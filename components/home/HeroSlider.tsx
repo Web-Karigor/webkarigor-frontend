@@ -84,7 +84,7 @@ const HeroSlider: React.FC = () => {
           <motion.div
             key={src}
             ref={el => (slidesRef.current[idx] = el)}
-            className="absolute top-0 left-1/2 -translate-x-1/2 rounded-xl overflow-hidden"
+            className="absolute top-0 -left-1/4 -translate-x-1/2 rounded-xl overflow-hidden"
             style={{
               width: '23vw',
               minWidth: 220,
