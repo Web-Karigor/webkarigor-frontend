@@ -3,6 +3,7 @@ import HeroSection from "@/components/home/HeroSection";
 import HeroSlider from "@/components/home/HeroSlider";
 import IndustryWins from "@/components/home/IndustryWins";
 import Services from "@/components/home/Services";
+import Technologies from "@/components/home/Technologies";
 import VideoSection from "@/components/home/VideoSection";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <ConnectedFeatures />
       <VideoSection />
       <IndustryWins />
+      <Technologies />
     </div>
   );
 }
