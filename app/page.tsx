@@ -6,6 +6,7 @@ import Team from "@/components/home/Team";
 import Services from "@/components/home/Services";
 import Technologies from "@/components/home/Technologies";
 import VideoSection from "@/components/home/VideoSection";
+import PricingSection from "@/components/home/PricingSection";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <VideoSection />
       <IndustryWins />
       <Team />
+      <PricingSection />
       <Technologies />
     </div>
   );
