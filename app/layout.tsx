@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Inter, Montserrat, MuseoModerno } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/home/Navbar";
 import Footer from "@/components/home/Footer";
@@ -15,6 +15,11 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
 });
 
+const museoModerno = MuseoModerno({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-museoModerno",
+});
 export const metadata: Metadata = {
   title: "Webkarigor - Company Website",
   description: "Webkarigor Company Website",
@@ -31,6 +36,7 @@ export default function RootLayout({
         className={`
           ${inter.variable}
           ${montserrat.variable}
+          ${museoModerno.variable}
           font-sans
           overflow-x-hidden
           scroll-smooth

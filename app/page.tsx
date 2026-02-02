@@ -1,12 +1,16 @@
-import ConnectedFeatures from "@/components/home/ConnectedFeatures";
 import HeroSection from "@/components/home/HeroSection";
-import HeroSlider from "@/components/home/HeroSlider";
-import IndustryWins from "@/components/home/IndustryWins";
-import Team from "@/components/home/Team";
 import Services from "@/components/home/Services";
 import Technologies from "@/components/home/Technologies";
-import VideoSection from "@/components/home/VideoSection";
+import Team from "@/components/home/Team";
 import PricingSection from "@/components/home/PricingSection";
+import FAQ from "@/components/home/FAQ";
+import HeroSlider from "@/components/home/HeroSlider";
+import ConnectedFeatures from "@/components/home/ConnectedFeatures";
+import VideoSection from "@/components/home/VideoSection";
+import IndustryWins from "@/components/home/IndustryWins";
+import HomeBanner from "@/components/home/HomeBanner";
+import BuildScaleSection from "@/components/home/BuildScaleSection";
+import TrustedFounders from "@/components/home/TrustedFounders";
 
 export default function Home() {
   return (
@@ -16,10 +20,17 @@ export default function Home() {
       <Services />
       <ConnectedFeatures />
       <VideoSection />
+      <Technologies />
       <IndustryWins />
+      <TrustedFounders /> 
       <Team />
       <PricingSection />
-      <Technologies />
+      <HomeBanner />
+      <FAQ />
+      <BuildScaleSection />
     </div>
   );
 }
+
+
+ 

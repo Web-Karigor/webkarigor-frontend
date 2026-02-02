@@ -78,14 +78,14 @@ export default function Footer() {
           {/* Content Overlay */}
           <div className="footer-content-overlay">
             {/* Descriptive Text Section */}
-            <div className="footer-description-section">
-              <p className="footer-description-text">
-                We help you move forward with modern, intuitive products by guiding you from design through product innovation to turn ideas into scalable success.
+            <div className="footer-description-section mb-0">
+              <p className="footer-description-text text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+                Let's build what your users will love and your business will grow with
               </p>
             </div>
 
             {/* Social Media Icons */}
-            <div className="footer-social-icons">
+            <div className="footer-social-icons mb-[550px]">
               {socialMediaIcons.map((social, index) => {
                 const IconComponent = social.Icon;
                 return (
@@ -101,60 +101,73 @@ export default function Footer() {
               })}
             </div>
 
-            {/* Footer Links Section */}
-            <div className="footer-links-section">
-              {/* Services Column */}
-              <div className="footer-links-column">
-                <h3 className="footer-links-heading">Services</h3>
-                <ul className="footer-links-list">
-                  {footerLinks.services.map((link, index) => (
-                    <li key={index}>
-                      <Link href={link.href} className="footer-link">
-                        {link.text}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {/* Footer Links Section - Centered in Middle */}
+            <div className="w-full flex items-center justify-center min-h-[1px] mt-80">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-[1200px] text-start">
+                {/* Services Column */}
+                <div className="footer-links-column flex flex-col items-center text-center">
+                  <h3 className="footer-links-heading">Services</h3>
+                  <ul className="footer-links-list">
+                    {footerLinks.services.map((link, index) => (
+                      <li key={index}>
+                        <Link href={link.href} className="footer-link">
+                          {link.text}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-              {/* Industries Column */}
-              <div className="footer-links-column">
-                <h3 className="footer-links-heading">Industries</h3>
-                <ul className="footer-links-list">
-                  {footerLinks.industries.map((link, index) => (
-                    <li key={index}>
-                      <Link href={link.href} className="footer-link">
-                        {link.text}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                {/* Industries Column */}
+                <div className="footer-links-column flex flex-col items-center text-center">
+                  <h3 className="footer-links-heading">Industries</h3>
+                  <ul className="footer-links-list">
+                    {footerLinks.industries.map((link, index) => (
+                      <li key={index}>
+                        <Link href={link.href} className="footer-link">
+                          {link.text}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-              {/* Important Link Column */}
-              <div className="footer-links-column">
-                <h3 className="footer-links-heading">Important Link</h3>
-                <ul className="footer-links-list">
-                  {footerLinks.importantLinks.map((link, index) => (
-                    <li key={index}>
-                      <Link href={link.href} className="footer-link">
-                        {link.text}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                {/* Important Link Column */}
+                <div className="footer-links-column flex flex-col items-center text-center">
+                  <h3 className="footer-links-heading">Important Link</h3>
+                  <ul className="footer-links-list">
+                    {footerLinks.importantLinks.map((link, index) => (
+                      <li key={index}>
+                        <Link href={link.href} className="footer-link">
+                          {link.text}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* WEBKARIGOR Text Section */}
-        <div className="webkarigor-hero-section">
-          <div className="webkarigor-hero-background">
-            <div className="webkarigor-hero-text">
-              WEBKARIGOR
-            </div>
-          </div>
+        <div className="relative flex justify-center items-center my-0 w-full">
+          <img
+            src="/frame.png"
+            alt="Frame background"
+            className="w-full h-auto"
+            style={{ minHeight: 0, minWidth: 0 }}
+          />
+          <span
+            className="absolute mt-40 inset-0 flex justify-center items-center font-montserrat font-bold select-none pointer-events-none text-[48px] md:text-[120px] lg:text-[180px] xl:text-[240px] text-white"
+            style={{
+              lineHeight: '1.08',
+              letterSpacing: '0',
+              opacity: 0.84,
+            }}
+          >
+            WEBKARIGOR
+          </span>
         </div>
       </footer>
     </>

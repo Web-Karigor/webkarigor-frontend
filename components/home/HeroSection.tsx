@@ -91,25 +91,7 @@ export default function HeroSection() {
 
           {/* RIGHT COLUMN */}
           <div className="col-span-3 flex flex-col items-end">
-            {/* CTA BUTTON – Figma exact */}
-            <button
-              className="
-                inline-flex items-center gap-[10px]
-                px-[24px] py-[24px]
-                border border-[#000000]
-                rounded-[12px]
-                text-[#000000]
-                font-bold
-                text-[20px]
-                leading-[1]
-                mt-[41px]
-                hover:bg-black hover:text-white
-                mr-4
-              "
-            >
-              Let’s get started
-            </button>
-            <div className="mt-[60px]">
+            <div className="mt-[170px]">
             <Image src="/h2.png" alt="" width={392} height={392} />
             </div>
           </div>

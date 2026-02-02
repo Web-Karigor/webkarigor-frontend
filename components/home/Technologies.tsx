@@ -1,16 +1,18 @@
-import React from "react";
+"use client";
+
+import Image from "next/image";
 
 const technologies = [
   [
     { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg", name: "Laravel" },
-    { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node.js" },
+    { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node js" },
     { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", name: "Python" },
-    { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg", name: "Coding" },
+    { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg", name: "Golang" },
     { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg", name: "Kotlin" },
   ],
   [
     { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", name: "React" },
-    { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-line.svg", name: "Next.js" },
+    { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-line.svg", name: "Next js" },
     { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg", name: "Tailwind" },
     { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg", name: "Vue" },
     { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg", name: "Bootstrap" },
@@ -31,63 +33,64 @@ const technologies = [
   ],
 ];
 
-const Technologies = () => {
+export default function Technologies() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-28 px-4">
+    <section className="relative overflow-hidden py-20 md:py-28 px-4">
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#FDFDFE] via-[#FDFDFE] to-[#EDFBEF]/60" />
 
-      {/* blobs – Figma matched & responsive */}
-      <div className="absolute -left-24 top-0 w-[220px] h-[220px] md:w-[300px] md:h-[300px] rounded-full blur-[80px]"
+      {/* glowing blobs (exact vibe like image) */}
+      <div className="absolute -left-24 top-0 w-64 h-64 md:w-80 md:h-80 rounded-full blur-[90px]"
         style={{ background: "linear-gradient(135deg,#38F8AB,#FEED35)" }} />
 
-      <div className="absolute right-[-120px] top-[40px] w-[260px] h-[260px] rounded-full blur-[90px]"
+      <div className="absolute right-[-140px] top-10 w-72 h-72 rounded-full blur-[100px]"
         style={{ background: "linear-gradient(135deg,#38F8AB,#FEED35)" }} />
 
-      <div className="absolute left-[-120px] bottom-[-80px] w-[300px] h-[300px] rounded-full blur-[100px]"
+      <div className="absolute left-[-120px] bottom-[-100px] w-80 h-80 rounded-full blur-[110px]"
         style={{ background: "linear-gradient(135deg,#38F8AB,#FEED35)" }} />
 
-      <div className="absolute right-[40px] bottom-[-90px] w-[120px] h-[120px] rounded-full blur-[70px]"
+      <div className="absolute right-16 bottom-[-90px] w-40 h-40 rounded-full blur-[80px]"
         style={{ background: "linear-gradient(135deg,#38F8AB,#FEED35)" }} />
 
       {/* content */}
       <div className="relative z-10 max-w-[1320px] mx-auto">
         {/* heading */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <h2 className="text-[2rem] md:text-[2.6rem] lg:text-[2.9rem] font-black tracking-tight">
+        <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-6">
+          <h2 className="text-3xl md:text-[44px] font-extrabold tracking-tight">
             Technologies Used
-          </h2>
-          <h2 className="text-[2rem] md:text-[2.6rem] lg:text-[2.9rem] font-black leading-none">
-            In <span className="text-[#39B770]">Web</span>karigor
           </h2>
         </div>
 
-        {/* grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 md:mt-16">
-          {technologies.map((group, colIdx) => (
+        {/* cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 md:mt-16">
+          {technologies.map((group, i) => (
             <div
-              key={colIdx}
-              className="rounded-xl border border-[#F0F0F3] bg-white/80 backdrop-blur-sm px-4 py-4 md:px-5 md:py-6"
-              style={{ boxShadow: "0 10px 32px rgba(234,245,235,.45)" }}
+              key={i}
+              className="rounded-2xl border border-[#EEF1F4] bg-white/80 backdrop-blur-md px-4 py-4 md:px-5 md:py-6 space-y-2"
+              style={{
+                boxShadow: "0 12px 35px rgba(200,230,210,0.45)",
+              }}
             >
               {group.map((tech) => (
                 <div
                   key={tech.name}
-                  className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-[#f3faf8] transition"
+                  className="flex items-center gap-3 px-3 py-2 rounded-lg shadow-lg hover:bg-[#F2FBF7] transition"
                 >
-                  <img
+                  <Image
                     src={tech.icon}
                     alt={tech.name}
+                    width={26}
+                    height={26}
                     className="w-6 h-6"
                     style={{
                       filter:
-                        tech.name === "Next.js" || tech.name === "Vercel"
+                        tech.name === "Next js" || tech.name === "Vercel"
                           ? "invert(0.85)"
                           : "none",
                     }}
-                    draggable={false}
+                    unoptimized
                   />
-                  <span className="text-[15px] font-medium tracking-tight text-[#222]">
+                  <span className="text-[15px] font-medium text-[#1F2937]">
                     {tech.name}
                   </span>
                 </div>
@@ -95,9 +98,13 @@ const Technologies = () => {
             </div>
           ))}
         </div>
+
+        <div className="flex flex-col md:flex-row justify-end items-start md:items-center gap-6 mt-12 md:mt-16">
+          <h2 className="text-3xl md:text-[44px] font-extrabold">
+            In <span className="text-[#39B770]">Web</span>karigor
+          </h2>
+        </div>
       </div>
     </section>
   );
-};
-
-export default Technologies;
+}
