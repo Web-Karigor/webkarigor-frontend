@@ -48,16 +48,18 @@ export default function HeroSection() {
         <div className="grid grid-cols-12 items-start">
 
           {/* LEFT COLUMN */}
-          <div className="col-span-3 flex flex-col gap-[80px] mt-[260px]">
+          <div className="col-span-3 flex flex-col gap-[80px] mt-[50px]">
             <StatsBadge />
-            <Image src="/h1.png" alt="" width={392} height={392} />
+            <span className="mt-[140px]">
+              <Image src="/h1.png" alt="" width={392} height={392} />
+            </span>
           </div>
 
           {/* CENTER COLUMN */}
           <div className="col-span-6 flex flex-col items-center mt-[240px]">
             <div className="max-w-[889px] text-center">
               <p className="hero-title">To deliver a 360</p>
-              <span className="hero-subtitle block -mt-6">
+              <span className="hero-subtitle text- block -mt-6">
                 AI driven solution
               </span>
               <p className="hero-title -mt-6">project approach</p>
@@ -95,10 +97,9 @@ export default function HeroSection() {
             <Image src="/h2.png" alt="" width={392} height={392} />
             </div>
           </div>
-        </div>
-      </div>
-      <div className="relative -mt-48">
-        <p className="text-[300px] text-[#1F1E1C05] font-bold text-center">
+        </div>      </div>
+      <div className="relative mt-8 md:-mt-16 lg:-mt-[60px] xl:-mt-[100px] 2xl:-mt-[180px]">
+        <p className="text-[96px] sm:text-[140px] md:text-[200px] lg:text-[240px] xl:text-[280px] 2xl:text-[300px] text-[#1F1E1C05] font-bold text-center">
           PROJECTS
         </p>
       </div>

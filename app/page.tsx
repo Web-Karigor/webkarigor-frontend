@@ -18,7 +18,7 @@ export default function Home() {
       <HeroSection />
       <HeroSlider />
       <Services />
-      <ConnectedFeatures />
+      {/* <ConnectedFeatures /> */}
       <VideoSection />
       <Technologies />
       <IndustryWins />

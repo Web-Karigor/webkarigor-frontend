@@ -1,14 +1,20 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
     title: "UI/UX",
-    titleHighlight: "Design",
-    description:
-      "UI/UX Design, App Design, Website Design, Dashboard Design, Wireframing & Prototyping, Interaction Design, and Product Design.",
+    highlight: "Design",
+    desc:
+      "UI/UX Design, App Design, Website Design, Dashboard Design, Wireframing & Prototyping.",
     link: "/services/ui-ux",
     images: [
       "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/679a9c4888217669122eebaf_3d41798d228903d42862a148dd56aeb1_Project%20Cards%20%2810%29%20%281%29.avif",
@@ -17,9 +23,9 @@ const services = [
   },
   {
     title: "Web",
-    titleHighlight: "Development",
-    description:
-      "Frontend Development, Backend Development, Full Stack Solutions, Mobile App Development, Custom Web Applications, API Integration.",
+    highlight: "Development",
+    desc:
+      "Frontend, Backend, Full Stack Solutions, Custom Web Apps, API Integration.",
     link: "/services/web-design",
     images: [
       "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78084947770a14f1eb7c_d1cec41f22346c1c941376236623384b_Project%20Cards.avif",
@@ -28,9 +34,9 @@ const services = [
   },
   {
     title: "Logo &",
-    titleHighlight: "Branding",
-    description:
-      "Logo Design, Full Branding, Business Branding, 3d logo, Custom Logo, Visual Identity, Brand Strategy, Social Media Branding, and Brand Guidelines.",
+    highlight: "Branding",
+    desc:
+      "Logo Design, Brand Identity, Visual Strategy, Social Media Branding.",
     link: "/services/logo-branding",
     images: [
       "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac7809638da68108df9847_Project%20Cards-4.avif",
@@ -39,9 +45,9 @@ const services = [
   },
   {
     title: "Webflow &",
-    titleHighlight: "Framer",
-    description:
-      "Custom Webflow Websites, Webflow Plugin, Framer Prototypes, Framer Material, Framer App, CMS Integration, Rapid Development.",
+    highlight: "Framer",
+    desc:
+      "Webflow, Framer Prototypes, CMS Integration, Rapid Landing Pages.",
     link: "/services/framer-design",
     images: [
       "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac780912dabe81710b65ed_8e70a34a4056237eca17e1209cecdebe_Project%20Cards-2.avif",
@@ -51,12 +57,35 @@ const services = [
 ];
 
 export default function Services() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  /* GSAP smooth scrub */
+  useEffect(() => {
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1.5
+    });
+  }, []);
+
+  /* Framer scroll */
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"]
+  });
+
+  /* Make scroll slow & buttery */
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 35,
+    damping: 22,
+    mass: 1.2
+  });
+
   return (
-    <section className="section-padding">
-      <div className="global-padding">
-        <div className="container-1899px">
-          <div className="section-services-content">
-            <div className="services-title-block text-center">
+    <section ref={sectionRef} className="relative py-40">
+      <div className="max-w-[1800px] mx-auto px-6">
+        <div className="services-title-block text-center">
               <div className="section-tag-block mb-6">
                 <div className="inline-block px-6 py-2 border-2 border-[#62F7B3] rounded-full bg-[#FEFCF6]">
                   <span className=" text-[#62F7B3] font-medium">Services</span>
@@ -80,254 +109,77 @@ export default function Services() {
               </div>
             </div>
 
-            <div className="service-c-flex">
-              <div className="services-content-left">
-                <div className="services-card-left-c-wrap">
-                  {services.map((service, index) => (
-                    <div
-                      key={index}
-                      className={`services-cl-content is-${["one", "two", "three", "four"][index]}`}
-                    >
-                      <div className="services-c-title-block">
-                        <h3 className="services-left-c-title">
-                          {service.title}{" "}
-                          <span className="service-left-title-pd">{service.titleHighlight}</span>
-                        </h3>
-                      </div>
-                      <div className="services-c-middle-line"></div>
-                      <div className="services-c-text-block-2">
-                        <p className="services-left-text-2">{service.description}</p>
-                      </div>
-                      <Link href={service.link} className="services-c-link-block-2 w-inline-block">
-                        <div className="services-c-link-text">See More</div>
-                        <div className="services-c-link-arrow-block">
-                          <Image
-                            loading="lazy"
-                            src="https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67326d59201cc3b185432b90_CTA%20Arrow.svg"
-                            alt=""
-                            width={20}
-                            height={20}
-                            className="services-c-link-arrow"
-                            unoptimized
-                          />
-                        </div>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
+        {services.map((service, i) => {
+          const start = i / services.length;
+          const end = (i + 1) / services.length;
 
-              <div className="services-content-right">
-                {services.map((service, gridIndex) => (
-                  <div key={gridIndex} className="services-right-image-block">
-                    {service.images.map((imageUrl, imgIndex) => (
-                      <div
-                        key={imgIndex}
-                        className={`services-img-box ${imgIndex === 1 ? "is-two" : ""}`}
-                      >
-                        <Image
-                          loading={gridIndex === 0 ? "eager" : "lazy"}
-                          src={imageUrl}
-                          alt=""
-                          width={400}
-                          height={300}
-                          className="services-r-image"
-                          unoptimized
-                        />
-                      </div>
-                    ))}
+          const rawOpacity = useTransform(
+            smoothProgress,
+            [start, start + 0.15, end - 0.15, end],
+            [0, 10, 10, 0]
+          );
+
+          const opacity = useSpring(rawOpacity, {
+            stiffness: 30,
+            damping: 20
+          });
+
+          const rawY = useTransform(
+            smoothProgress,
+            [start, end],
+            [100, -100]
+          );
+
+          const y = useSpring(rawY, {
+            stiffness: 30,
+            damping: 22
+          });
+
+          return (
+            <motion.div
+              key={i}
+              style={{ opacity }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-24 min-h-[90vh] items-center"
+            >
+              {/* LEFT */}
+              <motion.div style={{ y }}>
+                <h3 className="text-4xl font-bold mb-4">
+                  {service.title}{" "}
+                  <span className="italic">{service.highlight}</span>
+                </h3>
+
+                <p className="text-lg text-gray-600 max-w-md mb-6">
+                  {service.desc}
+                </p>
+
+                <Link
+                  href={service.link}
+                  className="inline-flex items-center gap-2 font-medium"
+                >
+                  See More →
+                </Link>
+              </motion.div>
+
+              {/* RIGHT */}
+              <motion.div style={{ y }} className="grid grid-cols-2 gap-6">
+                {service.images.map((img, j) => (
+                  <div key={j} className={j === 1 ? "mt-20" : ""}>
+                    <Image
+                      src={img}
+                      alt=""
+                      width={520}
+                      height={420}
+                      className="rounded-xl object-cover w-full"
+                      unoptimized
+                    />
                   </div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
+          );
+        })}
 
-          </div>
-        </div>
       </div>
-      <style jsx>{`
-        .section-padding {
-          padding: 4rem 1rem;
-        }
-        @media (min-width: 640px) {
-          .section-padding { padding: 5rem 1.5rem; }
-        }
-        @media (min-width: 768px) {
-          .section-padding { padding: 6rem 2rem; }
-        }
-        @media (min-width: 1024px) {
-          .section-padding { padding: 7rem 2rem; }
-        }
-
-        .global-padding { padding: 0 1rem; }
-        @media (min-width: 640px) {
-          .global-padding { padding: 0 1.5rem; }
-        }
-        @media (min-width: 768px) {
-          .global-padding { padding: 0 2rem; }
-        }
-
-        .container-1899px {
-          max-width: 1899px;
-          margin: 0 auto;
-          width: 100%;
-        }
-
-        .section-services-content { width: 100%; }
-        .services-title-block { margin-bottom: 4rem; }
-        .section-tag-block { margin-bottom: 1rem; }
-        .section-tag_text {
-          display: inline-block;
-          padding: 0.5rem 1rem;
-          border: 1px solid #22c55e;
-          border-radius: 9999px;
-          font-size: 0.875rem;
-          font-weight: 500;
-        }
-        .section-title-wrap { margin-top: 1rem; }
-        .service-c-flex {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 3rem;
-          margin-bottom: 3rem;
-          align-items: start;
-        }
-        @media (min-width: 1024px) {
-          .service-c-flex {
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-          }
-        }
-        .services-content-left {
-          display: flex;
-          flex-direction: column;
-          position: sticky;
-          top: 2rem;
-        }
-        @media (max-width: 1023px) {
-          .services-content-left {
-            position: relative;
-            top: 0;
-          }
-        }
-        .services-card-left-c-wrap {
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
-        }
-        .services-cl-content {
-          position: relative;
-          min-height: 200px;
-        }
-        @media (min-width: 1024px) {
-          .services-cl-content {
-            min-height: 250px;
-          }
-        }
-        .services-c-title-block { margin-bottom: 1rem; }
-        .services-left-c-title {
-          font-size: 1.875rem;
-          font-weight: 700;
-          line-height: 1.2;
-        }
-        @media (min-width: 768px) {
-          .services-left-c-title { font-size: 2.25rem; }
-        }
-        .service-left-title-pd {
-          font-style: italic;
-          font-family: serif;
-        }
-        .services-c-middle-line {
-          width: 100%;
-          height: 1px;
-          background-color: #9333ea;
-          margin: 1.5rem 0;
-        }
-        .services-c-text-block-2 { margin-bottom: 1.5rem; }
-        .services-left-text-2 {
-          font-size: 1rem;
-          line-height: 1.6;
-        }
-        .services-c-link-block-2 {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          text-decoration: none;
-          font-weight: 500;
-          transition: transform 0.2s;
-        }
-        .services-c-link-block-2:hover {
-          transform: translateX(4px);
-        }
-        .services-c-link-text {
-          font-size: 0.875rem;
-        }
-        .services-c-link-arrow-block {
-          display: flex;
-          align-items: center;
-        }
-        .services-c-link-arrow {
-          width: 20px;
-          height: 20px;
-        }
-        .services-content-right {
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
-        }
-        @media (min-width: 1024px) {
-          .services-content-right { gap: 4rem; }
-        }
-        .services-right-image-block {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-          position: relative;
-          min-height: 200px;
-        }
-        @media (min-width: 768px) {
-          .services-right-image-block {
-            gap: 1.5rem;
-            min-height: 250px;
-          }
-        }
-        @media (min-width: 1024px) {
-          .services-right-image-block {
-            min-height: 300px;
-          }
-        }
-        .services-img-box {
-          border-radius: 8px;
-          overflow: hidden;
-          padding: 1px;
-        }
-        .services-img-box.is-two {
-          margin-top: 2rem;
-        }
-        @media (min-width: 768px) {
-          .services-img-box.is-two {
-            margin-top: 3rem;
-          }
-        }
-        .services-r-image {
-          width: 100%;
-          height: auto;
-          min-height: 200px;
-          object-fit: cover;
-          object-position: top;
-          border-radius: 7px;
-          display: block;
-        }
-        @media (min-width: 768px) {
-          .services-r-image {
-            min-height: 250px;
-          }
-        }
-        @media (min-width: 1024px) {
-          .services-r-image {
-            min-height: 300px;
-          }
-        }
-      `}</style>
     </section>
   );
 }

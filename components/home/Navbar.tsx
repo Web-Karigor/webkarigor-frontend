@@ -1,62 +1,99 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 export default function NavbarTailwind() {
+  const [open, setOpen] = useState(false);
+
   return (
-   <header className="absolute top-[39px] left-0 right-0 z-[9999]">
-      <div className="max-w-[1800px] mx-auto flex items-center justify-between px-6">
-        
-        {/* CENTER NAVBAR */}
-        <nav className="flex justify-center flex-1">
+    <header className="absolute top-[16px] sm:top-[24px] md:top-[32px] left-0 right-0 z-[9999]">
+      <div className="max-w-[1800px] mx-auto relative px-4 sm:px-6">
+        {/* ================= DESKTOP NAVBAR ================= */}
+        <nav className="hidden lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:block">
           <div className="navbar-container flex items-center rounded-[24px]">
             <div className="navbar-content flex items-center justify-center font-semibold">
-              <Link href="/" className="navbar-link text-center transition-colors font-semibold">
-                Home
-              </Link>
-
-              <Link href="/service" className="navbar-link text-center transition-colors font-semibold">
-                Service
-              </Link>
+              <Link href="/" className="navbar-link">Home</Link>
+              <Link href="/service" className="navbar-link">Service</Link>
 
               <Link
                 href="/"
-                className="webkarigor-button relative inline-flex items-center justify-center transition-colors font-semibold"
+                className="webkarigor-button relative inline-flex items-center justify-center"
               >
                 <span className="webkarigor-inner w-full h-full flex items-center justify-center">
-                  <span className="webkarigor-text text-center font-semibold">
-                    Webkarigor
-                  </span>
+                  <span className="webkarigor-text">Webkarigor</span>
                 </span>
               </Link>
 
-              <Link href="/case" className="navbar-link text-center transition-colors font-semibold">
-                Case
-              </Link>
-
-              <Link href="/about-us" className="navbar-link text-center transition-colors font-semibold">
-                About us
-              </Link>
+              <Link href="/case" className="navbar-link">Case</Link>
+              <Link href="/about-us" className="navbar-link">About us</Link>
             </div>
           </div>
         </nav>
 
-        {/* RIGHT CTA BUTTON */}
-        <button
-          className="
-            inline-flex items-center gap-[10px]
-            px-[24px] py-[24px]
-            border border-[#000000]
-            rounded-[12px]
-            text-[#000000]
-            font-bold
-            text-[20px]
-            leading-[1]
-            hover:bg-black hover:text-white
-          "
-        >
-          Let’s get started
-        </button>
+        {/* ================= RIGHT SIDE ================= */}
+        <div className="flex items-center justify-between lg:justify-end">
+          {/* MOBILE LOGO / BRAND */}
+          <Link href="/" className="lg:hidden font-bold text-lg">
+            Webkarigor
+          </Link>
+
+          {/* CTA BUTTON (DESKTOP) */}
+          <button
+            className="
+              hidden lg:inline-flex
+              items-center gap-[10px]
+              px-[24px] py-[20px]
+              border border-black
+              rounded-[12px]
+              font-bold text-[18px] xl:text-[20px]
+              hover:bg-black hover:text-white
+              transition
+            "
+          >
+            Let’s get started
+          </button>
+
+          {/* HAMBURGER */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="lg:hidden w-10 h-10 flex items-center justify-center border rounded-lg"
+          >
+            <span className="text-2xl">{open ? "✕" : "☰"}</span>
+          </button>
+        </div>
+
+        {/* ================= MOBILE MENU ================= */}
+        {open && (
+          <div className="lg:hidden mt-4 rounded-2xl border bg-white shadow-xl p-6 space-y-5">
+            <Link onClick={() => setOpen(false)} href="/" className="block font-semibold">
+              Home
+            </Link>
+            <Link onClick={() => setOpen(false)} href="/service" className="block font-semibold">
+              Service
+            </Link>
+            <Link onClick={() => setOpen(false)} href="/case" className="block font-semibold">
+              Case
+            </Link>
+            <Link onClick={() => setOpen(false)} href="/about-us" className="block font-semibold">
+              About us
+            </Link>
+
+            <button
+              className="
+                w-full mt-4
+                px-6 py-4
+                border border-black
+                rounded-xl
+                font-bold
+                hover:bg-black hover:text-white
+                transition
+              "
+            >
+              Let’s get started
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

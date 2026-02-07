@@ -52,9 +52,9 @@ export default function RootLayout({
             height: "585px",
             top: "-454px",
             left: "110px",
-            background: "radial-gradient(circle, #BBFF68 0%, transparent 70%)",
+            background: "radial-gradient(circle, #BBFF68 80%, transparent 70%)",
             opacity: 0.28,
-            filter: "blur(300px)",
+            filter: "blur(400px)",
             zIndex: 0,
           }}
         />
