@@ -9,7 +9,7 @@ const images = [
 
 const HeroSlider = () => {
   return (
-    <section className="slanted-wrapper -mt-[260px]">
+    <section className="slanted-wrapper lg:-mt-[260px] md:-mt-[180px] -mt-[160px]">
       <div className="slanted-container">
         {images.map((src, index) => (
           <div key={index} className={`slanted-card card-${index + 1}`}>

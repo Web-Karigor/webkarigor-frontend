@@ -48,10 +48,11 @@ export default function RootLayout({
         <div
           className="absolute pointer-events-none"
           style={{
-            width: "1700px",
+            width: "min(1700px, 90vw)",
             height: "585px",
             top: "-454px",
-            left: "110px",
+            left: "50%",
+            transform: "translateX(-50%)",
             background: "radial-gradient(circle, #BBFF68 80%, transparent 70%)",
             opacity: 0.28,
             filter: "blur(400px)",
@@ -60,7 +61,7 @@ export default function RootLayout({
         />
 
         {/* CONTENT LAYER */}
-        <div className="relative z-10">
+        <div className="relative z-10 overflow-x-hidden">
           <Navbar />
           <main>{children}</main>
           <Footer />

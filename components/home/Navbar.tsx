@@ -7,7 +7,7 @@ export default function NavbarTailwind() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="absolute top-[16px] sm:top-[24px] md:top-[32px] left-0 right-0 z-[9999]">
+    <header className="absolute top-[16px] sm:top-[24px] md:top-[32px] left-0 right-0 z-[9999] overflow-x-hidden">
       <div className="max-w-[1800px] mx-auto relative px-4 sm:px-6">
         {/* ================= DESKTOP NAVBAR ================= */}
         <nav className="hidden lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:block">
@@ -43,7 +43,7 @@ export default function NavbarTailwind() {
             className="
               hidden lg:inline-flex
               items-center gap-[10px]
-              px-[24px] py-[20px]
+              px-[24px] py-[20px] lg:py-[18px] 2xl:py-[20px]
               border border-black
               rounded-[12px]
               font-bold text-[18px] xl:text-[20px]

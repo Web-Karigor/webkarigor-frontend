@@ -124,6 +124,65 @@
     -webkit-text-fill-color: transparent;
   }
 
+  /* Responsive adjustments for lg/xl screens */
+  @media (min-width: 1024px) {
+    .navbar-container {
+      width: 560px;
+      height: 64px;
+      padding: 8px 24px;
+      gap: 8px;
+    }
+    .navbar-content {
+      gap: 24px;
+      height: 48px;
+    }
+    .navbar-link {
+      font-size: 18px;
+    }
+    .webkarigor-inner {
+      padding: 10px 14px;
+    }
+    .webkarigor-text {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .navbar-container {
+      width: 600px;
+      height: 66px;
+      padding: 9px 26px;
+    }
+    .navbar-link {
+      font-size: 19px;
+    }
+    .webkarigor-text {
+      font-size: 19px;
+    }
+  }
+
+  @media (min-width: 1520px) {
+    .navbar-container {
+      width: 560px;
+      height: 72px;
+      padding: 8px 24px;
+      gap: 8px;
+    }
+    .navbar-content {
+      gap: 24px;
+      height: 48px;
+    }
+    .navbar-link {
+      font-size: 18px;
+    }
+    .webkarigor-inner {
+      padding: 10px 14px;
+    }
+    .webkarigor-text {
+      font-size: 18px;
+    }
+  }
+
   /* Footer Section */
   .footer-section {
     position: relative;
@@ -436,35 +495,44 @@
 .stats-number {
   font-family: var(--font-montserrat);
   font-weight: 600;
-  font-size: 300px; /* Figma: 300px */
-  line-height: 1.5; /* 150% */
-  letter-spacing: 0;
+  font-size: 96px;
+  line-height: 1;
   color: #1F1E1C;
 }
 
-/* Plus sign */
 .stats-plus {
   font-family: var(--font-montserrat);
   font-weight: 600;
-  font-size: 77px; /* Figma: 77px */
-  line-height: 1.5;
+  font-size: 28px;
+  line-height: 1;
   color: #1F1E1C;
 }
 
-/* Years text */
 .stats-years {
   font-family: var(--font-montserrat);
   font-weight: 600;
-  font-size: 40px; /* Figma: 40px */
-  line-height: 1.5;
+  font-size: 18px;
   color: #FCFCFC;
 }
 
-/* Black pill background */
 .stats-pill {
   background-color: #1F1E1C;
   border-radius: 4px;
+  padding: 4px 12px;
 }
+
+@media (min-width: 768px) {
+  .stats-number { font-size: 200px; }
+  .stats-plus { font-size: 56px; }
+  .stats-years { font-size: 32px; }
+}
+
+@media (min-width: 1024px) {
+  .stats-number { font-size: 300px; }
+  .stats-plus { font-size: 77px; }
+  .stats-years { font-size: 40px; }
+}
+
 
 /* =========================
    HERO TYPOGRAPHY
@@ -509,6 +577,30 @@
   padding: 2px 6px;
   border-radius: 4px;
   ;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 60px;
+    letter-spacing: -0.01em;
+  }
+  .hero-subtitle {
+    font-size: 28px;
+    letter-spacing: 0.06em;
+  }
+  .hero-desc {
+    font-size: 20px;
+  }
+  .hero-hello {
+    font-size: 10px;
+    font-family: var(--font-montserrat);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+  }
 }
 
 .hero-badge {

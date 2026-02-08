@@ -83,7 +83,7 @@ export default function Services() {
   });
 
   return (
-    <section ref={sectionRef} className="relative py-40">
+    <section ref={sectionRef} className="relative py-4">
       <div className="max-w-[1800px] mx-auto px-6">
         <div className="services-title-block text-center">
               <div className="section-tag-block mb-6">
@@ -139,7 +139,7 @@ export default function Services() {
             <motion.div
               key={i}
               style={{ opacity }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-24 min-h-[90vh] items-center"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 min-h-[70vh] items-center"
             >
               {/* LEFT */}
               <motion.div style={{ y }}>
