@@ -653,27 +653,18 @@
 }
 
 .slanted-container {
-  width: 100%;
   max-width: 1920px;
   margin: auto;
   display: flex;
-  align-items: flex-end; /* same bottom alignment */
+  align-items: flex-end;
   gap: 24px;
-  position: relative;
+  will-change: transform;
 }
 
-/* Common card styles */
 .slanted-card {
   position: relative;
   overflow: hidden;
-  
-  
-  clip-path: polygon(
-    0 8%,
-    100% 0,
-    100% 100%,
-    0 100%
-  ); /* top konakuni */
+  clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
 }
 
 .slanted-card img {
@@ -683,61 +674,32 @@
   display: block;
 }
 
-/* =========================
-   INDIVIDUAL SIZES
-========================= */
+/* FIXED SLOTS */
+.card-1 { width: 478px; height: 665px; }
+.card-2 { width: 479px; height: 730px; }
+.card-3 { width: 478px; height: 802px; }
+.card-4 { width: 479px; height: 880px; }
 
-/* 1st - smallest */
-.card-1 {
-  width: 478px;
-  height: 665px;
-}
-
-/* 2nd */
-.card-2 {
-  width: 479px;
-  height: 730px;
-}
-
-/* 3rd */
-.card-3 {
-  width: 478px;
-  height: 802px;
-}
-
-/* 4th - biggest */
-.card-4 {
-  width: 479px;
-  height: 880px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .slanted-container {
-    justify-content: center;
-    gap: 16px;
-  }
-
+  .slanted-container { gap: 16px; }
   .card-1 { width: 180px; height: 260px; }
   .card-2 { width: 200px; height: 290px; }
   .card-3 { width: 220px; height: 320px; }
   .card-4 { width: 250px; height: 360px; }
 }
 
+
 @media (max-width: 640px) {
   .slanted-container {
     flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 10px;
   }
 
   .slanted-card {
     flex: 0 0 auto;
   }
 }
+
 
 
 /* =========================
