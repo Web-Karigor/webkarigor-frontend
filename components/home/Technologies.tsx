@@ -40,16 +40,16 @@ export default function Technologies() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#FDFDFE] via-[#FDFDFE] to-[#EDFBEF]/60" />
 
       {/* glowing blobs (exact vibe like image) */}
-      <div className="absolute -left-24 top-0 w-64 h-64 md:w-80 md:h-80 rounded-full blur-[90px]"
+      <div className="absolute -left-24 top-0 w-64 h-64 md:w-80 md:h-80 rounded-full blur-[20px]"
         style={{ background: "linear-gradient(135deg,#38F8AB,#FEED35)" }} />
 
-      <div className="absolute right-[-140px] top-10 w-72 h-72 rounded-full blur-[100px]"
+      <div className="absolute right-[-140px] top-10 w-72 h-72 rounded-full blur-[10px]"
         style={{ background: "linear-gradient(135deg,#38F8AB,#FEED35)" }} />
 
-      <div className="absolute left-[-120px] bottom-[-100px] w-80 h-80 rounded-full blur-[110px]"
+      <div className="absolute left-[-120px] bottom-[-100px] w-80 h-80 rounded-full blur-[10px]"
         style={{ background: "linear-gradient(135deg,#38F8AB,#FEED35)" }} />
 
-      <div className="absolute right-16 bottom-[-90px] w-40 h-40 rounded-full blur-[80px]"
+      <div className="absolute right-16 bottom-[-90px] w-40 h-40 rounded-full blur-[30px]"
         style={{ background: "linear-gradient(135deg,#38F8AB,#FEED35)" }} />
 
       {/* content */}

@@ -61,7 +61,7 @@ export default function RootLayout({
         />
 
         {/* CONTENT LAYER */}
-        <div className="relative z-10 overflow-x-hidden">
+        <div className="relative z-10 overflow-x-clip">
           <Navbar />
           <main>{children}</main>
           <Footer />

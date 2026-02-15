@@ -341,7 +341,7 @@ export default function IndustryWins() {
                       </div>
 
                       {/* Right Image */}
-                      <div className="relative h-[250px] lg:h-[280px] rounded-md overflow-hidden">
+                      <div className="relative h-[250px] lg:h-[340px] rounded-md overflow-hidden">
                         <Image
                           src={project.image}
                           alt={project.title}
@@ -377,14 +377,6 @@ export default function IndustryWins() {
             <div className="relative justify-center bg-gradient-to-r from-purple-700 to-purple-800 hover:from-purple-700 hover:to-purple-800 text-white text-lg px-4 py-3 rounded shadow-lg shadow-purple-500/50 flex items-center gap-3">
               <span className="text-center text-sm">See All Projects</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              <Image
-                src="https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/672a7a8e3a6aba070d15d4c0_Star%206.avif"
-                alt=""
-                width={20}
-                height={20}
-                className="w-5 h-5"
-                unoptimized
-              />
             </div>
           </Link>
         </motion.div>

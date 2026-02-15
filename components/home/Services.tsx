@@ -11,10 +11,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    title: "UI/UX",
-    highlight: "Design",
+    title: "Web Application Development",
+    highlight: "And Design",
+    subtitle: "Fast, scalable, and secure solutions for modern businesses.",
     desc:
-      "UI/UX Design, App Design, Website Design, Dashboard Design, Wireframing & Prototyping.",
+      "From concept to deployment, we develop custom web applications engineered for performance and reliability. Our team transforms complex workflows into smooth digital operations, ensuring your platform grows as your business evolves.",
     link: "/services/ui-ux",
     images: [
       "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/679a9c4888217669122eebaf_3d41798d228903d42862a148dd56aeb1_Project%20Cards%20%2810%29%20%281%29.avif",
@@ -22,10 +23,11 @@ const services = [
     ]
   },
   {
-    title: "Web",
+    title: "Mobile App",
     highlight: "Development",
+    subtitle: "Seamless mobile experiences that connect with people.",
     desc:
-      "Frontend, Backend, Full Stack Solutions, Custom Web Apps, API Integration.",
+      "",
     link: "/services/web-design",
     images: [
       "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78084947770a14f1eb7c_d1cec41f22346c1c941376236623384b_Project%20Cards.avif",
@@ -33,8 +35,9 @@ const services = [
     ]
   },
   {
-    title: "Logo &",
-    highlight: "Branding",
+    title: "Branding & Digital",
+    highlight: "Identity",
+    subtitle: "Meaningful brands built to inspire confidence.",
     desc:
       "Logo Design, Brand Identity, Visual Strategy, Social Media Branding.",
     link: "/services/logo-branding",
@@ -44,8 +47,9 @@ const services = [
     ]
   },
   {
-    title: "Webflow &",
-    highlight: "Framer",
+    title: "Product Strategy & ",
+    highlight: "Consultation",
+    subtitle: "Expert guidance to turn ideas into scalable products.",
     desc:
       "Webflow, Framer Prototypes, CMS Integration, Rapid Landing Pages.",
     link: "/services/framer-design",
@@ -148,7 +152,11 @@ export default function Services() {
                   <span className="italic">{service.highlight}</span>
                 </h3>
 
-                <p className="text-lg text-gray-600 max-w-md mb-6">
+                <p className="text-[28px] text-gray-600 max-w-4xl mb-6">
+                  {service.subtitle}
+                </p>
+
+                <p className="text-lg text-gray-600 max-w-4xl mb-6">
                   {service.desc}
                 </p>
 
