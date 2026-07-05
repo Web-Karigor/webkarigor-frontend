@@ -200,7 +200,7 @@ const ServicesTextPanel = memo(function ServicesTextPanel({
   const service = services[activeIndex];
 
   return (
-    <div className="flex h-full w-full max-w-[520px] items-center lg:shrink-0">
+    <div className="flex h-full w-full max-w-[520px] items-center lg:shrink-0 lg:py-6">
       <AnimatePresence mode="wait" initial={false}>
         <ServiceActiveText key={service.link} service={service} />
       </AnimatePresence>
@@ -278,7 +278,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
   columnY: MotionValue<number>;
 }) {
   return (
-    <div className="relative h-full w-full max-w-[812px] shrink-0 overflow-hidden lg:w-auto">
+    <div className="relative h-full w-full max-w-[812px] shrink-0 overflow-hidden lg:w-auto lg:pt-2">
       <motion.div
         className="services-story-track"
         style={{ y: columnY, willChange: "transform" }}
@@ -316,7 +316,13 @@ export default function Services() {
   /** Images scroll up continuously — one group step per service segment */
   const columnY = useTransform(progress, (p) => {
     const movedGroups = Math.min(total - 1, p * total);
-    return -movedGroups * GROUP_STEP_PX;
+    const base = -movedGroups * GROUP_STEP_PX;
+
+    const lastSegmentStart = (total - 1) / total;
+    if (p <= lastSegmentStart) return base;
+
+    const t = (p - lastSegmentStart) / (1 - lastSegmentStart);
+    return base - t * 36;
   });
 
   return (
@@ -329,7 +335,7 @@ export default function Services() {
         <div className="relative z-10 mx-auto flex h-full max-w-[1800px] flex-col px-6">
           <ServicesHeader />
 
-          <div className="services-story-body flex min-h-0 flex-1 flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-center lg:gap-10 xl:gap-14">
+          <div className="services-story-body flex min-h-0 flex-1 flex-col items-center gap-10 pb-6 lg:flex-row lg:items-start lg:justify-center lg:gap-10 lg:pt-2 xl:gap-14">
             <ServicesTextPanel activeIndex={activeIndex} />
             <ServicesImageTrack columnY={columnY} />
           </div>

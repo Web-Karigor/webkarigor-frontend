@@ -1339,8 +1339,9 @@
   flex-direction: column;
   align-items: flex-start;
   will-change: transform;
-  padding-top: max(48px, calc(50vh - var(--services-layout-h) / 2 - 80px));
-  padding-bottom: max(48px, calc(50vh - var(--services-layout-h) / 2 - 80px));
+  /* Bias padding upward so the last image pair clears the sticky viewport bottom */
+  padding-top: max(24px, calc(50vh - var(--services-layout-h) / 2 - 140px));
+  padding-bottom: max(24px, calc(50vh - var(--services-layout-h) / 2 - 24px));
 }
 
 .services-story-body {
