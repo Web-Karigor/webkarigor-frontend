@@ -1,9 +1,7 @@
-'use client'
-import React, { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+"use client";
 
-gsap.registerPlugin(ScrollTrigger);
+import { useRef, useLayoutEffect } from "react";
+import { gsap } from "@/lib/gsap";
 
 const VideoSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,64 +10,67 @@ const VideoSection = () => {
   const embedUrl =
     "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=1&loop=1&playlist=dQw4w9WgXcQ";
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!videoRef.current || !containerRef.current) return;
 
-    let trigger: ScrollTrigger;
-
     const ctx = gsap.context(() => {
-      // Start the video small and scale up as you scroll
-      gsap.set(videoRef.current, {
-        scale: 0.35,
-        borderRadius: '2.5rem',
-        yPercent: 0,
-      });
-
-      trigger = ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top 10%",
-        end: "top top",
-        scrub: 0.7,
-        pin: true,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          const prog = self.progress;
-          gsap.to(videoRef.current, {
-            scale: 0.35 + prog * (1 - 0.35),
-            borderRadius: `${40 - prog * 40}px`, // 40px to 0px
-            yPercent: prog * 0, // can add motion if you want
-            duration: 0.4,
-            ease: "power2.out",
-          });
+      gsap.fromTo(
+        videoRef.current,
+        {
+          scale: 0.35,
+          borderRadius: "2.5rem",
         },
-      });
+        {
+          scale: 1,
+          borderRadius: "0px",
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 90%",
+            end: "top 25%",
+            scrub: 0.8,
+          },
+        },
+      );
     }, containerRef);
 
-    return () => {
-      ctx.revert();
-      if (trigger) trigger.kill();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={containerRef}
-      className="py-6 md:py-16 px-1 flex justify-center items-center"
-      style={{ minHeight: "100vh" }}
+      className="bg-[#FFFDF6] px-6 py-12 md:py-20"
     >
-      <div
-        ref={videoRef}
-        className="relative w-full h-[50vw] md:h-[800px] flex justify-center items-center overflow-hidden rounded-[2.5rem] bg-black pointer-events-none mx-auto shadow-xl"
-       
-      >
-        <iframe
-          src={embedUrl}
-          className="absolute inset-0 w-full h-full scale-x-150 scale-y-125"
-          title="About Video"
-          frameBorder="0"
-          allow="autoplay"
-          allowFullScreen
-        />
+      <div className="mx-auto max-w-[1600px]">
+        <div className="text-center mb-12 md:mb-16">
+          <span className="inline-block rounded-full border border-[#38F8AB] px-5 py-2 text-sm font-medium text-[#15D286]">
+            What make us different?
+          </span>
+
+          <h2 className="mt-8 flex flex-wrap items-center justify-center text-[48px] leading-[140%]">
+            <span className="relative inline-block -translate-x-4 -translate-y-2 section-accent-text">
+              Your Growth
+            </span>
+            <span className="relative inline-block translate-x-4 translate-y-4 font-montserrat font-bold text-[#111]">
+              Is Our Mission
+            </span>
+          </h2>
+        </div>
+
+        <div
+          ref={videoRef}
+          className="relative mx-auto flex h-[50vw] w-full max-w-[1800px] items-center justify-center overflow-hidden rounded-[2.5rem] bg-black shadow-xl md:h-[min(800px,70vh)]"
+        >
+          <iframe
+            src={embedUrl}
+            className="absolute inset-0 h-full w-full scale-x-150 scale-y-125"
+            title="About Video"
+            frameBorder="0"
+            allow="autoplay"
+            allowFullScreen
+          />
+        </div>
       </div>
     </section>
   );

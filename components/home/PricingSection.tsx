@@ -1,4 +1,4 @@
-import React from "react";
+import { ArrowRight } from "lucide-react";
 
 const plans = [
   {
@@ -48,7 +48,7 @@ const plans = [
   },
 ];
 
-const PricingSection = () => {
+export default function PricingSection() {
   return (
     <section className="bg-[#FFFDF6] py-24">
       <div className="mx-auto max-w-[1600px] px-6">
@@ -59,11 +59,16 @@ const PricingSection = () => {
             Pricing Plans
           </span>
 
-          <h2 className="mt-8 text-[56px] font-bold leading-tight text-[#111]">
-            <span className="italic text-[#15D286]">Fair Pricing</span> for Your Product
+          <h2 className="mt-8 flex flex-wrap items-center justify-center text-[48px] leading-[140%]">
+            <span className="relative inline-block -translate-x-4 -translate-y-2 section-accent-text">
+              Fair Pricing for
+            </span>
+            <span className="relative inline-block translate-x-4 translate-y-4 font-montserrat font-bold text-[#111]">
+              Your Product
+            </span>
           </h2>
 
-          <p className="mt-6 max-w-3xl mx-auto text-gray-600">
+          <p className="mt-6 max-w-2xl mx-auto text-gray-600">
             Our packages are designed to fit your product’s stage and ambition.
             Flexible, transparent, and customizable based on what your business truly needs.
           </p>
@@ -90,13 +95,13 @@ const PricingSection = () => {
 
                 {/* Popular Badge */}
                 {plan.highlight && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#FEED35] px-8 py-2 text-sm font-semibold text-black shadow-md">
+                  <div className="absolute top-3 left-1/2 w-[90%] text-center -translate-x-1/2 rounded-[16px] bg-[#38F8AB] px-8 py-1 text-xl font-semibold text-[#07422A] shadow-md">
                     Popular
                   </div>
                 )}
 
                 {/* Title */}
-                <h3 className="text-4xl text-center font-semibold font-monserrat text-[#111] mb-6">
+                <h3 className="text-4xl text-center font-semibold font-monserrat text-[#111] mb-6 mt-8">
                   {plan.title}
                 </h3>
 
@@ -129,14 +134,13 @@ const PricingSection = () => {
 
                 {/* Button */}
                 <button
-                  className={`w-full rounded-[20px] font-semibold text-black transition hover:opacity-90
-                  ${plan.highlight ? "py-4" : "py-4"}`}
+                  className="flex w-full items-center justify-center gap-[10px] rounded-[20px] px-8 py-5 font-semibold text-[#07422A] transition hover:opacity-90"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #38F8AB, #FEED35)",
+                    background: "linear-gradient(to right, #38F8AB, #FEED35)",
                   }}
                 >
-                  Explore This Package
+                  Book a Call
+                  <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
                 </button>
 
               </div>
@@ -147,6 +151,4 @@ const PricingSection = () => {
       </div>
     </section>
   );
-};
-
-export default PricingSection;
+}

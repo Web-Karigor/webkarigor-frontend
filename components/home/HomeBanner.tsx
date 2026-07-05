@@ -1,7 +1,6 @@
-import React from "react";
 import Image from "next/image";
 
-const HomeBanner = () => {
+export default function HomeBanner() {
   return (
     <section className="w-full relative overflow-hidden py-20 bg-gradient-to-br from-[#5ee99e] via-[#b1e863] to-[#e6e85b]">
       {/* Absolute Bg Image */}
@@ -35,6 +34,4 @@ const HomeBanner = () => {
       </div>
     </section>
   );
-};
-
-export default HomeBanner;
+}

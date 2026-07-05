@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import Link from "next/link";
+import { useState } from "react";
 
 const faqs = [
   {
@@ -43,7 +44,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="relative py-16 md:py-24 px-4 md:px-6 bg-[#FFFDF6]">
+    <section className="relative py-16 md:py-24 px-4 md:px-6 bg-[#FFFDF6] pb-8 md:pb-12">
       <div className="max-w-[1320px] mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
@@ -93,9 +94,12 @@ export default function FAQ() {
           <p className="text-lg md:text-xl text-[#1F1E1C] mb-6">
             Still curious? We&#39;re happy to help
           </p>
-          <button className="px-6 md:px-8 py-3 md:py-4 bg-[#39B770] text-white font-semibold text-base md:text-lg rounded-lg hover:bg-[#2ea05a] transition-colors">
-            Contact Us
-          </button>
+          <Link
+            href="/contact-us"
+            className="px-5 md:px-6 py-2 md:py-3 border border-[#000000] text-[#000000] font-semibold text-base md:text-lg rounded-lg transition-colors"
+          >
+            Let&apos;s talk
+          </Link>
         </div>
       </div>
     </section>

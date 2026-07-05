@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat, MuseoModerno } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/home/Navbar";
-import Footer from "@/components/home/Footer";
+import GsapProvider from "@/components/providers/GsapProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,7 +17,8 @@ const montserrat = Montserrat({
 
 const museoModerno = MuseoModerno({
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
   variable: "--font-museoModerno",
 });
 export const metadata: Metadata = {
@@ -39,11 +40,11 @@ export default function RootLayout({
           ${museoModerno.variable}
           font-sans
           overflow-x-hidden
-          scroll-smooth
           bg-[#FFFDF6]
           relative
         `}
       >
+        <GsapProvider>
         {/* 🌈 GLOBAL GRADIENT BACKGROUND */}
         <div
           className="absolute pointer-events-none"
@@ -64,8 +65,8 @@ export default function RootLayout({
         <div className="relative z-10 overflow-x-clip">
           <Navbar />
           <main>{children}</main>
-          <Footer />
         </div>
+        </GsapProvider>
       </body>
     </html>
   );

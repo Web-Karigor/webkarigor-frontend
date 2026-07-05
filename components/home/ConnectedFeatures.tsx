@@ -1,12 +1,20 @@
-import React from "react";
-
-const ConnectedFeatures = () => {
+export default function ConnectedFeatures() {
   return (
     <section className="solution-wrapper">
-      <p className="solution-pill">Center of Solution</p>
-      <h2 className="solution-title">
-        <span>Path to</span> Your Solution
-      </h2>
+      <div className="text-center mb-20">
+        <span className="inline-block rounded-full border border-[#38F8AB] px-5 py-2 text-sm font-medium text-[#15D286]">
+          Center of Solution
+        </span>
+
+        <h2 className="mt-8 flex flex-wrap items-center justify-center text-[48px] leading-[140%]">
+          <span className="relative inline-block -translate-x-4 -translate-y-2 section-accent-text">
+            Path to
+          </span>
+          <span className="relative inline-block translate-x-4 translate-y-4 font-montserrat font-bold text-[#111]">
+            Your Solution
+          </span>
+        </h2>
+      </div>
 
       <div className="solution-area">
 
@@ -46,6 +54,4 @@ const ConnectedFeatures = () => {
       </div>
     </section>
   );
-};
-
-export default ConnectedFeatures;
+}

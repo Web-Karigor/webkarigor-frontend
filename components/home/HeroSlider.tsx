@@ -1,97 +1,157 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "@/lib/gsap";
+import { SLIDER_IMAGES } from "@/lib/home-assets";
 
-gsap.registerPlugin(ScrollTrigger);
+const images = SLIDER_IMAGES;
+const CYCLE_SIZE = images.length;
+const REPEAT_CYCLES = 4;
+const ANCHOR_INDEX = CYCLE_SIZE * (REPEAT_CYCLES / 2);
+const SLIDE_DURATION = 36;
 
-const images = ["/s1.png", "/s2.png", "/s3.png", "/s4.png"];
+const SCALE_MAX = 1;
+const SCALE_MIN = 0.7;
+
+const cards = Array.from({ length: CYCLE_SIZE * REPEAT_CYCLES }, (_, i) => ({
+  src: images[i % images.length],
+}));
+
+function getSeamlessCycleWidth(track: HTMLElement) {
+  const children = Array.from(track.children) as HTMLElement[];
+  if (children.length <= CYCLE_SIZE) return 0;
+  return children[CYCLE_SIZE].offsetLeft - children[0].offsetLeft;
+}
+
+function getCardCenter(track: HTMLElement, index: number) {
+  const card = track.children[index] as HTMLElement | undefined;
+  if (!card) return 0;
+  return card.offsetLeft + card.offsetWidth / 2;
+}
+
+function computeScale(cardCenterX: number, viewportRect: DOMRect) {
+  const progress = gsap.utils.clamp(
+    0,
+    1,
+    (viewportRect.right - cardCenterX) / viewportRect.width,
+  );
+  return gsap.utils.interpolate(SCALE_MAX, SCALE_MIN, progress);
+}
 
 export default function HeroSlider() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const imgRefs = useRef<HTMLImageElement[]>([]);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  const [startIndex, setStartIndex] = useState(0);
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
 
-  /* ---------------- SCROLL DRIVER ---------------- */
-  useEffect(() => {
-    let lastStep = 0;
+    let cycleWidth = 0;
+    let anchorCenter = 0;
+    let scrollOffset = 0;
+    let tween: gsap.core.Tween | null = null;
+    let resizeRaf = 0;
 
-    const st = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top top",
-      end: "+=1600",
-      pin: true,
-      scrub: 1.2, // 🔥 smooth inertia
-      anticipatePin: 1,
+    const wrapOffset = (value: number) => {
+      if (!cycleWidth) return 0;
+      return gsap.utils.wrap(0, cycleWidth, value);
+    };
 
-      onUpdate(self) {
-        const step = Math.floor(self.progress * images.length);
+    const updateCardScales = () => {
+      const viewportRect = viewport.getBoundingClientRect();
+      const cardEls = Array.from(track.children) as HTMLElement[];
 
-        if (step !== lastStep) {
-          setStartIndex((prev) =>
-            self.direction > 0
-              ? (prev + 1) % images.length
-              : (prev - 1 + images.length) % images.length
-          );
-          lastStep = step;
-        }
-      },
-    });
+      cardEls.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const scale = computeScale(cardCenterX, viewportRect);
 
-    return () => st.kill();
+        gsap.set(card, {
+          scale,
+          transformOrigin: "50% 100%",
+          force3D: true,
+        });
+      });
+    };
+
+    const render = () => {
+      const viewportCenter = viewport.offsetWidth / 2;
+      const trackX = viewportCenter - anchorCenter - scrollOffset;
+      gsap.set(track, { x: trackX });
+      updateCardScales();
+    };
+
+    const startMarquee = (initialOffset = 0) => {
+      tween?.kill();
+      if (!cycleWidth) return;
+
+      scrollOffset = wrapOffset(initialOffset);
+      render();
+
+      const state = { offset: scrollOffset };
+
+      tween = gsap.to(state, {
+        offset: scrollOffset + cycleWidth * 1_000_000,
+        duration: SLIDE_DURATION * 1_000_000,
+        ease: "none",
+        modifiers: {
+          offset: (value) => String(wrapOffset(parseFloat(value))),
+        },
+        onUpdate: () => {
+          scrollOffset = parseFloat(String(state.offset));
+          render();
+        },
+      });
+    };
+
+    const measure = (preservePosition = true) => {
+      const prevCycleWidth = cycleWidth;
+      const ratio =
+        prevCycleWidth > 0 && preservePosition ? scrollOffset / prevCycleWidth : 0;
+
+      cycleWidth = getSeamlessCycleWidth(track);
+      anchorCenter = getCardCenter(track, ANCHOR_INDEX);
+
+      const nextOffset =
+        preservePosition && prevCycleWidth > 0 && cycleWidth > 0
+          ? ratio * cycleWidth
+          : 0;
+
+      startMarquee(nextOffset);
+    };
+
+    measure(false);
+
+    const onResize = () => {
+      cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(() => measure(true));
+    };
+
+    const observer = new ResizeObserver(onResize);
+    observer.observe(viewport);
+    observer.observe(track);
+
+    return () => {
+      tween?.kill();
+      observer.disconnect();
+      cancelAnimationFrame(resizeRaf);
+    };
   }, []);
-
-  /* ---------------- CONTINUOUS SLIDE (NO JUMP) ---------------- */
-  useLayoutEffect(() => {
-    if (!containerRef.current) return;
-
-    gsap.to(containerRef.current, {
-      x: 0,
-      duration: 0.8,
-      ease: "power3.out",
-    });
-  }, [startIndex]);
-
-  /* ---------------- IMAGE SOFT FADE ---------------- */
-  useLayoutEffect(() => {
-    imgRefs.current.forEach((img) => {
-      if (!img) return;
-
-      gsap.fromTo(
-        img,
-        { autoAlpha: 0.85 },
-        {
-          autoAlpha: 1,
-          duration: 0.6,
-          ease: "power2.out",
-          overwrite: true,
-        }
-      );
-    });
-  }, [startIndex]);
-
-  const getImage = (offset: number) =>
-    images[(startIndex + offset + images.length) % images.length];
 
   return (
     <section
-      ref={sectionRef}
-      className="slanted-wrapper lg:-mt-[260px] md:-mt-[180px] -mt-[160px]"
+      data-hero-slider
+      className="slanted-wrapper relative z-[1] -mt-[140px] md:-mt-[200px] lg:-mt-[240px] xl:-mt-[260px]"
     >
-      <div ref={containerRef} className="slanted-container">
-        {[0, 1, 2, 3].map((i) => (
-          <div key={i} className={`slanted-card card-${i + 1}`}>
-            <img
-              ref={(el) => (imgRefs.current[i] = el!)}
-              src={getImage(i)}
-              alt=""
-              style={{ willChange: "opacity" }}
-            />
-          </div>
-        ))}
+      <div ref={viewportRef} className="slanted-viewport">
+        <div ref={trackRef} className="slanted-track">
+          {cards.map((card, i) => (
+            <div key={i} className="slanted-card">
+              <img src={card.src} alt="" draggable={false} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

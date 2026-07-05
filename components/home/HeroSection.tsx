@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import StatsBadge from "@/components/home/StatsBadge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -37,202 +34,66 @@ export default function HeroSection() {
   // PROJECTS
   const projectsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const slider = document.querySelector<HTMLElement>("[data-hero-slider]");
+    if (!section || !slider) return;
 
-      /* 🔒 PIN HERO */
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=900",
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
+    const ctx = gsap.context(() => {
+      const scrubSmooth = 0.7;
+      const ease = "power3.out";
+
+      gsap.set(projectsRef.current, { opacity: 1, scale: 1 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          endTrigger: slider,
+          end: "top top",
+          pin: true,
+          pinSpacing: false,
+          scrub: scrubSmooth,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
       });
 
-      const scrubSmooth = 0.7;
-      const base = { ease: "power3.out" };
+      tl.to(leftStatsRef.current, { x: -120, opacity: 0, ease }, 0)
+        .to(leftImageRef.current, { x: -150, opacity: 0, ease }, 0.08)
+        .to(rightImageRef.current, { x: 150, opacity: 0, ease }, 0.08)
+        .to(titleLine1Ref.current, { x: -120, opacity: 0, ease }, 0.15)
+        .to(titleLine2Ref.current, { y: -80, opacity: 0, ease }, 0.22)
+        .to(titleLine3Ref.current, { x: 120, opacity: 0, ease }, 0.3)
+        .to(descRef.current, { y: 120, opacity: 0, ease }, 0.38)
+        .to(helloRef.current, { y: 90, opacity: 0, ease }, 0.45)
+        .to(
+          projectsRef.current,
+          { opacity: 1, scale: 1.04, ease },
+          0.42,
+        )
+        .to(
+          projectsRef.current,
+          { opacity: 0, scale: 1.08, ease: "power2.in" },
+          0.62,
+        )
+        .to(section, { autoAlpha: 0, ease: "power2.inOut" }, 0.58);
 
-      /* LEFT SIDE CONTENT */
-      gsap.fromTo(
-        leftStatsRef.current,
-        { x: 0, opacity: 1 },
-        {
-          x: -120,
-          opacity: 0,
-          ...base,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top+=80 top",
-            end: "+=300",
-            scrub: scrubSmooth,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        leftImageRef.current,
-        { x: 0, opacity: 1 },
-        {
-          x: -150,
-          opacity: 0,
-          ...base,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top+=120 top",
-            end: "+=360",
-            scrub: scrubSmooth,
-          },
-        }
-      );
-
-      /* RIGHT IMAGE */
-      gsap.fromTo(
-        rightImageRef.current,
-        { x: 0, opacity: 1 },
-        {
-          x: 150,
-          opacity: 0,
-          ...base,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top+=120 top",
-            end: "+=360",
-            scrub: scrubSmooth,
-          },
-        }
-      );
-
-      /* TITLE LINE 1 → LEFT */
-      gsap.fromTo(
-        titleLine1Ref.current,
-        { x: 0, opacity: 1 },
-        {
-          x: -120,
-          opacity: 0,
-          ...base,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top+=140 top",
-            end: "+=300",
-            scrub: scrubSmooth,
-          },
-        }
-      );
-
-      /* TITLE LINE 2 → TOP */
-      gsap.fromTo(
-        titleLine2Ref.current,
-        { y: 0, opacity: 1 },
-        {
-          y: -80,
-          opacity: 0,
-          ...base,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top+=170 top",
-            end: "+=320",
-            scrub: scrubSmooth,
-          },
-        }
-      );
-
-      /* TITLE LINE 3 → RIGHT */
-      gsap.fromTo(
-        titleLine3Ref.current,
-        { x: 0, opacity: 1 },
-        {
-          x: 120,
-          opacity: 0,
-          ...base,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top+=200 top",
-            end: "+=340",
-            scrub: scrubSmooth,
-          },
-        }
-      );
-
-      /* DESCRIPTION → BOTTOM */
-      gsap.fromTo(
-        descRef.current,
-        { y: 0, opacity: 1 },
-        {
-          y: 120,
-          opacity: 0,
-          ...base,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top+=240 top",
-            end: "+=420",
-            scrub: scrubSmooth,
-          },
-        }
-      );
-
-      /* HELLO */
-      gsap.fromTo(
-        helloRef.current,
-        { y: 0, opacity: 1 },
-        {
-          y: 90,
-          opacity: 0,
-          ...base,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top+=280 top",
-            end: "+=420",
-            scrub: scrubSmooth,
-          },
-        }
-      );
-
-      /* LINES FADE */
       [leftLineRef.current, rightLineRef.current, horizontalLineRef.current].forEach(
         (line) => {
-          gsap.fromTo(
-            line,
-            { opacity: 1 },
-            {
-              opacity: 0,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top+=220 top",
-                end: "+=420",
-                scrub: 1,
-              },
-            }
-          );
-        }
+          if (!line) return;
+          tl.to(line, { opacity: 0, ease: "power2.out" }, 0.35);
+        },
       );
 
-      /* PROJECTS */
-      gsap.fromTo(
-        projectsRef.current,
-        { opacity: 0.4, scale: 1 },
-        {
-          opacity: 1,
-          scale: 1.04,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: projectsRef.current,
-            start: "top 90%",
-            toggleActions: "play reverse play reverse",
-          },
-        }
-      );
-
+      requestAnimationFrame(() => ScrollTrigger.refresh());
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen">
+    <section ref={sectionRef} className="relative h-screen overflow-hidden">
 
       {/* LINES */}
       <span ref={leftLineRef} className="absolute left-[478px] top-0 h-[720px] w-[1px] bg-[#DACFA7] hidden 2xl:inline-block" />
@@ -251,7 +112,7 @@ export default function HeroSection() {
           </div>
 
           {/* CENTER */}
-          <div className="col-span-6 flex flex-col items-center md:mt-[255px]">
+          <div className="col-span-12 md:col-span-6 flex flex-col items-center md:mt-[255px]">
             <div className="max-w-[889px] text-center">
               <p ref={titleLine1Ref} className="hero-title">To deliver a 360</p>
               <span ref={titleLine2Ref} className="hero-subtitle md:-mt-6 block">
@@ -285,7 +146,7 @@ export default function HeroSection() {
           </div>
 
           {/* RIGHT */}
-          <div className="col-span-3 flex justify-end">
+          <div className="col-span-12 md:col-span-3 flex justify-end">
             <div ref={rightImageRef} className="mt-[170px] hidden lg:block">
               <Image src="/h2.png" alt="" width={392} height={392} />
             </div>
@@ -294,9 +155,12 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* PROJECTS */}
-      <div ref={projectsRef} className="relative mt-8 md:-mt-16 lg:-mt-[60px] xl:-mt-[100px] 2xl:-mt-[110px]">
-        <p className="text-[76px] md:text-[150px] lg:text-[190px] xl:text-[280px] 2xl:text-[300px] text-[#1F1E1C05] font-bold text-center">
+      {/* Projects watermark */}
+      <div
+        ref={projectsRef}
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2]"
+      >
+        <p className="translate-y-[24%] text-center text-[76px] font-bold leading-none text-[#1F1E1C] opacity-[0.07] md:translate-y-[26%] md:text-[150px] lg:translate-y-[28%] lg:text-[190px] xl:translate-y-[30%] xl:text-[280px] 2xl:translate-y-[32%] 2xl:text-[300px]">
           PROJECTS
         </p>
       </div>
