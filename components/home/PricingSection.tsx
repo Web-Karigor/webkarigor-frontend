@@ -50,38 +50,36 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section className="bg-[#FFFDF6] py-24">
-      <div className="mx-auto max-w-[1600px] px-6">
+    <section className="pricing-section bg-[#FFFDF6]">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6">
 
-        {/* Header */}
-        <div className="text-center mb-20">
-          <span className="inline-block rounded-full border border-[#38F8AB] px-5 py-2 text-sm font-medium text-[#15D286]">
+        <div className="text-center mb-12 sm:mb-16 md:mb-20">
+          <span className="inline-block rounded-full border border-[#38F8AB] px-4 sm:px-5 py-2 text-sm font-medium text-[#15D286]">
             Pricing Plans
           </span>
 
-          <h2 className="mt-8 flex flex-wrap items-center justify-center text-[48px] leading-[140%]">
-            <span className="relative inline-block -translate-x-4 -translate-y-2 section-accent-text">
+          <h2 className="section-heading">
+            <span className="section-heading-split-accent section-accent-text">
               Fair Pricing for
             </span>
-            <span className="relative inline-block translate-x-4 translate-y-4 font-montserrat font-bold text-[#111]">
+            <span className="section-heading-split-title">
               Your Product
             </span>
           </h2>
 
-          <p className="mt-6 max-w-2xl mx-auto text-gray-600">
+          <p className="mt-4 sm:mt-6 max-w-2xl mx-auto text-sm sm:text-base text-gray-600 px-2">
             Our packages are designed to fit your product’s stage and ambition.
             Flexible, transparent, and customizable based on what your business truly needs.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid gap-16 md:grid-cols-3 pt-16">
+        <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-3 lg:gap-16 pt-8 sm:pt-12 lg:pt-16">
 
           {plans.map((plan, i) => (
             <div
               key={i}
-              className={`relative rounded-[40px] p-[2px] transition-all duration-300
-              ${plan.highlight ? "scale-[1.15]" : ""}`}
+              className={`pricing-card relative p-[2px] transition-all duration-300
+              ${plan.highlight ? "pricing-card-highlight" : ""}`}
               style={{
                 background:
                   "linear-gradient(135deg, #0EC47B, #2EEDA0, #FEF33F, #15D286)",
@@ -90,27 +88,23 @@ export default function PricingSection() {
                   : "none",
               }}
             >
-              {/* Inner Card */}
-              <div className="h-full rounded-[38px] bg-[#FFFDF6] p-8">
+              <div className="pricing-card-inner h-full bg-[#FFFDF6]">
 
-                {/* Popular Badge */}
                 {plan.highlight && (
-                  <div className="absolute top-3 left-1/2 w-[90%] text-center -translate-x-1/2 rounded-[16px] bg-[#38F8AB] px-8 py-1 text-xl font-semibold text-[#07422A] shadow-md">
+                  <div className="absolute top-3 left-1/2 w-[90%] text-center -translate-x-1/2 rounded-[12px] sm:rounded-[16px] bg-[#38F8AB] px-4 sm:px-8 py-1 text-base sm:text-xl font-semibold text-[#07422A] shadow-md">
                     Popular
                   </div>
                 )}
 
-                {/* Title */}
-                <h3 className="text-4xl text-center font-semibold font-monserrat text-[#111] mb-6 mt-8">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl text-center font-semibold font-monserrat text-[#111] mb-4 sm:mb-6 mt-6 sm:mt-8">
                   {plan.title}
                 </h3>
 
-                {/* Price */}
-                <div className="text-4xl font-bold text-[#15D286] mb-2">
+                <div className="text-3xl sm:text-4xl font-bold text-[#15D286] mb-2">
                   {plan.price}
                 </div>
 
-                <p className="text-[#000000] text-[20px] font-semibold mb-8 mt-4 font-monserrat"> 
+                <p className="text-[#000000] text-base sm:text-lg lg:text-[20px] font-semibold mb-6 sm:mb-8 mt-3 sm:mt-4 font-monserrat">
                   {plan.subtitle}
                 </p>
 
@@ -134,7 +128,7 @@ export default function PricingSection() {
 
                 {/* Button */}
                 <button
-                  className="flex w-full items-center justify-center gap-[10px] rounded-[20px] px-8 py-5 font-semibold text-[#07422A] transition hover:opacity-90"
+                  className="flex w-full items-center justify-center gap-[10px] rounded-[16px] sm:rounded-[20px] px-6 sm:px-8 py-4 sm:py-5 text-sm sm:text-base font-semibold text-[#07422A] transition hover:opacity-90"
                   style={{
                     background: "linear-gradient(to right, #38F8AB, #FEED35)",
                   }}

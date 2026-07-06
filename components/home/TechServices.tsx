@@ -43,7 +43,12 @@ type CardSizes = {
 function getCardSizes(viewportWidth: number): CardSizes {
   const gap = viewportWidth <= 640 ? 10 : viewportWidth <= 1024 ? 12 : 16;
   const width = Math.floor((viewportWidth - gap * (VISIBLE_COUNT - 1)) / VISIBLE_COUNT);
-  const hoverWidth = Math.round(width * 1.9);
+  const hoverScale =
+    viewportWidth < 1024 ? 1.35 : viewportWidth < 1280 ? 1.5 : 1.9;
+  const hoverWidth = Math.min(
+    Math.round(width * hoverScale),
+    Math.floor(viewportWidth * 0.42),
+  );
   const height =
     viewportWidth <= 640
       ? Math.round(width * 1.5)

@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useMemo, useRef, useState } from "react";
+import { memo, useMemo, useRef, useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -75,8 +75,19 @@ const CTA_ARROW =
 const SCROLL_SPRING = { stiffness: 38, damping: 26, mass: 1.05 };
 const TEXT_DURATION = 0.5;
 
-/** Wrapper 720px + margin 160px — matches CSS layout */
-const GROUP_STEP_PX = 720 + 160;
+/** Wrapper 720px + margin 160px — matches CSS layout on xl+ desktop */
+const DESKTOP_GROUP_STEP_PX = 720 + 160;
+/** Scaled lg tier — matches CSS vars at 1024–1279px */
+const LG_GROUP_STEP_PX = 580 + 100;
+
+/** Small gap between full-height mobile cards */
+const MOBILE_CARD_GAP = 12;
+
+function getGroupStepPx(width: number, mobileSlotHeight: number) {
+  if (width >= 1280) return DESKTOP_GROUP_STEP_PX;
+  if (width >= 1024) return LG_GROUP_STEP_PX;
+  return Math.max(mobileSlotHeight + MOBILE_CARD_GAP, 280);
+}
 
 const SERIF = { fontFamily: "Georgia, 'Times New Roman', serif" } as const;
 
@@ -112,21 +123,21 @@ function useActiveIndex(progress: MotionValue<number>, total: number) {
 
 const ServicesHeader = memo(function ServicesHeader() {
   return (
-    <header className="relative z-20 shrink-0 pb-6 pt-8 text-center md:pb-8 md:pt-10">
+    <header className="relative z-20 hidden shrink-0 pb-6 pt-8 text-center md:block md:pb-8 md:pt-10">
       <span className="inline-block rounded-full border border-[#38F8AB] px-5 py-2 text-sm font-medium text-[#15D286]">
         Services
       </span>
 
-      <h2 className="mt-8 flex flex-wrap items-center justify-center text-[48px] leading-[140%]">
-        <span className="relative inline-block -translate-x-4 -translate-y-2 section-accent-text">
+      <h2 className="section-heading">
+        <span className="section-heading-split-accent section-accent-text">
           We Work to
         </span>
-        <span className="relative inline-block translate-x-4 translate-y-4 font-montserrat font-bold text-[#111]">
+        <span className="section-heading-split-title">
           Build Brands
         </span>
       </h2>
 
-      <p className="mx-auto mt-6 max-w-2xl text-gray-600">
+      <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base text-gray-600 px-2">
         From idea to execution, we help build brands through modern software,
         intuitive design, and strategic product thinking that drives real
         business results.
@@ -161,8 +172,8 @@ const ServiceActiveText = memo(function ServiceActiveText({
       style={{ willChange: "transform, opacity, filter" }}
     >
       <h3
-        className="text-[2.25rem] font-bold leading-none text-[#141414] sm:text-5xl lg:text-[64px]"
-        style={{ letterSpacing: "-2px" }}
+        className="text-[1.75rem] font-bold leading-[1.05] text-[#141414] sm:text-[2.25rem] lg:text-[2.75rem] xl:text-[4rem]"
+        style={{ letterSpacing: "-1.5px" }}
       >
         {service.title}
         <span className="italic text-[#62F7B3]" style={SERIF}>
@@ -170,15 +181,15 @@ const ServiceActiveText = memo(function ServiceActiveText({
         </span>
       </h3>
 
-      <div className="services-story-divider" aria-hidden />
+      <div className="services-story-divider services-story-divider--mobile" aria-hidden />
 
-      <p className="text-base leading-[1.8] text-[#141414]/60 sm:text-lg">
+      <p className="text-sm leading-[1.65] text-[#141414]/60 sm:text-base lg:text-lg lg:leading-[1.8]">
         {getDescription(service)}
       </p>
 
       <Link
         href={service.link}
-        className="group mt-8 inline-flex items-center gap-3 text-[15px] font-medium text-[#141414] transition-colors duration-300 hover:text-[#62F7B3]"
+        className="group mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#141414] transition-colors duration-300 hover:text-[#62F7B3] lg:mt-8 lg:gap-3 lg:text-[15px]"
       >
         <span>See More</span>
         <img
@@ -200,7 +211,7 @@ const ServicesTextPanel = memo(function ServicesTextPanel({
   const service = services[activeIndex];
 
   return (
-    <div className="flex h-full w-full max-w-[520px] items-center lg:shrink-0 lg:py-6">
+    <div className="flex w-full max-w-[520px] shrink-0 items-start pt-2 lg:h-full lg:items-center lg:py-6 lg:pt-0">
       <AnimatePresence mode="wait" initial={false}>
         <ServiceActiveText key={service.link} service={service} />
       </AnimatePresence>
@@ -234,7 +245,7 @@ const ImageLayout = memo(function ImageLayout({
           src={image1}
           alt={alt1}
           fill
-          sizes="420px"
+          sizes="(max-width: 1023px) 100vw, 420px"
           className="object-cover object-top"
           priority={priority}
           unoptimized
@@ -245,7 +256,7 @@ const ImageLayout = memo(function ImageLayout({
           src={image2}
           alt={alt2}
           fill
-          sizes="360px"
+          sizes="(max-width: 1023px) 100vw, 360px"
           className="object-cover object-top"
           unoptimized
         />
@@ -274,11 +285,23 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
 
 const ServicesImageTrack = memo(function ServicesImageTrack({
   columnY,
+  viewportRef,
+  slotHeight,
 }: {
   columnY: MotionValue<number>;
+  viewportRef: React.Ref<HTMLDivElement>;
+  slotHeight: number;
 }) {
   return (
-    <div className="relative h-full w-full max-w-[812px] shrink-0 overflow-hidden lg:w-auto lg:pt-2">
+    <div
+      ref={viewportRef}
+      className="services-story-images-viewport relative min-h-0 w-full flex-1 overflow-hidden lg:h-full lg:max-w-[min(812px,48vw)] xl:max-w-[812px] lg:flex-none lg:pt-2"
+      style={
+        {
+          "--services-slot-h": `${slotHeight}px`,
+        } as React.CSSProperties
+      }
+    >
       <motion.div
         className="services-story-track"
         style={{ y: columnY, willChange: "transform" }}
@@ -301,9 +324,35 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
 
 export default function Services() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const imageViewportRef = useRef<HTMLDivElement>(null);
   const total = services.length;
+  const [groupStep, setGroupStep] = useState(DESKTOP_GROUP_STEP_PX);
+  const [slotHeight, setSlotHeight] = useState(420);
 
   const sectionHeight = useMemo(() => `${total * 100}vh`, [total]);
+
+  useLayoutEffect(() => {
+    const viewport = imageViewportRef.current;
+    if (!viewport) return;
+
+    const update = () => {
+      const width = window.innerWidth;
+      const nextSlot = width >= 1024 ? 0 : viewport.offsetHeight;
+      setSlotHeight(nextSlot);
+      setGroupStep(getGroupStepPx(width, nextSlot));
+    };
+
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(viewport);
+
+    window.addEventListener("resize", update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -316,7 +365,7 @@ export default function Services() {
   /** Images scroll up continuously — one group step per service segment */
   const columnY = useTransform(progress, (p) => {
     const movedGroups = Math.min(total - 1, p * total);
-    const base = -movedGroups * GROUP_STEP_PX;
+    const base = -movedGroups * groupStep;
 
     const lastSegmentStart = (total - 1) / total;
     if (p <= lastSegmentStart) return base;
@@ -331,13 +380,17 @@ export default function Services() {
       className="services-story relative"
       style={{ height: sectionHeight }}
     >
-      <div className="sticky top-0 h-screen overflow-hidden">
-        <div className="relative z-10 mx-auto flex h-full max-w-[1800px] flex-col px-6">
+      <div className="sticky top-0 h-[100dvh] overflow-hidden">
+        <div className="relative z-10 mx-auto flex h-full max-w-[1800px] flex-col px-4 sm:px-6">
           <ServicesHeader />
 
-          <div className="services-story-body flex min-h-0 flex-1 flex-col items-center gap-10 pb-6 lg:flex-row lg:items-start lg:justify-center lg:gap-10 lg:pt-2 xl:gap-14">
+          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-4 pb-4 pt-2 lg:flex-row lg:items-start lg:justify-center lg:gap-10 lg:pb-6 lg:pt-2 xl:gap-14">
             <ServicesTextPanel activeIndex={activeIndex} />
-            <ServicesImageTrack columnY={columnY} />
+            <ServicesImageTrack
+              columnY={columnY}
+              viewportRef={imageViewportRef}
+              slotHeight={slotHeight}
+            />
           </div>
         </div>
       </div>

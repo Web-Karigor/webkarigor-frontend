@@ -142,7 +142,7 @@ export default function HeroSlider() {
   return (
     <section
       data-hero-slider
-      className="slanted-wrapper relative z-[1] -mt-[140px] md:-mt-[200px] lg:-mt-[240px] xl:-mt-[260px]"
+      className="slanted-wrapper relative z-[1] -mt-[80px] sm:-mt-[120px] md:-mt-[200px] lg:-mt-[240px] xl:-mt-[260px]"
     >
       <div ref={viewportRef} className="slanted-viewport">
         <div ref={trackRef} className="slanted-track">

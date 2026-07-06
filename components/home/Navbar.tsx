@@ -34,7 +34,7 @@ export default function Navbar() {
         {/* ================= RIGHT SIDE ================= */}
         <div className="flex items-center justify-between lg:justify-end">
           {/* MOBILE LOGO / BRAND */}
-          <Link href="/" className="lg:hidden font-bold text-lg">
+          <Link href="/" className="lg:hidden font-bold text-base sm:text-lg">
             Webkarigor
           </Link>
 

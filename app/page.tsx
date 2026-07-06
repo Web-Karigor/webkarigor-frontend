@@ -6,9 +6,9 @@ import Team from "@/components/home/Team";
 import PricingSection from "@/components/home/PricingSection";
 import FAQ from "@/components/home/FAQ";
 import HeroSlider from "@/components/home/HeroSlider";
-import ConnectedFeatures from "@/components/home/ConnectedFeatures";
+// import ConnectedFeatures from "@/components/home/ConnectedFeatures";
 import VideoSection from "@/components/home/VideoSection";
-
+import AIFeature from "@/components/home/AIFeature";
 import HomeBanner from "@/components/home/HomeBanner";
 import TrustedFounders from "@/components/home/TrustedFounders";
 import Case from "@/components/home/Case";
@@ -20,11 +20,12 @@ export default function Home() {
       <HeroSection />
       <HeroSlider />
       <Services />
-      <ConnectedFeatures />
+      {/* <ConnectedFeatures /> */}
+      <AIFeature />
       <VideoSection />
-      <Technologies />
       <TechServices />
       <Case />
+      <Technologies />
       <TrustedFounders />
       <Team />
       <PricingSection />

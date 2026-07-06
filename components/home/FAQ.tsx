@@ -65,11 +65,11 @@ export default function FAQ() {
                 onClick={() => toggleFAQ(index)}
                 className={`w-full flex items-center justify-between py-5 text-left hover:bg-[#faf9f4] transition focus:outline-none`}
               >
-                <span className="block text-base md:text-[17px] font-medium text-[#141414]">
+                <span className="block min-w-0 flex-1 pr-3 text-base md:text-[17px] font-medium text-[#141414]">
                   {faq.question}
                 </span>
                 <span
-                  className="flex items-center justify-center w-6 h-6 rounded-full text-[#141414] font-bold text-xl transition-colors duration-200"
+                  className="flex shrink-0 items-center justify-center w-6 h-6 rounded-full text-[#141414] font-bold text-xl transition-colors duration-200"
                 >
                   {openIndex === index ? (
                     <svg width="18" height="18" viewBox="0 0 18 18" className="text-[#39B770]"><line x1="4" y1="9" x2="14" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>

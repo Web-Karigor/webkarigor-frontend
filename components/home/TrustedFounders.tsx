@@ -14,20 +14,41 @@ export default function TrustedFounders() {
     if (!sectionRef.current || !containerRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        containerRef.current,
-        { x: -60 },
-        {
-          x: 60,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 85%",
-            end: "bottom 15%",
-            scrub: 1,
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        gsap.fromTo(
+          containerRef.current,
+          { x: -60 },
+          {
+            x: 60,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 85%",
+              end: "bottom 15%",
+              scrub: 1,
+            },
           },
-        },
-      );
+        );
+      });
+
+      mm.add("(max-width: 767px)", () => {
+        gsap.fromTo(
+          containerRef.current,
+          { x: -24 },
+          {
+            x: 24,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 90%",
+              end: "bottom 10%",
+              scrub: 1,
+            },
+          },
+        );
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -36,9 +57,9 @@ export default function TrustedFounders() {
   return (
     <section ref={sectionRef} className="trusted-wrapper">
       <div className="trusted-layout">
-        <div className="trusted-text -mb-[280px] ml-[100px]">
+        <div className="trusted-text">
           <span className="trusted-badge">Testimonials</span>
-          <h2 className="trusted-heading text-[72px] font-bold">
+          <h2 className="trusted-heading font-bold">
             Trusted <br />
             by <br />
             <span className="text-[#BABABA] font-museoModerno font-bold">

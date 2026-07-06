@@ -6,6 +6,7 @@ import {
   Linkedin,
   Youtube,
 } from "lucide-react";
+import FooterBrand from "@/components/home/FooterBrand";
 
 const linkColumns = [
   {
@@ -209,9 +210,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="footer-brand-wrap" aria-hidden>
-            <p className="footer-brand">WEBKARIGOR</p>
-          </div>
+          <FooterBrand />
         </div>
       </div>
     </footer>

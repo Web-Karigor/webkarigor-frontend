@@ -40,19 +40,19 @@ const VideoSection = () => {
   return (
     <section
       ref={containerRef}
-      className="bg-[#FFFDF6] px-6 py-12 md:py-20"
+      className="bg-[#FFFDF6] px-4 sm:px-6 py-10 sm:py-12 md:py-20"
     >
       <div className="mx-auto max-w-[1600px]">
-        <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block rounded-full border border-[#38F8AB] px-5 py-2 text-sm font-medium text-[#15D286]">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <span className="inline-block rounded-full border border-[#38F8AB] px-4 sm:px-5 py-2 text-sm font-medium text-[#15D286]">
             What make us different?
           </span>
 
-          <h2 className="mt-8 flex flex-wrap items-center justify-center text-[48px] leading-[140%]">
-            <span className="relative inline-block -translate-x-4 -translate-y-2 section-accent-text">
+          <h2 className="section-heading">
+            <span className="section-heading-split-accent section-accent-text">
               Your Growth
             </span>
-            <span className="relative inline-block translate-x-4 translate-y-4 font-montserrat font-bold text-[#111]">
+            <span className="section-heading-split-title">
               Is Our Mission
             </span>
           </h2>
@@ -60,7 +60,7 @@ const VideoSection = () => {
 
         <div
           ref={videoRef}
-          className="relative mx-auto flex h-[50vw] w-full max-w-[1800px] items-center justify-center overflow-hidden rounded-[2.5rem] bg-black shadow-xl md:h-[min(800px,70vh)]"
+          className="relative mx-auto flex h-[56vw] min-h-[200px] w-full max-w-[1800px] items-center justify-center overflow-hidden rounded-2xl sm:rounded-[2.5rem] bg-black shadow-xl md:h-[min(800px,70vh)]"
         >
           <iframe
             src={embedUrl}

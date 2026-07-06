@@ -115,7 +115,7 @@ export default function Case() {
 
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 901px)", () => {
+    mm.add("(min-width: 1024px)", () => {
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
       if (!cards.length) return;
 
@@ -229,7 +229,9 @@ export default function Case() {
       };
     });
 
-    mm.add("(max-width: 900px)", () => {
+    mm.add("(max-width: 1023px)", () => {
+      gsap.set(listRef.current, { clearProps: "all" });
+
       cardRefs.current.forEach((card) => {
         if (!card) return;
         gsap.set(card, { clearProps: "all" });
@@ -252,16 +254,16 @@ export default function Case() {
             Success Across Industries
           </span>
 
-          <h2 className="mt-8 flex flex-wrap items-center justify-center text-[48px] leading-[140%]">
-            <span className="relative inline-block -translate-x-4 -translate-y-2 section-accent-text">
+          <h2 className="section-heading">
+            <span className="section-heading-split-accent section-accent-text">
               Delivering
             </span>
-            <span className="relative inline-block translate-x-4 translate-y-4 font-montserrat font-bold text-[#111]">
+            <span className="section-heading-split-title">
               Success
             </span>
           </h2>
 
-          <p className="mt-6 max-w-2xl mx-auto text-gray-600">
+          <p className="mt-4 sm:mt-6 max-w-2xl mx-auto text-sm sm:text-base text-gray-600 px-2">
             Helping businesses achieve measurable growth and lasting impact
             across diverse industries
           </p>
