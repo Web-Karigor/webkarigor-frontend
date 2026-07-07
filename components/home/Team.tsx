@@ -209,7 +209,7 @@ export default function Team() {
 
   return (
     <section className="overflow-hidden bg-[#FEFCF6] py-12 sm:py-16 md:py-24">
-      <div className="mx-auto max-w-[1600px] px-4 sm:px-6">
+      <div className="team-section-inner mx-auto px-4 sm:px-6">
         <div className="mb-8 sm:mb-10 text-center lg:hidden">
           <h2 className="team-heading-mobile font-black text-[#141414]">Expert Team</h2>
           <p className="team-heading-mobile font-extrabold text-[#A0A4AA]">Big Result</p>

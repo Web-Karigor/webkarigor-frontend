@@ -168,7 +168,7 @@ const ServiceActiveText = memo(function ServiceActiveText({
       animate="center"
       exit="exit"
       transition={{ duration: TEXT_DURATION, ease: [0.22, 1, 0.36, 1] }}
-      className="w-full max-w-[520px]"
+      className="w-full"
       style={{ willChange: "transform, opacity, filter" }}
     >
       <h3
@@ -211,7 +211,7 @@ const ServicesTextPanel = memo(function ServicesTextPanel({
   const service = services[activeIndex];
 
   return (
-    <div className="flex w-full max-w-[520px] shrink-0 items-start pt-2 lg:h-full lg:items-center lg:py-6 lg:pt-0">
+    <div className="services-story-text-panel flex w-full min-w-0 items-start pt-2 lg:h-full lg:items-center lg:py-6 lg:pt-0">
       <AnimatePresence mode="wait" initial={false}>
         <ServiceActiveText key={service.link} service={service} />
       </AnimatePresence>
@@ -295,7 +295,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
   return (
     <div
       ref={viewportRef}
-      className="services-story-images-viewport relative min-h-0 w-full flex-1 overflow-hidden lg:h-full lg:max-w-[min(812px,48vw)] xl:max-w-[812px] lg:flex-none lg:pt-2"
+      className="services-story-images-viewport relative min-h-0 w-full flex-1 overflow-hidden lg:h-full lg:w-[var(--services-layout-w)] lg:max-w-[var(--services-layout-w)] lg:flex-none lg:pt-2"
       style={
         {
           "--services-slot-h": `${slotHeight}px`,
@@ -381,10 +381,10 @@ export default function Services() {
       style={{ height: sectionHeight }}
     >
       <div className="sticky top-0 h-[100dvh] overflow-hidden">
-        <div className="relative z-10 mx-auto flex h-full max-w-[1800px] flex-col px-4 sm:px-6">
+        <div className="services-story-shell">
           <ServicesHeader />
 
-          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-4 pb-4 pt-2 lg:flex-row lg:items-start lg:justify-center lg:gap-10 lg:pb-6 lg:pt-2 xl:gap-14">
+          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-4 pb-4 pt-2 lg:pb-6 lg:pt-2">
             <ServicesTextPanel activeIndex={activeIndex} />
             <ServicesImageTrack
               columnY={columnY}

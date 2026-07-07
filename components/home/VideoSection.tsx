@@ -18,11 +18,9 @@ const VideoSection = () => {
         videoRef.current,
         {
           scale: 0.35,
-          borderRadius: "2.5rem",
         },
         {
           scale: 1,
-          borderRadius: "0px",
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
@@ -42,7 +40,7 @@ const VideoSection = () => {
       ref={containerRef}
       className="bg-[#FFFDF6] px-4 sm:px-6 py-10 sm:py-12 md:py-20"
     >
-      <div className="mx-auto max-w-[1600px]">
+      <div className="mx-auto max-w-[1860px]">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <span className="inline-block rounded-full border border-[#38F8AB] px-4 sm:px-5 py-2 text-sm font-medium text-[#15D286]">
             What make us different?
@@ -60,11 +58,11 @@ const VideoSection = () => {
 
         <div
           ref={videoRef}
-          className="relative mx-auto flex h-[56vw] min-h-[200px] w-full max-w-[1800px] items-center justify-center overflow-hidden rounded-2xl sm:rounded-[2.5rem] bg-black shadow-xl md:h-[min(800px,70vh)]"
+          className="relative mx-auto flex max-h-[1039px] min-h-[48vw] w-full max-w-[1860px] items-center justify-center overflow-hidden rounded-[2.5rem] bg-black shadow-xl"
         >
           <iframe
             src={embedUrl}
-            className="absolute inset-0 h-full w-full scale-x-150 scale-y-125"
+            className="absolute inset-0 h-full w-full scale-x-150 scale-y-125 rounded-[2.5rem]"
             title="About Video"
             frameBorder="0"
             allow="autoplay"

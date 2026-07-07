@@ -12,6 +12,7 @@ import AIFeature from "@/components/home/AIFeature";
 import HomeBanner from "@/components/home/HomeBanner";
 import TrustedFounders from "@/components/home/TrustedFounders";
 import Case from "@/components/home/Case";
+import HomeConsultation from "@/components/home/HomeConsultation";
 import Footer from "@/components/home/Footer";
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
       <PricingSection />
       <HomeBanner />
       <FAQ />
+      <HomeConsultation />
       <Footer />
     </div>
   );
