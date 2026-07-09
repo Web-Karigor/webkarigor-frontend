@@ -10,29 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Deploy via SSH
+      - name: Deploy
         uses: appleboy/ssh-action@v1.2.2
-
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-
           script: |
             source /home/dhanshir/nodevenv/demo.webkarigor.com/22/bin/activate
 
             cd /home/dhanshir/demo.webkarigor.com
 
             git fetch origin
-
             git reset --hard origin/juel/home-page
 
-            npm install --omit=dev
+            npm install
+
+            npm run build
 
             mkdir -p tmp
-
             touch tmp/restart.txt
