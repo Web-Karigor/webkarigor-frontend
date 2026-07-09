@@ -353,7 +353,7 @@ function PortfolioSlider() {
   );
 }
 
-export default function TechServices() {
+export default function Services() {
   return (
     <section className="tech-services">
       <CategoryMarquee />

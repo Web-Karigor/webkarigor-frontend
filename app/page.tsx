@@ -1,12 +1,10 @@
 import HeroSection from "@/components/home/HeroSection";
 import Services from "@/components/home/Services";
 import Technologies from "@/components/home/Technologies";
-import TechServices from "@/components/home/TechServices";
 import Team from "@/components/home/Team";
 import PricingSection from "@/components/home/PricingSection";
 import FAQ from "@/components/home/FAQ";
 import HeroSlider from "@/components/home/HeroSlider";
-// import ConnectedFeatures from "@/components/home/ConnectedFeatures";
 import VideoSection from "@/components/home/VideoSection";
 import AIFeature from "@/components/home/AIFeature";
 import HomeBanner from "@/components/home/HomeBanner";
@@ -21,10 +19,8 @@ export default function Home() {
       <HeroSection />
       <HeroSlider />
       <Services />
-      {/* <ConnectedFeatures /> */}
       <AIFeature />
       <VideoSection />
-      <TechServices />
       <Case />
       <Technologies />
       <TrustedFounders />

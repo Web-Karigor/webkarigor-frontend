@@ -1,11 +1,7 @@
 import {
   Cloud,
-  Code2,
-  Globe,
   Home,
   Hospital,
-  Layers,
-  LineChart,
   ShoppingCart,
   type LucideIcon,
 } from "lucide-react";
@@ -137,25 +133,25 @@ export const WHY_CHOOSE_FEATURES = [
     title: "User-Centered Design",
     description:
       "Every decision starts with your users — clear flows, intuitive interfaces, and delightful experiences.",
-    icon: Layers,
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/layers/layers-original.svg",
   },
   {
     title: "Fast & Reliable Delivery",
     description:
       "Agile sprints, transparent milestones, and on-time launches you can plan your business around.",
-    icon: LineChart,
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linechart/linechart-original.svg",
   },
   {
     title: "Scalable Technology",
     description:
       "Modern stacks and clean architecture so your product grows without costly rebuilds.",
-    icon: Code2,
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/code/code-original.svg",
   },
   {
     title: "Dedicated Partnership",
     description:
       "A single team from strategy to launch — responsive, collaborative, and invested in your success.",
-    icon: Globe,
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/globe/globe-original.svg",
   },
 ] as const;
 

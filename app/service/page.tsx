@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Services from "@/components/home/Services";
+import Team from "@/components/home/Team";
 import ServiceClients from "@/components/services/ServiceClients";
 import ServiceContact from "@/components/services/ServiceContact";
 import ServiceFAQ from "@/components/services/ServiceFAQ";
@@ -7,8 +9,6 @@ import ServiceHero from "@/components/services/ServiceHero";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import ServiceOfferings from "@/components/services/ServiceOfferings";
 import ServicePricing from "@/components/services/ServicePricing";
-import ServiceShowcase from "@/components/services/ServiceShowcase";
-import ServiceTeamMosaic from "@/components/services/ServiceTeamMosaic";
 import ServiceTechGrid from "@/components/services/ServiceTechGrid";
 import ServiceTestimonials from "@/components/services/ServiceTestimonials";
 import ServiceWhyChoose from "@/components/services/ServiceWhyChoose";
@@ -26,10 +26,10 @@ export default function ServicePage() {
       <ServiceMarquee />
       <ServiceClients />
       <ServiceOfferings />
-      <ServiceShowcase />
+      <Services />
       <ServiceTechGrid />
       <ServiceWhyChoose />
-      <ServiceTeamMosaic />
+      <Team />
       <ServiceTestimonials />
       <ServicePricing />
       <ServiceFAQ />

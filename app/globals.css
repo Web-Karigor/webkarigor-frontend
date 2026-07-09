@@ -4039,7 +4039,6 @@
     min-height: 697px;
   }
 }
-
 .service-pricing-card h4 {
   font-family: var(--font-montserrat);
   font-size: clamp(1rem, 2.5vw, 1.125rem);
@@ -4110,4 +4109,5 @@
 
 /* FAQ — layout handled in ServiceFAQ.tsx (Frame 298: 1245 × hug) */
 /* Contact — layout handled in ServiceContact.tsx (Figma 2149-9338) */
+
 
