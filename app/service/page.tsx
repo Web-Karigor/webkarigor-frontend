@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Footer from "@/components/home/Footer";
 import ServiceClients from "@/components/services/ServiceClients";
 import ServiceContact from "@/components/services/ServiceContact";
 import ServiceFAQ from "@/components/services/ServiceFAQ";
+import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceHero from "@/components/services/ServiceHero";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import ServiceOfferings from "@/components/services/ServiceOfferings";
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function ServicePage() {
   return (
-    <div className="service-page">
+    <div className="bg-[#fffdf6]">
       <ServiceHero />
       <ServiceMarquee />
       <ServiceClients />
@@ -33,8 +33,9 @@ export default function ServicePage() {
       <ServiceTestimonials />
       <ServicePricing />
       <ServiceFAQ />
+      <ServiceMarquee />
       <ServiceContact />
-      <Footer />
+      <ServiceFooter />
     </div>
   );
 }

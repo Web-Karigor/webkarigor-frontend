@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Services page uses its own Figma header inside ServiceHero
+  if (pathname?.startsWith("/service")) {
+    return null;
+  }
 
   return (
     <header className="absolute top-[16px] sm:top-[24px] md:top-[32px] left-0 right-0 z-[9999] overflow-x-hidden">

@@ -1,12 +1,12 @@
 import {
+  Cloud,
   Code2,
   Globe,
+  Home,
+  Hospital,
   Layers,
   LineChart,
-  Megaphone,
-  Palette,
-  Search,
-  Smartphone,
+  ShoppingCart,
   type LucideIcon,
 } from "lucide-react";
 
@@ -21,18 +21,56 @@ export const MARQUEE_ITEMS = [
   "Consulting",
 ] as const;
 
-export const CLIENT_LOGOS = [
-  "Google",
-  "Microsoft",
-  "Amazon",
-  "Meta",
-  "Apple",
-  "Netflix",
-  "Spotify",
-  "Adobe",
-  "Slack",
-  "Uber",
-] as const;
+export type ClientLogo = {
+  name: string;
+  src: string;
+};
+
+export const CLIENTS_DESCRIPTION =
+  "At “WEB KARIGOR”, we have had the privilege of working with a diverse range of clients across various industries. Our commitment to delivering exceptional digital solutions has allowed us to build long-lasting relationships with both local and international businesses. Each project reflects our dedication to innovation, quality, and client satisfaction.";
+
+export const CLIENT_LOGOS: ClientLogo[] = [
+  {
+    name: "Government of Bangladesh",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/BD-Govt.png",
+  },
+  {
+    name: "Robi Axiata",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Robi.png",
+  },
+  {
+    name: "Walton",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Walton.png",
+  },
+  {
+    name: "Sajeeb Group",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Sajeeb-Group.png",
+  },
+  {
+    name: "Oitijjhya",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Oitijjhya.png",
+  },
+  {
+    name: "Nitol-Niloy Group",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Nitol-Niloy.png",
+  },
+  {
+    name: "Gear X",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Gear-X.png",
+  },
+  {
+    name: "The Cafe Rio",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Cafe-Rio.png",
+  },
+  {
+    name: "NIPORT",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Niport.webp",
+  },
+  {
+    name: "Shyamoli Paribahan",
+    src: "https://webkarigor.com/wp-content/uploads/2024/10/Shyamoli-Poribahan.png",
+  },
+];
 
 export type ServiceOffering = {
   title: string;
@@ -43,46 +81,39 @@ export type ServiceOffering = {
 
 export const SERVICE_OFFERINGS: ServiceOffering[] = [
   {
-    title: "Web Design",
+    title: "E-commerce",
     description:
-      "Beautiful, conversion-focused websites tailored to your brand and business goals.",
-    icon: Globe,
+      "Optimizing shopping experiences for higher conversions. We create seamless paths to purchase that delight customers and drive revenue.",
+    icon: ShoppingCart,
     variant: "yellow",
   },
   {
-    title: "SEO Services",
+    title: "SaaS & Software",
     description:
-      "Rank higher, attract qualified traffic, and turn search visibility into revenue.",
-    icon: Search,
+      "Intuitive dashboards that reduce churn and boost retention. We simplify complex workflows into elegant, user-friendly interfaces.",
+    icon: Cloud,
     variant: "green",
   },
   {
-    title: "Digital Marketing",
+    title: "Healthcare",
     description:
-      "Campaigns that reach the right audience with measurable growth outcomes.",
-    icon: Megaphone,
+      "Accessible and secure patient portals and applications. We prioritize clarity and ease of use for critical health services.",
+    icon: Hospital,
     variant: "yellow",
   },
   {
-    title: "Mobile Apps",
+    title: "Real Estate",
     description:
-      "Native and cross-platform apps built for performance, scale, and retention.",
-    icon: Smartphone,
+      "Immersive property discovery and management tools. We build visual-first experiences that showcase properties at their best.",
+    icon: Home,
     variant: "green",
   },
   {
-    title: "Branding",
+    title: "Healthcare",
     description:
-      "Identity systems that make your business memorable and investor-ready.",
-    icon: Palette,
+      "Accessible and secure patient portals and applications. We prioritize clarity and ease of use for critical health services.",
+    icon: Hospital,
     variant: "yellow",
-  },
-  {
-    title: "Development",
-    description:
-      "Robust engineering for web products that ship fast and scale confidently.",
-    icon: Code2,
-    variant: "green",
   },
 ];
 
@@ -131,6 +162,13 @@ export const WHY_CHOOSE_FEATURES = [
 export const TESTIMONIALS = [
   {
     quote:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    name: "Dianne Russel",
+    role: "CEO, Shishu Poribohon",
+    rating: 5,
+  },
+  {
+    quote:
       "Webkarigor transformed our brand and digital presence. The team delivered beyond expectations — professional, creative, and always on time.",
     name: "Sarah Mitchell",
     role: "CEO, TechStart Inc.",
@@ -143,11 +181,19 @@ export const TESTIMONIALS = [
     role: "Founder, ShopEasy",
     rating: 5,
   },
+  {
+    quote:
+      "Thoughtful design and clear communication throughout the project. We saw better conversions within weeks of launch.",
+    name: "Ayesha Rahman",
+    role: "Founder, Bloom Studio",
+    rating: 5,
+  },
 ] as const;
 
 export type PricingPlan = {
   title: string;
   price: string;
+  subtitle: string;
   features: string[];
 };
 
@@ -157,64 +203,50 @@ export type PricingMarket = {
   plans: PricingPlan[];
 };
 
+const SHARED_FEATURES = [
+  "User research and product discovery sessions",
+  "End-to-end UX/UI design for the full product",
+  "Design system for consistency and scale",
+  "Web or mobile app development",
+  "Usability testing and design iteration",
+  "Performance and security best practices",
+  "Post-launch support and proper handover",
+] as const;
+
 export const PRICING_MARKETS: PricingMarket[] = [
   {
-    label: "Local Market",
+    label: "Ecommerce",
     theme: "yellow",
     plans: [
       {
-        title: "Starter Website",
-        price: "$1,500",
-        features: [
-          "Up to 5 custom pages",
-          "Mobile-responsive design",
-          "Basic SEO setup",
-          "Contact form integration",
-          "2 rounds of revisions",
-          "30-day support",
-        ],
+        title: "Build & Validate",
+        price: "$5,000",
+        subtitle: "Full Product Design with Research & Development",
+        features: [...SHARED_FEATURES],
       },
       {
-        title: "Business Website",
-        price: "$3,500",
-        features: [
-          "Up to 12 custom pages",
-          "CMS integration",
-          "Advanced SEO optimization",
-          "Analytics setup",
-          "Blog functionality",
-          "90-day support",
-        ],
+        title: "Build & Validate",
+        price: "$5,000",
+        subtitle: "Full Product Design with Research & Development",
+        features: [...SHARED_FEATURES],
       },
     ],
   },
   {
-    label: "Global Market",
+    label: "Corporate",
     theme: "green",
     plans: [
       {
-        title: "MVP Application",
+        title: "Build & Validate",
         price: "$5,000",
-        features: [
-          "UX/UI design for core flows",
-          "Web or mobile development",
-          "User authentication",
-          "Admin dashboard",
-          "Deployment & handover",
-          "60-day support",
-        ],
+        subtitle: "Full Product Design with Research & Development",
+        features: [...SHARED_FEATURES],
       },
       {
-        title: "Full Product",
-        price: "$12,000",
-        features: [
-          "End-to-end product design",
-          "Full-stack development",
-          "Third-party integrations",
-          "Performance optimization",
-          "Dedicated project manager",
-          "6-month support",
-        ],
+        title: "Build & Validate",
+        price: "$5,000",
+        subtitle: "Full Product Design with Research & Development",
+        features: [...SHARED_FEATURES],
       },
     ],
   },
@@ -222,28 +254,33 @@ export const PRICING_MARKETS: PricingMarket[] = [
 
 export const SERVICE_FAQS = [
   {
-    question: "What services does Webkarigor offer?",
+    question: "Who do you work with and what projects do you take on?",
     answer:
-      "We offer web design, SEO, digital marketing, mobile app development, branding, and full-stack product development — tailored to startups and growing businesses.",
+      "We partner with startups, established companies, and agencies of all sizes. Our team takes on digital product design and development projects that are mission-driven and innovative.",
   },
   {
-    question: "How long does a typical project take?",
+    question: "How do you take a product from idea to launch?",
     answer:
-      "Timelines vary by scope. A starter website takes 2–4 weeks; a full product build typically runs 8–16 weeks. We provide a clear roadmap after the discovery call.",
+      "We start with understanding your vision, users, and markets. We ideate, wireframe, prototype, design, and develop iteratively, collaborating closely with you through each phase and ensuring each milestone is met before launch.",
   },
   {
-    question: "Do you work with international clients?",
+    question: "How do you approach UX, design, and technology decisions?",
     answer:
-      "Yes. We serve clients globally with flexible communication across time zones and transparent project management throughout every engagement.",
+      "All decisions are driven by your business goals, user needs, and best-in-class modern technology. We combine research-driven UX, elegant UI, and practical engineering for scalable solutions.",
   },
   {
-    question: "What's included in your pricing packages?",
+    question: "How involved will we be during the project?",
     answer:
-      "Each package lists deliverables upfront — design files, source code, deployment, and a defined support period. Custom scopes are quoted separately.",
+      "You stay as involved as you want throughout the project. We encourage your feedback in each phase, use frequent check-ins, and provide clear, collaborative communication. You're never left in the dark.",
   },
   {
-    question: "Can I upgrade my package later?",
+    question: "Do you provide ongoing support after launch?",
     answer:
-      "Absolutely. Many clients start with an MVP or starter site and expand as their business grows. We design every project to scale.",
+      "Yes! We offer continuous maintenance, support, and opportunities for evolution and improvement after your product launches. We're your partner for the long run.",
+  },
+  {
+    question: "How do pricing and timelines work?",
+    answer:
+      "We offer flexible pricing models (fixed, retainer, or hourly) depending on project needs. Timelines are validated during our initial call and adjusted collaboratively. Transparency is key.",
   },
 ] as const;
