@@ -6,7 +6,7 @@
     "clean": "rm -rf .next && rm -rf node_modules && rm -rf package-lock.json",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
     "lint": "next lint"
   },
   "dependencies": {
