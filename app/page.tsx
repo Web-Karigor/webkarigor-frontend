@@ -1,7 +1,35 @@
+import HeroSection from "@/components/home/HeroSection";
+import Services from "@/components/home/Services";
+import Technologies from "@/components/home/Technologies";
+import Team from "@/components/home/Team";
+import PricingSection from "@/components/home/PricingSection";
+import FAQ from "@/components/home/FAQ";
+import HeroSlider from "@/components/home/HeroSlider";
+import VideoSection from "@/components/home/VideoSection";
+import AIFeature from "@/components/home/AIFeature";
+import HomeBanner from "@/components/home/HomeBanner";
+import TrustedFounders from "@/components/home/TrustedFounders";
+import Case from "@/components/home/Case";
+import HomeConsultation from "@/components/home/HomeConsultation";
+import Footer from "@/components/home/Footer";
+
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <h1>Webkarigor Company Website</h1>
-    </main>
+    <div className="relative">
+      <HeroSection />
+      <HeroSlider />
+      <Services />
+      <AIFeature />
+      <VideoSection />
+      <Case />
+      <Technologies />
+      <TrustedFounders />
+      <Team />
+      <PricingSection />
+      <HomeBanner />
+      <FAQ />
+      <HomeConsultation />
+      <Footer />
+    </div>
   );
 }

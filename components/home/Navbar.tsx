@@ -1,81 +1,106 @@
 "use client";
 
 import Link from "next/link";
-import { FolderKanban, Settings, DollarSign, Menu, MessageCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
-export default function NavbarTailwind() {
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Services page uses its own Figma header inside ServiceHero
+  if (pathname?.startsWith("/service")) {
+    return null;
+  }
+
   return (
-    <header className="fixed top-5 left-0 right-0 z-[9999] pointer-events-none">
-      <div className="max-w-2xl mx-auto px-4 pb-4">
-        <div
-          className="relative rounded-2xl bg-[#070707]/95 backdrop-blur-2xl ring-1 ring-white/5 shadow-2xl overflow-visible pointer-events-auto"
-          style={{ height: 60 }}
-        >
-          <nav className="relative z-10 h-full flex items-center justify-between px-4">
-            {/* Left group: Projects + Services */}
-            <div className="flex items-center gap-3">
-              <Link
-                href="/projects"
-                className="group flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-[#9ae6b4] hover:text-white transition"
-              >
-                <FolderKanban className="w-4 h-4" />
-                <span className="hidden md:inline">Projects</span>
-              </Link>
-              <Link
-                href="/services"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-200/80 hover:text-white transition"
-              >
-                <Settings className="w-4 h-4" />
-                <span>Services</span>
-              </Link>
-            </div>
+    <header className="absolute top-[16px] sm:top-[24px] md:top-[32px] left-0 right-0 z-[9999] overflow-x-hidden">
+      <div className="max-w-[1800px] mx-auto relative px-4 sm:px-6">
+        {/* ================= DESKTOP NAVBAR ================= */}
+        <nav className="hidden lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:block">
+          <div className="navbar-container flex items-center rounded-[24px]">
+            <div className="navbar-content flex items-center justify-center font-semibold">
+              <Link href="/" className="navbar-link">Home</Link>
+              <Link href="/service" className="navbar-link">Service</Link>
 
-            {/* Center: Start a Project CTA */}
-            <div className="flex-1 flex justify-center">
-              <a
-                href="/contact"
-                className="relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded text-sm font-semibold text-white overflow-hidden"
-                style={{
-                  background: "linear-gradient(135deg, #9333ea 0%, #7c3aed 100%)",
-                  boxShadow: "0 4px 14px 0 rgba(147, 51, 234, 0.4)",
-                }}
-              >
-                <MessageCircle className="w-4 h-4 relative z-10" />
-                <span className="relative z-10">Start a Project</span>
-              </a>
-            </div>
-
-            {/* Right group: Pricing + More */}
-            <div className="flex items-center gap-3">
               <Link
-                href="/pricing"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-200/80 hover:text-white transition"
+                href="/"
+                className="webkarigor-button relative inline-flex items-center justify-center"
               >
-                <DollarSign className="w-4 h-4" />
-                <span>Pricing</span>
+                <span className="webkarigor-inner w-full h-full flex items-center justify-center">
+                  <span className="webkarigor-text">Webkarigor</span>
+                </span>
               </Link>
-              <Link
-                href="/more"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-200/80 hover:text-white transition"
-              >
-                <Menu className="w-4 h-4" />
-                <span>More</span>
-              </Link>
-            </div>
-          </nav>
 
-          {/* subtle bottom glow line */}
-          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-64 h-40 rounded-full pointer-events-none">
-            <div
-              className="w-full h-full rounded-full blur-3xl"
-              style={{
-                background:
-                  "radial-gradient(closest-side, rgba(16,185,129,0.06), rgba(124,58,237,0.02), transparent 60%)",
-                opacity: 0.25,
-              }}
-            />
+              <Link href="/case" className="navbar-link">Case</Link>
+              <Link href="/about-us" className="navbar-link">About us</Link>
+            </div>
           </div>
+        </nav>
+
+        {/* ================= RIGHT SIDE ================= */}
+        <div className="flex items-center justify-between lg:justify-end">
+          {/* MOBILE LOGO / BRAND */}
+          <Link href="/" className="lg:hidden font-bold text-base sm:text-lg">
+            Webkarigor
+          </Link>
+
+          {/* CTA BUTTON (DESKTOP) */}
+          <button
+            className="
+              hidden lg:inline-flex
+              items-center gap-[10px]
+              px-[24px] py-[20px] lg:py-[18px] 2xl:py-[20px]
+              border border-black
+              rounded-[12px]
+              font-bold text-[18px] xl:text-[20px]
+              hover:bg-black hover:text-white
+              transition
+            "
+          >
+            Let’s get started
+          </button>
+
+          {/* HAMBURGER */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="lg:hidden w-10 h-10 flex items-center justify-center border rounded-lg"
+          >
+            <span className="text-2xl">{open ? "✕" : "☰"}</span>
+          </button>
         </div>
+
+        {/* ================= MOBILE MENU ================= */}
+        {open && (
+          <div className="lg:hidden mt-4 rounded-2xl border bg-white shadow-xl p-6 space-y-5">
+            <Link onClick={() => setOpen(false)} href="/" className="block font-semibold">
+              Home
+            </Link>
+            <Link onClick={() => setOpen(false)} href="/service" className="block font-semibold">
+              Service
+            </Link>
+            <Link onClick={() => setOpen(false)} href="/case" className="block font-semibold">
+              Case
+            </Link>
+            <Link onClick={() => setOpen(false)} href="/about-us" className="block font-semibold">
+              About us
+            </Link>
+
+            <button
+              className="
+                w-full mt-4
+                px-6 py-4
+                border border-black
+                rounded-xl
+                font-bold
+                hover:bg-black hover:text-white
+                transition
+              "
+            >
+              Let’s get started
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -1,10 +1,26 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat, MuseoModerno } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/home/Navbar";
+import GsapProvider from "@/components/providers/GsapProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-montserrat",
+});
+
+const museoModerno = MuseoModerno({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-museoModerno",
+});
 export const metadata: Metadata = {
   title: "Webkarigor - Company Website",
   description: "Webkarigor Company Website",
@@ -12,15 +28,47 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${inter.className} overflow-x-hidden scroll-smooth bg-[#FFFDF6]`}>
-        <Navbar />
-        {children}
-        </body>
+      <body
+        className={`
+          ${inter.variable}
+          ${montserrat.variable}
+          ${museoModerno.variable}
+          font-sans
+          overflow-x-hidden
+          bg-[#FFFDF6]
+          relative
+        `}
+      >
+        <GsapProvider>
+        {/* 🌈 GLOBAL GRADIENT BACKGROUND */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            width: "min(1700px, 90vw)",
+            height: "585px",
+            top: "-454px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "radial-gradient(circle, #BBFF68 80%, transparent 70%)",
+            opacity: 0.28,
+            filter: "blur(400px)",
+            zIndex: 0,
+          }}
+        />
+
+        {/* CONTENT LAYER */}
+        <div className="relative z-10 overflow-x-clip">
+          <Navbar />
+          <main>{children}</main>
+        </div>
+        </GsapProvider>
+      </body>
     </html>
   );
 }
+
