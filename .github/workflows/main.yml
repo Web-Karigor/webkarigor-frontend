@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -24,12 +24,24 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      - name: Add SSH Key
+      - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
+
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -p ${{ secrets.PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+          ssh-keyscan -H -p ${{ secrets.PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: Test SSH Connection
+        run: |
+          ssh \
+            -i ~/.ssh/id_ed25519 \
+            -p ${{ secrets.PORT }} \
+            -o StrictHostKeyChecking=no \
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
+            "echo 'SSH Connected Successfully'"
 
       - name: Deploy with rsync
         run: |
@@ -37,14 +49,17 @@ jobs:
             --exclude=".git" \
             --exclude=".github" \
             --exclude="node_modules" \
-            -e "ssh -p ${{ secrets.PORT }}" \
+            -e "ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no" \
             ./ \
             ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/dhanshir/demo.webkarigor.com/
 
       - name: Restart Application
         run: |
-          ssh -p ${{ secrets.PORT }} \
-          ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+          ssh \
+            -i ~/.ssh/id_ed25519 \
+            -p ${{ secrets.PORT }} \
+            -o StrictHostKeyChecking=no \
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
 
           source /home/dhanshir/nodevenv/demo.webkarigor.com/22/bin/activate
 
