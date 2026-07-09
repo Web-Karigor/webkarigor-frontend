@@ -1,16 +1,16 @@
-name: Deploy Next.js to cPanel
+name: Deploy to cPanel
 
 on:
   push:
     branches:
-      - juel/home-page
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -18,42 +18,42 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build
+      - name: Build Next.js
         run: npm run build
 
-      - name: Copy files to Server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          source: |
-            .next
-            public
-            package.json
-            package-lock.json
-            next.config.mjs
-            server.js
-          target: /home/dhanshir/demo.webkarigor.com
+      - name: Add SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p ${{ secrets.PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
-      - name: Restart Node App
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            source /home/dhanshir/nodevenv/demo.webkarigor.com/22/bin/activate
+      - name: Deploy with rsync
+        run: |
+          rsync -az --delete \
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude="node_modules" \
+            -e "ssh -p ${{ secrets.PORT }}" \
+            ./ \
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/dhanshir/demo.webkarigor.com/
 
-            cd /home/dhanshir/demo.webkarigor.com
+      - name: Restart Application
+        run: |
+          ssh -p ${{ secrets.PORT }} \
+          ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
 
-            npm install --omit=dev
+          source /home/dhanshir/nodevenv/demo.webkarigor.com/22/bin/activate
 
-            mkdir -p tmp
+          cd /home/dhanshir/demo.webkarigor.com
 
-            touch tmp/restart.txt
+          npm install --omit=dev
+
+          mkdir -p tmp
+
+          touch tmp/restart.txt
+
+          EOF
