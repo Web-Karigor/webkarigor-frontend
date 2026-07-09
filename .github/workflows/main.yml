@@ -1,4 +1,4 @@
-name: Deploy to cPanel
+name: Deploy Next.js to cPanel
 
 on:
   push:
@@ -10,9 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Deploy
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Copy files to Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          source: |
+            .next
+            public
+            package.json
+            package-lock.json
+            next.config.mjs
+            server.js
+          target: /home/dhanshir/demo.webkarigor.com
+
+      - name: Restart Node App
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.HOST }}
@@ -24,12 +52,8 @@ jobs:
 
             cd /home/dhanshir/demo.webkarigor.com
 
-            git fetch origin
-            git reset --hard origin/juel/home-page
-
-            npm install
-
-            npm run build
+            npm install --omit=dev
 
             mkdir -p tmp
+
             touch tmp/restart.txt
