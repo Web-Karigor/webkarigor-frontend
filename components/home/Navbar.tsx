@@ -14,18 +14,18 @@ export default function Navbar() {
   }
 
   return (
-    <header className="absolute top-[16px] sm:top-[24px] md:top-[32px] left-0 right-0 z-[9999] overflow-x-hidden">
+    <header className="absolute top-[16px] sm:top-[24px] lg:top-[39px] left-0 right-0 z-[9999] overflow-x-hidden">
       <div className="max-w-[1800px] mx-auto relative px-4 sm:px-6">
         {/* ================= DESKTOP NAVBAR ================= */}
         <nav className="hidden lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:block">
-          <div className="navbar-container flex items-center rounded-[24px]">
+          <div className="navbar-container flex items-center justify-center box-border rounded-[24px]">
             <div className="navbar-content flex items-center justify-center font-semibold">
               <Link href="/" className="navbar-link">Home</Link>
               <Link href="/service" className="navbar-link">Service</Link>
 
               <Link
                 href="/"
-                className="webkarigor-button relative inline-flex items-center justify-center"
+                className="webkarigor-button relative inline-flex items-center justify-center shrink-0"
               >
                 <span className="webkarigor-inner w-full h-full flex items-center justify-center">
                   <span className="webkarigor-text">Webkarigor</span>

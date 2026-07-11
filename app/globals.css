@@ -151,88 +151,6 @@
     }
   }
 
-  /* Responsive adjustments for lg/xl screens */
-  @media (max-width: 1023px) {
-    .navbar-container {
-      width: auto;
-      max-width: 100%;
-      height: auto;
-      min-height: 56px;
-      padding: 8px 16px;
-    }
-    .navbar-content {
-      gap: 16px;
-      height: auto;
-      flex-wrap: wrap;
-    }
-    .navbar-link {
-      font-size: 16px;
-    }
-    .webkarigor-inner {
-      padding: 8px 12px;
-    }
-    .webkarigor-text {
-      font-size: 16px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .navbar-container {
-      width: 560px;
-      height: 64px;
-      padding: 8px 24px;
-      gap: 8px;
-    }
-    .navbar-content {
-      gap: 24px;
-      height: 48px;
-    }
-    .navbar-link {
-      font-size: 18px;
-    }
-    .webkarigor-inner {
-      padding: 10px 14px;
-    }
-    .webkarigor-text {
-      font-size: 18px;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .navbar-container {
-      width: 600px;
-      height: 66px;
-      padding: 9px 26px;
-    }
-    .navbar-link {
-      font-size: 19px;
-    }
-    .webkarigor-text {
-      font-size: 19px;
-    }
-  }
-
-  @media (min-width: 1520px) {
-    .navbar-container {
-      width: 560px;
-      height: 72px;
-      padding: 8px 24px;
-      gap: 8px;
-    }
-    .navbar-content {
-      gap: 24px;
-      height: 48px;
-    }
-    .navbar-link {
-      font-size: 18px;
-    }
-    .webkarigor-inner {
-      padding: 10px 14px;
-    }
-    .webkarigor-text {
-      font-size: 18px;
-    }
-  }
 }
 
 .stats-number {
@@ -3155,46 +3073,118 @@
 }
 
 .service-hero-chip-sparkle {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
 }
 
+@media (min-width: 640px) {
+  .service-hero-chip-sparkle {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-hero-chip-sparkle {
+    width: 18px;
+    height: 18px;
+  }
+}
+
 .service-hero-chip--ai {
-  top: clamp(32px, 8%, 56px);
-  left: 0;
-  transform: translateX(-44%);
-  padding: 12px 20px;
+  top: clamp(16px, 5%, 32px);
+  left: 4%;
+  transform: none;
+  max-width: calc(100% - 8%);
+  padding: 8px 14px;
   border-radius: 999px;
   font-family: var(--font-montserrat);
-  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #15d286;
 }
 
 .service-hero-chip--conversion {
-  right: 0;
-  bottom: clamp(56px, 14%, 92px);
-  transform: translateX(44%);
-  padding: 14px 18px;
-  border-radius: 18px;
+  right: 4%;
+  bottom: clamp(40px, 12%, 72px);
+  transform: none;
+  max-width: calc(100% - 8%);
+  padding: 10px 12px;
+  border-radius: 16px;
+}
+
+@media (min-width: 640px) {
+  .service-hero-chip--ai {
+    top: clamp(24px, 6%, 44px);
+    left: 0;
+    transform: translateX(-18%);
+    max-width: none;
+    padding: 10px 16px;
+    font-size: 0.875rem;
+  }
+
+  .service-hero-chip--conversion {
+    right: 0;
+    bottom: clamp(48px, 13%, 80px);
+    transform: translateX(18%);
+    max-width: none;
+    padding: 12px 16px;
+    border-radius: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-hero-chip--ai {
+    top: clamp(32px, 8%, 56px);
+    transform: translateX(-44%);
+    padding: 12px 20px;
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
+  }
+
+  .service-hero-chip--conversion {
+    bottom: clamp(56px, 14%, 92px);
+    transform: translateX(44%);
+    padding: 14px 18px;
+  }
 }
 
 .service-hero-chip-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
   border-radius: 999px;
   background: linear-gradient(135deg, #38f8ab, #15d286);
   color: #fff;
 }
 
+@media (min-width: 640px) {
+  .service-hero-chip-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-hero-chip-icon {
+    width: 44px;
+    height: 44px;
+  }
+}
+
 .service-hero-chip-trend {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+}
+
+@media (min-width: 1024px) {
+  .service-hero-chip-trend {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .service-hero-chip-copy {
