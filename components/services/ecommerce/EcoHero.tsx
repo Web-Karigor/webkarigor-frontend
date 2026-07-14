@@ -9,12 +9,7 @@ import { CLIENT_LOGOS } from "@/lib/services-data";
 /** Figma: OUR TOP CLIENTS row — 461 × 60, each mark 60 × 60 */
 const ECO_CLIENTS = CLIENT_LOGOS.slice(0, 5);
 
-/**
- * Figma Ecommerce hero — 1920 × 870, bg #F7F9FB
- * Absolute visual: 808 × 712 @ left 1052, top 47
- * Bottom glow: 1920 × 137 @ top 733 · #E4FFF4 → #F7F9FB
- * Header stays white (not section bg)
- */
+
 export default function EcoHero() {
   return (
     <section className="relative overflow-hidden bg-[#F7F9FB]">

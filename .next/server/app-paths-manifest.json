@@ -1,3 +1,4 @@
 {
-  "/service/ecommerce/page": "app/service/ecommerce/page.js"
+  "/service/page": "app/service/page.js",
+  "/service/erp/page": "app/service/erp/page.js"
 }

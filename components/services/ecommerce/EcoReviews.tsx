@@ -79,7 +79,7 @@ export default function EcoReviews() {
   }, [paused, maxIndex]);
 
   return (
-    <section className="overflow-hidden bg-[#F7F5EF] py-[clamp(48px,6vw,80px)]">
+    <section className="overflow-hidden bg-[#F5F5EB] py-[clamp(48px,6vw,80px)]">
       <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-10 px-[clamp(16px,4vw,40px)] lg:flex-row lg:items-center lg:gap-[clamp(32px,4vw,64px)]">
         {/* Left — top block 474×136 (gap 12), then title */}
         <div className="flex w-full max-w-[474px] shrink-0 flex-col gap-8">

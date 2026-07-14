@@ -2882,6 +2882,13 @@
 .service-hero-align {
   box-sizing: border-box;
   width: 100%;
+  max-width: 1850px;
+  padding-inline: clamp(16px, 6.25vw, 120px);
+}
+
+.service-hero-aligns {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 1680px;
   padding-inline: clamp(16px, 6.25vw, 120px);
 }

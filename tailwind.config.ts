@@ -28,6 +28,7 @@ const config: Config = {
       },
       fontFamily: {
         montserrat: ["var(--font-montserrat)", "sans-serif"],
+        manrope: ["var(--font-manrope)", "sans-serif"],
         museoModerno: ["var(--font-museoModerno)", "sans-serif"],
       },
     },
