@@ -396,8 +396,11 @@
 ========================= */
 
 .tech-services {
+  position: relative;
+  z-index: 2;
   width: 100%;
   overflow: visible;
+  isolation: isolate;
 }
 
 .tech-services-nav {
@@ -461,6 +464,8 @@
   position: relative;
   width: 100%;
   overflow: visible;
+  display: flex;
+  align-items: center;
 }
 
 .tech-services-track {
@@ -4100,4 +4105,222 @@
 /* FAQ — layout handled in ServiceFAQ.tsx (Frame 298: 1245 × hug) */
 /* Contact — layout handled in ServiceContact.tsx (Figma 2149-9338) */
 
+/* =========================
+   ECOMMERCE SERVICE PAGE
+========================= */
 
+.eco-marquee-track {
+  animation: eco-marquee-scroll 28s linear infinite;
+}
+
+@keyframes eco-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================
+   ECO TEAM — Figma 1680 × 944
+========================= */
+
+.eco-team {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: clamp(560px, 70vw, 944px);
+  background: #f7f8fa;
+  display: flex;
+  align-items: center;
+}
+
+.eco-team-oval {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  z-index: 0;
+  width: min(1400.14px, 160vw);
+  height: min(1400.14px, 160vw);
+  border-radius: 50%;
+  opacity: 0.15;
+  transform: translate(-10%, -50%);
+  background: linear-gradient(
+    180deg,
+    #c4d5f3 0%,
+    rgba(255, 255, 255, 0.0001) 100%
+  );
+}
+
+.eco-team-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 85px) clamp(16px, 4.4vw, 85px);
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(32px, 5vw, 64px);
+}
+
+.eco-team-title {
+  margin: 0;
+  flex: 0 1 696px;
+  max-width: 696px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 6.5vw, 100px);
+  line-height: 150%;
+  letter-spacing: 0;
+  color: #183b56;
+}
+
+.eco-team-collage {
+  position: relative;
+  flex: 0 0 auto;
+  width: min(100%, 620px);
+  height: clamp(400px, 46vw, 560px);
+  isolation: isolate;
+}
+
+.eco-team-shot {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 18px 44px rgba(24, 59, 86, 0.13);
+  background: #e8eef6;
+}
+
+/*
+  Figma collage (no photo-to-photo overlap):
+  1. Top-right  = largest
+  2. Mid-left   = medium
+  3. Center     = smallest
+  4. Bottom-left = 2nd largest
+  5. Bottom-right = medium
+*/
+
+/* 1 — Top right, LARGEST (overflow visible so accent can sit outside) */
+.eco-team-shot--lg {
+  top: 0;
+  right: 0;
+  z-index: 3;
+  width: clamp(176px, 21vw, 240px);
+  height: clamp(176px, 21vw, 240px);
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+}
+
+.eco-team-shot--lg .eco-team-shot-media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 18px 44px rgba(24, 59, 86, 0.13);
+  background: #e8eef6;
+}
+
+/* 2 — Middle left, medium */
+.eco-team-shot--md-left {
+  top: 22%;
+  left: 0;
+  z-index: 2;
+  width: clamp(124px, 15vw, 168px);
+  height: clamp(124px, 15vw, 168px);
+}
+
+/* 3 — Center, SMALLEST (above dot grid) */
+.eco-team-shot--sm {
+  top: 44%;
+  left: 40%;
+  z-index: 4;
+  width: clamp(68px, 8.5vw, 92px);
+  height: clamp(68px, 8.5vw, 92px);
+  border-radius: 20px;
+}
+
+/* 5 — Bottom right, medium (right of dot grid) */
+.eco-team-shot--md-right {
+  right: 4%;
+  bottom: 10%;
+  z-index: 2;
+  width: clamp(112px, 14vw, 152px);
+  height: clamp(112px, 14vw, 152px);
+}
+
+/* 4 — Bottom left, 2nd largest */
+.eco-team-shot--md-bottom {
+  left: 4%;
+  bottom: 0;
+  z-index: 3;
+  width: clamp(148px, 18vw, 200px);
+  height: clamp(148px, 18vw, 200px);
+}
+
+/* Blue circle — bottom-right of large photo (~25% over image, ~75% outside) */
+.eco-team-accent-dot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: clamp(42px, 5vw, 56px);
+  height: clamp(42px, 5vw, 56px);
+  border-radius: 50%;
+  background: #2f80ed;
+  transform: translate(30%, 30%);
+  pointer-events: none;
+}
+
+/* Dot grid — behind center/bottom area, 4×6 feel */
+.eco-team-dot-grid {
+  position: absolute;
+  left: 42%;
+  bottom: 18%;
+  z-index: 0;
+  width: 72px;
+  height: 112px;
+  background-image: radial-gradient(circle, #c5cdd8 1.7px, transparent 1.8px);
+  background-size: 16px 16px;
+  opacity: 0.7;
+}
+
+@media (max-width: 1023px) {
+  .eco-team-shell {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .eco-team-collage {
+    width: 100%;
+    max-width: 520px;
+    height: clamp(360px, 88vw, 480px);
+    align-self: center;
+  }
+
+  .eco-team-oval {
+    left: 50%;
+    transform: translate(-35%, -48%);
+  }
+}
+
+@media (max-width: 640px) {
+  .eco-team-shot {
+    border-radius: 20px;
+  }
+
+  .eco-team-shot--sm {
+    border-radius: 14px;
+  }
+
+  .eco-team-dot-grid {
+    width: 56px;
+    height: 88px;
+    background-size: 13px 13px;
+  }
+}

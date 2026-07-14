@@ -1,6 +1,7 @@
 import HeroSection from "@/components/home/HeroSection";
 import Services from "@/components/home/Services";
 import Technologies from "@/components/home/Technologies";
+import TechServices from "@/components/home/TechServices";
 import Team from "@/components/home/Team";
 import PricingSection from "@/components/home/PricingSection";
 import FAQ from "@/components/home/FAQ";
@@ -21,6 +22,7 @@ export default function Home() {
       <Services />
       <AIFeature />
       <VideoSection />
+      <TechServices />
       <Case />
       <Technologies />
       <TrustedFounders />

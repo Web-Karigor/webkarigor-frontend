@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Services from "@/components/home/Services";
+import TechServices from "@/components/home/TechServices";
 import Team from "@/components/home/Team";
 import ServiceClients from "@/components/services/ServiceClients";
 import ServiceContact from "@/components/services/ServiceContact";
@@ -26,7 +26,7 @@ export default function ServicePage() {
       <ServiceMarquee />
       <ServiceClients />
       <ServiceOfferings />
-      <Services />
+      <TechServices />
       <ServiceTechGrid />
       <ServiceWhyChoose />
       <Team />

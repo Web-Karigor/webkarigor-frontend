@@ -37,7 +37,7 @@ export default function ServiceFooter() {
 
           <p className="m-0 font-montserrat text-[14px] font-medium text-[#9ca3af]">
             © 2024 Webkarigor. All rights reserved.
-1          </p>
+          </p>
         </div>
       </div>
     </footer>
