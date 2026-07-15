@@ -162,13 +162,15 @@ export const TESTIMONIALS = [
     name: "Dianne Russel",
     role: "CEO, Shishu Poribohon",
     rating: 5,
+    highlight: false,
   },
   {
     quote:
       "Webkarigor transformed our brand and digital presence. The team delivered beyond expectations — professional, creative, and always on time.",
     name: "Sarah Mitchell",
     role: "CEO, TechStart Inc.",
-    rating: 5,
+    rating: 4,
+    highlight: false,
   },
   {
     quote:
@@ -176,13 +178,47 @@ export const TESTIMONIALS = [
     name: "James Rodriguez",
     role: "Founder, ShopEasy",
     rating: 5,
+    highlight: false,
   },
   {
     quote:
       "Thoughtful design and clear communication throughout the project. We saw better conversions within weeks of launch.",
     name: "Ayesha Rahman",
     role: "Founder, Bloom Studio",
+    rating: 4,
+    highlight: false,
+  },
+  {
+    quote:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    name: "Floyd Miles",
+    role: "CEO, Shishu Poribohon",
+    rating: 4,
+    highlight: true,
+  },
+  {
+    quote:
+      "Clear communication, strong craft, and a team that treated our roadmap like their own. Rare combination.",
+    name: "Robert Fox",
+    role: "CTO, NovaPay",
     rating: 5,
+    highlight: false,
+  },
+  {
+    quote:
+      "From design to development, every milestone landed on time. Our stakeholders noticed the difference immediately.",
+    name: "Kathryn Murphy",
+    role: "COO, Lumen Soft",
+    rating: 4,
+    highlight: false,
+  },
+  {
+    quote:
+      "Supportive partners and talent that ships. We extended the engagement twice after the first release.",
+    name: "Theresa Webb",
+    role: "VP Engineering, Orbit HR",
+    rating: 5,
+    highlight: false,
   },
 ] as const;
 

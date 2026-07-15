@@ -24,6 +24,7 @@ const linkColumns = [
     links: [
       { label: "E-commerce", href: "/service/ecommerce" },
       { label: "ERP", href: "/service/erp" },
+      { label: "Manpower", href: "/service/manpower" },
       { label: "Healthcare", href: "/industries/healthcare" },
       { label: "Fintech", href: "/industries/fintech" },
       { label: "Edtech", href: "/industries/edtech" },

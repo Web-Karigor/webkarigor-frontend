@@ -31,10 +31,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/service/page.js"
     ],
-    "/service/erp/page": [
+    "/service/manpower/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/service/erp/page.js"
+      "static/chunks/app/service/manpower/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
