@@ -4,27 +4,40 @@ export const ABOUT_HERO_IMAGES = [
   "/sm1.png",
   "/s3.png",
   "/s4.png",
+  "/sm2.jpg",
+  "/sm3.jpg",
 ] as const;
 
 export const ABOUT_IMPACT = {
   intro:
-    "We are a digital product studio helping businesses turn ambitious ideas into scalable products people love to use.",
+    "Every product we build is guided by clear goals and measurable results. Through thoughtful design, reliable technology and strategic execution, we turn ideas into success stories that speak for themselves.",
   stats: [
-    { value: "8+", label: "Years", sublabel: "Industry Experience" },
-    { value: "100+", label: "Projects", sublabel: "Successfully Delivered" },
+    {
+      value: "8+",
+      label: "Years",
+      description:
+        "Of experience building products businesses trust to grow with, supported by thoughtful design and dependable technology.",
+    },
+    {
+      value: "100+",
+      label: "Projects",
+      description:
+        "Successfully delivered across diverse industries, combining thoughtful execution with a strong focus on real business outcomes.",
+    },
   ],
   mainImage: "/services/why-choose-main.jpg",
-  gallery: ["/sm2.jpg", "/sm3.jpg", "/sm4.png"] as const,
+  gallery: ["/sm1.png", "/sm2.jpg", "/sm3.jpg", "/sm4.png"] as const,
 } as const;
 
 export const ABOUT_VISION = {
   title: "Our Vision",
-  body: "We envision a world where every business — regardless of size — can access world-class digital products that drive growth, delight users, and create lasting impact.",
+  lead: "is to turn ideas into scalable, future-ready products that drive real business growth.",
+  body: "We partner with teams who value quality, usability, and long-term success, helping businesses navigate change with confidence.",
   images: {
-    large: "/services/why-choose-collage.png",
-    top: "/h1.png",
-    bottomLeft: "/s2.png",
-    bottomRight: "/s3.png",
+    large: "/services/why-choose-main.jpg",
+    top: "/sm2.jpg",
+    bottomLeft: "/sm3.jpg",
+    bottomRight: "/sm4.png",
   },
 } as const;
 

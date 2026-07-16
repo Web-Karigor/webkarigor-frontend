@@ -1,108 +1,254 @@
 "use client";
 
-import Image from "next/image";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ABOUT_TEAM_IMAGES } from "@/lib/about-data";
+import { gsap } from "@/lib/gsap";
+import { TEAM_IMAGES } from "@/lib/home-assets";
 
-export default function AboutTeam() {
-  const topRow = ABOUT_TEAM_IMAGES.slice(0, 4);
-  const bottomRow = ABOUT_TEAM_IMAGES.slice(4, 8);
+const LOOP_COPIES = 3;
+const SLIDE_DURATION = 32;
+
+type TeamCardSizes = {
+  width: number;
+  hoverWidth: number;
+  height: number;
+  gap: number;
+  radius: number;
+};
+
+function getTeamCardSizes(viewportWidth: number): TeamCardSizes {
+  if (viewportWidth < 375) {
+    return { width: 180, hoverWidth: 240, height: 300, gap: 12, radius: 20 };
+  }
+  if (viewportWidth < 640) {
+    return { width: 200, hoverWidth: 280, height: 320, gap: 14, radius: 22 };
+  }
+  if (viewportWidth < 1024) {
+    return { width: 220, hoverWidth: 320, height: 360, gap: 16, radius: 24 };
+  }
+  if (viewportWidth < 1280) {
+    return { width: 240, hoverWidth: 360, height: 390, gap: 20, radius: 28 };
+  }
+  return { width: 279, hoverWidth: 421, height: 439, gap: 24, radius: 32 };
+}
+
+function useTeamCardSizes() {
+  const [sizes, setSizes] = useState<TeamCardSizes>(() =>
+    getTeamCardSizes(typeof window !== "undefined" ? window.innerWidth : 1440),
+  );
+
+  useLayoutEffect(() => {
+    const update = () => setSizes(getTeamCardSizes(window.innerWidth));
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return sizes;
+}
+
+function TeamCard({
+  src,
+  isHovered,
+  onEnter,
+  onLeave,
+  sizes,
+}: {
+  src: string;
+  isHovered: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
+  sizes: TeamCardSizes;
+}) {
+  return (
+    <motion.div
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      onFocus={onEnter}
+      onBlur={onLeave}
+      animate={{
+        width: isHovered ? sizes.hoverWidth : sizes.width,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 28,
+        mass: 0.85,
+      }}
+      className="relative flex-shrink-0 overflow-hidden border border-[#EFEFEF] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
+      style={{ height: sizes.height, borderRadius: sizes.radius }}
+      aria-label="Team member"
+    >
+      <img
+        src={src}
+        alt=""
+        className="h-full w-full object-cover"
+        draggable={false}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 ring-2 ring-[#3B82F6]"
+        style={{ borderRadius: sizes.radius }}
+        initial={false}
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+      />
+    </motion.div>
+  );
+}
+
+function InfiniteSlideRow({
+  images,
+  direction,
+  sizes,
+}: {
+  images: readonly string[];
+  direction: "left" | "right";
+  sizes: TeamCardSizes;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const setRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const hoveredRef = useRef(false);
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+
+  const pauseSlide = useCallback(() => {
+    timelineRef.current?.pause();
+  }, []);
+
+  const resumeSlide = useCallback(() => {
+    timelineRef.current?.resume();
+  }, []);
+
+  const handleEnter = useCallback(
+    (key: string) => {
+      hoveredRef.current = true;
+      setHoveredKey(key);
+      pauseSlide();
+    },
+    [pauseSlide],
+  );
+
+  const handleLeave = useCallback(() => {
+    hoveredRef.current = false;
+    setHoveredKey(null);
+    resumeSlide();
+  }, [resumeSlide]);
+
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    const set = setRef.current;
+    if (!track || !set) return;
+
+    const buildTimeline = () => {
+      timelineRef.current?.kill();
+
+      const setWidth = set.offsetWidth + sizes.gap;
+      gsap.set(track, { x: direction === "left" ? -setWidth : 0 });
+
+      const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
+      tl.to(track, {
+        x: direction === "right" ? -setWidth : 0,
+        duration: SLIDE_DURATION,
+      });
+
+      timelineRef.current = tl;
+    };
+
+    buildTimeline();
+
+    const observer = new ResizeObserver(() => {
+      if (hoveredRef.current) return;
+      buildTimeline();
+    });
+
+    observer.observe(set);
+
+    return () => {
+      observer.disconnect();
+      timelineRef.current?.kill();
+      timelineRef.current = null;
+    };
+  }, [direction, sizes.gap]);
 
   return (
-    <section className="overflow-hidden bg-[#FFFEFB] py-16 sm:py-20 md:py-28">
-      <div className="mx-auto w-full max-w-[1400px] px-[clamp(16px,4vw,40px)]">
-        <div className="mb-10 flex flex-col gap-4 sm:mb-14 lg:mb-16 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
-          <h2 className="m-0 max-w-[640px] font-montserrat text-[clamp(28px,3.4vw,44px)] font-bold leading-[1.15] tracking-[-0.03em] text-[#111827]">
-            Our Team Is at the Heart of Everything We Do
-          </h2>
-          <p className="m-0 max-w-[380px] font-montserrat text-[clamp(14px,1.05vw,16px)] font-medium leading-[1.65] text-[#6b7280] lg:text-right">
-            A tight-knit crew of designers, engineers, and strategists building products that matter.
-          </p>
-        </div>
-
-        {/* Mobile */}
-        <div className="lg:hidden">
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {ABOUT_TEAM_IMAGES.map((src, index) => (
-              <div
-                key={src}
-                className="relative aspect-[4/5] overflow-hidden rounded-[18px] sm:rounded-[22px]"
-              >
-                <Image
+    <div className="min-w-0 flex-1 overflow-hidden">
+      <div ref={trackRef} className="flex w-max will-change-transform">
+        {Array.from({ length: LOOP_COPIES }).map((_, copyIndex) => (
+          <div
+            key={copyIndex}
+            ref={copyIndex === 0 ? setRef : undefined}
+            className="flex flex-shrink-0"
+            style={{ gap: sizes.gap, marginRight: sizes.gap }}
+          >
+            {images.map((src, imageIndex) => {
+              const cardKey = `${copyIndex}-${imageIndex}-${src}`;
+              return (
+                <TeamCard
+                  key={cardKey}
                   src={src}
-                  alt={`Team member ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="45vw"
+                  isHovered={hoveredKey === cardKey}
+                  onEnter={() => handleEnter(cardKey)}
+                  onLeave={handleLeave}
+                  sizes={sizes}
                 />
-              </div>
-            ))}
+              );
+            })}
           </div>
-          <div className="mt-8 text-center">
-            <p className="m-0 font-montserrat text-[clamp(40px,12vw,64px)] font-bold leading-[0.92] tracking-[-0.04em] text-[#111827]">
-              Small Team
-            </p>
-            <p className="m-0 mt-1 font-montserrat text-[clamp(40px,12vw,64px)] font-bold leading-[0.92] tracking-[-0.04em] text-[#A0A4AA]">
-              Big Result
-            </p>
-          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const upperImages = TEAM_IMAGES;
+const lowerImages = [...TEAM_IMAGES].reverse();
+
+export default function AboutTeam() {
+  const sizes = useTeamCardSizes();
+
+  return (
+    <section className="overflow-hidden bg-[#FEFCF6] py-12 sm:py-16 md:py-24">
+      <div className="team-section-inner mx-auto px-4 sm:px-6">
+        <div className="mb-8 sm:mb-10 text-center lg:hidden">
+          <h2 className="team-heading-mobile font-black text-[#141414]">Expert Team</h2>
+          <p className="team-heading-mobile font-extrabold text-[#A0A4AA]">Big Result</p>
         </div>
 
-        {/* Desktop — Figma: photos + Small Team / Big Result */}
-        <div className="hidden lg:block">
-          <div className="mb-6 flex items-center gap-5 xl:gap-6">
-            <div className="grid min-w-0 flex-1 grid-cols-4 gap-4 xl:gap-5">
-              {topRow.map((src, index) => (
-                <motion.div
-                  key={`top-${src}`}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="relative aspect-[4/5] overflow-hidden rounded-[24px]"
-                >
-                  <Image src={src} alt="" fill className="object-cover" sizes="200px" />
-                </motion.div>
-              ))}
-            </div>
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="w-[220px] shrink-0 text-right font-montserrat text-[clamp(52px,5vw,76px)] font-bold leading-[0.88] tracking-[-0.04em] text-[#111827] xl:w-[260px]"
-            >
-              <span className="block">Small</span>
-              <span className="block">Team</span>
-            </motion.div>
-          </div>
+        <div className="mb-8 sm:mb-12 flex items-center justify-between gap-4 sm:gap-6 lg:gap-10">
+          <InfiniteSlideRow images={upperImages} direction="left" sizes={sizes} />
 
-          <div className="flex items-center gap-5 xl:gap-6">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="w-[220px] shrink-0 font-montserrat text-[clamp(52px,5vw,76px)] font-bold leading-[0.88] tracking-[-0.04em] text-[#A0A4AA] xl:w-[260px]"
-            >
-              <span className="block">Big</span>
-              <span className="block">Result</span>
-            </motion.div>
-            <div className="grid min-w-0 flex-1 grid-cols-4 gap-4 xl:gap-5">
-              {bottomRow.map((src, index) => (
-                <motion.div
-                  key={`bottom-${src}`}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="relative aspect-[4/5] overflow-hidden rounded-[24px]"
-                >
-                  <Image src={src} alt="" fill className="object-cover" sizes="200px" />
-                </motion.div>
-              ))}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="hidden flex-shrink-0 lg:block"
+          >
+            <div className="space-y-12 xl:space-y-20 text-right leading-[0.9]">
+              <div className="team-heading-desktop font-black text-[#141414]">Expert</div>
+              <div className="team-heading-desktop font-black text-[#141414]">Team</div>
             </div>
-          </div>
+          </motion.div>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 sm:gap-6 lg:gap-10">
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="hidden flex-shrink-0 lg:block"
+          >
+            <div className="space-y-12 xl:space-y-20 leading-[0.9]">
+              <div className="team-heading-desktop font-extrabold text-[#A0A4AA]">Big</div>
+              <div className="team-heading-desktop font-extrabold text-[#A0A4AA]">
+                Result
+              </div>
+            </div>
+          </motion.div>
+
+          <InfiniteSlideRow images={lowerImages} direction="right" sizes={sizes} />
         </div>
       </div>
     </section>
