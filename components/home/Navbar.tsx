@@ -32,7 +32,7 @@ export default function Navbar() {
                 </span>
               </Link>
 
-              <Link href="/case" className="navbar-link">Case</Link>
+              <Link href="/projects" className="navbar-link">Projects</Link>
               <Link href="/about-us" className="navbar-link">About us</Link>
             </div>
           </div>
@@ -79,8 +79,8 @@ export default function Navbar() {
             <Link onClick={() => setOpen(false)} href="/service" className="block font-semibold">
               Service
             </Link>
-            <Link onClick={() => setOpen(false)} href="/case" className="block font-semibold">
-              Case
+            <Link onClick={() => setOpen(false)} href="/projects" className="block font-semibold">
+              Projects
             </Link>
             <Link onClick={() => setOpen(false)} href="/about-us" className="block font-semibold">
               About us

@@ -48,7 +48,7 @@ function interpolateNeighborOffsetX(distanceSlots: number): number {
   const abs = Math.abs(distanceSlots);
   if (abs <= 0 || abs >= 2) return 0;
 
-  const magnitude = abs <= 1 ? 20 * abs : 20 * (2 - abs);
+  const magnitude = abs <= 1 ? 7 * abs : 7 * (2 - abs);
   return distanceSlots < 0 ? -magnitude : magnitude;
 }
 
