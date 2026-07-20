@@ -111,7 +111,7 @@ export default function ErpReviews() {
           {ERP_TESTIMONIALS.map((item) => (
             <article
               key={item.name}
-              className="flex w-[min(100%,555px)] shrink-0 snap-start flex-col rounded-[12px] border border-[#EEF0F3] bg-white p-10 shadow-[0_8px_30px_rgba(24,33,77,0.06)] sm:h-[388px] sm:w-[555px] sm:p-12"
+              className="flex w-[min(100%,calc(100vw-2rem))] shrink-0 snap-start flex-col rounded-[12px] border border-[#EEF0F3] bg-white p-6 shadow-[0_8px_30px_rgba(24,33,77,0.06)] sm:h-auto sm:w-[min(555px,85vw)] sm:p-10 md:p-12 lg:min-h-[388px]"
             >
               <Stars count={item.rating} />
 

@@ -46,12 +46,12 @@ export default function FAQ() {
   return (
     <section className="relative py-16 md:py-24 px-4 md:px-6 bg-[#FFFDF6] pb-8 md:pb-12">
       <div className="max-w-[1320px] mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <div className="inline-block px-4 md:px-6 py-2 bg-transparent mb-2">
-            <span className="text-[#39B770] font-medium text-[22px] md:text-[25px] italic">Questions</span>
-            <span className="ml-1 font-black text-[#222] text-[22px] md:text-[25px] not-italic">Answered?</span>
-          </div>
+        {/* Header — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
+        <div className="mb-12 text-center md:mb-16">
+          <h2 className="m-0 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
+            <span className="italic text-[#39B770]">Questions</span>
+            <span className="ml-1 not-italic">Answered?</span>
+          </h2>
         </div>
 
         {/* FAQ List */}
@@ -89,9 +89,9 @@ export default function FAQ() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
         <div className="text-center">
-          <p className="text-lg md:text-xl text-[#1F1E1C] mb-6">
+          <p className="mb-6 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
             Still curious? We&#39;re happy to help
           </p>
           <Link

@@ -4,41 +4,91 @@
 export const PR = {
   frame: 1920,
   content: 1320,
+  /** Hero feature row: 4 × 370 + gaps */
+  heroContent: 1540,
   sectionY: 100,
   radius: 24,
   radiusLg: 32,
   green: "#0EC47B",
   lime: "#38F8AB",
   yellow: "#FEED35",
-  cream: "#FFFDF6",
+  cream: "#F8F6EF",
   black: "#0A0A0A",
   muted: "#6B7280",
+  /** Shared brand gradient — borders / price / CTA */
+  gradient:
+    "linear-gradient(135deg, #0EC47B 0%, #2EEDA0 35%, #FFEF3F 70%, #15D286 100%)",
+  gradientBtn: "linear-gradient(90deg, #38F8AB 0%, #FEED35 100%)",
+  gradientText:
+    "linear-gradient(90deg, #0EC47B 0%, #2EEDA0 40%, #FFEF3F 100%)",
+  planCard: {
+    radius: 32,
+    pad: 32,
+    gap: 24,
+    titleSize: 32,
+    priceSize: 48,
+    bodySize: 16,
+    featureSize: 14,
+  },
+  heroCard: {
+    w: 370,
+    h: 329,
+    radius: 20,
+    gap: 20,
+    pad: 32,
+    /** #FFFFFF @ 24% */
+    bg: "rgba(255, 255, 255, 0.24)",
+    /** Drop shadow: 1 / 3 / 24 / 0 — #000 @ 4% */
+    shadow: "1px 3px 24px 0 rgba(0, 0, 0, 0.04)",
+  },
+  heroTitle: {
+    /** Figma: MuseoModerno Medium Italic 48 / 140% / -5% — gradient fill, no underline */
+    eyebrowW: 438,
+    eyebrowH: 67,
+    eyebrowSize: 48,
+    eyebrowLeading: 1.4,
+    eyebrowTracking: "-0.05em",
+    eyebrowGradient:
+      "linear-gradient(90deg, #0EC47B 0%, #2EEDA0 33%, #FFEF3F 66%, #15D286 100%)",
+    /** Figma H1 — Montserrat Bold */
+    titleSize: 48,
+    titleLeading: 1.3,
+    titleTracking: "-0.03em",
+    titleGap: 16,
+    titleMax: 820,
+  },
+  /** Figma Ellipse 1570 — 199×199, blur 240, gradient #AEFFDF → #FFF68F */
+  heroGlows: [
+    { left: 444, top: 692 },
+    { left: 861, top: 609 },
+    { left: 1271, top: 692 },
+  ],
 } as const;
 
 export const PRICING_HERO_FEATURES = [
   {
-    title: "Full-stack development",
+    title: "Clickable Design Prototype",
     description:
-      "Design, frontend, and backend delivered as one cohesive product team.",
-    icon: "stack",
+      "Visualize and test your product experience before development.",
+    icon: "pointer",
   },
   {
-    title: "Dedicated Project Manager",
+    title: "Developer-Ready Files",
     description:
-      "A single point of contact who keeps scope, timeline, and quality aligned.",
-    icon: "user",
+      "Organized assets and specifications for a smoother build process.",
+    icon: "code",
   },
   {
-    title: "No long-term contracts",
+    title: "Efficient Project Management",
     description:
-      "Pause or cancel anytime — scale up when you need, scale down when you don’t.",
-    icon: "shield",
+      "A clear workflow helps keep projects aligned and moving forward.",
+    icon: "calendar",
   },
   {
-    title: "Scalable resources",
+    title: "Ongoing Design Guidance",
     description:
-      "Add design or engineering capacity as your product and roadmap grow.",
-    icon: "scale",
+      "Receive expert guidance to support informed product decisions.",
+    icon: "compass",
   },
 ] as const;
 
@@ -55,51 +105,56 @@ export type PricingPlan = {
 
 export const PRICING_PLANS: PricingPlan[] = [
   {
-    id: "seed",
-    name: "Seed",
-    subtitle: "Best for start-up products",
-    monthly: 2500,
+    id: "launch",
+    name: "Launch Ready",
+    subtitle: "MVP Product Design & Development",
+    monthly: 3500,
     features: [
-      "1 active request at a time",
-      "Unlimited revisions",
-      "Standard UI/UX design",
-      "Trello board access",
-      "Pause or cancel anytime",
+      "UX/UI design for a single product or core feature",
+      "Web or mobile app development",
+      "Clean, scalable, and maintainable code",
+      "Essential user flows and usability focus",
+      "Basic testing and quality checks",
+      "Deployment-ready build with source files",
+      "Clear delivery timeline and milestone tracking",
     ],
   },
   {
-    id: "growth",
-    name: "Growth",
-    subtitle: "Best for scaling products",
+    id: "build",
+    name: "Build & Validate",
+    subtitle: "Full Product Design with Research & Development",
     monthly: 5000,
     popular: true,
     features: [
-      "2 active requests at a time",
-      "Unlimited revisions",
-      "Standard UI/UX design",
-      "Trello & Slack access",
-      "Pause or cancel anytime",
-      "Daily progress updates",
+      "User research and product discovery sessions",
+      "End-to-end UX/UI design for the full product",
+      "Design system for consistency and scale",
+      "Web or mobile app development",
+      "Usability testing and design iteration",
+      "Performance and security best practices",
+      "Post-launch support and proper handover",
     ],
   },
   {
-    id: "expert",
-    name: "Expert",
-    subtitle: "Best for large scale products",
+    id: "scale",
+    name: "Scale & Optimize",
+    subtitle: "Advanced Product Design & Development",
     monthly: 7000,
     features: [
-      "3 active requests at a time",
-      "Unlimited revisions",
-      "Premium UI/UX design",
-      "Trello, Slack & video calls",
-      "Pause or cancel anytime",
-      "Priority support",
+      "User research, audit, and competitor analysis",
+      "Strategic roadmap and feature prioritization",
+      "UX/UI design with system-level thinking",
+      "Full development with scalable architecture",
+      "Dedicated design and engineering team",
+      "Continuous monitoring and optimization",
+      "Priority support, maintenance",
     ],
   },
 ];
 
+/** Figma: Save 25% on yearly */
 export function planPrice(plan: PricingPlan, billing: PricingBilling): number {
-  if (billing === "yearly") return Math.round(plan.monthly * 0.8);
+  if (billing === "yearly") return Math.round(plan.monthly * 0.75);
   return plan.monthly;
 }
 
@@ -107,21 +162,21 @@ export function formatPrice(amount: number): string {
   return `$${amount.toLocaleString("en-US")}`;
 }
 
-/** Figma: 4 columns under Complete Package */
+/** Figma Frame — Complete Package 1520 × 696, 4 columns */
 export const PACKAGE_COLUMNS = [
   [
     "UI/UX Design",
     "Product Strategy",
     "UX Research",
     "Wireframing",
-    "Interactive Prototypes",
+    "Interactive Prototyping",
     "Website Design",
     "Landing Page Design",
-    "UI Audit",
+    "UX Audit",
   ],
   [
     "Back-end Development",
-    "Full-stack Development",
+    "Full-Stack Development",
     "API Development & Integration",
     "React Development",
     "Next.js Development",
@@ -142,6 +197,7 @@ export const PACKAGE_COLUMNS = [
   [
     "Mobile App Development",
     "SaaS Product Design",
+    "Framer Development",
     "Front-end Development",
     "Dashboard Design",
     "Webflow Development",
@@ -150,56 +206,47 @@ export const PACKAGE_COLUMNS = [
   ],
 ] as const;
 
-/** Figma: Webkarigor vs Other Agencies */
+/** Figma: Webkarigor vs Other Agencies — Built for Growing Products */
 export const COMPARISON_ITEMS = [
-  "Discovery and research before design",
-  "Interactive prototypes for every flow",
-  "Dedicated project manager",
-  "Unlimited revisions within active requests",
-  "Direct Slack communication",
-  "Fixed monthly price — no surprises",
-  "Pause or cancel anytime",
-  "Source files & code ownership",
-] as const;
-
-export const PRICING_FAQS = [
   {
-    question: "What's included in my plan?",
-    answer:
-      "Each plan includes design and development capacity, unlimited revisions within your active request slots, project management, and communication via Trello (and Slack on higher tiers).",
+    label: "Discovery and research before design",
+    otherHas: true,
   },
   {
-    question: "How do I pay?",
-    answer:
-      "We bill monthly by invoice. Yearly billing locks in a discounted monthly rate. Payment is due at the start of each billing cycle via bank transfer or card.",
+    label: "Interactive prototypes for key flows",
+    otherHas: false,
   },
   {
-    question: "Can I pause or cancel anytime?",
-    answer:
-      "Yes. There are no long-term contracts. You can pause or cancel at the end of your current billing period — no penalties.",
+    label: "Developer-ready handoff documentation",
+    otherHas: true,
   },
   {
-    question: "How fast will my requests be completed?",
-    answer:
-      "Most requests move within a few business days depending on complexity and your plan’s active request slots. Growth and Expert plans get faster turnaround and priority support.",
+    label: "Design system and reusable components",
+    otherHas: false,
   },
   {
-    question: "Do you offer custom pricing?",
-    answer:
-      "Absolutely. If your roadmap needs a dedicated squad, advisory retainers, or a one-off build, we’ll tailor a quote after a short discovery call.",
+    label: "Flexible engagement based on project needs",
+    otherHas: true,
   },
   {
-    question: "Who owns the work?",
-    answer:
-      "You do. All source files, code, and design assets are yours once delivered — we retain no ownership claim on your product IP.",
+    label: "Ongoing design consultation",
+    otherHas: false,
+  },
+  {
+    label: "Transparent communication throughout the project",
+    otherHas: false,
+  },
+  {
+    label: "Structured process from concept to delivery",
+    otherHas: true,
   },
 ] as const;
 
+/** Figma Featured Work — 1521 × 1083: 2 top + 3 bottom */
 export const FEATURED_WORK = [
-  { src: "/sm1.png", alt: "Mobile product screens", tall: true },
-  { src: "/ecommerce/hero-phone.png", alt: "Ecommerce phone mockup", tall: false },
-  { src: "/services/why-choose-main.jpg", alt: "Product dashboard", tall: true },
-  { src: "/sm3.jpg", alt: "App interface collage", tall: false },
-  { src: "/sm4.png", alt: "Fashion commerce UI", tall: true },
-  { src: "/ecommerce/hero-composite.png", alt: "Multi-device product shots", tall: false },
+  { src: "/sm1.png", alt: "Simple is More website" },
+  { src: "/sm4.png", alt: "Fashion mobile app screens" },
+  { src: "/services/why-choose-main.jpg", alt: "Desktop product interface" },
+  { src: "/sm3.jpg", alt: "Analytics dashboard" },
+  { src: "/ecommerce/hero-composite.png", alt: "Lifestyle commerce UI" },
 ] as const;

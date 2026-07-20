@@ -28,7 +28,7 @@ export default function ServiceHero() {
     <section className="service-hero relative bg-[#f5f5f5] pb-[clamp(48px,6vw,72px)]">
       {/* Figma header — fixed top, 1920 × 108 hug, px 120 / py 24 */}
       <header className="fixed inset-x-0 top-0 z-[50] w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        <div className="service-hero-align mx-auto flex h-[108px] w-full items-center justify-between">
+        <div className="service-hero-align mx-auto flex h-[72px] w-full items-center justify-between sm:h-[88px] lg:h-[108px]">
           <Link
             href="/"
             className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"

@@ -5,7 +5,7 @@ import PricingCustomBanner from "@/components/pricing/PricingCustomBanner";
 import PricingPackage from "@/components/pricing/PricingPackage";
 import PricingBuiltFor from "@/components/pricing/PricingBuiltFor";
 import PricingFeaturedWork from "@/components/pricing/PricingFeaturedWork";
-import PricingFAQ from "@/components/pricing/PricingFAQ";
+import FAQ from "@/components/home/FAQ";
 import TrustedFounders from "@/components/home/TrustedFounders";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import Footer from "@/components/home/Footer";
@@ -26,7 +26,7 @@ export default function PricingPage() {
       <TrustedFounders />
       <PricingBuiltFor />
       <PricingFeaturedWork />
-      <PricingFAQ />
+      <FAQ />
       <div id="contact">
         <HomeConsultation />
       </div>

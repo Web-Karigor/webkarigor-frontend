@@ -14,7 +14,11 @@ export default function Navbar() {
   }
 
   return (
-    <header className="absolute top-[16px] sm:top-[24px] lg:top-[39px] left-0 right-0 z-[9999] overflow-x-hidden">
+    <>
+      <div className="navbar-glow" aria-hidden />
+
+      <div className="sticky top-4 sm:top-6 lg:top-[39px] z-[9999] h-0 overflow-visible">
+      <header className="relative left-0 right-0 overflow-x-hidden">
       <div className="max-w-[1800px] mx-auto relative px-4 sm:px-6">
         {/* ================= DESKTOP NAVBAR ================= */}
         <nav className="hidden lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:block">
@@ -79,8 +83,11 @@ export default function Navbar() {
             <Link onClick={() => setOpen(false)} href="/service" className="block font-semibold">
               Service
             </Link>
-            <Link onClick={() => setOpen(false)} href="/case" className="block font-semibold">
-              Case
+            <Link onClick={() => setOpen(false)} href="/projects" className="block font-semibold">
+              Projects
+            </Link>
+            <Link onClick={() => setOpen(false)} href="/pricing" className="block font-semibold">
+              Pricing
             </Link>
             <Link onClick={() => setOpen(false)} href="/about-us" className="block font-semibold">
               About us
@@ -102,6 +109,8 @@ export default function Navbar() {
           </div>
         )}
       </div>
-    </header>
+      </header>
+    </div>
+    </>
   );
 }

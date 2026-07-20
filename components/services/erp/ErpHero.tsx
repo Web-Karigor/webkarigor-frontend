@@ -49,7 +49,7 @@ export default function ErpHero() {
   return (
     <section className="relative overflow-hidden bg-white">
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        <div className="mx-auto flex h-[108px] w-full max-w-[1680px] items-center justify-between px-[clamp(16px,3.5vw,50px)]">
+        <div className="mx-auto flex h-[72px] w-full max-w-[1680px] items-center justify-between px-[clamp(16px,3.5vw,50px)] sm:h-[88px] lg:h-[108px]">
           <Link
             href="/"
             className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
@@ -139,12 +139,8 @@ export default function ErpHero() {
               {/* Yellow half-circle — top-left behind dashboard */}
               <div
                 aria-hidden
-                className="absolute z-0 bg-[#FEED35]"
+                className="absolute z-0 left-[-24px] top-[-40px] h-[100px] w-[90px] bg-[#FEED35] sm:left-[-70px] sm:top-[-80px] sm:h-[180px] sm:w-[166px]"
                 style={{
-                  width: 166,
-                  height: 180,
-                  left: -70,
-                  top: -80,
                   borderRadius: "360px 0 0 0px",
                 }}
               />
@@ -152,27 +148,19 @@ export default function ErpHero() {
               {/* Green circle — bottom-right behind dashboard */}
               <div
                 aria-hidden
-                className="absolute z-0 rounded-full bg-[#0EC47B]"
-                style={{
-                  width: 204,
-                  height: 204,
-                  right: 80,
-                  bottom: -80,
-                }}
+                className="absolute z-0 bottom-[-40px] right-4 h-[120px] w-[120px] rounded-full bg-[#0EC47B] sm:bottom-[-80px] sm:right-20 sm:h-[204px] sm:w-[204px]"
               />
 
               {/* Dashboard frame */}
               <div
-                className="relative z-[2] overflow-hidden bg-white"
+                className="relative z-[2] w-full max-w-[696.55px] overflow-x-auto overflow-y-hidden bg-white"
                 style={{
-                  width: "100%",
-                  maxWidth: 696.55,
-                  height: 498.51,
                   marginLeft: "auto",
                   marginRight: 0,
                   borderRadius: 6.83,
                   border: "8px solid #12141D",
                   boxShadow: "0px 4px 60px 0px rgba(0, 0, 0, 0.08)",
+                  maxHeight: 498.51,
                 }}
               >
                 {/* Toolbar */}
@@ -193,8 +181,8 @@ export default function ErpHero() {
                 </div>
 
                 {/* Table */}
-                <div className="overflow-hidden px-2 sm:px-3">
-                  <table className="w-full border-collapse text-left">
+                <div className="overflow-x-auto px-2 sm:px-3">
+                  <table className="w-full min-w-[480px] border-collapse text-left sm:min-w-0">
                     <thead>
                       <tr className="border-b border-[#F0F0F0]">
                         <th className="w-8 py-2.5 pl-2">
@@ -204,7 +192,7 @@ export default function ErpHero() {
                           (h) => (
                             <th
                               key={h || "act"}
-                              className="whitespace-nowrap py-2.5 px-1 font-montserrat text-[9px] font-semibold uppercase tracking-wide text-[#98A2B3] sm:text-[10px]"
+                              className="py-2.5 px-1 font-montserrat text-[8px] font-semibold uppercase tracking-wide text-[#98A2B3] sm:whitespace-nowrap sm:text-[10px]"
                             >
                               {h}
                             </th>
@@ -335,9 +323,8 @@ export default function ErpHero() {
 
               {/* TECHNOLOGY card — overlaps bottom-left of dashboard */}
               <div
-                className="absolute z-[5] w-[168px] rounded-xl bg-white p-3.5 sm:w-[180px]"
+                className="absolute z-[5] left-2 w-[min(168px,42%)] rounded-xl bg-white p-3 sm:left-[-50px] sm:w-[168px] sm:p-3.5 md:w-[180px]"
                 style={{
-                  left: -50,
                   bottom: 36,
                   boxShadow: "0px 12px 40px rgba(15, 23, 42, 0.12)",
                 }}

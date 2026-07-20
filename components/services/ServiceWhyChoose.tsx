@@ -100,7 +100,7 @@ export default function ServiceWhyChoose() {
     <section className="bg-[#f5f7fa] py-[clamp(56px,8vw,96px)]">
       <div className="mx-auto w-full max-w-[1678px] px-[clamp(16px,4vw,40px)]">
         {/* Header — Figma Frame: 650 × 151 Hug */}
-        <div className="mx-auto mb-[clamp(36px,5vw,56px)] flex w-full max-w-[650px] flex-col items-center text-center lg:h-[151px] lg:justify-between">
+        <div className="mx-auto mb-[clamp(36px,5vw,56px)] flex w-full max-w-[650px] flex-col items-center gap-3 text-center lg:min-h-[151px] lg:justify-center">
           <p className="m-0 font-montserrat text-[18px] font-semibold leading-none text-[#15d286] lg:text-[20px]">
             Why Webkarigor
           </p>

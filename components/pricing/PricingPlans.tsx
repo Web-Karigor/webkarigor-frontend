@@ -2,120 +2,117 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
   formatPrice,
   planPrice,
-  PR,
   PRICING_PLANS,
   type PricingBilling,
 } from "@/lib/pricing-data";
 
-const ease = [0.16, 1, 0.3, 1] as const;
-const vp = { once: true, amount: 0.15 } as const;
-
 export default function PricingPlans() {
-  const [billing, setBilling] = useState<PricingBilling>("monthly");
+  const [billing, setBilling] = useState<PricingBilling>("yearly");
 
   return (
-    <section className="bg-[#FFFDF6] pb-10 sm:pb-14">
-      <div
-        className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
-        style={{ maxWidth: PR.content + 80 }}
-      >
-        <div className="flex justify-center">
-          <div className="inline-flex items-center rounded-full border border-[#E8E4DC] bg-white p-1.5 shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
-            {(["monthly", "yearly"] as const).map((option) => {
-              const active = billing === option;
-              return (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => setBilling(option)}
-                  className={`rounded-full px-6 py-2.5 font-montserrat text-[14px] font-bold capitalize transition ${
-                    active
-                      ? "bg-[#FEED35] text-[#0A0A0A]"
-                      : "bg-transparent text-[#6B7280] hover:text-[#0A0A0A]"
-                  }`}
-                >
-                  {option}
-                  {option === "yearly" && (
-                    <span className="ml-1.5 text-[11px] font-semibold text-[#0EC47B]">
-                      −20%
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+    <section className="pricing-section bg-[#F8F6EF] !pt-0">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6">
+        {/* Monthly / Yearly toggle */}
+        <div className="mb-10 flex flex-col items-center gap-3 sm:mb-12">
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <div className="inline-flex items-center rounded-full bg-[#FEED35] p-1">
+              {(["monthly", "yearly"] as const).map((option) => {
+                const active = billing === option;
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => setBilling(option)}
+                    className={`rounded-full px-4 py-2 font-montserrat text-[13px] font-bold capitalize transition sm:px-6 sm:py-2.5 sm:text-[15px] ${
+                      active
+                        ? "bg-white text-black shadow-sm"
+                        : "bg-transparent text-black/80 hover:text-black"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                );
+              })}
+            </div>
+            <span className="inline-flex items-center rounded-full bg-black px-3 py-1.5 font-montserrat text-[11px] font-bold text-white sm:px-3.5 sm:text-[12px]">
+              Save 25%
+            </span>
           </div>
+          <p className="m-0 font-montserrat text-[14px] font-medium text-[#9CA3AF]">
+            Everything Included
+          </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 items-stretch gap-6 md:mt-12 lg:grid-cols-3 lg:gap-7">
-          {PRICING_PLANS.map((plan, index) => {
+        {/* Same card design as home PricingSection */}
+        <div className="grid grid-cols-1 gap-8 pt-8 sm:gap-12 sm:pt-12 lg:grid-cols-3 lg:gap-16 lg:pt-16">
+          {PRICING_PLANS.map((plan) => {
             const price = planPrice(plan, billing);
-            const popular = Boolean(plan.popular);
+            const highlight = Boolean(plan.popular);
 
             return (
-              <motion.article
+              <div
                 key={plan.id}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={vp}
-                transition={{ duration: 0.85, delay: index * 0.08, ease }}
-                className={`relative flex flex-col rounded-[24px] border bg-white p-7 sm:p-8 ${
-                  popular
-                    ? "border-[#38F8AB] shadow-[0_0_40px_rgba(56,248,171,0.28)] lg:-mt-3 lg:mb-[-12px] lg:pb-10"
-                    : "border-[#E8E4DC] shadow-[0_10px_32px_rgba(0,0,0,0.04)]"
+                className={`pricing-card relative p-[2px] transition-all duration-300 ${
+                  highlight ? "pricing-card-highlight" : ""
                 }`}
+                style={{
+                  background:
+                    "linear-gradient(135deg, #0EC47B, #2EEDA0, #FEF33F, #15D286)",
+                  boxShadow: highlight
+                    ? "0 0 40px rgba(46, 237, 160, 0.35)"
+                    : "none",
+                }}
               >
-                {popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#38F8AB] px-4 py-1 font-montserrat text-[12px] font-bold text-[#07422A]">
-                    Most Popular
-                  </span>
-                )}
+                <div className="pricing-card-inner relative h-full bg-[#FFFDF6]">
+                  {highlight && (
+                    <div className="absolute top-3 left-1/2 w-[90%] -translate-x-1/2 rounded-[12px] bg-[#38F8AB] px-4 py-1 text-center text-base font-semibold text-[#07422A] shadow-md sm:rounded-[16px] sm:px-8 sm:text-xl">
+                      Popular
+                    </div>
+                  )}
 
-                <h3 className="m-0 font-montserrat text-[22px] font-bold text-[#0A0A0A]">
-                  {plan.name}
-                </h3>
-                <p className="mt-2 m-0 font-montserrat text-[14px] font-medium text-[#6B7280]">
-                  {plan.subtitle}
-                </p>
+                  <h3 className="font-monserrat mb-4 mt-6 text-center text-2xl font-semibold text-[#111] sm:mb-6 sm:mt-8 sm:text-3xl lg:text-4xl">
+                    {plan.name}
+                  </h3>
 
-                <p className="mt-6 m-0 font-montserrat text-[42px] font-bold leading-none text-[#0A0A0A]">
-                  {formatPrice(price)}
-                  <span className="ml-1.5 text-[15px] font-medium text-[#98A2B3]">
-                    /mo
-                  </span>
-                </p>
+                  <div className="mb-2 text-3xl font-bold text-[#15D286] sm:text-4xl">
+                    {formatPrice(price)}
+                  </div>
 
-                <hr className="my-6 border-0 border-t border-[#EDEAE3]" />
+                  <p className="font-monserrat mb-6 mt-3 text-base font-semibold text-black sm:mb-8 sm:mt-4 sm:text-lg lg:text-[20px]">
+                    {plan.subtitle}
+                  </p>
 
-                <ul className="m-0 flex list-none flex-col gap-3.5 p-0">
-                  {plan.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-start gap-3 font-montserrat text-[14px] font-medium leading-[1.45] text-[#475467]"
-                    >
-                      <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#38F8AB]/25 text-[#0EC47B]">
-                        <Check className="h-3.5 w-3.5" strokeWidth={2.75} aria-hidden />
-                      </span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <hr className="mb-6 border-gray-200" />
 
-                <Link
-                  href="#contact"
-                  className={`mt-auto inline-flex w-full items-center justify-center rounded-[14px] px-5 py-3.5 font-montserrat text-[15px] font-bold transition hover:opacity-90 ${
-                    popular
-                      ? "mt-8 bg-[#0EC47B] text-white"
-                      : "mt-8 border border-[#0A0A0A] bg-transparent text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white"
-                  }`}
-                >
-                  Book a Call
-                </Link>
-              </motion.article>
+                  <div className="mb-10">
+                    <p className="mb-4 font-semibold text-[#111]">What you get:</p>
+
+                    <ul className="space-y-3 text-sm text-gray-700">
+                      {plan.features.map((feature) => (
+                        <li key={feature} className="flex gap-3">
+                          <span className="text-[#15D286]">✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Link
+                    href="#contact"
+                    className="flex w-full items-center justify-center gap-[10px] rounded-[16px] px-6 py-4 text-sm font-semibold text-[#07422A] transition hover:opacity-90 sm:rounded-[20px] sm:px-8 sm:py-5 sm:text-base"
+                    style={{
+                      background: "linear-gradient(to right, #38F8AB, #FEED35)",
+                    }}
+                  >
+                    Book a Call
+                    <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
+                  </Link>
+                </div>
+              </div>
             );
           })}
         </div>

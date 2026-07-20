@@ -17,7 +17,7 @@ const montserrat = Montserrat({
 
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["600"],
+  weight: ["600", "700"],
   variable: "--font-manrope",
 });
 
@@ -52,22 +52,6 @@ export default function RootLayout({
         `}
       >
         <GsapProvider>
-        {/* 🌈 GLOBAL GRADIENT BACKGROUND */}
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            width: "min(1700px, 90vw)",
-            height: "585px",
-            top: "-454px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "radial-gradient(circle, #BBFF68 80%, transparent 70%)",
-            opacity: 0.28,
-            filter: "blur(400px)",
-            zIndex: 0,
-          }}
-        />
-
         {/* CONTENT LAYER */}
         <div className="relative z-10 overflow-x-clip">
           <Navbar />

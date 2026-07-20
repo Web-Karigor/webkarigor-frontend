@@ -44,7 +44,7 @@ export default function ManpowerHero() {
       }}
     >
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-white shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        <div className="mx-auto flex h-[88px] w-full max-w-[1800px] items-center justify-between px-[clamp(16px,3.5vw,50px)] lg:h-[108px]">
+        <div className="mx-auto flex h-[72px] w-full max-w-[1800px] items-center justify-between px-[clamp(16px,3.5vw,50px)] sm:h-[88px] lg:h-[108px]">
           <Link
             href="/"
             className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
@@ -70,12 +70,13 @@ export default function ManpowerHero() {
           priority
           className="absolute object-contain object-bottom"
           style={{
-            left: heroLayout.left,
+            right: 0,
             bottom: 0,
-            width: heroLayout.width,
-            height: heroLayout.height,
+            width: "min(869px, 48%)",
+            height: "auto",
+            maxHeight: "100%",
           }}
-          sizes="629px"
+          sizes="(max-width: 1280px) 48vw, 629px"
         />
 
         {MANPOWER_HERO.doodles.map((doodle, i) => (
@@ -170,11 +171,7 @@ export default function ManpowerHero() {
           </div>
 
           {/* Desktop spacer so left copy doesn't collide with absolute image */}
-          <div
-            className="hidden shrink-0 lg:block"
-            style={{ width: heroLayout.width, height: 1 }}
-            aria-hidden
-          />
+          <div className="hidden min-w-0 flex-1 lg:block" aria-hidden />
         </div>
       </div>
     </section>

@@ -31,7 +31,7 @@ export default function ProjectsGrid() {
   const lastRow = [rest[9], rest[10]];
 
   return (
-    <section className="projects-bento relative bg-[#FFFDF6] pb-16 pt-10 sm:pb-20 sm:pt-14 md:pb-28 md:pt-16">
+    <section className="projects-bento relative bg-[#FFFDF6] pb-12 pt-8 sm:pb-20 sm:pt-14 md:pb-28 md:pt-16">
       {/*
         Side watermarks (Figma):
         - top-left PROJECTS

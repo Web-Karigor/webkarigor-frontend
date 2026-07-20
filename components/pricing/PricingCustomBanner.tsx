@@ -1,32 +1,52 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PR } from "@/lib/pricing-data";
 
+/**
+ * Figma Frame 156 — 1920 × 300
+ * Same layout/copy as home HomeBanner
+ */
 export default function PricingCustomBanner() {
   return (
-    <section className="bg-[#FFFDF6] py-8 sm:py-12">
-      <div
-        className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
-        style={{ maxWidth: PR.content + 80 }}
-      >
-        <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-r from-[#0EC47B] via-[#2EEDA0] to-[#FEED35] px-6 py-10 sm:px-10 sm:py-12 lg:px-14">
-          <Image
-            src="/rr.png"
-            alt=""
-            fill
-            className="pointer-events-none object-cover object-center opacity-25 select-none"
-          />
-          <div className="relative z-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-            <h2 className="m-0 max-w-[680px] font-montserrat text-[clamp(22px,3vw,36px)] font-bold leading-[1.25] tracking-[-0.02em] text-black">
-              Every problem is different. Your pricing should be too.
-            </h2>
-            <Link
-              href="#contact"
-              className="inline-flex shrink-0 items-center justify-center rounded-[14px] bg-white px-7 py-3.5 font-montserrat text-[15px] font-bold text-black shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition hover:bg-[#f7f7f7]"
-            >
-              Talk to our expert
-            </Link>
-          </div>
+    <section
+      className="relative w-full overflow-hidden"
+      style={{ minHeight: 300 }}
+    >
+      {/* Figma Rectangle 79 gradient fill */}
+      <Image
+        src="/pricing/rectangle-79.png"
+        alt=""
+        fill
+        className="pointer-events-none object-cover object-center select-none"
+        sizes="1920px"
+        priority={false}
+      />
+      <Image
+        src="/rr.png"
+        alt=""
+        fill
+        className="pointer-events-none object-cover object-center opacity-30 select-none"
+        sizes="1920px"
+      />
+
+      <div className="relative z-10 mx-auto flex min-h-[300px] w-full max-w-7xl flex-col items-center justify-between gap-8 px-4 py-12 sm:px-6 sm:py-14 md:flex-row">
+        <div className="w-full md:w-2/3">
+          <h2 className="m-0 mb-2 flex flex-col gap-y-2 font-montserrat text-xl font-bold text-black sm:text-2xl md:gap-y-5 md:text-[32px] lg:text-[40px]">
+            <span>Every product is different</span>
+            <span>Your pricing should be too</span>
+          </h2>
+          <p className="mt-3 m-0 font-montserrat text-base font-medium text-[#222] sm:mt-4 sm:text-lg md:text-[20px]">
+            Looking for a custom solution or specific service?
+          </p>
+        </div>
+
+        <div className="flex w-full justify-center md:w-auto md:justify-end">
+          <Link
+            href="#contact"
+            className="inline-flex w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3 font-montserrat text-lg font-semibold text-black shadow-lg transition hover:bg-[#f3f3f3] sm:w-auto sm:px-7 sm:text-xl md:text-[24px]"
+            style={{ minWidth: "min(100%, 170px)" }}
+          >
+            Request a quote
+          </Link>
         </div>
       </div>
     </section>

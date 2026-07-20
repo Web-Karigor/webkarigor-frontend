@@ -30,16 +30,16 @@ export default function AboutImpact() {
                     : "pt-8 sm:pt-10"
                 }
               >
-                <div className="flex items-start gap-5 sm:gap-8">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-5 md:gap-8">
                   <div className="shrink-0">
-                    <p className="m-0 font-montserrat text-[clamp(48px,5vw,72px)] font-bold leading-none tracking-[-0.04em] text-[#0A0A0A]">
+                    <p className="m-0 font-montserrat text-[clamp(40px,10vw,72px)] font-bold leading-none tracking-[-0.04em] text-[#0A0A0A]">
                       {stat.value}
                     </p>
-                    <p className="mt-1 m-0 font-montserrat text-[clamp(18px,1.5vw,24px)] font-bold leading-none text-[#0A0A0A]">
+                    <p className="mt-1 m-0 font-montserrat text-[clamp(16px,4vw,24px)] font-bold leading-none text-[#0A0A0A]">
                       {stat.label}
                     </p>
                   </div>
-                  <p className="m-0 max-w-[344px] pt-2 font-montserrat text-[clamp(14px,1.1vw,16px)] font-medium leading-[1.65] text-[#6b7280] sm:pt-3">
+                  <p className="m-0 max-w-[344px] pt-0 font-montserrat text-[clamp(14px,1.1vw,16px)] font-medium leading-[1.65] text-[#6b7280] sm:pt-3">
                     {stat.description}
                   </p>
                 </div>

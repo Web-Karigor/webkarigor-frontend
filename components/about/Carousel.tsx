@@ -84,7 +84,7 @@ export default function Carousel({ images }: CarouselProps) {
   return (
     <div
       ref={viewportRef}
-      className="relative h-[460px] w-full overflow-hidden"
+      className="relative h-[min(460px,70vw)] min-h-[280px] w-full overflow-hidden sm:h-[380px] md:h-[420px] lg:h-[460px]"
       // Dynamic card width for layout math; animation uses MotionValues only.
       style={{ ["--about-card-w" as string]: `${cardWidth}px` }}
     >

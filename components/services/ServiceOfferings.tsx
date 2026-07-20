@@ -87,11 +87,11 @@ export default function ServiceOfferings() {
             <span className="mb-3 block font-montserrat text-sm lg:text-2xl font-bold leading-[1.2] tracking-[-0.01em] text-[#15d286]">
               Industries
             </span>
-            <h2 className="m-0 font-bold text-[32px] font-['Geist'] text-black max-w-[460px]">
+            <h2 className="m-0 max-w-[460px] font-['Geist'] text-[clamp(24px,6vw,32px)] font-bold text-black">
               Design Solutions Tailored for Every Industry
             </h2>
           </div>
-          <p className="m-0 w-full max-w-[913px] justify-start text-left font-['Manrope'] text-base font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:min-h-[96px] lg:text-[32px]">
+          <p className="m-0 w-full max-w-[913px] justify-start text-left font-['Manrope'] text-[clamp(14px,3.5vw,16px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:min-h-[96px] lg:text-[32px]">
             We&apos;ve partnered with businesses across diverse industries to create
             digital experiences that solve specific challenges.
           </p>
@@ -101,7 +101,7 @@ export default function ServiceOfferings() {
           <div className="relative w-full">
             <button
               type="button"
-              className="absolute left-40 top-1/2 z-[3] inline-flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[rgba(17,24,39,0.08)] bg-white text-[#111827] shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-[transform,box-shadow] hover:translate-y-[calc(-50%-1px)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
+              className="absolute left-3 top-1/2 z-[3] inline-flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[rgba(17,24,39,0.08)] bg-white text-[#111827] shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-[transform,box-shadow] hover:translate-y-[calc(-50%-1px)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] sm:left-5 sm:h-12 sm:w-12 lg:left-40"
               onClick={() => scrollByStep("left")}
               aria-label="Previous industries"
             >
@@ -110,7 +110,7 @@ export default function ServiceOfferings() {
 
             <div
               ref={trackRef}
-              className="flex h-[320px] w-full gap-6  lg:pl-[230px]"
+              className="flex h-[min(320px,70vw)] min-h-[260px] w-full gap-4 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-proximity [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-6 sm:h-[320px] [&::-webkit-scrollbar]:hidden lg:pl-[230px]"
             >
               {SERVICE_OFFERINGS.map((item, index) => {
                 const Icon = item.icon;
@@ -118,7 +118,7 @@ export default function ServiceOfferings() {
                   <article
                     key={`${item.title}-${index}`}
                     data-service-offering-card
-                    className={`flex h-[320px] w-[300px] shrink-0 snap-start flex-col gap-[10px] rounded-[12px] px-5 py-6 ${
+                    className={`flex h-full w-[min(300px,calc(100vw-64px))] shrink-0 snap-start flex-col gap-[10px] rounded-[12px] px-5 py-6 ${
                       item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"
                     }`}
                   >

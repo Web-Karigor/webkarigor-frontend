@@ -33,10 +33,10 @@ export default function EcoPricing() {
             return (
               <article
                 key={plan.name}
-                className={`relative flex w-full max-w-[320px] flex-col overflow-hidden rounded-[16px] border border-[#E5E7EB] bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] md:w-[320px] ${
+                className={`relative flex w-full max-w-[320px] flex-col overflow-hidden rounded-[16px] border border-[#E5E7EB] bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] md:w-[min(320px,30vw)] lg:w-[320px] ${
                   recommended
-                    ? "z-[1] md:h-[591px] md:shadow-[0_16px_48px_rgba(15,23,42,0.1)]"
-                    : "md:h-[551px]"
+                    ? "z-[1] md:min-h-[551px] md:shadow-[0_16px_48px_rgba(15,23,42,0.1)] lg:min-h-[591px]"
+                    : "md:min-h-[500px] lg:min-h-[551px]"
                 }`}
               >
                 {recommended && (

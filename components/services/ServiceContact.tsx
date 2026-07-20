@@ -33,9 +33,9 @@ export default function ServiceContact() {
       <div className="mx-auto grid w-full max-w-[1320px] grid-cols-1 items-stretch gap-10 px-[clamp(16px,4vw,40px)] pb-10 pt-20 lg:grid-cols-2 lg:gap-10">
         <aside className="flex h-auto flex-col justify-between gap-5 overflow-visible lg:h-[518px] lg:max-w-[520px]">
           <div className="flex flex-col gap-5">
-            <h2 className="m-0 font-montserrat text-[clamp(32px,3.4vw,48px)] font-bold leading-[1.15] tracking-[-0.03em] text-[#111827]">
-              <span className="block whitespace-nowrap">Let&apos;s Build Something</span>
-              <span className="block whitespace-nowrap">Users Will Love.</span>
+            <h2 className="m-0 font-montserrat text-[clamp(26px,7vw,48px)] font-bold leading-[1.15] tracking-[-0.03em] text-[#111827]">
+              <span className="block">Let&apos;s Build Something</span>
+              <span className="block">Users Will Love.</span>
             </h2>
 
             <p className="m-0 max-w-[440px] font-montserrat text-[clamp(14px,1.1vw,16px)] font-medium leading-[1.6] text-[#6b7280]">

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { PROJECTS_RADIUS } from "@/lib/projects-data";
 
 type ProjectCardProps = {
   src: string;
@@ -33,11 +32,10 @@ export default function ProjectCard({
       viewport={{ once: true, amount: 0.2, margin: "0px 0px -40px 0px" }}
       transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -3, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } }}
-      className="group relative w-full max-w-full overflow-hidden bg-[#f3f1ea]"
+      className="group relative w-full max-w-full overflow-hidden rounded-2xl bg-[#f3f1ea] md:rounded-[32px]"
       style={{
         width: `min(100%, ${width}px)`,
         aspectRatio: `${width} / ${height}`,
-        borderRadius: PROJECTS_RADIUS,
       }}
     >
       {variant === "brand-v" ? (
@@ -48,7 +46,7 @@ export default function ProjectCard({
               "radial-gradient(circle at 50% 45%, #ff8a3d 0%, #ff4d2e 45%, #c41e0a 100%)",
           }}
         >
-          <span className="font-montserrat text-[clamp(72px,10vw,140px)] font-bold leading-none text-white/95">
+          <span className="font-montserrat text-[clamp(56px,14vw,140px)] font-bold leading-none text-white/95">
             V
           </span>
         </div>
@@ -60,14 +58,14 @@ export default function ProjectCard({
             fill
             priority={priority}
             className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-            sizes={`${width}px`}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-          <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
-            <p className="m-0 font-montserrat text-[11px] font-semibold tracking-[0.18em] text-white/90 uppercase">
+          <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 sm:bottom-5 sm:left-5 sm:right-5">
+            <p className="m-0 font-montserrat text-[10px] font-semibold tracking-[0.18em] text-white/90 uppercase sm:text-[11px]">
               Ventures
             </p>
-            <p className="m-0 font-montserrat text-[11px] font-semibold tracking-[0.18em] text-white/70 uppercase">
+            <p className="m-0 font-montserrat text-[10px] font-semibold tracking-[0.18em] text-white/70 uppercase sm:text-[11px]">
               Antler
             </p>
           </div>
@@ -79,7 +77,7 @@ export default function ProjectCard({
           fill
           priority={priority}
           className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-          sizes={`${width}px`}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
         />
       )}
 

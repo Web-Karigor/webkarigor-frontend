@@ -14,7 +14,7 @@ export default function EcoHero() {
   return (
     <section className="relative overflow-hidden bg-[#F7F9FB]">
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        <div className="service-hero-align mx-auto flex h-[108px] w-full items-center justify-between">
+        <div className="service-hero-align mx-auto flex h-[72px] w-full items-center justify-between sm:h-[88px] lg:h-[108px]">
           <Link
             href="/"
             className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
@@ -72,14 +72,14 @@ export default function EcoHero() {
         <div
           className="absolute z-10 flex flex-col"
           style={{
-            left: 60,
+            left: "clamp(24px, 3.125vw, 60px)",
             top: 143,
-            width: 805,
+            width: "min(805px, 48%)",
             bottom: 160,
           }}
         >
           {/* Figma: 805 × 196 · Montserrat 700 · 70px · LH 140% · LS -3% */}
-          <h1 className="m-0 w-full max-w-[805px] font-montserrat text-[70px] font-bold leading-[140%] tracking-[-0.03em] text-black">
+          <h1 className="m-0 w-full max-w-[805px] font-montserrat text-[clamp(40px,4.2vw,70px)] font-bold leading-[140%] tracking-[-0.03em] text-black">
             {ECO_HERO.titleLine1}
             <br />
             {ECO_HERO.titleLine2}

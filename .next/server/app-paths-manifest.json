@@ -1,9 +1,13 @@
 {
-  "/page": "app/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/case/page": "app/case/page.js",
+  "/page": "app/page.js",
+  "/about-us/page": "app/about-us/page.js",
   "/projects/page": "app/projects/page.js",
-  "/projects/[slug]/page": "app/projects/[slug]/page.js",
   "/pricing/page": "app/pricing/page.js",
+  "/service/erp/page": "app/service/erp/page.js",
+  "/service/manpower/page": "app/service/manpower/page.js",
   "/service/page": "app/service/page.js",
-  "/about-us/page": "app/about-us/page.js"
+  "/service/ecommerce/page": "app/service/ecommerce/page.js",
+  "/projects/[slug]/page": "app/projects/[slug]/page.js"
 }
