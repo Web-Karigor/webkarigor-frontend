@@ -1,0 +1,74 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Next.js
+        run: npm run build
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+
+          chmod 600 ~/.ssh/id_ed25519
+
+          ssh-keyscan -H -p ${{ secrets.PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: Test SSH Connection
+        run: |
+          ssh \
+            -i ~/.ssh/id_ed25519 \
+            -p ${{ secrets.PORT }} \
+            -o StrictHostKeyChecking=no \
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
+            "echo 'SSH Connected Successfully'"
+
+      - name: Deploy with rsync
+        run: |
+          rsync -az --delete \
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude="node_modules" \
+            -e "ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no" \
+            ./ \
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/dhanshir/demo.webkarigor.com/
+
+      - name: Restart Application
+        run: |
+          ssh \
+            -i ~/.ssh/id_ed25519 \
+            -p ${{ secrets.PORT }} \
+            -o StrictHostKeyChecking=no \
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+
+          source /home/dhanshir/nodevenv/demo.webkarigor.com/22/bin/activate
+
+          cd /home/dhanshir/demo.webkarigor.com
+
+          npm install --omit=dev
+
+          mkdir -p tmp
+
+          touch tmp/restart.txt
+
+          EOF
