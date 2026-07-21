@@ -26,7 +26,7 @@ const VideoSection = () => {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 768px)", () => {
+      mm.add("(min-width: 1024px)", () => {
         gsap.set(stage, {
           perspective: 1400,
           transformStyle: "preserve-3d",
@@ -100,31 +100,6 @@ const VideoSection = () => {
           stage.removeEventListener("mouseleave", onLeave);
         };
       });
-
-      mm.add("(max-width: 767px)", () => {
-        gsap.set(frame, {
-          scale: 0.5,
-          force3D: true,
-          transformOrigin: "50% 50%",
-          willChange: "transform",
-        });
-
-        gsap.to(frame, {
-          scale: 1,
-          ease: "power2.inOut",
-          force3D: true,
-          scrollTrigger: {
-            trigger: stage,
-            start: "center center",
-            end: "+=140%",
-            pin: true,
-            pinSpacing: true,
-            scrub: 2.1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-      });
     }, section);
 
     requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -135,10 +110,10 @@ const VideoSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#FFFDF6] px-4 py-10 sm:px-6 sm:py-12 md:py-20"
+      className="relative bg-[#FFFDF6] px-5 py-10 max-lg:overflow-x-hidden lg:overflow-hidden lg:px-4 lg:py-10 xl:px-6 xl:py-12 2xl:py-20"
     >
-      <div className="mx-auto max-w-[1860px]">
-        <div className="mb-8 text-center sm:mb-12 md:mb-16">
+      <div className="mx-auto w-full max-w-[1860px] max-lg:max-w-full">
+        <div className="mb-6 text-center max-lg:mb-8 lg:mb-8 xl:mb-12 2xl:mb-16">
           <span className="inline-block rounded-full border border-[#38F8AB] px-4 py-2 text-sm font-medium text-[#15D286] sm:px-5">
             What make us different?
           </span>
@@ -153,17 +128,16 @@ const VideoSection = () => {
 
         <div
           ref={stageRef}
-          className="relative mx-auto w-full max-w-[1860px]"
-          style={{ perspective: "1400px" }}
+          className="relative mx-auto w-full max-w-full lg:max-w-[1860px] lg:[perspective:1400px]"
         >
-          <div ref={tiltRef} className="w-full" style={{ transformStyle: "preserve-3d" }}>
+          <div ref={tiltRef} className="w-full lg:[transform-style:preserve-3d]">
             <div
               ref={frameRef}
-              className="relative mx-auto flex max-h-[1039px] min-h-[min(48vw,280px)] w-full items-center justify-center overflow-hidden rounded-[1.5rem] bg-black shadow-[0_24px_80px_rgba(0,0,0,0.18)] sm:min-h-[48vw] sm:rounded-[2.5rem]"
+              className="video-section-frame relative mx-auto flex w-full max-w-full items-center justify-center overflow-hidden rounded-[1.5rem] bg-black shadow-[0_12px_40px_rgba(0,0,0,0.12)] max-lg:aspect-video max-lg:min-h-0 max-lg:max-h-none lg:max-h-[1039px] lg:min-h-[min(48vw,280px)] lg:shadow-[0_24px_80px_rgba(0,0,0,0.18)] lg:rounded-[2.5rem] xl:min-h-[48vw]"
             >
               <iframe
                 src={embedUrl}
-                className="pointer-events-auto absolute inset-0 h-full w-full rounded-[1.5rem] sm:scale-x-150 sm:scale-y-125 sm:rounded-[2.5rem]"
+                className="video-section-iframe pointer-events-auto absolute inset-0 h-full w-full rounded-[1.5rem] lg:scale-x-150 lg:scale-y-125 lg:rounded-[2.5rem]"
                 title="About Video"
                 frameBorder="0"
                 allow="autoplay"

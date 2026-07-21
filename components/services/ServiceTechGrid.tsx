@@ -69,11 +69,9 @@ function TechMarqueeRow({
   return (
     <div className="overflow-hidden">
       <div
-        className={`flex w-max gap-[10px] will-change-transform ${
-          reverse
-            ? "animate-[service-tech-scroll-right_24s_linear_infinite]"
-            : "animate-[service-tech-scroll-left_24s_linear_infinite]"
-        } hover:[animation-play-state:paused]`}
+        className={`flex w-max gap-[10px] will-change-transform hover:[animation-play-state:paused] motion-reduce:animate-none ${
+          reverse ? "animate-tech-scroll-right" : "animate-tech-scroll-left"
+        }`}
       >
         {[...items, ...items, ...items].map((item, index) => (
           <article

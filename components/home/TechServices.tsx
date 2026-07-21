@@ -38,6 +38,7 @@ type CardSizes = {
   height: number;
   hoverHeight: number;
   gap: number;
+  viewportMinExtra: number;
 };
 
 function getCardSizes(viewportWidth: number): CardSizes {
@@ -66,6 +67,7 @@ function getCardSizes(viewportWidth: number): CardSizes {
     height,
     hoverHeight,
     gap,
+    viewportMinExtra: vw >= 1024 ? 80 : vw >= 768 ? 40 : 24,
   };
 }
 
@@ -79,7 +81,8 @@ function useCardSizes(viewportRef: React.RefObject<HTMLDivElement | null>) {
     if (!viewport) return;
 
     const update = () => {
-      setSizes(getCardSizes(viewport.offsetWidth));
+      const width = viewport.offsetWidth || window.innerWidth;
+      setSizes(getCardSizes(width));
     };
 
     update();
@@ -91,6 +94,24 @@ function useCardSizes(viewportRef: React.RefObject<HTMLDivElement | null>) {
   }, [viewportRef]);
 
   return sizes;
+}
+
+function useBelowLg() {
+  const [isBelowLg, setIsBelowLg] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 1023px)").matches
+      : false,
+  );
+
+  useLayoutEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const update = () => setIsBelowLg(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return isBelowLg;
 }
 
 const cards = Array.from({ length: CYCLE_SIZE * REPEAT_CYCLES }, (_, i) => ({
@@ -223,9 +244,14 @@ function PortfolioSlider() {
   const hoveredRef = useRef(false);
   const [hoveredKey, setHoveredKey] = useState<number | null>(null);
   const sizes = useCardSizes(viewportRef);
+  const isBelowLg = useBelowLg();
 
   const activeHeight =
     hoveredKey !== null ? sizes.hoverHeight : sizes.height;
+
+  const viewportMinHeight = isBelowLg
+    ? "auto"
+    : activeHeight + sizes.viewportMinExtra;
 
   const pauseSlide = useCallback(() => {
     tweenRef.current?.pause();
@@ -336,12 +362,11 @@ function PortfolioSlider() {
         ref={viewportRef}
         className="tech-services-viewport"
         initial={false}
-        animate={{ minHeight: activeHeight + 80 }}
+        animate={{ minHeight: viewportMinHeight }}
         transition={{
           duration: HOVER_DURATION,
           ease: HOVER_EASE,
         }}
-        style={{ minHeight: activeHeight + 80 }}
       >
         <div
           ref={trackRef}

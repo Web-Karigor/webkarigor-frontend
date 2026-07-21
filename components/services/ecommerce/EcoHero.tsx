@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
+import { SERVICE_PAGE_GUTTER } from "@/lib/service-layout";
 import { ECO_HERO } from "@/lib/ecommerce-data";
 import { CLIENT_LOGOS } from "@/lib/services-data";
 
@@ -14,7 +15,7 @@ export default function EcoHero() {
   return (
     <section className="relative overflow-hidden bg-[#F7F9FB]">
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        <div className="service-hero-align mx-auto flex h-[72px] w-full items-center justify-between sm:h-[88px] lg:h-[108px]">
+        <div className={`${SERVICE_PAGE_GUTTER} flex h-[72px] items-center justify-between sm:h-[88px] lg:h-[108px]`}>
           <Link
             href="/"
             className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"

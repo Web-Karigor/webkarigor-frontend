@@ -140,7 +140,7 @@ export default function HeroSlider() {
   }, []);
 
   return (
-    <section data-hero-slider className="slanted-wrapper relative z-[2] -mt-[28px] sm:-mt-[36px] md:-mt-[44px] lg:-mt-[52px] xl:-mt-[60px] 2xl:-mt-[68px]">
+    <section data-hero-slider className="slanted-wrapper relative z-[2] max-md:mt-2 sm:-mt-[36px] md:-mt-[44px] lg:-mt-[52px] xl:-mt-[60px] 2xl:-mt-[68px]">
       <div ref={viewportRef} className="slanted-viewport">
         <div ref={trackRef} className="slanted-track">
           {cards.map((card, i) => (

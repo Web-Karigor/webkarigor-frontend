@@ -99,47 +99,49 @@ export default function ManpowerHero() {
         ))}
       </div>
 
-      <div className="relative z-[1] mx-auto flex h-full w-full max-w-[1800px] items-center px-[clamp(16px,3.5vw,50px)] pt-[104px] pb-8 lg:pt-[108px] lg:pb-0">
-        <div className="flex w-full flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+      <div className="relative z-[1] mx-auto flex h-full w-full max-w-[1800px] items-center px-[clamp(16px,3.5vw,50px)] pt-[80px] pb-6 sm:pt-[96px] sm:pb-8 lg:pt-[108px] lg:pb-0">
+        <div className="flex w-full flex-col items-stretch gap-6 md:gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           {/* Left — copy + phone CTA */}
-          <div className="flex w-full max-w-[620px] shrink-0 flex-col">
-            <h1 className="m-0 font-montserrat text-[clamp(2.35rem,4.1vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
+          <div className="flex w-full max-w-[620px] shrink-0 flex-col lg:max-w-[620px]">
+            <h1 className="m-0 font-montserrat text-[clamp(1.75rem,5.5vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
               {MANPOWER_HERO.title}
             </h1>
 
-            <p className="mt-5 m-0 max-w-[520px] font-manrope text-[17px] font-semibold leading-[160%] text-[#98A2B3]">
+            <p className="mt-4 m-0 max-w-[520px] font-manrope text-[clamp(15px,1.6vw,17px)] font-semibold leading-[160%] text-[#98A2B3] md:mt-5">
               {MANPOWER_HERO.description}
             </p>
 
             <form
               onSubmit={onSubmit}
-              className="mt-8 flex w-full max-w-[540px] flex-wrap items-center gap-2 rounded-full border border-[#E5E7EB] bg-white p-1.5 shadow-[0_10px_32px_rgba(24,33,77,0.08)] sm:flex-nowrap"
+              className="mt-6 flex w-full max-w-[540px] flex-col gap-2 rounded-[20px] border border-[#E5E7EB] bg-white p-2 shadow-[0_10px_32px_rgba(24,33,77,0.08)] md:mt-7 md:flex-row md:flex-nowrap md:items-center md:rounded-full md:p-1.5 lg:mt-8"
             >
-              <button
-                type="button"
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-transparent px-3 py-2.5 font-montserrat text-[14px] font-semibold text-[#111827]"
-                aria-label="Country code Bangladesh +880"
-              >
-                <BdFlag className="h-3.5 w-5 shrink-0" />
-                <span>{MANPOWER_HERO.countryCode}</span>
-                <ChevronDown className="h-4 w-4 text-[#98A2B3]" strokeWidth={2} />
-              </button>
+              <div className="flex min-w-0 flex-1 items-center gap-1 rounded-full bg-[#F9FAFB] px-1 md:bg-transparent md:px-0">
+                <button
+                  type="button"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-transparent px-2.5 py-2.5 font-montserrat text-[13px] font-semibold text-[#111827] sm:px-3 sm:text-[14px]"
+                  aria-label="Country code Bangladesh +880"
+                >
+                  <BdFlag className="h-3.5 w-5 shrink-0" />
+                  <span>{MANPOWER_HERO.countryCode}</span>
+                  <ChevronDown className="h-4 w-4 text-[#98A2B3]" strokeWidth={2} />
+                </button>
 
-              <span className="hidden h-6 w-px bg-[#E5E7EB] sm:block" aria-hidden />
+                <span className="hidden h-6 w-px bg-[#E5E7EB] md:block" aria-hidden />
 
-              <input
-                type="tel"
-                inputMode="numeric"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder={MANPOWER_HERO.phonePlaceholder}
-                className="min-w-0 flex-1 border-0 bg-transparent px-2 py-3 font-montserrat text-[14px] font-medium text-[#111827] outline-none placeholder:text-[#98A2B3] sm:px-3"
-                aria-label="Mobile number"
-              />
+                <input
+                  type="tel"
+                  inputMode="numeric"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder={MANPOWER_HERO.phonePlaceholder}
+                  className="min-w-0 flex-1 border-0 bg-transparent px-2 py-2.5 font-montserrat text-[13px] font-medium text-[#111827] outline-none placeholder:text-[#98A2B3] sm:px-3 sm:py-3 sm:text-[14px]"
+                  aria-label="Mobile number"
+                />
+              </div>
 
               <button
                 type="submit"
-                className="w-full shrink-0 rounded-full bg-[#0EC47B] px-5 py-3 font-montserrat text-[14px] font-bold text-white transition-opacity hover:opacity-90 sm:w-auto sm:px-6"
+                className="w-full shrink-0 rounded-full bg-[#0EC47B] px-5 py-3 font-montserrat text-[14px] font-bold text-white transition-opacity hover:opacity-90 md:w-auto md:px-6"
               >
                 {MANPOWER_HERO.ctaLabel}
               </button>
@@ -147,7 +149,7 @@ export default function ManpowerHero() {
 
             <a
               href={`tel:${MANPOWER_HERO.hotline.replace(/-/g, "")}`}
-              className="mt-4 inline-flex w-fit items-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-4 py-2.5 font-montserrat text-[14px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03]"
+              className="mt-3 inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-4 py-2.5 font-montserrat text-[13px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] sm:mt-4 sm:w-fit sm:justify-start sm:text-[14px]"
             >
               <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#F2F4F7] text-[#111827]">
                 <Phone className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden />
@@ -156,8 +158,8 @@ export default function ManpowerHero() {
             </a>
           </div>
 
-          {/* Mobile fallback — bottom-aligned cutout */}
-          <div className="relative mx-auto w-full max-w-[629px] shrink-0 lg:hidden">
+          {/* Mobile / tablet — bottom-aligned cutout */}
+          <div className="relative mx-auto w-full max-w-[360px] shrink-0 sm:max-w-[460px] md:max-w-[540px] lg:hidden">
             <div className="relative mx-auto aspect-[629/673] w-full">
               <Image
                 src={MANPOWER_HERO.heroImage}

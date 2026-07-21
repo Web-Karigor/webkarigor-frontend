@@ -73,12 +73,12 @@ function MarqueeRow({
   const copies = [...items, ...items];
 
   return (
-    <div className="service-testimonials-track w-full overflow-hidden">
+    <div className="group/testimonials w-full overflow-hidden">
       <div
-        className={`service-testimonials-row ${
+        className={`flex w-max gap-5 will-change-transform motion-reduce:animate-none group-hover/testimonials:[animation-play-state:paused] ${
           direction === "rtl"
-            ? "service-testimonials-row--rtl"
-            : "service-testimonials-row--ltr"
+            ? "animate-testimonials-rtl"
+            : "animate-testimonials-ltr"
         }`}
       >
         {copies.map((item, index) => (

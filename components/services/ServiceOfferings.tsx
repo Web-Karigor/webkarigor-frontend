@@ -8,7 +8,17 @@ const CARD_GAP = 24;
 const AUTO_SCROLL_MS = 4500;
 
 export default function ServiceOfferings() {
+  const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+  const maxOffsetRef = useRef(0);
+  const pauseAutoRef = useRef(false);
+  const dragStateRef = useRef<{
+    pointerId: number;
+    startX: number;
+    startOffset: number;
+    moved: boolean;
+  } | null>(null);
 
   const getScrollStep = useCallback(() => {
     const track = trackRef.current;
@@ -18,66 +28,146 @@ export default function ServiceOfferings() {
     return (card?.offsetWidth ?? 372) + CARD_GAP;
   }, []);
 
-  const scrollByStep = useCallback(
-    (direction: "left" | "right") => {
-      const track = trackRef.current;
-      if (!track) return;
-
-      const step = getScrollStep();
-      const maxScroll = track.scrollWidth - track.clientWidth;
-
-      if (direction === "right" && track.scrollLeft >= maxScroll - 4) {
-        track.scrollTo({ left: 0, behavior: "smooth" });
-        return;
-      }
-
-      if (direction === "left" && track.scrollLeft <= 4) {
-        track.scrollTo({ left: maxScroll, behavior: "smooth" });
-        return;
-      }
-
-      track.scrollBy({
-        left: direction === "left" ? -step : step,
-        behavior: "smooth",
-      });
-    },
-    [getScrollStep],
-  );
-
-  useLayoutEffect(() => {
-    trackRef.current?.scrollTo({ left: 0 });
-  }, []);
-
-  useEffect(() => {
+  const setOffset = useCallback((nextOffset: number, smooth = false) => {
     const track = trackRef.current;
     if (!track) return;
 
-    let paused = false;
+    const clamped = Math.max(0, Math.min(nextOffset, maxOffsetRef.current));
+    offsetRef.current = clamped;
+    track.style.transition = smooth ? "transform 400ms ease" : "none";
+    track.style.transform = `translate3d(${-clamped}px, 0, 0)`;
+  }, []);
+
+  const measureBounds = useCallback(() => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+
+    maxOffsetRef.current = Math.max(0, track.scrollWidth - viewport.clientWidth);
+    setOffset(offsetRef.current, false);
+  }, [setOffset]);
+
+  const scrollByStep = useCallback(
+    (direction: "left" | "right") => {
+      const step = getScrollStep();
+      const maxOffset = maxOffsetRef.current;
+
+      if (direction === "right" && offsetRef.current >= maxOffset - 4) {
+        setOffset(0, true);
+        return;
+      }
+
+      if (direction === "left" && offsetRef.current <= 4) {
+        setOffset(maxOffset, true);
+        return;
+      }
+
+      setOffset(
+        offsetRef.current + (direction === "left" ? -step : step),
+        true,
+      );
+    },
+    [getScrollStep, setOffset],
+  );
+
+  useLayoutEffect(() => {
+    measureBounds();
+
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+
+    const observer = new ResizeObserver(measureBounds);
+    observer.observe(viewport);
+    observer.observe(track);
+
+    return () => observer.disconnect();
+  }, [measureBounds]);
+
+  useEffect(() => {
     const pause = () => {
-      paused = true;
+      pauseAutoRef.current = true;
     };
     const resume = () => {
-      paused = false;
+      pauseAutoRef.current = false;
     };
 
-    track.addEventListener("mouseenter", pause);
-    track.addEventListener("mouseleave", resume);
-    track.addEventListener("touchstart", pause, { passive: true });
-    track.addEventListener("touchend", resume, { passive: true });
-
     const timer = window.setInterval(() => {
-      if (paused) return;
+      if (pauseAutoRef.current) return;
       scrollByStep("right");
     }, AUTO_SCROLL_MS);
 
     return () => {
       clearInterval(timer);
-      track.removeEventListener("mouseenter", pause);
-      track.removeEventListener("mouseleave", resume);
-      track.removeEventListener("touchstart", pause);
-      track.removeEventListener("touchend", resume);
     };
   }, [scrollByStep]);
+
+  const handlePointerDown = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+
+      pauseAutoRef.current = true;
+      dragStateRef.current = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startOffset: offsetRef.current,
+        moved: false,
+      };
+      event.currentTarget.setPointerCapture(event.pointerId);
+    },
+    [],
+  );
+
+  const handlePointerMove = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      const drag = dragStateRef.current;
+      if (!drag || drag.pointerId !== event.pointerId) return;
+
+      const deltaX = event.clientX - drag.startX;
+      if (Math.abs(deltaX) > 4) {
+        drag.moved = true;
+      }
+
+      setOffset(drag.startOffset - deltaX, false);
+    },
+    [setOffset],
+  );
+
+  const finishDrag = useCallback((pointerId: number) => {
+    const viewport = viewportRef.current;
+    const drag = dragStateRef.current;
+    if (!viewport || !drag || drag.pointerId !== pointerId) return;
+
+    if (viewport.hasPointerCapture(pointerId)) {
+      viewport.releasePointerCapture(pointerId);
+    }
+
+    dragStateRef.current = null;
+    pauseAutoRef.current = false;
+  }, []);
+
+  const handleWheel = useCallback(
+    (event: React.WheelEvent<HTMLDivElement>) => {
+      const dominantDelta =
+        Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+
+      if (dominantDelta === 0 || maxOffsetRef.current <= 0) return;
+
+      pauseAutoRef.current = true;
+      setOffset(offsetRef.current + dominantDelta, false);
+
+      window.clearTimeout((handleWheel as typeof handleWheel & { timeout?: number }).timeout);
+      (handleWheel as typeof handleWheel & { timeout?: number }).timeout = window.setTimeout(
+        () => {
+          pauseAutoRef.current = false;
+        },
+        140,
+      );
+
+      event.preventDefault();
+    },
+    [setOffset],
+  );
 
   return (
     <section className="overflow-hidden bg-[#f8fafc] py-12">
@@ -109,33 +199,49 @@ export default function ServiceOfferings() {
             </button>
 
             <div
-              ref={trackRef}
-              className="flex h-[min(320px,70vw)] min-h-[260px] w-full gap-4 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-proximity [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-6 sm:h-[320px] [&::-webkit-scrollbar]:hidden lg:pl-[230px]"
+              ref={viewportRef}
+              className="relative w-full overflow-hidden touch-pan-y lg:pl-[230px]"
+              onMouseEnter={() => {
+                pauseAutoRef.current = true;
+              }}
+              onMouseLeave={() => {
+                pauseAutoRef.current = false;
+              }}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={(event) => finishDrag(event.pointerId)}
+              onPointerCancel={(event) => finishDrag(event.pointerId)}
+              onWheel={handleWheel}
             >
-              {SERVICE_OFFERINGS.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <article
-                    key={`${item.title}-${index}`}
-                    data-service-offering-card
-                    className={`flex h-full w-[min(300px,calc(100vw-64px))] shrink-0 snap-start flex-col gap-[10px] rounded-[12px] px-5 py-6 ${
-                      item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"
-                    }`}
-                  >
-                    <div className="flex items-center gap-[14px]">
-                      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
-                        <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
-                      </span>
-                      <h3 className="m-0 font-montserrat text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
-                        {item.title}
-                      </h3>
-                    </div>
-                    <p className="m-0 font-montserrat text-[0.9375rem] leading-[1.65] text-[#111827]">
-                      {item.description}
-                    </p>
-                  </article>
-                );
-              })}
+              <div
+                ref={trackRef}
+                className="flex h-[min(320px,70vw)] min-h-[260px] w-max gap-4 will-change-transform sm:gap-6 sm:h-[320px]"
+              >
+                {SERVICE_OFFERINGS.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <article
+                      key={`${item.title}-${index}`}
+                      data-service-offering-card
+                      className={`flex h-full w-[min(300px,calc(100vw-64px))] shrink-0 snap-start flex-col gap-[10px] rounded-[12px] px-5 py-6 ${
+                        item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-[14px]">
+                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
+                          <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
+                        </span>
+                        <h3 className="m-0 font-montserrat text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
+                          {item.title}
+                        </h3>
+                      </div>
+                      <p className="m-0 font-montserrat text-[0.9375rem] leading-[1.65] text-[#111827]">
+                        {item.description}
+                      </p>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

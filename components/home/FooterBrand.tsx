@@ -13,7 +13,7 @@ export default function FooterBrand() {
 
     const fit = () => {
       const inset = 20;
-      text.style.transform = "translateY(6%) scale(1)";
+      text.style.transform = "scale(1)";
       text.style.transformOrigin = "center bottom";
 
       const available = Math.max(0, wrap.clientWidth - inset * 2);
@@ -21,7 +21,7 @@ export default function FooterBrand() {
 
       if (needed > 0 && available > 0) {
         const scale = Math.min(1, available / needed);
-        text.style.transform = `translateY(6%) scale(${scale})`;
+        text.style.transform = `scale(${scale})`;
       }
     };
 

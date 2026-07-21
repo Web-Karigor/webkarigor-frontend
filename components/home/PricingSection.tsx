@@ -73,48 +73,45 @@ export default function PricingSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-3 lg:gap-16 pt-8 sm:pt-12 lg:pt-16">
+        <div className="grid grid-cols-1 items-stretch gap-8 sm:gap-12 lg:grid-cols-3 lg:gap-10 xl:gap-12 pt-8 sm:pt-12 lg:pt-16">
 
           {plans.map((plan, i) => (
             <div
               key={i}
-              className={`pricing-card relative p-[2px] transition-all duration-300
-              ${plan.highlight ? "pricing-card-highlight" : ""}`}
-              style={{
-                background:
-                  "linear-gradient(135deg, #0EC47B, #2EEDA0, #FEF33F, #15D286)",
-                boxShadow: plan.highlight
-                  ? "0 0 40px rgba(46, 237, 160, 0.35)"
-                  : "none",
-              }}
+              className={`pricing-card relative mx-auto w-full max-w-[480px] p-[2px] transition-all duration-300${
+                plan.highlight ? " pricing-card-highlight" : ""
+              }`}
             >
-              <div className="pricing-card-inner h-full bg-[#FFFDF6]">
+              <div className="pricing-card-inner h-full">
 
                 {plan.highlight && (
-                  <div className="absolute top-3 left-1/2 w-[90%] text-center -translate-x-1/2 rounded-[12px] sm:rounded-[16px] bg-[#38F8AB] px-4 sm:px-8 py-1 text-base sm:text-xl font-semibold text-[#07422A] shadow-md">
+                  <div className="absolute top-3 left-1/2 z-10 w-[90%] -translate-x-1/2 rounded-[16px] bg-[#38F8AB] px-4 py-1 text-center text-base font-semibold text-[#07422A] sm:top-4 sm:rounded-[16px] sm:px-8 sm:text-xl">
                     Popular
                   </div>
                 )}
 
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl text-center font-semibold font-monserrat text-[#111] mb-4 sm:mb-6 mt-6 sm:mt-8">
+                <h3
+                  className={`text-center font-montserrat text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold leading-[120%] text-[#111] ${
+                    plan.highlight ? "mt-10 sm:mt-12" : "mt-2"
+                  }`}
+                >
                   {plan.title}
                 </h3>
 
-                <div className="text-3xl sm:text-4xl font-bold text-[#15D286] mb-2">
-                  {plan.price}
+                <div className="text-center">
+                  <span className="pricing-card-price text-3xl font-bold sm:text-4xl">
+                    {plan.price}
+                  </span>
                 </div>
 
-                <p className="text-[#000000] text-base sm:text-lg lg:text-[20px] font-semibold mb-6 sm:mb-8 mt-3 sm:mt-4 font-monserrat">
+                <p className="font-montserrat text-base font-semibold text-[#000000] sm:text-lg lg:text-[20px]">
                   {plan.subtitle}
                 </p>
 
-                <hr className="mb-6 border-gray-200" />
+                <hr className="border-gray-200" />
 
-                {/* Features */}
-                <div className="mb-10">
-                  <p className="font-semibold text-[#111] mb-4">
-                    What you get:
-                  </p>
+                <div className="mb-2 flex-1">
+                  <p className="mb-4 font-semibold text-[#111]">What you get:</p>
 
                   <ul className="space-y-3 text-sm text-gray-700">
                     {plan.features.map((f, idx) => (
@@ -126,11 +123,10 @@ export default function PricingSection() {
                   </ul>
                 </div>
 
-                {/* Button */}
                 <button
-                  className="flex w-full items-center justify-center gap-[10px] rounded-[16px] sm:rounded-[20px] px-6 sm:px-8 py-4 sm:py-5 text-sm sm:text-base font-semibold text-[#07422A] transition hover:opacity-90"
+                  className="mt-auto flex w-full items-center justify-center gap-[10px] rounded-[20px] px-6 py-4 text-sm font-semibold text-[#07422A] transition hover:opacity-90 sm:px-8 sm:py-5 sm:text-base"
                   style={{
-                    background: "linear-gradient(to right, #38F8AB, #FEED35)",
+                    background: "linear-gradient(90deg, #38F8AB 0%, #FEED35 100%)",
                   }}
                 >
                   Book a Call

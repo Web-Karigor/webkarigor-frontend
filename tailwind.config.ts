@@ -31,6 +31,45 @@ const config: Config = {
         manrope: ["var(--font-manrope)", "sans-serif"],
         museoModerno: ["var(--font-museoModerno)", "sans-serif"],
       },
+      keyframes: {
+        "marquee-scroll": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-25%)" },
+        },
+        "tech-scroll-left": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-33.333333%)" },
+        },
+        "tech-scroll-right": {
+          from: { transform: "translateX(-33.333333%)" },
+          to: { transform: "translateX(0)" },
+        },
+        "testimonials-rtl": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "testimonials-ltr": {
+          from: { transform: "translateX(-50%)" },
+          to: { transform: "translateX(0)" },
+        },
+        "hireus-spin": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        "hireus-blink": {
+          "0%, 45%": { opacity: "1" },
+          "55%, 100%": { opacity: "0.12" },
+        },
+      },
+      animation: {
+        "marquee-scroll": "marquee-scroll 28s linear infinite",
+        "tech-scroll-left": "tech-scroll-left 24s linear infinite",
+        "tech-scroll-right": "tech-scroll-right 24s linear infinite",
+        "testimonials-rtl": "testimonials-rtl 40s linear infinite",
+        "testimonials-ltr": "testimonials-ltr 40s linear infinite",
+        "hireus-spin": "hireus-spin 12s linear infinite",
+        "hireus-blink": "hireus-blink 1s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

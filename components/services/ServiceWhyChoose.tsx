@@ -60,7 +60,7 @@ function HireUsBadge() {
         />
 
         <g
-          className="animate-[hireus-spin_12s_linear_infinite]"
+          className="animate-hireus-spin"
           style={{ transformOrigin: "100px 100px" }}
         >
           {labels.map((label, index) => (
@@ -88,7 +88,7 @@ function HireUsBadge() {
           cy="100"
           r="16"
           fill="#FFE94A"
-          className="animate-[hireus-blink_1s_ease-in-out_infinite]"
+          className="animate-hireus-blink"
         />
       </svg>
     </div>

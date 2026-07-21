@@ -14,26 +14,57 @@ import {
   ECO_PORTFOLIO_TABS,
 } from "@/lib/ecommerce-data";
 
-const CARD_GAP = 24;
-const CARD_H = 500;
-const VISIBLE_CARDS = 4;
 const AUTO_SCROLL_MS = 4500;
-/** Only room for the arrow — Figma left gap, NOT ServiceOfferings 230px */
-const LEFT_INSET_PX = 96;
+
+type PortfolioLayout = {
+  visibleCards: number;
+  cardHeight: number;
+  cardGap: number;
+  leftInset: number;
+};
+
+function getPortfolioLayout(width: number): PortfolioLayout {
+  if (width < 768) {
+    return { visibleCards: 1, cardHeight: 380, cardGap: 16, leftInset: 56 };
+  }
+  if (width < 1024) {
+    return { visibleCards: 2, cardHeight: 460, cardGap: 20, leftInset: 72 };
+  }
+  return { visibleCards: 4, cardHeight: 500, cardGap: 24, leftInset: 96 };
+}
+
+function usePortfolioLayout() {
+  const [layout, setLayout] = useState<PortfolioLayout>(() =>
+    typeof window !== "undefined"
+      ? getPortfolioLayout(window.innerWidth)
+      : getPortfolioLayout(1280),
+  );
+
+  useEffect(() => {
+    const onResize = () => setLayout(getPortfolioLayout(window.innerWidth));
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  return layout;
+}
 
 export default function EcoPortfolio() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [cardW, setCardW] = useState(0);
+  const layout = usePortfolioLayout();
   const cards = ECO_PORTFOLIO_ITEMS;
-  const isSlider = cards.length > VISIBLE_CARDS;
+  const isSlider = cards.length > layout.visibleCards;
 
   const measureCards = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
+    const { visibleCards, cardGap } = layout;
     const w =
-      (track.clientWidth - CARD_GAP * (VISIBLE_CARDS - 1)) / VISIBLE_CARDS;
+      (track.clientWidth - cardGap * (visibleCards - 1)) / visibleCards;
     setCardW(Math.max(0, Math.floor(w)));
-  }, []);
+  }, [layout]);
 
   useLayoutEffect(() => {
     measureCards();
@@ -46,8 +77,8 @@ export default function EcoPortfolio() {
   }, [measureCards]);
 
   const getScrollStep = useCallback(() => {
-    return (cardW || 300) + CARD_GAP;
-  }, [cardW]);
+    return (cardW || 300) + layout.cardGap;
+  }, [cardW, layout.cardGap]);
 
   const scrollByStep = useCallback(
     (direction: "left" | "right") => {
@@ -77,7 +108,7 @@ export default function EcoPortfolio() {
 
   useLayoutEffect(() => {
     trackRef.current?.scrollTo({ left: 0 });
-  }, []);
+  }, [layout.visibleCards, layout.cardGap, layout.leftInset]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -110,67 +141,75 @@ export default function EcoPortfolio() {
     };
   }, [scrollByStep, isSlider]);
 
+  const imageSizes =
+    layout.visibleCards === 1
+      ? "92vw"
+      : layout.visibleCards === 2
+        ? "48vw"
+        : "25vw";
+
   return (
-    <section className="overflow-hidden bg-[#f8fafc] py-12">
-      <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-[40px] px-[clamp(16px,4vw,40px)]">
-        {/* Nav — same left start as first card */}
+    <section className="overflow-hidden bg-[#f8fafc] py-[clamp(32px,5vw,48px)]">
+      <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-6 px-[clamp(16px,4vw,40px)] md:gap-8 lg:gap-10">
         <nav
-          className="flex flex-wrap items-center justify-start gap-x-[14px] gap-y-2 sm:gap-x-5"
-          style={{ paddingLeft: LEFT_INSET_PX }}
+          className="flex flex-wrap items-center justify-start gap-x-3 gap-y-2 sm:gap-x-4 md:gap-x-5 lg:gap-x-[14px]"
+          style={{ paddingLeft: layout.leftInset }}
           aria-label="Portfolio categories"
         >
           {ECO_PORTFOLIO_TABS.map((tab, index) => (
-            <span key={tab} className="inline-flex items-center gap-x-[14px] sm:gap-x-5">
+            <span
+              key={tab}
+              className="inline-flex items-center gap-x-3 sm:gap-x-4 md:gap-x-5 lg:gap-x-[14px]"
+            >
               {index > 0 && (
                 <span
                   className="h-1.5 w-1.5 shrink-0 rounded-full bg-black"
                   aria-hidden
                 />
               )}
-              <span className="font-montserrat text-[clamp(15px,1.5vw,18px)] font-bold leading-none tracking-[-0.01em] text-black">
+              <span className="font-montserrat text-[clamp(14px,1.5vw,18px)] font-bold leading-none tracking-[-0.01em] text-black">
                 {tab}
               </span>
             </span>
           ))}
         </nav>
 
-        {/*
-          Right bleed → cards fill to screen edge (no empty right).
-          Left inset small → only arrow gap, cards start right after it.
-        */}
         <div
           className="mr-[calc(-1*var(--eco-bleed))] w-[calc(100%+var(--eco-bleed))] [--eco-bleed:max(0px,calc((100vw-min(100vw,1680px))/2+clamp(16px,4vw,40px)))]"
-          style={{ paddingLeft: LEFT_INSET_PX }}
+          style={{ paddingLeft: layout.leftInset }}
         >
           <div className="relative">
             {isSlider && (
               <button
                 type="button"
-                className="absolute top-1/2 z-[3] inline-flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[rgba(17,24,39,0.08)] bg-white text-[#111827] shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-[transform,box-shadow] hover:translate-y-[calc(-50%-1px)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
-                style={{ left: -LEFT_INSET_PX + 16 }}
+                className="absolute top-1/2 z-[3] inline-flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[rgba(17,24,39,0.08)] bg-white text-[#111827] shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-[transform,box-shadow] hover:translate-y-[calc(-50%-1px)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] md:h-11 md:w-11 lg:h-12 lg:w-12"
+                style={{ left: -layout.leftInset + 12 }}
                 onClick={() => scrollByStep("left")}
                 aria-label="Previous portfolio project"
               >
-                <ArrowLeft className="h-[22px] w-[22px] stroke-[1.5]" aria-hidden />
+                <ArrowLeft
+                  className="h-5 w-5 stroke-[1.5] md:h-[20px] md:w-[20px] lg:h-[22px] lg:w-[22px]"
+                  aria-hidden
+                />
               </button>
             )}
 
             <div
               ref={trackRef}
-              className="flex gap-6 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              style={{ height: CARD_H }}
+              className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              style={{ height: layout.cardHeight, gap: layout.cardGap }}
             >
               {cards.map((item) => (
                 <article
                   key={item.id}
                   data-eco-portfolio-card
-                  className="relative shrink-0 snap-start overflow-hidden rounded-[24px] bg-white shadow-[0px_1px_30px_8px_rgba(140,140,140,0.14)]"
+                  className="relative shrink-0 snap-start overflow-hidden rounded-[16px] bg-white shadow-[0px_1px_30px_8px_rgba(140,140,140,0.14)] md:rounded-[20px] lg:rounded-[24px]"
                   style={{
                     width: cardW || undefined,
-                    height: CARD_H,
+                    height: layout.cardHeight,
                     flex: cardW
                       ? `0 0 ${cardW}px`
-                      : `0 0 calc((100% - ${(VISIBLE_CARDS - 1) * CARD_GAP}px) / ${VISIBLE_CARDS})`,
+                      : `0 0 calc((100% - ${(layout.visibleCards - 1) * layout.cardGap}px) / ${layout.visibleCards})`,
                   }}
                 >
                   <Image
@@ -178,7 +217,7 @@ export default function EcoPortfolio() {
                     alt={item.title}
                     fill
                     className="object-cover object-top"
-                    sizes="25vw"
+                    sizes={imageSizes}
                   />
                 </article>
               ))}

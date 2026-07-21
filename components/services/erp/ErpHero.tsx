@@ -65,8 +65,8 @@ export default function ErpHero() {
         </div>
       </header>
 
-      <div className="mx-auto w-full max-w-[1850px] px-[clamp(16px,3.5vw,50px)] pt-[128px] pb-14 lg:pb-20">
-        <div className="flex w-full flex-col items-stretch gap-12 py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+      <div className="mx-auto w-full max-w-[1850px] px-[clamp(16px,3.5vw,50px)] pb-14 pt-[80px] sm:pt-[100px] lg:pb-20 lg:pt-[128px]">
+        <div className="flex w-full flex-col items-stretch gap-12 py-4 max-md:gap-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-12">
           {/* Left copy — Figma 636 × 388 */}
           <div className="flex w-full max-w-[636px] shrink-0 flex-col justify-center lg:min-h-[388px]">
             <h1 className="m-0 font-montserrat text-[clamp(2.5rem,4.5vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
@@ -96,7 +96,7 @@ export default function ErpHero() {
               {ERP_HERO.description}
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="mt-8 flex w-full flex-col items-center gap-3 md:flex-row md:flex-wrap md:items-center md:gap-4">
               <Link
                 href="#contact"
                 className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"

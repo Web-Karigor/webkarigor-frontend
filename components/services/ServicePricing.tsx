@@ -44,7 +44,7 @@ export default function ServicePricing() {
                   {market.plans.map((plan, index) => (
                     <article
                       key={`${market.label}-${plan.title}-${index}`}
-                      className="service-pricing-plan-card w-full max-w-[400px]"
+                      className="box-border flex w-full max-w-[400px] flex-col gap-2.5 rounded-[20px] border-[0.5px] border-transparent bg-[linear-gradient(#ffffff,#ffffff)_padding-box,linear-gradient(135deg,#0ec47b_0%,#2eeda0_50%,#ffef3f_100%)_border-box] p-[clamp(20px,4vw,24px)_clamp(14px,3vw,16px)] lg:min-h-[697px]"
                     >
                       <h3 className="m-0 font-montserrat text-[28px] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
                         {plan.title}

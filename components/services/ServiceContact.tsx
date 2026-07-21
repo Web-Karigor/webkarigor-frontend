@@ -45,14 +45,14 @@ export default function ServiceContact() {
 
             <Link
               href="mailto:hello@webkarigor.com"
-              className="inline-flex w-fit items-center gap-2.5 font-montserrat text-[15px] font-semibold text-[#111827] transition-colors hover:text-[#0ec47b]"
+              className="inline-flex w-full max-md:justify-center items-center gap-2.5 font-montserrat text-[15px] font-semibold text-[#111827] transition-colors hover:text-[#0ec47b] sm:w-fit"
             >
               <Mail className="h-[18px] w-[18px] shrink-0 text-[#111827]" strokeWidth={1.75} aria-hidden />
               hello@webkarigor.com
             </Link>
           </div>
 
-          <div className="w-fit shrink-0">
+          <div className="flex w-full shrink-0 flex-col items-center text-center sm:w-fit sm:items-start sm:text-left">
             <div className="relative h-[160px] w-[174px]">
               <Image
                 src={PROFILE_IMAGE}

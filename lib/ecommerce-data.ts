@@ -224,23 +224,6 @@ export const ECO_TESTIMONIALS = [
   },
 ] as const;
 
-export const ECO_TEAM_PHOTOS = [
-  { src: "/sm1.png", className: "eco-team-photo eco-team-photo--1" },
-  { src: "/sm2.jpg", className: "eco-team-photo eco-team-photo--2" },
-  { src: "/sm3.jpg", className: "eco-team-photo eco-team-photo--3" },
-  { src: "/sm4.png", className: "eco-team-photo eco-team-photo--4" },
-  { src: "/h1.png", className: "eco-team-photo eco-team-photo--5" },
-  { src: "/h2.png", className: "eco-team-photo eco-team-photo--6" },
-  {
-    src: "https://i.pravatar.cc/200?img=15",
-    className: "eco-team-photo eco-team-photo--7",
-  },
-  {
-    src: "https://i.pravatar.cc/200?img=28",
-    className: "eco-team-photo eco-team-photo--8",
-  },
-] as const;
-
 export const ECO_PRICING_PLANS = [
   {
     name: "Basic",

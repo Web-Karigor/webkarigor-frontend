@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function HeroSection() {
   return (
-    <section className="relative isolate min-h-screen h-screen bg-[#FFFDF6]">
+    <section className="relative isolate bg-[#FFFDF6] max-md:min-h-0 max-md:h-auto md:min-h-screen md:h-screen">
       <span className="absolute left-[478px] top-0 hidden h-[720px] w-[1px] bg-[#DACFA7] 2xl:inline-block" />
       <span className="absolute right-[478px] top-0 hidden h-[720px] w-[1px] bg-[#DACFA7] 2xl:inline-block" />
       <span className="absolute left-1/2 top-[580px] hidden h-[1px] w-[942px] -translate-x-1/2 bg-[#DACFA7] 2xl:inline-block" />
@@ -40,7 +40,7 @@ export default function HeroSection() {
               faster with confidence.
             </p>
 
-            <div className="hero-hello mt-8 px-2 sm:mt-12 md:mt-[60px]">
+            <div className="hero-hello mt-4 px-2 md:mt-[60px]">
               Say hello. We’re listening
               <div className="flex -space-x-2">
                 <Avatar className="h-7 w-7 sm:h-8 sm:w-8">
@@ -70,7 +70,7 @@ export default function HeroSection() {
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] overflow-visible">
-        <p className="translate-y-[54%] text-center text-[clamp(48px,18vw,76px)] font-bold leading-[0.9] text-[#1F1E1C] opacity-[0.07] md:translate-y-[56%] md:text-[clamp(100px,16vw,150px)] lg:translate-y-[58%] lg:text-[190px] xl:translate-y-[60%] xl:text-[280px] 2xl:translate-y-[64%] 2xl:text-[300px]">
+        <p className="translate-y-[calc(54%+30px)] text-center text-[clamp(48px,18vw,76px)] font-bold leading-[0.9] text-[#1F1E1C] opacity-[0.07] md:translate-y-[56%] md:text-[clamp(100px,16vw,150px)] lg:translate-y-[58%] lg:text-[190px] xl:translate-y-[60%] xl:text-[280px] 2xl:translate-y-[64%] 2xl:text-[300px]">
           PROJECTS
         </p>
       </div>
