@@ -1,5 +1,7 @@
 "use client";
 
+import "./AIFeature.css";
+
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 

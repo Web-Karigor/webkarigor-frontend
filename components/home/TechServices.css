@@ -1,0 +1,181 @@
+/* Split from globals.css — UI unchanged */
+/* =========================
+   TECH SERVICES SLIDER
+========================= */
+
+.tech-services {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.tech-services-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 96px;
+  padding: 0 24px;
+  background: #fff5d4;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.tech-services-nav-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.tech-services-nav-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-services-nav-item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.tech-services-nav-dot {
+  color: #000;
+  font-family: var(--font-montserrat);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.tech-services-nav-text {
+  font-family: var(--font-montserrat);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: 0.02em;
+  color: #000;
+  white-space: nowrap;
+}
+
+.tech-services-slider {
+  width: 100%;
+  background-color: #2ec4b6;
+  background-image: url("/tech-services-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  padding: 48px 0 64px;
+  overflow: visible;
+}
+
+@media (max-width: 1023px) {
+  .tech-services {
+    overflow-x: hidden;
+  }
+
+  .tech-services-slider {
+    box-sizing: border-box;
+    height: auto;
+    min-height: fit-content;
+    overflow: hidden;
+  }
+
+  .tech-services-viewport {
+    overflow: hidden;
+    min-height: fit-content;
+    height: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tech-services-slider {
+    padding: 40px 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .tech-services-slider {
+    padding: 32px 16px;
+  }
+}
+
+.tech-services-viewport {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+}
+
+.tech-services-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  overflow: visible;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.tech-services-card {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  transform-origin: center center;
+  will-change: transform, width, height;
+  backface-visibility: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.72s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.tech-services-card:hover,
+.tech-services-card:focus-within {
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.22);
+}
+
+.tech-services-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 640px) {
+  .tech-services-nav {
+    height: 72px;
+    padding: 0 16px;
+  }
+
+  .tech-services-nav-list {
+    gap: 8px;
+  }
+
+  .tech-services-nav-item {
+    gap: 8px;
+  }
+
+  .tech-services-nav-text,
+  .tech-services-nav-dot {
+    font-size: 16px;
+    letter-spacing: 0.015em;
+  }
+
+  .tech-services-card {
+    border-radius: 10px;
+  }
+}

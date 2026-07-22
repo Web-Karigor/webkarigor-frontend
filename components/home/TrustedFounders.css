@@ -1,0 +1,229 @@
+/* Split from globals.css — UI unchanged */
+/* =========================
+   WRAPPER
+========================= */
+
+.trusted-wrapper {
+  width: 100%;
+  padding: clamp(48px, 8vw, 100px) 0;
+  overflow: hidden;
+  background: #fbfaf7;
+}
+
+.trusted-layout {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 40px);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.trusted-image-row {
+  max-width: 1920px;
+  margin: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(12px, 2vw, 28px);
+}
+
+/* =========================
+   IMAGE CARDS
+========================= */
+
+.trusted-image-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.trusted-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* =========================
+   LEFT TEXT
+========================= */
+
+.trusted-text {
+  min-width: 0;
+}
+
+.trusted-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #c7f2d0;
+  color: #2cbf6d;
+  font-size: clamp(0.75rem, 2vw, 0.8125rem);
+  font-weight: 500;
+  margin-bottom: clamp(12px, 3vw, 20px);
+}
+
+.trusted-heading {
+  line-height: 1.1;
+  font-weight: 700;
+  color: #111;
+  font-size: clamp(2.25rem, 9vw, 4.5rem);
+}
+
+.trusted-heading span {
+  color: #b9b9b9;
+  font-weight: 600;
+  font-family: var(--font-museoModerno);
+}
+
+
+/* =========================
+   SIZE PROGRESSION (original Figma staircase)
+========================= */
+
+.size-1 {
+  flex: 0 0 auto;
+  width: 495px;
+  height: 597px;
+}
+
+.size-2 {
+  flex: 0 0 auto;
+  width: 494px;
+  height: 784px;
+}
+
+.size-3 {
+  flex: 0 0 auto;
+  width: 494px;
+  height: 877px;
+}
+
+.size-4 {
+  flex: 0 0 auto;
+  width: 495px;
+  height: 921px;
+}
+
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .trusted-image-row {
+    gap: clamp(10px, 1.2vw, 20px);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .trusted-image-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .trusted-image-card {
+    flex: 0 0 auto;
+  }
+
+  .size-1 {
+    width: clamp(180px, 18vw, 260px);
+    height: clamp(220px, 22vw, 320px);
+  }
+
+  .size-2 {
+    width: clamp(190px, 19vw, 280px);
+    height: clamp(300px, 30vw, 420px);
+  }
+
+  .size-3 {
+    width: clamp(200px, 20vw, 300px);
+    height: clamp(340px, 34vw, 480px);
+  }
+
+  .size-4 {
+    width: clamp(210px, 21vw, 320px);
+    height: clamp(380px, 38vw, 520px);
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .trusted-image-row {
+    gap: clamp(14px, 1.5vw, 24px);
+  }
+
+  .size-1 {
+    width: clamp(280px, 22vw, 400px);
+    height: clamp(340px, 26vw, 480px);
+  }
+
+  .size-2 {
+    width: clamp(290px, 23vw, 420px);
+    height: clamp(440px, 34vw, 640px);
+  }
+
+  .size-3 {
+    width: clamp(300px, 24vw, 440px);
+    height: clamp(500px, 38vw, 720px);
+  }
+
+  .size-4 {
+    width: clamp(310px, 25vw, 460px);
+    height: clamp(540px, 42vw, 780px);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1024px) {
+  .trusted-layout {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 5vw, 40px);
+  }
+
+  .trusted-text {
+    text-align: center;
+    margin: 0;
+  }
+
+  .trusted-image-row {
+    justify-content: flex-start;
+    gap: clamp(10px, 2vw, 20px);
+  }
+
+  .size-1 { width: clamp(120px, 28vw, 180px); height: clamp(180px, 40vw, 260px); }
+  .size-2 { width: clamp(140px, 32vw, 210px); height: clamp(210px, 46vw, 300px); }
+  .size-3 { width: clamp(160px, 36vw, 240px); height: clamp(240px, 52vw, 340px); }
+  .size-4 { width: clamp(180px, 40vw, 280px); height: clamp(270px, 58vw, 380px); }
+}
+
+@media (min-width: 1025px) {
+  .trusted-layout {
+    position: relative;
+  }
+
+  .trusted-text {
+    position: relative;
+    z-index: 2;
+    margin-left: 100px;
+    margin-bottom: -280px;
+  }
+
+  .trusted-heading {
+    font-size: 72px;
+  }
+}
+
+@media (max-width: 640px) {
+  .trusted-image-row {
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .trusted-image-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+}

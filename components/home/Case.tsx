@@ -1,5 +1,7 @@
 "use client";
 
+import "./Case.css";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";

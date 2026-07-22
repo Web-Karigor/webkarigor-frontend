@@ -1,5 +1,7 @@
 "use client";
 
+import "./Footer.css";
+
 import { useLayoutEffect, useRef } from "react";
 
 export default function FooterBrand() {

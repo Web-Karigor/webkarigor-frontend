@@ -1,5 +1,7 @@
 "use client";
 
+import "./Services.css";
+
 import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,0 +1,79 @@
+/* Split from globals.css — UI unchanged */
+.stats-number {
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: clamp(4rem, 22vw, 18.75rem);
+  line-height: 1;
+  color: #1F1E1C;
+}
+
+.stats-plus {
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 4vw, 4.8125rem);
+  line-height: 1;
+  color: #1F1E1C;
+}
+
+.stats-years {
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: clamp(0.75rem, 2.5vw, 2.5rem);
+  color: #FCFCFC;
+}
+
+.stats-pill {
+  background-color: #1F1E1C;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+@media (min-width: 640px) {
+  .stats-pill {
+    padding: 4px 14px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .stats-pill {
+    padding: 4px 24px;
+  }
+}
+
+/* lg only */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .stats-number {
+    font-size: clamp(4.5rem, 7vw, 6.25rem);
+  }
+
+  .stats-plus {
+    font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+  }
+
+  .stats-years {
+    font-size: clamp(0.8rem, 1.15vw, 1.1rem);
+  }
+
+  .stats-pill {
+    padding: 4px 12px;
+  }
+}
+
+/* xl only */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .stats-number {
+    font-size: clamp(6rem, 8.5vw, 9rem);
+  }
+
+  .stats-plus {
+    font-size: clamp(1.75rem, 2.6vw, 3rem);
+  }
+
+  .stats-years {
+    font-size: clamp(0.95rem, 1.35vw, 1.5rem);
+  }
+
+  .stats-pill {
+    padding: 4px 16px;
+  }
+}

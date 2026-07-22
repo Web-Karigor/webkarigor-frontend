@@ -1,5 +1,7 @@
 "use client";
 
+import "./VideoSection.css";
+
 import { useRef, useLayoutEffect } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
@@ -40,7 +42,7 @@ const VideoSection = () => {
         });
 
         gsap.set(frame, {
-          scale: 0.42,
+          scale: 0.62,
           borderRadius: "2.75rem",
           force3D: true,
           transformOrigin: "50% 50%",
