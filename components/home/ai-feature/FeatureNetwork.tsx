@@ -1,0 +1,74 @@
+"use client";
+
+import { useRef } from "react";
+import FeatureCard from "./FeatureCard";
+import CenterNode from "./CenterNode";
+import SvgConnections from "./SvgConnections";
+import { useCircuitGeometry } from "./useCircuitGeometry";
+import { featureCards } from "./cards-data";
+
+export default function FeatureNetwork() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const centerRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const { geometry, bindCardRef, scheduleUpdate } = useCircuitGeometry(
+    sectionRef,
+    centerRef,
+    cardRefs,
+  );
+
+  return (
+    <section
+      ref={sectionRef}
+      className="ai-feature-section relative overflow-hidden bg-[#fbfaf7]"
+    >
+      <SvgConnections geometry={geometry} />
+
+      <div className="ai-feature-content relative z-[2] mx-auto max-w-6xl">
+        <div className="mb-12 text-center sm:mb-16 md:mb-24 lg:mb-36">
+          <span className="inline-flex h-7 min-w-0 items-center justify-center rounded-full border border-[#38F8AB] bg-[#38F8AB]/10 px-4 sm:min-w-[156px] sm:px-5">
+            <span className="section-badge-text">Center of Solution</span>
+          </span>
+
+          <h2 className="section-heading">
+            <span className="section-heading-split-accent section-accent-text">
+              Path to
+            </span>
+            <span className="section-heading-split-title">Your Solution</span>
+          </h2>
+        </div>
+
+        <div className="mt-4 mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:mt-8 md:mb-20 md:grid-cols-3 md:items-start md:gap-8">
+          {featureCards.slice(0, 3).map((card, index) => (
+            <FeatureCard
+              key={card.title}
+              ref={bindCardRef(index)}
+              index={index}
+              {...card}
+            />
+          ))}
+        </div>
+
+        <div className="ai-feature-center-wrap relative my-12 flex justify-center md:my-20">
+          <CenterNode
+            ref={(el) => {
+              centerRef.current = el;
+              if (el) scheduleUpdate();
+            }}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:items-end md:gap-8">
+          {featureCards.slice(3, 6).map((card, index) => (
+            <FeatureCard
+              key={card.title}
+              ref={bindCardRef(index + 3)}
+              index={index + 3}
+              {...card}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

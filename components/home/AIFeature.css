@@ -25,6 +25,22 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
+.ai-feature-card--asset {
+  padding: 0;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  aspect-ratio: 366 / 318;
+  min-height: unset;
+}
+
+.ai-feature-card-asset {
+  object-fit: cover;
+  object-position: center;
+}
+
 .ai-feature-card-body {
   position: relative;
   z-index: 2;
@@ -67,13 +83,38 @@
   padding: clamp(48px, 8vw, 96px) clamp(16px, 4vw, 24px);
 }
 
+.ai-feature-circuit-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ai-feature-center-wrap {
+  position: relative;
+  z-index: 3;
+}
+
 .ai-feature-center-node {
   width: clamp(4.5rem, 12vw, 7rem);
   height: clamp(4.5rem, 12vw, 7rem);
 }
 
-.ai-feature-center-text {
-  font-size: clamp(1.75rem, 5vw, 3rem);
+.ai-feature-center-image {
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.ai-feature-circuit-path {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
 }
 
 .ai-visual-front {
