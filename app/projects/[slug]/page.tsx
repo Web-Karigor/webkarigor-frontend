@@ -14,15 +14,18 @@ import {
 } from "@/lib/project-details-data";
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
   return getAllProjectSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const project = getProjectDetail(params.slug);
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectDetail(slug);
   if (!project) {
     return { title: "Project — Webkarigor" };
   }
@@ -32,8 +35,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-export default function ProjectDetailsPage({ params }: PageProps) {
-  const project = getProjectDetail(params.slug);
+export default async function ProjectDetailsPage({ params }: PageProps) {
+  const { slug } = await params;
+  const project = getProjectDetail(slug);
   if (!project) notFound();
 
   return (

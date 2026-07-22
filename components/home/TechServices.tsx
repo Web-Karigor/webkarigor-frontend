@@ -73,9 +73,12 @@ function getCardSizes(viewportWidth: number): CardSizes {
   };
 }
 
+/** SSR + first client paint must match — never read window during useState init. */
+const SSR_VIEWPORT_WIDTH = 1440;
+
 function useCardSizes(viewportRef: React.RefObject<HTMLDivElement | null>) {
   const [sizes, setSizes] = useState<CardSizes>(() =>
-    getCardSizes(typeof window !== "undefined" ? window.innerWidth : 1440),
+    getCardSizes(SSR_VIEWPORT_WIDTH),
   );
 
   useLayoutEffect(() => {
@@ -99,11 +102,7 @@ function useCardSizes(viewportRef: React.RefObject<HTMLDivElement | null>) {
 }
 
 function useBelowLg() {
-  const [isBelowLg, setIsBelowLg] = useState(() =>
-    typeof window !== "undefined"
-      ? window.matchMedia("(max-width: 1023px)").matches
-      : false,
-  );
+  const [isBelowLg, setIsBelowLg] = useState(false);
 
   useLayoutEffect(() => {
     const media = window.matchMedia("(max-width: 1023px)");
@@ -245,8 +244,13 @@ function PortfolioSlider() {
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const hoveredRef = useRef(false);
   const [hoveredKey, setHoveredKey] = useState<number | null>(null);
+  const [ready, setReady] = useState(false);
   const sizes = useCardSizes(viewportRef);
   const isBelowLg = useBelowLg();
+
+  useLayoutEffect(() => {
+    setReady(true);
+  }, []);
 
   const activeHeight =
     hoveredKey !== null ? sizes.hoverHeight : sizes.height;
@@ -364,7 +368,8 @@ function PortfolioSlider() {
         ref={viewportRef}
         className="tech-services-viewport"
         initial={false}
-        animate={{ minHeight: viewportMinHeight }}
+        style={ready ? undefined : { minHeight: viewportMinHeight }}
+        animate={ready ? { minHeight: viewportMinHeight } : false}
         transition={{
           duration: HOVER_DURATION,
           ease: HOVER_EASE,
