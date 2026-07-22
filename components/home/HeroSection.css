@@ -1,0 +1,190 @@
+/* =========================
+   HERO TYPOGRAPHY (base — all breakpoints)
+========================= */
+
+.hero-title {
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  font-size: clamp(2rem, 8.5vw, 6.625rem);
+  line-height: 130%;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: #1f1e1c;
+}
+
+.hero-subtitle {
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  font-size: clamp(0.875rem, 3.2vw, 2.5rem);
+  line-height: 140%;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: rgba(226, 106, 0, 0.38);
+}
+
+.hero-desc {
+  font-family: var(--font-montserrat);
+  font-weight: 500;
+  font-size: clamp(0.9375rem, 2vw, 1.5rem);
+  line-height: 150%;
+  text-align: center;
+  color: #1f1e1c;
+}
+
+.hero-highlight {
+  background: #24ff74;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.hero-badge {
+  background: #f7cc22;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.hero-hello {
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: clamp(0.75rem, 2vw, 1.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(6px, 1.5vw, 10px);
+  justify-content: center;
+}
+
+.hero-projects-text {
+  font-size: clamp(48px, 18vw, 76px);
+}
+
+@media (min-width: 768px) {
+  .hero-projects-text {
+    font-size: clamp(100px, 16vw, 150px);
+  }
+}
+
+/* 2xl+ PROJECTS size (xl Tailwind removed so lg/xl can own mid sizes) */
+@media (min-width: 1536px) {
+  .hero-title {
+    letter-spacing: -0.05em;
+    line-height: 140%;
+  }
+
+  .hero-subtitle {
+    letter-spacing: 0.1em;
+  }
+
+  .hero-projects-text {
+    font-size: 300px;
+  }
+}
+
+/* =========================================================
+   lg only — 1024px–1279px
+   Fit viewport via spacing math (no overflow-y:auto/hidden).
+========================================================= */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .hero-section {
+    /* Drop forced full-viewport height — closes empty bottom band */
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 5.5rem;
+    /* Clear navbar (~72–90px) then sit content mid-upper */
+    --hero-left-mt: 12vh;
+    --hero-left-gap: 2.5vh;
+    --hero-photo-left-mt: 2vh;
+    --hero-center-mt: 18vh;
+    --hero-title-pull: 0.75rem;
+    --hero-desc-mt: 2vh;
+    --hero-hello-mt: 1.5vh;
+    --hero-photo-right-mt: 14vh;
+  }
+
+  .hero-title {
+    font-size: clamp(2.35rem, 3.55vw, 3.55rem); /* ~15% under 2xl feel */
+    line-height: 118%;
+    letter-spacing: -0.035em;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.95rem, 1.35vw, 1.3rem);
+    line-height: 125%;
+    letter-spacing: 0.06em;
+  }
+
+  .hero-desc {
+    font-size: clamp(0.9rem, 1.15vw, 1.1rem);
+    line-height: 140%;
+  }
+
+  .hero-hello {
+    font-size: clamp(0.8rem, 1.05vw, 1rem);
+  }
+
+  .hero-photo-img {
+    max-width: 200px !important;
+  }
+
+  .hero-projects-wrap {
+    bottom: 0;
+  }
+
+  .hero-projects-text {
+    font-size: clamp(110px, 12vw, 150px);
+    transform: translateY(42%) !important;
+  }
+}
+
+/* =========================================================
+   xl only — 1280px–1535px
+========================================================= */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .hero-section {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 6.5rem;
+    --hero-left-mt: 13vh;
+    --hero-left-gap: 3vh;
+    --hero-photo-left-mt: 2.5vh;
+    --hero-center-mt: 20vh;
+    --hero-title-pull: 1rem;
+    --hero-desc-mt: 2.5vh;
+    --hero-hello-mt: 1.75vh;
+    --hero-photo-right-mt: 16vh;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 4.1vw, 4.55rem); /* ~12–15% under full */
+    line-height: 122%;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 1.55vw, 1.7rem);
+    line-height: 128%;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-desc {
+    font-size: clamp(1rem, 1.25vw, 1.25rem);
+    line-height: 145%;
+  }
+
+  .hero-hello {
+    font-size: clamp(0.9rem, 1.15vw, 1.15rem);
+  }
+
+  .hero-photo-img {
+    max-width: 260px !important;
+  }
+
+  .hero-projects-wrap {
+    bottom: 0;
+  }
+
+  .hero-projects-text {
+    font-size: clamp(150px, 14vw, 210px);
+    transform: translateY(45%) !important;
+  }
+}

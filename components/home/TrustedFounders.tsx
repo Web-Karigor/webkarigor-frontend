@@ -1,5 +1,7 @@
 "use client";
 
+import "./TrustedFounders.css";
+
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { SLIDER_IMAGES } from "@/lib/home-assets";

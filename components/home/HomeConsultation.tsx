@@ -1,5 +1,7 @@
 "use client";
 
+import "./HomeConsultation.css";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";

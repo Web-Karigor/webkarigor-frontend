@@ -1,3 +1,4 @@
+import "./StatsBadge.css";
 export default function StatsBadge() {
   return (
     <div className="flex items-center justify-center gap-2 text-center">

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Manrope, Montserrat, MuseoModerno } from "next/font/google";
 import "./globals.css";
+import "@/styles/section-shared.css";
+import "@/styles/pricing.css";
+import "@/styles/legacy-solution.css";
 import Navbar from "@/components/home/Navbar";
 import GsapProvider from "@/components/providers/GsapProvider";
 

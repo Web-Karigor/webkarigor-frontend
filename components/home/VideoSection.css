@@ -1,0 +1,16 @@
+/* Split from globals.css — UI unchanged */
+/* Video section — static layout below lg (no GSAP) */
+@media (max-width: 1023px) {
+  .video-section-frame {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    height: auto;
+    transform: none !important;
+  }
+
+  .video-section-iframe {
+    transform: none !important;
+  }
+}

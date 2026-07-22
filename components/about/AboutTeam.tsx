@@ -1,5 +1,7 @@
 "use client";
 
+import "../home/Team.css";
+
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "@/lib/gsap";

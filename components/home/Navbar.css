@@ -1,0 +1,120 @@
+/* Split from globals.css — UI unchanged */
+  /* Navbar Styles */
+  .navbar-container {
+    width: fit-content;
+    max-width: min(628px, calc(100vw - 2rem));
+    height: auto;
+    min-height: 56px;
+    padding: 8px clamp(12px, 2vw, 32px);
+    gap: 8px;
+    background-color: rgba(255, 253, 246, 0.4);
+    border: 0.5px solid #00E68A;
+    box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  @media (min-width: 1280px) {
+    .navbar-container {
+      height: 72px;
+      min-height: 72px;
+      padding: 10px 32px;
+      gap: 10px;
+    }
+  }
+
+  /* lg — reduce horizontal padding only; height unchanged */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .navbar-container {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+  }
+
+  /* xl — reduce horizontal padding only; height unchanged (72px from ≥1280) */
+  @media (min-width: 1280px) and (max-width: 1535px) {
+    .navbar-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  /* Figma Ellipse — 1700×585 · Layer blur 400 · behind navbar */
+  .navbar-glow {
+    position: fixed;
+    top: -454px;
+    left: 50%;
+    z-index: 9998;
+    width: min(1700px, 92vw);
+    height: 585px;
+    pointer-events: none;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, #bbff68 80%, transparent 70%);
+    opacity: 0.28;
+    filter: blur(400px);
+  }
+
+  @media (min-width: 1024px) {
+    .navbar-glow {
+      top: -420px;
+    }
+  }
+
+  .navbar-content {
+    width: 100%;
+    height: auto;
+    min-height: 44px;
+    gap: clamp(12px, 2vw, 32px);
+  }
+
+  @media (min-width: 1280px) {
+    .navbar-content {
+      height: 52px;
+      min-height: 52px;
+    }
+  }
+
+  .navbar-link {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: clamp(14px, 1.4vw, 20px);
+    line-height: 140%;
+    letter-spacing: 0%;
+    color: #1F1E1C;
+    white-space: nowrap;
+  }
+
+  .webkarigor-button {
+    width: fit-content;
+    height: auto;
+    min-height: 44px;
+    padding: 1px;
+    background: linear-gradient(to right, #38F8AB, #FEED35, #38F8AB, #FEED35, #38F8AB);
+    border-radius: 12px;
+  }
+
+  @media (min-width: 1280px) {
+    .webkarigor-button {
+      height: 52px;
+      min-height: 52px;
+    }
+  }
+
+  .webkarigor-inner {
+    background-color: #FFFAEA;
+    padding: clamp(8px, 1vw, 12px) clamp(10px, 1.2vw, 16px);
+    border-radius: 11px;
+  }
+
+  .webkarigor-text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: clamp(14px, 1.4vw, 20px);
+    line-height: 140%;
+    letter-spacing: 0%;
+    background-image: linear-gradient(to right, #0EC47B, #15D286, #E4D20E);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
