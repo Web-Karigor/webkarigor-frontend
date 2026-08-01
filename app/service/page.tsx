@@ -12,11 +12,11 @@ import ServicePricing from "@/components/services/ServicePricing";
 import ServiceTechGrid from "@/components/services/ServiceTechGrid";
 import ServiceTestimonials from "@/components/services/ServiceTestimonials";
 import ServiceWhyChoose from "@/components/services/ServiceWhyChoose";
+import servicesContent from "@/data/services-content.json";
 
 export const metadata: Metadata = {
-  title: "Services — Webkarigor",
-  description:
-    "Web design, SEO, digital marketing, mobile apps, branding, and full-stack development tailored to your business goals.",
+  title: servicesContent.metadata.title,
+  description: servicesContent.metadata.description,
 };
 
 export default function ServicePage() {

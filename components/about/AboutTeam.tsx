@@ -5,7 +5,7 @@ import "../home/Team.css";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "@/lib/gsap";
-import { TEAM_IMAGES } from "@/lib/home-assets";
+import { ABOUT_TEAM, ABOUT_TEAM_IMAGES } from "@/lib/about-data";
 
 const LOOP_COPIES = 3;
 const SLIDE_DURATION = 32;
@@ -79,7 +79,7 @@ function TeamCard({
       }}
       className="relative flex-shrink-0 overflow-hidden border border-[#EFEFEF] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
       style={{ height: sizes.height, borderRadius: sizes.radius }}
-      aria-label="Team member"
+      aria-label={ABOUT_TEAM.cardAriaLabel}
     >
       <img
         src={src}
@@ -203,18 +203,19 @@ function InfiniteSlideRow({
   );
 }
 
-const upperImages = TEAM_IMAGES;
-const lowerImages = [...TEAM_IMAGES].reverse();
+const upperImages = ABOUT_TEAM_IMAGES;
+const lowerImages = [...ABOUT_TEAM_IMAGES].reverse();
 
 export default function AboutTeam() {
   const sizes = useTeamCardSizes();
+  const { heading } = ABOUT_TEAM;
 
   return (
     <section className="overflow-hidden bg-[#FEFCF6] py-12 sm:py-16 md:py-24">
       <div className="team-section-inner mx-auto px-4 sm:px-6">
         <div className="mb-8 sm:mb-10 text-center lg:hidden">
-          <h2 className="team-heading-mobile font-black text-[#141414]">Expert Team</h2>
-          <p className="team-heading-mobile font-extrabold text-[#A0A4AA]">Big Result</p>
+          <h2 className="team-heading-mobile font-black text-[#141414]">{heading.mobileLine1}</h2>
+          <p className="team-heading-mobile font-extrabold text-[#A0A4AA]">{heading.mobileLine2}</p>
         </div>
 
         <div className="mb-8 sm:mb-12 flex items-center justify-between gap-4 sm:gap-6 lg:gap-10">
@@ -228,8 +229,11 @@ export default function AboutTeam() {
             className="hidden flex-shrink-0 lg:block"
           >
             <div className="space-y-12 xl:space-y-20 text-right leading-[0.9]">
-              <div className="team-heading-desktop font-black text-[#141414]">Expert</div>
-              <div className="team-heading-desktop font-black text-[#141414]">Team</div>
+              {heading.desktopLeft.map((line) => (
+                <div key={line} className="team-heading-desktop font-black text-[#141414]">
+                  {line}
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -243,10 +247,11 @@ export default function AboutTeam() {
             className="hidden flex-shrink-0 lg:block"
           >
             <div className="space-y-12 xl:space-y-20 leading-[0.9]">
-              <div className="team-heading-desktop font-extrabold text-[#A0A4AA]">Big</div>
-              <div className="team-heading-desktop font-extrabold text-[#A0A4AA]">
-                Result
-              </div>
+              {heading.desktopRight.map((line) => (
+                <div key={line} className="team-heading-desktop font-extrabold text-[#A0A4AA]">
+                  {line}
+                </div>
+              ))}
             </div>
           </motion.div>
 

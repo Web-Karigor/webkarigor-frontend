@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { PROJECT_CARD_OVERLAY_LABELS } from "@/lib/projects-data";
 
 type ProjectCardProps = {
   src: string;
@@ -63,10 +64,10 @@ export default function ProjectCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
           <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 sm:bottom-5 sm:left-5 sm:right-5">
             <p className="m-0 font-montserrat text-[10px] font-semibold tracking-[0.18em] text-white/90 uppercase sm:text-[11px]">
-              Ventures
+              {PROJECT_CARD_OVERLAY_LABELS.ventures}
             </p>
             <p className="m-0 font-montserrat text-[10px] font-semibold tracking-[0.18em] text-white/70 uppercase sm:text-[11px]">
-              Antler
+              {PROJECT_CARD_OVERLAY_LABELS.venturesPartner}
             </p>
           </div>
         </>
@@ -88,7 +89,12 @@ export default function ProjectCard({
   if (!href) return card;
 
   return (
-    <Link href={href} className="block w-full max-w-full outline-none" aria-label={title}>
+    <Link
+      href={href}
+      data-project-cursor
+      className="block w-full max-w-full outline-none"
+      aria-label={title}
+    >
       {card}
     </Link>
   );

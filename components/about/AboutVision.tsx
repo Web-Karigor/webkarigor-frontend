@@ -34,7 +34,7 @@ export default function AboutVision() {
           <div className="relative min-h-[320px] overflow-hidden rounded-[20px] sm:min-h-[400px] sm:rounded-[24px] md:row-span-2 md:min-h-0 md:rounded-[28px]">
             <Image
               src={ABOUT_VISION.images.large}
-              alt="Team collaborating on product craft"
+              alt={ABOUT_VISION.alts.large}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 900px"
@@ -46,7 +46,7 @@ export default function AboutVision() {
           <div className="relative min-h-[200px] overflow-hidden rounded-[20px] sm:min-h-[240px] sm:rounded-[24px] md:min-h-0 md:rounded-[28px]">
             <Image
               src={ABOUT_VISION.images.top}
-              alt="Team discussion in the office"
+              alt={ABOUT_VISION.alts.top}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 900px"
@@ -58,7 +58,7 @@ export default function AboutVision() {
             <div className="relative min-h-[160px] overflow-hidden rounded-[16px] sm:min-h-[200px] sm:rounded-[20px] md:min-h-0 md:rounded-[28px]">
               <Image
                 src={ABOUT_VISION.images.bottomLeft}
-                alt="Collaborating over ideas"
+                alt={ABOUT_VISION.alts.bottomLeft}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 440px"
@@ -67,7 +67,7 @@ export default function AboutVision() {
             <div className="relative min-h-[160px] overflow-hidden rounded-[16px] sm:min-h-[200px] sm:rounded-[20px] md:min-h-0 md:rounded-[28px]">
               <Image
                 src={ABOUT_VISION.images.bottomRight}
-                alt="Designer reviewing digital interfaces"
+                alt={ABOUT_VISION.alts.bottomRight}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 440px"

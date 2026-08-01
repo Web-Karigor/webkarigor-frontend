@@ -1,7 +1,7 @@
 "use client";
 
-import { PROJECT_CARD_SLUGS } from "@/lib/project-details-data";
 import {
+  PROJECT_CARD_SLUGS,
   PROJECT_ITEMS,
   PROJECTS_CONTENT_W,
   PROJECTS_GAP,
@@ -57,6 +57,7 @@ export default function ProjectsGrid() {
             className="flex h-full w-full items-center justify-center font-montserrat font-bold uppercase leading-none tracking-[-0.04em]"
             style={{
               color: PROJECTS_WATERMARK.color,
+              opacity: PROJECTS_WATERMARK.opacity,
               fontSize: PROJECTS_WATERMARK.fontSize,
               writingMode: "vertical-rl",
               transform: "rotate(180deg)",

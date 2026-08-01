@@ -1,142 +1,213 @@
-import { ArrowRight } from "lucide-react";
+"use client";
 
-const plans = [
-  {
-    price: "$3,500",
-    subtitle: "MVP Product Design & Development",
-    title: "Launch Ready",
-    features: [
-      "UX/UI design for a single product or core feature",
-      "Web or mobile app development",
-      "Clean, scalable, and maintainable code",
-      "Essential user flows and usability focus",
-      "Basic testing and quality checks",
-      "Deployment-ready build with source files",
-      "Clear delivery timeline and milestone tracking",
-    ],
-    highlight: false,
-  },
-  {
-    price: "$5,000",
-    subtitle: "Full Product Design with Research & Development",
-    title: "Build & Validate",
-    features: [
-      "User research and product discovery sessions",
-      "End-to-end UX/UI design for the full product",
-      "Design system for consistency and scale",
-      "Web or mobile app development",
-      "Usability testing and design iteration",
-      "Performance and security best practices",
-      "Post-launch support and proper handover",
-    ],
-    highlight: true,
-  },
-  {
-    price: "$7,000",
-    subtitle: "Advanced Product Design & Development",
-    title: "Scale & Optimize",
-    features: [
-      "User research, audit, and competitor analysis",
-      "Strategic roadmap and feature prioritization",
-      "UX/UI design with system-level thinking",
-      "Full development with scalable architecture",
-      "Dedicated design and engineering team",
-      "Continuous monitoring and optimization",
-      "Priority support, maintenance",
-    ],
-    highlight: false,
-  },
-];
+import Image from "next/image";
+import { useState } from "react";
+import homeContent from "@/data/home-content.json";
+
+const {
+  badge,
+  headingAccent,
+  headingTitle,
+  description,
+  popularLabel,
+  featuresHeading,
+  cancelLabel,
+  noExtraFee,
+  billing,
+  plans,
+} = homeContent.pricing;
+
+type Billing = "monthly" | "quarterly";
+
+function CheckIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="17"
+      height="13"
+      viewBox="0 0 17 13"
+      fill="none"
+      className="home-pricing-check"
+      aria-hidden
+    >
+      <path
+        d="M5.7 12.025L0 6.325L1.425 4.9L5.7 9.175L14.875 0L16.3 1.425L5.7 12.025Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function CustomPriceIcon() {
+  return (
+    <svg
+      width="56"
+      height="40"
+      viewBox="0 0 56 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      className="home-pricing-custom-icon"
+    >
+      <rect x="2" y="14" width="12" height="24" rx="6" stroke="#111" strokeWidth="2" />
+      <rect x="22" y="2" width="12" height="36" rx="6" stroke="#111" strokeWidth="2" />
+      <circle cx="28" cy="10" r="3.5" fill="#16c784" />
+      <rect x="42" y="10" width="12" height="28" rx="6" stroke="#111" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function InfoIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+      <circle cx="7" cy="7" r="6.25" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M7 6.2V10"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <circle cx="7" cy="4.2" r="0.7" fill="currentColor" />
+    </svg>
+  );
+}
 
 export default function PricingSection() {
-  return (
-    <section className="pricing-section bg-[#FFFDF6]">
-      <div className="mx-auto max-w-[1600px] px-4 sm:px-6">
+  const [period, setPeriod] = useState<Billing>("quarterly");
 
-        <div className="text-center mb-12 sm:mb-16 md:mb-20">
-          <span className="inline-block rounded-full border border-[#38F8AB] px-4 sm:px-5 py-2 text-sm font-medium text-[#15D286]">
-            Pricing Plans
+  return (
+    <section className="home-pricing-section">
+      <div className="home-pricing-shell">
+        <div className="home-pricing-header">
+          <span className="home-pricing-badge">
+            <span className="section-badge-text">{badge}</span>
           </span>
 
           <h2 className="section-heading">
             <span className="section-heading-split-accent section-accent-text">
-              Fair Pricing for
+              {headingAccent}
             </span>
-            <span className="section-heading-split-title">
-              Your Product
-            </span>
+            <span className="section-heading-split-title">{headingTitle}</span>
           </h2>
 
-          <p className="mt-4 sm:mt-6 max-w-2xl mx-auto text-sm sm:text-base text-gray-600 px-2">
-            Our packages are designed to fit your product’s stage and ambition.
-            Flexible, transparent, and customizable based on what your business truly needs.
-          </p>
+          <p className="home-pricing-desc">{description}</p>
         </div>
 
-        <div className="grid grid-cols-1 items-stretch gap-8 sm:gap-12 lg:grid-cols-3 lg:gap-10 xl:gap-12 pt-8 sm:pt-12 lg:pt-16">
+        <div className="home-pricing-tabs" role="tablist" aria-label="Billing period">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={period === "monthly"}
+            className={`home-pricing-tab${period === "monthly" ? " is-active" : ""}`}
+            onClick={() => setPeriod("monthly")}
+          >
+            {billing.monthly}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={period === "quarterly"}
+            className={`home-pricing-tab${period === "quarterly" ? " is-active" : ""}`}
+            onClick={() => setPeriod("quarterly")}
+          >
+            {billing.quarterly}
+          </button>
+        </div>
 
-          {plans.map((plan, i) => (
-            <div
-              key={i}
-              className={`pricing-card relative mx-auto w-full max-w-[480px] p-[2px] transition-all duration-300${
-                plan.highlight ? " pricing-card-highlight" : ""
-              }`}
-            >
-              <div className="pricing-card-inner h-full">
+        <p className="home-pricing-fee-note">
+          <span>{noExtraFee}</span>
+          <InfoIcon />
+        </p>
 
-                {plan.highlight && (
-                  <div className="absolute top-3 left-1/2 z-10 w-[90%] -translate-x-1/2 rounded-[16px] bg-[#38F8AB] px-4 py-1 text-center text-base font-semibold text-[#07422A] sm:top-4 sm:rounded-[16px] sm:px-8 sm:text-xl">
-                    Popular
+        <div className="home-pricing-grid">
+          {plans.map((plan) => {
+            const price = plan.price[period];
+            const isPopular = plan.highlight;
+
+            return (
+              <div
+                key={plan.id}
+                className={`home-pricing-plan${isPopular ? " is-popular" : ""}`}
+              >
+                {isPopular ? (
+                  <div className="home-pricing-popular-badge">
+                    <Image
+                      src="/pricing/popular-tab.png"
+                      alt=""
+                      width={174}
+                      height={34}
+                      className="home-pricing-popular-badge-img"
+                      unoptimized
+                    />
+                    <span className="home-pricing-popular-badge-text">{popularLabel}</span>
                   </div>
-                )}
+                ) : null}
 
-                <h3
-                  className={`text-center font-montserrat text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold leading-[120%] text-[#111] ${
-                    plan.highlight ? "mt-10 sm:mt-12" : "mt-2"
+                <article
+                  className={`home-pricing-card${isPopular ? " is-popular" : ""}`}
+                >
+                <div
+                  className={`home-pricing-avail is-pill is-${plan.availabilityTone}${
+                    plan.availabilityMarquee ? " is-marquee" : ""
                   }`}
                 >
-                  {plan.title}
-                </h3>
-
-                <div className="text-center">
-                  <span className="pricing-card-price text-3xl font-bold sm:text-4xl">
-                    {plan.price}
+                  <span
+                    className={`home-pricing-dot${
+                      plan.availabilityTone === "red" ? " is-red" : ""
+                    }`}
+                    aria-hidden
+                  >
+                    <span className="home-pricing-dot-pulse" />
                   </span>
+
+                  {plan.availabilityMarquee ? (
+                    <div className="home-pricing-marquee" aria-label={plan.availability}>
+                      <div className="home-pricing-marquee-track">
+                        {Array.from({ length: 8 }).map((_, i) => (
+                          <span key={i}>{plan.availability}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <span className="home-pricing-avail-text">{plan.availability}</span>
+                  )}
                 </div>
 
-                <p className="font-montserrat text-base font-semibold text-[#000000] sm:text-lg lg:text-[20px]">
-                  {plan.subtitle}
-                </p>
+                <h3 className="home-pricing-title">{plan.title}</h3>
+                <p className="home-pricing-card-desc">{plan.description}</p>
 
-                <hr className="border-gray-200" />
+                <div className="home-pricing-amount">
+                  {plan.customPrice ? (
+                    <CustomPriceIcon />
+                  ) : (
+                    <>
+                      <span className="home-pricing-price">{price}</span>
+                      <span className="home-pricing-duration">/month</span>
+                    </>
+                  )}
+                </div>
 
-                <div className="mb-2 flex-1">
-                  <p className="mb-4 font-semibold text-[#111]">What you get:</p>
+                <p className="home-pricing-cancel">{cancelLabel}</p>
 
-                  <ul className="space-y-3 text-sm text-gray-700">
-                    {plan.features.map((f, idx) => (
-                      <li key={idx} className="flex gap-3">
-                        <span className="text-[#15D286]">✓</span>
-                        {f}
+                <a href="#book-a-call" className="home-pricing-cta">
+                  {plan.cta}
+                </a>
+
+                <div className="home-pricing-features">
+                  <p className="home-pricing-features-title">{featuresHeading}</p>
+                  <ul className="home-pricing-features-list">
+                    {plan.features.map((feature) => (
+                      <li key={feature}>
+                        <CheckIcon />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-
-                <button
-                  className="mt-auto flex w-full items-center justify-center gap-[10px] rounded-[20px] px-6 py-4 text-sm font-semibold text-[#07422A] transition hover:opacity-90 sm:px-8 sm:py-5 sm:text-base"
-                  style={{
-                    background: "linear-gradient(90deg, #38F8AB 0%, #FEED35 100%)",
-                  }}
-                >
-                  Book a Call
-                  <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
-                </button>
-
+                </article>
               </div>
-            </div>
-          ))}
-
+            );
+          })}
         </div>
       </div>
     </section>

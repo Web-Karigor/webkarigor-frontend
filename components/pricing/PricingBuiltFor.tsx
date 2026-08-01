@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
-import { COMPARISON_ITEMS } from "@/lib/pricing-data";
+import { BUILT_FOR_SECTION, COMPARISON_ITEMS } from "@/lib/pricing-data";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.2 } as const;
@@ -29,6 +29,8 @@ function CompareCheck({ active }: { active: boolean }) {
 }
 
 export default function PricingBuiltFor() {
+  const { title, cta, columns } = BUILT_FOR_SECTION;
+
   return (
     <section className="bg-[#F8F6EF] py-[clamp(64px,8vw,100px)]">
       <div
@@ -45,13 +47,13 @@ export default function PricingBuiltFor() {
         >
           <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
             <h2 className="m-0 max-w-[520px] font-montserrat text-[clamp(28px,3.4vw,44px)] font-bold leading-[1.15] tracking-[-0.03em] text-[#0A0A0A]">
-              Built for Growing Products
+              {title}
             </h2>
             <Link
-              href="#contact"
+              href={cta.href}
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-black px-6 py-3.5 font-montserrat text-[15px] font-semibold text-white transition hover:opacity-90"
             >
-              Book a Call
+              {cta.label}
               <ArrowRight className="h-4 w-4" strokeWidth={2.5} aria-hidden />
             </Link>
           </div>
@@ -69,7 +71,7 @@ export default function PricingBuiltFor() {
                 {/* Webkarigor — all active */}
                 <div>
                   <h3 className="m-0 mb-6 font-montserrat text-[20px] font-bold text-[#0A0A0A] md:mb-8 md:text-[22px]">
-                    Webkarigor
+                    {columns.ours}
                   </h3>
                   <ul className="m-0 flex list-none flex-col gap-4 p-0 md:gap-5">
                     {COMPARISON_ITEMS.map((item) => (
@@ -87,7 +89,7 @@ export default function PricingBuiltFor() {
                 {/* Other Agencies — mixed active / faded */}
                 <div>
                   <h3 className="m-0 mb-6 font-montserrat text-[20px] font-bold text-[#0A0A0A] md:mb-8 md:text-[22px]">
-                    Other Agencies
+                    {columns.others}
                   </h3>
                   <ul className="m-0 flex list-none flex-col gap-4 p-0 md:gap-5">
                     {COMPARISON_ITEMS.map((item) => (

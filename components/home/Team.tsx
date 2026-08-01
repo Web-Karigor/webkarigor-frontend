@@ -4,34 +4,40 @@ import "./Team.css";
 
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { gsap } from "@/lib/gsap";
-import { TEAM_IMAGES } from "@/lib/home-assets";
+import homeContent from "@/data/home-content.json";
 
-const LOOP_COPIES = 3;
-const SLIDE_DURATION = 32;
+const {
+  mobileTitle,
+  mobileSubtitle,
+  desktopExpertLines,
+  desktopResultLines,
+  members: TEAM_MEMBERS,
+} = homeContent.team;
+
+type TeamMember = (typeof TEAM_MEMBERS)[number];
 
 type TeamCardSizes = {
   width: number;
-  hoverWidth: number;
   height: number;
   gap: number;
   radius: number;
 };
 
+/** Card size = Figma 433 × 448. */
 function getTeamCardSizes(viewportWidth: number): TeamCardSizes {
-  if (viewportWidth < 375) {
-    return { width: 180, hoverWidth: 240, height: 300, gap: 12, radius: 20 };
-  }
+  const width = 433;
+  const height = 448;
+
   if (viewportWidth < 640) {
-    return { width: 200, hoverWidth: 280, height: 320, gap: 14, radius: 22 };
+    return { width, height, gap: 14, radius: 22 };
   }
   if (viewportWidth < 1024) {
-    return { width: 220, hoverWidth: 320, height: 360, gap: 16, radius: 24 };
+    return { width, height, gap: 16, radius: 24 };
   }
   if (viewportWidth < 1280) {
-    return { width: 240, hoverWidth: 360, height: 390, gap: 20, radius: 28 };
+    return { width, height, gap: 20, radius: 28 };
   }
-  return { width: 279, hoverWidth: 421, height: 439, gap: 24, radius: 32 };
+  return { width, height, gap: 24, radius: 32 };
 }
 
 function useTeamCardSizes() {
@@ -50,43 +56,40 @@ function useTeamCardSizes() {
 }
 
 function TeamCard({
-  src,
+  member,
   isHovered,
   onEnter,
   onLeave,
   sizes,
 }: {
-  src: string;
+  member: TeamMember;
   isHovered: boolean;
   onEnter: () => void;
   onLeave: () => void;
   sizes: TeamCardSizes;
 }) {
   return (
-    <motion.div
+    <div
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onFocus={onEnter}
       onBlur={onLeave}
-      animate={{
-        width: isHovered ? sizes.hoverWidth : sizes.width,
+      tabIndex={0}
+      className="relative flex-shrink-0 overflow-hidden border border-[#EFEFEF] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06)] outline-none"
+      style={{
+        width: sizes.width,
+        height: sizes.height,
+        borderRadius: sizes.radius,
       }}
-      transition={{
-        type: "spring",
-        stiffness: 260,
-        damping: 28,
-        mass: 0.85,
-      }}
-      className="relative flex-shrink-0 overflow-hidden border border-[#EFEFEF] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
-      style={{ height: sizes.height, borderRadius: sizes.radius }}
-      aria-label="Team member"
+      aria-label={`${member.name}, ${member.designation}`}
     >
       <img
-        src={src}
+        src={member.src}
         alt=""
         className="h-full w-full object-cover"
         draggable={false}
       />
+
       <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-0 ring-2 ring-[#3B82F6]"
@@ -95,116 +98,123 @@ function TeamCard({
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       />
-    </motion.div>
-  );
-}
 
-function InfiniteSlideRow({
-  images,
-  direction,
-  sizes,
-}: {
-  images: readonly string[];
-  direction: "left" | "right";
-  sizes: TeamCardSizes;
-}) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const setRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const hoveredRef = useRef(false);
-  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
-
-  const pauseSlide = useCallback(() => {
-    timelineRef.current?.pause();
-  }, []);
-
-  const resumeSlide = useCallback(() => {
-    timelineRef.current?.resume();
-  }, []);
-
-  const handleEnter = useCallback(
-    (key: string) => {
-      hoveredRef.current = true;
-      setHoveredKey(key);
-      pauseSlide();
-    },
-    [pauseSlide],
-  );
-
-  const handleLeave = useCallback(() => {
-    hoveredRef.current = false;
-    setHoveredKey(null);
-    resumeSlide();
-  }, [resumeSlide]);
-
-  useLayoutEffect(() => {
-    const track = trackRef.current;
-    const set = setRef.current;
-    if (!track || !set) return;
-
-    const buildTimeline = () => {
-      timelineRef.current?.kill();
-
-      const setWidth = set.offsetWidth + sizes.gap;
-      gsap.set(track, { x: direction === "left" ? -setWidth : 0 });
-
-      const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
-      tl.to(track, {
-        x: direction === "right" ? -setWidth : 0,
-        duration: SLIDE_DURATION,
-      });
-
-      timelineRef.current = tl;
-    };
-
-    buildTimeline();
-
-    const observer = new ResizeObserver(() => {
-      if (hoveredRef.current) return;
-      buildTimeline();
-    });
-
-    observer.observe(set);
-
-    return () => {
-      observer.disconnect();
-      timelineRef.current?.kill();
-      timelineRef.current = null;
-    };
-  }, [direction, sizes.gap]);
-
-  return (
-    <div className="min-w-0 flex-1 overflow-hidden">
-      <div ref={trackRef} className="flex w-max will-change-transform">
-        {Array.from({ length: LOOP_COPIES }).map((_, copyIndex) => (
-          <div
-            key={copyIndex}
-            ref={copyIndex === 0 ? setRef : undefined}
-            className="flex flex-shrink-0"
-            style={{ gap: sizes.gap, marginRight: sizes.gap }}
-          >
-            {images.map((src, imageIndex) => {
-              const cardKey = `${copyIndex}-${imageIndex}-${src}`;
-              return (
-                <TeamCard
-                  key={cardKey}
-                  src={src}
-                  isHovered={hoveredKey === cardKey}
-                  onEnter={() => handleEnter(cardKey)}
-                  onLeave={handleLeave}
-                  sizes={sizes}
-                />
-              );
-            })}
-          </div>
-        ))}
+      {/* Name + designation — absolute bottom overlay */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] overflow-hidden px-4 pb-4 pt-12 sm:px-5 sm:pb-5">
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent"
+          initial={false}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+        />
+        <motion.p
+          className="relative m-0 font-montserrat text-[clamp(0.9375rem,1.4vw,1.125rem)] font-semibold leading-tight text-white"
+          initial={false}
+          animate={{
+            opacity: isHovered ? 1 : 0,
+            x: isHovered ? 0 : -32,
+          }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {member.name}
+        </motion.p>
+        <motion.p
+          className="relative m-0 mt-0.5 font-montserrat text-[clamp(0.75rem,1.1vw,0.875rem)] font-medium leading-tight text-white/85"
+          initial={false}
+          animate={{
+            opacity: isHovered ? 1 : 0,
+            x: isHovered ? 0 : 32,
+          }}
+          transition={{
+            duration: 0.5,
+            ease: [0.22, 1, 0.36, 1],
+            delay: isHovered ? 0.06 : 0,
+          }}
+        >
+          {member.designation}
+        </motion.p>
       </div>
     </div>
   );
 }
 
-const upperImages = TEAM_IMAGES;
-const lowerImages = [...TEAM_IMAGES].reverse();
+function ManualScrollRow({
+  members,
+  sizes,
+}: {
+  members: readonly TeamMember[];
+  sizes: TeamCardSizes;
+}) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const onPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    dragRef.current = {
+      active: true,
+      startX: e.clientX,
+      scrollLeft: el.scrollLeft,
+    };
+    setIsDragging(true);
+    el.setPointerCapture(e.pointerId);
+  }, []);
+
+  const onPointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current;
+    if (!el || !dragRef.current.active) return;
+    const dx = e.clientX - dragRef.current.startX;
+    el.scrollLeft = dragRef.current.scrollLeft - dx;
+  }, []);
+
+  const endDrag = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current;
+    dragRef.current.active = false;
+    setIsDragging(false);
+    if (el?.hasPointerCapture(e.pointerId)) {
+      el.releasePointerCapture(e.pointerId);
+    }
+  }, []);
+
+  return (
+    <div
+      ref={scrollerRef}
+      className="team-manual-scroll min-w-0 flex-1 cursor-grab overflow-x-auto overflow-y-hidden active:cursor-grabbing"
+      style={{ touchAction: "pan-x" }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+    >
+      <div
+        className="flex w-max"
+        style={{
+          gap: sizes.gap,
+          pointerEvents: isDragging ? "none" : "auto",
+        }}
+      >
+        {members.map((member, imageIndex) => {
+          const cardKey = `${imageIndex}-${member.src}`;
+          return (
+            <TeamCard
+              key={cardKey}
+              member={member}
+              isHovered={hoveredKey === cardKey}
+              onEnter={() => setHoveredKey(cardKey)}
+              onLeave={() => setHoveredKey(null)}
+              sizes={sizes}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const upperMembers = TEAM_MEMBERS;
+const lowerMembers = [...TEAM_MEMBERS].reverse();
 
 export default function Team() {
   const sizes = useTeamCardSizes();
@@ -213,12 +223,16 @@ export default function Team() {
     <section className="overflow-hidden bg-[#FEFCF6] py-12 sm:py-16 md:py-24">
       <div className="team-section-inner mx-auto px-4 sm:px-6">
         <div className="mb-8 sm:mb-10 text-center lg:hidden">
-          <h2 className="team-heading-mobile font-black text-[#141414]">Expert Team</h2>
-          <p className="team-heading-mobile font-extrabold text-[#A0A4AA]">Big Result</p>
+          <h2 className="team-heading-mobile font-black text-[#141414]">
+            {mobileTitle}
+          </h2>
+          <p className="team-heading-mobile font-extrabold text-[#A0A4AA]">
+            {mobileSubtitle}
+          </p>
         </div>
 
-        <div className="mb-8 sm:mb-12 flex items-center justify-between gap-4 sm:gap-6 lg:gap-10">
-          <InfiniteSlideRow images={upperImages} direction="left" sizes={sizes} />
+        <div className="mb-8 flex items-center justify-between gap-4 sm:mb-12 sm:gap-6 lg:gap-10">
+          <ManualScrollRow members={upperMembers} sizes={sizes} />
 
           <motion.div
             initial={{ opacity: 0, x: 60 }}
@@ -227,9 +241,9 @@ export default function Team() {
             viewport={{ once: true }}
             className="hidden flex-shrink-0 lg:block"
           >
-            <div className="space-y-12 xl:space-y-20 text-right leading-[0.9]">
-              <div className="team-heading-desktop font-black text-[#141414]">Expert</div>
-              <div className="team-heading-desktop font-black text-[#141414]">Team</div>
+            <div className="team-heading-desktop-expert text-right">
+              <div>{desktopExpertLines[0]}</div>
+              <div>{desktopExpertLines[1]}</div>
             </div>
           </motion.div>
         </div>
@@ -242,15 +256,13 @@ export default function Team() {
             viewport={{ once: true }}
             className="hidden flex-shrink-0 lg:block"
           >
-            <div className="space-y-12 xl:space-y-20 leading-[0.9]">
-              <div className="team-heading-desktop font-extrabold text-[#A0A4AA]">Big</div>
-              <div className="team-heading-desktop font-extrabold text-[#A0A4AA]">
-                Result
-              </div>
+            <div className="team-heading-desktop-result">
+              <div>{desktopResultLines[0]}</div>
+              <div>{desktopResultLines[1]}</div>
             </div>
           </motion.div>
 
-          <InfiniteSlideRow images={lowerImages} direction="right" sizes={sizes} />
+          <ManualScrollRow members={lowerMembers} sizes={sizes} />
         </div>
       </div>
     </section>

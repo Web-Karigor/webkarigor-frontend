@@ -14,65 +14,23 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import homeContent from "@/data/home-content.json";
 
 /* -------------------------------------------------------------------------- */
 /* Data                                                                       */
 /* -------------------------------------------------------------------------- */
 
-const services = [
-  {
-    title: "Web Application Development",
-    highlight: "And Design",
-    subtitle: "Fast, scalable, and secure solutions for modern businesses.",
-    desc:
-      "From concept to deployment, we develop custom web applications engineered for performance and reliability. Our team transforms complex workflows into smooth digital operations, ensuring your platform grows as your business evolves.",
-    link: "/services/ui-ux",
-    images: [
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/679a9c4888217669122eebaf_3d41798d228903d42862a148dd56aeb1_Project%20Cards%20%2810%29%20%281%29.avif",
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78087a5b72120cc3e5db_d1a5f14e5e5fc69f2dbac575600f06f4_Project%20Cards-6.avif",
-    ],
-  },
-  {
-    title: "Mobile App",
-    highlight: "Development",
-    subtitle: "Seamless mobile experiences that connect with people.",
-    desc: "",
-    link: "/services/web-design",
-    images: [
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78084947770a14f1eb7c_d1cec41f22346c1c941376236623384b_Project%20Cards.avif",
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78089c9a93e810fbfa6e_Project%20Cards-1.avif",
-    ],
-  },
-  {
-    title: "Branding & Digital",
-    highlight: "Identity",
-    subtitle: "Meaningful brands built to inspire confidence.",
-    desc:
-      "Logo Design, Brand Identity, Visual Strategy, Social Media Branding.",
-    link: "/services/logo-branding",
-    images: [
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac7809638da68108df9847_Project%20Cards-4.avif",
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78089a0d6cfed1675211_Project%20Cards-5.avif",
-    ],
-  },
-  {
-    title: "Product Strategy & ",
-    highlight: "Consultation",
-    subtitle: "Expert guidance to turn ideas into scalable products.",
-    desc:
-      "Webflow, Framer Prototypes, CMS Integration, Rapid Landing Pages.",
-    link: "/services/framer-design",
-    images: [
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac780912dabe81710b65ed_8e70a34a4056237eca17e1209cecdebe_Project%20Cards-2.avif",
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78088c2757d4cdf75977_Project%20Cards-3.avif",
-    ],
-  },
-] as const;
+const {
+  badge: servicesBadge,
+  headingAccent: servicesHeadingAccent,
+  headingTitle: servicesHeadingTitle,
+  description: servicesDescription,
+  seeMoreLabel,
+  ctaArrow: CTA_ARROW,
+  items: services,
+} = homeContent.services;
 
 type Service = (typeof services)[number];
-
-const CTA_ARROW =
-  "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67326d59201cc3b185432b90_CTA%20Arrow.svg";
 
 /**
  * Design Monks–style inertia: soft spring lag (Lenis-like),
@@ -129,20 +87,18 @@ const ServicesHeader = memo(function ServicesHeader() {
   return (
     <>
       <span className="inline-block rounded-full border border-[#38F8AB] px-5 py-2 text-sm font-medium text-[#15D286]">
-        Services
+        {servicesBadge}
       </span>
 
       <h2 className="section-heading">
         <span className="section-heading-split-accent section-accent-text">
-          We Work to
+          {servicesHeadingAccent}
         </span>
-        <span className="section-heading-split-title">Build Brands</span>
+        <span className="section-heading-split-title">{servicesHeadingTitle}</span>
       </h2>
 
       <p className="mx-auto mt-3 max-w-2xl px-2 text-sm text-gray-600 sm:mt-4 sm:text-base">
-        From idea to execution, we help build brands through modern software,
-        intuitive design, and strategic product thinking that drives real
-        business results.
+        {servicesDescription}
       </p>
     </>
   );
@@ -248,7 +204,7 @@ const ServiceActiveText = memo(function ServiceActiveText({
         href={service.link}
         className="group mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#141414] transition-colors duration-300 hover:text-[#62F7B3] lg:mt-8 lg:gap-3 lg:text-[15px]"
       >
-        <span>See More</span>
+        <span>{seeMoreLabel}</span>
         <img
           src={CTA_ARROW}
           alt=""

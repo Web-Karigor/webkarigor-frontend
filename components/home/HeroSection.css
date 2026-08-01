@@ -43,15 +43,109 @@
   border-radius: 4px;
 }
 
+/* Figma: Say hello CTA — path79 arrow + label + avatar/phone, gap 10 */
 .hero-hello {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 4px 2px;
   font-family: var(--font-montserrat);
   font-weight: 600;
-  font-size: clamp(0.75rem, 2vw, 1.5rem);
-  display: flex;
-  flex-wrap: wrap;
+  font-size: clamp(0.875rem, 1.6vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #1f1e1c;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.hero-hello:hover {
+  transform: translateY(-1px);
+}
+
+.hero-hello:focus-visible {
+  outline: 2px solid #38f8ab;
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+.hero-hello-arrow {
+  width: clamp(22px, 2.2vw, 28px);
+  height: auto;
+  flex-shrink: 0;
+  display: block;
+  object-fit: contain;
+}
+
+.hero-hello-label {
+  white-space: nowrap;
+  color: #1f1e1c;
+}
+
+.hero-hello-icons {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: clamp(56px, 5.8vw, 68px);
+  height: clamp(34px, 3.6vw, 42px);
+}
+
+.hero-hello-avatar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 0;
+  width: clamp(30px, 3.2vw, 38px);
+  height: clamp(30px, 3.2vw, 38px);
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  object-fit: cover;
+  display: block;
+  border: 1.5px solid #fff;
+}
+
+.hero-hello-phone {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  display: inline-flex;
+  width: clamp(34px, 3.6vw, 42px);
+  height: clamp(34px, 3.6vw, 42px);
   align-items: center;
-  gap: clamp(6px, 1.5vw, 10px);
   justify-content: center;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  border: 2px solid #ffffff;
+  background: linear-gradient(145deg, #2ee8a3 0%, #6ef08c 48%, #b6f05c 100%);
+  background-size: 180% 180%;
+  box-shadow: 0 2px 10px rgba(46, 232, 163, 0.4);
+  animation: hero-hello-blink 1.4s ease-in-out infinite;
+}
+
+.hero-hello-phone-icon {
+  width: 48%;
+  height: 48%;
+  display: block;
+}
+
+@keyframes hero-hello-blink {
+  0%,
+  100% {
+    background-position: 0% 40%;
+    filter: brightness(1);
+    box-shadow: 0 2px 10px rgba(46, 232, 163, 0.35);
+  }
+  50% {
+    background-position: 100% 60%;
+    filter: brightness(1.3);
+    box-shadow: 0 0 0 6px rgba(46, 232, 163, 0.22),
+      0 4px 18px rgba(182, 240, 92, 0.5);
+  }
 }
 
 .hero-projects-text {

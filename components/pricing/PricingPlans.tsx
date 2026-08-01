@@ -7,11 +7,14 @@ import {
   formatPrice,
   planPrice,
   PRICING_PLANS,
+  PRICING_PLANS_SECTION,
   type PricingBilling,
 } from "@/lib/pricing-data";
 
 export default function PricingPlans() {
   const [billing, setBilling] = useState<PricingBilling>("yearly");
+  const { saveBadge, includedLabel, popularLabel, whatYouGetLabel, cta } =
+    PRICING_PLANS_SECTION;
 
   return (
     <section className="pricing-section bg-[#F8F6EF] !pt-0">
@@ -39,11 +42,11 @@ export default function PricingPlans() {
               })}
             </div>
             <span className="inline-flex items-center rounded-full bg-black px-3 py-1.5 font-montserrat text-[11px] font-bold text-white sm:px-3.5 sm:text-[12px]">
-              Save 25%
+              {saveBadge}
             </span>
           </div>
           <p className="m-0 font-montserrat text-[14px] font-medium text-[#9CA3AF]">
-            Everything Included
+            {includedLabel}
           </p>
         </div>
 
@@ -70,7 +73,7 @@ export default function PricingPlans() {
                 <div className="pricing-card-inner relative h-full bg-[#FFFDF6]">
                   {highlight && (
                     <div className="absolute top-3 left-1/2 w-[90%] -translate-x-1/2 rounded-[12px] bg-[#38F8AB] px-4 py-1 text-center text-base font-semibold text-[#07422A] shadow-md sm:rounded-[16px] sm:px-8 sm:text-xl">
-                      Popular
+                      {popularLabel}
                     </div>
                   )}
 
@@ -89,7 +92,7 @@ export default function PricingPlans() {
                   <hr className="mb-6 border-gray-200" />
 
                   <div className="mb-10">
-                    <p className="mb-4 font-semibold text-[#111]">What you get:</p>
+                    <p className="mb-4 font-semibold text-[#111]">{whatYouGetLabel}</p>
 
                     <ul className="space-y-3 text-sm text-gray-700">
                       {plan.features.map((feature) => (
@@ -102,13 +105,13 @@ export default function PricingPlans() {
                   </div>
 
                   <Link
-                    href="#contact"
+                    href={cta.href}
                     className="flex w-full items-center justify-center gap-[10px] rounded-[16px] px-6 py-4 text-sm font-semibold text-[#07422A] transition hover:opacity-90 sm:rounded-[20px] sm:px-8 sm:py-5 sm:text-base"
                     style={{
                       background: "linear-gradient(to right, #38F8AB, #FEED35)",
                     }}
                   >
-                    Book a Call
+                    {cta.label}
                     <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
                   </Link>
                 </div>

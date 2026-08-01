@@ -253,11 +253,15 @@
   align-items: flex-end;
   justify-content: center;
   width: 100%;
+  height: auto;
+  margin: 0;
   box-sizing: border-box;
-  padding: 0 clamp(18px, 5vw, 40px) 0;
-  overflow: hidden;
+  padding: 0 clamp(18px, 5vw, 40px);
+  overflow: visible;
   pointer-events: none;
   user-select: none;
+  /* Sit flush on the card’s bottom edge (slight clip is intentional). */
+  transform: translateY(5%);
 }
 
 .footer-brand {
@@ -268,12 +272,11 @@
   font-family: var(--font-montserrat);
   font-size: clamp(1.5rem, 14cqi, 14.5rem);
   font-weight: 800;
-  line-height: 0.82;
+  line-height: 0.78;
   letter-spacing: -0.045em;
   text-align: center;
   color: #111;
   white-space: nowrap;
-  transform: translateY(0);
   transform-origin: center bottom;
   will-change: transform;
 }

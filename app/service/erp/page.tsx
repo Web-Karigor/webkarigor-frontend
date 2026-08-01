@@ -10,12 +10,9 @@ import ErpTeam from "@/components/services/erp/ErpTeam";
 import ServiceContact from "@/components/services/ServiceContact";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
+import { ERP_METADATA } from "@/lib/erp-data";
 
-export const metadata: Metadata = {
-  title: "ERP Services — Webkarigor",
-  description:
-    "Custom ERP solutions for inventory, finance, HR, and operations — built by Webkarigor to streamline your business.",
-};
+export const metadata: Metadata = ERP_METADATA;
 
 export default function ErpServicePage() {
   return (

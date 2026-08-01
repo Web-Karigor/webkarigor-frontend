@@ -3,7 +3,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-import type { ProjectDetail } from "@/lib/project-details-data";
+import {
+  PROJECT_DETAILS_UI,
+  type ProjectDetail,
+} from "@/lib/project-details-data";
 import { PD } from "@/lib/project-details-layout";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -34,7 +37,7 @@ export default function ProjectDetailsTestimonial({
             }}
           >
             <p className="m-0 font-montserrat text-[12px] font-semibold tracking-[0.16em] uppercase sm:text-[13px]">
-              Testimonial
+              {PROJECT_DETAILS_UI.testimonial}
             </p>
             <p className="mt-5 m-0 max-w-[980px] font-montserrat text-[clamp(16px,4vw,28px)] font-medium leading-[155%] tracking-[-0.01em] sm:mt-6">
               {testimonial.quote}

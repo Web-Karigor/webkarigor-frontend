@@ -3,11 +3,19 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
+import servicesContent from "@/data/services-content.json";
 import { TESTIMONIALS } from "@/lib/services-data";
 
 const AUTO_MS = 4200;
-const AVATARS = ["/sm1.png", "/sm2.jpg", "/sm3.jpg", "/sm4.png"] as const;
 const GAP_PX = 16;
+
+const {
+  eyebrow,
+  title,
+  description,
+  summary,
+  avatars: AVATARS,
+} = servicesContent.testimonials;
 
 function Stars({ count, size = 18 }: { count: number; size?: number }) {
   return (
@@ -68,30 +76,29 @@ export default function ServiceTestimonials() {
       <div className="mx-auto w-full max-w-[1920px] px-[clamp(16px,6.25vw,120px)]">
         <div className="mx-auto mb-8 max-w-[760px] text-center lg:mb-10">
           <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
-            Client Success Stories
+            {eyebrow}
           </p>
           <h2 className="mt-3 font-montserrat text-[clamp(28px,3.2vw,44px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-            Trusted by Founders and Growing Businesses
+            {title}
           </h2>
           <p className="mx-auto mt-3 max-w-[640px] font-montserrat text-[clamp(13px,1vw,16px)] font-medium leading-[1.5] text-[#98a2b3]">
-            See what clients have to say about working with Webkarigor and how
-            thoughtful design helped them achieve better results.
+            {description}
           </p>
         </div>
 
         <div className="flex flex-col items-stretch gap-4 lg:flex-row lg:gap-[10px]">
           <article className="flex w-full shrink-0 flex-col items-center justify-center rounded-[24px] bg-[#0a7d5f] px-8 py-10 text-center text-white lg:w-[min(360px,32%)] lg:min-h-[360px]">
             <span className="font-montserrat text-[clamp(48px,5vw,72px)] font-bold leading-none">
-              4.9
+              {summary.rating}
             </span>
             <div className="mt-3">
               <Stars count={5} size={22} />
             </div>
             <p className="mt-3 font-montserrat text-[14px] font-medium text-white/90">
-              (100+ Reviews)
+              {summary.reviewsLabel}
             </p>
             <p className="mt-5 max-w-[230px] font-montserrat text-[clamp(16px,1.3vw,20px)] font-semibold leading-[1.35]">
-              Customer experience that speak for them selves
+              {summary.headline}
             </p>
 
             <div className="mt-8 flex items-center justify-center">

@@ -2,39 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import homeContent from "@/data/home-content.json";
 
-const faqs = [
-  {
-    question: "Who do you work with and what projects do you take on?",
-    answer:
-      "We partner with startups, established companies, and agencies of all sizes. Our team takes on digital product design and development projects that are mission-driven and innovative.",
-  },
-  {
-    question: "How do you take a product from idea to launch?",
-    answer:
-      "We start with understanding your vision, users, and markets. We ideate, wireframe, prototype, design, and develop iteratively, collaborating closely with you through each phase and ensuring each milestone is met before launch.",
-  },
-  {
-    question: "How do you approach UX, design, and technology decisions?",
-    answer:
-      "All decisions are driven by your business goals, user needs, and best-in-class modern technology. We combine research-driven UX, elegant UI, and practical engineering for scalable solutions.",
-  },
-  {
-    question: "How involved will we be during the project?",
-    answer:
-      "You stay as involved as you want throughout the project. We encourage your feedback in each phase, use frequent check-ins, and provide clear, collaborative communication. You’re never left in the dark.",
-  },
-  {
-    question: "Do you provide ongoing support after launch?",
-    answer:
-      "Yes! We offer continuous maintenance, support, and opportunities for evolution and improvement after your product launches. We’re your partner for the long run.",
-  },
-  {
-    question: "How do pricing and timelines work?",
-    answer:
-      "We offer flexible pricing models (fixed, retainer, or hourly) depending on project needs. Timelines are validated during our initial call and adjusted collaboratively. Transparency is key.",
-  },
-];
+const { headingAccent, headingTitle, ctaText, ctaLabel, ctaHref, items: faqs } =
+  homeContent.faq;
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -49,8 +20,8 @@ export default function FAQ() {
         {/* Header — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
         <div className="mb-12 text-center md:mb-16">
           <h2 className="m-0 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
-            <span className="italic text-[#39B770]">Questions</span>
-            <span className="ml-1 not-italic">Answered?</span>
+            <span className="italic text-[#39B770]">{headingAccent}</span>
+            <span className="ml-1 not-italic">{headingTitle}</span>
           </h2>
         </div>
 
@@ -65,7 +36,7 @@ export default function FAQ() {
                 onClick={() => toggleFAQ(index)}
                 className={`w-full flex items-center justify-between py-5 text-left hover:bg-[#faf9f4] transition focus:outline-none`}
               >
-                <span className="block min-w-0 flex-1 pr-3 text-base md:text-[17px] font-medium text-[#141414]">
+                <span className="block min-w-0 flex-1 pr-3 text-base md:text-[26px] font-semibold leading-[100%] tracking-[-0.05em] text-[#141414]">
                   {faq.question}
                 </span>
                 <span
@@ -80,7 +51,7 @@ export default function FAQ() {
               </button>
               {openIndex === index && (
                 <div className="pr-0 pb-5">
-                  <p className="text-base md:text-[17px] text-[#444] leading-relaxed">
+                  <p className="text-base md:text-[20px] font-medium  tracking-[-0.05em] text-[#525151]">
                     {faq.answer}
                   </p>
                 </div>
@@ -92,13 +63,13 @@ export default function FAQ() {
         {/* CTA — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
         <div className="text-center">
           <p className="mb-6 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
-            Still curious? We&#39;re happy to help
+            {ctaText}
           </p>
           <Link
-            href="/contact-us"
+            href={ctaHref}
             className="px-5 md:px-6 py-2 md:py-3 border border-[#000000] text-[#000000] font-semibold text-base md:text-lg rounded-lg transition-colors"
           >
-            Let&apos;s talk
+            {ctaLabel}
           </Link>
         </div>
       </div>

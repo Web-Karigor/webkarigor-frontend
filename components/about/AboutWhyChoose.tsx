@@ -11,8 +11,8 @@ const ICONS = {
   performance: Zap,
 } as const;
 
-const TOP_CARDS = ABOUT_WHY_CHOOSE.slice(0, 2);
-const BOTTOM_CARDS = ABOUT_WHY_CHOOSE.slice(2, 4);
+const TOP_CARDS = ABOUT_WHY_CHOOSE.items.slice(0, 2);
+const BOTTOM_CARDS = ABOUT_WHY_CHOOSE.items.slice(2, 4);
 
 function WhyChooseCard({
   title,
@@ -22,10 +22,10 @@ function WhyChooseCard({
 }: {
   title: string;
   description: string;
-  icon: keyof typeof ICONS;
+  icon: string;
   index: number;
 }) {
-  const Icon = ICONS[icon];
+  const Icon = ICONS[icon as keyof typeof ICONS];
 
   return (
     <motion.article
@@ -62,10 +62,10 @@ export default function AboutWhyChoose() {
       <div className="mx-auto w-full max-w-[1478px] px-[clamp(16px,4vw,40px)]">
         <div className="mb-10 text-center sm:mb-14">
           <h2 className="m-0 mx-auto max-w-[533px] font-museoModerno text-[clamp(26px,6vw,48px)] font-medium italic leading-[140%] tracking-[-0.05em] text-[#15D286]">
-            Why Choose Webkarigor
+            {ABOUT_WHY_CHOOSE.title}
           </h2>
           <p className="mt-3 m-0 px-1 font-montserrat text-[clamp(14px,1.15vw,16px)] font-medium text-[#6b7280]">
-            Thoughtful Design and Technology Built for Long-Term Growth
+            {ABOUT_WHY_CHOOSE.subtitle}
           </p>
         </div>
 

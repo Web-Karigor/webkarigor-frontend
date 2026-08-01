@@ -12,30 +12,24 @@ import {
   ChevronRight,
   Globe,
 } from "lucide-react";
+import homeContent from "@/data/home-content.json";
 
-const PROFILE_IMAGE = "/sm4.png";
+const {
+  badge,
+  title,
+  description,
+  founder,
+  talkPrompt,
+  whatsapp,
+  fields,
+  schedule,
+  submitLabel,
+  regions: REGIONS,
+  timeSlots: TIME_SLOTS,
+  weekdays: WEEKDAYS,
+} = homeContent.consultation;
 
-const REGIONS = [
-  { label: "United States", flag: "🇺🇸" },
-  { label: "United Kingdom", flag: "🇬🇧" },
-  { label: "Bangladesh", flag: "🇧🇩" },
-  { label: "Canada", flag: "🇨🇦" },
-  { label: "Australia", flag: "🇦🇺" },
-];
-
-const TIME_SLOTS = [
-  "9:00 AM",
-  "10:00 AM",
-  "11:00 AM",
-  "12:00 PM",
-  "1:00 PM",
-  "2:00 PM",
-  "3:00 PM",
-  "4:00 PM",
-  "5:00 PM",
-];
-
-const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
+const PROFILE_IMAGE = founder.image;
 
 function WhatsAppIcon() {
   return (
@@ -94,65 +88,64 @@ export default function HomeConsultation() {
         <div className="home-consultation-card">
           <div className="home-consultation-layout">
             <aside className="home-consultation-copy">
-              <span className="home-consultation-badge">Get Free Consultation</span>
+              <div className="home-consultation-copy-top">
+                <span className="home-consultation-badge">
+                  <span className="home-consultation-badge-text">{badge}</span>
+                </span>
 
-              <h2 className="home-consultation-title">
-                Let&apos;s Build Something Great Together
-              </h2>
+                <h2 className="home-consultation-title">{title}</h2>
 
-              <p className="home-consultation-desc">
-                From your first message to project delivery, we keep the process
-                clear, responsive, and focused on your goals.
-              </p>
+                <p className="home-consultation-desc">{description}</p>
 
-              <div className="home-consultation-founder">
-                <div className="home-consultation-founder-photo">
-                  <Image
-                    src={PROFILE_IMAGE}
-                    alt="Esther Howard"
-                    fill
-                    className="object-cover"
-                    sizes="112px"
-                  />
-                </div>
-                <div>
-                  <p className="home-consultation-founder-name">Esther Howard</p>
-                  <p className="home-consultation-founder-role">CEO, Webkarigor</p>
+                <div className="home-consultation-founder">
+                  <div className="home-consultation-founder-photo">
+                    <Image
+                      src={PROFILE_IMAGE}
+                      alt={founder.name}
+                      fill
+                      className="object-cover"
+                      sizes="160px"
+                    />
+                  </div>
+                  <p className="home-consultation-founder-name">{founder.name}</p>
+                  <p className="home-consultation-founder-role">{founder.role}</p>
                 </div>
               </div>
 
-              <p className="home-consultation-talk">Prefer to talk first?</p>
+              <div className="home-consultation-copy-bottom">
+                <p className="home-consultation-talk">{talkPrompt}</p>
 
-              <Link
-                href="https://wa.me/8801624283328"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="home-consultation-whatsapp"
-              >
-                <WhatsAppIcon />
-                <span>WhatsApp: 01624-283328</span>
-              </Link>
+                <Link
+                  href={whatsapp.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="home-consultation-whatsapp"
+                >
+                  <WhatsAppIcon />
+                  <span>{whatsapp.label}</span>
+                </Link>
+              </div>
             </aside>
 
             <form className="home-consultation-form" onSubmit={handleSubmit}>
               <div className="home-consultation-form-grid home-consultation-form-grid--two">
                 <label className="home-consultation-field">
-                  <span className="home-consultation-label">Full Name</span>
+                  <span className="home-consultation-label">{fields.fullName.label}</span>
                   <input
                     type="text"
                     name="name"
-                    placeholder="Esther Howard"
+                    placeholder={fields.fullName.placeholder}
                     className="home-consultation-input"
                     required
                   />
                 </label>
 
                 <label className="home-consultation-field">
-                  <span className="home-consultation-label">Contact Email</span>
+                  <span className="home-consultation-label">{fields.email.label}</span>
                   <input
                     type="email"
                     name="email"
-                    placeholder="your-mail@gmail.com"
+                    placeholder={fields.email.placeholder}
                     className="home-consultation-input"
                     required
                   />
@@ -161,13 +154,13 @@ export default function HomeConsultation() {
 
               <div className="home-consultation-form-grid home-consultation-form-grid--two">
                 <label className="home-consultation-field">
-                  <span className="home-consultation-label">Contact Number (WhatsApp)</span>
+                  <span className="home-consultation-label">{fields.phone.label}</span>
                   <span className="home-consultation-input-wrap">
                     <Globe className="home-consultation-input-icon" aria-hidden />
                     <input
                       type="tel"
                       name="phone"
-                      placeholder="123 4567 890"
+                      placeholder={fields.phone.placeholder}
                       className="home-consultation-input home-consultation-input--with-icon"
                       required
                     />
@@ -175,7 +168,7 @@ export default function HomeConsultation() {
                 </label>
 
                 <div className="home-consultation-field">
-                  <span className="home-consultation-label">Your Current Region</span>
+                  <span className="home-consultation-label">{fields.region.label}</span>
                   <div className="home-consultation-select-wrap">
                     <button
                       type="button"
@@ -217,11 +210,11 @@ export default function HomeConsultation() {
               </div>
 
               <label className="home-consultation-field">
-                <span className="home-consultation-label">Project Details</span>
+                <span className="home-consultation-label">{fields.details.label}</span>
                 <textarea
                   name="details"
                   rows={4}
-                  placeholder="I need to build my ecommerce dashboard..."
+                  placeholder={fields.details.placeholder}
                   className="home-consultation-textarea"
                   required
                 />
@@ -229,7 +222,7 @@ export default function HomeConsultation() {
 
               <div className="home-consultation-schedule">
                 <div className="home-consultation-schedule-panel">
-                  <p className="home-consultation-schedule-title">Select a date</p>
+                  <p className="home-consultation-schedule-title">{schedule.dateTitle}</p>
 
                   <div className="home-consultation-calendar">
                     <div className="home-consultation-calendar-head">
@@ -237,7 +230,7 @@ export default function HomeConsultation() {
                         type="button"
                         className="home-consultation-calendar-nav"
                         onClick={() => shiftMonth(-1)}
-                        aria-label="Previous month"
+                        aria-label={schedule.prevMonthAria}
                       >
                         <ChevronLeft className="h-4 w-4" />
                       </button>
@@ -246,7 +239,7 @@ export default function HomeConsultation() {
                         type="button"
                         className="home-consultation-calendar-nav"
                         onClick={() => shiftMonth(1)}
-                        aria-label="Next month"
+                        aria-label={schedule.nextMonthAria}
                       >
                         <ChevronRight className="h-4 w-4" />
                       </button>
@@ -281,7 +274,7 @@ export default function HomeConsultation() {
 
                 <div className="home-consultation-schedule-panel">
                   <p className="home-consultation-schedule-title">
-                    Pick any time <span>(Optional)</span>
+                    {schedule.timeTitle} <span>{schedule.timeOptional}</span>
                   </p>
 
                   <div className="home-consultation-times">
@@ -304,7 +297,7 @@ export default function HomeConsultation() {
               </div>
 
               <button type="submit" className="home-consultation-submit">
-                <span>Let&apos;s Do It</span>
+                <span>{submitLabel}</span>
                 <ArrowRight className="h-5 w-5" aria-hidden />
               </button>
             </form>

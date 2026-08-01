@@ -60,7 +60,7 @@ export default function AboutImpact() {
             <div className="relative aspect-[16/11] w-full overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px] xl:max-w-[1100px]">
               <Image
                 src={ABOUT_IMPACT.mainImage}
-                alt="Webkarigor team collaborating"
+                alt={ABOUT_IMPACT.mainImageAlt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 900px"

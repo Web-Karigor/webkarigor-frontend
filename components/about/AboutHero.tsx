@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ABOUT_HERO_IMAGES } from "@/lib/about-data";
+import { ABOUT_HERO_IMAGES, ABOUT_HERO_TITLE } from "@/lib/about-data";
 import Carousel from "./Carousel";
 
 export default function AboutHero() {
@@ -18,7 +18,7 @@ export default function AboutHero() {
           transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto mt-10 text-center font-montserrat text-[clamp(32px,4.2vw,60px)] font-bold leading-[150%] tracking-[-0.05em] text-black sm:mt-14 md:mt-16"
         >
-          Building Digital Products That Empower Businesses and Delight Users
+          {ABOUT_HERO_TITLE}
         </motion.h1>
       </div>
     </section>

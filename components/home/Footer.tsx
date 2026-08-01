@@ -1,99 +1,24 @@
 import "./Footer.css";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import FooterBrand from "@/components/home/FooterBrand";
+import homeContent from "@/data/home-content.json";
 
-const linkColumns = [
-  {
-    title: "Services",
-    links: [
-      { label: "Product Design", href: "/services/product-design" },
-      { label: "Product Development", href: "/services/product-development" },
-      { label: "Branding", href: "/services/branding" },
-      { label: "Marketing", href: "/services/marketing" },
-      { label: "Consultancy", href: "/services/consultancy" },
-    ],
-  },
-  {
-    title: "Industries",
-    links: [
-      { label: "E-commerce", href: "/service/ecommerce" },
-      { label: "ERP", href: "/service/erp" },
-      { label: "Manpower", href: "/service/manpower" },
-      { label: "Healthcare", href: "/industries/healthcare" },
-      { label: "Fintech", href: "/industries/fintech" },
-      { label: "Edtech", href: "/industries/edtech" },
-      { label: "CMS", href: "/industries/cms" },
-    ],
-  },
-  {
-    title: "Important Link",
-    links: [
-      { label: "Team", href: "/team" },
-      { label: "Products", href: "/products" },
-      { label: "About Us", href: "/about-us" },
-      { label: "Contact Us", href: "/contact-us" },
-      { label: "Our Policies", href: "/policies" },
-    ],
-  },
-];
+const { headingLines, taglineParts, linkColumns, socialLinks } = homeContent.footer;
 
-const socialLinks = [
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: <LinkedInIcon />,
-  },
-  {
-    label: "Facebook",
-    href: "https://facebook.com",
-    icon: <FacebookIcon />,
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com",
-    icon: <GitHubIcon />,
-  },
-  {
-    label: "VS Code",
-    href: "https://code.visualstudio.com",
-    icon: <VsCodeIcon />,
-  },
-  {
-    label: "WhatsApp",
-    href: "https://wa.me/",
-    icon: <WhatsAppIcon />,
-  },
-  {
-    label: "Telegram",
-    href: "https://t.me/",
-    icon: <TelegramIcon />,
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com",
-    icon: <InstagramIcon />,
-  },
-  {
-    label: "YouTube",
-    href: "https://youtube.com",
-    icon: <YouTubeIcon />,
-  },
-  {
-    label: "Behance",
-    href: "https://behance.net",
-    icon: <BehanceIcon />,
-  },
-  {
-    label: "TikTok",
-    href: "https://tiktok.com",
-    icon: <TikTokIcon />,
-  },
-  {
-    label: "X",
-    href: "https://x.com",
-    icon: <XIcon />,
-  },
-];
+const socialIcons: Record<string, ReactNode> = {
+  linkedin: <LinkedInIcon />,
+  facebook: <FacebookIcon />,
+  github: <GitHubIcon />,
+  vscode: <VsCodeIcon />,
+  whatsapp: <WhatsAppIcon />,
+  telegram: <TelegramIcon />,
+  instagram: <InstagramIcon />,
+  youtube: <YouTubeIcon />,
+  behance: <BehanceIcon />,
+  tiktok: <TikTokIcon />,
+  x: <XIcon />,
+};
 
 function LinkedInIcon() {
   return (
@@ -187,29 +112,29 @@ export default function Footer() {
   return (
     <footer className="footer-shell">
       <div className="footer-wrap">
-        
+
 
         <div className="footer-card">
           <div className="footer-content">
             <div className="footer-intro">
               <h2 className="footer-heading font-extrabold">
-                <span className="footer-heading-line">
-                  Let&apos;s build what your users will love
-                </span>
-                <span className="footer-heading-line">
-                  and your business will grow with
-                </span>
+                {headingLines.map((line) => (
+                  <span key={line} className="footer-heading-line">
+                    {line}
+                  </span>
+                ))}
               </h2>
               <p className="footer-tagline">
-                <span>Build Smarter</span>
-                <span className="footer-tagline-sep" aria-hidden="true">
-                  •
-                </span>
-                <span>Launch Stronger</span>
-                <span className="footer-tagline-sep" aria-hidden="true">
-                  •
-                </span>
-                <span>Scale Faster</span>
+                {taglineParts.flatMap((part, index) =>
+                  index === 0
+                    ? [<span key={part}>{part}</span>]
+                    : [
+                        <span key={`${part}-sep`} className="footer-tagline-sep" aria-hidden="true">
+                          •
+                        </span>,
+                        <span key={part}>{part}</span>,
+                      ],
+                )}
               </p>
             </div>
 
@@ -223,7 +148,7 @@ export default function Footer() {
                   aria-label={item.label}
                   className="footer-social-link"
                 >
-                  {item.icon}
+                  {socialIcons[item.id]}
                 </a>
               ))}
             </div>

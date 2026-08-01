@@ -2,7 +2,16 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { SERVICE_FAQS } from "@/lib/services-data";
+import serviceSharedContent from "@/data/service-shared-content.json";
+
+const {
+  eyebrow,
+  title,
+  ctaText,
+  ctaLabel,
+  ctaHref,
+  items: faqs,
+} = serviceSharedContent.faq;
 
 export default function ServiceFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -13,15 +22,15 @@ export default function ServiceFAQ() {
       <div className="mx-auto flex w-full max-w-[1245px] flex-col gap-20 px-[clamp(16px,4vw,40px)] py-12">
         <div className="text-center">
           <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
-            FAQ
+            {eyebrow}
           </p>
           <h2 className="mt-3 font-montserrat text-[clamp(28px,3.2vw,44px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-            Frequently Answered Questions
+            {title}
           </h2>
         </div>
 
         <div className="w-full">
-          {SERVICE_FAQS.map((faq, index) => {
+          {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
@@ -62,13 +71,13 @@ export default function ServiceFAQ() {
 
         <div className="text-center">
           <p className="m-0 mb-5 font-montserrat text-[clamp(18px,1.6vw,24px)] font-bold leading-[1.3] text-[#111827]">
-            Still curious? We&apos;re happy to help
+            {ctaText}
           </p>
           <Link
-            href="/contact-us"
+            href={ctaHref}
             className="inline-flex items-center justify-center rounded-xl border-[0.5px] border-[#111827] px-7 py-3 font-montserrat text-[clamp(14px,1.1vw,16px)] font-bold text-[#111827] transition-colors hover:bg-[#111827] hover:text-white"
           >
-            Let&apos;s talk
+            {ctaLabel}
           </Link>
         </div>
       </div>

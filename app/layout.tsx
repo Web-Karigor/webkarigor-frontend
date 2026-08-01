@@ -5,7 +5,9 @@ import "@/styles/section-shared.css";
 import "@/styles/pricing.css";
 import "@/styles/legacy-solution.css";
 import Navbar from "@/components/home/Navbar";
+import GlobalCursor from "@/components/GlobalCursor";
 import GsapProvider from "@/components/providers/GsapProvider";
+import homeContent from "@/data/home-content.json";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,9 +32,12 @@ const museoModerno = MuseoModerno({
   style: ["normal", "italic"],
   variable: "--font-museoModerno",
 });
+
+const { title, description } = homeContent.metadata;
+
 export const metadata: Metadata = {
-  title: "Webkarigor - Company Website",
-  description: "Webkarigor Company Website",
+  title,
+  description,
 };
 
 export default function RootLayout({
@@ -55,6 +60,7 @@ export default function RootLayout({
         `}
       >
         <GsapProvider>
+        <GlobalCursor />
         {/* CONTENT LAYER */}
         <div className="relative z-10 overflow-x-clip">
           <Navbar />
@@ -65,4 +71,3 @@ export default function RootLayout({
     </html>
   );
 }
-

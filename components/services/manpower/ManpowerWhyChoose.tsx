@@ -1,45 +1,13 @@
 import Image from "next/image";
 import { BarChart3, Briefcase, Handshake, UserRound } from "lucide-react";
+import { MANPOWER_WHY } from "@/lib/manpower-data";
 
-/** Figma Why Choose — feature rows */
-const FEATURES = [
-  {
-    title: "User-Centered Design",
-    description:
-      "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
-    icon: UserRound,
-    color: "#12B76A",
-    bg: "#E8F8F0",
-    border: "#B6E9D1",
-  },
-  {
-    title: "Business-Focused",
-    description:
-      "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
-    icon: Briefcase,
-    color: "#F79009",
-    bg: "#FEF4E6",
-    border: "#F9D9A8",
-  },
-  {
-    title: "Collaborative Process",
-    description:
-      "We act as an extension of your team, maintaining transparent communication throughout.",
-    icon: Handshake,
-    color: "#EE46BC",
-    bg: "#FCE8F5",
-    border: "#F5B8E0",
-  },
-  {
-    title: "Scalable Systems",
-    description:
-      "We deliver robust design systems that make future development faster and consistent.",
-    icon: BarChart3,
-    color: "#2E90FA",
-    bg: "#E8F3FE",
-    border: "#B5D7FC",
-  },
-] as const;
+const ICONS = {
+  user: UserRound,
+  briefcase: Briefcase,
+  handshake: Handshake,
+  chart: BarChart3,
+} as const;
 
 /**
  * Figma left visual — just the two overlapping images (collage export).
@@ -51,8 +19,8 @@ function WhyChooseImages() {
       {/* Figma export is just the two photos overlapping (432×393 native) */}
       <div className="relative aspect-[432/393] w-full">
         <Image
-          src="/services/why-choose-collage.png"
-          alt="Office collaboration and analytics screens"
+          src={MANPOWER_WHY.image}
+          alt={MANPOWER_WHY.imageAlt}
           fill
           className="object-contain object-left object-top"
           sizes="698px"
@@ -67,15 +35,15 @@ function WhyChooseCopy() {
   return (
     <div className="w-full min-w-0 max-w-[620px] lg:pt-2">
       <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
-        Why Webkarigor
+        {MANPOWER_WHY.eyebrow}
       </p>
       <h2 className="mt-3 m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-        More Than Beautiful Interfaces
+        {MANPOWER_WHY.title}
       </h2>
 
       <ul className="mt-8 m-0 flex list-none flex-col gap-7 p-0 sm:mt-10 sm:gap-8">
-        {FEATURES.map((feature) => {
-          const Icon = feature.icon;
+        {MANPOWER_WHY.items.map((feature) => {
+          const Icon = ICONS[feature.icon as keyof typeof ICONS];
           return (
             <li key={feature.title} className="flex items-start gap-4 sm:gap-5">
               <span

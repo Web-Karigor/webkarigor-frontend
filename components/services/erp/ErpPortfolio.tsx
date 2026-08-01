@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { ERP_PORTFOLIO_ITEMS } from "@/lib/erp-data";
+import { ERP_PORTFOLIO_ITEMS, ERP_PORTFOLIO_SECTION } from "@/lib/erp-data";
 
 const AUTO_SCROLL_MS = 4500;
 
@@ -146,7 +146,7 @@ export default function ErpPortfolio() {
       <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-6 px-[clamp(16px,4vw,40px)] md:gap-8 lg:gap-10">
         <div className="flex items-center justify-between gap-3 md:gap-4">
           <h2 className="m-0 font-montserrat text-[clamp(22px,2.8vw,32px)] font-bold leading-none tracking-[-0.02em] text-[#18214D]">
-            Our Projects
+            {ERP_PORTFOLIO_SECTION.title}
           </h2>
 
           <div className="flex shrink-0 items-center gap-2 md:gap-3">

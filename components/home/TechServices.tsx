@@ -6,21 +6,9 @@ import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "@/lib/gsap";
 import { PORTFOLIO_IMAGES } from "@/lib/home-assets";
+import homeContent from "@/data/home-content.json";
 
-const categories = [
-  "Web Design",
-  "SaaS",
-  "Dashboard",
-  "Figma",
-  "Framer",
-  "Webflow",
-  "Mobile App",
-  "E-commerce",
-  "Portfolio",
-  "Branding",
-  "Social Media",
-  "Digital Marketing",
-];
+const categories = homeContent.techServices.categories;
 
 const portfolioImages = PORTFOLIO_IMAGES;
 

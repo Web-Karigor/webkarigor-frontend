@@ -1,0 +1,323 @@
+{
+  "metadata": {
+    "title": "ERP Services — Webkarigor",
+    "description": "Custom ERP solutions for inventory, finance, HR, and operations — built by Webkarigor to streamline your business."
+  },
+  "hero": {
+    "brand": "Webkarigor",
+    "brandHref": "/",
+    "navCta": {
+      "label": "Get a Quote",
+      "href": "#contact"
+    },
+    "titleLine1": "Analyze data",
+    "titleLine2": "fast, with",
+    "titleBrand": "Analizar",
+    "description": "It is a software through which you can easily make the right decision by analyzing the data. Data analysis is important in business.",
+    "primaryCta": {
+      "label": "Start Your Project",
+      "href": "#contact"
+    },
+    "hotlineLabel": "Say hello",
+    "hotline": "01624-283328",
+    "trustTitle": "We've Worked with them, We Trust Each Other",
+    "trustDescription": "At “WEB KARIGOR”, we have had the privilege of working with a diverse range of clients across various industries.",
+    "dashboardImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+    "avatarImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+    "demo": {
+      "searchLabel": "Search",
+      "addCustomerLabel": "Add Customer",
+      "tableHeaders": [
+        "NAME",
+        "DESCRIPTION",
+        "RATE",
+        "BALANCE",
+        "DEPOSIT",
+        "STATUS",
+        ""
+      ],
+      "descriptionCell": "Lorem ipsum...",
+      "currencySuffix": "INR",
+      "activeCustomersLabel": "Active Customers: 478/708",
+      "rowsPerPageLabel": "Rows per page: 10",
+      "paginationLabel": "1-10 of 708",
+      "customers": [
+        {
+          "name": "Kadin Herwitz",
+          "id": "87364523",
+          "rate": "70.00",
+          "balance": "-270.00",
+          "balanceNeg": true,
+          "deposit": "500.00",
+          "status": "ACTIVE"
+        },
+        {
+          "name": "Kadin Herwitz",
+          "id": "87364523",
+          "rate": "70.00",
+          "balance": "270.00",
+          "balanceNeg": false,
+          "deposit": "500.00",
+          "status": "INACTIVE"
+        },
+        {
+          "name": "Kadin Herwitz",
+          "id": "87364523",
+          "rate": "70.00",
+          "balance": "270.00",
+          "balanceNeg": false,
+          "deposit": "500.00",
+          "status": "ACTIVE"
+        }
+      ],
+      "technologyCard": {
+        "label": "Technology",
+        "value": "27.24",
+        "valueSuffix": "ROI",
+        "items": [
+          { "label": "Cloud Services", "pct": 81, "color": "#F79009" },
+          { "label": "Automation", "pct": 28, "color": "#FBBF24" },
+          { "label": "Business Transformation", "pct": 11, "color": "#D0D5DD" }
+        ]
+      }
+    }
+  },
+  "trustedLogos": [
+    { "name": "Slack", "src": "https://cdn.simpleicons.org/slack/667085" },
+    { "name": "Netflix", "src": "https://cdn.simpleicons.org/netflix/667085" },
+    { "name": "Fitbit", "src": "https://cdn.simpleicons.org/fitbit/667085" },
+    { "name": "Google", "src": "https://cdn.simpleicons.org/google/667085" },
+    { "name": "Airbnb", "src": "https://cdn.simpleicons.org/airbnb/667085" }
+  ],
+  "features": {
+    "eyebrow": "Why Webkarigor",
+    "title": "More Than Beautiful Interfaces",
+    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+    "items": [
+      {
+        "title": "User-Centered Design",
+        "description": "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
+        "color": "#12B76A",
+        "bg": "#E8F8F0",
+        "icon": "user"
+      },
+      {
+        "title": "Business-Focused",
+        "description": "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
+        "color": "#F79009",
+        "bg": "#FEF4E6",
+        "icon": "briefcase"
+      },
+      {
+        "title": "Collaborative Process",
+        "description": "We act as an extension of your team, maintaining transparent communication throughout.",
+        "color": "#EE46BC",
+        "bg": "#FCE8F5",
+        "icon": "handshake"
+      },
+      {
+        "title": "Scalable Systems",
+        "description": "We deliver robust design systems that make future development faster and consistent.",
+        "color": "#2E90FA",
+        "bg": "#E8F3FE",
+        "icon": "chart"
+      }
+    ]
+  },
+  "integrations": {
+    "title": "Technologies used in webkarigor",
+    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+    "inner": [
+      {
+        "name": "GitHub",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+      },
+      {
+        "name": "Notion",
+        "icon": "https://cdn.simpleicons.org/notion/000000"
+      },
+      {
+        "name": "Figma",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+      }
+    ],
+    "outer": [
+      {
+        "name": "PHP",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+      },
+      {
+        "name": "React",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+      },
+      {
+        "name": "Next.js",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+      },
+      {
+        "name": "Node.js",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+      },
+      {
+        "name": "Vercel",
+        "icon": "https://cdn.simpleicons.org/vercel/000000"
+      },
+      {
+        "name": "Tailwind",
+        "icon": "https://cdn.simpleicons.org/tailwindcss/06B6D4"
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Our Projects",
+    "items": [
+      {
+        "id": "food",
+        "title": "Food Delivery Storefront",
+        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "saas",
+        "title": "Business Analytics Platform",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "fashion",
+        "title": "Fashion Ecommerce",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "corporate",
+        "title": "Corporate Landing",
+        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "dashboard",
+        "title": "Ops Dashboard",
+        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "mobile",
+        "title": "Product App UI",
+        "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80"
+      }
+    ]
+  },
+  "reviews": {
+    "title": "Ehya is loved by users",
+    "items": [
+      {
+        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
+        "name": "Jaquon Hart",
+        "role": "Digital Marketing Executive, Hypebeast",
+        "rating": 5
+      },
+      {
+        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
+        "name": "Rickie Baroch",
+        "role": "Product Manager of Salestation Asia",
+        "rating": 4
+      },
+      {
+        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
+        "name": "Harinder Bharwal",
+        "role": "Digital Marketing Executive, Hypebeast",
+        "rating": 4
+      },
+      {
+        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
+        "name": "Floyd Miles",
+        "role": "CEO, Shishu Poribohan",
+        "rating": 5
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Pricing Plan",
+    "title": "No Hidden Charges",
+    "description": "Flexible ERP packages designed for teams at every stage — from startup to enterprise.",
+    "recommendedLabel": "Recommended",
+    "cta": "Purchase",
+    "ctaHref": "#contact",
+    "plans": [
+      {
+        "name": "Basic",
+        "price": "$29",
+        "period": "/mo",
+        "recommended": false,
+        "priceColor": "dark",
+        "description": "Essential ERP modules for small teams getting started.",
+        "features": [
+          "Core dashboard access",
+          "Up to 5 user seats",
+          "Basic reporting",
+          "Email support",
+          "Standard integrations"
+        ]
+      },
+      {
+        "name": "Standard",
+        "price": "$99",
+        "period": "/mo",
+        "recommended": true,
+        "priceColor": "green",
+        "description": "Full-featured ERP for growing businesses with multiple departments.",
+        "features": [
+          "All Basic features",
+          "Unlimited project use",
+          "Advanced analytics",
+          "Multivariate components",
+          "Priority phone support"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$299",
+        "period": "/mo",
+        "recommended": false,
+        "priceColor": "blue",
+        "description": "Enterprise-grade ERP with custom modules and dedicated support.",
+        "features": [
+          "All Standard features",
+          "Custom module development",
+          "Dedicated account manager",
+          "SLA-backed uptime",
+          "On-site training"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Frequently Asked Questions",
+    "footerText": "Still curious? We're happy to help —",
+    "footerCta": "Contact Us",
+    "footerCtaHref": "#contact",
+    "items": [
+      {
+        "question": "What industries does your ERP solution support?",
+        "answer": "We build ERP systems for retail, manufacturing, healthcare, logistics, and service businesses — tailored to your workflows and compliance needs."
+      },
+      {
+        "question": "How long does ERP implementation typically take?",
+        "answer": "Most mid-size deployments go live in 8–14 weeks after discovery. Complex multi-module rollouts may take longer with phased delivery."
+      },
+      {
+        "question": "Can you integrate with our existing tools?",
+        "answer": "Yes. We connect accounting, CRM, inventory, HR, and payment systems via APIs and standard connectors."
+      },
+      {
+        "question": "Do you offer training for our team?",
+        "answer": "Every plan includes onboarding documentation. Standard and Pro plans add live training sessions and role-based guides."
+      },
+      {
+        "question": "Is data migration included?",
+        "answer": "We audit your current data, map fields, and migrate records with validation checks before go-live."
+      },
+      {
+        "question": "What support do you provide after launch?",
+        "answer": "Ongoing maintenance, feature updates, and priority support based on your plan — with optional dedicated SLA tiers."
+      }
+    ]
+  }
+}

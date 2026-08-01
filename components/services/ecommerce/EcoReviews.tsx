@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 import {
   ECO_REVIEW_AVATARS,
+  ECO_REVIEWS_SECTION,
   ECO_TESTIMONIALS,
 } from "@/lib/ecommerce-data";
 
@@ -85,16 +86,16 @@ export default function EcoReviews() {
         <div className="flex w-full max-w-[474px] shrink-0 flex-col gap-8">
           <div className="flex w-full flex-col gap-3">
             <p className="m-0 font-montserrat text-[16px] font-semibold leading-none text-[#15d286]">
-              Client Success Stories
+              {ECO_REVIEWS_SECTION.eyebrow}
             </p>
 
             <div className="flex w-full items-center justify-between">
               <div className="flex items-baseline gap-2.5">
                 <span className="font-montserrat text-[48px] font-bold leading-none tracking-[-0.03em] text-[#111827]">
-                  4.9
+                  {ECO_REVIEWS_SECTION.rating}
                 </span>
                 <span className="font-montserrat text-[14px] font-medium leading-none text-[#9CA3AF]">
-                  (60+ Reviews)
+                  {ECO_REVIEWS_SECTION.ratingLabel}
                 </span>
               </div>
 
@@ -122,7 +123,7 @@ export default function EcoReviews() {
           </div>
 
           <h2 className="m-0 w-full max-w-[474px] font-montserrat text-[36px] font-bold leading-[150%] tracking-normal text-[#272B34]">
-            Trusted by Founders and Growing Businesses
+            {ECO_REVIEWS_SECTION.title}
           </h2>
         </div>
 

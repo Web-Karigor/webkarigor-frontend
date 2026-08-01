@@ -1,0 +1,324 @@
+{
+  "metadata": {
+    "title": "Manpower Services — Webkarigor",
+    "description": "Hire verified talent, scale teams fast, and deliver with Webkarigor manpower services — staffing, squads, and flexible engagement models."
+  },
+  "hero": {
+    "brand": "Webkarigor",
+    "brandHref": "/",
+    "navCta": {
+      "label": "Get a Quote",
+      "href": "#contact"
+    },
+    "title": "Delight your customers with happy elements",
+    "description": "Welcome to the support portal! Search your answers with the search box above, or if you're stuck you can create a support ticket.",
+    "countryCode": "+880",
+    "phonePlaceholder": "Enter your mobile number",
+    "primaryCta": {
+      "label": "Book A Meeting",
+      "href": "#contact"
+    },
+    "hotlineLabel": "Say hello",
+    "hotline": "01624-283328",
+    "heroImage": "/manpower/hero.png",
+    "heroImageAlt": "Happy student giving thumbs up",
+    "doodleSrc": "/manpower/vector-16.png"
+  },
+  "trustedLogos": [
+    { "name": "Confluent", "src": "https://cdn.simpleicons.org/confluent/252526" },
+    { "name": "Seismic", "src": "https://cdn.simpleicons.org/hubspot/FF7A59" },
+    { "name": "Datadog", "src": "https://cdn.simpleicons.org/datadog/632CA6" },
+    { "name": "SurveyMonkey", "src": "https://cdn.simpleicons.org/surveymonkey/00BF6F" },
+    { "name": "Salesforce", "src": "https://cdn.simpleicons.org/salesforce/00A1E0" },
+    { "name": "Okta", "src": "https://cdn.simpleicons.org/okta/007DC1" },
+    { "name": "Talkdesk", "src": "https://cdn.simpleicons.org/intercom/6AFDEF" }
+  ],
+  "trustTitle": "Trusted by over 100+ businesses worldwide.",
+  "techOrbit": {
+    "title": "Technologies used in webkarigor",
+    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+    "icons": [
+      {
+        "name": "PHP",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+      },
+      {
+        "name": "Node.js",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+      },
+      {
+        "name": "React",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+      },
+      {
+        "name": "Bootstrap",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+      },
+      {
+        "name": "Next.js",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+      },
+      {
+        "name": "Vercel",
+        "icon": "https://cdn.simpleicons.org/vercel/000000"
+      },
+      {
+        "name": "Tailwind",
+        "icon": "https://cdn.simpleicons.org/tailwindcss/06B6D4"
+      },
+      {
+        "name": "Python",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+      },
+      {
+        "name": "Figma",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+      },
+      {
+        "name": "Go",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
+      },
+      {
+        "name": "Notion",
+        "icon": "https://cdn.simpleicons.org/notion/000000"
+      },
+      {
+        "name": "AWS",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
+      },
+      {
+        "name": "Sketch",
+        "icon": "https://cdn.simpleicons.org/sketch/F7B500"
+      },
+      {
+        "name": "Kotlin",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
+      }
+    ]
+  },
+  "whyChoose": {
+    "eyebrow": "Why Webkarigor",
+    "title": "More Than Beautiful Interfaces",
+    "image": "/services/why-choose-collage.png",
+    "imageAlt": "Office collaboration and analytics screens",
+    "items": [
+      {
+        "title": "User-Centered Design",
+        "description": "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
+        "icon": "user",
+        "color": "#12B76A",
+        "bg": "#E8F8F0",
+        "border": "#B6E9D1"
+      },
+      {
+        "title": "Business-Focused",
+        "description": "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
+        "icon": "briefcase",
+        "color": "#F79009",
+        "bg": "#FEF4E6",
+        "border": "#F9D9A8"
+      },
+      {
+        "title": "Collaborative Process",
+        "description": "We act as an extension of your team, maintaining transparent communication throughout.",
+        "icon": "handshake",
+        "color": "#EE46BC",
+        "bg": "#FCE8F5",
+        "border": "#F5B8E0"
+      },
+      {
+        "title": "Scalable Systems",
+        "description": "We deliver robust design systems that make future development faster and consistent.",
+        "icon": "chart",
+        "color": "#2E90FA",
+        "bg": "#E8F3FE",
+        "border": "#B5D7FC"
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Our Projects",
+    "items": [
+      {
+        "id": "food",
+        "title": "Food Delivery Storefront",
+        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "saas",
+        "title": "Business Analytics Platform",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "fashion",
+        "title": "Fashion Ecommerce",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "corporate",
+        "title": "Corporate Landing",
+        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "dashboard",
+        "title": "Ops Dashboard",
+        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "mobile",
+        "title": "Product App UI",
+        "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80"
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "What our clients say",
+    "title": "The world's best companies are using our service",
+    "items": [
+      {
+        "quote": "Webkarigor helped us staff a full product squad in weeks. The talent quality and communication have been outstanding.",
+        "name": "Jenny Wilson",
+        "role": "Head of Product, Bright Labs",
+        "avatar": "/sm1.png",
+        "highlight": false
+      },
+      {
+        "quote": "Finally a partner that understands both hiring speed and engineering depth. Our release cadence doubled.",
+        "name": "Robert Fox",
+        "role": "CTO, NovaPay",
+        "avatar": "/sm2.jpg",
+        "highlight": false
+      },
+      {
+        "quote": "From designers to backend leads, every placement clicked with our culture. Highly recommend their manpower desk.",
+        "name": "Kathryn Murphy",
+        "role": "COO, Lumen Soft",
+        "avatar": "/sm3.jpg",
+        "highlight": false
+      },
+      {
+        "quote": "Clear contracts, strong onboarding, and people who actually ship. We extended the engagement twice.",
+        "name": "Theresa Webb",
+        "role": "VP Engineering, Orbit HR",
+        "avatar": "/sm4.png",
+        "highlight": false
+      },
+      {
+        "quote": "They filled critical roles without the usual agency noise. Transparent, fast, and reliable.",
+        "name": "Wade Warren",
+        "role": "Founder, Stackline",
+        "avatar": "/h2.png",
+        "highlight": false
+      },
+      {
+        "quote": "With Webkarigor, we're able to easily scale our team in full detail. It's become an essential partner for growth.",
+        "name": "Jaquon Hart",
+        "role": "Digital Marketing Executive, Hypebeast",
+        "avatar": "/sm1.png",
+        "highlight": true
+      },
+      {
+        "quote": "The designers they placed elevated our product UI overnight. Stakeholders noticed the difference immediately.",
+        "name": "Cody Fisher",
+        "role": "Design Lead, Peak Commerce",
+        "avatar": "/h1.png",
+        "highlight": false
+      },
+      {
+        "quote": "Supportive account managers and talent that treats our roadmap like their own. Rare combination.",
+        "name": "Esther Howard",
+        "role": "People Ops, Northwind",
+        "avatar": "/sm3.jpg",
+        "highlight": false
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Pricing plan",
+    "title": "The Right Plan for Your Business",
+    "description": "Flexible manpower packages for startups and enterprises — scale your team without the usual overhead.",
+    "recommendedLabel": "Most Popular",
+    "cta": "Get Started",
+    "ctaHref": "#contact",
+    "plans": [
+      {
+        "name": "Basic",
+        "price": "$39",
+        "period": "/mo",
+        "recommended": false,
+        "priceColor": "dark",
+        "description": "Best for startups needing flexible specialist support.",
+        "features": [
+          "Up to 2 active roles",
+          "Shared account manager",
+          "Basic skill matching",
+          "Email support",
+          "Monthly reporting"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$49",
+        "period": "/mo",
+        "recommended": true,
+        "priceColor": "green",
+        "description": "Most popular for growing teams that need faster placement.",
+        "features": [
+          "Up to 8 active roles",
+          "Priority candidate shortlist",
+          "Dedicated coordinator",
+          "Weekly status calls",
+          "Replacement guarantee"
+        ]
+      },
+      {
+        "name": "Premium",
+        "price": "$339",
+        "period": "/mo",
+        "recommended": false,
+        "priceColor": "blue",
+        "description": "Enterprise staffing with dedicated pods and SLAs.",
+        "features": [
+          "Unlimited role openings",
+          "Full squad staffing",
+          "On-site / hybrid support",
+          "Custom SLAs",
+          "Quarterly strategy reviews"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Frequently Asked Questions",
+    "footerText": "Still curious? We're happy to help —",
+    "footerCta": "Contact Us",
+    "footerCtaHref": "#contact",
+    "items": [
+      {
+        "question": "What kinds of roles can you staff?",
+        "answer": "We place product designers, engineers, QA, DevOps, project managers, marketers, and operations specialists — senior and mid-level."
+      },
+      {
+        "question": "How fast can you start sourcing?",
+        "answer": "Most engagements see first shortlists within 5–10 business days after discovery and role definition."
+      },
+      {
+        "question": "Are candidates full-time employees or contractors?",
+        "answer": "Both. We support full-time placements, contract-to-hire, and dedicated remote pods depending on your preference."
+      },
+      {
+        "question": "Do you offer replacement guarantees?",
+        "answer": "Yes. Pro and Premium plans include a replacement window if a placement doesn’t fit within the agreed probation period."
+      },
+      {
+        "question": "Can you build a full cross-functional team?",
+        "answer": "Absolutely. Premium clients often engage us for design + engineering + PM squads that operate as one unit."
+      },
+      {
+        "question": "How do billing and contracts work?",
+        "answer": "Transparent monthly plans or per-seat models. Contracts cover NDAs, IP assignment, and clear termination terms."
+      }
+    ]
+  }
+}

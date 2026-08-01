@@ -2,17 +2,98 @@
 
 import "./Navbar.css";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import homeContent from "@/data/home-content.json";
 
-const SCROLLED_SURFACE =
-  "bg-[#fffdf6] shadow-[0_8px_24px_rgba(0,0,0,0.08)]";
+const { brand, desktopLinks, mobileLinks, aria } = homeContent.navbar;
+
+type NavItem = {
+  id: string;
+  label: string;
+  href: string;
+};
+
+type PillBox = {
+  left: number;
+  width: number;
+};
+
+function getActiveIdFromPath(pathname: string | null): string {
+  if (!pathname) return "brand";
+  if (pathname.startsWith("/about")) return "about";
+  if (pathname.startsWith("/contact")) return "contact";
+  if (pathname.startsWith("/case") || pathname.startsWith("/projects")) {
+    return "case";
+  }
+  if (pathname.startsWith("/service")) return "service";
+  return "brand";
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [activeId, setActiveId] = useState(() => getActiveIdFromPath(pathname));
+  const [pill, setPill] = useState<PillBox | null>(null);
+
+  const navRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const pillLockRef = useRef(false);
+  const pillLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [caseLink, serviceLink, contactLink, aboutLink] = desktopLinks;
+
+  const items: NavItem[] = [
+    { id: "case", label: caseLink.label, href: caseLink.href },
+    { id: "service", label: serviceLink.label, href: serviceLink.href },
+    { id: "brand", label: brand, href: "/" },
+    { id: "contact", label: contactLink.label, href: contactLink.href },
+    { id: "about", label: aboutLink.label, href: aboutLink.href },
+  ];
+
+  const measurePill = useCallback((id: string): PillBox | null => {
+    const nav = navRef.current;
+    const link = linkRefs.current[id];
+    if (!nav || !link) return null;
+
+    const navBox = nav.getBoundingClientRect();
+    const linkBox = link.getBoundingClientRect();
+
+    return {
+      left: linkBox.left - navBox.left,
+      width: linkBox.width,
+    };
+  }, []);
+
+  const updatePill = useCallback(
+    (opts?: { force?: boolean }) => {
+      if (pillLockRef.current && !opts?.force) return;
+
+      const next = measurePill(activeId);
+      if (!next) return;
+
+      setPill((prev) => {
+        if (
+          prev &&
+          Math.abs(prev.left - next.left) < 0.5 &&
+          Math.abs(prev.width - next.width) < 0.5
+        ) {
+          return prev;
+        }
+        return next;
+      });
+    },
+    [activeId, measurePill],
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -20,6 +101,41 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const nextId = getActiveIdFromPath(pathname);
+    setActiveId((prev) => (prev === nextId ? prev : nextId));
+  }, [pathname]);
+
+  useLayoutEffect(() => {
+    pillLockRef.current = true;
+    updatePill({ force: true });
+
+    if (pillLockTimerRef.current) clearTimeout(pillLockTimerRef.current);
+    pillLockTimerRef.current = setTimeout(() => {
+      pillLockRef.current = false;
+    }, 500);
+
+    return () => {
+      if (pillLockTimerRef.current) clearTimeout(pillLockTimerRef.current);
+    };
+  }, [activeId, updatePill]);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    const onResize = () => updatePill();
+    window.addEventListener("resize", onResize);
+
+    const ro = new ResizeObserver(() => updatePill());
+    ro.observe(nav);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      ro.disconnect();
+    };
+  }, [updatePill]);
 
   if (pathname?.startsWith("/service")) {
     return null;
@@ -32,115 +148,102 @@ export default function Navbar() {
         aria-hidden
       />
 
-      <div
-        className={`sticky z-[9999] h-0 overflow-visible transition-[top] duration-300 ${
-          scrolled ? "top-0" : "top-4 sm:top-6 lg:top-[39px]"
-        }`}
-      >
-        <header className="relative left-0 right-0 overflow-x-hidden">
-          <div
-            className={`relative mx-auto max-w-[1800px] px-4 sm:px-6 ${
-              scrolled ? "py-2 lg:py-3" : ""
-            }`}
-          >
-            {/* Desktop — nav + CTA share one row, aligned center */}
+      {/* Keep sticky top fixed — scroll only changes blur/bg, never position (no route-arrival jolt) */}
+      <div className="sticky top-4 z-[9999] h-0 overflow-visible sm:top-6 lg:top-[39px]">
+        <header className="relative left-0 right-0 overflow-visible">
+          <div className="relative mx-auto max-w-[1800px] px-4 sm:px-6">
             <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6">
               <div aria-hidden />
 
               <nav>
-                <div
-                  className={`navbar-container flex items-center justify-center box-border rounded-[24px] transition-[background-color,box-shadow] duration-300 ${
-                    scrolled ? SCROLLED_SURFACE : ""
-                  }`}
-                >
-                  <div className="navbar-content flex items-center justify-center font-semibold">
-                    <Link href="/" className="navbar-link">
-                      Home
-                    </Link>
-                    <Link href="/service" className="navbar-link">
-                      Service
-                    </Link>
-
-                    <Link
-                      href="/"
-                      className="webkarigor-button relative inline-flex shrink-0 items-center justify-center"
+                <div className="navbar-border-ring">
+                  <div
+                    className={`navbar-container flex items-center justify-center box-border ${
+                      scrolled ? "navbar-container--scrolled" : ""
+                    }`}
+                  >
+                    <div
+                      ref={navRef}
+                      className="navbar-content flex items-center justify-center font-semibold"
                     >
-                      <span className="webkarigor-inner flex h-full w-full items-center justify-center">
-                        <span className="webkarigor-text">Webkarigor</span>
-                      </span>
-                    </Link>
+                      {pill ? (
+                        <motion.span
+                          className="navbar-active-pill"
+                          initial={false}
+                          animate={{
+                            left: pill.left,
+                            width: pill.width,
+                          }}
+                          transition={{
+                            duration: 0.45,
+                            ease: [0.4, 0, 0.2, 1],
+                          }}
+                          aria-hidden
+                        />
+                      ) : null}
 
-                    <Link href="/case" className="navbar-link">
-                      Case
-                    </Link>
-                    <Link href="/about-us" className="navbar-link">
-                      About us
-                    </Link>
+                      {items.map((item) => {
+                        const isActive = item.id === activeId;
+
+                        return (
+                          <Link
+                            key={item.id}
+                            href={item.href}
+                            ref={(el) => {
+                              linkRefs.current[item.id] = el;
+                            }}
+                            className={`navbar-link${isActive ? " is-active" : ""}`}
+                            aria-current={isActive ? "page" : undefined}
+                            onClick={() => setActiveId(item.id)}
+                          >
+                            <span className="navbar-link-label">{item.label}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </nav>
+            </div>
 
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  className={`inline-flex items-center gap-[10px] rounded-[12px] border border-black px-6 py-[18px] font-bold text-[18px] transition-[background-color,box-shadow,color,transform] duration-300 hover:bg-black hover:text-white xl:px-[24px] xl:py-5 xl:text-[20px] ${
-                    scrolled
-                      ? SCROLLED_SURFACE
-                      : "border-black/70 bg-transparent shadow-none"
+            <div className="flex items-center justify-between lg:hidden">
+              <div className="navbar-mobile-ring">
+                <Link
+                  href="/"
+                  className={`navbar-mobile-surface block rounded-[11.5px] px-3 py-2 font-bold text-base sm:text-lg ${
+                    scrolled ? "navbar-mobile-surface--scrolled" : ""
                   }`}
                 >
-                  Let&apos;s get started
+                  {brand}
+                </Link>
+              </div>
+
+              <div className="navbar-mobile-ring navbar-mobile-ring--btn">
+                <button
+                  type="button"
+                  onClick={() => setOpen(!open)}
+                  className={`navbar-mobile-surface flex h-10 w-10 items-center justify-center ${
+                    scrolled ? "navbar-mobile-surface--scrolled" : ""
+                  }`}
+                  aria-label={open ? aria.closeMenu : aria.openMenu}
+                >
+                  <span className="text-2xl">{open ? "✕" : "☰"}</span>
                 </button>
               </div>
             </div>
 
-            {/* Mobile */}
-            <div className="flex items-center justify-between lg:hidden">
-              <Link
-                href="/"
-                className={`rounded-xl px-3 py-2 font-bold text-base transition-[background-color,box-shadow] duration-300 sm:text-lg ${
-                  scrolled ? SCROLLED_SURFACE : ""
-                }`}
-              >
-                Webkarigor
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => setOpen(!open)}
-                className={`flex h-10 w-10 items-center justify-center rounded-lg border transition-[background-color,box-shadow] duration-300 ${
-                  scrolled ? SCROLLED_SURFACE : ""
-                }`}
-                aria-label={open ? "Close menu" : "Open menu"}
-              >
-                <span className="text-2xl">{open ? "✕" : "☰"}</span>
-              </button>
-            </div>
-
             {open && (
               <div className="mt-4 space-y-5 rounded-2xl border bg-white p-6 shadow-xl lg:hidden">
-                <Link onClick={() => setOpen(false)} href="/" className="block font-semibold">
-                  Home
-                </Link>
-                <Link onClick={() => setOpen(false)} href="/service" className="block font-semibold">
-                  Service
-                </Link>
-                <Link onClick={() => setOpen(false)} href="/projects" className="block font-semibold">
-                  Projects
-                </Link>
-                <Link onClick={() => setOpen(false)} href="/pricing" className="block font-semibold">
-                  Pricing
-                </Link>
-                <Link onClick={() => setOpen(false)} href="/about-us" className="block font-semibold">
-                  About us
-                </Link>
-
-                <button
-                  type="button"
-                  className="mt-4 w-full rounded-xl border border-black px-6 py-4 font-bold transition hover:bg-black hover:text-white"
-                >
-                  Let&apos;s get started
-                </button>
+                {mobileLinks.map((link) => (
+                  <Link
+                    key={link.href + link.label}
+                    onClick={() => setOpen(false)}
+                    href={link.href}
+                    className="block font-semibold"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             )}
           </div>

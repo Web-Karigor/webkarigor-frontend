@@ -5,8 +5,10 @@ import "./TrustedFounders.css";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { SLIDER_IMAGES } from "@/lib/home-assets";
+import homeContent from "@/data/home-content.json";
 
 const images = SLIDER_IMAGES;
+const { badge, headingLines, headingAccent } = homeContent.testimonials;
 /** Duplicate sets for seamless infinite marquee */
 const LOOP_SETS = 3;
 /** ~17% faster than 48 — still constant & premium */
@@ -260,12 +262,12 @@ export default function TrustedFounders() {
     <section ref={sectionRef} className="trusted-wrapper">
       <div className="trusted-layout">
         <div className="trusted-text">
-          <span className="trusted-badge -mt-9">Testimonials</span>
+          <span className="trusted-badge -mt-9">{badge}</span>
           <h2 className="trusted-heading font-bold">
-            Trusted <br />
-            by <br />
+            {headingLines[0]} <br />
+            {headingLines[1]} <br />
             <span className="text-[#BABABA] font-museoModerno font-bold">
-              Founders
+              {headingAccent}
             </span>
           </h2>
         </div>

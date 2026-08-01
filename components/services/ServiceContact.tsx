@@ -4,17 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { ChevronDown, Mail } from "lucide-react";
+import serviceSharedContent from "@/data/service-shared-content.json";
 
-const PROFILE_IMAGE = "/sm4.png";
-
-const PROJECT_TYPES = [
-  "Product Design",
-  "Product Development",
-  "Branding",
-  "Marketing",
-  "Mobile App",
-  "Other",
-] as const;
+const {
+  headingLines,
+  description,
+  email,
+  emailHref,
+  profile,
+  projectTypes,
+  placeholders,
+  submitLabel,
+} = serviceSharedContent.contact;
 
 const fieldClass =
   "w-full rounded-[10px] border-[0.5px] border-[#e5e7eb] bg-white px-4 py-3 font-montserrat text-[14px] font-medium text-[#111827] outline-none transition-colors placeholder:text-[#9ca3af] focus:border-[#0ec47b]";
@@ -28,35 +29,37 @@ export default function ServiceContact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-24 border-t-[3px] border-[#0ec47b] bg-[#FFFEFB]">
+    <section id="contact" className="scroll-mt-24 bg-[#FFFEFB]">
       {/* Figma 2149-9338 — 1920 × hug, pt 80 / px 300 / pb 40, gap 10 */}
       <div className="mx-auto grid w-full max-w-[1320px] grid-cols-1 items-stretch gap-10 px-[clamp(16px,4vw,40px)] pb-10 pt-20 lg:grid-cols-2 lg:gap-10">
         <aside className="flex h-auto flex-col justify-between gap-5 overflow-visible lg:h-[518px] lg:max-w-[520px]">
           <div className="flex flex-col gap-5">
             <h2 className="m-0 font-montserrat text-[clamp(26px,7vw,48px)] font-bold leading-[1.15] tracking-[-0.03em] text-[#111827]">
-              <span className="block">Let&apos;s Build Something</span>
-              <span className="block">Users Will Love.</span>
+              {headingLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h2>
 
             <p className="m-0 max-w-[440px] font-montserrat text-[clamp(14px,1.1vw,16px)] font-medium leading-[1.6] text-[#6b7280]">
-              Ready to transform your digital product? Reach out for a free
-              consultation. No obligation. Response within 24 hours.
+              {description}
             </p>
 
             <Link
-              href="mailto:hello@webkarigor.com"
+              href={emailHref}
               className="inline-flex w-full max-md:justify-center items-center gap-2.5 font-montserrat text-[15px] font-semibold text-[#111827] transition-colors hover:text-[#0ec47b] sm:w-fit"
             >
               <Mail className="h-[18px] w-[18px] shrink-0 text-[#111827]" strokeWidth={1.75} aria-hidden />
-              hello@webkarigor.com
+              {email}
             </Link>
           </div>
 
           <div className="flex w-full shrink-0 flex-col items-center text-center sm:w-fit sm:items-start sm:text-left">
             <div className="relative h-[160px] w-[174px]">
               <Image
-                src={PROFILE_IMAGE}
-                alt="Esther Howard"
+                src={profile.image}
+                alt={profile.name}
                 fill
                 className="rounded-[12px] object-cover"
                 sizes="174px"
@@ -64,10 +67,10 @@ export default function ServiceContact() {
             </div>
             <div className="pt-3">
               <p className="m-0 font-montserrat text-[20px] font-bold leading-tight text-[#000000]">
-                Esther Howard
+                {profile.name}
               </p>
               <p className="m-0 mt-1 font-montserrat text-[14px] font-medium text-[#838383]">
-                CEO, Webkarigor
+                {profile.role}
               </p>
             </div>
           </div>
@@ -81,36 +84,36 @@ export default function ServiceContact() {
             <input
               type="text"
               name="name"
-              placeholder="Your Name"
+              placeholder={placeholders.name}
               className={fieldClass}
               required
-              aria-label="Your Name"
+              aria-label={placeholders.name}
             />
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder={placeholders.email}
               className={fieldClass}
               required
-              aria-label="Email"
+              aria-label={placeholders.email}
             />
           </div>
 
           <input
             type="tel"
             name="mobile"
-            placeholder="Mobile"
+            placeholder={placeholders.mobile}
             className={fieldClass}
             required
-            aria-label="Mobile"
+            aria-label={placeholders.mobile}
           />
 
           <input
             type="text"
             name="company"
-            placeholder="Company"
+            placeholder={placeholders.company}
             className={fieldClass}
-            aria-label="Company"
+            aria-label={placeholders.company}
           />
 
           <div className="relative">
@@ -123,7 +126,7 @@ export default function ServiceContact() {
               aria-expanded={typeOpen}
               aria-haspopup="listbox"
             >
-              <span>{projectType || "Project Type"}</span>
+              <span>{projectType || placeholders.projectType}</span>
               <ChevronDown
                 className={`h-4 w-4 shrink-0 text-[#6b7280] transition-transform ${
                   typeOpen ? "rotate-180" : ""
@@ -138,7 +141,7 @@ export default function ServiceContact() {
                 className="absolute left-0 right-0 z-20 mt-1.5 overflow-hidden rounded-[10px] border-[0.5px] border-[#e5e7eb] bg-white shadow-[0_10px_30px_rgba(17,24,39,0.1)]"
                 role="listbox"
               >
-                {PROJECT_TYPES.map((option) => (
+                {projectTypes.map((option) => (
                   <li key={option}>
                     <button
                       type="button"
@@ -161,17 +164,17 @@ export default function ServiceContact() {
           <textarea
             name="details"
             rows={4}
-            placeholder="Project Details"
+            placeholder={placeholders.details}
             className={`${fieldClass} min-h-[112px] flex-1 resize-none`}
             required
-            aria-label="Project Details"
+            aria-label={placeholders.details}
           />
 
           <button
             type="submit"
             className="mt-auto w-full shrink-0 rounded-[12px] bg-[#0EC47B] px-5 py-3.5 font-montserrat text-[15px] font-bold text-white transition-opacity hover:opacity-90"
           >
-            Get Free Quote
+            {submitLabel}
           </button>
         </form>
       </div>

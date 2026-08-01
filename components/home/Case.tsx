@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger, scrollStepsPx } from "@/lib/gsap";
+import homeContent from "@/data/home-content.json";
 
 type CaseItem = {
   number: string;
@@ -22,88 +23,15 @@ type CaseItem = {
   images: string[];
 };
 
-const cases: CaseItem[] = [
-  {
-    number: "(01)",
-    title: "Branding that drives conversion & funding.",
-    description:
-      "We clarify your positioning, define a distinctive tone of voice, and build a visual system that works across acquisition and product. Each sprint ships a robust logo, pragmatic brand guidelines, and a social kit so you can launch fast. The goal is simple: perceived value up.",
-    color: "hsla(246.88524590163937, 56.48%, 42.35%, 1)",
-    href: "/case",
-    quote:
-      "Working with Brand Appart has been an absolute pleasure. Beyond their creativity and professionalism, there's a real sense of kindness and care in everything they do. The team is always open, generous, and never gets stuck on small details, they never say no. I was truly impressed by their reliability, flexibility, and collaborative spirit. I couldn't recommend them more!",
-    author: {
-      name: "Jérémy Bendayan",
-      role: "Co-founder & COO @Jaws Group",
-      image:
-        "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68403ea61d62eda6b245af20_1738708560978.avif",
-    },
-    images: [
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e1f900620069168863_branding-01.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e11dd5b6cd8f6f8560_branding-02.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e1186f7124847bd445_branding-03.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e0f43b55dc529e97b9_branding-04.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e103809778f67dd98c_branding-05.avif",
-    ],
-  },
-  {
-    number: "(02)",
-    title: "Product experiences users adopt & keep using",
-    description:
-      "We start from business goals, map the critical journeys, and prototype what actually moves the needle. Every sprint ships clear flows, a reusable UI library, and a dev-ready. Expect time-to-value down, UX friction down, retention/NPS up.",
-    color: "#f72",
-    href: "/case",
-    quote:
-      "A huge thank you to the entire Brand Appart team for your outstanding work on our rebranding! We're thrilled to have you as an integral part of the Incard team, and we can't wait to reveal what's coming next.",
-    author: {
-      name: "Théo Cesarini",
-      role: "CEO & Co-Founder @Incard & @Fundree",
-      image:
-        "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df0223365b8119da39098_1722618592452.avif",
-    },
-    images: [
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e633760e1dd0f55c0e7c0a_product-01.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63376f869c68f5cea9df4_product-02.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337695e0b1cfdaefcf26_product-03.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337619312f05f66e3d5f_product-04.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337651246334ea0392df_product-05.avif",
-    ],
-  },
-  {
-    number: "(03)",
-    title: "Web Design for growing teams & business.",
-    description:
-      "We align messaging, page architecture, and UI. You get clear structure, sections. The site loads fast, tells the right story, and pushes to action without dev firefighting. Your team gets a scalable base they can evolve without calling us for every change.",
-    color: "#ff3c34",
-    href: "/case",
-    quote:
-      "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is. That speed and agility are exactly what we needed at Ircam Amplify.",
-    author: {
-      name: "Alexis Botaya",
-      role: "Managing director @Sound Experience",
-      image:
-        "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df55bfbee02637c53da16_1664138677695.avif",
-    },
-    images: [
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541167dd0ff79e0f7c6_webdesign-01.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541b8dc1bbd7e988323_webdesign-02.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6354120e45d0ecfb10fb4_webdesign-03.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6354124be687757a781ef_webdesign-04.avif",
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541ae1384d40a6368a5_webdesign-05.avif",
-    ],
-  },
-  {
-    number: "(04)",
-    title: "Investor-proof decks that raise faster.",
-    description:
-      "We craft the narrative that gets meetings and a precise ask. Design serves the story: readable numbers, rhythm across slides, and versions for teaser/one-pager. Your deck can be pitched in 5 minutes, read solo, and generates faster responses.",
-    color: "#785f47",
-    href: "/case",
-    images: [
-      "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e635aa0286520b44dea001_pitch-01.avif",
-    ],
-  },
-];
+const {
+  badge: caseBadge,
+  headingAccent: caseHeadingAccent,
+  headingTitle: caseHeadingTitle,
+  description: caseDescription,
+  cursorLabel,
+} = homeContent.case;
+
+const cases = homeContent.case.items as CaseItem[];
 
 function CaseCursor({
   active,
@@ -123,7 +51,7 @@ function CaseCursor({
         opacity: active ? 1 : 0,
       }}
     >
-      <span className="case-cursor__text">See our case studies</span>
+      <span className="case-cursor__text">{cursorLabel}</span>
       <span className="case-cursor__icon" aria-hidden>
         <svg width="12" height="13" viewBox="0 0 12 13" fill="none">
           <path
@@ -371,15 +299,14 @@ export default function Case() {
       <div className="case-section-inner">
         <div className="case-section-header">
           <span className="case-section-badge">
-            <span className="section-badge-text">Success Across Industries</span>
+            <span className="section-badge-text">{caseBadge}</span>
           </span>
           <h2 className="case-section-heading">
-            <span className="section-heading-split-accent section-accent-text">Delivering</span>
-            <span className="section-heading-split-title">Success</span>
+            <span className="section-heading-split-accent section-accent-text">{caseHeadingAccent}</span>
+            <span className="section-heading-split-title">{caseHeadingTitle}</span>
           </h2>
           <p className="case-section-desc">
-            Helping businesses achieve measurable growth and lasting impact across diverse
-            industries
+            {caseDescription}
           </p>
         </div>
 

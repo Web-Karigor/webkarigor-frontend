@@ -1,0 +1,658 @@
+{
+  "metadata": {
+    "title": "Webkarigor - Company Website",
+    "description": "Webkarigor Company Website"
+  },
+  "navbar": {
+    "brand": "Webkarigor",
+    "desktopLinks": [
+      { "label": "Case", "href": "/projects" },
+      { "label": "Services", "href": "/service" },
+      { "label": "Contact", "href": "/contact-us" },
+      { "label": "About us", "href": "/about-us" }
+    ],
+    "mobileLinks": [
+      { "label": "Case", "href": "/projects" },
+      { "label": "Services", "href": "/service" },
+      { "label": "Contact", "href": "/contact-us" },
+      { "label": "About us", "href": "/about-us" }
+    ],
+    "aria": {
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    }
+  },
+  "hero": {
+    "titleLines": ["To deliver a 360", "AI driven solution", "project approach"],
+    "description": {
+      "beforeHighlight": "Your ",
+      "highlight": "vision",
+      "afterHighlight": " deserves to grow. We create the brand identity, digital experience, and investor-ready story that help ",
+      "badge": "businesses",
+      "afterBadge": " move faster with confidence."
+    },
+    "cta": {
+      "href": "/contact-us",
+      "label": "Say hello. We're listening",
+      "ariaLabel": "Say hello. We're listening",
+      "arrowSrc": "/hero/arrow.png",
+      "avatarSrc": "/hero/hello-avatar.png"
+    },
+    "photos": {
+      "left": "/h2.png",
+      "right": "/h2.png"
+    },
+    "backgroundWord": "PROJECTS"
+  },
+  "stats": {
+    "number": "8",
+    "plus": "+",
+    "label": "Years"
+  },
+  "assets": {
+    "sliderImages": ["/s1.png", "/s2.png", "/s3.png", "/s4.png"],
+    "teamImages": ["/sm1.png", "/sm2.jpg", "/sm3.jpg", "/sm4.png"]
+  },
+  "services": {
+    "badge": "Services",
+    "headingAccent": "We Work to",
+    "headingTitle": "Build Brands",
+    "description": "From idea to execution, we help build brands through modern software, intuitive design, and strategic product thinking that drives real business results.",
+    "seeMoreLabel": "See More",
+    "ctaArrow": "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67326d59201cc3b185432b90_CTA%20Arrow.svg",
+    "items": [
+      {
+        "title": "Web Application Development",
+        "highlight": "And Design",
+        "subtitle": "Fast, scalable, and secure solutions for modern businesses.",
+        "desc": "From concept to deployment, we develop custom web applications engineered for performance and reliability. Our team transforms complex workflows into smooth digital operations, ensuring your platform grows as your business evolves.",
+        "link": "/services/ui-ux",
+        "images": [
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/679a9c4888217669122eebaf_3d41798d228903d42862a148dd56aeb1_Project%20Cards%20%2810%29%20%281%29.avif",
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78087a5b72120cc3e5db_d1a5f14e5e5fc69f2dbac575600f06f4_Project%20Cards-6.avif"
+        ]
+      },
+      {
+        "title": "Mobile App",
+        "highlight": "Development",
+        "subtitle": "Seamless mobile experiences that connect with people.",
+        "desc": "",
+        "link": "/services/web-design",
+        "images": [
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78084947770a14f1eb7c_d1cec41f22346c1c941376236623384b_Project%20Cards.avif",
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78089c9a93e810fbfa6e_Project%20Cards-1.avif"
+        ]
+      },
+      {
+        "title": "Branding & Digital",
+        "highlight": "Identity",
+        "subtitle": "Meaningful brands built to inspire confidence.",
+        "desc": "Logo Design, Brand Identity, Visual Strategy, Social Media Branding.",
+        "link": "/services/logo-branding",
+        "images": [
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac7809638da68108df9847_Project%20Cards-4.avif",
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78089a0d6cfed1675211_Project%20Cards-5.avif"
+        ]
+      },
+      {
+        "title": "Product Strategy & ",
+        "highlight": "Consultation",
+        "subtitle": "Expert guidance to turn ideas into scalable products.",
+        "desc": "Webflow, Framer Prototypes, CMS Integration, Rapid Landing Pages.",
+        "link": "/services/framer-design",
+        "images": [
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac780912dabe81710b65ed_8e70a34a4056237eca17e1209cecdebe_Project%20Cards-2.avif",
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78088c2757d4cdf75977_Project%20Cards-3.avif"
+        ]
+      }
+    ]
+  },
+  "aiFeature": {
+    "badge": "Center of Solution",
+    "headingAccent": "Path to",
+    "headingTitle": "Your Solution",
+    "centerImage": "/ai-feature/center-node.png",
+    "centerAlt": "Webkarigor",
+    "cards": [
+      {
+        "title": "Front-End Excellence",
+        "imageSrc": "/ai-feature/front-end.png"
+      },
+      {
+        "title": "AI-Driven Smart Solutions",
+        "imageSrc": "/ai-feature/ai-driven.png"
+      },
+      {
+        "title": "Scalable Back-End Technology",
+        "imageSrc": "/ai-feature/backend.png"
+      },
+      {
+        "title": "Long-Term Product Thinking",
+        "imageSrc": "/ai-feature/product-thinking.png"
+      },
+      {
+        "title": "Cross-Platform Consistency",
+        "imageSrc": "/ai-feature/cross-platform.png"
+      },
+      {
+        "title": "Branding Feels Trustworthy",
+        "imageSrc": "/ai-feature/branding.png"
+      }
+    ]
+  },
+  "video": {
+    "embedUrl": "https://player.vimeo.com/video/411257859?background=1",
+    "title": "About Video"
+  },
+  "techServices": {
+    "categories": [
+      "Web Design",
+      "SaaS",
+      "Dashboard",
+      "Figma",
+      "Framer",
+      "Webflow",
+      "Mobile App",
+      "E-commerce",
+      "Portfolio",
+      "Branding",
+      "Social Media",
+      "Digital Marketing"
+    ]
+  },
+  "case": {
+    "badge": "Success Across Industries",
+    "headingAccent": "Delivering",
+    "headingTitle": "Success",
+    "description": "Helping businesses achieve measurable growth and lasting impact across diverse industries",
+    "cursorLabel": "See our case studies",
+    "items": [
+      {
+        "number": "(01)",
+        "title": "Branding that drives conversion & funding.",
+        "description": "We clarify your positioning, define a distinctive tone of voice, and build a visual system that works across acquisition and product. Each sprint ships a robust logo, pragmatic brand guidelines, and a social kit so you can launch fast. The goal is simple: perceived value up.",
+        "color": "hsla(246.88524590163937, 56.48%, 42.35%, 1)",
+        "href": "/case",
+        "quote": "Working with Brand Appart has been an absolute pleasure. Beyond their creativity and professionalism, there's a real sense of kindness and care in everything they do. The team is always open, generous, and never gets stuck on small details, they never say no. I was truly impressed by their reliability, flexibility, and collaborative spirit. I couldn't recommend them more!",
+        "author": {
+          "name": "Jérémy Bendayan",
+          "role": "Co-founder & COO @Jaws Group",
+          "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68403ea61d62eda6b245af20_1738708560978.avif"
+        },
+        "images": [
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e1f900620069168863_branding-01.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e11dd5b6cd8f6f8560_branding-02.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e1186f7124847bd445_branding-03.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e0f43b55dc529e97b9_branding-04.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e103809778f67dd98c_branding-05.avif"
+        ]
+      },
+      {
+        "number": "(02)",
+        "title": "Product experiences users adopt & keep using",
+        "description": "We start from business goals, map the critical journeys, and prototype what actually moves the needle. Every sprint ships clear flows, a reusable UI library, and a dev-ready. Expect time-to-value down, UX friction down, retention/NPS up.",
+        "color": "#f72",
+        "href": "/case",
+        "quote": "A huge thank you to the entire Brand Appart team for your outstanding work on our rebranding! We're thrilled to have you as an integral part of the Incard team, and we can't wait to reveal what's coming next.",
+        "author": {
+          "name": "Théo Cesarini",
+          "role": "CEO & Co-Founder @Incard & @Fundree",
+          "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df0223365b8119da39098_1722618592452.avif"
+        },
+        "images": [
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e633760e1dd0f55c0e7c0a_product-01.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63376f869c68f5cea9df4_product-02.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337695e0b1cfdaefcf26_product-03.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337619312f05f66e3d5f_product-04.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337651246334ea0392df_product-05.avif"
+        ]
+      },
+      {
+        "number": "(03)",
+        "title": "Web Design for growing teams & business.",
+        "description": "We align messaging, page architecture, and UI. You get clear structure, sections. The site loads fast, tells the right story, and pushes to action without dev firefighting. Your team gets a scalable base they can evolve without calling us for every change.",
+        "color": "#ff3c34",
+        "href": "/case",
+        "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is. That speed and agility are exactly what we needed at Ircam Amplify.",
+        "author": {
+          "name": "Alexis Botaya",
+          "role": "Managing director @Sound Experience",
+          "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df55bfbee02637c53da16_1664138677695.avif"
+        },
+        "images": [
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541167dd0ff79e0f7c6_webdesign-01.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541b8dc1bbd7e988323_webdesign-02.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6354120e45d0ecfb10fb4_webdesign-03.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6354124be687757a781ef_webdesign-04.avif",
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541ae1384d40a6368a5_webdesign-05.avif"
+        ]
+      },
+      {
+        "number": "(04)",
+        "title": "Investor-proof decks that raise faster.",
+        "description": "We craft the narrative that gets meetings and a precise ask. Design serves the story: readable numbers, rhythm across slides, and versions for teaser/one-pager. Your deck can be pitched in 5 minutes, read solo, and generates faster responses.",
+        "color": "#785f47",
+        "href": "/case",
+        "images": [
+          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e635aa0286520b44dea001_pitch-01.avif"
+        ]
+      }
+    ]
+  },
+  "technologies": {
+    "headingPrefix": "Technologies",
+    "headingAccent": "Used",
+    "footerPrefix": "In",
+    "footerAccent": "Web",
+    "footerSuffix": "karigor",
+    "groups": [
+      {
+        "title": "Back end",
+        "items": [
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
+            "name": "Laravel"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+            "name": "Node js"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+            "name": "Python"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg",
+            "name": "Golang"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+            "name": "Kotlin"
+          }
+        ]
+      },
+      {
+        "title": "Front end",
+        "items": [
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+            "name": "React"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+            "name": "Next js"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+            "name": "Tailwind"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+            "name": "Vue"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+            "name": "Bootstrap"
+          }
+        ]
+      },
+      {
+        "title": "Design",
+        "items": [
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+            "name": "Figma"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg",
+            "name": "Sketch"
+          },
+          {
+            "icon": "https://www.vectorlogo.zone/logos/framer/framer-icon.svg",
+            "name": "Framer"
+          },
+          {
+            "icon": "/technologies/webflow.svg",
+            "name": "Webflow"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg",
+            "name": "Adobe"
+          }
+        ]
+      },
+      {
+        "title": "Tools & Cloud",
+        "items": [
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg",
+            "name": "Notion"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+            "name": "Github"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
+            "name": "Vercel"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg",
+            "name": "Google Workspace"
+          },
+          {
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+            "name": "AWS"
+          }
+        ]
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+    "headingLines": ["Trusted", "by"],
+    "headingAccent": "Founders"
+  },
+  "team": {
+    "mobileTitle": "Expert Team",
+    "mobileSubtitle": "Big Result",
+    "desktopExpertLines": ["Expert", "Team"],
+    "desktopResultLines": ["Big", "Result"],
+    "cardAriaLabel": "Team member",
+    "members": [
+      {
+        "src": "/sm1.png",
+        "name": "Sarah Ahmed",
+        "designation": "Product Designer"
+      },
+      {
+        "src": "/sm2.jpg",
+        "name": "Rakib Hasan",
+        "designation": "Lead Engineer"
+      },
+      {
+        "src": "/sm3.jpg",
+        "name": "Nadia Rahman",
+        "designation": "UX Researcher"
+      },
+      {
+        "src": "/sm4.png",
+        "name": "Arif Khan",
+        "designation": "Brand Strategist"
+      }
+    ]
+  },
+  "pricing": {
+    "badge": "Pricing Plans",
+    "headingAccent": "Fair Pricing for",
+    "headingTitle": "Your Product",
+    "description": "Our packages are designed to fit your product’s stage and ambition. Flexible, transparent, and customizable based on what your business truly needs.",
+    "popularLabel": "Most popular",
+    "featuresHeading": "What's Included:",
+    "cancelLabel": "Cancel any time",
+    "noExtraFee": "No Extra Fee",
+    "billing": {
+      "monthly": "Monthly",
+      "quarterly": "Quarterly"
+    },
+    "plans": [
+      {
+        "id": "starter",
+        "title": "Starter",
+        "description": "Perfect for small projects or testing the waters",
+        "availability": "3 Slots Available, Hurry!",
+        "availabilityTone": "green",
+        "cta": "Book a free call",
+        "price": { "monthly": "$2600", "quarterly": "$2340" },
+        "features": [
+          "40 hours of dedicated design support",
+          "Full-Stack Delivery Team",
+          "All design services included",
+          "Daily communication Slack + Loom",
+          "1 active request per team member",
+          "Hours rollover",
+          "2 meetings per month",
+          "Same-day response time",
+          "Unlimited requests",
+          "Weekly updates and monthly reports",
+          "MUSE'S Hub (Coming soon)**"
+        ],
+        "highlight": false,
+        "customPrice": false
+      },
+      {
+        "id": "accelerate",
+        "title": "Accelerate",
+        "description": "For growing teams with consistent design needs",
+        "availability": "2 Slots Available, Hurry!",
+        "availabilityTone": "red",
+        "availabilityMarquee": true,
+        "cta": "Book a free call",
+        "price": { "monthly": "$4800", "quarterly": "$4320" },
+        "features": [
+          "80 hours of dedicated design support",
+          "Full-Stack Delivery Team",
+          "All design services included",
+          "Daily communication Slack + Loom",
+          "1 active request per team member",
+          "Hours rollover",
+          "Weekly sync meetings",
+          "Same-day response time",
+          "Unlimited requests",
+          "Weekly updates and monthly reports",
+          "MUSE'S Hub (Coming soon)**"
+        ],
+        "highlight": true,
+        "customPrice": false
+      },
+      {
+        "id": "scale",
+        "title": "Scale",
+        "description": "For established businesses with high-volume design demands",
+        "availability": "Limited availability",
+        "availabilityTone": "gray",
+        "cta": "Book a free call",
+        "price": { "monthly": "$7800", "quarterly": "$7020" },
+        "features": [
+          "160 hours of dedicated design support",
+          "Full-Stack Delivery Team",
+          "All design services included",
+          "Daily communication Slack + Loom",
+          "1 active request per team member",
+          "Hours rollover",
+          "Up to 8 meetings per month",
+          "Same-day response time",
+          "Unlimited requests",
+          "Weekly updates and monthly reports",
+          "MUSE'S Hub (Coming soon)**"
+        ],
+        "highlight": false,
+        "customPrice": false
+      },
+      {
+        "id": "enterprise",
+        "title": "Enterprise",
+        "description": "Tailored for large organizations with custom requirements",
+        "availability": "Limited availability",
+        "availabilityTone": "gray",
+        "cta": "Contact Us",
+        "price": { "monthly": "", "quarterly": "" },
+        "features": [
+          "Tailored support based on your needs",
+          "Full-Stack Delivery Team",
+          "All design services included",
+          "Daily communication Slack + Loom",
+          "1 active request per team member",
+          "Hours rollover",
+          "Flexible meetings based on your needs",
+          "Same-day response time",
+          "Unlimited requests",
+          "Weekly updates and monthly reports",
+          "MUSE'S Hub (Coming soon)**"
+        ],
+        "highlight": false,
+        "customPrice": true
+      }
+    ]
+  },
+  "banner": {
+    "backgroundImage": "/rr.png",
+    "titleLines": [
+      "Every product is different",
+      "Your pricing should be too"
+    ],
+    "description": "Looking for a custom solution or specific service?",
+    "ctaLabel": "Request a quote"
+  },
+  "faq": {
+    "headingAccent": "Questions",
+    "headingTitle": "Answered?",
+    "ctaText": "Still curious? We're happy to help",
+    "ctaLabel": "Let's talk",
+    "ctaHref": "/contact-us",
+    "items": [
+      {
+        "question": "Who do you work with and what projects do you take on?",
+        "answer": "We partner with startups, established companies, and agencies of all sizes. Our team takes on digital product design and development projects that are mission-driven and innovative."
+      },
+      {
+        "question": "How do you take a product from idea to launch?",
+        "answer": "We start with understanding your vision, users, and markets. We ideate, wireframe, prototype, design, and develop iteratively, collaborating closely with you through each phase and ensuring each milestone is met before launch."
+      },
+      {
+        "question": "How do you approach UX, design, and technology decisions?",
+        "answer": "All decisions are driven by your business goals, user needs, and best-in-class modern technology. We combine research-driven UX, elegant UI, and practical engineering for scalable solutions."
+      },
+      {
+        "question": "How involved will we be during the project?",
+        "answer": "You stay as involved as you want throughout the project. We encourage your feedback in each phase, use frequent check-ins, and provide clear, collaborative communication. You’re never left in the dark."
+      },
+      {
+        "question": "Do you provide ongoing support after launch?",
+        "answer": "Yes! We offer continuous maintenance, support, and opportunities for evolution and improvement after your product launches. We’re your partner for the long run."
+      },
+      {
+        "question": "How do pricing and timelines work?",
+        "answer": "We offer flexible pricing models (fixed, retainer, or hourly) depending on project needs. Timelines are validated during our initial call and adjusted collaboratively. Transparency is key."
+      }
+    ]
+  },
+  "consultation": {
+    "badge": "Get Free Consultation",
+    "title": "Let's Build Something Great Together",
+    "description": "From your first message to project delivery, we keep the process clear, responsive, and focused on your goals.",
+    "founder": {
+      "image": "/sm4.png",
+      "name": "Esther Howard",
+      "role": "CEO, Webkarigor"
+    },
+    "talkPrompt": "Prefer to talk first?",
+    "whatsapp": {
+      "href": "https://wa.me/8801624283328",
+      "label": "WhatsApp: 01624-283328"
+    },
+    "fields": {
+      "fullName": {
+        "label": "Full Name",
+        "placeholder": "Esther Howard"
+      },
+      "email": {
+        "label": "Contact Email",
+        "placeholder": "your-mail@gmail.com"
+      },
+      "phone": {
+        "label": "Contact Number (WhatsApp)",
+        "placeholder": "123 4567 890"
+      },
+      "region": {
+        "label": "Your Current Region"
+      },
+      "details": {
+        "label": "Project Details",
+        "placeholder": "I need to build my ecommerce dashboard..."
+      }
+    },
+    "schedule": {
+      "dateTitle": "Select a date",
+      "timeTitle": "Pick any time",
+      "timeOptional": "(Optional)",
+      "prevMonthAria": "Previous month",
+      "nextMonthAria": "Next month"
+    },
+    "submitLabel": "Let's Do It",
+    "regions": [
+      { "label": "United States", "flag": "🇺🇸" },
+      { "label": "United Kingdom", "flag": "🇬🇧" },
+      { "label": "Bangladesh", "flag": "🇧🇩" },
+      { "label": "Canada", "flag": "🇨🇦" },
+      { "label": "Australia", "flag": "🇦🇺" }
+    ],
+    "timeSlots": [
+      "9:00 AM",
+      "10:00 AM",
+      "11:00 AM",
+      "12:00 PM",
+      "1:00 PM",
+      "2:00 PM",
+      "3:00 PM",
+      "4:00 PM",
+      "5:00 PM"
+    ],
+    "weekdays": ["S", "M", "T", "W", "T", "F", "S"]
+  },
+  "footer": {
+    "headingLines": [
+      "Let's build what your users will love",
+      "and your business will grow with"
+    ],
+    "taglineParts": ["Build Smarter", "Launch Stronger", "Scale Faster"],
+    "wordmark": "WEBKARIGOR",
+    "linkColumns": [
+      {
+        "title": "Services",
+        "links": [
+          { "label": "Product Design", "href": "/services/product-design" },
+          { "label": "Product Development", "href": "/services/product-development" },
+          { "label": "Branding", "href": "/services/branding" },
+          { "label": "Marketing", "href": "/services/marketing" },
+          { "label": "Consultancy", "href": "/services/consultancy" }
+        ]
+      },
+      {
+        "title": "Industries",
+        "links": [
+          { "label": "E-commerce", "href": "/service/ecommerce" },
+          { "label": "ERP", "href": "/service/erp" },
+          { "label": "Manpower", "href": "/service/manpower" },
+          { "label": "Healthcare", "href": "/industries/healthcare" },
+          { "label": "Fintech", "href": "/industries/fintech" },
+          { "label": "Edtech", "href": "/industries/edtech" },
+          { "label": "CMS", "href": "/industries/cms" }
+        ]
+      },
+      {
+        "title": "Important Link",
+        "links": [
+          { "label": "Team", "href": "/team" },
+          { "label": "Products", "href": "/products" },
+          { "label": "About Us", "href": "/about-us" },
+          { "label": "Contact Us", "href": "/contact-us" },
+          { "label": "Our Policies", "href": "/policies" }
+        ]
+      }
+    ],
+    "socialLinks": [
+      { "id": "linkedin", "label": "LinkedIn", "href": "https://linkedin.com" },
+      { "id": "facebook", "label": "Facebook", "href": "https://facebook.com" },
+      { "id": "github", "label": "GitHub", "href": "https://github.com" },
+      { "id": "vscode", "label": "VS Code", "href": "https://code.visualstudio.com" },
+      { "id": "whatsapp", "label": "WhatsApp", "href": "https://wa.me/" },
+      { "id": "telegram", "label": "Telegram", "href": "https://t.me/" },
+      { "id": "instagram", "label": "Instagram", "href": "https://instagram.com" },
+      { "id": "youtube", "label": "YouTube", "href": "https://youtube.com" },
+      { "id": "behance", "label": "Behance", "href": "https://behance.net" },
+      { "id": "tiktok", "label": "TikTok", "href": "https://tiktok.com" },
+      { "id": "x", "label": "X", "href": "https://x.com" }
+    ]
+  }
+}

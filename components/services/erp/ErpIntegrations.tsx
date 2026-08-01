@@ -1,4 +1,18 @@
-import { ERP_TECH_INNER, ERP_TECH_OUTER } from "@/lib/erp-data";
+import {
+  ERP_INTEGRATIONS_SECTION,
+  ERP_TECH_INNER,
+  ERP_TECH_OUTER,
+} from "@/lib/erp-data";
+
+/** Inner triangle positions — Figma soft disc layout */
+const INNER_LAYOUT = [
+  { top: "22%", left: "50%" },
+  { top: "62%", left: "28%" },
+  { top: "62%", left: "72%" },
+] as const;
+
+/** Outer ring angles (degrees) */
+const OUTER_ANGLES = [-90, -30, 30, 90, 150, 210] as const;
 
 /**
  * Figma Frame 2409-11733 — 1307 × 550, horizontal, gap 212
@@ -12,13 +26,11 @@ export default function ErpIntegrations() {
         {/* Left copy */}
         <div className="w-full max-w-[650px] shrink-0 text-center lg:text-left">
           <h2 className="m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
-            Technologies used in webkarigor
+            {ERP_INTEGRATIONS_SECTION.title}
           </h2>
           {/* Figma: 650×54 · Manrope SemiBold 600 · 18px · LH 150% · #A7A7A7 */}
           <p className="mt-5 m-0 h-auto w-full max-w-[650px] font-manrope text-[18px] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:h-[54px]">
-            We combine strategy, research, and design thinking to create products
-            that not only look good but perform exceptionally well in the real
-            world.
+            {ERP_INTEGRATIONS_SECTION.description}
           </p>
         </div>
 
@@ -43,11 +55,11 @@ export default function ErpIntegrations() {
           />
 
           {/* Inner logos — GitHub / Notion / Figma */}
-          {ERP_TECH_INNER.map((tech) => (
+          {ERP_TECH_INNER.map((tech, index) => (
             <div
               key={tech.name}
               className="absolute z-[2] flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_4px_20px_rgba(15,23,42,0.08)] sm:h-16 sm:w-16"
-              style={tech.style}
+              style={INNER_LAYOUT[index]}
               title={tech.name}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -61,8 +73,9 @@ export default function ErpIntegrations() {
           ))}
 
           {/* Outer orbit logos — positioned by angle on 88% ring */}
-          {ERP_TECH_OUTER.map((tech) => {
-            const rad = (tech.angle * Math.PI) / 180;
+          {ERP_TECH_OUTER.map((tech, index) => {
+            const angle = OUTER_ANGLES[index] ?? 0;
+            const rad = (angle * Math.PI) / 180;
             const radius = 44; // % of container (matches ~88% diameter / 2)
             const left = 50 + radius * Math.cos(rad);
             const top = 50 + radius * Math.sin(rad);

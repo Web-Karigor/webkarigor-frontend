@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MANPOWER_FAQS } from "@/lib/manpower-data";
+import { MANPOWER_FAQS, MANPOWER_FAQ_SECTION } from "@/lib/manpower-data";
 
 export default function ManpowerFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -12,10 +12,10 @@ export default function ManpowerFAQ() {
       <div className="mx-auto flex w-full max-w-[1245px] flex-col gap-12 px-[clamp(16px,4vw,40px)] py-12">
         <div className="text-center">
           <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
-            FAQ
+            {MANPOWER_FAQ_SECTION.eyebrow}
           </p>
           <h2 className="mt-3 font-montserrat text-[clamp(28px,3.2vw,44px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-            Frequently Asked Questions
+            {MANPOWER_FAQ_SECTION.title}
           </h2>
         </div>
 
@@ -58,12 +58,12 @@ export default function ManpowerFAQ() {
         </div>
 
         <p className="m-0 text-center font-montserrat text-[15px] font-medium text-[#667085]">
-          Still curious? We&apos;re happy to help —{" "}
+          {MANPOWER_FAQ_SECTION.footerText}{" "}
           <Link
-            href="#contact"
+            href={MANPOWER_FAQ_SECTION.footerCtaHref}
             className="font-semibold text-[#0ec47b] underline-offset-2 hover:underline"
           >
-            Contact Us
+            {MANPOWER_FAQ_SECTION.footerCta}
           </Link>
         </p>
       </div>

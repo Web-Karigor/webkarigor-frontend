@@ -2,7 +2,10 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
+import servicesContent from "@/data/services-content.json";
 import { SERVICE_OFFERINGS } from "@/lib/services-data";
+
+const { eyebrow, title, description } = servicesContent.offerings;
 
 const CARD_GAP = 24;
 const AUTO_SCROLL_MS = 4500;
@@ -175,15 +178,14 @@ export default function ServiceOfferings() {
         <div className="grid grid-cols-1 items-center gap-[clamp(20px,3vw,32px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,913px)] lg:gap-[clamp(64px,10vw,140px)]">
           <div>
             <span className="mb-3 block font-montserrat text-sm lg:text-2xl font-bold leading-[1.2] tracking-[-0.01em] text-[#15d286]">
-              Industries
+              {eyebrow}
             </span>
             <h2 className="m-0 max-w-[460px] font-['Geist'] text-[clamp(24px,6vw,32px)] font-bold text-black">
-              Design Solutions Tailored for Every Industry
+              {title}
             </h2>
           </div>
           <p className="m-0 w-full max-w-[913px] justify-start text-left font-['Manrope'] text-[clamp(14px,3.5vw,16px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:min-h-[96px] lg:text-[32px]">
-            We&apos;ve partnered with businesses across diverse industries to create
-            digital experiences that solve specific challenges.
+            {description}
           </p>
         </div>
 

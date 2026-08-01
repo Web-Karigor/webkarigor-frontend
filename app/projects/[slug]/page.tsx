@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Footer from "@/components/home/Footer";
+import ProjectHoverCursor from "@/components/projects/ProjectHoverCursor";
 import ProjectDetailsBody from "@/components/projects/details/ProjectDetailsBody";
 import ProjectDetailsCredits from "@/components/projects/details/ProjectDetailsCredits";
 import ProjectDetailsCTA, {
@@ -9,6 +10,7 @@ import ProjectDetailsCTA, {
 import ProjectDetailsHero from "@/components/projects/details/ProjectDetailsHero";
 import ProjectDetailsTestimonial from "@/components/projects/details/ProjectDetailsTestimonial";
 import {
+  PROJECT_DETAILS_METADATA,
   getAllProjectSlugs,
   getProjectDetail,
 } from "@/lib/project-details-data";
@@ -27,10 +29,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectDetail(slug);
   if (!project) {
-    return { title: "Project — Webkarigor" };
+    return { title: PROJECT_DETAILS_METADATA.fallbackTitle };
   }
   return {
-    title: `${project.title} — Webkarigor`,
+    title: `${project.title} — ${PROJECT_DETAILS_METADATA.siteName}`,
     description: project.about.body,
   };
 }
@@ -42,6 +44,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
 
   return (
     <div className="bg-[#FFFDF6]">
+      <ProjectHoverCursor />
       <ProjectDetailsHero project={project} />
       <ProjectDetailsBody project={project} />
       <ProjectDetailsCredits project={project} />

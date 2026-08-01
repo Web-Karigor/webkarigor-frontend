@@ -1,0 +1,116 @@
+{
+  "footer": {
+    "brand": "Webkarigor",
+    "brandHref": "/",
+    "copyright": "© 2024 Webkarigor. All rights reserved.",
+    "ariaLabel": "Footer",
+    "links": [
+      { "label": "About Us", "href": "/about-us" },
+      { "label": "Privacy Policy", "href": "/policies" },
+      { "label": "Terms of Service", "href": "/policies" },
+      { "label": "FAQ", "href": "/service#faq" }
+    ]
+  },
+  "contact": {
+    "headingLines": ["Let's Build Something", "Users Will Love."],
+    "description": "Ready to transform your digital product? Reach out for a free consultation. No obligation. Response within 24 hours.",
+    "email": "hello@webkarigor.com",
+    "emailHref": "mailto:hello@webkarigor.com",
+    "profile": {
+      "image": "/sm4.png",
+      "name": "Esther Howard",
+      "role": "CEO, Webkarigor"
+    },
+    "projectTypes": [
+      "Product Design",
+      "Product Development",
+      "Branding",
+      "Marketing",
+      "Mobile App",
+      "Other"
+    ],
+    "placeholders": {
+      "name": "Your Name",
+      "email": "Email",
+      "mobile": "Mobile",
+      "company": "Company",
+      "projectType": "Project Type",
+      "details": "Project Details"
+    },
+    "submitLabel": "Get Free Quote"
+  },
+  "marquee": {
+    "items": [
+      "Web Design",
+      "SEO",
+      "Marketing",
+      "Branding",
+      "Mobile App",
+      "UI/UX",
+      "Development",
+      "Consulting"
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Frequently Answered Questions",
+    "ctaText": "Still curious? We're happy to help",
+    "ctaLabel": "Let's talk",
+    "ctaHref": "/contact-us",
+    "items": [
+      {
+        "question": "Who do you work with and what projects do you take on?",
+        "answer": "We partner with startups, established companies, and agencies of all sizes. Our team takes on digital product design and development projects that are mission-driven and innovative."
+      },
+      {
+        "question": "How do you take a product from idea to launch?",
+        "answer": "We start with understanding your vision, users, and markets. We ideate, wireframe, prototype, design, and develop iteratively, collaborating closely with you through each phase and ensuring each milestone is met before launch."
+      },
+      {
+        "question": "How do you approach UX, design, and technology decisions?",
+        "answer": "All decisions are driven by your business goals, user needs, and best-in-class modern technology. We combine research-driven UX, elegant UI, and practical engineering for scalable solutions."
+      },
+      {
+        "question": "How involved will we be during the project?",
+        "answer": "You stay as involved as you want throughout the project. We encourage your feedback in each phase, use frequent check-ins, and provide clear, collaborative communication. You're never left in the dark."
+      },
+      {
+        "question": "Do you provide ongoing support after launch?",
+        "answer": "Yes! We offer continuous maintenance, support, and opportunities for evolution and improvement after your product launches. We're your partner for the long run."
+      },
+      {
+        "question": "How do pricing and timelines work?",
+        "answer": "We offer flexible pricing models (fixed, retainer, or hourly) depending on project needs. Timelines are validated during our initial call and adjusted collaboratively. Transparency is key."
+      }
+    ]
+  },
+  "teamSection": {
+    "headingLines": ["Expert Team", "Big Result"],
+    "featuredPhoto": {
+      "src": "/sm2.jpg",
+      "alt": "Team member — top right"
+    },
+    "photos": [
+      {
+        "src": "/sm1.png",
+        "alt": "Team member — middle left",
+        "className": "absolute left-0 top-[22%] z-[2] h-[clamp(124px,15vw,168px)] w-[clamp(124px,15vw,168px)]"
+      },
+      {
+        "src": "/h2.png",
+        "alt": "Team member — center small",
+        "className": "absolute left-[40%] top-[44%] z-[4] h-[clamp(68px,8.5vw,92px)] w-[clamp(68px,8.5vw,92px)] rounded-[20px] max-sm:rounded-[14px]"
+      },
+      {
+        "src": "/sm3.jpg",
+        "alt": "Team member — bottom left",
+        "className": "absolute bottom-0 left-[4%] z-[3] h-[clamp(148px,18vw,200px)] w-[clamp(148px,18vw,200px)]"
+      },
+      {
+        "src": "/sm4.png",
+        "alt": "Team member — bottom right",
+        "className": "absolute bottom-[10%] right-[4%] z-[2] h-[clamp(112px,14vw,152px)] w-[clamp(112px,14vw,152px)]"
+      }
+    ]
+  }
+}

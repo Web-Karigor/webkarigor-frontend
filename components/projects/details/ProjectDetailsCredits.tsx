@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import type { ProjectDetail } from "@/lib/project-details-data";
+import {
+  PROJECT_DETAILS_UI,
+  type ProjectDetail,
+} from "@/lib/project-details-data";
 import { PD } from "@/lib/project-details-layout";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -23,7 +26,7 @@ export default function ProjectDetailsCredits({ project }: { project: ProjectDet
             transition={{ duration: 1, ease }}
             className="m-0 font-montserrat text-[clamp(24px,6vw,40px)] font-bold leading-[130%] tracking-[-0.03em] text-[#0A0A0A]"
           >
-            CREDITS
+            {PROJECT_DETAILS_UI.credits}
           </motion.h2>
 
           <div className="mt-8 grid grid-cols-1 gap-x-6 sm:mt-10 sm:grid-cols-2 md:gap-x-10 lg:gap-x-20">

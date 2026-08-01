@@ -4,12 +4,14 @@ type CircuitPathProps = {
   path: string;
   dotPath?: string;
   delay?: number;
+  duration?: number;
 };
 
 export default function CircuitPath({
   path,
   dotPath,
   delay = 0,
+  duration,
 }: CircuitPathProps) {
   if (!path) return null;
 
@@ -24,7 +26,7 @@ export default function CircuitPath({
         strokeLinejoin="round"
         fill="none"
       />
-      <AnimatedDot path={dotPath ?? path} delay={delay} />
+      <AnimatedDot path={dotPath ?? path} delay={delay} duration={duration} />
     </g>
   );
 }

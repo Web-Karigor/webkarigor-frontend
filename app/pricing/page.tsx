@@ -9,11 +9,11 @@ import FAQ from "@/components/home/FAQ";
 import TrustedFounders from "@/components/home/TrustedFounders";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import Footer from "@/components/home/Footer";
+import { PRICING_METADATA } from "@/lib/pricing-data";
 
 export const metadata: Metadata = {
-  title: "Pricing — Webkarigor",
-  description:
-    "Transparent monthly pricing for product design and development. Seed, Growth, and Expert plans with no long-term contracts.",
+  title: PRICING_METADATA.title,
+  description: PRICING_METADATA.description,
 };
 
 export default function PricingPage() {

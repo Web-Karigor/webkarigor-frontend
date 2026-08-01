@@ -1,30 +1,6 @@
 import type { FeatureCardData } from "./types";
+import homeContent from "@/data/home-content.json";
 
-const cards: FeatureCardData[] = [
-  {
-    title: "Front-End Excellence",
-    imageSrc: "/ai-feature/front-end.png",
-  },
-  {
-    title: "AI-Driven Smart Solutions",
-    imageSrc: "/ai-feature/ai-driven.png",
-  },
-  {
-    title: "Scalable Back-End Technology",
-    imageSrc: "/ai-feature/backend.png",
-  },
-  {
-    title: "Long-Term Product Thinking",
-    imageSrc: "/ai-feature/product-thinking.png",
-  },
-  {
-    title: "Cross-Platform Consistency",
-    imageSrc: "/ai-feature/cross-platform.png",
-  },
-  {
-    title: "Branding Feels Trustworthy",
-    imageSrc: "/ai-feature/branding.png",
-  },
-];
+const cards = homeContent.aiFeature.cards as FeatureCardData[];
 
 export { cards as featureCards };

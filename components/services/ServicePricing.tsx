@@ -1,5 +1,14 @@
 import { Check } from "lucide-react";
+import servicesContent from "@/data/services-content.json";
 import { PRICING_MARKETS } from "@/lib/services-data";
+
+const {
+  eyebrow,
+  title,
+  description,
+  whatYouGetLabel,
+  ctaLabel,
+} = servicesContent.pricing;
 
 export default function ServicePricing() {
   return (
@@ -7,15 +16,13 @@ export default function ServicePricing() {
       <div className="mx-auto w-full max-w-[1800px] px-[clamp(16px,4vw,40px)]">
         <div className="mx-auto mb-[clamp(32px,5vw,48px)] max-w-[760px] text-center">
           <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
-            Pricing Plane
+            {eyebrow}
           </p>
           <h2 className="mt-3 font-montserrat text-[clamp(28px,3.2vw,44px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-            Fair Pricing for Your Product
+            {title}
           </h2>
           <p className="mx-auto mt-3 max-w-[680px] font-montserrat text-[clamp(13px,1vw,16px)] font-medium leading-[1.5] text-[#98a2b3]">
-            Our packages are designed to fit your product&apos;s stage and ambition.
-            Flexible, transparent, and customizable based on what your business
-            truly needs.
+            {description}
           </p>
         </div>
 
@@ -60,7 +67,7 @@ export default function ServicePricing() {
 
                       <div className="flex w-full flex-1 flex-col">
                         <p className="m-0 font-montserrat text-[15px] font-bold text-[#111827]">
-                          What you get:
+                          {whatYouGetLabel}
                         </p>
                         <ul className="mt-2.5 flex list-none flex-col gap-2.5 p-0">
                           {plan.features.map((feature) => (
@@ -81,7 +88,7 @@ export default function ServicePricing() {
                         type="button"
                         className="mt-auto w-full rounded-full bg-[#0EC47B] px-5 py-3.5 font-montserrat text-[14px] font-bold text-white transition-opacity hover:opacity-90"
                       >
-                        Explore This Package
+                        {ctaLabel}
                       </button>
                     </article>
                   ))}

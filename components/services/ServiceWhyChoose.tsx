@@ -1,36 +1,29 @@
 import Image from "next/image";
-import { LayoutGrid, Target, TrendingUp, Users } from "lucide-react";
+import { LayoutGrid, Target, TrendingUp, Users, type LucideIcon } from "lucide-react";
+import servicesContent from "@/data/services-content.json";
 
-const FEATURE_CARDS = [
-  {
-    title: "User-Centered Design",
-    description:
-      "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
-    icon: Target,
-  },
-  {
-    title: "Business-Focused",
-    description:
-      "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
-    icon: TrendingUp,
-  },
-  {
-    title: "Collaborative Process",
-    description:
-      "We act as an extension of your team, maintaining transparent communication throughout.",
-    icon: Users,
-  },
-  {
-    title: "Scalable Systems",
-    description:
-      "We deliver robust design systems that make future development faster and consistent.",
-    icon: LayoutGrid,
-  },
-] as const;
+const {
+  eyebrow,
+  title,
+  description,
+  images,
+  hireUsLabels,
+  features,
+} = servicesContent.whyChoose;
+
+const FEATURE_ICONS = {
+  target: Target,
+  trendingUp: TrendingUp,
+  users: Users,
+  layoutGrid: LayoutGrid,
+} as const satisfies Record<string, LucideIcon>;
+
+const FEATURE_CARDS = features.map((feature) => ({
+  ...feature,
+  icon: FEATURE_ICONS[feature.icon as keyof typeof FEATURE_ICONS],
+}));
 
 function HireUsBadge() {
-  const labels = ["HIRE US", "HIRE US", "HIRE US"] as const;
-
   return (
     <div className="relative h-full w-full drop-shadow-[0_12px_28px_rgba(4,96,67,0.22)]">
       <svg viewBox="0 0 200 200" className="h-full w-full" aria-hidden>
@@ -63,7 +56,7 @@ function HireUsBadge() {
           className="animate-hireus-spin"
           style={{ transformOrigin: "100px 100px" }}
         >
-          {labels.map((label, index) => (
+          {hireUsLabels.map((label, index) => (
             <text
               key={`${label}-${index}`}
               fill="#ffffff"
@@ -102,15 +95,13 @@ export default function ServiceWhyChoose() {
         {/* Header — Figma Frame: 650 × 151 Hug */}
         <div className="mx-auto mb-[clamp(36px,5vw,56px)] flex w-full max-w-[650px] flex-col items-center gap-3 text-center lg:min-h-[151px] lg:justify-center">
           <p className="m-0 font-montserrat text-[18px] font-semibold leading-none text-[#15d286] lg:text-[20px]">
-            Why Webkarigor
+            {eyebrow}
           </p>
           <h2 className="m-0 font-montserrat text-[28px] font-bold leading-[1.15] tracking-[-0.02em] text-black sm:text-[32px] lg:text-[36px]">
-            More Than Beautiful Interfaces
+            {title}
           </h2>
           <p className="m-0 max-w-[650px] font-montserrat text-[14px] font-medium leading-[1.4] text-[#98a2b3] sm:text-[15px] lg:text-[16px]">
-            We combine strategy, research, and design thinking to create products
-            that not only look good but perform exceptionally well in the real
-            world.
+            {description}
           </p>
         </div>
 
@@ -124,8 +115,8 @@ export default function ServiceWhyChoose() {
           <div className="grid w-full max-w-[728px] shrink-0 grid-cols-[1fr_1.05fr] gap-4 lg:h-[631px] lg:gap-5">
             <div className="relative min-h-[320px] overflow-hidden rounded-[20px] shadow-[0_12px_32px_rgba(0,0,0,0.08)] lg:min-h-0 lg:h-full">
               <Image
-                src="/sm1.png"
-                alt="Team collaboration"
+                src={images.left.src}
+                alt={images.left.alt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 50vw, 350px"
@@ -135,8 +126,8 @@ export default function ServiceWhyChoose() {
             <div className="grid h-full grid-rows-[1.15fr_auto] gap-4 lg:gap-5">
               <div className="relative min-h-[200px] overflow-hidden rounded-[20px] shadow-[0_12px_32px_rgba(0,0,0,0.08)] lg:min-h-0">
                 <Image
-                  src="/sm3.jpg"
-                  alt="Design review session"
+                  src={images.right.src}
+                  alt={images.right.alt}
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 360px"

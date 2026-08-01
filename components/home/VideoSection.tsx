@@ -4,6 +4,9 @@ import "./VideoSection.css";
 
 import { useRef, useLayoutEffect } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import homeContent from "@/data/home-content.json";
+
+const { embedUrl, title: videoTitle } = homeContent.video;
 
 /**
  * Video expands only once it's dead-center in the viewport (Noomo-style).
@@ -14,9 +17,6 @@ const VideoSection = () => {
   const stageRef = useRef<HTMLDivElement>(null);
   const tiltRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
-
-  const embedUrl =
-    "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=1&loop=1&playlist=dQw4w9WgXcQ";
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -42,7 +42,7 @@ const VideoSection = () => {
         });
 
         gsap.set(frame, {
-          scale: 0.62,
+          scale: 0.55,
           borderRadius: "2.75rem",
           force3D: true,
           transformOrigin: "50% 50%",
@@ -50,25 +50,29 @@ const VideoSection = () => {
           backfaceVisibility: "hidden",
         });
 
-        /**
-         * start: video center hits viewport center → pin in the middle
-         * then scrub-grow while locked at center (Noomo cinematic feel)
-         */
-        gsap.to(frame, {
-          scale: 1,
-          borderRadius: "1.75rem",
-          ease: "power2.inOut",
-          force3D: true,
+        // Zoom finishes early; remaining scroll keeps full-size video pinned
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: stage,
             start: "center center",
-            end: "+=180%",
+            end: "+=260%",
             pin: true,
             pinSpacing: true,
             scrub: 2.4,
             anticipatePin: 1,
             invalidateOnRefresh: true,
           },
+        });
+
+        tl.to(frame, {
+          scale: 1,
+          borderRadius: "1.75rem",
+          ease: "power2.inOut",
+          force3D: true,
+          duration: 1,
+        }).to(frame, {
+          // hold at full zoom while user keeps scrolling
+          duration: 0.7,
         });
 
         const quickRotY = gsap.quickTo(tilt, "rotateY", {
@@ -115,18 +119,6 @@ const VideoSection = () => {
       className="relative bg-[#FFFDF6] px-5 py-10 max-lg:overflow-x-hidden lg:overflow-hidden lg:px-4 lg:py-10 xl:px-6 xl:py-12 2xl:py-20"
     >
       <div className="mx-auto w-full max-w-[1860px] max-lg:max-w-full">
-        <div className="mb-6 text-center max-lg:mb-8 lg:mb-8 xl:mb-12 2xl:mb-16">
-          <span className="inline-block rounded-full border border-[#38F8AB] px-4 py-2 text-sm font-medium text-[#15D286] sm:px-5">
-            What make us different?
-          </span>
-
-          <h2 className="section-heading">
-            <span className="section-heading-split-accent section-accent-text">
-              Your Growth
-            </span>
-            <span className="section-heading-split-title">Is Our Mission</span>
-          </h2>
-        </div>
 
         <div
           ref={stageRef}
@@ -135,15 +127,16 @@ const VideoSection = () => {
           <div ref={tiltRef} className="w-full lg:[transform-style:preserve-3d]">
             <div
               ref={frameRef}
-              className="video-section-frame relative mx-auto flex w-full max-w-full items-center justify-center overflow-hidden rounded-[1.5rem] bg-black shadow-[0_12px_40px_rgba(0,0,0,0.12)] max-lg:aspect-video max-lg:min-h-0 max-lg:max-h-none lg:max-h-[1039px] lg:min-h-[min(48vw,280px)] lg:shadow-[0_24px_80px_rgba(0,0,0,0.18)] lg:rounded-[2.5rem] xl:min-h-[48vw]"
+              className="video-section-frame relative mx-auto w-full max-w-full overflow-hidden rounded-[1.5rem] shadow-[0_12px_40px_rgba(0,0,0,0.12)] max-lg:aspect-video max-lg:min-h-0 max-lg:max-h-none lg:max-h-[1039px] lg:min-h-[min(48vw,280px)] lg:shadow-[0_24px_80px_rgba(0,0,0,0.18)] lg:rounded-[2.5rem] xl:min-h-[48vw]"
             >
               <iframe
                 src={embedUrl}
-                className="video-section-iframe pointer-events-auto absolute inset-0 h-full w-full rounded-[1.5rem] lg:scale-x-150 lg:scale-y-125 lg:rounded-[2.5rem]"
-                title="About Video"
+                className="video-section-iframe pointer-events-none absolute border-0"
+                title={videoTitle}
                 frameBorder="0"
-                allow="autoplay"
+                allow="autoplay; picture-in-picture"
                 allowFullScreen
+                sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox"
               />
             </div>
           </div>

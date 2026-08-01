@@ -1,0 +1,20 @@
+.global-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10050;
+  border-radius: 50%;
+  pointer-events: none;
+  background: #ffffff;
+  opacity: 0;
+  mix-blend-mode: difference;
+  transform: translate3d(-999px, -999px, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+
+html.global-cursor-active,
+html.global-cursor-active * {
+  cursor: none !important;
+}

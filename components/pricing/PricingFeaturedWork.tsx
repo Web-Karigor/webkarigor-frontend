@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { FEATURED_WORK } from "@/lib/pricing-data";
+import { FEATURED_WORK, FEATURED_WORK_SECTION } from "@/lib/pricing-data";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.15 } as const;
@@ -13,6 +13,7 @@ const vp = { once: true, amount: 0.15 } as const;
 const FEATURED_W = 1521;
 
 export default function PricingFeaturedWork() {
+  const { title, description, seeAll } = FEATURED_WORK_SECTION;
   const [topLeft, topRight, bottomLeft, bottomMid, bottomRight] = FEATURED_WORK;
 
   return (
@@ -30,19 +31,18 @@ export default function PricingFeaturedWork() {
           style={{ maxWidth: FEATURED_W }}
         >
           <h2 className="m-0 mx-auto max-w-[900px] text-center font-montserrat text-[clamp(28px,3.6vw,48px)] font-bold leading-[1.2] tracking-[-0.03em] text-white">
-            Featured Work That Turns Ideas Into Digital Products
+            {title}
           </h2>
 
           <div className="mt-6 flex flex-col items-start justify-between gap-4 sm:mt-8 sm:flex-row sm:items-end">
             <p className="m-0 max-w-[520px] font-montserrat text-[15px] font-medium leading-[1.6] text-white/70 sm:text-[16px]">
-              Explore selected work that highlights our design, development, and
-              problem-solving approach.
+              {description}
             </p>
             <Link
-              href="/projects"
+              href={seeAll.href}
               className="inline-flex shrink-0 items-center gap-1.5 font-montserrat text-[15px] font-semibold text-white transition hover:opacity-80"
             >
-              See All
+              {seeAll.label}
               <ArrowRight className="h-4 w-4" strokeWidth={2.5} aria-hidden />
             </Link>
           </div>

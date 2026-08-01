@@ -6,6 +6,9 @@ import CenterNode from "./CenterNode";
 import SvgConnections from "./SvgConnections";
 import { useCircuitGeometry } from "./useCircuitGeometry";
 import { featureCards } from "./cards-data";
+import homeContent from "@/data/home-content.json";
+
+const { badge, headingAccent, headingTitle } = homeContent.aiFeature;
 
 export default function FeatureNetwork() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -27,14 +30,14 @@ export default function FeatureNetwork() {
       <div className="ai-feature-content relative z-[2] mx-auto max-w-6xl">
         <div className="mb-12 text-center sm:mb-16 md:mb-24 lg:mb-36">
           <span className="inline-flex h-7 min-w-0 items-center justify-center rounded-full border border-[#38F8AB] bg-[#38F8AB]/10 px-4 sm:min-w-[156px] sm:px-5">
-            <span className="section-badge-text">Center of Solution</span>
+            <span className="section-badge-text">{badge}</span>
           </span>
 
           <h2 className="section-heading">
             <span className="section-heading-split-accent section-accent-text">
-              Path to
+              {headingAccent}
             </span>
-            <span className="section-heading-split-title">Your Solution</span>
+            <span className="section-heading-split-title">{headingTitle}</span>
           </h2>
         </div>
 

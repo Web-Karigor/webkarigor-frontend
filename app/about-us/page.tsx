@@ -8,11 +8,11 @@ import AboutWhyChoose from "@/components/about/AboutWhyChoose";
 import FAQ from "@/components/home/FAQ";
 import Footer from "@/components/home/Footer";
 import HomeConsultation from "@/components/home/HomeConsultation";
+import { ABOUT_METADATA } from "@/lib/about-data";
 
 export const metadata: Metadata = {
-  title: "About Us — Webkarigor",
-  description:
-    "Building digital products that empower businesses and delight users. Learn about Webkarigor’s vision, team, and approach.",
+  title: ABOUT_METADATA.title,
+  description: ABOUT_METADATA.description,
 };
 
 export default function AboutUsPage() {

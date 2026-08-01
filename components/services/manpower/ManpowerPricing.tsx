@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { MANPOWER_PRICING_PLANS } from "@/lib/manpower-data";
+import { MANPOWER_PRICING_PLANS, MANPOWER_PRICING_SECTION } from "@/lib/manpower-data";
 
 const PRICE_COLORS = {
   dark: "text-[#1f1e1c]",
@@ -14,14 +14,13 @@ export default function ManpowerPricing() {
       <div className="mx-auto w-full max-w-[1100px] px-[clamp(16px,4vw,40px)]">
         <div className="mx-auto max-w-[680px] text-center">
           <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#0EC47B]">
-            Pricing plan
+            {MANPOWER_PRICING_SECTION.eyebrow}
           </p>
           <h2 className="mt-3 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#1f1e1c]">
-            The Right Plan for Your Business
+            {MANPOWER_PRICING_SECTION.title}
           </h2>
           <p className="mx-auto mt-3 max-w-[620px] font-montserrat text-[clamp(13px,1vw,16px)] font-medium leading-[1.55] text-[#98A2B3]">
-            Flexible manpower packages for startups and enterprises — scale your
-            team without the usual overhead.
+            {MANPOWER_PRICING_SECTION.description}
           </p>
         </div>
 
@@ -40,13 +39,13 @@ export default function ManpowerPricing() {
               >
                 {recommended && (
                   <div className="shrink-0 bg-[#0EC47B] px-4 py-2.5 text-center font-montserrat text-[12px] font-bold uppercase tracking-[0.08em] text-white">
-                    Most Popular
+                    {MANPOWER_PRICING_SECTION.recommendedLabel}
                   </div>
                 )}
 
                 <div className="flex min-h-0 flex-1 flex-col px-7 pb-7 pt-8">
                   <p
-                    className={`m-0 font-montserrat text-[48px] font-bold leading-none ${PRICE_COLORS[plan.priceColor]}`}
+                    className={`m-0 font-montserrat text-[48px] font-bold leading-none ${PRICE_COLORS[plan.priceColor as keyof typeof PRICE_COLORS]}`}
                   >
                     {plan.price}
                     <span className="ml-1.5 align-middle text-[14px] font-medium text-[#98A2B3]">
@@ -79,14 +78,14 @@ export default function ManpowerPricing() {
 
                   <div className="mt-auto pt-6">
                     <Link
-                      href="#contact"
+                      href={MANPOWER_PRICING_SECTION.ctaHref}
                       className={`inline-flex w-full items-center justify-between rounded-[10px] px-5 py-3.5 font-montserrat text-[14px] font-bold transition-opacity hover:opacity-90 ${
                         recommended
                           ? "bg-[#0EC47B] text-white"
                           : "border border-[#0EC47B] bg-white text-[#0EC47B]"
                       }`}
                     >
-                      <span>Get Started</span>
+                      <span>{MANPOWER_PRICING_SECTION.cta}</span>
                       <ArrowRight className="h-4 w-4" strokeWidth={2.5} aria-hidden />
                     </Link>
                   </div>

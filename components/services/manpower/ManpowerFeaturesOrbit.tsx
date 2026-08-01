@@ -1,19 +1,39 @@
 import { MANPOWER_TECH_ORBIT } from "@/lib/manpower-data";
 
+/** Figma 2409-12229 — 967 × 650 orbit geometry */
+const FRAME = { width: 967, height: 650 } as const;
+const RINGS = [
+  { rx: 215, ry: 175, opacity: 0.1 },
+  { rx: 275, ry: 225, opacity: 0.2 },
+  { rx: 335, ry: 275, opacity: 0.4 },
+] as const;
+const LEFT_CENTER = { x: 375, y: 325 } as const;
+const RIGHT_CENTER = { x: 592, y: 325 } as const;
+
+/** Icon placement by index — matches MANPOWER_TECH_ORBIT.icons order */
+const ICON_LAYOUT = [
+  { side: "left" as const, ring: 2, angle: -130, size: 56 },
+  { side: "left" as const, ring: 2, angle: -100, size: 54 },
+  { side: "left" as const, ring: 1, angle: 180, size: 68 },
+  { side: "left" as const, ring: 2, angle: 130, size: 52 },
+  { side: "left" as const, ring: 2, angle: 100, size: 56 },
+  { side: "left" as const, ring: 0, angle: 158, size: 50 },
+  { side: "left" as const, ring: 0, angle: 135, size: 50 },
+  { side: "right" as const, ring: 2, angle: -50, size: 54 },
+  { side: "right" as const, ring: 2, angle: 0, size: 78 },
+  { side: "right" as const, ring: 2, angle: 50, size: 54 },
+  { side: "right" as const, ring: 1, angle: -65, size: 48 },
+  { side: "right" as const, ring: 0, angle: -12, size: 54 },
+  { side: "right" as const, ring: 0, angle: 72, size: 50 },
+  { side: "right" as const, ring: 1, angle: 78, size: 52 },
+] as const;
+
 /**
  * Figma 2409-12229 — 967 × 650
  * Left 3 arcs + Right 3 arcs (separate) · tight middle · icons both sides
  */
 export default function ManpowerFeaturesOrbit() {
-  const {
-    title,
-    description,
-    frame,
-    rings,
-    leftCenter,
-    rightCenter,
-    icons,
-  } = MANPOWER_TECH_ORBIT;
+  const { title, description, icons } = MANPOWER_TECH_ORBIT;
 
   return (
     <section className="w-full overflow-hidden py-8 md:py-12">
@@ -30,22 +50,22 @@ export default function ManpowerFeaturesOrbit() {
       <div className="mx-auto flex w-full max-w-[1920px] items-center justify-center px-4 md:px-[clamp(16px,4vw,48px)]">
         <div
           className="relative mx-auto w-full max-w-[min(100%,360px)] [--mp-icon-scale:0.72] sm:max-w-[min(100%,440px)] sm:[--mp-icon-scale:0.82] lg:max-w-[967px] lg:[--mp-icon-scale:1]"
-          style={{ aspectRatio: `${frame.width} / ${frame.height}` }}
+          style={{ aspectRatio: `${FRAME.width} / ${FRAME.height}` }}
         >
           <svg
             aria-hidden
             className="pointer-events-none absolute inset-0 h-full w-full"
-            viewBox={`0 0 ${frame.width} ${frame.height}`}
+            viewBox={`0 0 ${FRAME.width} ${FRAME.height}`}
             fill="none"
           >
             <defs>
               <linearGradient
                 id="mp-orbit-grad-l"
                 gradientUnits="userSpaceOnUse"
-                x1={leftCenter.x - 335}
-                y1={leftCenter.y}
-                x2={leftCenter.x + 335}
-                y2={leftCenter.y}
+                x1={LEFT_CENTER.x - 335}
+                y1={LEFT_CENTER.y}
+                x2={LEFT_CENTER.x + 335}
+                y2={LEFT_CENTER.y}
               >
                 <stop offset="0%" stopColor="#1565D8" />
                 <stop offset="50%" stopColor="#F8FBFF" />
@@ -54,10 +74,10 @@ export default function ManpowerFeaturesOrbit() {
               <linearGradient
                 id="mp-orbit-grad-r"
                 gradientUnits="userSpaceOnUse"
-                x1={rightCenter.x - 335}
-                y1={rightCenter.y}
-                x2={rightCenter.x + 335}
-                y2={rightCenter.y}
+                x1={RIGHT_CENTER.x - 335}
+                y1={RIGHT_CENTER.y}
+                x2={RIGHT_CENTER.x + 335}
+                y2={RIGHT_CENTER.y}
               >
                 <stop offset="0%" stopColor="#FFFFFF" />
                 <stop offset="50%" stopColor="#F8FBFF" />
@@ -65,11 +85,11 @@ export default function ManpowerFeaturesOrbit() {
               </linearGradient>
             </defs>
 
-            {rings.map((ring, i) => (
+            {RINGS.map((ring, i) => (
               <ellipse
                 key={`left-${i}`}
-                cx={leftCenter.x}
-                cy={leftCenter.y}
+                cx={LEFT_CENTER.x}
+                cy={LEFT_CENTER.y}
                 rx={ring.rx}
                 ry={ring.ry}
                 stroke="url(#mp-orbit-grad-l)"
@@ -78,11 +98,11 @@ export default function ManpowerFeaturesOrbit() {
               />
             ))}
 
-            {rings.map((ring, i) => (
+            {RINGS.map((ring, i) => (
               <ellipse
                 key={`right-${i}`}
-                cx={rightCenter.x}
-                cy={rightCenter.y}
+                cx={RIGHT_CENTER.x}
+                cy={RIGHT_CENTER.y}
                 rx={ring.rx}
                 ry={ring.ry}
                 stroke="url(#mp-orbit-grad-r)"
@@ -102,24 +122,26 @@ export default function ManpowerFeaturesOrbit() {
             </p>
           </div>
 
-          {icons.map((tech) => {
-            const center = tech.side === "left" ? leftCenter : rightCenter;
-            const ring = rings[tech.ring];
-            const rad = (tech.angle * Math.PI) / 180;
+          {icons.map((tech, index) => {
+            const layout = ICON_LAYOUT[index];
+            if (!layout) return null;
+            const center = layout.side === "left" ? LEFT_CENTER : RIGHT_CENTER;
+            const ring = RINGS[layout.ring];
+            const rad = (layout.angle * Math.PI) / 180;
             const x = center.x + ring.rx * Math.cos(rad);
             const y = center.y + ring.ry * Math.sin(rad);
             const iconWidth =
-              ((tech.size / frame.width) * 100).toFixed(4) + "%";
+              ((layout.size / FRAME.width) * 100).toFixed(4) + "%";
 
             return (
               <div
                 key={tech.name}
                 className={`absolute z-[2] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_6px_22px_rgba(15,23,42,0.1)] ${
-                  tech.ring === 0 ? "max-sm:hidden" : ""
+                  layout.ring === 0 ? "max-sm:hidden" : ""
                 }`}
                 style={{
-                  left: `${(x / frame.width) * 100}%`,
-                  top: `${(y / frame.height) * 100}%`,
+                  left: `${(x / FRAME.width) * 100}%`,
+                  top: `${(y / FRAME.height) * 100}%`,
                   width: `calc(${iconWidth} * var(--mp-icon-scale))`,
                   aspectRatio: "1 / 1",
                 }}

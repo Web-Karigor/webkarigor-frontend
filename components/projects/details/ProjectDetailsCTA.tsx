@@ -4,7 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import type { ProjectDetail } from "@/lib/project-details-data";
+import {
+  PROJECT_DETAILS_UI,
+  type ProjectDetail,
+} from "@/lib/project-details-data";
 import { PD } from "@/lib/project-details-layout";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -23,7 +26,7 @@ export default function ProjectDetailsCTA({ project }: { project: ProjectDetail 
         style={{ maxWidth: PD.cta.w }}
       >
         <h2 className="m-0 font-montserrat text-[clamp(24px,5.5vw,42px)] font-bold leading-[130%] tracking-[-0.03em] text-black">
-          Have a project idea in mind?
+          {PROJECT_DETAILS_UI.ctaTitle}
         </h2>
         <p className="m-0 max-w-[780px] font-montserrat text-[clamp(14px,3.5vw,16px)] font-medium leading-[170%] text-black">
           {project.ctaBody}
@@ -32,7 +35,7 @@ export default function ProjectDetailsCTA({ project }: { project: ProjectDetail 
           href="/#contact"
           className="inline-flex h-11 items-center justify-center rounded-[10px] border border-black bg-transparent px-6 font-montserrat text-[14px] font-bold leading-none text-black transition hover:bg-black hover:text-white sm:h-[48px] sm:px-8 sm:text-[15px]"
         >
-          Let’s get started
+          {PROJECT_DETAILS_UI.ctaButton}
         </Link>
       </motion.div>
 
@@ -50,7 +53,7 @@ export default function ProjectDetailsCTA({ project }: { project: ProjectDetail 
           className="mx-auto flex w-full items-center justify-center gap-2 border-y border-[#8E8874]/50 px-4 py-5 font-montserrat text-[11px] font-medium tracking-[0.08em] text-[#8E8874] uppercase transition hover:text-[#0A0A0A] sm:gap-3 sm:px-8 sm:py-6 sm:text-[13px] sm:tracking-[0.14em]"
           style={{ maxWidth: PD.cta.w }}
         >
-          View Next Project
+          {PROJECT_DETAILS_UI.nextProject}
           <ArrowRight className="h-[15px] w-[15px]" strokeWidth={1.75} />
         </Link>
       </motion.div>
@@ -73,7 +76,7 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
             transition={{ duration: 1, ease }}
             className="m-0 font-montserrat text-[clamp(22px,5.5vw,40px)] font-bold leading-[130%] tracking-[-0.03em] text-[#0A0A0A]"
           >
-            Other Related Projects
+            {PROJECT_DETAILS_UI.relatedProjects}
           </motion.h2>
 
           {/* Figma: 3 cards — image | text | image */}
@@ -98,13 +101,14 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
                         href={`/projects/${item.slug}`}
                         className="mt-6 inline-flex items-center gap-1.5 self-end font-montserrat text-[14px] font-bold leading-none text-[#0A0A0A] underline underline-offset-4 transition hover:opacity-70"
                       >
-                        View Project
+                        {PROJECT_DETAILS_UI.viewProject}
                         <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
                       </Link>
                     </div>
                   ) : (
                     <Link
                       href={`/projects/${item.slug}`}
+                      data-project-cursor
                       className="relative block h-full w-full"
                       aria-label={item.title}
                     >

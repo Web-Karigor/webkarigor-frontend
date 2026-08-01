@@ -34,6 +34,8 @@ function CircuitDefs() {
 }
 
 const STAGGER = 0.35;
+/** Slightly slower than default (3.5s) — left/right paths are longer. */
+const SIDE_DURATION = 7;
 
 export default function SvgConnections({ geometry }: SvgConnectionsProps) {
   return (
@@ -43,6 +45,7 @@ export default function SvgConnections({ geometry }: SvgConnectionsProps) {
         path={geometry.topLeft}
         dotPath={geometry.topLeftDot}
         delay={STAGGER * 0}
+        duration={SIDE_DURATION}
       />
       <TopCenterPath
         path={geometry.topCenter}
@@ -53,11 +56,13 @@ export default function SvgConnections({ geometry }: SvgConnectionsProps) {
         path={geometry.topRight}
         dotPath={geometry.topRightDot}
         delay={STAGGER * 2}
+        duration={SIDE_DURATION}
       />
       <BottomLeftPath
         path={geometry.bottomLeft}
         dotPath={geometry.bottomLeftDot}
         delay={STAGGER * 3}
+        duration={SIDE_DURATION}
       />
       <BottomCenterPath
         path={geometry.bottomCenter}
@@ -68,6 +73,7 @@ export default function SvgConnections({ geometry }: SvgConnectionsProps) {
         path={geometry.bottomRight}
         dotPath={geometry.bottomRightDot}
         delay={STAGGER * 5}
+        duration={SIDE_DURATION}
       />
       {geometry.centerLeft ? (
         <path

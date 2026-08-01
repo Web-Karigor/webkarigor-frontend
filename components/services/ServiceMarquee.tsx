@@ -1,11 +1,12 @@
 import { Fragment } from "react";
-import { MARQUEE_ITEMS } from "@/lib/services-data";
+import serviceSharedContent from "@/data/service-shared-content.json";
 
 type ServiceMarqueeProps = {
   className?: string;
 };
 
 const MARQUEE_COPIES = 4;
+const MARQUEE_ITEMS = serviceSharedContent.marquee.items;
 
 function MarqueeSeparator() {
   return (

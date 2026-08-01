@@ -11,12 +11,9 @@ import ManpowerWhyChoose from "@/components/services/manpower/ManpowerWhyChoose"
 import ServiceContact from "@/components/services/ServiceContact";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
+import { MANPOWER_METADATA } from "@/lib/manpower-data";
 
-export const metadata: Metadata = {
-  title: "Manpower Services — Webkarigor",
-  description:
-    "Hire verified talent, scale teams fast, and deliver with Webkarigor manpower services — staffing, squads, and flexible engagement models.",
-};
+export const metadata: Metadata = MANPOWER_METADATA;
 
 export default function ManpowerServicePage() {
   return (

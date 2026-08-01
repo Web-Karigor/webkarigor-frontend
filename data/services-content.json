@@ -1,0 +1,403 @@
+{
+  "metadata": {
+    "title": "Services — Webkarigor",
+    "description": "Web design, SEO, digital marketing, mobile apps, branding, and full-stack development tailored to your business goals."
+  },
+  "hero": {
+    "brand": "Webkarigor",
+    "brandHref": "/",
+    "navCta": {
+      "href": "#contact",
+      "label": "Get a Quote"
+    },
+    "whatsapp": {
+      "href": "https://wa.me/8801624283328",
+      "label": "Say hello: 01624-283328"
+    },
+    "titleLines": ["To Deliver a 360", "Project Approach"],
+    "description": "Your vision deserves to grow. We create the brand identity, digital experience, and investor-ready story that help businesses move faster with confidence.",
+    "form": {
+      "placeholders": {
+        "name": "Your Name",
+        "phone": "Mobile",
+        "details": "Project Details"
+      },
+      "submitLabel": "Start Your Project"
+    },
+    "image": {
+      "src": "/sm2.jpg",
+      "alt": "Team member working on a project"
+    },
+    "badges": {
+      "ai": "AI driven solution",
+      "conversionLabel": "Conversion Rate",
+      "conversionValue": "+240%"
+    },
+    "stats": [
+      { "value": "10+", "label": "Years of Experience" },
+      { "value": "300+", "label": "Successful Projects" },
+      { "value": "200+", "label": "Happy Clients" }
+    ]
+  },
+  "clients": {
+    "title": "Our Clients",
+    "description": "At “WEB KARIGOR”, we have had the privilege of working with a diverse range of clients across various industries. Our commitment to delivering exceptional digital solutions has allowed us to build long-lasting relationships with both local and international businesses. Each project reflects our dedication to innovation, quality, and client satisfaction.",
+    "logos": [
+      {
+        "name": "Government of Bangladesh",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/BD-Govt.png"
+      },
+      {
+        "name": "Robi Axiata",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Robi.png"
+      },
+      {
+        "name": "Walton",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Walton.png"
+      },
+      {
+        "name": "Sajeeb Group",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Sajeeb-Group.png"
+      },
+      {
+        "name": "Oitijjhya",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Oitijjhya.png"
+      },
+      {
+        "name": "Nitol-Niloy Group",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Nitol-Niloy.png"
+      },
+      {
+        "name": "Gear X",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Gear-X.png"
+      },
+      {
+        "name": "The Cafe Rio",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Cafe-Rio.png"
+      },
+      {
+        "name": "NIPORT",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Niport.webp"
+      },
+      {
+        "name": "Shyamoli Paribahan",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Shyamoli-Poribahan.png"
+      }
+    ]
+  },
+  "offerings": {
+    "eyebrow": "Industries",
+    "title": "Design Solutions Tailored for Every Industry",
+    "description": "We've partnered with businesses across diverse industries to create digital experiences that solve specific challenges.",
+    "items": [
+      {
+        "title": "E-commerce",
+        "description": "Optimizing shopping experiences for higher conversions. We create seamless paths to purchase that delight customers and drive revenue.",
+        "icon": "shoppingCart",
+        "variant": "yellow"
+      },
+      {
+        "title": "SaaS & Software",
+        "description": "Intuitive dashboards that reduce churn and boost retention. We simplify complex workflows into elegant, user-friendly interfaces.",
+        "icon": "cloud",
+        "variant": "green"
+      },
+      {
+        "title": "Healthcare",
+        "description": "Accessible and secure patient portals and applications. We prioritize clarity and ease of use for critical health services.",
+        "icon": "hospital",
+        "variant": "yellow"
+      },
+      {
+        "title": "Real Estate",
+        "description": "Immersive property discovery and management tools. We build visual-first experiences that showcase properties at their best.",
+        "icon": "home",
+        "variant": "green"
+      },
+      {
+        "title": "Healthcare",
+        "description": "Accessible and secure patient portals and applications. We prioritize clarity and ease of use for critical health services.",
+        "icon": "hospital",
+        "variant": "yellow"
+      }
+    ]
+  },
+  "techGrid": {
+    "eyebrow": "Why Webkarigor",
+    "title": "More Than Beautiful Interfaces",
+    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+    "items": [
+      {
+        "name": "Laravel",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg"
+      },
+      {
+        "name": "React",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+      },
+      {
+        "name": "Next js",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+      },
+      {
+        "name": "Node js",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+      },
+      {
+        "name": "Bootstrap",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+      },
+      {
+        "name": "Vercel",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg"
+      },
+      {
+        "name": "Tailwind",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+      },
+      {
+        "name": "Python",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+      },
+      {
+        "name": "Kotlin",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
+      },
+      {
+        "name": "Github",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+      },
+      {
+        "name": "Notion",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg"
+      },
+      {
+        "name": "Figma",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+      }
+    ]
+  },
+  "techStack": [
+    {
+      "name": "React",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+    },
+    {
+      "name": "Next.js",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-line.svg"
+    },
+    {
+      "name": "Node.js",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+    },
+    {
+      "name": "Laravel",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg"
+    },
+    {
+      "name": "Figma",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+    },
+    {
+      "name": "Python",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+    },
+    {
+      "name": "Tailwind",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg"
+    },
+    {
+      "name": "AWS",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg"
+    },
+    {
+      "name": "Vue",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+    },
+    {
+      "name": "Framer",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framer/framer-original.svg"
+    },
+    {
+      "name": "GitHub",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+    },
+    {
+      "name": "Vercel",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg"
+    }
+  ],
+  "whyChoose": {
+    "eyebrow": "Why Webkarigor",
+    "title": "More Than Beautiful Interfaces",
+    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+    "images": {
+      "left": { "src": "/sm1.png", "alt": "Team collaboration" },
+      "right": { "src": "/sm3.jpg", "alt": "Design review session" }
+    },
+    "hireUsLabels": ["HIRE US", "HIRE US", "HIRE US"],
+    "features": [
+      {
+        "title": "User-Centered Design",
+        "description": "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
+        "icon": "target"
+      },
+      {
+        "title": "Business-Focused",
+        "description": "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
+        "icon": "trendingUp"
+      },
+      {
+        "title": "Collaborative Process",
+        "description": "We act as an extension of your team, maintaining transparent communication throughout.",
+        "icon": "users"
+      },
+      {
+        "title": "Scalable Systems",
+        "description": "We deliver robust design systems that make future development faster and consistent.",
+        "icon": "layoutGrid"
+      }
+    ]
+  },
+  "whyChooseFeatures": [
+    {
+      "title": "User-Centered Design",
+      "description": "Every decision starts with your users — clear flows, intuitive interfaces, and delightful experiences.",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/layers/layers-original.svg"
+    },
+    {
+      "title": "Fast & Reliable Delivery",
+      "description": "Agile sprints, transparent milestones, and on-time launches you can plan your business around.",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linechart/linechart-original.svg"
+    },
+    {
+      "title": "Scalable Technology",
+      "description": "Modern stacks and clean architecture so your product grows without costly rebuilds.",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/code/code-original.svg"
+    },
+    {
+      "title": "Dedicated Partnership",
+      "description": "A single team from strategy to launch — responsive, collaborative, and invested in your success.",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/globe/globe-original.svg"
+    }
+  ],
+  "testimonials": {
+    "eyebrow": "Client Success Stories",
+    "title": "Trusted by Founders and Growing Businesses",
+    "description": "See what clients have to say about working with Webkarigor and how thoughtful design helped them achieve better results.",
+    "summary": {
+      "rating": "4.9",
+      "reviewsLabel": "(100+ Reviews)",
+      "headline": "Customer experience that speak for them selves"
+    },
+    "avatars": ["/sm1.png", "/sm2.jpg", "/sm3.jpg", "/sm4.png"],
+    "items": [
+      {
+        "quote": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "name": "Dianne Russel",
+        "role": "CEO, Shishu Poribohon",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "Webkarigor transformed our brand and digital presence. The team delivered beyond expectations — professional, creative, and always on time.",
+        "name": "Sarah Mitchell",
+        "role": "CEO, TechStart Inc.",
+        "rating": 4,
+        "highlight": false
+      },
+      {
+        "quote": "Outstanding work on our e-commerce platform. Sales increased 40% within three months of launch. Highly recommend their services.",
+        "name": "James Rodriguez",
+        "role": "Founder, ShopEasy",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "Thoughtful design and clear communication throughout the project. We saw better conversions within weeks of launch.",
+        "name": "Ayesha Rahman",
+        "role": "Founder, Bloom Studio",
+        "rating": 4,
+        "highlight": false
+      },
+      {
+        "quote": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "name": "Floyd Miles",
+        "role": "CEO, Shishu Poribohon",
+        "rating": 4,
+        "highlight": true
+      },
+      {
+        "quote": "Clear communication, strong craft, and a team that treated our roadmap like their own. Rare combination.",
+        "name": "Robert Fox",
+        "role": "CTO, NovaPay",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "From design to development, every milestone landed on time. Our stakeholders noticed the difference immediately.",
+        "name": "Kathryn Murphy",
+        "role": "COO, Lumen Soft",
+        "rating": 4,
+        "highlight": false
+      },
+      {
+        "quote": "Supportive partners and talent that ships. We extended the engagement twice after the first release.",
+        "name": "Theresa Webb",
+        "role": "VP Engineering, Orbit HR",
+        "rating": 5,
+        "highlight": false
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Pricing Plane",
+    "title": "Fair Pricing for Your Product",
+    "description": "Our packages are designed to fit your product's stage and ambition. Flexible, transparent, and customizable based on what your business truly needs.",
+    "whatYouGetLabel": "What you get:",
+    "ctaLabel": "Explore This Package",
+    "sharedFeatures": [
+      "User research and product discovery sessions",
+      "End-to-end UX/UI design for the full product",
+      "Design system for consistency and scale",
+      "Web or mobile app development",
+      "Usability testing and design iteration",
+      "Performance and security best practices",
+      "Post-launch support and proper handover"
+    ],
+    "markets": [
+      {
+        "label": "Ecommerce",
+        "theme": "yellow",
+        "plans": [
+          {
+            "title": "Build & Validate",
+            "price": "$5,000",
+            "subtitle": "Full Product Design with Research & Development"
+          },
+          {
+            "title": "Build & Validate",
+            "price": "$5,000",
+            "subtitle": "Full Product Design with Research & Development"
+          }
+        ]
+      },
+      {
+        "label": "Corporate",
+        "theme": "green",
+        "plans": [
+          {
+            "title": "Build & Validate",
+            "price": "$5,000",
+            "subtitle": "Full Product Design with Research & Development"
+          },
+          {
+            "title": "Build & Validate",
+            "price": "$5,000",
+            "subtitle": "Full Product Design with Research & Development"
+          }
+        ]
+      }
+    ]
+  }
+}

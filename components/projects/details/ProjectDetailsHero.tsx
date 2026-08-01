@@ -4,7 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
-import type { ProjectDetail } from "@/lib/project-details-data";
+import {
+  PROJECT_DETAILS_UI,
+  type ProjectDetail,
+} from "@/lib/project-details-data";
 import { PD } from "@/lib/project-details-layout";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -36,7 +39,7 @@ export default function ProjectDetailsHero({ project }: { project: ProjectDetail
                 className="inline-flex h-9 items-center gap-2 rounded-full bg-[#FFF68F] px-4 font-montserrat text-[13px] font-semibold leading-none text-[#0A0A0A] transition hover:bg-[#f5e96a] sm:h-10 sm:px-5 sm:text-[14px]"
               >
                 <ArrowLeft className="h-4 w-4" strokeWidth={2.5} />
-                Back to Projects
+                {PROJECT_DETAILS_UI.backToProjects}
               </Link>
             </motion.div>
 
@@ -49,6 +52,7 @@ export default function ProjectDetailsHero({ project }: { project: ProjectDetail
                   initial={{ opacity: 0, y: 28 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 0.08 * index, ease }}
+                  data-project-cursor
                   className="relative w-full max-w-[562px] overflow-hidden rounded-2xl bg-[rgba(221,227,235,0.16)] p-2.5 shadow-[0_0_25px_rgba(0,0,0,0.12)] backdrop-blur-[40px] sm:rounded-[28px] sm:p-3.5 md:rounded-[32px] md:p-4"
                   style={{
                     aspectRatio: `${hero.cardW} / ${hero.cardH}`,

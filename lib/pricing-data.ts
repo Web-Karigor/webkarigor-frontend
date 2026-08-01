@@ -1,6 +1,9 @@
 /**
  * Pricing Page — Figma node 2546-10751 (1920 × 10024)
+ * Design tokens stay in TS; editable copy lives in data/pricing-content.json
  */
+import pricingContent from "@/data/pricing-content.json";
+
 export const PR = {
   frame: 1920,
   content: 1320,
@@ -65,32 +68,11 @@ export const PR = {
   ],
 } as const;
 
-export const PRICING_HERO_FEATURES = [
-  {
-    title: "Clickable Design Prototype",
-    description:
-      "Visualize and test your product experience before development.",
-    icon: "pointer",
-  },
-  {
-    title: "Developer-Ready Files",
-    description:
-      "Organized assets and specifications for a smoother build process.",
-    icon: "code",
-  },
-  {
-    title: "Efficient Project Management",
-    description:
-      "A clear workflow helps keep projects aligned and moving forward.",
-    icon: "calendar",
-  },
-  {
-    title: "Ongoing Design Guidance",
-    description:
-      "Receive expert guidance to support informed product decisions.",
-    icon: "compass",
-  },
-] as const;
+export const PRICING_METADATA = pricingContent.metadata;
+
+export const PRICING_HERO = pricingContent.hero;
+
+export const PRICING_HERO_FEATURES = pricingContent.hero.features;
 
 export type PricingBilling = "monthly" | "yearly";
 
@@ -103,54 +85,23 @@ export type PricingPlan = {
   features: string[];
 };
 
-export const PRICING_PLANS: PricingPlan[] = [
-  {
-    id: "launch",
-    name: "Launch Ready",
-    subtitle: "MVP Product Design & Development",
-    monthly: 3500,
-    features: [
-      "UX/UI design for a single product or core feature",
-      "Web or mobile app development",
-      "Clean, scalable, and maintainable code",
-      "Essential user flows and usability focus",
-      "Basic testing and quality checks",
-      "Deployment-ready build with source files",
-      "Clear delivery timeline and milestone tracking",
-    ],
-  },
-  {
-    id: "build",
-    name: "Build & Validate",
-    subtitle: "Full Product Design with Research & Development",
-    monthly: 5000,
-    popular: true,
-    features: [
-      "User research and product discovery sessions",
-      "End-to-end UX/UI design for the full product",
-      "Design system for consistency and scale",
-      "Web or mobile app development",
-      "Usability testing and design iteration",
-      "Performance and security best practices",
-      "Post-launch support and proper handover",
-    ],
-  },
-  {
-    id: "scale",
-    name: "Scale & Optimize",
-    subtitle: "Advanced Product Design & Development",
-    monthly: 7000,
-    features: [
-      "User research, audit, and competitor analysis",
-      "Strategic roadmap and feature prioritization",
-      "UX/UI design with system-level thinking",
-      "Full development with scalable architecture",
-      "Dedicated design and engineering team",
-      "Continuous monitoring and optimization",
-      "Priority support, maintenance",
-    ],
-  },
-];
+export const PRICING_PLANS_SECTION = pricingContent.plans;
+
+export const PRICING_PLANS: PricingPlan[] = pricingContent.plans.items;
+
+export const PRICING_CUSTOM_BANNER = pricingContent.customBanner;
+
+export const PACKAGE_SECTION = pricingContent.package;
+
+export const PACKAGE_COLUMNS = pricingContent.package.columns;
+
+export const BUILT_FOR_SECTION = pricingContent.builtFor;
+
+export const COMPARISON_ITEMS = pricingContent.builtFor.items;
+
+export const FEATURED_WORK_SECTION = pricingContent.featuredWork;
+
+export const FEATURED_WORK = pricingContent.featuredWork.items;
 
 /** Figma: Save 25% on yearly */
 export function planPrice(plan: PricingPlan, billing: PricingBilling): number {
@@ -161,92 +112,3 @@ export function planPrice(plan: PricingPlan, billing: PricingBilling): number {
 export function formatPrice(amount: number): string {
   return `$${amount.toLocaleString("en-US")}`;
 }
-
-/** Figma Frame — Complete Package 1520 × 696, 4 columns */
-export const PACKAGE_COLUMNS = [
-  [
-    "UI/UX Design",
-    "Product Strategy",
-    "UX Research",
-    "Wireframing",
-    "Interactive Prototyping",
-    "Website Design",
-    "Landing Page Design",
-    "UX Audit",
-  ],
-  [
-    "Back-end Development",
-    "Full-Stack Development",
-    "API Development & Integration",
-    "React Development",
-    "Next.js Development",
-    "Laravel Development",
-    "Node.js Development",
-    "WordPress Development",
-  ],
-  [
-    "Brand Identity Design",
-    "Logo Design",
-    "Motion Graphics",
-    "UI Animation",
-    "Prototype",
-    "Illustration Design",
-    "Pitch Deck Design",
-    "Marketing Creatives",
-  ],
-  [
-    "Mobile App Development",
-    "SaaS Product Design",
-    "Framer Development",
-    "Front-end Development",
-    "Dashboard Design",
-    "Webflow Development",
-    "Ongoing Maintenance & Support",
-    "Mobile App Design",
-  ],
-] as const;
-
-/** Figma: Webkarigor vs Other Agencies — Built for Growing Products */
-export const COMPARISON_ITEMS = [
-  {
-    label: "Discovery and research before design",
-    otherHas: true,
-  },
-  {
-    label: "Interactive prototypes for key flows",
-    otherHas: false,
-  },
-  {
-    label: "Developer-ready handoff documentation",
-    otherHas: true,
-  },
-  {
-    label: "Design system and reusable components",
-    otherHas: false,
-  },
-  {
-    label: "Flexible engagement based on project needs",
-    otherHas: true,
-  },
-  {
-    label: "Ongoing design consultation",
-    otherHas: false,
-  },
-  {
-    label: "Transparent communication throughout the project",
-    otherHas: false,
-  },
-  {
-    label: "Structured process from concept to delivery",
-    otherHas: true,
-  },
-] as const;
-
-/** Figma Featured Work — 1521 × 1083: 2 top + 3 bottom */
-export const FEATURED_WORK = [
-  { src: "/sm1.png", alt: "Simple is More website" },
-  { src: "/sm4.png", alt: "Fashion mobile app screens" },
-  { src: "/services/why-choose-main.jpg", alt: "Desktop product interface" },
-  { src: "/sm3.jpg", alt: "Analytics dashboard" },
-  { src: "/ecommerce/hero-composite.png", alt: "Lifestyle commerce UI" },
-] as const;
