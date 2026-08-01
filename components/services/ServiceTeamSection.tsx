@@ -1,8 +1,32 @@
 import Image from "next/image";
-import serviceSharedContent from "@/data/service-shared-content.json";
 
-const { headingLines, featuredPhoto, photos } =
-  serviceSharedContent.teamSection;
+/** Exact original collage — classes stay in TSX for Tailwind JIT */
+const TEAM_PHOTOS = [
+  {
+    src: "/sm1.png",
+    alt: "Team member — middle left",
+    className:
+      "absolute left-0 top-[22%] z-[2] h-[clamp(124px,15vw,168px)] w-[clamp(124px,15vw,168px)]",
+  },
+  {
+    src: "/h2.png",
+    alt: "Team member — center small",
+    className:
+      "absolute left-[40%] top-[44%] z-[4] h-[clamp(68px,8.5vw,92px)] w-[clamp(68px,8.5vw,92px)] rounded-[20px] max-sm:rounded-[14px]",
+  },
+  {
+    src: "/sm3.jpg",
+    alt: "Team member — bottom left",
+    className:
+      "absolute bottom-0 left-[4%] z-[3] h-[clamp(148px,18vw,200px)] w-[clamp(148px,18vw,200px)]",
+  },
+  {
+    src: "/sm4.png",
+    alt: "Team member — bottom right",
+    className:
+      "absolute bottom-[10%] right-[4%] z-[2] h-[clamp(112px,14vw,152px)] w-[clamp(112px,14vw,152px)]",
+  },
+] as const;
 
 const SHOT_BASE =
   "overflow-hidden rounded-[28px] bg-[#e8eef6] shadow-[0_18px_44px_rgba(24,59,86,0.13)] max-sm:rounded-[20px]";
@@ -17,12 +41,9 @@ export default function ServiceTeamSection() {
 
       <div className="relative z-[1] mx-auto flex w-full max-w-[1680px] items-center justify-between gap-[clamp(32px,5vw,64px)] px-[clamp(16px,4.4vw,85px)] py-[clamp(48px,6vw,85px)] max-lg:flex-col max-lg:items-start max-lg:justify-start max-lg:gap-[clamp(20px,4vw,32px)] max-lg:py-[clamp(40px,6vw,64px)]">
         <h2 className="m-0 max-w-[696px] shrink-0 font-montserrat text-[clamp(40px,6.5vw,100px)] font-bold leading-[150%] text-[#183b56] max-lg:max-w-full max-lg:flex-none max-lg:text-[clamp(36px,8vw,56px)] max-lg:leading-[1.25]">
-          {headingLines.map((line, index) => (
-            <span key={line}>
-              {line}
-              {index < headingLines.length - 1 ? <br /> : null}
-            </span>
-          ))}
+          Expert Team
+          <br />
+          Big Result
         </h2>
 
         <div className="relative isolate h-[clamp(400px,46vw,560px)] w-[min(100%,620px)] shrink-0 max-lg:mx-auto max-lg:h-[clamp(360px,88vw,480px)] max-lg:max-w-[520px]">
@@ -34,8 +55,8 @@ export default function ServiceTeamSection() {
           <div className="absolute right-0 top-0 z-[3] h-[clamp(176px,21vw,240px)] w-[clamp(176px,21vw,240px)] overflow-visible bg-transparent shadow-none">
             <div className={`relative h-full w-full ${SHOT_BASE}`}>
               <Image
-                src={featuredPhoto.src}
-                alt={featuredPhoto.alt}
+                src="/sm2.jpg"
+                alt="Team member — top right"
                 fill
                 priority
                 className="object-cover"
@@ -48,7 +69,7 @@ export default function ServiceTeamSection() {
             />
           </div>
 
-          {photos.map((photo) => (
+          {TEAM_PHOTOS.map((photo) => (
             <div key={photo.src} className={`${photo.className} ${SHOT_BASE}`}>
               <Image
                 src={photo.src}

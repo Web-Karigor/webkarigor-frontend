@@ -24,7 +24,7 @@ export default function ErpServicePage() {
       <ErpReviews />
       <ErpTeam />
       <ErpPricing />
-      <FAQ />
+      <FAQ className="bg-white" />
       <ServiceMarquee />
       <ServiceContact />
       <ServiceFooter />

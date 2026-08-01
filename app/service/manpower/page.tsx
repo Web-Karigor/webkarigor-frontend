@@ -26,7 +26,7 @@ export default function ManpowerServicePage() {
       <ManpowerTeam />
       <ManpowerReviews />
       <ManpowerPricing />
-      <FAQ />
+      <FAQ className="bg-white" />
       <ServiceMarquee />
       <ServiceContact />
       <ServiceFooter />

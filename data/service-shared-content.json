@@ -60,23 +60,19 @@
     "photos": [
       {
         "src": "/sm1.png",
-        "alt": "Team member — middle left",
-        "className": "absolute left-0 top-[22%] z-[2] h-[clamp(124px,15vw,168px)] w-[clamp(124px,15vw,168px)]"
+        "alt": "Team member — middle left"
       },
       {
         "src": "/h2.png",
-        "alt": "Team member — center small",
-        "className": "absolute left-[40%] top-[44%] z-[4] h-[clamp(68px,8.5vw,92px)] w-[clamp(68px,8.5vw,92px)] rounded-[20px] max-sm:rounded-[14px]"
+        "alt": "Team member — center small"
       },
       {
         "src": "/sm3.jpg",
-        "alt": "Team member — bottom left",
-        "className": "absolute bottom-0 left-[4%] z-[3] h-[clamp(148px,18vw,200px)] w-[clamp(148px,18vw,200px)]"
+        "alt": "Team member — bottom left"
       },
       {
         "src": "/sm4.png",
-        "alt": "Team member — bottom right",
-        "className": "absolute bottom-[10%] right-[4%] z-[2] h-[clamp(112px,14vw,152px)] w-[clamp(112px,14vw,152px)]"
+        "alt": "Team member — bottom right"
       }
     ]
   }

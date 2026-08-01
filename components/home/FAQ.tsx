@@ -7,7 +7,11 @@ import homeContent from "@/data/home-content.json";
 const { headingAccent, headingTitle, ctaText, ctaLabel, ctaHref, items: faqs } =
   homeContent.faq;
 
-export default function FAQ() {
+export default function FAQ({
+  className = "bg-[#FFFDF6]",
+}: {
+  className?: string;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -15,7 +19,10 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative scroll-mt-24 py-16 md:py-24 px-4 md:px-6 bg-[#FFFDF6] pb-8 md:pb-12">
+    <section
+      id="faq"
+      className={`relative scroll-mt-24 px-4 py-16 pb-8 md:px-6 md:py-24 md:pb-12 ${className}`}
+    >
       <div className="max-w-[1320px] mx-auto">
         {/* Header — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
         <div className="mb-12 text-center md:mb-16">

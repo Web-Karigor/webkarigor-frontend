@@ -24,7 +24,7 @@ export default function EcommerceServicePage() {
       <EcoReviews />
       <EcoTeam />
       <EcoPricing />
-      <FAQ />
+      <FAQ className="bg-white" />
       <ServiceMarquee />
       <ServiceContact />
       <ServiceFooter />
