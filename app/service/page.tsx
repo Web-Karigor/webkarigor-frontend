@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import FAQ from "@/components/home/FAQ";
 import TechServices from "@/components/home/TechServices";
 import Team from "@/components/home/Team";
 import ServiceClients from "@/components/services/ServiceClients";
 import ServiceContact from "@/components/services/ServiceContact";
-import ServiceFAQ from "@/components/services/ServiceFAQ";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceHero from "@/components/services/ServiceHero";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
@@ -32,7 +32,7 @@ export default function ServicePage() {
       <Team />
       <ServiceTestimonials />
       <ServicePricing />
-      <ServiceFAQ />
+      <FAQ />
       <ServiceMarquee />
       <ServiceContact />
       <ServiceFooter />

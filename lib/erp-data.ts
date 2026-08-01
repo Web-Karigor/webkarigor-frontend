@@ -34,7 +34,3 @@ export const ERP_TESTIMONIALS = erpContent.reviews.items;
 export const ERP_PRICING_SECTION = erpContent.pricing;
 
 export const ERP_PRICING_PLANS = erpContent.pricing.plans;
-
-export const ERP_FAQ_SECTION = erpContent.faq;
-
-export const ERP_FAQS = erpContent.faq.items;

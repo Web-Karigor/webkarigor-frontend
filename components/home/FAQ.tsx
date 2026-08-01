@@ -15,7 +15,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="relative py-16 md:py-24 px-4 md:px-6 bg-[#FFFDF6] pb-8 md:pb-12">
+    <section id="faq" className="relative scroll-mt-24 py-16 md:py-24 px-4 md:px-6 bg-[#FFFDF6] pb-8 md:pb-12">
       <div className="max-w-[1320px] mx-auto">
         {/* Header — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
         <div className="mb-12 text-center md:mb-16">

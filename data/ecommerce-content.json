@@ -309,32 +309,6 @@
       }
     ]
   },
-  "faqs": [
-    {
-      "question": "Who do you work with and what ecommerce projects do you take on?",
-      "answer": "We partner with DTC brands, marketplaces, and retail teams launching or redesigning online stores — from MVP storefronts to multi-vendor platforms."
-    },
-    {
-      "question": "How do you take a store from idea to launch?",
-      "answer": "Discovery, information architecture, UX/UI, development, QA, and launch support. You get demos every sprint with clear conversion goals."
-    },
-    {
-      "question": "Which platforms and stacks do you support?",
-      "answer": "Custom Next.js/Node builds, headless commerce, Shopify, and hybrid setups. We recommend the stack that fits your catalog size and growth plan."
-    },
-    {
-      "question": "How involved will we be during the project?",
-      "answer": "As involved as you want. Shared boards, weekly reviews, and async feedback keep decisions fast without blocking your team."
-    },
-    {
-      "question": "Do you provide ongoing support after launch?",
-      "answer": "Yes — maintenance, CRO experiments, feature sprints, and performance monitoring so the store keeps improving after go-live."
-    },
-    {
-      "question": "How do pricing and timelines work?",
-      "answer": "Packages start from the plans above; custom scopes get a fixed quote after a short discovery call. Typical MVP storefronts ship in 6–10 weeks."
-    }
-  ],
   "marqueeItems": [
     "Web Design",
     "React",

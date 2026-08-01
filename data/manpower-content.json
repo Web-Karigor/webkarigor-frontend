@@ -287,38 +287,5 @@
         ]
       }
     ]
-  },
-  "faq": {
-    "eyebrow": "FAQ",
-    "title": "Frequently Asked Questions",
-    "footerText": "Still curious? We're happy to help —",
-    "footerCta": "Contact Us",
-    "footerCtaHref": "#contact",
-    "items": [
-      {
-        "question": "What kinds of roles can you staff?",
-        "answer": "We place product designers, engineers, QA, DevOps, project managers, marketers, and operations specialists — senior and mid-level."
-      },
-      {
-        "question": "How fast can you start sourcing?",
-        "answer": "Most engagements see first shortlists within 5–10 business days after discovery and role definition."
-      },
-      {
-        "question": "Are candidates full-time employees or contractors?",
-        "answer": "Both. We support full-time placements, contract-to-hire, and dedicated remote pods depending on your preference."
-      },
-      {
-        "question": "Do you offer replacement guarantees?",
-        "answer": "Yes. Pro and Premium plans include a replacement window if a placement doesn’t fit within the agreed probation period."
-      },
-      {
-        "question": "Can you build a full cross-functional team?",
-        "answer": "Absolutely. Premium clients often engage us for design + engineering + PM squads that operate as one unit."
-      },
-      {
-        "question": "How do billing and contracts work?",
-        "answer": "Transparent monthly plans or per-seat models. Contracts cover NDAs, IP assignment, and clear termination terms."
-      }
-    ]
   }
 }

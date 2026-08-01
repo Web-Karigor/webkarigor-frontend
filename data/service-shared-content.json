@@ -51,39 +51,6 @@
       "Consulting"
     ]
   },
-  "faq": {
-    "eyebrow": "FAQ",
-    "title": "Frequently Answered Questions",
-    "ctaText": "Still curious? We're happy to help",
-    "ctaLabel": "Let's talk",
-    "ctaHref": "/contact-us",
-    "items": [
-      {
-        "question": "Who do you work with and what projects do you take on?",
-        "answer": "We partner with startups, established companies, and agencies of all sizes. Our team takes on digital product design and development projects that are mission-driven and innovative."
-      },
-      {
-        "question": "How do you take a product from idea to launch?",
-        "answer": "We start with understanding your vision, users, and markets. We ideate, wireframe, prototype, design, and develop iteratively, collaborating closely with you through each phase and ensuring each milestone is met before launch."
-      },
-      {
-        "question": "How do you approach UX, design, and technology decisions?",
-        "answer": "All decisions are driven by your business goals, user needs, and best-in-class modern technology. We combine research-driven UX, elegant UI, and practical engineering for scalable solutions."
-      },
-      {
-        "question": "How involved will we be during the project?",
-        "answer": "You stay as involved as you want throughout the project. We encourage your feedback in each phase, use frequent check-ins, and provide clear, collaborative communication. You're never left in the dark."
-      },
-      {
-        "question": "Do you provide ongoing support after launch?",
-        "answer": "Yes! We offer continuous maintenance, support, and opportunities for evolution and improvement after your product launches. We're your partner for the long run."
-      },
-      {
-        "question": "How do pricing and timelines work?",
-        "answer": "We offer flexible pricing models (fixed, retainer, or hourly) depending on project needs. Timelines are validated during our initial call and adjusted collaboratively. Transparency is key."
-      }
-    ]
-  },
   "teamSection": {
     "headingLines": ["Expert Team", "Big Result"],
     "featuredPhoto": {

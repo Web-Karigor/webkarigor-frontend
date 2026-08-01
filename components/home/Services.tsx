@@ -4,13 +4,10 @@ import "./Services.css";
 
 import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
-  AnimatePresence,
   motion,
   useMotionValue,
   useMotionValueEvent,
-  useSpring,
   useTransform,
   type MotionValue,
 } from "framer-motion";
@@ -25,21 +22,12 @@ const {
   headingAccent: servicesHeadingAccent,
   headingTitle: servicesHeadingTitle,
   description: servicesDescription,
-  seeMoreLabel,
-  ctaArrow: CTA_ARROW,
   items: services,
 } = homeContent.services;
 
 type Service = (typeof services)[number];
 
-/**
- * Design Monks–style inertia: soft spring lag (Lenis-like),
- * longer text crossfade, hull-height sticky stage.
- */
-const SCROLL_SPRING = { stiffness: 30, damping: 30, mass: 1.05, restDelta: 0.001 };
-const TEXT_DURATION = 0.72;
-const TEXT_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-/** One viewport of scroll for intro header exit (Design Monks style) */
+/** One viewport of scroll for intro header exit */
 const INTRO_SCROLL_VIEWS = 1;
 
 const DESKTOP_GROUP_STEP_PX = 720 + 160;
@@ -52,28 +40,29 @@ function getGroupStepPx(width: number, mobileSlotHeight: number) {
   return Math.max(mobileSlotHeight + MOBILE_CARD_GAP, 280);
 }
 
-const SERIF = { fontFamily: "Georgia, 'Times New Roman', serif" } as const;
+/** Frame-rate independent ease — silky follow, zero overshoot */
+const SCROLL_SMOOTH = 7.2;
+/** Extra scroll room per service = slower, more controlled scrub */
+const SCROLL_VH_PER_STEP = 1.15;
 
-/* -------------------------------------------------------------------------- */
-/* Helpers                                                                    */
-/* -------------------------------------------------------------------------- */
-
-function getDescription(service: Service) {
-  return service.desc
-    ? `${service.subtitle} ${service.desc}`
-    : service.subtitle;
-}
-
-function getActiveIndex(progress: number, total: number) {
-  return Math.min(total - 1, Math.max(0, Math.floor(progress * total)));
+/**
+ * Hysteresis keeps active row stable while smoothed progress drifts near edges.
+ */
+function getActiveIndex(progress: number, total: number, prev: number) {
+  if (total <= 1) return 0;
+  const exact = progress * (total - 1);
+  if (Math.abs(exact - prev) < 0.38) return prev;
+  return Math.min(total - 1, Math.max(0, Math.round(exact)));
 }
 
 function useActiveIndex(progress: MotionValue<number>, total: number) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useMotionValueEvent(progress, "change", (latest) => {
-    const next = getActiveIndex(latest, total);
-    setActiveIndex((prev) => (prev === next ? prev : next));
+    setActiveIndex((prev) => {
+      const next = getActiveIndex(latest, total, prev);
+      return next === prev ? prev : next;
+    });
   });
 
   return activeIndex;
@@ -157,77 +146,38 @@ const ServicesIntroHeader = memo(function ServicesIntroHeader({
 });
 
 /* -------------------------------------------------------------------------- */
-/* Left — single active text                                                    */
+/* Left — sticky list; active row expands description                         */
 /* -------------------------------------------------------------------------- */
 
-const textVariants = {
-  enter: { opacity: 0, y: 28, filter: "blur(6px)" },
-  center: { opacity: 1, y: 0, filter: "blur(0px)" },
-  exit: { opacity: 0, y: -28, filter: "blur(6px)" },
-};
-
-const ServiceActiveText = memo(function ServiceActiveText({
-  service,
-}: {
-  service: Service;
-}) {
-  return (
-    <motion.div
-      variants={textVariants}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      transition={{ duration: TEXT_DURATION, ease: TEXT_EASE }}
-      className="w-full"
-      style={{ willChange: "transform, opacity, filter" }}
-    >
-      <h3
-        className="text-[1.75rem] font-bold leading-[1.05] text-[#141414] sm:text-[2.25rem] lg:text-[2.75rem] xl:text-[4rem]"
-        style={{ letterSpacing: "-1.5px" }}
-      >
-        {service.title}
-        <span className="italic text-[#62F7B3]" style={SERIF}>
-          {service.highlight}
-        </span>
-      </h3>
-
-      <div
-        className="services-story-divider services-story-divider--mobile"
-        aria-hidden
-      />
-
-      <p className="text-sm leading-[1.65] text-[#141414]/60 sm:text-base lg:text-lg lg:leading-[1.8]">
-        {getDescription(service)}
-      </p>
-
-      <Link
-        href={service.link}
-        className="group mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#141414] transition-colors duration-300 hover:text-[#62F7B3] lg:mt-8 lg:gap-3 lg:text-[15px]"
-      >
-        <span>{seeMoreLabel}</span>
-        <img
-          src={CTA_ARROW}
-          alt=""
-          className="h-[18px] w-[18px] transition-transform duration-500 ease-out group-hover:translate-x-1.5"
-          loading="lazy"
-        />
-      </Link>
-    </motion.div>
-  );
-});
-
-const ServicesTextPanel = memo(function ServicesTextPanel({
+const ServicesListPanel = memo(function ServicesListPanel({
   activeIndex,
 }: {
   activeIndex: number;
 }) {
-  const service = services[activeIndex];
-
   return (
-    <div className="services-story-text-panel flex w-full min-w-0 items-start pt-2 lg:h-full lg:items-center lg:py-0 lg:pt-0">
-      <AnimatePresence mode="wait" initial={false}>
-        <ServiceActiveText key={service.link} service={service} />
-      </AnimatePresence>
+    <div className="services-story-text-panel flex w-full min-w-0 items-start lg:h-full lg:items-center">
+      <ul className="services-story-list w-full">
+        {services.map((service, index) => {
+          const isActive = index === activeIndex;
+          const fullTitle = `${service.title}${service.highlight}`;
+
+          return (
+            <li
+              key={service.link}
+              className={`services-story-list-item${isActive ? " is-active" : ""}`}
+            >
+              <h3 className="services-story-list-title">{fullTitle}</h3>
+              <p className="services-story-list-subtitle">{service.subtitle}</p>
+
+              <div className="services-story-list-desc-wrap" aria-hidden={!isActive}>
+                <div className="services-story-list-desc-inner">
+                  <p className="services-story-list-desc">{service.desc}</p>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 });
@@ -253,13 +203,14 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
     const pos = p * (total - 1);
     return Math.max(0, 1 - Math.abs(pos - index));
   });
-  const scale = useTransform(focus, [0, 1], [0.96, 1]);
-  const opacity = useTransform(focus, [0, 0.4, 1], [0, 0, 1]);
+  // Soft ease — never fully disappears, gentle scale
+  const scale = useTransform(focus, [0, 1], [0.97, 1]);
+  const opacity = useTransform(focus, [0, 0.35, 1], [0.4, 0.72, 1]);
 
   return (
     <motion.div
       className="services-story-image-group"
-      style={{ scale, opacity, willChange: "transform, opacity" }}
+      style={{ scale, opacity }}
     >
       <div className="services-story-img services-story-img--primary">
         <Image
@@ -340,14 +291,17 @@ export default function Services() {
   const [slotHeight, setSlotHeight] = useState(420);
   const [introViews, setIntroViews] = useState(INTRO_SCROLL_VIEWS);
   const introViewsRef = useRef(INTRO_SCROLL_VIEWS);
+  const targetProgressRef = useRef(0);
+  const smoothProgressRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const lastTimeRef = useRef(0);
 
   const sectionHeight = useMemo(
-    () => `${(total + introViews) * 100}vh`,
+    () => `${(total + introViews) * SCROLL_VH_PER_STEP * 100}vh`,
     [total, introViews],
   );
 
-  const rawOverall = useMotionValue(0);
-  const overall = useSpring(rawOverall, SCROLL_SPRING);
+  const overall = useMotionValue(0);
 
   /** 0→1: intro header slides up; 0→1: service story after intro */
   const introProgress = useTransform(overall, (p) => {
@@ -395,29 +349,42 @@ export default function Services() {
       groupStepRef.current = getGroupStepPx(width, nextSlot);
     };
 
-    const measureProgress = () => {
+    const readTarget = () => {
       const rect = section.getBoundingClientRect();
       const scrollable = Math.max(section.offsetHeight - window.innerHeight, 1);
       const passed = Math.min(Math.max(-rect.top, 0), scrollable);
-      rawOverall.set(passed / scrollable);
+      targetProgressRef.current = passed / scrollable;
     };
 
     measureLayout();
-    measureProgress();
+    readTarget();
+    smoothProgressRef.current = targetProgressRef.current;
+    overall.set(smoothProgressRef.current);
 
-    let ticking = false;
+    const tick = (now: number) => {
+      const last = lastTimeRef.current || now;
+      const dt = Math.min(0.048, (now - last) / 1000);
+      lastTimeRef.current = now;
+
+      const alpha = 1 - Math.exp(-SCROLL_SMOOTH * dt);
+      const target = targetProgressRef.current;
+      const current = smoothProgressRef.current;
+      const next = current + (target - current) * alpha;
+      smoothProgressRef.current = next;
+      overall.set(next);
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
     const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        measureProgress();
-        ticking = false;
-      });
+      readTarget();
     };
 
     const onResize = () => {
       measureLayout();
-      measureProgress();
+      readTarget();
+      smoothProgressRef.current = targetProgressRef.current;
+      overall.set(smoothProgressRef.current);
     };
 
     const observer = viewport ? new ResizeObserver(onResize) : null;
@@ -425,13 +392,15 @@ export default function Services() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
+    rafRef.current = requestAnimationFrame(tick);
 
     return () => {
       observer?.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
-  }, [rawOverall]);
+  }, [overall]);
 
   return (
     <section
@@ -444,7 +413,7 @@ export default function Services() {
           <ServicesIntroHeader introProgress={introProgress} />
 
           <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-3 lg:min-h-0 lg:gap-0">
-            <ServicesTextPanel activeIndex={activeIndex} />
+            <ServicesListPanel activeIndex={activeIndex} />
             <ServicesImageTrack
               columnY={columnY}
               progress={storyProgress}

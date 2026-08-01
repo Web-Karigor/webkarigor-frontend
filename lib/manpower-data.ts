@@ -28,7 +28,3 @@ export const MANPOWER_TESTIMONIALS = manpowerContent.reviews.items;
 export const MANPOWER_PRICING_SECTION = manpowerContent.pricing;
 
 export const MANPOWER_PRICING_PLANS = manpowerContent.pricing.plans;
-
-export const MANPOWER_FAQ_SECTION = manpowerContent.faq;
-
-export const MANPOWER_FAQS = manpowerContent.faq.items;

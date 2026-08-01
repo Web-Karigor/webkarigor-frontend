@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ErpFAQ from "@/components/services/erp/ErpFAQ";
+import FAQ from "@/components/home/FAQ";
 import ErpFeatures from "@/components/services/erp/ErpFeatures";
 import ErpHero from "@/components/services/erp/ErpHero";
 import ErpIntegrations from "@/components/services/erp/ErpIntegrations";
@@ -24,7 +24,7 @@ export default function ErpServicePage() {
       <ErpReviews />
       <ErpTeam />
       <ErpPricing />
-      <ErpFAQ />
+      <FAQ />
       <ServiceMarquee />
       <ServiceContact />
       <ServiceFooter />

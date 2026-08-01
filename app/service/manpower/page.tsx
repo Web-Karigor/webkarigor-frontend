@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ManpowerFAQ from "@/components/services/manpower/ManpowerFAQ";
+import FAQ from "@/components/home/FAQ";
 import ManpowerFeaturesOrbit from "@/components/services/manpower/ManpowerFeaturesOrbit";
 import ManpowerHero from "@/components/services/manpower/ManpowerHero";
 import ManpowerPortfolio from "@/components/services/manpower/ManpowerPortfolio";
@@ -26,7 +26,7 @@ export default function ManpowerServicePage() {
       <ManpowerTeam />
       <ManpowerReviews />
       <ManpowerPricing />
-      <ManpowerFAQ />
+      <FAQ />
       <ServiceMarquee />
       <ServiceContact />
       <ServiceFooter />

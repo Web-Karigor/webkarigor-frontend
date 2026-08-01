@@ -286,38 +286,5 @@
         ]
       }
     ]
-  },
-  "faq": {
-    "eyebrow": "FAQ",
-    "title": "Frequently Asked Questions",
-    "footerText": "Still curious? We're happy to help —",
-    "footerCta": "Contact Us",
-    "footerCtaHref": "#contact",
-    "items": [
-      {
-        "question": "What industries does your ERP solution support?",
-        "answer": "We build ERP systems for retail, manufacturing, healthcare, logistics, and service businesses — tailored to your workflows and compliance needs."
-      },
-      {
-        "question": "How long does ERP implementation typically take?",
-        "answer": "Most mid-size deployments go live in 8–14 weeks after discovery. Complex multi-module rollouts may take longer with phased delivery."
-      },
-      {
-        "question": "Can you integrate with our existing tools?",
-        "answer": "Yes. We connect accounting, CRM, inventory, HR, and payment systems via APIs and standard connectors."
-      },
-      {
-        "question": "Do you offer training for our team?",
-        "answer": "Every plan includes onboarding documentation. Standard and Pro plans add live training sessions and role-based guides."
-      },
-      {
-        "question": "Is data migration included?",
-        "answer": "We audit your current data, map fields, and migrate records with validation checks before go-live."
-      },
-      {
-        "question": "What support do you provide after launch?",
-        "answer": "Ongoing maintenance, feature updates, and priority support based on your plan — with optional dedicated SLA tiers."
-      }
-    ]
   }
 }

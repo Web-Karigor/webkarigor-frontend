@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import FAQ from "@/components/home/FAQ";
 import EcoFeatures from "@/components/services/ecommerce/EcoFeatures";
 import EcoHero from "@/components/services/ecommerce/EcoHero";
 import EcoPortfolio from "@/components/services/ecommerce/EcoPortfolio";
@@ -6,7 +7,6 @@ import EcoPricing from "@/components/services/ecommerce/EcoPricing";
 import EcoReviews from "@/components/services/ecommerce/EcoReviews";
 import EcoTeam from "@/components/services/ecommerce/EcoTeam";
 import EcoTechStack from "@/components/services/ecommerce/EcoTechStack";
-import ServiceFAQ from "@/components/services/ServiceFAQ";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceContact from "@/components/services/ServiceContact";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
@@ -24,7 +24,7 @@ export default function EcommerceServicePage() {
       <EcoReviews />
       <EcoTeam />
       <EcoPricing />
-      <ServiceFAQ />
+      <FAQ />
       <ServiceMarquee />
       <ServiceContact />
       <ServiceFooter />

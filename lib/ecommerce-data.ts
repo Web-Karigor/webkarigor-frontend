@@ -37,6 +37,4 @@ export const ECO_PRICING_SECTION = ecommerceContent.pricing;
 
 export const ECO_PRICING_PLANS = ecommerceContent.pricing.plans;
 
-export const ECO_FAQS = ecommerceContent.faqs;
-
 export const ECO_MARQUEE_ITEMS = ecommerceContent.marqueeItems;

@@ -70,4 +70,3 @@ export const PRICING_MARKETS: PricingMarket[] =
     })),
   }));
 
-export const SERVICE_FAQS = serviceSharedContent.faq.items;
