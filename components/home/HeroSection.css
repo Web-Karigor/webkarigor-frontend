@@ -152,6 +152,99 @@
   font-size: clamp(48px, 18vw, 76px);
 }
 
+/* =========================================================
+   Mobile hero mid — stats + photo slider (Figma sizes)
+   Photo: 167×96, radius 0 · Badge: ~123×76, radius 0
+========================================================= */
+@media (max-width: 1023px) {
+  .hero-mobile-mid {
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-mobile-stats {
+    width: 123px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .hero-mobile-stats > .flex {
+    gap: 4px;
+    height: 100%;
+    align-items: center;
+  }
+
+  .hero-mobile-stats .stats-number {
+    font-size: 76px;
+    font-weight: 600;
+    line-height: 76px;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-mobile-stats .stats-plus {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .hero-mobile-stats .stats-years {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .hero-mobile-stats .stats-pill {
+    padding: 3px 8px;
+    border-radius: 0;
+  }
+
+  .hero-mobile-slider {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  .hero-mobile-slider-track {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-right: 24px;
+  }
+
+  .hero-mobile-slider-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-mobile-slide {
+    flex: 0 0 auto;
+    width: 167px;
+    height: 96px;
+    scroll-snap-align: start;
+    border-radius: 0;
+    overflow: hidden;
+    background: #ece7dc;
+  }
+
+  .hero-mobile-slide-img {
+    display: block;
+    width: 167px;
+    height: 96px;
+    max-width: none;
+    aspect-ratio: auto;
+    object-fit: cover;
+    border-radius: 0;
+  }
+}
+
 @media (min-width: 768px) {
   .hero-projects-text {
     font-size: clamp(100px, 16vw, 150px);

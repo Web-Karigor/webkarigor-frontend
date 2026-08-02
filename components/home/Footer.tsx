@@ -4,7 +4,8 @@ import type { ReactNode } from "react";
 import FooterBrand from "@/components/home/FooterBrand";
 import homeContent from "@/data/home-content.json";
 
-const { headingLines, taglineParts, linkColumns, socialLinks } = homeContent.footer;
+const { headingLines, taglineParts, linkColumns, socialLinks, copyright } =
+  homeContent.footer;
 
 const socialIcons: Record<string, ReactNode> = {
   linkedin: <LinkedInIcon />,
@@ -173,6 +174,8 @@ export default function Footer() {
 
           <FooterBrand />
         </div>
+
+        <p className="footer-copyright">{copyright}</p>
       </div>
     </footer>
   );

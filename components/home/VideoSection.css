@@ -1,5 +1,3 @@
-/* Split from globals.css — UI unchanged */
-
 /* Cover the frame fully — no letterbox / black side bars */
 .video-section-iframe {
   position: absolute;
@@ -12,18 +10,41 @@
   transform-origin: center center;
 }
 
-/* Video section — static layout below lg (no GSAP) */
+/*
+ * Mobile — Brand Appart pattern:
+ * start compact 16:9, GSAP scrub grows to full vw×vh.
+ * Do NOT lock transform (GSAP needs it).
+ */
 @media (max-width: 1023px) {
+  .video-section-stage {
+    width: 100%;
+    max-width: none;
+  }
+
+  .video-section-tilt {
+    width: 100%;
+    height: 100%;
+  }
+
   .video-section-frame {
     width: 100%;
     max-width: 100%;
     aspect-ratio: 16 / 9;
     min-height: 0;
     height: auto;
-    transform: none !important;
+    background: #111;
+    /* GSAP overrides width/height/radius inline while scrubbing */
   }
 
+  /* Cover like Brand Appart .--portrait iframe (height-first fill) */
   .video-section-iframe {
-    transform: translate(-50%, -50%) scale(1.05) !important;
+    width: auto;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    aspect-ratio: 16 / 9;
+    max-width: none;
+    transform: translate(-50%, -50%) scale(1.01);
+    will-change: transform;
   }
 }

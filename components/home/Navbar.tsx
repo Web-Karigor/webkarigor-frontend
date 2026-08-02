@@ -14,7 +14,7 @@ import {
 } from "react";
 import homeContent from "@/data/home-content.json";
 
-const { brand, desktopLinks, mobileLinks, aria } = homeContent.navbar;
+const { brand, desktopLinks } = homeContent.navbar;
 
 type NavItem = {
   id: string;
@@ -39,7 +39,6 @@ function getActiveIdFromPath(pathname: string | null): string {
 }
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const [activeId, setActiveId] = useState(() => getActiveIdFromPath(pathname));
@@ -205,47 +204,6 @@ export default function Navbar() {
                 </div>
               </nav>
             </div>
-
-            <div className="flex items-center justify-between lg:hidden">
-              <div className="navbar-mobile-ring">
-                <Link
-                  href="/"
-                  className={`navbar-mobile-surface block rounded-[11.5px] px-3 py-2 font-bold text-base sm:text-lg ${
-                    scrolled ? "navbar-mobile-surface--scrolled" : ""
-                  }`}
-                >
-                  {brand}
-                </Link>
-              </div>
-
-              <div className="navbar-mobile-ring navbar-mobile-ring--btn">
-                <button
-                  type="button"
-                  onClick={() => setOpen(!open)}
-                  className={`navbar-mobile-surface flex h-10 w-10 items-center justify-center ${
-                    scrolled ? "navbar-mobile-surface--scrolled" : ""
-                  }`}
-                  aria-label={open ? aria.closeMenu : aria.openMenu}
-                >
-                  <span className="text-2xl">{open ? "✕" : "☰"}</span>
-                </button>
-              </div>
-            </div>
-
-            {open && (
-              <div className="mt-4 space-y-5 rounded-2xl border bg-white p-6 shadow-xl lg:hidden">
-                {mobileLinks.map((link) => (
-                  <Link
-                    key={link.href + link.label}
-                    onClick={() => setOpen(false)}
-                    href={link.href}
-                    className="block font-semibold"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
           </div>
         </header>
       </div>

@@ -121,14 +121,14 @@ export default function ProjectHoverCursor() {
         <circle
           cx="56"
           cy="56"
-          r="51"
+          r="49"
           stroke="currentColor"
-          strokeWidth="3"
+          strokeWidth="6.5"
         />
         <path
           d="M42 70L70 42M70 42H50M70 42V62"
           stroke="currentColor"
-          strokeWidth="3.25"
+          strokeWidth="6.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />

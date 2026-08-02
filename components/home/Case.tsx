@@ -133,163 +133,143 @@ export default function Case() {
   useLayoutEffect(() => {
     if (!wrapperRef.current || !pinRef.current || !listRef.current) return;
 
-    const mm = gsap.matchMedia();
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (!cards.length) return;
 
-    mm.add("(min-width: 1024px)", () => {
-      const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
-      if (!cards.length) return;
+    const getLift = () => {
+      const cardHeight = cards[0].offsetHeight || 564;
+      return cardHeight * 1.15;
+    };
 
-      const getLift = () => {
-        const cardHeight = cards[0].offsetHeight || 564;
-        return cardHeight * 1.15;
-      };
+    const getStackY = (stackIndex: number) => `${stackIndex * 10}%`;
+    const getStackZ = (stackIndex: number) => -stackIndex * 30;
+    const liftDuration = 0.68;
+    const revealDuration = 0.32;
 
-      const getStackY = (stackIndex: number) => `${stackIndex * 10}%`;
-      const getStackZ = (stackIndex: number) => -stackIndex * 30;
-      const liftDuration = 0.68;
-      const revealDuration = 0.32;
-
-      const ctx = gsap.context(() => {
-        gsap.set(listRef.current, {
-          perspective: 1200,
-          transformStyle: "preserve-3d",
-        });
-
-        cards.forEach((card, index) => {
-          const title = card.querySelector<HTMLElement>(".service-card-title");
-          const content = card.querySelector<HTMLElement>(".service-card-content");
-          if (!title || !content) return;
-
-          gsap.set(card, {
-            zIndex: cards.length - index,
-            force3D: true,
-            y: index === 0 ? 0 : getStackY(index),
-            z: getStackZ(index),
-            scale: 1,
-            rotateX: 0,
-          });
-
-          if (index === 0) {
-            gsap.set(title, { y: 0, rotateX: 0, autoAlpha: 1, clearProps: "transform" });
-            gsap.set(content, { y: 0, rotateX: 0, autoAlpha: 1, clearProps: "transform" });
-          } else {
-            gsap.set(title, { y: 0, rotateX: 0, autoAlpha: 0 });
-            gsap.set(content, { y: 0, rotateX: 0, autoAlpha: 0 });
-          }
-        });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top top",
-            end: () => `+=${scrollStepsPx(Math.max(cards.length - 1, 1))}`,
-            pin: pinRef.current,
-            pinSpacing: true,
-            scrub: 0.85,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        cards.forEach((card, index) => {
-          if (index === cards.length - 1) return;
-
-          const title = card.querySelector<HTMLElement>(".service-card-title");
-          const content = card.querySelector<HTMLElement>(".service-card-content");
-          const next = cards[index + 1];
-          const nextTitle = next.querySelector<HTMLElement>(".service-card-title");
-          const nextContent = next.querySelector<HTMLElement>(".service-card-content");
-          if (!title || !content || !nextTitle || !nextContent) return;
-
-          const segment = index;
-          const revealAt = segment + liftDuration;
-
-          tl.set(card, { zIndex: 50 }, segment)
-            .to(
-              card,
-              {
-                y: () => -getLift(),
-                z: 40,
-                rotateX: 10,
-                transformOrigin: "50% 100%",
-                ease: "none",
-                duration: liftDuration,
-              },
-              segment,
-            )
-            .to(
-              title,
-              { y: -80, rotateX: 28, ease: "none", duration: liftDuration },
-              segment,
-            )
-            .to(
-              content,
-              { y: -40, rotateX: 28, ease: "none", duration: liftDuration },
-              segment,
-            )
-            .to(
-              next,
-              { y: 0, z: 0, rotateX: 0, ease: "none", duration: revealDuration },
-              revealAt,
-            )
-            .to(
-              nextTitle,
-              { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 0.22 },
-              revealAt + 0.12,
-            )
-            .to(
-              nextContent,
-              { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 0.22 },
-              revealAt + 0.12,
-            );
-
-          for (let j = index + 2; j < cards.length; j++) {
-            const stackPos = j - index - 1;
-            tl.to(
-              cards[j],
-              {
-                y: getStackY(stackPos),
-                z: getStackZ(stackPos),
-                rotateX: 0,
-                ease: "none",
-                duration: revealDuration,
-              },
-              revealAt,
-            );
-          }
-
-          tl.add(() => {
-            cards.forEach((stackCard, stackIndex) => {
-              if (stackIndex <= index) {
-                gsap.set(stackCard, { zIndex: 0 });
-                return;
-              }
-
-              const stackPos = stackIndex - index - 1;
-              gsap.set(stackCard, { zIndex: cards.length - stackPos });
-            });
-          }, segment + 0.999);
-        });
-      }, sectionRef.current ?? undefined);
-
-      return () => ctx.revert();
-    });
-
-    mm.add("(max-width: 1023px)", () => {
-      gsap.set(listRef.current, { clearProps: "all" });
-
-      cardRefs.current.forEach((card) => {
-        if (!card) return;
-        gsap.set(card, { clearProps: "all" });
-        card
-          .querySelectorAll<HTMLElement>(".service-card-title, .service-card-content")
-          .forEach((el) => {
-            gsap.set(el, { clearProps: "all" });
-          });
+    const ctx = gsap.context(() => {
+      gsap.set(listRef.current, {
+        perspective: 1200,
+        transformStyle: "preserve-3d",
       });
-    });
 
-    return () => mm.revert();
+      cards.forEach((card, index) => {
+        const title = card.querySelector<HTMLElement>(".service-card-title");
+        const content = card.querySelector<HTMLElement>(".service-card-content");
+        if (!title || !content) return;
+
+        gsap.set(card, {
+          zIndex: cards.length - index,
+          force3D: true,
+          y: index === 0 ? 0 : getStackY(index),
+          z: getStackZ(index),
+          scale: 1,
+          rotateX: 0,
+        });
+
+        if (index === 0) {
+          gsap.set(title, { y: 0, rotateX: 0, autoAlpha: 1, clearProps: "transform" });
+          gsap.set(content, { y: 0, rotateX: 0, autoAlpha: 1, clearProps: "transform" });
+        } else {
+          gsap.set(title, { y: 0, rotateX: 0, autoAlpha: 0 });
+          gsap.set(content, { y: 0, rotateX: 0, autoAlpha: 0 });
+        }
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: () => `+=${scrollStepsPx(Math.max(cards.length - 1, 1))}`,
+          pin: pinRef.current,
+          pinSpacing: true,
+          scrub: 0.85,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      cards.forEach((card, index) => {
+        if (index === cards.length - 1) return;
+
+        const title = card.querySelector<HTMLElement>(".service-card-title");
+        const content = card.querySelector<HTMLElement>(".service-card-content");
+        const next = cards[index + 1];
+        const nextTitle = next.querySelector<HTMLElement>(".service-card-title");
+        const nextContent = next.querySelector<HTMLElement>(".service-card-content");
+        if (!title || !content || !nextTitle || !nextContent) return;
+
+        const segment = index;
+        const revealAt = segment + liftDuration;
+
+        tl.set(card, { zIndex: 50 }, segment)
+          .to(
+            card,
+            {
+              y: () => -getLift(),
+              z: 40,
+              rotateX: 10,
+              transformOrigin: "50% 100%",
+              ease: "none",
+              duration: liftDuration,
+            },
+            segment,
+          )
+          .to(
+            title,
+            { y: -80, rotateX: 28, ease: "none", duration: liftDuration },
+            segment,
+          )
+          .to(
+            content,
+            { y: -40, rotateX: 28, ease: "none", duration: liftDuration },
+            segment,
+          )
+          .to(
+            next,
+            { y: 0, z: 0, rotateX: 0, ease: "none", duration: revealDuration },
+            revealAt,
+          )
+          .to(
+            nextTitle,
+            { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 0.22 },
+            revealAt + 0.12,
+          )
+          .to(
+            nextContent,
+            { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 0.22 },
+            revealAt + 0.12,
+          );
+
+        for (let j = index + 2; j < cards.length; j++) {
+          const stackPos = j - index - 1;
+          tl.to(
+            cards[j],
+            {
+              y: getStackY(stackPos),
+              z: getStackZ(stackPos),
+              rotateX: 0,
+              ease: "none",
+              duration: revealDuration,
+            },
+            revealAt,
+          );
+        }
+
+        tl.add(() => {
+          cards.forEach((stackCard, stackIndex) => {
+            if (stackIndex <= index) {
+              gsap.set(stackCard, { zIndex: 0 });
+              return;
+            }
+
+            const stackPos = stackIndex - index - 1;
+            gsap.set(stackCard, { zIndex: cards.length - stackPos });
+          });
+        }, segment + 0.999);
+      });
+    }, sectionRef.current ?? undefined);
+
+    return () => ctx.revert();
   }, []);
 
   const cursor = cursorRef.current;

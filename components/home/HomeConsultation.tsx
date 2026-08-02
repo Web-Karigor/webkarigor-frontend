@@ -104,7 +104,7 @@ export default function HomeConsultation() {
                       alt={founder.name}
                       fill
                       className="object-cover"
-                      sizes="160px"
+                      sizes="(max-width: 768px) 100vw, 160px"
                     />
                   </div>
                   <p className="home-consultation-founder-name">{founder.name}</p>

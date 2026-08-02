@@ -412,7 +412,7 @@ export default function Services() {
         <div className="services-story-shell">
           <ServicesIntroHeader introProgress={introProgress} />
 
-          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-3 lg:min-h-0 lg:gap-0">
+          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col-reverse items-stretch gap-3 lg:min-h-0 lg:flex-col lg:gap-0">
             <ServicesListPanel activeIndex={activeIndex} />
             <ServicesImageTrack
               columnY={columnY}

@@ -441,69 +441,75 @@
 
 @media (max-width: 1023px) {
   .case-section {
-    padding: 64px 0 80px;
-    overflow: visible;
+    padding: 48px 0 72px;
+    overflow: clip;
   }
 
   .case-section-inner {
     width: calc(100% - 32px);
   }
 
+  /* Keep absolute stack layout so mobile gets the same pin/scrub motion */
   .tiles_stack_wrapper {
     overflow: visible;
   }
 
   .tiles_stack_pin {
-    height: auto;
-    display: block;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: visible;
+    /* Leave room for mobile sticky nav */
+    padding-bottom: 72px;
+    box-sizing: border-box;
   }
 
   .tiles_stack_list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: auto;
-    max-height: none;
+    position: relative;
+    display: block;
+    height: var(--case-card-height);
+    max-height: min(var(--case-card-height), calc(100dvh - 140px));
+    --case-card-height: clamp(420px, 68dvh, 560px);
   }
 
   .tiles_stack_item {
-    position: relative;
-    inset: unset;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
+    height: 100%;
+    will-change: transform;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
 
   .service-card {
-    min-height: 0;
-    height: auto;
+    min-height: var(--case-card-height);
+    height: 100%;
     border-radius: 20px;
     overflow: hidden;
+    padding: 20px;
   }
 
   .service-card-body {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
 
   .service-card-title {
     flex: none;
-    padding-right: 56px;
+    padding-right: 48px;
+    gap: 16px;
   }
 
   .service_card_title {
     max-width: none;
+    font-size: clamp(1.25rem, 5.5vw, 1.65rem);
   }
 
   .service-card-desc {
     max-width: none;
+    font-size: 0.8125rem;
   }
 
   .service-card-content {
@@ -512,6 +518,11 @@
   }
 
   .service-card-media {
-    min-height: clamp(220px, 52vw, 320px);
+    min-height: clamp(160px, 38vw, 220px);
+  }
+
+  .service-card-count {
+    top: 18px;
+    right: 18px;
   }
 }

@@ -93,25 +93,32 @@ export default function PricingSection() {
           <p className="home-pricing-desc">{description}</p>
         </div>
 
-        <div className="home-pricing-tabs" role="tablist" aria-label="Billing period">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={period === "monthly"}
-            className={`home-pricing-tab${period === "monthly" ? " is-active" : ""}`}
-            onClick={() => setPeriod("monthly")}
-          >
-            {billing.monthly}
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={period === "quarterly"}
-            className={`home-pricing-tab${period === "quarterly" ? " is-active" : ""}`}
-            onClick={() => setPeriod("quarterly")}
-          >
-            {billing.quarterly}
-          </button>
+        <div className="home-pricing-tabs-wrap">
+          <div className="home-pricing-tabs" role="tablist" aria-label="Billing period">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={period === "monthly"}
+              className={`home-pricing-tab${period === "monthly" ? " is-active" : ""}`}
+              onClick={() => setPeriod("monthly")}
+            >
+              {billing.monthly}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={period === "quarterly"}
+              className={`home-pricing-tab${period === "quarterly" ? " is-active" : ""}`}
+              onClick={() => setPeriod("quarterly")}
+            >
+              {billing.quarterly}
+            </button>
+          </div>
+          {billing.saveBadge ? (
+            <span className="home-pricing-save-badge" aria-hidden>
+              {billing.saveBadge}
+            </span>
+          ) : null}
         </div>
 
         <p className="home-pricing-fee-note">

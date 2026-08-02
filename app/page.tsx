@@ -3,6 +3,7 @@ import Services from "@/components/home/Services";
 import Technologies from "@/components/home/Technologies";
 import TechServices from "@/components/home/TechServices";
 import Team from "@/components/home/Team";
+import Team2 from "@/components/home/Team2";
 import PricingSection from "@/components/home/PricingSection";
 import FAQ from "@/components/home/FAQ";
 import HeroSlider from "@/components/home/HeroSlider";
@@ -27,6 +28,7 @@ export default function Home() {
       <Technologies />
       <TrustedFounders />
       <Team />
+      {/* <Team2 /> */}
       <PricingSection />
       <HomeBanner />
       <FAQ />

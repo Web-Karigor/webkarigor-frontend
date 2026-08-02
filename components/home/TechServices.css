@@ -88,6 +88,8 @@
     height: auto;
     min-height: fit-content;
     overflow: hidden;
+    /* Taller gallery strip, less vertical gap */
+    padding: 14px 0 18px;
   }
 
   .tech-services-viewport {
@@ -99,13 +101,23 @@
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .tech-services-slider {
-    padding: 40px 24px;
+    padding: 18px 12px 22px;
   }
 }
 
 @media (max-width: 767px) {
   .tech-services-slider {
-    padding: 32px 16px;
+    padding: 12px 6px 14px;
+  }
+
+  .tech-services-card {
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  }
+
+  .tech-services-card:hover,
+  .tech-services-card:focus-within {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
   }
 }
 

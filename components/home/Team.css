@@ -32,11 +32,13 @@
   color: #bababa;
 }
 
-.team-manual-scroll {
+.team-manual-scroll,
+.team-infinite-scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-.team-manual-scroll::-webkit-scrollbar {
+.team-manual-scroll::-webkit-scrollbar,
+.team-infinite-scroll::-webkit-scrollbar {
   display: none;
 }

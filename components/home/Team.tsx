@@ -4,6 +4,7 @@ import "./Team.css";
 
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { gsap } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
 
 const {
@@ -23,6 +24,9 @@ type TeamCardSizes = {
   radius: number;
 };
 
+const LOOP_COPIES = 3;
+const SLIDE_DURATION = 36;
+
 /** Card size = Figma 433 × 448. */
 function getTeamCardSizes(viewportWidth: number): TeamCardSizes {
   const width = 433;
@@ -40,9 +44,12 @@ function getTeamCardSizes(viewportWidth: number): TeamCardSizes {
   return { width, height, gap: 24, radius: 32 };
 }
 
+/** SSR + first client paint must match — never read window during useState init. */
+const SSR_VIEWPORT_WIDTH = 1440;
+
 function useTeamCardSizes() {
   const [sizes, setSizes] = useState<TeamCardSizes>(() =>
-    getTeamCardSizes(typeof window !== "undefined" ? window.innerWidth : 1440),
+    getTeamCardSizes(SSR_VIEWPORT_WIDTH),
   );
 
   useLayoutEffect(() => {
@@ -99,7 +106,6 @@ function TeamCard({
         transition={{ duration: 0.25, ease: "easeOut" }}
       />
 
-      {/* Name + designation — absolute bottom overlay */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] overflow-hidden px-4 pb-4 pt-12 sm:px-5 sm:pb-5">
         <motion.div
           className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent"
@@ -138,76 +144,109 @@ function TeamCard({
   );
 }
 
-function ManualScrollRow({
+/** Seamless infinite auto-marquee (pauses on hover). */
+function InfiniteSlideRow({
   members,
+  direction,
   sizes,
 }: {
   members: readonly TeamMember[];
+  direction: "left" | "right";
   sizes: TeamCardSizes;
 }) {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  const trackRef = useRef<HTMLDivElement>(null);
+  const setRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const hoveredRef = useRef(false);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
 
-  const onPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    dragRef.current = {
-      active: true,
-      startX: e.clientX,
-      scrollLeft: el.scrollLeft,
+  const pauseSlide = useCallback(() => {
+    timelineRef.current?.pause();
+  }, []);
+
+  const resumeSlide = useCallback(() => {
+    timelineRef.current?.resume();
+  }, []);
+
+  const handleEnter = useCallback(
+    (key: string) => {
+      hoveredRef.current = true;
+      setHoveredKey(key);
+      pauseSlide();
+    },
+    [pauseSlide],
+  );
+
+  const handleLeave = useCallback(() => {
+    hoveredRef.current = false;
+    setHoveredKey(null);
+    resumeSlide();
+  }, [resumeSlide]);
+
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    const set = setRef.current;
+    if (!track || !set) return;
+
+    const buildTimeline = () => {
+      timelineRef.current?.kill();
+
+      const setWidth = set.offsetWidth + sizes.gap;
+      if (setWidth < 1) return;
+
+      gsap.set(track, { x: direction === "left" ? -setWidth : 0 });
+
+      const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
+      tl.to(track, {
+        x: direction === "right" ? -setWidth : 0,
+        duration: SLIDE_DURATION,
+      });
+
+      timelineRef.current = tl;
+      if (hoveredRef.current) tl.pause();
     };
-    setIsDragging(true);
-    el.setPointerCapture(e.pointerId);
-  }, []);
 
-  const onPointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    const el = scrollerRef.current;
-    if (!el || !dragRef.current.active) return;
-    const dx = e.clientX - dragRef.current.startX;
-    el.scrollLeft = dragRef.current.scrollLeft - dx;
-  }, []);
+    buildTimeline();
 
-  const endDrag = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    const el = scrollerRef.current;
-    dragRef.current.active = false;
-    setIsDragging(false);
-    if (el?.hasPointerCapture(e.pointerId)) {
-      el.releasePointerCapture(e.pointerId);
-    }
-  }, []);
+    const observer = new ResizeObserver(() => {
+      if (hoveredRef.current) return;
+      buildTimeline();
+    });
+    observer.observe(set);
+
+    return () => {
+      observer.disconnect();
+      timelineRef.current?.kill();
+      timelineRef.current = null;
+    };
+  }, [direction, sizes.gap, sizes.width, members]);
 
   return (
-    <div
-      ref={scrollerRef}
-      className="team-manual-scroll min-w-0 flex-1 cursor-grab overflow-x-auto overflow-y-hidden active:cursor-grabbing"
-      style={{ touchAction: "pan-x" }}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={endDrag}
-      onPointerCancel={endDrag}
-    >
-      <div
-        className="flex w-max"
-        style={{
-          gap: sizes.gap,
-          pointerEvents: isDragging ? "none" : "auto",
-        }}
-      >
-        {members.map((member, imageIndex) => {
-          const cardKey = `${imageIndex}-${member.src}`;
-          return (
-            <TeamCard
-              key={cardKey}
-              member={member}
-              isHovered={hoveredKey === cardKey}
-              onEnter={() => setHoveredKey(cardKey)}
-              onLeave={() => setHoveredKey(null)}
-              sizes={sizes}
-            />
-          );
-        })}
+    <div className="team-infinite-scroll min-w-0 flex-1 overflow-hidden">
+      <div ref={trackRef} className="flex w-max will-change-transform">
+        {Array.from({ length: LOOP_COPIES }).map((_, copyIndex) => (
+          <div
+            key={copyIndex}
+            ref={copyIndex === 0 ? setRef : undefined}
+            className="flex flex-shrink-0"
+            style={{ gap: sizes.gap, marginRight: sizes.gap }}
+            aria-hidden={copyIndex > 0 ? true : undefined}
+          >
+            {members.map((member, imageIndex) => {
+              const cardKey = `${copyIndex}-${imageIndex}-${member.src}`;
+              return (
+                <TeamCard
+                  key={cardKey}
+                  member={member}
+                  isHovered={hoveredKey === cardKey}
+                  onEnter={() => handleEnter(cardKey)}
+                  onLeave={handleLeave}
+                  sizes={sizes}
+                />
+              );
+            })}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -232,7 +271,11 @@ export default function Team() {
         </div>
 
         <div className="mb-8 flex items-center justify-between gap-4 sm:mb-12 sm:gap-6 lg:gap-10">
-          <ManualScrollRow members={upperMembers} sizes={sizes} />
+          <InfiniteSlideRow
+            members={upperMembers}
+            direction="left"
+            sizes={sizes}
+          />
 
           <motion.div
             initial={{ opacity: 0, x: 60 }}
@@ -262,7 +305,11 @@ export default function Team() {
             </div>
           </motion.div>
 
-          <ManualScrollRow members={lowerMembers} sizes={sizes} />
+          <InfiniteSlideRow
+            members={lowerMembers}
+            direction="right"
+            sizes={sizes}
+          />
         </div>
       </div>
     </section>

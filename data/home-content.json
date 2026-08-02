@@ -393,7 +393,8 @@
     "noExtraFee": "No Extra Fee",
     "billing": {
       "monthly": "Monthly",
-      "quarterly": "Quarterly"
+      "quarterly": "Yearly",
+      "saveBadge": "Save 25%"
     },
     "plans": [
       {
@@ -607,6 +608,7 @@
     ],
     "taglineParts": ["Build Smarter", "Launch Stronger", "Scale Faster"],
     "wordmark": "WEBKARIGOR",
+    "copyright": "© 2026 Webkarigor. All rights reserved.",
     "linkColumns": [
       {
         "title": "Services",

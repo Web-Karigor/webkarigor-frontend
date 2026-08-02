@@ -18,7 +18,8 @@ const ANCHOR_INDEX = CYCLE_SIZE * (REPEAT_CYCLES / 2);
 const SLIDE_DURATION = 36;
 const MARQUEE_DURATION = 32;
 const MARQUEE_COPIES = 2;
-const VISIBLE_COUNT = 5;
+const DESKTOP_VISIBLE_COUNT = 5;
+const MOBILE_VISIBLE_COUNT = 3;
 const HOVER_DURATION = 0.72;
 const HOVER_EASE = [0.19, 1, 0.22, 1] as const;
 
@@ -29,27 +30,31 @@ type CardSizes = {
   hoverHeight: number;
   gap: number;
   viewportMinExtra: number;
+  hoverEnabled: boolean;
 };
 
 function getCardSizes(viewportWidth: number): CardSizes {
   const vw = Math.max(viewportWidth || 0, 320);
-  const gap = vw <= 640 ? 10 : vw <= 1024 ? 12 : 16;
+  const isMobile = vw < 768;
+  const isTablet = vw >= 768 && vw < 1024;
+  const visibleCount =
+    isMobile || isTablet ? MOBILE_VISIBLE_COUNT : DESKTOP_VISIBLE_COUNT;
+  const gap = isMobile ? 8 : isTablet ? 12 : 16;
   const width = Math.max(
-    80,
-    Math.floor((vw - gap * (VISIBLE_COUNT - 1)) / VISIBLE_COUNT),
+    96,
+    Math.floor((vw - gap * (visibleCount - 1)) / visibleCount),
   );
-  const hoverScale = vw < 1024 ? 1.35 : vw < 1280 ? 1.5 : 1.9;
-  const hoverWidth = Math.min(
-    Math.round(width * hoverScale),
-    Math.floor(vw * 0.42),
-  );
-  const height =
-    vw <= 640
-      ? Math.round(width * 1.5)
-      : vw <= 1024
-        ? Math.round(width * 1.35)
-        : Math.round(width * 1.22);
-  const hoverHeight = Math.round(height * 1.18);
+  const hoverEnabled = vw >= 1024;
+  const hoverScale = vw < 1280 ? 1.5 : 1.9;
+  const hoverWidth = hoverEnabled
+    ? Math.min(Math.round(width * hoverScale), Math.floor(vw * 0.42))
+    : width;
+  const height = isMobile
+    ? Math.round(width * 1.72)
+    : isTablet
+      ? Math.round(width * 1.45)
+      : Math.round(width * 1.22);
+  const hoverHeight = hoverEnabled ? Math.round(height * 1.18) : height;
 
   return {
     width,
@@ -57,7 +62,8 @@ function getCardSizes(viewportWidth: number): CardSizes {
     height,
     hoverHeight,
     gap,
-    viewportMinExtra: vw >= 1024 ? 80 : vw >= 768 ? 40 : 24,
+    viewportMinExtra: isMobile ? 8 : isTablet ? 20 : 80,
+    hoverEnabled,
   };
 }
 
@@ -193,20 +199,21 @@ function PortfolioCard({
   onLeave: () => void;
   sizes: CardSizes;
 }) {
-  const width = isHovered ? sizes.hoverWidth : sizes.width;
-  const height = isHovered ? sizes.hoverHeight : sizes.height;
+  const canHover = sizes.hoverEnabled && isHovered;
+  const width = canHover ? sizes.hoverWidth : sizes.width;
+  const height = canHover ? sizes.hoverHeight : sizes.height;
 
   return (
     <motion.div
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      onFocus={onEnter}
-      onBlur={onLeave}
+      onMouseEnter={sizes.hoverEnabled ? onEnter : undefined}
+      onMouseLeave={sizes.hoverEnabled ? onLeave : undefined}
+      onFocus={sizes.hoverEnabled ? onEnter : undefined}
+      onBlur={sizes.hoverEnabled ? onLeave : undefined}
       initial={false}
       animate={{
         width,
         height,
-        scale: isHovered ? 1.03 : 1,
+        scale: canHover ? 1.03 : 1,
       }}
       transition={{
         width: { duration: HOVER_DURATION, ease: HOVER_EASE },
@@ -217,8 +224,9 @@ function PortfolioCard({
       style={{
         width,
         height,
-        zIndex: isHovered ? 30 : 1,
+        zIndex: canHover ? 30 : 1,
         transformOrigin: "center center",
+        cursor: sizes.hoverEnabled ? "pointer" : "default",
       }}
     >
       <img src={src} alt="" draggable={false} />
@@ -241,10 +249,12 @@ function PortfolioSlider() {
   }, []);
 
   const activeHeight =
-    hoveredKey !== null ? sizes.hoverHeight : sizes.height;
+    sizes.hoverEnabled && hoveredKey !== null
+      ? sizes.hoverHeight
+      : sizes.height;
 
   const viewportMinHeight = isBelowLg
-    ? "auto"
+    ? sizes.height + sizes.viewportMinExtra
     : activeHeight + sizes.viewportMinExtra;
 
   const pauseSlide = useCallback(() => {
@@ -255,20 +265,29 @@ function PortfolioSlider() {
     tweenRef.current?.resume();
   }, []);
 
+  useLayoutEffect(() => {
+    if (sizes.hoverEnabled) return;
+    hoveredRef.current = false;
+    setHoveredKey(null);
+    resumeSlide();
+  }, [sizes.hoverEnabled, resumeSlide]);
+
   const handleEnter = useCallback(
     (index: number) => {
+      if (!sizes.hoverEnabled) return;
       hoveredRef.current = true;
       setHoveredKey(index);
       pauseSlide();
     },
-    [pauseSlide],
+    [pauseSlide, sizes.hoverEnabled],
   );
 
   const handleLeave = useCallback(() => {
+    if (!sizes.hoverEnabled) return;
     hoveredRef.current = false;
     setHoveredKey(null);
     resumeSlide();
-  }, [resumeSlide]);
+  }, [resumeSlide, sizes.hoverEnabled]);
 
   useLayoutEffect(() => {
     const viewport = viewportRef.current;

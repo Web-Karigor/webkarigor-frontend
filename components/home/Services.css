@@ -287,6 +287,11 @@
     --services-img-radius: 20px;
   }
 
+  /* Image stack on top, service text list below */
+  .services-story-body {
+    flex-direction: column-reverse;
+  }
+
   .services-story-track {
     align-items: stretch;
     width: 100%;

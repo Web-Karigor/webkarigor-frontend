@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import PricingHero from "@/components/pricing/PricingHero";
-import PricingPlans from "@/components/pricing/PricingPlans";
 import PricingCustomBanner from "@/components/pricing/PricingCustomBanner";
 import PricingPackage from "@/components/pricing/PricingPackage";
 import PricingBuiltFor from "@/components/pricing/PricingBuiltFor";
 import PricingFeaturedWork from "@/components/pricing/PricingFeaturedWork";
 import FAQ from "@/components/home/FAQ";
+import PricingSection from "@/components/home/PricingSection";
 import TrustedFounders from "@/components/home/TrustedFounders";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import Footer from "@/components/home/Footer";
@@ -20,7 +20,7 @@ export default function PricingPage() {
   return (
     <div className="bg-[#FFFDF6]">
       <PricingHero />
-      <PricingPlans />
+      <PricingSection />
       <PricingCustomBanner />
       <PricingPackage />
       <TrustedFounders />

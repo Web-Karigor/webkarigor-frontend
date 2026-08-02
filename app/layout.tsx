@@ -5,6 +5,7 @@ import "@/styles/section-shared.css";
 import "@/styles/pricing.css";
 import "@/styles/legacy-solution.css";
 import Navbar from "@/components/home/Navbar";
+import StickyNav from "@/components/home/StickuNav";
 import GlobalCursor from "@/components/GlobalCursor";
 import GsapProvider from "@/components/providers/GsapProvider";
 import homeContent from "@/data/home-content.json";
@@ -64,8 +65,9 @@ export default function RootLayout({
         {/* CONTENT LAYER */}
         <div className="relative z-10 overflow-x-clip">
           <Navbar />
-          <main>{children}</main>
+          <main className="pb-[88px] lg:pb-0">{children}</main>
         </div>
+        <StickyNav />
         </GsapProvider>
       </body>
     </html>

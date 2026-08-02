@@ -8,9 +8,14 @@ import homeContent from "@/data/home-content.json";
 
 const { embedUrl, title: videoTitle } = homeContent.video;
 
+/** Matches Brand Appart mobile video shell (~20px inset, ~16:9 start). */
+const MOBILE_PAD_X = 20;
+const MOBILE_VIDEO_RATIO = 16 / 9;
+
 /**
- * Video expands only once it's dead-center in the viewport (Noomo-style).
- * Pin keeps it in the middle while scale grows with smooth scrub inertia.
+ * Desktop: Noomo-style center pin + scale.
+ * Mobile: Brand Appart-style — compact 16:9 card scrub-grows to full viewport.
+ * @see https://www.brandappart.com/
  */
 const VideoSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -50,7 +55,6 @@ const VideoSection = () => {
           backfaceVisibility: "hidden",
         });
 
-        // Zoom finishes early; remaining scroll keeps full-size video pinned
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: stage,
@@ -71,7 +75,6 @@ const VideoSection = () => {
           force3D: true,
           duration: 1,
         }).to(frame, {
-          // hold at full zoom while user keeps scrolling
           duration: 0.7,
         });
 
@@ -106,6 +109,130 @@ const VideoSection = () => {
           stage.removeEventListener("mouseleave", onLeave);
         };
       });
+
+      // Brand Appart mobile: 16:9 inset card → full vw×vh on scrub
+      mm.add("(max-width: 1023px)", () => {
+        const measure = () => {
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          const startW = Math.max(vw - MOBILE_PAD_X * 2, 280);
+          const startH = Math.round(startW / MOBILE_VIDEO_RATIO);
+          return { vw, vh, startW, startH };
+        };
+
+        const applyStart = () => {
+          const { startW, startH } = measure();
+
+          gsap.set(section, {
+            paddingLeft: MOBILE_PAD_X,
+            paddingRight: MOBILE_PAD_X,
+            paddingTop: 40,
+            paddingBottom: 40,
+          });
+
+          gsap.set(stage, {
+            width: "100%",
+            height: startH,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "visible",
+          });
+
+          gsap.set(tilt, {
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            x: 0,
+            y: 0,
+          });
+
+          gsap.set(frame, {
+            width: startW,
+            height: startH,
+            maxWidth: "none",
+            aspectRatio: "auto",
+            borderRadius: 10.5,
+            x: 0,
+            y: 0,
+            scale: 1,
+            force3D: true,
+            transformOrigin: "50% 50%",
+            willChange: "width,height,border-radius,transform",
+            backfaceVisibility: "hidden",
+          });
+        };
+
+        applyStart();
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: stage,
+            start: "center center",
+            end: () => `+=${Math.round(window.innerHeight * 2.4)}`,
+            pin: true,
+            pinSpacing: true,
+            // Brand Appart feels linear / tightly scrubbed
+            scrub: 1.15,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onRefresh: () => {
+              if (tl.progress() < 0.02) applyStart();
+            },
+          },
+        });
+
+        tl.to(
+          section,
+          {
+            paddingLeft: 0,
+            paddingRight: 0,
+            paddingTop: 0,
+            paddingBottom: 0,
+            ease: "none",
+            duration: 1,
+          },
+          0,
+        )
+          .to(
+            stage,
+            {
+              height: () => window.innerHeight,
+              width: () => window.innerWidth,
+              ease: "none",
+              duration: 1,
+            },
+            0,
+          )
+          .to(
+            frame,
+            {
+              width: () => window.innerWidth,
+              height: () => window.innerHeight,
+              borderRadius: 0,
+              ease: "none",
+              force3D: true,
+              duration: 1,
+            },
+            0,
+          )
+          // Hold fullscreen briefly (Brand Appart keeps full frame through extra scroll)
+          .to({}, { duration: 0.85 });
+
+        const onResize = () => {
+          if (tl.progress() < 0.02) applyStart();
+          ScrollTrigger.refresh();
+        };
+        window.addEventListener("resize", onResize);
+        window.addEventListener("orientationchange", onResize);
+
+        return () => {
+          window.removeEventListener("resize", onResize);
+          window.removeEventListener("orientationchange", onResize);
+        };
+      });
     }, section);
 
     requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -116,18 +243,20 @@ const VideoSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#FFFDF6] px-5 py-10 max-lg:overflow-x-hidden lg:overflow-hidden lg:px-4 lg:py-10 xl:px-6 xl:py-12 2xl:py-20"
+      className="video-section relative bg-[#FFFDF6] px-5 py-10 max-lg:overflow-hidden max-lg:px-5 max-lg:py-10 lg:overflow-hidden lg:px-4 lg:py-10 xl:px-6 xl:py-12 2xl:py-20"
     >
-      <div className="mx-auto w-full max-w-[1860px] max-lg:max-w-full">
-
+      <div className="video-section-shell mx-auto w-full max-w-[1860px] max-lg:max-w-none">
         <div
           ref={stageRef}
-          className="relative mx-auto w-full max-w-full lg:max-w-[1860px] lg:[perspective:1400px]"
+          className="video-section-stage relative mx-auto w-full max-w-full lg:max-w-[1860px] lg:[perspective:1400px]"
         >
-          <div ref={tiltRef} className="w-full lg:[transform-style:preserve-3d]">
+          <div
+            ref={tiltRef}
+            className="video-section-tilt w-full lg:[transform-style:preserve-3d]"
+          >
             <div
               ref={frameRef}
-              className="video-section-frame relative mx-auto w-full max-w-full overflow-hidden rounded-[1.5rem] shadow-[0_12px_40px_rgba(0,0,0,0.12)] max-lg:aspect-video max-lg:min-h-0 max-lg:max-h-none lg:max-h-[1039px] lg:min-h-[min(48vw,280px)] lg:shadow-[0_24px_80px_rgba(0,0,0,0.18)] lg:rounded-[2.5rem] xl:min-h-[48vw]"
+              className="video-section-frame relative mx-auto w-full max-w-full overflow-hidden rounded-[1.5rem] shadow-[0_12px_40px_rgba(0,0,0,0.12)] max-lg:rounded-[10.5px] max-lg:shadow-none lg:max-h-[1039px] lg:min-h-[min(48vw,280px)] lg:shadow-[0_24px_80px_rgba(0,0,0,0.18)] lg:rounded-[2.5rem] xl:min-h-[48vw]"
             >
               <iframe
                 src={embedUrl}

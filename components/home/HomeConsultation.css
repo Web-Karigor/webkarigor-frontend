@@ -513,6 +513,42 @@
     box-sizing: border-box;
   }
 
+  .home-consultation-copy {
+    max-width: none;
+  }
+
+  .home-consultation-founder {
+    align-items: center;
+    text-align: center;
+  }
+
+  .home-consultation-founder-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 16px;
+  }
+
+  .home-consultation-founder-name,
+  .home-consultation-founder-role {
+    text-align: center;
+  }
+
+  .home-consultation-copy-bottom {
+    align-items: center;
+    text-align: center;
+  }
+
+  .home-consultation-talk {
+    text-align: center;
+    width: 100%;
+  }
+
+  .home-consultation-whatsapp {
+    align-self: stretch;
+    width: 100%;
+  }
+
   .home-consultation-submit {
     width: 100%;
     max-width: none;
