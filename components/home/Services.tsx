@@ -30,8 +30,8 @@ type Service = (typeof services)[number];
 /** One viewport of scroll for intro header exit */
 const INTRO_SCROLL_VIEWS = 1;
 
-const DESKTOP_GROUP_STEP_PX = 720 + 160;
-const LG_GROUP_STEP_PX = 580 + 100;
+const DESKTOP_GROUP_STEP_PX = 680 + 160;
+const LG_GROUP_STEP_PX = 520 + 100;
 const MOBILE_CARD_GAP = 12;
 
 function getGroupStepPx(width: number, mobileSlotHeight: number) {
@@ -155,15 +155,17 @@ const ServicesListPanel = memo(function ServicesListPanel({
   activeIndex: number;
 }) {
   return (
-    <div className="services-story-text-panel flex w-full min-w-0 items-start lg:h-full lg:items-center">
+    <div className="services-story-text-panel flex w-full min-w-0 items-start font-montserrat lg:h-full lg:items-center">
       <ul className="services-story-list w-full">
         {services.map((service, index) => {
           const isActive = index === activeIndex;
-          const fullTitle = `${service.title}${service.highlight}`;
+          const fullTitle = [service.title, service.highlight]
+            .filter(Boolean)
+            .join(" ");
 
           return (
             <li
-              key={service.link}
+              key={`${index}-${service.link}`}
               className={`services-story-list-item${isActive ? " is-active" : ""}`}
             >
               <h3 className="services-story-list-title">{fullTitle}</h3>
@@ -266,7 +268,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
       >
         {services.map((service, index) => (
           <ServiceImageGroup
-            key={service.link}
+            key={`${index}-${service.link}`}
             service={service}
             index={index}
             progress={progress}

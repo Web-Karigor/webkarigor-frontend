@@ -1,4 +1,41 @@
-/* Cover the frame fully — no letterbox / black side bars */
+/* Video grows from inset card → true full viewport (no leftover gaps) */
+
+.video-section {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fffdf6;
+}
+
+.video-section-shell {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.video-section-stage {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.video-section-tilt {
+  width: 100%;
+  height: 100%;
+}
+
+.video-section-frame {
+  position: relative;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+  /* width/height/radius driven by GSAP */
+}
+
 .video-section-iframe {
   position: absolute;
   top: 50%;
@@ -10,33 +47,24 @@
   transform-origin: center center;
 }
 
-/*
- * Mobile — Brand Appart pattern:
- * start compact 16:9, GSAP scrub grows to full vw×vh.
- * Do NOT lock transform (GSAP needs it).
- */
-@media (max-width: 1023px) {
+@media (min-width: 1024px) {
   .video-section-stage {
-    width: 100%;
-    max-width: none;
+    perspective: 1400px;
   }
 
   .video-section-tilt {
-    width: 100%;
-    height: 100%;
+    transform-style: preserve-3d;
   }
+}
 
+@media (max-width: 1023px) {
   .video-section-frame {
-    width: 100%;
-    max-width: 100%;
     aspect-ratio: 16 / 9;
     min-height: 0;
     height: auto;
-    background: #111;
-    /* GSAP overrides width/height/radius inline while scrubbing */
+    box-shadow: none;
   }
 
-  /* Cover like Brand Appart .--portrait iframe (height-first fill) */
   .video-section-iframe {
     width: auto;
     height: 100%;

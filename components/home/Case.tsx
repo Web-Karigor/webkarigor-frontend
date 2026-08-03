@@ -4,8 +4,8 @@ import "./Case.css";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { gsap, ScrollTrigger, scrollStepsPx } from "@/lib/gsap";
+import { useLayoutEffect, useRef } from "react";
+import { gsap, scrollStepsPx } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
 
 type CaseItem = {
@@ -28,51 +28,9 @@ const {
   headingAccent: caseHeadingAccent,
   headingTitle: caseHeadingTitle,
   description: caseDescription,
-  cursorLabel,
 } = homeContent.case;
 
 const cases = homeContent.case.items as CaseItem[];
-
-function CaseCursor({
-  active,
-  x,
-  y,
-}: {
-  active: boolean;
-  x: number;
-  y: number;
-}) {
-  return (
-    <div
-      className="case-cursor"
-      aria-hidden
-      style={{
-        transform: `translate3d(${x}px, ${y}px, 0) scale(${active ? 1 : 0.85})`,
-        opacity: active ? 1 : 0,
-      }}
-    >
-      <span className="case-cursor__text">{cursorLabel}</span>
-      <span className="case-cursor__icon" aria-hidden>
-        <svg width="12" height="13" viewBox="0 0 12 13" fill="none">
-          <path
-            d="M10 6.2973H2"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M7.5 8.79742C7.5 8.79742 10 6.9562 10 6.2974C10 5.63861 7.5 3.79742 7.5 3.79742"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
-    </div>
-  );
-}
 
 export default function Case() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -80,55 +38,6 @@ export default function Case() {
   const pinRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const cursorRef = useRef({ x: 0, y: 0, active: false });
-  const [, forceCursor] = useState(0);
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-
-    const mm = window.matchMedia("(min-width: 1024px)");
-    if (!mm.matches) return;
-
-    const onMove = (event: MouseEvent) => {
-      const rect = wrapper.getBoundingClientRect();
-      const inside =
-        event.clientX >= rect.left &&
-        event.clientX <= rect.right &&
-        event.clientY >= rect.top &&
-        event.clientY <= rect.bottom;
-
-      cursorRef.current = {
-        x: event.clientX,
-        y: event.clientY,
-        active: inside,
-      };
-
-      if (rafRef.current === null) {
-        rafRef.current = window.requestAnimationFrame(() => {
-          rafRef.current = null;
-          forceCursor((value) => value + 1);
-        });
-      }
-    };
-
-    const onLeave = () => {
-      cursorRef.current.active = false;
-      forceCursor((value) => value + 1);
-    };
-
-    window.addEventListener("mousemove", onMove);
-    wrapper.addEventListener("mouseleave", onLeave);
-
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      wrapper.removeEventListener("mouseleave", onLeave);
-      if (rafRef.current !== null) {
-        window.cancelAnimationFrame(rafRef.current);
-      }
-    };
-  }, []);
 
   useLayoutEffect(() => {
     if (!wrapperRef.current || !pinRef.current || !listRef.current) return;
@@ -138,13 +47,13 @@ export default function Case() {
 
     const getLift = () => {
       const cardHeight = cards[0].offsetHeight || 564;
-      return cardHeight * 1.15;
+      return cardHeight * 1.05;
     };
 
     const getStackY = (stackIndex: number) => `${stackIndex * 10}%`;
     const getStackZ = (stackIndex: number) => -stackIndex * 30;
-    const liftDuration = 0.68;
-    const revealDuration = 0.32;
+    /** Lift + next reveal run together so content never goes blank. */
+    const stepDuration = 1;
 
     const ctx = gsap.context(() => {
       gsap.set(listRef.current, {
@@ -166,13 +75,9 @@ export default function Case() {
           rotateX: 0,
         });
 
-        if (index === 0) {
-          gsap.set(title, { y: 0, rotateX: 0, autoAlpha: 1, clearProps: "transform" });
-          gsap.set(content, { y: 0, rotateX: 0, autoAlpha: 1, clearProps: "transform" });
-        } else {
-          gsap.set(title, { y: 0, rotateX: 0, autoAlpha: 0 });
-          gsap.set(content, { y: 0, rotateX: 0, autoAlpha: 0 });
-        }
+        // Always visible — no empty flash between cards
+        gsap.set(title, { y: 0, rotateX: 0, autoAlpha: 1 });
+        gsap.set(content, { y: 0, rotateX: 0, autoAlpha: 1 });
       });
 
       const tl = gsap.timeline({
@@ -194,12 +99,9 @@ export default function Case() {
         const title = card.querySelector<HTMLElement>(".service-card-title");
         const content = card.querySelector<HTMLElement>(".service-card-content");
         const next = cards[index + 1];
-        const nextTitle = next.querySelector<HTMLElement>(".service-card-title");
-        const nextContent = next.querySelector<HTMLElement>(".service-card-content");
-        if (!title || !content || !nextTitle || !nextContent) return;
+        if (!title || !content || !next) return;
 
         const segment = index;
-        const revealAt = segment + liftDuration;
 
         tl.set(card, { zIndex: 50 }, segment)
           .to(
@@ -210,34 +112,31 @@ export default function Case() {
               rotateX: 10,
               transformOrigin: "50% 100%",
               ease: "none",
-              duration: liftDuration,
+              duration: stepDuration,
             },
             segment,
           )
           .to(
             title,
-            { y: -80, rotateX: 28, ease: "none", duration: liftDuration },
+            { y: -80, rotateX: 28, ease: "none", duration: stepDuration },
             segment,
           )
           .to(
             content,
-            { y: -40, rotateX: 28, ease: "none", duration: liftDuration },
+            { y: -40, rotateX: 28, ease: "none", duration: stepDuration },
             segment,
           )
+          // Next card rises in parallel — stays fully visible underneath
           .to(
             next,
-            { y: 0, z: 0, rotateX: 0, ease: "none", duration: revealDuration },
-            revealAt,
-          )
-          .to(
-            nextTitle,
-            { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 0.22 },
-            revealAt + 0.12,
-          )
-          .to(
-            nextContent,
-            { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 0.22 },
-            revealAt + 0.12,
+            {
+              y: 0,
+              z: 0,
+              rotateX: 0,
+              ease: "none",
+              duration: stepDuration,
+            },
+            segment,
           );
 
         for (let j = index + 2; j < cards.length; j++) {
@@ -249,9 +148,9 @@ export default function Case() {
               z: getStackZ(stackPos),
               rotateX: 0,
               ease: "none",
-              duration: revealDuration,
+              duration: stepDuration,
             },
-            revealAt,
+            segment,
           );
         }
 
@@ -272,8 +171,6 @@ export default function Case() {
     return () => ctx.revert();
   }, []);
 
-  const cursor = cursorRef.current;
-
   return (
     <section ref={sectionRef} className="case-section">
       <div className="case-section-inner">
@@ -282,17 +179,15 @@ export default function Case() {
             <span className="section-badge-text">{caseBadge}</span>
           </span>
           <h2 className="case-section-heading">
-            <span className="section-heading-split-accent section-accent-text">{caseHeadingAccent}</span>
+            <span className="section-heading-split-accent section-accent-text">
+              {caseHeadingAccent}
+            </span>
             <span className="section-heading-split-title">{caseHeadingTitle}</span>
           </h2>
-          <p className="case-section-desc">
-            {caseDescription}
-          </p>
+          <p className="case-section-desc">{caseDescription}</p>
         </div>
 
         <div ref={wrapperRef} className="tiles_stack_wrapper case-stack">
-          <CaseCursor active={cursor.active} x={cursor.x} y={cursor.y} />
-
           <div ref={pinRef} className="tiles_stack_pin">
             <div ref={listRef} role="list" className="tiles_stack_list w-dyn-items">
               {cases.map((item, index) => (
@@ -313,8 +208,6 @@ export default function Case() {
                       className="service-card-link u-cover"
                       aria-label={item.title}
                     />
-
-                    <div className="service-card-count text-large">{item.number}</div>
 
                     <div className="service-card-body">
                       <div className="service-card-title">
@@ -338,7 +231,9 @@ export default function Case() {
                               />
                             </div>
                             <div className="author-infos">
-                              <span className="author_name u-block">{item.author.name}</span>
+                              <span className="author_name u-block">
+                                {item.author.name}
+                              </span>
                               <span className="author_job u-block text-xs">
                                 {item.author.role}
                               </span>

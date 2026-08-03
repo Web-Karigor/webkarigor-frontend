@@ -265,7 +265,7 @@ export default function TrustedFounders() {
           <span className="trusted-badge -mt-9">{badge}</span>
           <h2 className="trusted-heading font-bold">
             {headingLines[0]} <br />
-            {headingLines[1]} <br />
+            {headingLines[1]}{" "}
             <span className="text-[#BABABA] font-museoModerno font-bold">
               {headingAccent}
             </span>
@@ -274,7 +274,7 @@ export default function TrustedFounders() {
 
         <div
           ref={containerRef}
-          className="trusted-image-row pt-20"
+          className="trusted-image-row lg:pt-28 pt-10 md:pt-10 xl:pt-40 2xl:pt-48"
           style={{ willChange: "transform", backfaceVisibility: "hidden" }}
         >
           {marqueeItems.map((item) => (

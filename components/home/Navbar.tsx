@@ -40,6 +40,7 @@ function getActiveIdFromPath(pathname: string | null): string {
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const pathname = usePathname();
   const [activeId, setActiveId] = useState(() => getActiveIdFromPath(pathname));
   const [pill, setPill] = useState<PillBox | null>(null);
@@ -48,6 +49,7 @@ export default function Navbar() {
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const pillLockRef = useRef(false);
   const pillLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [caseLink, serviceLink, contactLink, aboutLink] = desktopLinks;
 
@@ -95,10 +97,33 @@ export default function Navbar() {
   );
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 12);
+
+      if (y <= 12) {
+        setNavHidden(false);
+        if (scrollIdleTimerRef.current) {
+          clearTimeout(scrollIdleTimerRef.current);
+          scrollIdleTimerRef.current = null;
+        }
+        return;
+      }
+
+      setNavHidden(true);
+      if (scrollIdleTimerRef.current) clearTimeout(scrollIdleTimerRef.current);
+      scrollIdleTimerRef.current = setTimeout(() => {
+        setNavHidden(false);
+        scrollIdleTimerRef.current = null;
+      }, 1300);
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (scrollIdleTimerRef.current) clearTimeout(scrollIdleTimerRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -147,8 +172,12 @@ export default function Navbar() {
         aria-hidden
       />
 
-      {/* Keep sticky top fixed — scroll only changes blur/bg, never position (no route-arrival jolt) */}
-      <div className="sticky top-4 z-[9999] h-0 overflow-visible sm:top-6 lg:top-[39px]">
+      {/* Hide while scrolling; show again when scroll stops */}
+      <div
+        className={`navbar-sticky sticky top-4 z-[9999] h-0 overflow-visible sm:top-6 lg:top-[39px]${
+          navHidden ? " is-hidden" : ""
+        }`}
+      >
         <header className="relative left-0 right-0 overflow-visible">
           <div className="relative mx-auto max-w-[1800px] px-4 sm:px-6">
             <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6">

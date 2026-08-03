@@ -284,7 +284,7 @@ export default function Team() {
             viewport={{ once: true }}
             className="hidden flex-shrink-0 lg:block"
           >
-            <div className="team-heading-desktop-expert text-right">
+            <div className="team-heading-desktop-expert text-left">
               <div>{desktopExpertLines[0]}</div>
               <div>{desktopExpertLines[1]}</div>
             </div>

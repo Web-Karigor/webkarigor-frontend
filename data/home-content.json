@@ -66,7 +66,7 @@
         "highlight": "And Design",
         "subtitle": "Fast, scalable, and secure solutions for modern businesses.",
         "desc": "From concept to deployment, we develop custom web applications engineered for performance and reliability. Our team transforms complex workflows into smooth digital operations, ensuring your platform grows as your business evolves.",
-        "link": "/services/ui-ux",
+        "link": "/services/web-application",
         "images": [
           "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/679a9c4888217669122eebaf_3d41798d228903d42862a148dd56aeb1_Project%20Cards%20%2810%29%20%281%29.avif",
           "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78087a5b72120cc3e5db_d1a5f14e5e5fc69f2dbac575600f06f4_Project%20Cards-6.avif"
@@ -84,6 +84,17 @@
         ]
       },
       {
+        "title": "UX/UI",
+        "highlight": "Design",
+        "subtitle": "Human-centered design that elevates every interaction.",
+        "desc": "We craft user flows, wireframes, and polished interfaces that reduce friction and elevate every interaction — so your product is clear, accessible, and delightful across web and mobile.",
+        "link": "/services/ui-ux",
+        "images": [
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac780912dabe81710b65ed_8e70a34a4056237eca17e1209cecdebe_Project%20Cards-2.avif",
+          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78088c2757d4cdf75977_Project%20Cards-3.avif"
+        ]
+      },
+      {
         "title": "Branding & Digital",
         "highlight": "Identity",
         "subtitle": "Meaningful brands built to inspire confidence.",
@@ -95,7 +106,7 @@
         ]
       },
       {
-        "title": "Product Strategy & ",
+        "title": "Product Strategy &",
         "highlight": "Consultation",
         "subtitle": "Expert guidance to turn ideas into scalable products.",
         "desc": "We help you define roadmap, UX priorities, and go-to-market decisions with clear research and practical workshops — so your product launches faster with less risk and stronger user focus.",

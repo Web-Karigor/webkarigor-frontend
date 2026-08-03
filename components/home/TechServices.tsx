@@ -2,8 +2,7 @@
 
 import "./TechServices.css";
 
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { PORTFOLIO_IMAGES } from "@/lib/home-assets";
 import homeContent from "@/data/home-content.json";
@@ -12,106 +11,49 @@ const categories = homeContent.techServices.categories;
 
 const portfolioImages = PORTFOLIO_IMAGES;
 
+/**
+ * Max card sizes (user uploads images at these dimensions):
+ *   desktop → 515×448
+ *   mobile  → 202×376
+ *   large   → 515×584
+ * Pattern: desktop | mobile | large | mobile | desktop | …
+ */
+const DESKTOP_SIZE = { width: 515, height: 448 } as const;
+const MOBILE_SIZE = { width: 202, height: 376 } as const;
+const LARGE_SIZE = { width: 515, height: 584 } as const;
+const SIZE_PATTERN = [
+  DESKTOP_SIZE,
+  MOBILE_SIZE,
+  LARGE_SIZE,
+  MOBILE_SIZE,
+  DESKTOP_SIZE,
+] as const;
+
+/** Per-image size in one seamless cycle (length === portfolioImages.length). */
+const CYCLE_SIZES = portfolioImages.map(
+  (_, i) => SIZE_PATTERN[i % SIZE_PATTERN.length],
+);
+
 const CYCLE_SIZE = portfolioImages.length;
 const REPEAT_CYCLES = 4;
 const ANCHOR_INDEX = CYCLE_SIZE * (REPEAT_CYCLES / 2);
-const SLIDE_DURATION = 36;
+const SLIDE_DURATION = 40;
 const MARQUEE_DURATION = 32;
 const MARQUEE_COPIES = 2;
-const DESKTOP_VISIBLE_COUNT = 5;
-const MOBILE_VISIBLE_COUNT = 3;
-const HOVER_DURATION = 0.72;
-const HOVER_EASE = [0.19, 1, 0.22, 1] as const;
+const BASE_GAP = 16;
+const MAX_CARD_HEIGHT = LARGE_SIZE.height;
+/** Design width of one full 5-card motif — used to pick a sensible scale. */
+const PATTERN_WIDTH =
+  SIZE_PATTERN.reduce((sum, s) => sum + s.width, 0) +
+  (SIZE_PATTERN.length - 1) * BASE_GAP;
 
-type CardSizes = {
-  width: number;
-  hoverWidth: number;
-  height: number;
-  hoverHeight: number;
-  gap: number;
-  viewportMinExtra: number;
-  hoverEnabled: boolean;
-};
-
-function getCardSizes(viewportWidth: number): CardSizes {
-  const vw = Math.max(viewportWidth || 0, 320);
-  const isMobile = vw < 768;
-  const isTablet = vw >= 768 && vw < 1024;
-  const visibleCount =
-    isMobile || isTablet ? MOBILE_VISIBLE_COUNT : DESKTOP_VISIBLE_COUNT;
-  const gap = isMobile ? 8 : isTablet ? 12 : 16;
-  const width = Math.max(
-    96,
-    Math.floor((vw - gap * (visibleCount - 1)) / visibleCount),
-  );
-  const hoverEnabled = vw >= 1024;
-  const hoverScale = vw < 1280 ? 1.5 : 1.9;
-  const hoverWidth = hoverEnabled
-    ? Math.min(Math.round(width * hoverScale), Math.floor(vw * 0.42))
-    : width;
-  const height = isMobile
-    ? Math.round(width * 1.72)
-    : isTablet
-      ? Math.round(width * 1.45)
-      : Math.round(width * 1.22);
-  const hoverHeight = hoverEnabled ? Math.round(height * 1.18) : height;
-
+const cards = Array.from({ length: CYCLE_SIZE * REPEAT_CYCLES }, (_, i) => {
+  const cycleIndex = i % CYCLE_SIZE;
   return {
-    width,
-    hoverWidth,
-    height,
-    hoverHeight,
-    gap,
-    viewportMinExtra: isMobile ? 8 : isTablet ? 20 : 80,
-    hoverEnabled,
+    src: portfolioImages[cycleIndex],
+    size: CYCLE_SIZES[cycleIndex],
   };
-}
-
-/** SSR + first client paint must match — never read window during useState init. */
-const SSR_VIEWPORT_WIDTH = 1440;
-
-function useCardSizes(viewportRef: React.RefObject<HTMLDivElement | null>) {
-  const [sizes, setSizes] = useState<CardSizes>(() =>
-    getCardSizes(SSR_VIEWPORT_WIDTH),
-  );
-
-  useLayoutEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport) return;
-
-    const update = () => {
-      const width = viewport.offsetWidth || window.innerWidth;
-      setSizes(getCardSizes(width));
-    };
-
-    update();
-
-    const observer = new ResizeObserver(update);
-    observer.observe(viewport);
-
-    return () => observer.disconnect();
-  }, [viewportRef]);
-
-  return sizes;
-}
-
-function useBelowLg() {
-  const [isBelowLg, setIsBelowLg] = useState(false);
-
-  useLayoutEffect(() => {
-    const media = window.matchMedia("(max-width: 1023px)");
-    const update = () => setIsBelowLg(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  return isBelowLg;
-}
-
-const cards = Array.from({ length: CYCLE_SIZE * REPEAT_CYCLES }, (_, i) => ({
-  src: portfolioImages[i % portfolioImages.length],
-}));
+});
 
 function getSeamlessCycleWidth(track: HTMLElement) {
   const children = Array.from(track.children) as HTMLElement[];
@@ -123,6 +65,31 @@ function getCardCenter(track: HTMLElement, index: number) {
   const card = track.children[index] as HTMLElement | undefined;
   if (!card) return 0;
   return card.offsetLeft + card.offsetWidth / 2;
+}
+
+function useTrackScale(viewportRef: React.RefObject<HTMLDivElement | null>) {
+  const [scale, setScale] = useState(1);
+
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const update = () => {
+      const available = viewport.clientWidth;
+      if (available <= 0) return;
+      // Fit roughly one design motif; never upscale past 1.
+      setScale(Math.min(1, available / PATTERN_WIDTH));
+    };
+
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(viewport);
+
+    return () => observer.disconnect();
+  }, [viewportRef]);
+
+  return scale;
 }
 
 function CategoryMarquee() {
@@ -188,49 +155,23 @@ function CategoryMarquee() {
 
 function PortfolioCard({
   src,
-  isHovered,
-  onEnter,
-  onLeave,
-  sizes,
+  size,
+  scale,
 }: {
   src: string;
-  isHovered: boolean;
-  onEnter: () => void;
-  onLeave: () => void;
-  sizes: CardSizes;
+  size: { width: number; height: number };
+  scale: number;
 }) {
-  const canHover = sizes.hoverEnabled && isHovered;
-  const width = canHover ? sizes.hoverWidth : sizes.width;
-  const height = canHover ? sizes.hoverHeight : sizes.height;
-
   return (
-    <motion.div
-      onMouseEnter={sizes.hoverEnabled ? onEnter : undefined}
-      onMouseLeave={sizes.hoverEnabled ? onLeave : undefined}
-      onFocus={sizes.hoverEnabled ? onEnter : undefined}
-      onBlur={sizes.hoverEnabled ? onLeave : undefined}
-      initial={false}
-      animate={{
-        width,
-        height,
-        scale: canHover ? 1.03 : 1,
-      }}
-      transition={{
-        width: { duration: HOVER_DURATION, ease: HOVER_EASE },
-        height: { duration: HOVER_DURATION, ease: HOVER_EASE },
-        scale: { duration: HOVER_DURATION * 0.85, ease: HOVER_EASE },
-      }}
+    <div
       className="tech-services-card"
       style={{
-        width,
-        height,
-        zIndex: canHover ? 30 : 1,
-        transformOrigin: "center center",
-        cursor: sizes.hoverEnabled ? "pointer" : "default",
+        width: size.width * scale,
+        height: size.height * scale,
       }}
     >
       <img src={src} alt="" draggable={false} />
-    </motion.div>
+    </div>
   );
 }
 
@@ -238,56 +179,9 @@ function PortfolioSlider() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
-  const hoveredRef = useRef(false);
-  const [hoveredKey, setHoveredKey] = useState<number | null>(null);
-  const [ready, setReady] = useState(false);
-  const sizes = useCardSizes(viewportRef);
-  const isBelowLg = useBelowLg();
-
-  useLayoutEffect(() => {
-    setReady(true);
-  }, []);
-
-  const activeHeight =
-    sizes.hoverEnabled && hoveredKey !== null
-      ? sizes.hoverHeight
-      : sizes.height;
-
-  const viewportMinHeight = isBelowLg
-    ? sizes.height + sizes.viewportMinExtra
-    : activeHeight + sizes.viewportMinExtra;
-
-  const pauseSlide = useCallback(() => {
-    tweenRef.current?.pause();
-  }, []);
-
-  const resumeSlide = useCallback(() => {
-    tweenRef.current?.resume();
-  }, []);
-
-  useLayoutEffect(() => {
-    if (sizes.hoverEnabled) return;
-    hoveredRef.current = false;
-    setHoveredKey(null);
-    resumeSlide();
-  }, [sizes.hoverEnabled, resumeSlide]);
-
-  const handleEnter = useCallback(
-    (index: number) => {
-      if (!sizes.hoverEnabled) return;
-      hoveredRef.current = true;
-      setHoveredKey(index);
-      pauseSlide();
-    },
-    [pauseSlide, sizes.hoverEnabled],
-  );
-
-  const handleLeave = useCallback(() => {
-    if (!sizes.hoverEnabled) return;
-    hoveredRef.current = false;
-    setHoveredKey(null);
-    resumeSlide();
-  }, [resumeSlide, sizes.hoverEnabled]);
+  const scale = useTrackScale(viewportRef);
+  const gap = BASE_GAP * scale;
+  const viewportHeight = MAX_CARD_HEIGHT * scale;
 
   useLayoutEffect(() => {
     const viewport = viewportRef.current;
@@ -334,8 +228,6 @@ function PortfolioSlider() {
     };
 
     const measure = (preservePosition = true) => {
-      if (hoveredRef.current) return;
-
       const prevCycleWidth = cycleWidth;
       const ratio =
         prevCycleWidth > 0 && preservePosition ? scrollOffset / prevCycleWidth : 0;
@@ -351,7 +243,8 @@ function PortfolioSlider() {
       startMarquee(nextOffset);
     };
 
-    measure(false);
+    // Wait a frame so scaled widths are laid out before measuring.
+    const kickoff = requestAnimationFrame(() => measure(false));
 
     const onResize = () => {
       cancelAnimationFrame(resizeRaf);
@@ -365,40 +258,33 @@ function PortfolioSlider() {
     return () => {
       tweenRef.current?.kill();
       observer.disconnect();
+      cancelAnimationFrame(kickoff);
       cancelAnimationFrame(resizeRaf);
     };
-  }, [sizes]);
+  }, [scale]);
 
   return (
     <div className="tech-services-slider">
-      <motion.div
+      <div
         ref={viewportRef}
         className="tech-services-viewport"
-        initial={false}
-        style={ready ? undefined : { minHeight: viewportMinHeight }}
-        animate={ready ? { minHeight: viewportMinHeight } : false}
-        transition={{
-          duration: HOVER_DURATION,
-          ease: HOVER_EASE,
-        }}
+        style={{ height: viewportHeight }}
       >
         <div
           ref={trackRef}
           className="tech-services-track"
-          style={{ gap: sizes.gap }}
+          style={{ gap }}
         >
           {cards.map((card, i) => (
             <PortfolioCard
               key={i}
               src={card.src}
-              isHovered={hoveredKey === i}
-              onEnter={() => handleEnter(i)}
-              onLeave={handleLeave}
-              sizes={sizes}
+              size={card.size}
+              scale={scale}
             />
           ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

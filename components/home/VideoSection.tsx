@@ -8,14 +8,14 @@ import homeContent from "@/data/home-content.json";
 
 const { embedUrl, title: videoTitle } = homeContent.video;
 
-/** Matches Brand Appart mobile video shell (~20px inset, ~16:9 start). */
 const MOBILE_PAD_X = 20;
 const MOBILE_VIDEO_RATIO = 16 / 9;
+const DESKTOP_START_SCALE = 0.55;
 
 /**
- * Desktop: Noomo-style center pin + scale.
- * Mobile: Brand Appart-style — compact 16:9 card scrub-grows to full viewport.
- * @see https://www.brandappart.com/
+ * Desktop + mobile: inset card scrub-grows to true full viewport (100vw × 100vh).
+ * Scale-only grow left gaps because the frame never reached viewport size — now
+ * width/height animate to window.innerWidth / innerHeight with radius → 0.
  */
 const VideoSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -34,26 +34,60 @@ const VideoSection = () => {
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 1024px)", () => {
-        gsap.set(stage, {
-          perspective: 1400,
-          transformStyle: "preserve-3d",
-        });
+        const applyStart = () => {
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          const startW = Math.round(vw * DESKTOP_START_SCALE);
+          const startH = Math.round(vh * DESKTOP_START_SCALE);
 
-        gsap.set(tilt, {
-          transformStyle: "preserve-3d",
-          force3D: true,
-          willChange: "transform",
-          backfaceVisibility: "hidden",
-        });
+          gsap.set(section, {
+            padding: 0,
+            margin: 0,
+            width: "100%",
+            maxWidth: "none",
+          });
 
-        gsap.set(frame, {
-          scale: 0.55,
-          borderRadius: "2.75rem",
-          force3D: true,
-          transformOrigin: "50% 50%",
-          willChange: "transform,border-radius",
-          backfaceVisibility: "hidden",
-        });
+          gsap.set(stage, {
+            perspective: 1400,
+            transformStyle: "preserve-3d",
+            width: vw,
+            height: vh,
+            maxWidth: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "hidden",
+          });
+
+          gsap.set(tilt, {
+            transformStyle: "preserve-3d",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            force3D: true,
+            willChange: "transform",
+            backfaceVisibility: "hidden",
+          });
+
+          gsap.set(frame, {
+            width: startW,
+            height: startH,
+            maxWidth: "none",
+            maxHeight: "none",
+            borderRadius: 44,
+            scale: 1,
+            x: 0,
+            y: 0,
+            force3D: true,
+            transformOrigin: "50% 50%",
+            willChange: "width,height,border-radius,transform",
+            backfaceVisibility: "hidden",
+          });
+        };
+
+        applyStart();
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -65,18 +99,35 @@ const VideoSection = () => {
             scrub: 2.4,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            onRefresh: () => {
+              if (tl.progress() < 0.02) applyStart();
+            },
           },
         });
 
-        tl.to(frame, {
-          scale: 1,
-          borderRadius: "1.75rem",
-          ease: "power2.inOut",
-          force3D: true,
-          duration: 1,
-        }).to(frame, {
-          duration: 0.7,
-        });
+        tl.to(
+          stage,
+          {
+            width: () => window.innerWidth,
+            height: () => window.innerHeight,
+            ease: "power2.inOut",
+            duration: 1,
+          },
+          0,
+        )
+          .to(
+            frame,
+            {
+              width: () => window.innerWidth,
+              height: () => window.innerHeight,
+              borderRadius: 0,
+              ease: "power2.inOut",
+              force3D: true,
+              duration: 1,
+            },
+            0,
+          )
+          .to({}, { duration: 0.7 });
 
         const quickRotY = gsap.quickTo(tilt, "rotateY", {
           duration: 1.05,
@@ -104,13 +155,19 @@ const VideoSection = () => {
         stage.addEventListener("mousemove", onMove);
         stage.addEventListener("mouseleave", onLeave);
 
+        const onResize = () => {
+          if (tl.progress() < 0.02) applyStart();
+          ScrollTrigger.refresh();
+        };
+        window.addEventListener("resize", onResize);
+
         return () => {
           stage.removeEventListener("mousemove", onMove);
           stage.removeEventListener("mouseleave", onLeave);
+          window.removeEventListener("resize", onResize);
         };
       });
 
-      // Brand Appart mobile: 16:9 inset card → full vw×vh on scrub
       mm.add("(max-width: 1023px)", () => {
         const measure = () => {
           const vw = window.innerWidth;
@@ -174,7 +231,6 @@ const VideoSection = () => {
             end: () => `+=${Math.round(window.innerHeight * 2.4)}`,
             pin: true,
             pinSpacing: true,
-            // Brand Appart feels linear / tightly scrubbed
             scrub: 1.15,
             anticipatePin: 1,
             invalidateOnRefresh: true,
@@ -218,7 +274,6 @@ const VideoSection = () => {
             },
             0,
           )
-          // Hold fullscreen briefly (Brand Appart keeps full frame through extra scroll)
           .to({}, { duration: 0.85 });
 
         const onResize = () => {
@@ -241,23 +296,11 @@ const VideoSection = () => {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="video-section relative bg-[#FFFDF6] px-5 py-10 max-lg:overflow-hidden max-lg:px-5 max-lg:py-10 lg:overflow-hidden lg:px-4 lg:py-10 xl:px-6 xl:py-12 2xl:py-20"
-    >
-      <div className="video-section-shell mx-auto w-full max-w-[1860px] max-lg:max-w-none">
-        <div
-          ref={stageRef}
-          className="video-section-stage relative mx-auto w-full max-w-full lg:max-w-[1860px] lg:[perspective:1400px]"
-        >
-          <div
-            ref={tiltRef}
-            className="video-section-tilt w-full lg:[transform-style:preserve-3d]"
-          >
-            <div
-              ref={frameRef}
-              className="video-section-frame relative mx-auto w-full max-w-full overflow-hidden rounded-[1.5rem] shadow-[0_12px_40px_rgba(0,0,0,0.12)] max-lg:rounded-[10.5px] max-lg:shadow-none lg:max-h-[1039px] lg:min-h-[min(48vw,280px)] lg:shadow-[0_24px_80px_rgba(0,0,0,0.18)] lg:rounded-[2.5rem] xl:min-h-[48vw]"
-            >
+    <section ref={sectionRef} className="video-section">
+      <div className="video-section-shell">
+        <div ref={stageRef} className="video-section-stage">
+          <div ref={tiltRef} className="video-section-tilt">
+            <div ref={frameRef} className="video-section-frame">
               <iframe
                 src={embedUrl}
                 className="video-section-iframe pointer-events-none absolute border-0"

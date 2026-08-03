@@ -7,8 +7,13 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   isolation: isolate;
+  background-color: #2ec4b6;
+  background-image: url("/tech-services-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
 
 .tech-services-nav {
@@ -17,14 +22,15 @@
   width: 100%;
   height: 96px;
   padding: 0 24px;
-  background: #fff5d4;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: transparent;
+  border-bottom: none;
   overflow: hidden;
 }
 
 .tech-services-nav-track {
   display: flex;
   width: max-content;
+  gap: 18px;
   will-change: transform;
   backface-visibility: hidden;
 }
@@ -34,7 +40,7 @@
   align-items: center;
   flex-wrap: nowrap;
   flex-shrink: 0;
-  gap: 10px;
+  gap: 18px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -44,58 +50,40 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  gap: 10px;
+  gap: 18px;
 }
 
 .tech-services-nav-dot {
-  color: #000;
+  color: #fff;
   font-family: var(--font-montserrat);
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 120%;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
   letter-spacing: 0.02em;
   user-select: none;
 }
 
 .tech-services-nav-text {
   font-family: var(--font-montserrat);
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 700;
   line-height: 120%;
   letter-spacing: 0.02em;
-  color: #000;
+  color: #fff;
   white-space: nowrap;
 }
 
 .tech-services-slider {
   width: 100%;
-  background-color: #2ec4b6;
-  background-image: url("/tech-services-gradient.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
+  background: transparent;
   padding: 48px 0 64px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 @media (max-width: 1023px) {
-  .tech-services {
-    overflow-x: hidden;
-  }
-
   .tech-services-slider {
     box-sizing: border-box;
-    height: auto;
-    min-height: fit-content;
-    overflow: hidden;
-    /* Taller gallery strip, less vertical gap */
     padding: 14px 0 18px;
-  }
-
-  .tech-services-viewport {
-    overflow: hidden;
-    min-height: fit-content;
-    height: auto;
   }
 }
 
@@ -114,17 +102,12 @@
     border-radius: 12px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
   }
-
-  .tech-services-card:hover,
-  .tech-services-card:focus-within {
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
-  }
 }
 
 .tech-services-viewport {
   position: relative;
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   align-items: center;
 }
@@ -133,7 +116,6 @@
   display: flex;
   align-items: center;
   width: max-content;
-  overflow: visible;
   will-change: transform;
   backface-visibility: hidden;
   transform: translateZ(0);
@@ -146,16 +128,8 @@
   border-radius: 14px;
   background: #fff;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-  transform-origin: center center;
-  will-change: transform, width, height;
-  backface-visibility: hidden;
-  cursor: pointer;
-  transition: box-shadow 0.72s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.tech-services-card:hover,
-.tech-services-card:focus-within {
-  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.22);
+  cursor: default;
+  pointer-events: none;
 }
 
 .tech-services-card img {
@@ -173,18 +147,16 @@
     padding: 0 16px;
   }
 
-  .tech-services-nav-list {
-    gap: 8px;
-  }
-
   .tech-services-nav-item {
-    gap: 8px;
+    gap: 14px;
   }
 
-  .tech-services-nav-text,
+  .tech-services-nav-text {
+    font-size: 18px;
+  }
+
   .tech-services-nav-dot {
-    font-size: 16px;
-    letter-spacing: 0.015em;
+    font-size: 22px;
   }
 
   .tech-services-card {
