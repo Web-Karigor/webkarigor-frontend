@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Code2, Handshake, Layers3, Zap } from "lucide-react";
 import { ABOUT_WHY_CHOOSE } from "@/lib/about-data";
 
@@ -18,21 +15,15 @@ function WhyChooseCard({
   title,
   description,
   icon,
-  index,
 }: {
   title: string;
   description: string;
   icon: string;
-  index: number;
 }) {
   const Icon = ICONS[icon as keyof typeof ICONS];
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, delay: index * 0.07 }}
+    <article
       className="flex w-full max-w-[600px] flex-col items-center justify-center gap-4 rounded-[24px] border-2 border-transparent p-5 text-center shadow-[0_12px_40px_rgba(63,255,178,0.18),0_4px_20px_rgba(255,239,63,0.12)] sm:gap-6 sm:p-6 md:min-h-[280px] lg:min-h-[329px] xl:w-[min(600px,calc(50%-1rem))]"
       style={{
         background: `
@@ -52,7 +43,7 @@ function WhyChooseCard({
           {description}
         </p>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -69,30 +60,25 @@ export default function AboutWhyChoose() {
           </p>
         </div>
 
-        {/* Figma Frame 191: 1478 × 739 */}
         <div className="mx-auto flex w-full max-w-[1478px] flex-col gap-5 sm:gap-8 xl:min-h-[739px] xl:justify-between xl:gap-0">
-          {/* Top row — left */}
           <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6 xl:justify-start xl:gap-8">
-            {TOP_CARDS.map((item, index) => (
+            {TOP_CARDS.map((item) => (
               <WhyChooseCard
                 key={item.title}
                 title={item.title}
                 description={item.description}
                 icon={item.icon}
-                index={index}
               />
             ))}
           </div>
 
-          {/* Bottom row — right */}
           <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6 xl:justify-end xl:gap-8">
-            {BOTTOM_CARDS.map((item, index) => (
+            {BOTTOM_CARDS.map((item) => (
               <WhyChooseCard
                 key={item.title}
                 title={item.title}
                 description={item.description}
                 icon={item.icon}
-                index={index + 2}
               />
             ))}
           </div>

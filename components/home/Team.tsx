@@ -277,33 +277,21 @@ export default function Team() {
             sizes={sizes}
           />
 
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="hidden flex-shrink-0 lg:block"
-          >
+          <div className="hidden flex-shrink-0 lg:block">
             <div className="team-heading-desktop-expert text-left">
               <div>{desktopExpertLines[0]}</div>
               <div>{desktopExpertLines[1]}</div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <div className="flex items-center justify-between gap-4 sm:gap-6 lg:gap-10">
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="hidden flex-shrink-0 lg:block"
-          >
+          <div className="hidden flex-shrink-0 lg:block">
             <div className="team-heading-desktop-result">
               <div>{desktopResultLines[0]}</div>
               <div>{desktopResultLines[1]}</div>
             </div>
-          </motion.div>
+          </div>
 
           <InfiniteSlideRow
             members={lowerMembers}

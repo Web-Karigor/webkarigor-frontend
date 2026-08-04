@@ -6,13 +6,13 @@
   "navbar": {
     "brand": "Webkarigor",
     "desktopLinks": [
-      { "label": "Case", "href": "/projects" },
+      { "label": "Projects", "href": "/projects" },
       { "label": "Services", "href": "/service" },
       { "label": "Contact", "href": "/contact-us" },
       { "label": "About us", "href": "/about-us" }
     ],
     "mobileLinks": [
-      { "label": "Case", "href": "/projects" },
+      { "label": "Projects", "href": "/projects" },
       { "label": "Services", "href": "/service" },
       { "label": "Contact", "href": "/contact-us" },
       { "label": "About us", "href": "/about-us" }
@@ -517,6 +517,7 @@
     "ctaLabel": "Request a quote"
   },
   "faq": {
+    "badge": "Frequently Ask Questions",
     "headingAccent": "Questions",
     "headingTitle": "Answered?",
     "ctaText": "Still curious? We're happy to help",
@@ -647,7 +648,7 @@
         "title": "Important Link",
         "links": [
           { "label": "Team", "href": "/team" },
-          { "label": "Products", "href": "/products" },
+          { "label": "Projects", "href": "/projects" },
           { "label": "About Us", "href": "/about-us" },
           { "label": "Contact Us", "href": "/contact-us" },
           { "label": "Our Policies", "href": "/policies" }

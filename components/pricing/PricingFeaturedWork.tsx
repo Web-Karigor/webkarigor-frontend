@@ -12,6 +12,37 @@ const vp = { once: true, amount: 0.15 } as const;
 /** Figma: 1521 × 1083 Hug — same width as Complete Package (1520) */
 const FEATURED_W = 1521;
 
+function FeaturedImage({
+  src,
+  alt,
+  href,
+  sizes,
+  className,
+}: {
+  src: string;
+  alt: string;
+  href: string;
+  sizes: string;
+  className: string;
+}) {
+  return (
+    <Link
+      href={href}
+      data-project-cursor
+      className={`group relative block overflow-hidden rounded-[20px] bg-[#1a1a1a] outline-none ${className}`}
+      aria-label={alt}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+        sizes={sizes}
+      />
+    </Link>
+  );
+}
+
 export default function PricingFeaturedWork() {
   const { title, description, seeAll } = FEATURED_WORK_SECTION;
   const [topLeft, topRight, bottomLeft, bottomMid, bottomRight] = FEATURED_WORK;
@@ -47,7 +78,6 @@ export default function PricingFeaturedWork() {
             </Link>
           </div>
 
-          {/* Figma grid: 2 top + 3 bottom, full 1521 width */}
           <div className="mt-10 flex flex-col gap-4 sm:mt-12 sm:gap-5">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
               {[topLeft, topRight].map((item, index) => (
@@ -57,13 +87,12 @@ export default function PricingFeaturedWork() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
                   transition={{ duration: 0.8, delay: index * 0.06, ease }}
-                  className="relative aspect-[16/10] overflow-hidden rounded-[20px] bg-[#1a1a1a]"
                 >
-                  <Image
+                  <FeaturedImage
                     src={item.src}
                     alt={item.alt}
-                    fill
-                    className="object-cover transition duration-500 hover:scale-[1.03]"
+                    href={seeAll.href}
+                    className="aspect-[16/10] w-full"
                     sizes="(max-width: 640px) 100vw, 760px"
                   />
                 </motion.div>
@@ -78,13 +107,12 @@ export default function PricingFeaturedWork() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
                   transition={{ duration: 0.8, delay: 0.12 + index * 0.06, ease }}
-                  className="relative aspect-[4/3] overflow-hidden rounded-[20px] bg-[#1a1a1a]"
                 >
-                  <Image
+                  <FeaturedImage
                     src={item.src}
                     alt={item.alt}
-                    fill
-                    className="object-cover transition duration-500 hover:scale-[1.03]"
+                    href={seeAll.href}
+                    className="aspect-[4/3] w-full"
                     sizes="(max-width: 640px) 100vw, 500px"
                   />
                 </motion.div>

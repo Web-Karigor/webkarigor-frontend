@@ -4,7 +4,16 @@ import "./HomeConsultation.css";
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import {
+  FormEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ComponentType,
+  type SVGProps,
+} from "react";
+import * as FlagIcons from "country-flag-icons/react/3x2";
 import {
   ArrowRight,
   ChevronDown,
@@ -13,6 +22,12 @@ import {
   Globe,
 } from "lucide-react";
 import homeContent from "@/data/home-content.json";
+import {
+  COUNTRY_OPTIONS,
+  DEFAULT_COUNTRY,
+  DEFAULT_DIAL_COUNTRY,
+  type CountryOption,
+} from "@/lib/countries";
 
 const {
   badge,
@@ -24,12 +39,27 @@ const {
   fields,
   schedule,
   submitLabel,
-  regions: REGIONS,
   timeSlots: TIME_SLOTS,
   weekdays: WEEKDAYS,
 } = homeContent.consultation;
 
 const PROFILE_IMAGE = founder.image;
+
+type FlagComponent = ComponentType<SVGProps<SVGSVGElement>>;
+
+function CountryFlag({
+  iso2,
+  className,
+  title,
+}: {
+  iso2: string;
+  className?: string;
+  title?: string;
+}) {
+  const Flag = (FlagIcons as Record<string, FlagComponent | undefined>)[iso2];
+  if (!Flag) return null;
+  return <Flag className={className} title={title ?? iso2} />;
+}
 
 function WhatsAppIcon() {
   return (
@@ -46,18 +76,46 @@ function getCalendarCells(year: number, month: number) {
 
   for (let i = 0; i < firstDay; i += 1) cells.push(null);
   for (let day = 1; day <= daysInMonth; day += 1) cells.push(day);
-
   while (cells.length % 7 !== 0) cells.push(null);
 
   return cells;
 }
 
+function useClickOutside(
+  ref: React.RefObject<HTMLElement | null>,
+  open: boolean,
+  onClose: () => void,
+) {
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointer = (event: MouseEvent) => {
+      const target = event.target as Node | null;
+      if (target && ref.current && !ref.current.contains(target)) {
+        onClose();
+      }
+    };
+
+    // Use click (not mousedown) so toggle button can open first
+    document.addEventListener("click", onPointer);
+    return () => document.removeEventListener("click", onPointer);
+  }, [open, onClose, ref]);
+}
+
 export default function HomeConsultation() {
-  const [region, setRegion] = useState(REGIONS[0]);
+  const [dialCountry, setDialCountry] = useState<CountryOption>(DEFAULT_DIAL_COUNTRY);
+  const [region, setRegion] = useState<CountryOption>(DEFAULT_COUNTRY);
+  const [dialOpen, setDialOpen] = useState(false);
   const [regionOpen, setRegionOpen] = useState(false);
   const [calendarDate, setCalendarDate] = useState(() => new Date(2026, 5, 12));
   const [selectedDay, setSelectedDay] = useState(12);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
+  const dialRef = useRef<HTMLDivElement>(null);
+  const regionRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(dialRef, dialOpen, () => setDialOpen(false));
+  useClickOutside(regionRef, regionOpen, () => setRegionOpen(false));
 
   const calendarCells = useMemo(
     () => getCalendarCells(calendarDate.getFullYear(), calendarDate.getMonth()),
@@ -82,6 +140,9 @@ export default function HomeConsultation() {
     event.preventDefault();
   };
 
+  const phoneLabelMain = fields.phone.label.replace(/\s*\(.*\)\s*$/, "");
+  const phoneLabelHint = fields.phone.label.match(/\(([^)]+)\)/)?.[1];
+
   return (
     <section className="home-consultation-section">
       <div className="home-consultation-shell">
@@ -94,7 +155,6 @@ export default function HomeConsultation() {
                 </span>
 
                 <h2 className="home-consultation-title">{title}</h2>
-
                 <p className="home-consultation-desc">{description}</p>
 
                 <div className="home-consultation-founder">
@@ -114,7 +174,6 @@ export default function HomeConsultation() {
 
               <div className="home-consultation-copy-bottom">
                 <p className="home-consultation-talk">{talkPrompt}</p>
-
                 <Link
                   href={whatsapp.href}
                   target="_blank"
@@ -153,59 +212,139 @@ export default function HomeConsultation() {
               </div>
 
               <div className="home-consultation-form-grid home-consultation-form-grid--two">
-                <label className="home-consultation-field">
-                  <span className="home-consultation-label">{fields.phone.label}</span>
-                  <span className="home-consultation-input-wrap">
-                    <Globe className="home-consultation-input-icon" aria-hidden />
+                <div className="home-consultation-field">
+                  <span className="home-consultation-label">
+                    {phoneLabelMain}
+                    {phoneLabelHint ? (
+                      <span className="home-consultation-label-hint">
+                        {" "}
+                        ({phoneLabelHint})
+                      </span>
+                    ) : null}
+                  </span>
+
+                  <div className="home-consultation-phone-row">
+                    <div className="home-consultation-select-wrap" ref={dialRef}>
+                      <button
+                        type="button"
+                        className="home-consultation-code-btn"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          setRegionOpen(false);
+                          setDialOpen((open) => !open);
+                        }}
+                        aria-expanded={dialOpen}
+                        aria-haspopup="listbox"
+                        aria-label={`Country code ${dialCountry.dialCode}`}
+                      >
+                        <Globe className="home-consultation-code-globe" aria-hidden />
+                        <span className="home-consultation-code-value">
+                          {dialCountry.dialCode}
+                        </span>
+                        <ChevronDown className="home-consultation-code-chevron" aria-hidden />
+                      </button>
+
+                      {dialOpen ? (
+                        <ul
+                          className="home-consultation-select-menu"
+                          role="listbox"
+                          onMouseDown={(event) => event.stopPropagation()}
+                        >
+                          {COUNTRY_OPTIONS.map((option) => (
+                            <li key={`dial-${option.iso2}`}>
+                              <button
+                                type="button"
+                                role="option"
+                                aria-selected={dialCountry.iso2 === option.iso2}
+                                className="home-consultation-select-option"
+                                onClick={() => {
+                                  setDialCountry(option);
+                                  setDialOpen(false);
+                                }}
+                              >
+                                <CountryFlag
+                                  iso2={option.iso2}
+                                  className="home-consultation-flag"
+                                  title={option.name}
+                                />
+                                <span className="home-consultation-option-name">
+                                  {option.name}
+                                </span>
+                                <span className="home-consultation-option-code">
+                                  {option.dialCode}
+                                </span>
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+
                     <input
                       type="tel"
                       name="phone"
                       placeholder={fields.phone.placeholder}
-                      className="home-consultation-input home-consultation-input--with-icon"
+                      className="home-consultation-input home-consultation-input--phone"
                       required
                     />
-                  </span>
-                </label>
+                    <input type="hidden" name="dialCode" value={dialCountry.dialCode} />
+                  </div>
+                </div>
 
                 <div className="home-consultation-field">
                   <span className="home-consultation-label">{fields.region.label}</span>
-                  <div className="home-consultation-select-wrap">
+                  <div className="home-consultation-select-wrap" ref={regionRef}>
                     <button
                       type="button"
                       className="home-consultation-select"
-                      onClick={() => setRegionOpen((open) => !open)}
+                      onClick={() => {
+                        setRegionOpen((open) => !open);
+                        setDialOpen(false);
+                      }}
                       aria-expanded={regionOpen}
                       aria-haspopup="listbox"
                     >
                       <span className="home-consultation-select-value">
-                        <span aria-hidden>{region.flag}</span>
-                        {region.label}
+                        <CountryFlag
+                          iso2={region.iso2}
+                          className="home-consultation-flag"
+                          title={region.name}
+                        />
+                        <ChevronDown className="home-consultation-inline-chevron" aria-hidden />
+                        <span>{region.name}</span>
                       </span>
-                      <ChevronDown className="home-consultation-select-chevron" aria-hidden />
                     </button>
 
-                    {regionOpen && (
+                    {regionOpen ? (
                       <ul className="home-consultation-select-menu" role="listbox">
-                        {REGIONS.map((option) => (
-                          <li key={option.label}>
+                        {COUNTRY_OPTIONS.map((option) => (
+                          <li key={`region-${option.iso2}`}>
                             <button
                               type="button"
                               role="option"
-                              aria-selected={region.label === option.label}
+                              aria-selected={region.iso2 === option.iso2}
                               className="home-consultation-select-option"
                               onClick={() => {
                                 setRegion(option);
                                 setRegionOpen(false);
                               }}
                             >
-                              <span aria-hidden>{option.flag}</span>
-                              {option.label}
+                              <CountryFlag
+                                iso2={option.iso2}
+                                className="home-consultation-flag"
+                                title={option.name}
+                              />
+                              <span className="home-consultation-option-name">
+                                {option.name}
+                              </span>
                             </button>
                           </li>
                         ))}
                       </ul>
-                    )}
+                    ) : null}
                   </div>
+                  <input type="hidden" name="region" value={region.name} />
                 </div>
               </div>
 
@@ -265,7 +404,10 @@ export default function HomeConsultation() {
                             {day}
                           </button>
                         ) : (
-                          <span key={`empty-${index}`} className="home-consultation-calendar-day is-empty" />
+                          <span
+                            key={`empty-${index}`}
+                            className="home-consultation-calendar-day is-empty"
+                          />
                         ),
                       )}
                     </div>

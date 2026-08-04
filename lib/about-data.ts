@@ -10,10 +10,6 @@ export const ABOUT_VISION = aboutContent.vision;
 
 export const ABOUT_CAPABILITIES = aboutContent.capabilities;
 
-export const ABOUT_TEAM = aboutContent.team;
-
-export const ABOUT_TEAM_IMAGES = aboutContent.team.images;
-
 export const ABOUT_WHY_CHOOSE = aboutContent.whyChoose;
 
 export const ABOUT_METADATA = aboutContent.metadata;

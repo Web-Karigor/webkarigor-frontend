@@ -99,8 +99,8 @@
 }
 
 .ai-feature-center-node {
-  width: clamp(4.5rem, 12vw, 7rem);
-  height: clamp(4.5rem, 12vw, 7rem);
+  width: clamp(5.25rem, 14vw, 8.25rem);
+  height: clamp(5.25rem, 14vw, 8.25rem);
 }
 
 .ai-feature-center-image {

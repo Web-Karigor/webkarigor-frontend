@@ -14,7 +14,7 @@ const CenterNode = forwardRef<HTMLDivElement>(function CenterNode(_, ref) {
         alt={centerAlt}
         fill
         className="ai-feature-center-image"
-        sizes="(max-width: 768px) 72px, 112px"
+        sizes="(max-width: 768px) 84px, 132px"
         priority
       />
     </div>

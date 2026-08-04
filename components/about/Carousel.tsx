@@ -65,9 +65,9 @@ export default function Carousel({ images }: CarouselProps) {
 
   useEffect(() => {
     if (cycleWidth <= 0 || viewportWidth <= 0) return;
-    const startOffset = viewportWidth / 2 - cardWidth / 2 - stride * 2;
-    x.set(startOffset);
-  }, [cycleWidth, viewportWidth, cardWidth, stride, x]);
+    // Start from the left edge (not centered)
+    x.set(0);
+  }, [cycleWidth, viewportWidth, x]);
 
   useAnimationFrame((_, delta) => {
     if (cycleWidth <= 0) return;

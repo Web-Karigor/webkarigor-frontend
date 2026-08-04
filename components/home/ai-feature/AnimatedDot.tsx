@@ -12,14 +12,16 @@ export default function AnimatedDot({
   if (!path) return null;
 
   return (
-    <circle r="5" fill="url(#aiCircuitDot)">
-      <animateMotion
-        dur={`${duration}s`}
-        repeatCount="indefinite"
-        path={path}
-        calcMode="linear"
-        begin={`${delay}s`}
-      />
-    </circle>
+    <g filter="url(#aiCircuitDotGlow)">
+      <circle r="5" fill="url(#aiCircuitDot)">
+        <animateMotion
+          dur={`${duration}s`}
+          repeatCount="indefinite"
+          path={path}
+          calcMode="linear"
+          begin={`${delay}s`}
+        />
+      </circle>
+    </g>
   );
 }

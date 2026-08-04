@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ABOUT_HERO_IMAGES, ABOUT_HERO_TITLE } from "@/lib/about-data";
 import Carousel from "./Carousel";
 
@@ -12,14 +9,9 @@ export default function AboutHero() {
       </div>
 
       <div className="mx-auto w-full max-w-[1174px] px-[clamp(16px,4vw,40px)]">
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-10 text-center font-montserrat text-[clamp(32px,4.2vw,60px)] font-bold leading-[150%] tracking-[-0.05em] text-black sm:mt-14 md:mt-16"
-        >
+        <h1 className="mx-auto mt-10 text-center font-montserrat text-[clamp(32px,4.2vw,60px)] font-bold leading-[150%] tracking-[-0.05em] text-black sm:mt-14 md:mt-16">
           {ABOUT_HERO_TITLE}
-        </motion.h1>
+        </h1>
       </div>
     </section>
   );

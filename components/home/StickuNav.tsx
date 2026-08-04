@@ -43,7 +43,7 @@ const SERVICES = [
 const MORE_LINKS = [
   { href: "/", title: "Home", desc: "Back to Webkarigor home" },
   { href: "/about-us", title: "About us", desc: "Who we are and how we work" },
-  { href: "/projects", title: "Case studies", desc: "Selected work & results" },
+  { href: "/projects", title: "Projects", desc: "Selected work & results" },
   { href: "/pricing", title: "Pricing", desc: "Plans that fit your stage" },
   { href: "/contact-us", title: "Contact us", desc: "Say hello — we reply fast" },
 ] as const;
@@ -187,7 +187,7 @@ export default function StickyNav() {
                 }`}
               >
                 <FolderKanban className="h-4 w-4" />
-                <span>Case</span>
+                <span>Projects</span>
               </Link>
 
               <button

@@ -58,6 +58,11 @@
       "avatar": "/s1.png"
     },
     {
+      "role": "Developer (Back-End)",
+      "name": "Floyd Miles",
+      "avatar": "/h1.png"
+    },
+    {
       "role": "SQA Engineer",
       "name": "Floyd Miles",
       "avatar": "/s2.png"
@@ -118,7 +123,7 @@
           "title": "Fashion Mobile App",
           "description": "A trust-focused shopping experience with clear product details, structured information hierarchy, and reassurance for modern parents across web and mobile.",
           "image": "/services/why-choose-main.jpg",
-          "variant": "text"
+          "variant": "image"
         },
         {
           "slug": "travel-app",
@@ -174,7 +179,7 @@
           "title": "Travel Booking App",
           "description": "A clean multi-platform booking flow designed to reduce friction and help travelers plan with confidence.",
           "image": "/ecommerce/hero-composite.png",
-          "variant": "text"
+          "variant": "image"
         },
         {
           "slug": "kids-ecommerce",
@@ -230,7 +235,7 @@
           "title": "Kids Ecommerce Platform",
           "description": "A trust-driven shopping experience designed for modern parents across web and mobile.",
           "image": "/services/why-choose-main.jpg",
-          "variant": "text"
+          "variant": "image"
         },
         {
           "slug": "fashion-mobile",

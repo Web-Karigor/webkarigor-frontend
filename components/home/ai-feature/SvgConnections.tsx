@@ -29,6 +29,19 @@ function CircuitDefs() {
         <stop offset="45%" stopColor="#38F8AB" />
         <stop offset="100%" stopColor="#38F8AB" />
       </radialGradient>
+      <filter
+        id="aiCircuitDotGlow"
+        x="-120%"
+        y="-120%"
+        width="340%"
+        height="340%"
+      >
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
     </defs>
   );
 }

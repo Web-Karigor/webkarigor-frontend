@@ -4,19 +4,19 @@
 ========================= */
 
 .footer-shell {
-  padding: 72px 20px 12px;
+  padding: 40px 20px 12px;
   background: #fffdf6;
 }
 
 @media (min-width: 768px) {
   .footer-shell {
-    padding: 80px 40px 14px;
+    padding: 48px 40px 14px;
   }
 }
 
 @media (min-width: 1280px) {
   .footer-shell {
-    padding: 88px 60px 16px;
+    padding: 56px 60px 16px;
   }
 }
 
@@ -86,7 +86,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: clamp(72px, 8vw, 104px) clamp(24px, 4vw, 56px) 0;
+  padding: clamp(40px, 5vw, 64px) clamp(24px, 4vw, 56px) 0;
   text-align: center;
 }
 
@@ -126,14 +126,14 @@
   align-items: center;
   justify-content: space-between;
   width: min(100%, 1225px);
-  min-height: 38px;
+  min-height: 44px;
   margin: clamp(24px, 3vw, 34px) auto 0;
   font-family: var(--font-montserrat);
-  font-size: clamp(0.875rem, 1.25vw, 1.125rem);
-  font-weight: 500;
-  line-height: 38px;
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
   color: #111;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 @media (min-width: 768px) {
@@ -149,8 +149,12 @@
 }
 
 .footer-tagline-sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
-  font-weight: 500;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
   line-height: 1;
 }
 

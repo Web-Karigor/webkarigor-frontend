@@ -6,23 +6,22 @@ import "./ProjectHoverCursor.css";
 const SIZE = 112;
 /** Position ease — higher = snappier, lower = softer trail */
 const POS_EASE = 0.12;
-/** Scale ease — keep separate so hover size never snaps */
-const SCALE_EASE = 0.1;
-const SCALE_IDLE = 1;
-const SCALE_HOT = 1.1;
+/** Scale ease — keep separate so open/close never snaps */
+const SCALE_EASE = 0.12;
+const SCALE_HIDDEN = 0;
+const SCALE_VISIBLE = 1;
 
 /**
- * Full-page project cursor. Position + scale only via rAF (no CSS
- * transform/scale transitions — those caused the jitter).
+ * Project image cursor only. Visible while hovering
+ * `[data-project-cursor]` zones; smoothly closes elsewhere.
  */
 export default function ProjectHoverCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const targetRef = useRef({ x: 0, y: 0 });
   const posRef = useRef({ x: 0, y: 0 });
-  const scaleRef = useRef(SCALE_IDLE);
-  const targetScaleRef = useRef(SCALE_IDLE);
+  const scaleRef = useRef(SCALE_HIDDEN);
+  const targetScaleRef = useRef(SCALE_HIDDEN);
   const hotRef = useRef(false);
-  const visibleRef = useRef(false);
   const seededRef = useRef(false);
   const rafRef = useRef<number | null>(null);
   const [enabled, setEnabled] = useState(false);
@@ -41,7 +40,13 @@ export default function ProjectHoverCursor() {
     const el = cursorRef.current;
     if (!el) return;
 
-    document.documentElement.classList.add("project-cursor-active");
+    const setHot = (hot: boolean) => {
+      if (hot === hotRef.current) return;
+      hotRef.current = hot;
+      targetScaleRef.current = hot ? SCALE_VISIBLE : SCALE_HIDDEN;
+      el.style.opacity = hot ? "1" : "0";
+      document.documentElement.classList.toggle("project-cursor-active", hot);
+    };
 
     const onMove = (e: MouseEvent) => {
       targetRef.current.x = e.clientX;
@@ -51,25 +56,17 @@ export default function ProjectHoverCursor() {
         posRef.current.x = e.clientX;
         posRef.current.y = e.clientY;
         seededRef.current = true;
-        visibleRef.current = true;
-        el.style.opacity = "1";
       }
 
       const hot = Boolean(
         (e.target as Element | null)?.closest?.("[data-project-cursor]"),
       );
-      if (hot !== hotRef.current) {
-        hotRef.current = hot;
-        targetScaleRef.current = hot ? SCALE_HOT : SCALE_IDLE;
-      }
+      setHot(hot);
     };
 
     const onLeaveWindow = () => {
-      visibleRef.current = false;
       seededRef.current = false;
-      el.style.opacity = "0";
-      hotRef.current = false;
-      targetScaleRef.current = SCALE_IDLE;
+      setHot(false);
     };
 
     const tick = () => {

@@ -4,8 +4,15 @@ import Link from "next/link";
 import { useState } from "react";
 import homeContent from "@/data/home-content.json";
 
-const { headingAccent, headingTitle, ctaText, ctaLabel, ctaHref, items: faqs } =
-  homeContent.faq;
+const {
+  badge,
+  headingAccent,
+  headingTitle,
+  ctaText,
+  ctaLabel,
+  ctaHref,
+  items: faqs,
+} = homeContent.faq;
 
 export default function FAQ({
   className = "bg-[#FFFDF6]",
@@ -15,66 +22,84 @@ export default function FAQ({
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndex((current) => (current === index ? null : index));
   };
 
   return (
     <section
       id="faq"
-      className={`relative scroll-mt-24 px-4 py-16 pb-8 md:px-6 md:py-24 md:pb-12 ${className}`}
+      className={`relative scroll-mt-24 px-4 py-16 pb-8 font-montserrat md:px-6 md:py-24 md:pb-12 ${className}`}
     >
-      <div className="max-w-[1320px] mx-auto">
-        {/* Header — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
-        <div className="mb-12 text-center md:mb-16">
-          <h2 className="m-0 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
-            <span className="italic text-[#39B770]">{headingAccent}</span>
-            <span className="ml-1 not-italic">{headingTitle}</span>
+      <div className="mx-auto max-w-[1320px]">
+        <div className="faq-section-header mb-12 text-center md:mb-16">
+          <span className="faq-section-badge">
+            <span className="faq-badge-text">{badge}</span>
+          </span>
+
+          <h2 className="section-heading">
+            <span className="section-heading-split-accent faq-gradient-text faq-accent-text">
+              {headingAccent}
+            </span>
+            <span className="section-heading-split-title">{headingTitle}</span>
           </h2>
         </div>
 
-        {/* FAQ List */}
-        <div className="space-y-1 md:space-y-1 mb-12 md:mb-16">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="border-b border-[#e5e5e5]"
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className={`w-full flex items-center justify-between py-5 text-left hover:bg-[#faf9f4] transition focus:outline-none`}
-              >
-                <span className="block min-w-0 flex-1 pr-3 text-base md:text-[26px] font-semibold leading-[100%] tracking-[-0.05em] text-[#141414]">
-                  {faq.question}
-                </span>
-                <span
-                  className="flex shrink-0 items-center justify-center w-6 h-6 rounded-full text-[#141414] font-bold text-xl transition-colors duration-200"
+        <div className="mb-12 space-y-1 md:mb-16">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div key={index} className="border-b border-[#e5e5e5]">
+                <button
+                  type="button"
+                  onClick={() => toggleFAQ(index)}
+                  aria-expanded={isOpen}
+                  className="flex w-full cursor-pointer items-center justify-between py-5 text-left focus:outline-none"
                 >
-                  {openIndex === index ? (
-                    <svg width="18" height="18" viewBox="0 0 18 18" className="text-[#39B770]"><line x1="4" y1="9" x2="14" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
-                  ) : (
-                    <svg width="18" height="18" viewBox="0 0 18 18" className="text-[#141414]"><line x1="9" y1="4" x2="9" y2="14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><line x1="4" y1="9" x2="14" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
-                  )}
-                </span>
-              </button>
-              {openIndex === index && (
-                <div className="pr-0 pb-5">
-                  <p className="text-base md:text-[20px] font-medium  tracking-[-0.05em] text-[#525151]">
-                    {faq.answer}
-                  </p>
+                  <span className="block min-w-0 flex-1 pr-3 font-montserrat text-base font-semibold leading-[100%] tracking-[-0.05em] text-[#141414] md:text-[26px]">
+                    {faq.question}
+                  </span>
+                  <span
+                    className={`relative flex h-6 w-6 shrink-0 items-center justify-center text-[#141414] transition-colors duration-[700ms] ease-out ${
+                      isOpen ? "text-[#39B770]" : "text-[#141414]"
+                    }`}
+                    aria-hidden
+                  >
+                    {/* Horizontal bar always visible */}
+                    <span className="absolute h-[2px] w-[14px] rounded-full bg-current" />
+                    {/* Vertical bar rotates away for minus */}
+                    <span
+                      className={`absolute h-[14px] w-[2px] rounded-full bg-current transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        isOpen ? "scale-y-0" : "scale-y-100"
+                      }`}
+                    />
+                  </span>
+                </button>
+
+                {/* Height-only animation — no opacity (avoids flicker/shake) */}
+                <div
+                  className={`grid overflow-hidden transition-[grid-template-rows] duration-[1100ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <p className="pb-5 pr-0 font-montserrat text-base font-medium tracking-[-0.05em] text-[#525151] md:text-[20px]">
+                      {faq.answer}
+                    </p>
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
 
-        {/* CTA — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
         <div className="text-center">
           <p className="mb-6 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
             {ctaText}
           </p>
           <Link
             href={ctaHref}
-            className="px-5 md:px-6 py-2 md:py-3 border border-[#000000] text-[#000000] font-semibold text-base md:text-lg rounded-lg transition-colors"
+            className="cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold text-[#000000] transition-colors md:px-6 md:py-3 md:text-lg"
           >
             {ctaLabel}
           </Link>

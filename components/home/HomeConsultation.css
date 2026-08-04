@@ -220,9 +220,14 @@
 
 .home-consultation-label {
   font-family: var(--font-montserrat);
-  font-size: 0.875rem;
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.home-consultation-label-hint {
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .home-consultation-input,
@@ -257,6 +262,81 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+.home-consultation-phone-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+
+.home-consultation-phone-row .home-consultation-select-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.home-consultation-phone-row .home-consultation-select-menu {
+  left: 0;
+  right: auto;
+  min-width: 280px;
+  width: max(280px, 100%);
+  max-width: min(340px, 85vw);
+  z-index: 50;
+}
+
+.home-consultation-code-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 52px;
+  min-height: 52px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-montserrat);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.home-consultation-code-btn:hover,
+.home-consultation-code-btn[aria-expanded="true"] {
+  border-color: rgba(56, 248, 171, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.home-consultation-code-globe {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.home-consultation-code-value {
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.home-consultation-code-chevron,
+.home-consultation-inline-chevron {
+  width: 14px;
+  height: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  flex-shrink: 0;
+}
+
+.home-consultation-input--phone {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+}
+
 .home-consultation-input-wrap {
   position: relative;
 }
@@ -288,7 +368,7 @@
 .home-consultation-select {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px;
   cursor: pointer;
   text-align: left;
@@ -297,7 +377,23 @@
 .home-consultation-select-value {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  min-width: 0;
+}
+
+.home-consultation-select-value > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-consultation-flag {
+  width: 22px;
+  height: 15px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
 }
 
 .home-consultation-select-chevron {
@@ -311,14 +407,17 @@
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  z-index: 20;
+  z-index: 30;
+  max-height: 260px;
   margin: 0;
   padding: 8px;
+  overflow-y: auto;
   list-style: none;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   background: #111;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  scrollbar-width: thin;
 }
 
 .home-consultation-select-option {
@@ -335,6 +434,20 @@
   font-size: 0.875rem;
   text-align: left;
   cursor: pointer;
+}
+
+.home-consultation-option-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-consultation-option-code {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
 }
 
 .home-consultation-select-option:hover,
