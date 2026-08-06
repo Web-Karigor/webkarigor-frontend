@@ -53,7 +53,11 @@ export default function ServiceTeamSection() {
           />
 
           <div className="absolute right-0 top-0 z-[3] h-[clamp(176px,21vw,240px)] w-[clamp(176px,21vw,240px)] overflow-visible bg-transparent shadow-none">
-            <div className={`relative h-full w-full ${SHOT_BASE}`}>
+            <span
+              aria-hidden
+              className="pointer-events-none absolute bottom-0 right-0 z-0 h-[clamp(42px,5vw,56px)] w-[clamp(42px,5vw,56px)] translate-x-[30%] translate-y-[30%] rounded-full bg-[#2f80ed]"
+            />
+            <div className={`relative z-[1] h-full w-full ${SHOT_BASE}`}>
               <Image
                 src="/sm2.jpg"
                 alt="Team member — top right"
@@ -63,10 +67,6 @@ export default function ServiceTeamSection() {
                 sizes="(max-width: 768px) 180px, 240px"
               />
             </div>
-            <span
-              aria-hidden
-              className="pointer-events-none absolute bottom-0 right-0 z-0 h-[clamp(42px,5vw,56px)] w-[clamp(42px,5vw,56px)] translate-x-[30%] translate-y-[30%] rounded-full bg-[#2f80ed]"
-            />
           </div>
 
           {TEAM_PHOTOS.map((photo) => (

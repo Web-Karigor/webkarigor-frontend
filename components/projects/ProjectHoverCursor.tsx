@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import "./ProjectHoverCursor.css";
 
 const SIZE = 112;
-/** Position ease — higher = snappier, lower = softer trail */
-const POS_EASE = 0.12;
+/** Lower = slower Mac-like flow behind the mouse */
+const POS_EASE = 0.07;
 /** Scale ease — keep separate so open/close never snaps */
-const SCALE_EASE = 0.12;
+const SCALE_EASE = 0.08;
 const SCALE_HIDDEN = 0;
 const SCALE_VISIBLE = 1;
 

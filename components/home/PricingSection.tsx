@@ -93,38 +93,40 @@ export default function PricingSection() {
           <p className="home-pricing-desc">{description}</p>
         </div>
 
-        <div className="home-pricing-tabs-wrap">
-          <div className="home-pricing-tabs" role="tablist" aria-label="Billing period">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={period === "monthly"}
-              className={`home-pricing-tab${period === "monthly" ? " is-active" : ""}`}
-              onClick={() => setPeriod("monthly")}
-            >
-              {billing.monthly}
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={period === "quarterly"}
-              className={`home-pricing-tab${period === "quarterly" ? " is-active" : ""}`}
-              onClick={() => setPeriod("quarterly")}
-            >
-              {billing.quarterly}
-            </button>
+        <div className="home-pricing-billing">
+          <div className="home-pricing-tabs-row">
+            <div className="home-pricing-tabs" role="tablist" aria-label="Billing period">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={period === "monthly"}
+                className={`home-pricing-tab${period === "monthly" ? " is-active" : ""}`}
+                onClick={() => setPeriod("monthly")}
+              >
+                {billing.monthly}
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={period === "quarterly"}
+                className={`home-pricing-tab${period === "quarterly" ? " is-active" : ""}`}
+                onClick={() => setPeriod("quarterly")}
+              >
+                {billing.quarterly}
+              </button>
+            </div>
+            {billing.saveBadge ? (
+              <span className="home-pricing-save-badge" aria-hidden>
+                {billing.saveBadge}
+              </span>
+            ) : null}
           </div>
-          {billing.saveBadge ? (
-            <span className="home-pricing-save-badge" aria-hidden>
-              {billing.saveBadge}
-            </span>
-          ) : null}
-        </div>
 
-        <p className="home-pricing-fee-note">
-          <span>{noExtraFee}</span>
-          <InfoIcon />
-        </p>
+          <p className="home-pricing-fee-note">
+            <span>{noExtraFee}</span>
+            <InfoIcon />
+          </p>
+        </div>
 
         <div className="home-pricing-grid">
           {plans.map((plan) => {
@@ -196,7 +198,7 @@ export default function PricingSection() {
 
                 <p className="home-pricing-cancel">{cancelLabel}</p>
 
-                <a href="#book-a-call" className="home-pricing-cta">
+                <a href="#book-a-call" className="home-pricing-cta capitalize">
                   {plan.cta}
                 </a>
 

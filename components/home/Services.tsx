@@ -2,7 +2,7 @@
 
 import "./Services.css";
 
-import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { memo, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -32,18 +32,39 @@ const INTRO_SCROLL_VIEWS = 1;
 
 const DESKTOP_GROUP_STEP_PX = 680 + 160;
 const LG_GROUP_STEP_PX = 520 + 100;
-const MOBILE_CARD_GAP = 12;
+
+function getSlideHeightWithGap(el: HTMLElement | null) {
+  if (!el) return 0;
+  const marginBottom = Number.parseFloat(getComputedStyle(el).marginBottom) || 0;
+  return el.offsetHeight + marginBottom;
+}
 
 function getGroupStepPx(width: number, mobileSlotHeight: number) {
   if (width >= 1280) return DESKTOP_GROUP_STEP_PX;
   if (width >= 1024) return LG_GROUP_STEP_PX;
-  return Math.max(mobileSlotHeight + MOBILE_CARD_GAP, 280);
+  return Math.max(mobileSlotHeight, 280);
+}
+
+function computeSectionHeight(
+  width: number,
+  total: number,
+  introViews: number,
+  stepPx: number,
+  viewportH: number,
+) {
+  if (width < 1024) {
+    const introScroll = introViews * viewportH;
+    return `${viewportH + introScroll + Math.max(total - 1, 0) * stepPx}px`;
+  }
+  return `${(total + introViews) * SCROLL_VH_PER_STEP * 100}vh`;
 }
 
 /** Frame-rate independent ease — silky follow, zero overshoot */
 const SCROLL_SMOOTH = 7.2;
 /** Extra scroll room per service = slower, more controlled scrub */
 const SCROLL_VH_PER_STEP = 1.15;
+/** Extra push on last mobile slide to trim visible bottom gap */
+const MOBILE_END_TRIM_PX = 36;
 
 /**
  * Hysteresis keeps active row stable while smoothed progress drifts near edges.
@@ -75,7 +96,7 @@ function useActiveIndex(progress: MotionValue<number>, total: number) {
 const ServicesHeader = memo(function ServicesHeader() {
   return (
     <>
-      <span className="inline-block rounded-full border border-[#38F8AB] px-5 py-2 text-sm font-medium text-[#15D286]">
+      <span className="inline-block rounded-full border border-[#38F8AB] px-6 py-2.5 text-[15px] font-medium text-[#15D286] sm:px-7 md:text-lg">
         {servicesBadge}
       </span>
 
@@ -155,7 +176,7 @@ const ServicesListPanel = memo(function ServicesListPanel({
   activeIndex: number;
 }) {
   return (
-    <div className="services-story-text-panel flex w-full min-w-0 items-start font-montserrat lg:h-full lg:items-center">
+    <div className="services-story-text-panel hidden w-full min-w-0 items-start font-montserrat lg:flex lg:h-full lg:items-center">
       <ul className="services-story-list w-full">
         {services.map((service, index) => {
           const isActive = index === activeIndex;
@@ -255,7 +276,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
   return (
     <div
       ref={viewportRef}
-      className="services-story-images-viewport relative min-h-0 w-full flex-1 overflow-hidden lg:h-full lg:w-[var(--services-layout-w)] lg:max-w-[var(--services-layout-w)] lg:flex-none"
+      className="services-story-images-viewport relative hidden min-h-0 w-full flex-1 overflow-hidden lg:block lg:h-full lg:w-[var(--services-layout-w)] lg:max-w-[var(--services-layout-w)] lg:flex-none"
       style={
         {
           "--services-slot-h": `${slotHeight}px`,
@@ -282,26 +303,130 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
 });
 
 /* -------------------------------------------------------------------------- */
+/* Mobile — image + text paired per scroll step                               */
+/* -------------------------------------------------------------------------- */
+
+const ServicesMobileSlide = memo(function ServicesMobileSlide({
+  service,
+  index,
+  progress,
+  total,
+  measureRef,
+  eager,
+}: {
+  service: Service;
+  index: number;
+  progress: MotionValue<number>;
+  total: number;
+  measureRef?: React.Ref<HTMLDivElement>;
+  eager?: boolean;
+}) {
+  const focus = useTransform(progress, (p) => {
+    const pos = p * (total - 1);
+    return Math.max(0, 1 - Math.abs(pos - index));
+  });
+  const scale = useTransform(focus, [0, 1], [0.98, 1]);
+  const opacity = useTransform(focus, [0, 0.35, 1], [0.45, 0.78, 1]);
+
+  const fullTitle = [service.title, service.highlight].filter(Boolean).join(" ");
+
+  return (
+    <motion.article
+      ref={measureRef}
+      className="services-story-mobile-slide"
+      style={{ scale, opacity }}
+    >
+      <div className="services-story-mobile-slide-image">
+        <Image
+          src={service.images[0]}
+          alt={`${service.title} preview`}
+          fill
+          sizes="100vw"
+          className="object-cover object-top"
+          priority={eager}
+          unoptimized
+        />
+      </div>
+
+      <div className="services-story-mobile-slide-text">
+        <h3 className="services-story-mobile-slide-title">{fullTitle}</h3>
+        <p className="services-story-mobile-slide-subtitle">{service.subtitle}</p>
+        <p className="services-story-mobile-slide-desc">{service.desc}</p>
+      </div>
+    </motion.article>
+  );
+});
+
+const ServicesMobileTrack = memo(function ServicesMobileTrack({
+  columnY,
+  progress,
+  viewportRef,
+  slideMeasureRef,
+  lastSlideMeasureRef,
+}: {
+  columnY: MotionValue<number>;
+  progress: MotionValue<number>;
+  viewportRef: React.Ref<HTMLDivElement>;
+  slideMeasureRef: React.Ref<HTMLDivElement>;
+  lastSlideMeasureRef: React.Ref<HTMLDivElement>;
+}) {
+  const total = services.length;
+  const lastIndex = total - 1;
+
+  return (
+    <div
+      ref={viewportRef}
+      className="services-story-mobile-viewport relative min-h-0 w-full flex-1 overflow-hidden lg:hidden"
+    >
+      <motion.div
+        className="services-story-mobile-track"
+        style={{ y: columnY, willChange: "transform" }}
+      >
+        {services.map((service, index) => (
+          <ServicesMobileSlide
+            key={`mobile-${index}-${service.link}`}
+            service={service}
+            index={index}
+            progress={progress}
+            total={total}
+            measureRef={
+              index === 0
+                ? slideMeasureRef
+                : index === lastIndex
+                  ? lastSlideMeasureRef
+                  : undefined
+            }
+            eager={index === 0}
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+});
+
+/* -------------------------------------------------------------------------- */
 /* Section                                                                    */
 /* -------------------------------------------------------------------------- */
 
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageViewportRef = useRef<HTMLDivElement>(null);
+  const mobileViewportRef = useRef<HTMLDivElement>(null);
+  const mobileSlideMeasureRef = useRef<HTMLDivElement>(null);
+  const mobileLastSlideMeasureRef = useRef<HTMLDivElement>(null);
   const groupStepRef = useRef(DESKTOP_GROUP_STEP_PX);
+  const mobileEndOffsetRef = useRef(0);
   const total = services.length;
   const [slotHeight, setSlotHeight] = useState(420);
   const [introViews, setIntroViews] = useState(INTRO_SCROLL_VIEWS);
+  const [sectionHeight, setSectionHeight] = useState(
+    `${(total + INTRO_SCROLL_VIEWS) * SCROLL_VH_PER_STEP * 100}vh`,
+  );
   const introViewsRef = useRef(INTRO_SCROLL_VIEWS);
   const targetProgressRef = useRef(0);
   const smoothProgressRef = useRef(0);
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef(0);
-
-  const sectionHeight = useMemo(
-    () => `${(total + introViews) * SCROLL_VH_PER_STEP * 100}vh`,
-    [total, introViews],
-  );
 
   const overall = useMotionValue(0);
 
@@ -324,7 +449,21 @@ export default function Services() {
   const activeIndex = useActiveIndex(storyProgress, total);
 
   const columnY = useTransform(storyProgress, (p) => {
-    return -p * (total - 1) * groupStepRef.current;
+    const step = groupStepRef.current;
+    let y = -p * (total - 1) * step;
+
+    if (typeof window !== "undefined" && window.innerWidth < 1024 && total > 1) {
+      const endOffset = mobileEndOffsetRef.current;
+      if (endOffset > 0) {
+        const lastSegmentStart = (total - 2) / (total - 1);
+        if (p >= lastSegmentStart) {
+          const t = (p - lastSegmentStart) / (1 - lastSegmentStart);
+          y += endOffset * t;
+        }
+      }
+    }
+
+    return y;
   });
 
   useLayoutEffect(() => {
@@ -346,9 +485,31 @@ export default function Services() {
 
     const measureLayout = () => {
       const width = window.innerWidth;
-      const nextSlot = width >= 1024 ? 0 : viewport?.offsetHeight ?? 0;
-      setSlotHeight(nextSlot);
-      groupStepRef.current = getGroupStepPx(width, nextSlot);
+      const viewportH = window.innerHeight;
+
+      if (width >= 1024) {
+        setSlotHeight(0);
+        groupStepRef.current = getGroupStepPx(width, 0);
+        mobileEndOffsetRef.current = 0;
+        setSectionHeight(
+          computeSectionHeight(width, total, introViewsRef.current, groupStepRef.current, viewportH),
+        );
+      } else {
+        const slideH = getSlideHeightWithGap(mobileSlideMeasureRef.current);
+        const viewportTrackH = mobileViewportRef.current?.offsetHeight ?? 0;
+        const nextSlot = slideH || viewportTrackH;
+        const lastSlideH = mobileLastSlideMeasureRef.current?.offsetHeight ?? nextSlot;
+
+        setSlotHeight(nextSlot);
+        groupStepRef.current = slideH || getGroupStepPx(width, nextSlot);
+        mobileEndOffsetRef.current = Math.max(
+          0,
+          viewportTrackH - lastSlideH + MOBILE_END_TRIM_PX,
+        );
+        setSectionHeight(
+          computeSectionHeight(width, total, introViewsRef.current, groupStepRef.current, viewportH),
+        );
+      }
     };
 
     const readTarget = () => {
@@ -389,8 +550,14 @@ export default function Services() {
       overall.set(smoothProgressRef.current);
     };
 
-    const observer = viewport ? new ResizeObserver(onResize) : null;
-    if (viewport && observer) observer.observe(viewport);
+    const observer = new ResizeObserver(onResize);
+    if (viewport) observer.observe(viewport);
+    const mobileViewport = mobileViewportRef.current;
+    if (mobileViewport) observer.observe(mobileViewport);
+    const mobileSlide = mobileSlideMeasureRef.current;
+    if (mobileSlide) observer.observe(mobileSlide);
+    const mobileLastSlide = mobileLastSlideMeasureRef.current;
+    if (mobileLastSlide) observer.observe(mobileLastSlide);
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
@@ -402,7 +569,7 @@ export default function Services() {
       window.removeEventListener("resize", onResize);
       if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
-  }, [overall]);
+  }, [overall, introViews]);
 
   return (
     <section
@@ -414,7 +581,15 @@ export default function Services() {
         <div className="services-story-shell">
           <ServicesIntroHeader introProgress={introProgress} />
 
-          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col-reverse items-stretch gap-3 lg:min-h-0 lg:flex-col lg:gap-0">
+          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-0 lg:min-h-0 lg:gap-0">
+            <ServicesMobileTrack
+              columnY={columnY}
+              progress={storyProgress}
+              viewportRef={mobileViewportRef}
+              slideMeasureRef={mobileSlideMeasureRef}
+              lastSlideMeasureRef={mobileLastSlideMeasureRef}
+            />
+
             <ServicesListPanel activeIndex={activeIndex} />
             <ServicesImageTrack
               columnY={columnY}

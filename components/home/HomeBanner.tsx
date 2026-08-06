@@ -29,7 +29,7 @@ export default function HomeBanner() {
         </div>
         <div className="md:w-auto w-full flex md:justify-end justify-center">
           <button
-            className="bg-white w-full sm:w-auto px-6 sm:px-7 py-3 rounded-xl shadow-lg text-lg sm:text-xl md:text-[24px] font-semibold text-black transition hover:bg-[#f3f3f3] border border-slate-200"
+            className="bg-white w-full sm:w-auto px-6 sm:px-7 py-3 capitalize rounded-xl shadow-lg text-lg sm:text-xl md:text-[24px] font-semibold text-black transition hover:bg-[#f3f3f3] border border-slate-200"
             style={{ minWidth: "min(100%, 170px)" }}
           >
             {ctaLabel}

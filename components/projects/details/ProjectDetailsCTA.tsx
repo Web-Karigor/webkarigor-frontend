@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import "./ProjectDetailsRelated.css";
 import {
   PROJECT_DETAILS_UI,
   type ProjectDetail,
@@ -22,7 +23,7 @@ export default function ProjectDetailsCTA({ project }: { project: ProjectDetail 
         </p>
         <Link
           href="/#contact"
-          className="inline-flex h-11 items-center justify-center rounded-[10px] border border-black bg-transparent px-6 font-montserrat text-[14px] font-bold leading-none text-black transition hover:bg-black hover:text-white sm:h-[48px] sm:px-8 sm:text-[15px]"
+          className="inline-flex h-11 items-center justify-center rounded-[10px] border border-black bg-transparent px-6 font-montserrat text-[14px] font-bold capitalize leading-none text-black transition hover:bg-black hover:text-white sm:h-[48px] sm:px-8 sm:text-[15px]"
         >
           {PROJECT_DETAILS_UI.ctaButton}
         </Link>
@@ -61,32 +62,34 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
             {project.related.map((item, index) => (
               <article
                 key={`${item.slug}-${index}`}
-                className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#E8E4DC] shadow-[0_8px_28px_rgba(0,0,0,0.06)] md:aspect-auto md:h-[420px] md:rounded-[24px]"
+                className="related-project-flip relative aspect-[4/5] md:aspect-auto md:h-[420px]"
               >
                 <Link
                   href={`/projects/${item.slug}`}
                   data-project-cursor
-                  className="group relative block h-full w-full overflow-hidden outline-none"
+                  className="related-project-flip-link group block h-full w-full outline-none"
                   aria-label={item.title}
                 >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-                    sizes="(max-width: 768px) 100vw, 420px"
-                  />
+                  <div className="related-project-flip-inner">
+                    <div className="related-project-flip-face related-project-flip-front">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 420px"
+                      />
+                    </div>
 
-                  <div
-                    className="pointer-events-none absolute inset-0 flex translate-y-full flex-col justify-between border border-[#EDEAE3] bg-white p-5 transition-transform duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0 sm:p-7 md:p-8"
-                  >
-                    <p className="m-0 font-montserrat text-[clamp(14px,3.5vw,15px)] font-medium leading-[170%] text-[#6B7280]">
-                      {item.description}
-                    </p>
-                    <span className="mt-6 inline-flex items-center gap-1.5 self-end font-montserrat text-[14px] font-bold leading-none text-[#0A0A0A] underline underline-offset-4">
-                      {PROJECT_DETAILS_UI.viewProject}
-                      <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
-                    </span>
+                    <div className="related-project-flip-face related-project-flip-back">
+                      <p className="m-0 font-montserrat text-[clamp(14px,3.5vw,15px)] font-medium leading-[170%] text-[#6B7280]">
+                        {item.description}
+                      </p>
+                      <span className="mt-6 inline-flex items-center gap-1.5 self-end font-montserrat text-[14px] font-bold leading-none text-[#0A0A0A] underline underline-offset-4">
+                        {PROJECT_DETAILS_UI.viewProject}
+                        <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </article>

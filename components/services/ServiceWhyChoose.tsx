@@ -60,7 +60,7 @@ function HireUsBadge() {
             <text
               key={`${label}-${index}`}
               fill="#ffffff"
-              fontSize="15"
+              fontSize="17.5"
               fontWeight="700"
               letterSpacing="1"
               fontFamily="Montserrat, sans-serif"
@@ -81,7 +81,6 @@ function HireUsBadge() {
           cy="100"
           r="16"
           fill="#FFE94A"
-          className="animate-hireus-blink"
         />
       </svg>
     </div>

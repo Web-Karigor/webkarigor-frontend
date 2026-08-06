@@ -262,7 +262,7 @@ export default function TrustedFounders() {
     <section ref={sectionRef} className="trusted-wrapper">
       <div className="trusted-layout">
         <div className="trusted-text">
-          <span className="trusted-badge -mt-9">{badge}</span>
+          <span className="trusted-badge">{badge}</span>
           <h2 className="trusted-heading font-bold">
             {headingLines[0]} <br />
             {headingLines[1]}{" "}

@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import "./GlobalCursor.css";
 
 const SIZE = 16;
-const POS_EASE = 0.4;
-const SCALE_EASE = 0.22;
+/** Lower = more lag / Mac-like soft trail (was 0.4 = almost locked to mouse) */
+const POS_EASE = 0.075;
+const SCALE_EASE = 0.09;
 const IDLE_SCALE = 1;
 const HOVER_SCALE = 1.65;
 /** Offset so dot sits near cursor tip without hiding the arrow */

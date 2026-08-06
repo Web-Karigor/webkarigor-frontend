@@ -14,7 +14,7 @@
   transform: translate3d(-999px, -999px, 0);
   will-change: transform, opacity;
   backface-visibility: hidden;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.5s ease;
 }
 
 .project-hover-cursor__icon {

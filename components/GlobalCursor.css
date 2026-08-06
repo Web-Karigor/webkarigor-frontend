@@ -11,5 +11,5 @@
   transform: translate3d(-999px, -999px, 0);
   will-change: transform, opacity;
   backface-visibility: hidden;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.45s ease;
 }

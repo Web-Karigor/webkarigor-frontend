@@ -97,7 +97,12 @@ export default function ServiceHero() {
 
               <button
                 type="submit"
-                className="mt-1 min-h-[54px] w-full cursor-pointer rounded-xl border-0 bg-[linear-gradient(90deg,#38f8ab_0%,#8ef0a8_55%,#c8f57a_100%)] font-montserrat text-base font-bold text-white transition-[opacity,transform] hover:-translate-y-px hover:opacity-95"
+                className="mt-1 min-h-[54px] w-full cursor-pointer rounded-full border-0 font-montserrat text-base font-bold text-white transition-[opacity,transform] hover:-translate-y-px hover:opacity-95"
+                style={{
+                  /* Light yellow only at start + end; green stays in the middle */
+                  background:
+                    "linear-gradient(90deg, #d8ef88 0%, #38f8ab 18%, #0ec47b 50%, #38f8ab 82%, #d8ef88 100%)",
+                }}
               >
                 {hero.form.submitLabel}
               </button>

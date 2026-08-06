@@ -235,7 +235,15 @@
 }
 
 .navbar-link.is-active .navbar-link-label {
-  background-image: linear-gradient(to right, #0ec47b, #15d286, #e4d20e);
+  /* Green through most of the word; light yellow only at bottom-right end */
+  background-image: linear-gradient(
+    160deg,
+    #0ec47b 0%,
+    #2eeda0 48%,
+    #15d286 72%,
+    #b8e070 90%,
+    #e4ef96 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

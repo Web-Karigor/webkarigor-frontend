@@ -51,29 +51,29 @@ export default function ServicePricing() {
                   {market.plans.map((plan, index) => (
                     <article
                       key={`${market.label}-${plan.title}-${index}`}
-                      className="box-border flex w-full max-w-[400px] flex-col gap-2.5 rounded-[20px] border-[0.5px] border-transparent bg-[linear-gradient(#ffffff,#ffffff)_padding-box,linear-gradient(135deg,#0ec47b_0%,#2eeda0_50%,#ffef3f_100%)_border-box] p-[clamp(20px,4vw,24px)_clamp(14px,3vw,16px)] lg:min-h-[697px]"
+                      className="box-border flex w-full max-w-[400px] flex-col rounded-[20px] border border-[#0EC47B] bg-[#FFFEFB] p-[clamp(20px,4vw,24px)_clamp(14px,3vw,16px)] lg:min-h-[697px]"
                     >
-                      <h3 className="m-0 font-montserrat text-[28px] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
+                      <h3 className="m-0 font-montserrat text-[30px] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827] sm:text-[32px]">
                         {plan.title}
                       </h3>
-                      <p className="m-0 font-montserrat text-[48px] font-bold leading-none text-[#0EC47B]">
+                      <p className="mt-3 m-0 font-montserrat text-[52px] font-bold leading-none text-[#0EC47B] sm:mt-4 sm:text-[56px]">
                         {plan.price}
                       </p>
-                      <p className="m-0 font-montserrat text-[14px] font-semibold leading-[1.4] text-[#111827]">
+                      <p className="mt-3 m-0 max-w-[300px] font-montserrat text-[15px] font-semibold leading-[1.45] text-[#111827] sm:mt-4 sm:text-[16px]">
                         {plan.subtitle}
                       </p>
 
-                      <hr className="m-0 w-full border-0 border-t-[0.5px] border-[#e5e7eb]" />
+                      <hr className="mx-0 mb-5 mt-6 w-full border-0 border-t border-[#E5E7EB]" />
 
                       <div className="flex w-full flex-1 flex-col">
-                        <p className="m-0 font-montserrat text-[15px] font-bold text-[#111827]">
+                        <p className="m-0 font-montserrat text-[16px] font-bold text-[#111827]">
                           {whatYouGetLabel}
                         </p>
-                        <ul className="mt-2.5 flex list-none flex-col gap-2.5 p-0">
+                        <ul className="mt-4 flex list-none flex-col gap-3.5 p-0">
                           {plan.features.map((feature) => (
                             <li
                               key={feature}
-                              className="flex items-start gap-2.5 font-montserrat text-[13px] font-medium leading-[1.45] text-[#6b7280]"
+                              className="flex items-start gap-2.5 font-montserrat text-[14px] font-medium leading-[1.5] text-[#6b7280] sm:text-[15px]"
                             >
                               <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center text-[#0EC47B]">
                                 <Check className="h-4 w-4" strokeWidth={2.75} aria-hidden />

@@ -119,16 +119,18 @@
   color: #6b7280;
 }
 
-.home-pricing-tabs-wrap {
+.home-pricing-billing {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: fit-content;
-  max-width: min(100%, 420px);
-  margin: 0 auto;
-  padding-right: clamp(64px, 18vw, 88px);
+  max-width: min(calc(100% - 88px), 380px);
+  margin: 0 auto 28px;
   box-sizing: border-box;
+}
+
+.home-pricing-tabs-row {
+  position: relative;
+  width: 100%;
 }
 
 .home-pricing-tabs {
@@ -173,7 +175,8 @@
 .home-pricing-save-badge {
   position: absolute;
   top: 50%;
-  right: 16px;
+  left: calc(100% - 10px);
+  right: auto;
   z-index: 2;
   display: inline-flex;
   align-items: center;
@@ -210,7 +213,7 @@
   justify-content: center;
   gap: 6px;
   width: 100%;
-  margin: 12px 0 28px;
+  margin: 10px 0 0;
   font-family: var(--font-montserrat);
   font-size: 12px;
   font-weight: 500;
@@ -488,7 +491,7 @@
   min-height: 48px;
   margin-top: 22px;
   padding: 12px 24px;
-  border-radius: 100px;
+  border-radius: 14px;
   background: #ebeef0;
   font-family: var(--font-montserrat);
   font-size: 15px;
@@ -556,22 +559,66 @@
 }
 
 @media (max-width: 640px) {
-  .home-pricing-tabs-wrap {
-    width: 100%;
-    max-width: 100%;
-    padding-right: 76px;
+  .home-pricing-section {
+    padding: 36px 0 44px;
+  }
+
+  .home-pricing-shell {
+    width: min(1400px, calc(100% - 24px));
+  }
+
+  .home-pricing-header {
+    margin-bottom: 18px;
+  }
+
+  .home-pricing-header .section-heading {
+    margin-top: 0.85rem;
+  }
+
+  .home-pricing-header .section-accent-text,
+  .home-pricing-header .section-heading-split-title {
+    font-size: 1.55rem;
+  }
+
+  .home-pricing-header .section-heading-split-accent {
+    transform: translate(-0.22rem, -0.14rem);
+  }
+
+  .home-pricing-header .section-heading-split-title {
+    transform: translate(0.22rem, 0.22rem);
+  }
+
+  .home-pricing-desc {
+    margin-top: 10px;
+    max-width: 320px;
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .home-pricing-billing {
+    max-width: min(calc(100% - 68px), 330px);
+    margin-bottom: 24px;
   }
 
   .home-pricing-tabs {
     width: 100%;
+    padding: 5px;
   }
 
   .home-pricing-tab {
-    padding: 11px 12px;
+    padding: 11px 16px;
+    font-size: 14px;
   }
 
   .home-pricing-save-badge {
-    right: 0;
+    left: calc(100% - 8px);
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  .home-pricing-fee-note {
+    margin-top: 10px;
+    font-size: 12px;
   }
 
   .home-pricing-card {
@@ -581,8 +628,7 @@
 }
 
 @media (min-width: 641px) and (max-width: 1023px) {
-  .home-pricing-tabs-wrap {
-    max-width: min(100%, 380px);
-    padding-right: 84px;
+  .home-pricing-billing {
+    max-width: min(calc(100% - 84px), 360px);
   }
 }
