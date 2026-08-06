@@ -10,7 +10,7 @@
 .stats-plus {
   font-family: var(--font-montserrat);
   font-weight: 600;
-  font-size: clamp(1.25rem, 4vw, 4.8125rem);
+  font-size: clamp(2.5rem, 5vw, 6rem);
   line-height: 1;
   color: #1F1E1C;
 }

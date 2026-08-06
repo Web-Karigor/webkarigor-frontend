@@ -16,37 +16,13 @@ import {
   Settings,
   X,
 } from "lucide-react";
+import {
+  STICKY_NAV_MORE_LINKS,
+  STICKY_NAV_SERVICES,
+} from "@/lib/sticky-nav-data";
 
-const SERVICES = [
-  {
-    href: "/service",
-    title: "All Services",
-    desc: "Full-stack product design & development.",
-  },
-  {
-    href: "/service/ecommerce",
-    title: "E-commerce",
-    desc: "Stores built to convert and scale.",
-  },
-  {
-    href: "/service/erp",
-    title: "ERP",
-    desc: "Custom systems for operations.",
-  },
-  {
-    href: "/service/manpower",
-    title: "Manpower",
-    desc: "Specialist talent for your team.",
-  },
-] as const;
-
-const MORE_LINKS = [
-  { href: "/", title: "Home", desc: "Back to Webkarigor home" },
-  { href: "/about-us", title: "About us", desc: "Who we are and how we work" },
-  { href: "/projects", title: "Projects", desc: "Selected work & results" },
-  { href: "/pricing", title: "Pricing", desc: "Plans that fit your stage" },
-  { href: "/contact-us", title: "Contact us", desc: "Say hello — we reply fast" },
-] as const;
+const SERVICES = STICKY_NAV_SERVICES;
+const MORE_LINKS = STICKY_NAV_MORE_LINKS;
 
 type Sheet = "services" | "more" | null;
 

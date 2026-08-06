@@ -83,7 +83,7 @@
   position: relative;
   z-index: 1;
   width: fit-content;
-  max-width: min(680px, calc(100vw - 2rem));
+  max-width: min(820px, calc(100vw - 2rem));
   height: auto;
   min-height: 56px;
   padding: 8px clamp(6px, 1vw, 12px);
@@ -248,6 +248,34 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+.navbar-menu-trigger {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.navbar-dropdown-link {
+  display: block;
+  border-radius: 12px;
+  padding: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-dropdown-link:hover {
+  background-color: #f3f4f6;
+}
+
+.navbar-dropdown-feature {
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navbar-dropdown-feature:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .navbar-mobile-surface {

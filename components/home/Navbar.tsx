@@ -2,7 +2,8 @@
 
 import "./Navbar.css";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -12,29 +13,44 @@ import {
   useRef,
   useState,
 } from "react";
+import { ChevronRight, X } from "lucide-react";
 import homeContent from "@/data/home-content.json";
+import {
+  STICKY_NAV_MORE_LINKS,
+  STICKY_NAV_SERVICES,
+} from "@/lib/sticky-nav-data";
 
-const { brand, desktopLinks } = homeContent.navbar;
+const { brand } = homeContent.navbar;
 
-type NavItem = {
-  id: string;
-  label: string;
-  href: string;
-};
+type NavMenu = "services" | "more";
+
+type NavItem =
+  | { id: string; label: string; href: string; kind: "link" }
+  | { id: string; label: string; menu: NavMenu; kind: "menu" };
 
 type PillBox = {
   left: number;
   width: number;
 };
 
+const NAV_ITEMS: NavItem[] = [
+  { id: "case", label: "Projects", href: "/projects", kind: "link" },
+  { id: "service", label: "Services", menu: "services", kind: "menu" },
+  { id: "brand", label: brand, href: "/", kind: "link" },
+  { id: "pricing", label: "Pricing", href: "/pricing", kind: "link" },
+  { id: "more", label: "More", menu: "more", kind: "menu" },
+];
+
 function getActiveIdFromPath(pathname: string | null): string {
   if (!pathname) return "brand";
-  if (pathname.startsWith("/about")) return "about";
-  if (pathname.startsWith("/contact")) return "contact";
+  if (pathname.startsWith("/pricing")) return "pricing";
+  if (pathname.startsWith("/service")) return "service";
   if (pathname.startsWith("/case") || pathname.startsWith("/projects")) {
     return "case";
   }
-  if (pathname.startsWith("/service")) return "service";
+  if (pathname.startsWith("/about") || pathname.startsWith("/contact")) {
+    return "more";
+  }
   return "brand";
 }
 
@@ -44,30 +60,27 @@ export default function Navbar() {
   const pathname = usePathname();
   const [activeId, setActiveId] = useState(() => getActiveIdFromPath(pathname));
   const [pill, setPill] = useState<PillBox | null>(null);
+  const [openMenu, setOpenMenu] = useState<NavMenu | null>(null);
 
   const navRef = useRef<HTMLDivElement>(null);
-  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const itemRefs = useRef<Record<string, HTMLElement | null>>({});
   const pillLockRef = useRef(false);
   const pillLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [caseLink, serviceLink, contactLink, aboutLink] = desktopLinks;
-
-  const items: NavItem[] = [
-    { id: "case", label: caseLink.label, href: caseLink.href },
-    { id: "service", label: serviceLink.label, href: serviceLink.href },
-    { id: "brand", label: brand, href: "/" },
-    { id: "contact", label: contactLink.label, href: contactLink.href },
-    { id: "about", label: aboutLink.label, href: aboutLink.href },
-  ];
+  const closeMenu = useCallback(() => setOpenMenu(null), []);
+  const toggleMenu = useCallback((menu: NavMenu) => {
+    setOpenMenu((curr) => (curr === menu ? null : menu));
+    setActiveId(menu === "services" ? "service" : "more");
+  }, []);
 
   const measurePill = useCallback((id: string): PillBox | null => {
     const nav = navRef.current;
-    const link = linkRefs.current[id];
-    if (!nav || !link) return null;
+    const el = itemRefs.current[id];
+    if (!nav || !el) return null;
 
     const navBox = nav.getBoundingClientRect();
-    const linkBox = link.getBoundingClientRect();
+    const linkBox = el.getBoundingClientRect();
 
     return {
       left: linkBox.left - navBox.left,
@@ -127,9 +140,28 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    closeMenu();
     const nextId = getActiveIdFromPath(pathname);
     setActiveId((prev) => (prev === nextId ? prev : nextId));
-  }, [pathname]);
+  }, [pathname, closeMenu]);
+
+  useEffect(() => {
+    if (!openMenu) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [openMenu]);
+
+  useEffect(() => {
+    if (!openMenu) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openMenu, closeMenu]);
 
   useLayoutEffect(() => {
     pillLockRef.current = true;
@@ -143,7 +175,7 @@ export default function Navbar() {
     return () => {
       if (pillLockTimerRef.current) clearTimeout(pillLockTimerRef.current);
     };
-  }, [activeId, updatePill]);
+  }, [activeId, openMenu, updatePill]);
 
   useEffect(() => {
     const nav = navRef.current;
@@ -167,12 +199,26 @@ export default function Navbar() {
 
   return (
     <>
+      <AnimatePresence>
+        {openMenu ? (
+          <motion.button
+            type="button"
+            aria-label="Close menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="navbar-dropdown-backdrop fixed inset-0 z-[9998] bg-black/20 backdrop-blur-[2px]"
+            onClick={closeMenu}
+          />
+        ) : null}
+      </AnimatePresence>
+
       <div
         className={`navbar-glow transition-opacity duration-300 ${scrolled ? "opacity-0" : ""}`}
         aria-hidden
       />
 
-      {/* Hide while scrolling; show again when scroll stops */}
       <div
         className={`navbar-sticky sticky top-4 z-[9999] h-0 overflow-visible sm:top-6 lg:top-[39px]${
           navHidden ? " is-hidden" : ""
@@ -183,7 +229,7 @@ export default function Navbar() {
             <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6">
               <div aria-hidden />
 
-              <nav>
+              <nav className="relative">
                 <div className="navbar-border-ring">
                   <div
                     className={`navbar-container flex items-center justify-center box-border ${
@@ -210,19 +256,42 @@ export default function Navbar() {
                         />
                       ) : null}
 
-                      {items.map((item) => {
+                      {NAV_ITEMS.map((item) => {
                         const isActive = item.id === activeId;
+
+                        if (item.kind === "menu") {
+                          const isOpen = openMenu === item.menu;
+                          return (
+                            <button
+                              key={item.id}
+                              type="button"
+                              ref={(el) => {
+                                itemRefs.current[item.id] = el;
+                              }}
+                              className={`navbar-link navbar-menu-trigger${
+                                isActive || isOpen ? " is-active" : ""
+                              }`}
+                              aria-expanded={isOpen}
+                              onClick={() => toggleMenu(item.menu)}
+                            >
+                              <span className="navbar-link-label">{item.label}</span>
+                            </button>
+                          );
+                        }
 
                         return (
                           <Link
                             key={item.id}
                             href={item.href}
                             ref={(el) => {
-                              linkRefs.current[item.id] = el;
+                              itemRefs.current[item.id] = el;
                             }}
                             className={`navbar-link${isActive ? " is-active" : ""}`}
                             aria-current={isActive ? "page" : undefined}
-                            onClick={() => setActiveId(item.id)}
+                            onClick={() => {
+                              closeMenu();
+                              setActiveId(item.id);
+                            }}
                           >
                             <span className="navbar-link-label">{item.label}</span>
                           </Link>
@@ -231,11 +300,127 @@ export default function Navbar() {
                     </div>
                   </div>
                 </div>
+
+                <AnimatePresence mode="wait">
+                  {openMenu === "services" ? (
+                    <NavDropdown key="services" title="Services" onClose={closeMenu}>
+                      <div className="space-y-1">
+                        {STICKY_NAV_SERVICES.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={closeMenu}
+                            className="navbar-dropdown-link"
+                          >
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
+                                {item.title}
+                              </span>
+                              <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
+                            </div>
+                            <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
+                              {item.desc}
+                            </p>
+                          </Link>
+                        ))}
+                      </div>
+                    </NavDropdown>
+                  ) : null}
+
+                  {openMenu === "more" ? (
+                    <NavDropdown key="more" title="More" onClose={closeMenu}>
+                      <div className="space-y-1">
+                        {STICKY_NAV_MORE_LINKS.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={closeMenu}
+                            className="navbar-dropdown-link"
+                          >
+                            <div className="font-montserrat text-[15px] font-semibold text-[#111827]">
+                              {item.title}
+                            </div>
+                            <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
+                              {item.desc}
+                            </p>
+                          </Link>
+                        ))}
+                      </div>
+
+                      <Link
+                        href="/projects"
+                        onClick={closeMenu}
+                        className="navbar-dropdown-feature mt-4 block overflow-hidden rounded-xl border border-[#eef0f3]"
+                      >
+                        <div className="p-3">
+                          <div className="flex items-center justify-between">
+                            <h3 className="font-montserrat text-[15px] font-bold text-[#111827]">
+                              Our latest work
+                            </h3>
+                            <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
+                          </div>
+                          <p className="mt-1 font-montserrat text-[12px] font-medium leading-snug text-[#6b7280]">
+                            Browse case studies and see how we grow products.
+                          </p>
+                        </div>
+                        <figure className="relative h-28 w-full bg-[#f3f4f6]">
+                          <Image
+                            src="/sm2.jpg"
+                            alt="Latest work"
+                            fill
+                            className="object-cover"
+                            sizes="400px"
+                          />
+                        </figure>
+                      </Link>
+                    </NavDropdown>
+                  ) : null}
+                </AnimatePresence>
               </nav>
             </div>
           </div>
         </header>
       </div>
     </>
+  );
+}
+
+function NavDropdown({
+  title,
+  children,
+  onClose,
+}: {
+  title: string;
+  children: React.ReactNode;
+  onClose: () => void;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 8, scale: 0.98 }}
+      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+      className="navbar-dropdown pointer-events-auto absolute left-1/2 top-[calc(100%+14px)] z-[10000] w-[min(100vw-2rem,360px)] -translate-x-1/2 overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_rgba(0,0,0,0.18)]"
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+    >
+      <div className="flex items-center justify-between px-4 pt-4">
+        <p className="m-0 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
+          {title}
+        </p>
+        <button
+          type="button"
+          onClick={onClose}
+          className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f3f4f6] text-[#111827]"
+          aria-label="Close"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+      <div className="max-h-[min(62vh,480px)] overflow-y-auto px-3 pb-4 pt-2">
+        {children}
+      </div>
+    </motion.div>
   );
 }
