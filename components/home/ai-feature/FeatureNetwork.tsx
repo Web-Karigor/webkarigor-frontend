@@ -28,12 +28,12 @@ export default function FeatureNetwork() {
       <SvgConnections geometry={geometry} />
 
       <div className="ai-feature-content relative z-[2] mx-auto max-w-6xl">
-        <div className="mb-12 text-center sm:mb-16 md:mb-24 lg:mb-36">
-          <span className="inline-flex h-7 min-w-0 items-center justify-center rounded-full border border-[#38F8AB] bg-[#38F8AB]/10 px-4 sm:min-w-[156px] sm:px-5">
+        <div className="mb-8 text-center sm:mb-10 md:mb-12 lg:mb-14">
+          <span className="ai-feature-badge inline-flex items-center justify-center rounded-full border border-[#38F8AB] px-5 py-2.5 sm:min-w-[156px] sm:px-6 sm:py-3">
             <span className="section-badge-text">{badge}</span>
           </span>
 
-          <h2 className="section-heading">
+          <h2 className="section-heading ai-feature-heading">
             <span className="section-heading-split-accent section-accent-text">
               {headingAccent}
             </span>
@@ -41,7 +41,7 @@ export default function FeatureNetwork() {
           </h2>
         </div>
 
-        <div className="mt-4 mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:mt-8 md:mb-20 md:grid-cols-3 md:items-start md:gap-8">
+        <div className="mt-2 mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:mt-4 md:mb-20 md:grid-cols-3 md:items-start md:gap-8">
           {featureCards.slice(0, 3).map((card, index) => (
             <FeatureCard
               key={card.title}

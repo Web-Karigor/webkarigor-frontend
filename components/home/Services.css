@@ -1,4 +1,3 @@
-/* Split from globals.css — UI unchanged */
 /* =========================
    SERVICES STORYTELLING
 ========================= */
@@ -97,7 +96,7 @@
   }
 
   .services-story-text-panel {
-    max-width: none;
+    max-width: min(100%, 820px);
     width: 100%;
     min-width: 0;
     padding-right: 12px;
@@ -129,7 +128,7 @@
 }
 
 .services-story-list-item {
-  padding: 0.85rem 0;
+  padding: 1.75rem 0;
   border-bottom: 1px solid rgba(20, 20, 20, 0.12);
 }
 

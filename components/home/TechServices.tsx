@@ -40,7 +40,7 @@ const ANCHOR_INDEX = CYCLE_SIZE * (REPEAT_CYCLES / 2);
 const SLIDE_DURATION = 40;
 const MARQUEE_DURATION = 32;
 const MARQUEE_COPIES = 2;
-const BASE_GAP = 16;
+const BASE_GAP = 28;
 const MAX_CARD_HEIGHT = LARGE_SIZE.height;
 /** Design width of one full 5-card motif — used to pick a sensible scale. */
 const PATTERN_WIDTH =
@@ -136,14 +136,12 @@ function CategoryMarquee() {
             className="tech-services-nav-list"
             aria-hidden={copyIndex > 0 ? true : undefined}
           >
-            {categories.map((category, index) => (
+            {categories.map((category) => (
               <li key={`${copyIndex}-${category}`} className="tech-services-nav-item">
-                {index > 0 && (
-                  <span className="tech-services-nav-dot" aria-hidden>
-                    ·
-                  </span>
-                )}
                 <span className="tech-services-nav-text">{category}</span>
+                <span className="tech-services-nav-dot" aria-hidden>
+                  ·
+                </span>
               </li>
             ))}
           </ul>

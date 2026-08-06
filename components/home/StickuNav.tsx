@@ -2,7 +2,6 @@
 
 import "./StickuNav.css";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,13 +17,11 @@ import {
 } from "lucide-react";
 import {
   STICKY_NAV_MORE_LINKS,
+  STICKY_NAV_PROJECTS,
   STICKY_NAV_SERVICES,
 } from "@/lib/sticky-nav-data";
 
-const SERVICES = STICKY_NAV_SERVICES;
-const MORE_LINKS = STICKY_NAV_MORE_LINKS;
-
-type Sheet = "services" | "more" | null;
+type Sheet = "projects" | "services" | "more" | null;
 
 export default function StickyNav() {
   const pathname = usePathname();
@@ -70,13 +67,53 @@ export default function StickyNav() {
           style={{ paddingBottom: "max(12px, env(safe-area-inset-bottom))" }}
         >
           <AnimatePresence mode="wait">
+            {sheet === "projects" ? (
+              <MobileSheet key="projects" onClose={close}>
+                <p className="mb-3 px-1 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
+                  Latest Projects
+                </p>
+                <div className="space-y-1">
+                  {STICKY_NAV_PROJECTS.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={close}
+                      className="block rounded-xl p-3 transition active:bg-[#f3f4f6]"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
+                          {item.title}
+                        </span>
+                        <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
+                      </div>
+                      <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
+                        {item.desc}
+                      </p>
+                    </Link>
+                  ))}
+                  <Link
+                    href="/projects"
+                    onClick={close}
+                    className="mt-1 block rounded-xl border-t border-[#eef0f3] p-3 pt-4 transition active:bg-[#f3f4f6]"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-montserrat text-[15px] font-semibold text-[#0EC47B]">
+                        View all projects
+                      </span>
+                      <ChevronRight className="h-4 w-4 text-[#0EC47B]" />
+                    </div>
+                  </Link>
+                </div>
+              </MobileSheet>
+            ) : null}
+
             {sheet === "services" ? (
               <MobileSheet key="services" onClose={close}>
                 <p className="mb-3 px-1 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
                   Services
                 </p>
                 <div className="space-y-1">
-                  {SERVICES.map((item) => (
+                  {STICKY_NAV_SERVICES.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -104,7 +141,7 @@ export default function StickyNav() {
                   More
                 </p>
                 <div className="space-y-1">
-                  {MORE_LINKS.map((item) => (
+                  {STICKY_NAV_MORE_LINKS.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -120,42 +157,18 @@ export default function StickyNav() {
                     </Link>
                   ))}
                 </div>
-
-                <Link
-                  href="/projects"
-                  onClick={close}
-                  className="mt-4 block overflow-hidden rounded-xl border border-[#eef0f3]"
-                >
-                  <div className="p-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-montserrat text-[15px] font-bold text-[#111827]">
-                        Our latest work
-                      </h3>
-                      <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
-                    </div>
-                    <p className="mt-1 font-montserrat text-[12px] font-medium leading-snug text-[#6b7280]">
-                      Browse case studies and see how we grow products.
-                    </p>
-                  </div>
-                  <figure className="relative h-28 w-full bg-[#f3f4f6]">
-                    <Image
-                      src="/sm2.jpg"
-                      alt="Latest work"
-                      fill
-                      className="object-cover"
-                      sizes="400px"
-                    />
-                  </figure>
-                </Link>
               </MobileSheet>
             ) : null}
           </AnimatePresence>
 
           <div className="pointer-events-auto sticky-nav-ring mt-2">
             <nav className="sticky-nav-bar" aria-label="Mobile sticky navigation">
-              <Link
-                href="/projects"
+              <button
+                type="button"
+                aria-expanded={sheet === "projects"}
+                onClick={() => toggle("projects")}
                 className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${
+                  sheet === "projects" ||
                   pathname?.startsWith("/projects") ||
                   pathname?.startsWith("/case")
                     ? "text-[#0EC47B]"
@@ -164,7 +177,7 @@ export default function StickyNav() {
               >
                 <FolderKanban className="h-4 w-4" />
                 <span>Projects</span>
-              </Link>
+              </button>
 
               <button
                 type="button"

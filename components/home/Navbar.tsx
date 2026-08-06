@@ -3,7 +3,6 @@
 import "./Navbar.css";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -13,16 +12,17 @@ import {
   useRef,
   useState,
 } from "react";
-import { ChevronRight, X } from "lucide-react";
+import { ChevronRight, EllipsisVertical, X } from "lucide-react";
 import homeContent from "@/data/home-content.json";
 import {
   STICKY_NAV_MORE_LINKS,
+  STICKY_NAV_PROJECTS,
   STICKY_NAV_SERVICES,
 } from "@/lib/sticky-nav-data";
 
 const { brand } = homeContent.navbar;
 
-type NavMenu = "services" | "more";
+type NavMenu = "projects" | "services" | "more";
 
 type NavItem =
   | { id: string; label: string; href: string; kind: "link" }
@@ -33,8 +33,14 @@ type PillBox = {
   width: number;
 };
 
+const MENU_TO_ACTIVE: Record<NavMenu, string> = {
+  projects: "case",
+  services: "service",
+  more: "more",
+};
+
 const NAV_ITEMS: NavItem[] = [
-  { id: "case", label: "Projects", href: "/projects", kind: "link" },
+  { id: "case", label: "Projects", menu: "projects", kind: "menu" },
   { id: "service", label: "Services", menu: "services", kind: "menu" },
   { id: "brand", label: brand, href: "/", kind: "link" },
   { id: "pricing", label: "Pricing", href: "/pricing", kind: "link" },
@@ -67,11 +73,40 @@ export default function Navbar() {
   const pillLockRef = useRef(false);
   const pillLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hoverCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const closeMenu = useCallback(() => setOpenMenu(null), []);
+
+  const openMenuById = useCallback((menu: NavMenu) => {
+    if (hoverCloseTimerRef.current) {
+      clearTimeout(hoverCloseTimerRef.current);
+      hoverCloseTimerRef.current = null;
+    }
+    setOpenMenu(menu);
+    setActiveId(MENU_TO_ACTIVE[menu]);
+  }, []);
+
   const toggleMenu = useCallback((menu: NavMenu) => {
-    setOpenMenu((curr) => (curr === menu ? null : menu));
-    setActiveId(menu === "services" ? "service" : "more");
+    setOpenMenu((curr) => {
+      const next = curr === menu ? null : menu;
+      if (next) setActiveId(MENU_TO_ACTIVE[next]);
+      return next;
+    });
+  }, []);
+
+  const scheduleCloseMenu = useCallback(() => {
+    if (hoverCloseTimerRef.current) clearTimeout(hoverCloseTimerRef.current);
+    hoverCloseTimerRef.current = setTimeout(() => {
+      setOpenMenu(null);
+      hoverCloseTimerRef.current = null;
+    }, 160);
+  }, []);
+
+  const cancelCloseMenu = useCallback(() => {
+    if (hoverCloseTimerRef.current) {
+      clearTimeout(hoverCloseTimerRef.current);
+      hoverCloseTimerRef.current = null;
+    }
   }, []);
 
   const measurePill = useCallback((id: string): PillBox | null => {
@@ -147,21 +182,18 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!openMenu) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [openMenu]);
-
-  useEffect(() => {
-    if (!openMenu) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeMenu();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [openMenu, closeMenu]);
+
+  useEffect(() => {
+    return () => {
+      if (hoverCloseTimerRef.current) clearTimeout(hoverCloseTimerRef.current);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     pillLockRef.current = true;
@@ -210,6 +242,7 @@ export default function Navbar() {
             transition={{ duration: 0.22 }}
             className="navbar-dropdown-backdrop fixed inset-0 z-[9998] bg-black/20 backdrop-blur-[2px]"
             onClick={closeMenu}
+            onMouseEnter={scheduleCloseMenu}
           />
         ) : null}
       </AnimatePresence>
@@ -229,7 +262,11 @@ export default function Navbar() {
             <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6">
               <div aria-hidden />
 
-              <nav className="relative">
+              <nav
+                className="relative"
+                onMouseLeave={scheduleCloseMenu}
+                onMouseEnter={cancelCloseMenu}
+              >
                 <div className="navbar-border-ring">
                   <div
                     className={`navbar-container flex items-center justify-center box-border ${
@@ -272,9 +309,20 @@ export default function Navbar() {
                                 isActive || isOpen ? " is-active" : ""
                               }`}
                               aria-expanded={isOpen}
+                              onMouseEnter={() => openMenuById(item.menu)}
+                              onFocus={() => openMenuById(item.menu)}
                               onClick={() => toggleMenu(item.menu)}
                             >
-                              <span className="navbar-link-label">{item.label}</span>
+                              <span className="inline-flex items-center gap-1.5">
+                                <span className="navbar-link-label">{item.label}</span>
+                                {item.menu === "more" ? (
+                                  <EllipsisVertical
+                                    className="navbar-more-icon h-[1em] w-[1em] shrink-0"
+                                    strokeWidth={2.25}
+                                    aria-hidden
+                                  />
+                                ) : null}
+                              </span>
                             </button>
                           );
                         }
@@ -288,6 +336,7 @@ export default function Navbar() {
                             }}
                             className={`navbar-link${isActive ? " is-active" : ""}`}
                             aria-current={isActive ? "page" : undefined}
+                            onMouseEnter={scheduleCloseMenu}
                             onClick={() => {
                               closeMenu();
                               setActiveId(item.id);
@@ -302,6 +351,43 @@ export default function Navbar() {
                 </div>
 
                 <AnimatePresence mode="wait">
+                  {openMenu === "projects" ? (
+                    <NavDropdown key="projects" title="Latest Projects" onClose={closeMenu}>
+                      <div className="space-y-1">
+                        {STICKY_NAV_PROJECTS.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={closeMenu}
+                            className="navbar-dropdown-link"
+                          >
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
+                                {item.title}
+                              </span>
+                              <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
+                            </div>
+                            <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
+                              {item.desc}
+                            </p>
+                          </Link>
+                        ))}
+                        <Link
+                          href="/projects"
+                          onClick={closeMenu}
+                          className="navbar-dropdown-link mt-1 border-t border-[#eef0f3] pt-3"
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-montserrat text-[15px] font-semibold text-[#0EC47B]">
+                              View all projects
+                            </span>
+                            <ChevronRight className="h-4 w-4 text-[#0EC47B]" />
+                          </div>
+                        </Link>
+                      </div>
+                    </NavDropdown>
+                  ) : null}
+
                   {openMenu === "services" ? (
                     <NavDropdown key="services" title="Services" onClose={closeMenu}>
                       <div className="space-y-1">
@@ -346,33 +432,6 @@ export default function Navbar() {
                           </Link>
                         ))}
                       </div>
-
-                      <Link
-                        href="/projects"
-                        onClick={closeMenu}
-                        className="navbar-dropdown-feature mt-4 block overflow-hidden rounded-xl border border-[#eef0f3]"
-                      >
-                        <div className="p-3">
-                          <div className="flex items-center justify-between">
-                            <h3 className="font-montserrat text-[15px] font-bold text-[#111827]">
-                              Our latest work
-                            </h3>
-                            <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
-                          </div>
-                          <p className="mt-1 font-montserrat text-[12px] font-medium leading-snug text-[#6b7280]">
-                            Browse case studies and see how we grow products.
-                          </p>
-                        </div>
-                        <figure className="relative h-28 w-full bg-[#f3f4f6]">
-                          <Image
-                            src="/sm2.jpg"
-                            alt="Latest work"
-                            fill
-                            className="object-cover"
-                            sizes="400px"
-                          />
-                        </figure>
-                      </Link>
                     </NavDropdown>
                   ) : null}
                 </AnimatePresence>

@@ -86,7 +86,7 @@ const CARD_GLOWS = [
     width: 320,
     height: 320,
     wrapClassName:
-      "pointer-events-none absolute -left-6 bottom-10 z-0 hidden size-[clamp(160px,42%,220px)] sm:block",
+      "pointer-events-none absolute -left-28 bottom-10 z-0 hidden size-[clamp(160px,42%,220px)] sm:block",
   },
   {
     id: "card-3",
@@ -94,7 +94,7 @@ const CARD_GLOWS = [
     width: 168,
     height: 168,
     wrapClassName:
-      "pointer-events-none absolute -right-4 top-10 z-0 hidden size-[clamp(140px,38%,200px)] sm:block",
+      "pointer-events-none absolute -right-16 top-10 z-0 hidden size-[clamp(140px,38%,200px)] sm:block",
   },
 ] as const;
 
@@ -214,7 +214,7 @@ export default function Technologies() {
       ))}
 
       <div className="relative z-[1] mx-auto flex w-full max-w-[1851px] flex-col lg:h-full lg:max-h-[732px] lg:justify-between">
-        <h2 className="relative m-0 font-montserrat text-[clamp(2rem,5.5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black">
+        <h2 className="relative order-1 m-0 font-montserrat text-[clamp(2rem,5.5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black">
           {headingPrefix}{" "}
           <span className="relative inline-block">
             {headingAccent}
@@ -222,7 +222,16 @@ export default function Technologies() {
           </span>
         </h2>
 
-        <div className="mt-9 grid grid-cols-1 justify-items-center gap-7 sm:mt-10 sm:grid-cols-2 sm:justify-items-stretch sm:gap-8 lg:mt-8 lg:mb-6 lg:grid-cols-4 lg:gap-[clamp(20px,1.5vw,31px)]">
+        <p className="relative order-2 mt-3 text-left font-montserrat text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black sm:mt-4 lg:order-3 lg:mt-auto lg:text-right">
+          {footerPrefix}{" "}
+          <span className="relative inline-block">
+            {footerAccent}
+            <BlobLayer blob={WEB_BLOB} />
+          </span>
+          {footerSuffix}
+        </p>
+
+        <div className="order-3 mt-9 grid grid-cols-1 justify-items-center gap-7 sm:mt-10 sm:grid-cols-2 sm:justify-items-stretch sm:gap-8 lg:order-2 lg:mt-8 lg:mb-6 lg:grid-cols-4 lg:gap-[clamp(20px,1.5vw,31px)]">
           {technologyGroups.map((group, index) => (
             <TechColumn
               key={group.title}
@@ -237,15 +246,6 @@ export default function Technologies() {
             />
           ))}
         </div>
-
-        <p className="relative mt-10 text-left font-montserrat text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black sm:mt-12 md:mt-16 md:text-right lg:mt-auto">
-          {footerPrefix}{" "}
-          <span className="relative inline-block">
-            {footerAccent}
-            <BlobLayer blob={WEB_BLOB} />
-          </span>
-          {footerSuffix}
-        </p>
       </div>
     </section>
   );

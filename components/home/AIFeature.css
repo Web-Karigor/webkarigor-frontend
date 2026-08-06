@@ -83,6 +83,39 @@
   padding: clamp(48px, 8vw, 96px) clamp(16px, 4vw, 24px);
 }
 
+.ai-feature-badge {
+  background: transparent;
+}
+
+/* Tighten gap between "Path to" and "Your Solution" — section only */
+.ai-feature-heading .section-heading-split-accent {
+  transform: translate(-0.15rem, -0.2rem);
+}
+
+.ai-feature-heading .section-heading-split-title {
+  transform: translate(0.15rem, 0.35rem);
+}
+
+@media (min-width: 640px) {
+  .ai-feature-heading .section-heading-split-accent {
+    transform: translate(-0.3rem, -0.35rem);
+  }
+
+  .ai-feature-heading .section-heading-split-title {
+    transform: translate(0.3rem, 0.65rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ai-feature-heading .section-heading-split-accent {
+    transform: translate(-0.45rem, -0.5rem);
+  }
+
+  .ai-feature-heading .section-heading-split-title {
+    transform: translate(0.45rem, 1rem);
+  }
+}
+
 .ai-feature-circuit-svg {
   position: absolute;
   inset: 0;

@@ -89,9 +89,6 @@ function useActiveIndex(progress: MotionValue<number>, total: number) {
   return activeIndex;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Header                                                                     */
-/* -------------------------------------------------------------------------- */
 
 const ServicesHeader = memo(function ServicesHeader() {
   return (

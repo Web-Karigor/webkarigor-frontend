@@ -256,6 +256,14 @@
   cursor: pointer;
 }
 
+.navbar-more-icon {
+  color: #1f1e1c;
+}
+
+.navbar-link.is-active .navbar-more-icon {
+  color: #0ec47b;
+}
+
 .navbar-dropdown-link {
   display: block;
   border-radius: 12px;
@@ -266,16 +274,6 @@
 
 .navbar-dropdown-link:hover {
   background-color: #f3f4f6;
-}
-
-.navbar-dropdown-feature {
-  text-decoration: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.navbar-dropdown-feature:hover {
-  border-color: #d1d5db;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .navbar-mobile-surface {

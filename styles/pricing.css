@@ -103,15 +103,48 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 28px;
-  padding: 0 16px;
+  height: auto;
+  min-height: 0;
+  padding: 10px 18px;
   border: 1px solid #38f8ab;
   border-radius: 999px;
-  background: rgba(56, 248, 171, 0.1);
+  background: transparent;
+}
+
+.home-pricing-header .section-heading {
+  margin-top: clamp(0.85rem, 2vw, 1.25rem);
+}
+
+.home-pricing-header .section-heading-split-accent {
+  transform: translate(-0.15rem, -0.2rem);
+}
+
+.home-pricing-header .section-heading-split-title {
+  transform: translate(0.15rem, 0.35rem);
+}
+
+@media (min-width: 640px) {
+  .home-pricing-header .section-heading-split-accent {
+    transform: translate(-0.3rem, -0.35rem);
+  }
+
+  .home-pricing-header .section-heading-split-title {
+    transform: translate(0.3rem, 0.65rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-pricing-header .section-heading-split-accent {
+    transform: translate(-0.45rem, -0.5rem);
+  }
+
+  .home-pricing-header .section-heading-split-title {
+    transform: translate(0.45rem, 1rem);
+  }
 }
 
 .home-pricing-desc {
-  margin: 16px auto 0;
+  margin: 10px auto 0;
   max-width: 640px;
   font-family: var(--font-montserrat);
   font-size: clamp(14px, 1.2vw, 16px);
