@@ -48,6 +48,34 @@
   margin-top: clamp(8px, 1.2vh, 16px);
 }
 
+.services-story-header .section-heading-split-accent {
+  transform: translate(-0.15rem, -0.2rem);
+}
+
+.services-story-header .section-heading-split-title {
+  transform: translate(0.15rem, 0.35rem);
+}
+
+@media (min-width: 640px) {
+  .services-story-header .section-heading-split-accent {
+    transform: translate(-0.3rem, -0.35rem);
+  }
+
+  .services-story-header .section-heading-split-title {
+    transform: translate(0.3rem, 0.65rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-story-header .section-heading-split-accent {
+    transform: translate(-0.45rem, -0.5rem);
+  }
+
+  .services-story-header .section-heading-split-title {
+    transform: translate(0.45rem, 1rem);
+  }
+}
+
 .services-story-header em {
   font-family: Georgia, "Times New Roman", serif;
   font-style: italic;

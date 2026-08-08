@@ -26,7 +26,7 @@ type NavMenu = "projects" | "services" | "more";
 
 type NavItem =
   | { id: string; label: string; href: string; kind: "link" }
-  | { id: string; label: string; menu: NavMenu; kind: "menu" };
+  | { id: string; label: string; menu: NavMenu; kind: "menu"; href?: string };
 
 type PillBox = {
   left: number;
@@ -40,8 +40,8 @@ const MENU_TO_ACTIVE: Record<NavMenu, string> = {
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { id: "case", label: "Projects", menu: "projects", kind: "menu" },
-  { id: "service", label: "Services", menu: "services", kind: "menu" },
+  { id: "case", label: "Projects", menu: "projects", href: "/projects", kind: "menu" },
+  { id: "service", label: "Services", menu: "services", href: "/service", kind: "menu" },
   { id: "brand", label: brand, href: "/", kind: "link" },
   { id: "pricing", label: "Pricing", href: "/pricing", kind: "link" },
   { id: "more", label: "More", menu: "more", kind: "menu" },
@@ -298,6 +298,47 @@ export default function Navbar() {
 
                         if (item.kind === "menu") {
                           const isOpen = openMenu === item.menu;
+                          const menuClass = `navbar-link navbar-menu-trigger${
+                            isActive || isOpen ? " is-active" : ""
+                          }`;
+                          const menuLabel = (
+                            <span className="inline-flex items-center gap-1.5">
+                              <span className="navbar-link-label">{item.label}</span>
+                              {item.menu === "more" ? (
+                                <EllipsisVertical
+                                  className="navbar-more-icon h-[1em] w-[1em] shrink-0"
+                                  strokeWidth={2.25}
+                                  aria-hidden
+                                />
+                              ) : null}
+                            </span>
+                          );
+
+                          /* Projects / Services: click → page, hover → modal */
+                          if (item.href) {
+                            return (
+                              <Link
+                                key={item.id}
+                                href={item.href}
+                                ref={(el) => {
+                                  itemRefs.current[item.id] = el;
+                                }}
+                                className={menuClass}
+                                aria-expanded={isOpen}
+                                aria-current={isActive ? "page" : undefined}
+                                onMouseEnter={() => openMenuById(item.menu)}
+                                onFocus={() => openMenuById(item.menu)}
+                                onClick={() => {
+                                  closeMenu();
+                                  setActiveId(item.id);
+                                }}
+                              >
+                                {menuLabel}
+                              </Link>
+                            );
+                          }
+
+                          /* More: click toggles modal only */
                           return (
                             <button
                               key={item.id}
@@ -305,24 +346,13 @@ export default function Navbar() {
                               ref={(el) => {
                                 itemRefs.current[item.id] = el;
                               }}
-                              className={`navbar-link navbar-menu-trigger${
-                                isActive || isOpen ? " is-active" : ""
-                              }`}
+                              className={menuClass}
                               aria-expanded={isOpen}
                               onMouseEnter={() => openMenuById(item.menu)}
                               onFocus={() => openMenuById(item.menu)}
                               onClick={() => toggleMenu(item.menu)}
                             >
-                              <span className="inline-flex items-center gap-1.5">
-                                <span className="navbar-link-label">{item.label}</span>
-                                {item.menu === "more" ? (
-                                  <EllipsisVertical
-                                    className="navbar-more-icon h-[1em] w-[1em] shrink-0"
-                                    strokeWidth={2.25}
-                                    aria-hidden
-                                  />
-                                ) : null}
-                              </span>
+                              {menuLabel}
                             </button>
                           );
                         }

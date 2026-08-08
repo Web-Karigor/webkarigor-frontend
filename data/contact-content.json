@@ -1,0 +1,178 @@
+{
+  "metadata": {
+    "title": "Contact Us | Webkarigor",
+    "description": "Have a question or just want to chat? Tell us about your project — we respond within 24 hours."
+  },
+  "hero": {
+    "breadcrumbHome": "Home",
+    "breadcrumbHomeHref": "/",
+    "breadcrumbCurrent": "Contact us",
+    "headingLine1": "Have A Question Or",
+    "headingAccent": "Just Want To Chat?"
+  },
+  "form": {
+    "titleLine1": "Tell Us Your Amazing",
+    "titleAccent": "Project Here",
+    "benefits": [
+      "Expect a response from us within 24 hours",
+      "We're happy to sign an NDA upon request.",
+      "Get access to a team of dedicated product specialists."
+    ],
+    "fields": {
+      "fullName": { "label": "Full Name", "placeholder": "John Doe" },
+      "email": { "label": "Your Email", "placeholder": "yourmail@gmail.com" },
+      "whatsapp": { "label": "Whatsapp Number", "placeholder": "123 456 7890" },
+      "budget": { "label": "Project Budget" },
+      "details": {
+        "label": "Project Details",
+        "placeholder": "Tell us about your goals, timeline, and what success looks like..."
+      }
+    },
+    "budgets": [
+      "Less than $5K",
+      "$5K - $10K",
+      "$10K - $20K",
+      "$20K - $50K",
+      "More than $50K"
+    ],
+    "submitLabel": "Let's Connect"
+  },
+  "connect": {
+    "badge": "Connect Now",
+    "headingLine1": "Get In Touch Now For Business Or",
+    "headingAccent": "Career Opportunities!",
+    "logos": [
+      {
+        "name": "Government of Bangladesh",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/BD-Govt.png"
+      },
+      {
+        "name": "Robi Axiata",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Robi.png"
+      },
+      {
+        "name": "Walton",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Walton.png"
+      },
+      {
+        "name": "Sajeeb Group",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Sajeeb-Group.png"
+      },
+      {
+        "name": "Oitijjhya",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Oitijjhya.png"
+      },
+      {
+        "name": "Nitol-Niloy Group",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Nitol-Niloy.png"
+      },
+      {
+        "name": "Gear X",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Gear-X.png"
+      },
+      {
+        "name": "The Cafe Rio",
+        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Cafe-Rio.png"
+      }
+    ],
+    "emails": [
+      {
+        "title": "Project Inquiries? Let's Team Up",
+        "email": "hello@webkarigor.com",
+        "href": "mailto:hello@webkarigor.com"
+      },
+      {
+        "title": "Join the Team! Build with Webkarigor",
+        "email": "career@webkarigor.com",
+        "href": "mailto:career@webkarigor.com"
+      }
+    ],
+    "offices": [
+      {
+        "country": "Bangladesh",
+        "address": "Ventura Iconia, Plot 37 Road No. 11, Banani, Dhaka 1213",
+        "phone": "+880 1624-283328",
+        "whatsappHref": "https://wa.me/8801624283328"
+      }
+    ]
+  },
+  "companyDeck": {
+    "badge": "Company Deck",
+    "headingLine1": "Details For The",
+    "headingAccent": "Startups",
+    "description": "Interested in learning more about us? Our company overview covers the projects we've tackled, the solutions we offer, and the culture we cultivate.",
+    "ctaLabel": "Check Company Deck",
+    "ctaHref": "/about-us",
+    "image": "/services/why-choose-main.jpg",
+    "imageAlt": "Webkarigor team and product work overview"
+  },
+  "stories": {
+    "badge": "Client Stories",
+    "headingLine1": "Success",
+    "headingAccent1": "Stories",
+    "headingLine2": "That",
+    "headingAccent2": "Inspire Us",
+    "ctaLabel": "Book a call",
+    "ctaHref": "#contact-form",
+    "categories": [
+      {
+        "id": "uiux",
+        "label": "UI UX Design",
+        "image": "/ecommerce/hero-phone.png",
+        "imageAlt": "Mobile product UI showcase",
+        "quote": "Webkarigor transformed our brand and digital presence. The team delivered beyond expectations — professional, creative, and always on time.",
+        "name": "Sarah Mitchell",
+        "role": "CEO, TechStart Inc.",
+        "avatar": "/sm1.png"
+      },
+      {
+        "id": "branding",
+        "label": "Branding",
+        "image": "/services/why-choose-collage.png",
+        "imageAlt": "Brand and visual identity work",
+        "quote": "Thoughtful design and clear communication throughout the project. We saw better conversions within weeks of launch.",
+        "name": "Ayesha Rahman",
+        "role": "Founder, Bloom Studio",
+        "avatar": "/sm3.jpg"
+      },
+      {
+        "id": "web",
+        "label": "Web Design",
+        "image": "/services/why-choose-main.jpg",
+        "imageAlt": "Web design project showcase",
+        "quote": "Outstanding work on our e-commerce platform. Sales increased 40% within three months of launch. Highly recommend their services.",
+        "name": "James Rodriguez",
+        "role": "Founder, ShopEasy",
+        "avatar": "/sm2.jpg"
+      },
+      {
+        "id": "mobile",
+        "label": "Mobile App Design",
+        "image": "/ecommerce/hero-composite.png",
+        "imageAlt": "Mobile app design showcase",
+        "quote": "From design to development, every milestone landed on time. Our stakeholders noticed the difference immediately.",
+        "name": "Kathryn Murphy",
+        "role": "COO, Lumen Soft",
+        "avatar": "/sm4.png"
+      },
+      {
+        "id": "saas",
+        "label": "SaaS Design",
+        "image": "/h1.png",
+        "imageAlt": "SaaS product interface",
+        "quote": "Clear communication, strong craft, and a team that treated our roadmap like their own. Rare combination.",
+        "name": "Robert Fox",
+        "role": "CTO, NovaPay",
+        "avatar": "/sm1.png"
+      }
+    ]
+  },
+  "bottomCta": {
+    "badge": "Claim a Free Consultation",
+    "headingLine1": "Your Brand Deserves the",
+    "headingAccent": "Next Level!",
+    "description": "Get expert advice and a custom strategy session at no cost.",
+    "ctaLabel": "Let's Talk",
+    "ctaHref": "#contact-form"
+  }
+}

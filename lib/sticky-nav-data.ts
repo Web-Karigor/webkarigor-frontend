@@ -6,7 +6,7 @@ import {
 export const STICKY_NAV_SERVICES = [
   {
     href: "/service",
-    title: "All Services",
+    title: "Service",
     desc: "Full-stack product design & development.",
   },
   {

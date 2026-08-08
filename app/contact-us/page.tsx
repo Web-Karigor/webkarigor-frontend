@@ -1,17 +1,30 @@
 import type { Metadata } from "next";
+import "@/components/contact/ContactPage.css";
+import ContactBottomCta from "@/components/contact/ContactBottomCta";
+import ContactCompanyDeck from "@/components/contact/ContactCompanyDeck";
+import ContactConnect from "@/components/contact/ContactConnect";
+import ContactFormSection from "@/components/contact/ContactFormSection";
+import ContactHero from "@/components/contact/ContactHero";
+import ContactStories from "@/components/contact/ContactStories";
+import FAQ from "@/components/home/FAQ";
 import Footer from "@/components/home/Footer";
-import ServiceContact from "@/components/services/ServiceContact";
+import contactContent from "@/data/contact-content.json";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Webkarigor",
-  description:
-    "Ready to transform your digital product? Reach out for a free consultation. Response within 24 hours.",
+  title: contactContent.metadata.title,
+  description: contactContent.metadata.description,
 };
 
 export default function ContactUsPage() {
   return (
-    <div className="bg-[#FFFEFB] mt-20">
-      <ServiceContact />
+    <div className="contact-page">
+      <ContactHero />
+      <ContactFormSection />
+      <ContactConnect />
+      <ContactCompanyDeck />
+      <ContactStories />
+      <FAQ className="bg-[#FFFEFB]" />
+      <ContactBottomCta />
       <Footer />
     </div>
   );

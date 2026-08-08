@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import servicesContent from "@/data/services-content.json";
 import { SERVICE_OFFERINGS } from "@/lib/services-data";
@@ -9,175 +9,175 @@ const { eyebrow, title, description } = servicesContent.offerings;
 
 const CARD_GAP = 24;
 const AUTO_SCROLL_MS = 4500;
+const DRAG_THRESHOLD_PX = 48;
 
 export default function ServiceOfferings() {
   const viewportRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const offsetRef = useRef(0);
-  const maxOffsetRef = useRef(0);
   const pauseAutoRef = useRef(false);
-  const dragStateRef = useRef<{
+  const resumeTimerRef = useRef<number | null>(null);
+  const [dragging, setDragging] = useState(false);
+
+  const dragRef = useRef<{
     pointerId: number;
     startX: number;
-    startOffset: number;
+    startScroll: number;
+    lastX: number;
+    lastT: number;
+    velocity: number;
     moved: boolean;
   } | null>(null);
 
-  const getScrollStep = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return CARD_GAP;
+  const clearResumeTimer = () => {
+    if (resumeTimerRef.current != null) {
+      window.clearTimeout(resumeTimerRef.current);
+      resumeTimerRef.current = null;
+    }
+  };
 
-    const card = track.querySelector<HTMLElement>("[data-service-offering-card]");
-    return (card?.offsetWidth ?? 372) + CARD_GAP;
+  const pauseAuto = useCallback((ms?: number) => {
+    pauseAutoRef.current = true;
+    clearResumeTimer();
+    if (ms != null) {
+      resumeTimerRef.current = window.setTimeout(() => {
+        pauseAutoRef.current = false;
+        resumeTimerRef.current = null;
+      }, ms);
+    }
   }, []);
 
-  const setOffset = useCallback((nextOffset: number, smooth = false) => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const clamped = Math.max(0, Math.min(nextOffset, maxOffsetRef.current));
-    offsetRef.current = clamped;
-    track.style.transition = smooth ? "transform 400ms ease" : "none";
-    track.style.transform = `translate3d(${-clamped}px, 0, 0)`;
-  }, []);
-
-  const measureBounds = useCallback(() => {
+  const getStep = useCallback(() => {
     const viewport = viewportRef.current;
-    const track = trackRef.current;
-    if (!viewport || !track) return;
+    if (!viewport) return 324;
+    const card = viewport.querySelector<HTMLElement>("[data-service-offering-card]");
+    return (card?.offsetWidth ?? 300) + CARD_GAP;
+  }, []);
 
-    maxOffsetRef.current = Math.max(0, track.scrollWidth - viewport.clientWidth);
-    setOffset(offsetRef.current, false);
-  }, [setOffset]);
+  const maxScroll = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return 0;
+    return Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+  }, []);
+
+  const scrollTo = useCallback((left: number, smooth = false) => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const clamped = Math.max(0, Math.min(left, maxScroll()));
+    viewport.scrollTo({ left: clamped, behavior: smooth ? "smooth" : "auto" });
+  }, [maxScroll]);
 
   const scrollByStep = useCallback(
     (direction: "left" | "right") => {
-      const step = getScrollStep();
-      const maxOffset = maxOffsetRef.current;
+      const viewport = viewportRef.current;
+      if (!viewport) return;
 
-      if (direction === "right" && offsetRef.current >= maxOffset - 4) {
-        setOffset(0, true);
+      const step = getStep();
+      const max = maxScroll();
+      const current = viewport.scrollLeft;
+      pauseAuto(AUTO_SCROLL_MS);
+
+      if (direction === "right" && current >= max - 4) {
+        scrollTo(0, true);
+        return;
+      }
+      if (direction === "left" && current <= 4) {
+        scrollTo(max, true);
         return;
       }
 
-      if (direction === "left" && offsetRef.current <= 4) {
-        setOffset(maxOffset, true);
-        return;
-      }
-
-      setOffset(
-        offsetRef.current + (direction === "left" ? -step : step),
-        true,
-      );
+      scrollTo(current + (direction === "left" ? -step : step), true);
     },
-    [getScrollStep, setOffset],
+    [getStep, maxScroll, pauseAuto, scrollTo],
   );
 
-  useLayoutEffect(() => {
-    measureBounds();
-
-    const viewport = viewportRef.current;
-    const track = trackRef.current;
-    if (!viewport || !track) return;
-
-    const observer = new ResizeObserver(measureBounds);
-    observer.observe(viewport);
-    observer.observe(track);
-
-    return () => observer.disconnect();
-  }, [measureBounds]);
-
   useEffect(() => {
-    const pause = () => {
-      pauseAutoRef.current = true;
-    };
-    const resume = () => {
-      pauseAutoRef.current = false;
-    };
-
     const timer = window.setInterval(() => {
-      if (pauseAutoRef.current) return;
+      if (pauseAutoRef.current || dragRef.current) return;
       scrollByStep("right");
     }, AUTO_SCROLL_MS);
 
     return () => {
       clearInterval(timer);
+      clearResumeTimer();
     };
   }, [scrollByStep]);
 
-  const handlePointerDown = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
-      if (event.pointerType === "mouse" && event.button !== 0) return;
-
-      pauseAutoRef.current = true;
-      dragStateRef.current = {
-        pointerId: event.pointerId,
-        startX: event.clientX,
-        startOffset: offsetRef.current,
-        moved: false,
-      };
-      event.currentTarget.setPointerCapture(event.pointerId);
-    },
-    [],
-  );
-
-  const handlePointerMove = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
-      const drag = dragStateRef.current;
-      if (!drag || drag.pointerId !== event.pointerId) return;
-
-      const deltaX = event.clientX - drag.startX;
-      if (Math.abs(deltaX) > 4) {
-        drag.moved = true;
-      }
-
-      setOffset(drag.startOffset - deltaX, false);
-    },
-    [setOffset],
-  );
-
-  const finishDrag = useCallback((pointerId: number) => {
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
     const viewport = viewportRef.current;
-    const drag = dragStateRef.current;
-    if (!viewport || !drag || drag.pointerId !== pointerId) return;
+    if (!viewport || maxScroll() <= 0) return;
 
-    if (viewport.hasPointerCapture(pointerId)) {
-      viewport.releasePointerCapture(pointerId);
+    pauseAuto();
+    dragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startScroll: viewport.scrollLeft,
+      lastX: event.clientX,
+      lastT: performance.now(),
+      velocity: 0,
+      moved: false,
+    };
+    setDragging(true);
+    viewport.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    const viewport = viewportRef.current;
+    if (!drag || !viewport || drag.pointerId !== event.pointerId) return;
+
+    const now = performance.now();
+    const frameDx = event.clientX - drag.lastX;
+    const dt = Math.max(now - drag.lastT, 1);
+    drag.velocity = frameDx / dt;
+    drag.lastX = event.clientX;
+    drag.lastT = now;
+
+    const deltaX = event.clientX - drag.startX;
+    if (Math.abs(deltaX) > 6) {
+      drag.moved = true;
     }
 
-    dragStateRef.current = null;
-    pauseAutoRef.current = false;
-  }, []);
+    viewport.scrollLeft = drag.startScroll - deltaX;
+  };
 
-  const handleWheel = useCallback(
-    (event: React.WheelEvent<HTMLDivElement>) => {
-      const dominantDelta =
-        Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    const viewport = viewportRef.current;
+    if (!drag || !viewport || drag.pointerId !== event.pointerId) return;
 
-      if (dominantDelta === 0 || maxOffsetRef.current <= 0) return;
+    if (viewport.hasPointerCapture(event.pointerId)) {
+      viewport.releasePointerCapture(event.pointerId);
+    }
 
-      pauseAutoRef.current = true;
-      setOffset(offsetRef.current + dominantDelta, false);
+    const { velocity, moved, startX } = drag;
+    const deltaX = event.clientX - startX;
+    dragRef.current = null;
+    setDragging(false);
 
-      window.clearTimeout((handleWheel as typeof handleWheel & { timeout?: number }).timeout);
-      (handleWheel as typeof handleWheel & { timeout?: number }).timeout = window.setTimeout(
-        () => {
-          pauseAutoRef.current = false;
-        },
-        140,
-      );
+    if (moved) {
+      const step = getStep();
+      let target = viewport.scrollLeft;
 
-      event.preventDefault();
-    },
-    [setOffset],
-  );
+      if (deltaX <= -DRAG_THRESHOLD_PX || velocity < -0.45) {
+        target = Math.ceil((viewport.scrollLeft + 1) / step) * step;
+      } else if (deltaX >= DRAG_THRESHOLD_PX || velocity > 0.45) {
+        target = Math.floor((viewport.scrollLeft - 1) / step) * step;
+      } else {
+        target = Math.round(viewport.scrollLeft / step) * step;
+      }
+
+      scrollTo(target, true);
+    }
+
+    pauseAuto(AUTO_SCROLL_MS);
+  };
 
   return (
     <section className="overflow-hidden bg-[#f8fafc] py-12">
       <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-[60px] px-[clamp(16px,4vw,40px)]">
         <div className="grid grid-cols-1 items-center gap-[clamp(20px,3vw,32px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,913px)] lg:gap-[clamp(64px,10vw,140px)]">
           <div>
-            <span className="mb-3 block font-montserrat text-sm lg:text-2xl font-bold leading-[1.2] tracking-[-0.01em] text-[#15d286]">
+            <span className="mb-3 block font-montserrat text-sm font-bold leading-[1.2] tracking-[-0.01em] text-[#15d286] lg:text-2xl">
               {eyebrow}
             </span>
             <h2 className="m-0 max-w-[460px] font-['Geist'] text-[clamp(24px,6vw,32px)] font-bold text-black">
@@ -202,48 +202,50 @@ export default function ServiceOfferings() {
 
             <div
               ref={viewportRef}
-              className="relative w-full overflow-hidden touch-pan-y lg:pl-[230px]"
-              onMouseEnter={() => {
-                pauseAutoRef.current = true;
-              }}
+              className={`relative flex w-full gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-6 [&::-webkit-scrollbar]:hidden ${
+                dragging
+                  ? "cursor-grabbing select-none"
+                  : "cursor-grab scroll-smooth"
+              }`}
+              style={{ touchAction: "pan-y" }}
+              onMouseEnter={() => pauseAuto()}
               onMouseLeave={() => {
-                pauseAutoRef.current = false;
+                if (!dragRef.current) pauseAuto(AUTO_SCROLL_MS);
               }}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={(event) => finishDrag(event.pointerId)}
-              onPointerCancel={(event) => finishDrag(event.pointerId)}
-              onWheel={handleWheel}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerUp}
             >
-              <div
-                ref={trackRef}
-                className="flex h-[min(320px,70vw)] min-h-[260px] w-max gap-4 will-change-transform sm:gap-6 sm:h-[320px]"
-              >
-                {SERVICE_OFFERINGS.map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <article
-                      key={`${item.title}-${index}`}
-                      data-service-offering-card
-                      className={`flex h-full w-[min(300px,calc(100vw-64px))] shrink-0 snap-start flex-col gap-[10px] rounded-[12px] px-5 py-6 ${
-                        item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"
-                      }`}
-                    >
-                      <div className="flex items-center gap-[14px]">
-                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
-                          <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
-                        </span>
-                        <h3 className="m-0 font-montserrat text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
-                          {item.title}
-                        </h3>
-                      </div>
-                      <p className="m-0 font-montserrat text-[0.9375rem] leading-[1.65] text-[#111827]">
-                        {item.description}
-                      </p>
-                    </article>
-                  );
-                })}
-              </div>
+              {/* Spacer so cards clear the arrow on large screens */}
+              <div className="hidden w-[210px] shrink-0 lg:block" aria-hidden />
+
+              {SERVICE_OFFERINGS.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <article
+                    key={`${item.title}-${index}`}
+                    data-service-offering-card
+                    className={`flex h-[min(320px,70vw)] min-h-[260px] w-[min(300px,calc(100vw-64px))] shrink-0 flex-col gap-[10px] rounded-[12px] px-5 py-6 sm:h-[320px] ${
+                      item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-[14px]">
+                      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
+                        <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
+                      </span>
+                      <h3 className="m-0 font-montserrat text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="m-0 font-montserrat text-[0.9375rem] leading-[1.65] text-[#111827]">
+                      {item.description}
+                    </p>
+                  </article>
+                );
+              })}
+
+              <div className="w-4 shrink-0 sm:w-6" aria-hidden />
             </div>
           </div>
         </div>

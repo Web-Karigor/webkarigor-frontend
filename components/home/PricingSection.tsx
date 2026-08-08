@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import homeContent from "@/data/home-content.json";
 
@@ -198,9 +199,12 @@ export default function PricingSection() {
 
                 <p className="home-pricing-cancel">{cancelLabel}</p>
 
-                <a href="#book-a-call" className="home-pricing-cta capitalize">
+                <Link
+                  href={plan.customPrice ? "/contact-us" : "/pricing"}
+                  className="home-pricing-cta capitalize"
+                >
                   {plan.cta}
-                </a>
+                </Link>
 
                 <div className="home-pricing-features">
                   <p className="home-pricing-features-title">{featuresHeading}</p>

@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import servicesContent from "@/data/services-content.json";
@@ -8,6 +14,7 @@ import { TESTIMONIALS } from "@/lib/services-data";
 
 const AUTO_MS = 4200;
 const GAP_PX = 16;
+const DRAG_THRESHOLD_PX = 48;
 
 const {
   eyebrow,
@@ -40,6 +47,19 @@ export default function ServiceTestimonials() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(1);
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef({
+    pointerId: -1,
+    startX: 0,
+    lastX: 0,
+    lastT: 0,
+    velocity: 0,
+    moved: false,
+  });
+
   const total = TESTIMONIALS.length;
   const maxIndex = Math.max(0, total - visible);
 
@@ -49,6 +69,12 @@ export default function ServiceTestimonials() {
     },
     [maxIndex],
   );
+
+  const stepWidth = useCallback(() => {
+    const width = viewportRef.current?.clientWidth ?? 0;
+    if (width <= 0) return 0;
+    return (width - (visible - 1) * GAP_PX) / visible + GAP_PX;
+  }, [visible]);
 
   useEffect(() => {
     const update = () => setVisible(window.matchMedia("(min-width: 640px)").matches ? 2 : 1);
@@ -62,14 +88,100 @@ export default function ServiceTestimonials() {
   }, [maxIndex]);
 
   useEffect(() => {
-    if (paused || maxIndex <= 0) return;
+    if (paused || isDragging || maxIndex <= 0) return;
 
     const timer = window.setInterval(() => {
       setActive((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, AUTO_MS);
 
     return () => window.clearInterval(timer);
-  }, [paused, maxIndex]);
+  }, [paused, isDragging, maxIndex]);
+
+  const endDrag = useCallback(
+    (clientX: number) => {
+      const { startX, velocity, moved, pointerId } = dragRef.current;
+      if (pointerId < 0) return;
+
+      const delta = clientX - startX;
+      const width = stepWidth();
+      let next = active;
+
+      if (moved) {
+        const distanceThreshold = Math.max(DRAG_THRESHOLD_PX, width * 0.18);
+        if (delta <= -distanceThreshold || velocity < -0.45) {
+          next = active + 1;
+        } else if (delta >= distanceThreshold || velocity > 0.45) {
+          next = active - 1;
+        }
+      }
+
+      dragRef.current.pointerId = -1;
+      setIsDragging(false);
+      setDragX(0);
+      goTo(next);
+    },
+    [active, goTo, stepWidth],
+  );
+
+  const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0 || maxIndex <= 0) return;
+
+    dragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      lastX: event.clientX,
+      lastT: performance.now(),
+      velocity: 0,
+      moved: false,
+    };
+    setIsDragging(true);
+    setPaused(true);
+    setDragX(0);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (drag.pointerId !== event.pointerId) return;
+
+    const now = performance.now();
+    const dx = event.clientX - drag.lastX;
+    const dt = Math.max(now - drag.lastT, 1);
+    drag.velocity = dx / dt;
+    drag.lastX = event.clientX;
+    drag.lastT = now;
+
+    const delta = event.clientX - drag.startX;
+    if (Math.abs(delta) > 6) drag.moved = true;
+
+    const atStart = active <= 0 && delta > 0;
+    const atEnd = active >= maxIndex && delta < 0;
+    const resistance = atStart || atEnd ? 0.35 : 1;
+    setDragX(delta * resistance);
+  };
+
+  const onPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (dragRef.current.pointerId !== event.pointerId) return;
+    try {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    } catch {
+      /* already released */
+    }
+    endDrag(event.clientX);
+  };
+
+  const onPointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (dragRef.current.pointerId !== event.pointerId) return;
+    dragRef.current.pointerId = -1;
+    setIsDragging(false);
+    setDragX(0);
+  };
+
+  const baseTranslate = `calc(-${active} * ((100% - ${(visible - 1) * GAP_PX}px) / ${visible} + ${GAP_PX}px))`;
+  const trackTransform =
+    dragX !== 0
+      ? `translateX(calc(${baseTranslate} + ${dragX}px))`
+      : `translateX(${baseTranslate})`;
 
   return (
     <section className="bg-[#f2f2f2] py-8">
@@ -126,14 +238,25 @@ export default function ServiceTestimonials() {
           <div
             className="min-w-0 flex-1"
             onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
+            onMouseLeave={() => {
+              if (!isDragging) setPaused(false);
+            }}
           >
-            <div className="overflow-hidden">
+            <div
+              ref={viewportRef}
+              className={`overflow-hidden touch-pan-y ${
+                isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+              }`}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerCancel}
+            >
               <div
-                className="flex gap-4 transition-transform duration-500 ease-out"
-                style={{
-                  transform: `translateX(calc(-${active} * ((100% - ${(visible - 1) * GAP_PX}px) / ${visible} + ${GAP_PX}px)))`,
-                }}
+                className={`flex gap-4 ease-out ${
+                  isDragging ? "transition-none" : "transition-transform duration-500"
+                }`}
+                style={{ transform: trackTransform }}
               >
                 {TESTIMONIALS.map((item) => (
                   <article

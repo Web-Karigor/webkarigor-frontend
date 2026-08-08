@@ -27,8 +27,12 @@ export default function Home() {
       <Case />
       <Technologies />
       <TrustedFounders />
-      <Team />
-      {/* <Team2 /> */}
+      <div className="hidden md:block">
+        <Team />
+      </div>
+      <div className="md:hidden">
+        <Team2 />
+      </div>
       <PricingSection />
       <HomeBanner />
       <FAQ />
