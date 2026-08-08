@@ -115,14 +115,14 @@ export default function EcoHero() {
               {ECO_CLIENTS.map((client) => (
                 <div
                   key={client.name}
-                  className="relative flex h-[60px] w-[60px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80"
+                  className="group relative flex h-[60px] w-[60px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80"
                 >
                   <Image
                     src={client.src}
                     alt={client.name}
                     width={60}
                     height={60}
-                    className="h-[60px] w-[60px] object-contain opacity-80 grayscale"
+                    className="h-[60px] w-[60px] object-contain opacity-80 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
                     unoptimized
                   />
                 </div>
@@ -188,14 +188,14 @@ export default function EcoHero() {
               {ECO_CLIENTS.map((client) => (
                 <div
                   key={client.name}
-                  className="relative flex h-[52px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80 sm:h-[60px] sm:w-[60px]"
+                  className="group relative flex h-[52px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80 sm:h-[60px] sm:w-[60px]"
                 >
                   <Image
                     src={client.src}
                     alt={client.name}
                     width={60}
                     height={60}
-                    className="h-full w-full object-contain opacity-80 grayscale"
+                    className="h-full w-full object-contain opacity-80 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
                     unoptimized
                   />
                 </div>

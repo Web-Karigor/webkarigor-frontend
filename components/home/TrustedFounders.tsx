@@ -59,6 +59,7 @@ export default function TrustedFounders() {
     let activeHoverCard: HTMLElement | null = null;
     /** Animated additive boost on top of dynamic position scale */
     const hoverState = { boost: 0 };
+    const inViewRef = { current: true };
 
     /** Continuous world position — never reset to a tween start */
     let xPos = 0;
@@ -147,6 +148,7 @@ export default function TrustedFounders() {
     };
 
     const onTick = () => {
+      if (!inViewRef.current) return;
       if (!paused && setWidth > 0) {
         xPos -= MARQUEE_SPEED * (gsap.ticker.deltaRatio(60) / 60);
       }
@@ -156,6 +158,15 @@ export default function TrustedFounders() {
     measure();
     render();
     gsap.ticker.add(onTick);
+
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        inViewRef.current = Boolean(entry?.isIntersecting);
+        if (inViewRef.current) render();
+      },
+      { rootMargin: "120px 0px" },
+    );
+    visibility.observe(section);
 
     const onEnter = (card: HTMLElement) => () => {
       const img = card.querySelector("img");
@@ -240,6 +251,7 @@ export default function TrustedFounders() {
 
     return () => {
       gsap.ticker.remove(onTick);
+      visibility.disconnect();
       window.removeEventListener("resize", onResize);
       cleanups.forEach((fn) => fn());
       gsap.killTweensOf(hoverState);

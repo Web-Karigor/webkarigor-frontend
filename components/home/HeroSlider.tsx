@@ -134,9 +134,26 @@ export default function HeroSlider() {
     observer.observe(viewport);
     observer.observe(track);
 
+    let inView = true;
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        const next = Boolean(entry?.isIntersecting);
+        if (next === inView) return;
+        inView = next;
+        if (inView) {
+          startMarquee(scrollOffset);
+        } else {
+          tween?.pause();
+        }
+      },
+      { rootMargin: "160px 0px" },
+    );
+    visibility.observe(viewport);
+
     return () => {
       tween?.kill();
       observer.disconnect();
+      visibility.disconnect();
       cancelAnimationFrame(resizeRaf);
     };
   }, []);

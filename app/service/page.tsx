@@ -1,18 +1,34 @@
 import type { Metadata } from "next";
-import FAQ from "@/components/home/FAQ";
-import TechServices from "@/components/home/TechServices";
-import Team from "@/components/home/Team";
-import ServiceClients from "@/components/services/ServiceClients";
-import ServiceContact from "@/components/services/ServiceContact";
-import ServiceFooter from "@/components/services/ServiceFooter";
+import dynamic from "next/dynamic";
 import ServiceHero from "@/components/services/ServiceHero";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
-import ServiceOfferings from "@/components/services/ServiceOfferings";
-import ServicePricing from "@/components/services/ServicePricing";
-import ServiceTechGrid from "@/components/services/ServiceTechGrid";
-import ServiceTestimonials from "@/components/services/ServiceTestimonials";
-import ServiceWhyChoose from "@/components/services/ServiceWhyChoose";
+import ServiceClients from "@/components/services/ServiceClients";
 import servicesContent from "@/data/services-content.json";
+
+const ServiceOfferings = dynamic(
+  () => import("@/components/services/ServiceOfferings"),
+);
+const TechServices = dynamic(() => import("@/components/home/TechServices"));
+const ServiceTechGrid = dynamic(
+  () => import("@/components/services/ServiceTechGrid"),
+);
+const ServiceWhyChoose = dynamic(
+  () => import("@/components/services/ServiceWhyChoose"),
+);
+const Team = dynamic(() => import("@/components/home/Team"));
+const ServiceTestimonials = dynamic(
+  () => import("@/components/services/ServiceTestimonials"),
+);
+const ServicePricing = dynamic(
+  () => import("@/components/services/ServicePricing"),
+);
+const FAQ = dynamic(() => import("@/components/home/FAQ"));
+const ServiceContact = dynamic(
+  () => import("@/components/services/ServiceContact"),
+);
+const ServiceFooter = dynamic(
+  () => import("@/components/services/ServiceFooter"),
+);
 
 export const metadata: Metadata = {
   title: servicesContent.metadata.title,

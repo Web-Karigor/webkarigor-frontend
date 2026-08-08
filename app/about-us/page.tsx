@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import AboutCapabilities from "@/components/about/AboutCapabilities";
+import dynamic from "next/dynamic";
 import AboutHero from "@/components/about/AboutHero";
 import AboutImpact from "@/components/about/AboutImpact";
-import AboutVision from "@/components/about/AboutVision";
-import AboutWhyChoose from "@/components/about/AboutWhyChoose";
-import FAQ from "@/components/home/FAQ";
-import Footer from "@/components/home/Footer";
-import HomeConsultation from "@/components/home/HomeConsultation";
-import Team from "@/components/home/Team";
 import { ABOUT_METADATA } from "@/lib/about-data";
+
+const AboutVision = dynamic(() => import("@/components/about/AboutVision"));
+const AboutCapabilities = dynamic(
+  () => import("@/components/about/AboutCapabilities"),
+);
+const Team = dynamic(() => import("@/components/home/Team"));
+const AboutWhyChoose = dynamic(() => import("@/components/about/AboutWhyChoose"));
+const FAQ = dynamic(() => import("@/components/home/FAQ"));
+const HomeConsultation = dynamic(() => import("@/components/home/HomeConsultation"));
+const Footer = dynamic(() => import("@/components/home/Footer"));
 
 export const metadata: Metadata = {
   title: ABOUT_METADATA.title,

@@ -214,8 +214,23 @@ function InfiniteSlideRow({
     });
     observer.observe(set);
 
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        const tl = timelineRef.current;
+        if (!tl) return;
+        if (entry?.isIntersecting) {
+          if (!hoveredRef.current) tl.resume();
+        } else {
+          tl.pause();
+        }
+      },
+      { rootMargin: "120px 0px" },
+    );
+    visibility.observe(track);
+
     return () => {
       observer.disconnect();
+      visibility.disconnect();
       timelineRef.current?.kill();
       timelineRef.current = null;
     };

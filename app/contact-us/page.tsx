@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import "@/components/contact/ContactPage.css";
-import ContactBottomCta from "@/components/contact/ContactBottomCta";
-import ContactCompanyDeck from "@/components/contact/ContactCompanyDeck";
-import ContactConnect from "@/components/contact/ContactConnect";
-import ContactFormSection from "@/components/contact/ContactFormSection";
 import ContactHero from "@/components/contact/ContactHero";
-import ContactStories from "@/components/contact/ContactStories";
-import FAQ from "@/components/home/FAQ";
-import Footer from "@/components/home/Footer";
+import ContactFormSection from "@/components/contact/ContactFormSection";
 import contactContent from "@/data/contact-content.json";
+
+const ContactConnect = dynamic(() => import("@/components/contact/ContactConnect"));
+const ContactCompanyDeck = dynamic(
+  () => import("@/components/contact/ContactCompanyDeck"),
+);
+const ContactStories = dynamic(() => import("@/components/contact/ContactStories"));
+const FAQ = dynamic(() => import("@/components/home/FAQ"));
+const ContactBottomCta = dynamic(() => import("@/components/contact/ContactBottomCta"));
+const Footer = dynamic(() => import("@/components/home/Footer"));
 
 export const metadata: Metadata = {
   title: contactContent.metadata.title,

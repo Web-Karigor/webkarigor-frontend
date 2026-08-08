@@ -120,9 +120,21 @@ function CategoryMarquee() {
     const observer = new ResizeObserver(buildMarquee);
     observer.observe(set);
 
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        const tween = tweenRef.current;
+        if (!tween) return;
+        if (entry?.isIntersecting) tween.resume();
+        else tween.pause();
+      },
+      { rootMargin: "120px 0px" },
+    );
+    visibility.observe(track);
+
     return () => {
       tweenRef.current?.kill();
       observer.disconnect();
+      visibility.disconnect();
     };
   }, []);
 
@@ -253,9 +265,26 @@ function PortfolioSlider() {
     observer.observe(viewport);
     observer.observe(track);
 
+    let inView = true;
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        const next = Boolean(entry?.isIntersecting);
+        if (next === inView) return;
+        inView = next;
+        if (inView) {
+          startMarquee(scrollOffset);
+        } else {
+          tweenRef.current?.pause();
+        }
+      },
+      { rootMargin: "160px 0px" },
+    );
+    visibility.observe(viewport);
+
     return () => {
       tweenRef.current?.kill();
       observer.disconnect();
+      visibility.disconnect();
       cancelAnimationFrame(kickoff);
       cancelAnimationFrame(resizeRaf);
     };

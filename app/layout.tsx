@@ -13,18 +13,21 @@ import homeContent from "@/data/home-content.json";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-montserrat",
+  display: "swap",
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
   weight: ["600", "700"],
   variable: "--font-manrope",
+  display: "swap",
 });
 
 const museoModerno = MuseoModerno({
@@ -32,6 +35,7 @@ const museoModerno = MuseoModerno({
   weight: ["500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-museoModerno",
+  display: "swap",
 });
 
 const { title, description } = homeContent.metadata;
@@ -61,13 +65,12 @@ export default function RootLayout({
         `}
       >
         <GsapProvider>
-        <GlobalCursor />
-        {/* CONTENT LAYER */}
-        <div className="relative z-10 overflow-x-clip">
-          <Navbar />
-          <main className="pb-[88px] lg:pb-0">{children}</main>
-        </div>
-        <StickyNav />
+          <GlobalCursor />
+          <div className="relative z-10 overflow-x-clip">
+            <Navbar />
+            <main className="pb-[88px] lg:pb-0">{children}</main>
+          </div>
+          <StickyNav />
         </GsapProvider>
       </body>
     </html>

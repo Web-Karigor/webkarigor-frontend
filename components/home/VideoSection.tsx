@@ -2,7 +2,7 @@
 
 import "./VideoSection.css";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
 
@@ -22,6 +22,25 @@ const VideoSection = () => {
   const stageRef = useRef<HTMLDivElement>(null);
   const tiltRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const [loadVideo, setLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setLoadVideo(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "280px 0px" },
+    );
+
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -301,15 +320,22 @@ const VideoSection = () => {
         <div ref={stageRef} className="video-section-stage">
           <div ref={tiltRef} className="video-section-tilt">
             <div ref={frameRef} className="video-section-frame">
-              <iframe
-                src={embedUrl}
-                className="video-section-iframe pointer-events-none absolute border-0"
-                title={videoTitle}
-                frameBorder="0"
-                allow="autoplay; picture-in-picture"
-                allowFullScreen
-                sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox"
-              />
+              {loadVideo ? (
+                <iframe
+                  src={embedUrl}
+                  className="video-section-iframe pointer-events-none absolute border-0"
+                  title={videoTitle}
+                  frameBorder="0"
+                  allow="autoplay; picture-in-picture"
+                  allowFullScreen
+                  sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox"
+                />
+              ) : (
+                <div
+                  className="video-section-iframe pointer-events-none absolute border-0 bg-[#111]"
+                  aria-hidden
+                />
+              )}
             </div>
           </div>
         </div>
