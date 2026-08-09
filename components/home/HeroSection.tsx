@@ -150,6 +150,8 @@ export default function HeroSection() {
                 width={392}
                 height={392}
                 className="hero-photo-img h-auto w-full max-w-[280px] 2xl:max-w-[392px]"
+                sizes="(max-width: 1535px) 280px, 392px"
+                priority
               />
             </span>
           </div>
@@ -168,6 +170,8 @@ export default function HeroSection() {
                 width={392}
                 height={392}
                 className="hero-photo-img h-auto w-full max-w-[280px] 2xl:max-w-[392px]"
+                sizes="(max-width: 1535px) 280px, 392px"
+                priority
               />
             </div>
           </div>

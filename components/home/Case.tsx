@@ -250,7 +250,6 @@ export default function Case() {
                             fill
                             className="service-card-featured-img"
                             sizes="(max-width: 1023px) 100vw, 42vw"
-                            unoptimized
                           />
                         </div>
                       </div>

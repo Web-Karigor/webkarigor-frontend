@@ -25,7 +25,7 @@
       "submitLabel": "Start Your Project"
     },
     "image": {
-      "src": "/sm2.jpg",
+      "src": "/sm2.webp",
       "alt": "Team member working on a project"
     },
     "badges": {
@@ -177,63 +177,13 @@
       }
     ]
   },
-  "techStack": [
-    {
-      "name": "React",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-    },
-    {
-      "name": "Next.js",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-line.svg"
-    },
-    {
-      "name": "Node.js",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-    },
-    {
-      "name": "Laravel",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg"
-    },
-    {
-      "name": "Figma",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
-    },
-    {
-      "name": "Python",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-    },
-    {
-      "name": "Tailwind",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg"
-    },
-    {
-      "name": "AWS",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg"
-    },
-    {
-      "name": "Vue",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
-    },
-    {
-      "name": "Framer",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framer/framer-original.svg"
-    },
-    {
-      "name": "GitHub",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-    },
-    {
-      "name": "Vercel",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg"
-    }
-  ],
   "whyChoose": {
     "eyebrow": "Why Webkarigor",
     "title": "More Than Beautiful Interfaces",
     "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
     "images": {
-      "left": { "src": "/sm1.png", "alt": "Team collaboration" },
-      "right": { "src": "/sm3.jpg", "alt": "Design review session" }
+      "left": { "src": "/sm1.webp", "alt": "Team collaboration" },
+      "right": { "src": "/sm3.webp", "alt": "Design review session" }
     },
     "hireUsLabels": ["HIRE US", "HIRE US", "HIRE US"],
     "features": [
@@ -259,28 +209,6 @@
       }
     ]
   },
-  "whyChooseFeatures": [
-    {
-      "title": "User-Centered Design",
-      "description": "Every decision starts with your users — clear flows, intuitive interfaces, and delightful experiences.",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/layers/layers-original.svg"
-    },
-    {
-      "title": "Fast & Reliable Delivery",
-      "description": "Agile sprints, transparent milestones, and on-time launches you can plan your business around.",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linechart/linechart-original.svg"
-    },
-    {
-      "title": "Scalable Technology",
-      "description": "Modern stacks and clean architecture so your product grows without costly rebuilds.",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/code/code-original.svg"
-    },
-    {
-      "title": "Dedicated Partnership",
-      "description": "A single team from strategy to launch — responsive, collaborative, and invested in your success.",
-      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/globe/globe-original.svg"
-    }
-  ],
   "testimonials": {
     "eyebrow": "Client Success Stories",
     "title": "Trusted by Founders and Growing Businesses",
@@ -290,7 +218,7 @@
       "reviewsLabel": "(100+ Reviews)",
       "headline": "Customer experience that speak for them selves"
     },
-    "avatars": ["/sm1.png", "/sm2.jpg", "/sm3.jpg", "/sm4.png"],
+    "avatars": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"],
     "items": [
       {
         "quote": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",

@@ -3,6 +3,7 @@
 import "./TechServices.css";
 
 import { useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { PORTFOLIO_IMAGES } from "@/lib/home-assets";
 import homeContent from "@/data/home-content.json";
@@ -180,7 +181,14 @@ function PortfolioCard({
         height: size.height * scale,
       }}
     >
-      <img src={src} alt="" draggable={false} />
+      <Image
+        src={src}
+        alt=""
+        fill
+        sizes="(max-width: 640px) 202px, 515px"
+        className="object-cover"
+        draggable={false}
+      />
     </div>
   );
 }

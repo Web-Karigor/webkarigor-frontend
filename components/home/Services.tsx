@@ -240,7 +240,6 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
           sizes="(max-width: 1023px) 100vw, 420px"
           className="object-cover object-top"
           priority={eager}
-          unoptimized
         />
       </div>
       <div className="services-story-img services-story-img--secondary">
@@ -250,7 +249,6 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
           fill
           sizes="(max-width: 1023px) 100vw, 360px"
           className="object-cover object-top"
-          unoptimized
         />
       </div>
     </motion.div>
@@ -341,7 +339,6 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
           sizes="100vw"
           className="object-cover object-top"
           priority={eager}
-          unoptimized
         />
       </div>
 

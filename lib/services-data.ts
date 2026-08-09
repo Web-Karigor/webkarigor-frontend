@@ -5,19 +5,7 @@ import {
   ShoppingCart,
   type LucideIcon,
 } from "lucide-react";
-import serviceSharedContent from "@/data/service-shared-content.json";
 import servicesContent from "@/data/services-content.json";
-
-export const MARQUEE_ITEMS = serviceSharedContent.marquee.items;
-
-export type ClientLogo = {
-  name: string;
-  src: string;
-};
-
-export const CLIENTS_DESCRIPTION = servicesContent.clients.description;
-
-export const CLIENT_LOGOS: ClientLogo[] = servicesContent.clients.logos;
 
 const OFFERING_ICONS = {
   shoppingCart: ShoppingCart,
@@ -40,10 +28,6 @@ export const SERVICE_OFFERINGS: ServiceOffering[] =
     icon: OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS],
     variant: item.variant as "yellow" | "green",
   }));
-
-export const TECH_STACK = servicesContent.techStack;
-
-export const WHY_CHOOSE_FEATURES = servicesContent.whyChooseFeatures;
 
 export const TESTIMONIALS = servicesContent.testimonials.items;
 
@@ -69,4 +53,3 @@ export const PRICING_MARKETS: PricingMarket[] =
       features: [...servicesContent.pricing.sharedFeatures],
     })),
   }));
-

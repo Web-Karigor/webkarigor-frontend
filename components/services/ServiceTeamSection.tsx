@@ -3,25 +3,25 @@ import Image from "next/image";
 /** Exact original collage — classes stay in TSX for Tailwind JIT */
 const TEAM_PHOTOS = [
   {
-    src: "/sm1.png",
+    src: "/sm1.webp",
     alt: "Team member — middle left",
     className:
       "absolute left-0 top-[22%] z-[2] h-[clamp(124px,15vw,168px)] w-[clamp(124px,15vw,168px)]",
   },
   {
-    src: "/h2.png",
+    src: "/h2.webp",
     alt: "Team member — center small",
     className:
       "absolute left-[40%] top-[44%] z-[4] h-[clamp(68px,8.5vw,92px)] w-[clamp(68px,8.5vw,92px)] rounded-[20px] max-sm:rounded-[14px]",
   },
   {
-    src: "/sm3.jpg",
+    src: "/sm3.webp",
     alt: "Team member — bottom left",
     className:
       "absolute bottom-0 left-[4%] z-[3] h-[clamp(148px,18vw,200px)] w-[clamp(148px,18vw,200px)]",
   },
   {
-    src: "/sm4.png",
+    src: "/sm4.webp",
     alt: "Team member — bottom right",
     className:
       "absolute bottom-[10%] right-[4%] z-[2] h-[clamp(112px,14vw,152px)] w-[clamp(112px,14vw,152px)]",
@@ -59,7 +59,7 @@ export default function ServiceTeamSection() {
             />
             <div className={`relative z-[1] h-full w-full ${SHOT_BASE}`}>
               <Image
-                src="/sm2.jpg"
+                src="/sm2.webp"
                 alt="Team member — top right"
                 fill
                 priority

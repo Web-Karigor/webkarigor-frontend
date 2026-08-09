@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Minimal production folder for small deploy zips
+  output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -27,6 +29,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "www.vectorlogo.zone",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
         pathname: "/**",
       },
     ],

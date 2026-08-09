@@ -8,13 +8,8 @@ export const MANPOWER_TRUST_TITLE = manpowerContent.trustTitle;
 
 export const MANPOWER_TRUSTED_LOGOS = manpowerContent.trustedLogos;
 
-/** Tech icon content only — orbit geometry lives in ManpowerFeaturesOrbit.tsx */
 export const MANPOWER_TECH_ORBIT = manpowerContent.techOrbit;
 
-/** @deprecated — kept for any leftover imports */
-export const MANPOWER_FEATURES_ORBIT = MANPOWER_TECH_ORBIT;
-
-/** Active Why Choose copy (from ManpowerWhyChoose — not the unused legacy MANPOWER_WHY) */
 export const MANPOWER_WHY = manpowerContent.whyChoose;
 
 export const MANPOWER_PORTFOLIO_SECTION = manpowerContent.portfolio;

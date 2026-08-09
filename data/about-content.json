@@ -6,13 +6,13 @@
   "hero": {
     "title": "Building Digital Products That Empower Businesses and Delight Users",
     "images": [
-      "/s1.png",
-      "/s2.png",
-      "/sm1.png",
-      "/s3.png",
-      "/s4.png",
-      "/sm2.jpg",
-      "/sm3.jpg"
+      "/s1.webp",
+      "/s2.webp",
+      "/sm1.webp",
+      "/s3.webp",
+      "/s4.webp",
+      "/sm2.webp",
+      "/sm3.webp"
     ]
   },
   "impact": {
@@ -31,7 +31,7 @@
     ],
     "mainImage": "/services/why-choose-main.jpg",
     "mainImageAlt": "Webkarigor team collaborating",
-    "gallery": ["/sm1.png", "/sm2.jpg", "/sm3.jpg", "/sm4.png"]
+    "gallery": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"]
   },
   "vision": {
     "title": "Our Vision",
@@ -39,9 +39,9 @@
     "body": "We partner with teams who value quality, usability, and long-term success, helping businesses navigate change with confidence.",
     "images": {
       "large": "/services/why-choose-main.jpg",
-      "top": "/sm2.jpg",
-      "bottomLeft": "/sm3.jpg",
-      "bottomRight": "/sm4.png"
+      "top": "/sm2.webp",
+      "bottomLeft": "/sm3.webp",
+      "bottomRight": "/sm4.webp"
     },
     "alts": {
       "large": "Team collaborating on product craft",
@@ -60,7 +60,7 @@
     "Technical Expertise"
   ],
   "team": {
-    "images": ["/sm1.png", "/sm2.jpg", "/sm3.jpg", "/sm4.png"],
+    "images": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"],
     "heading": {
       "mobileLine1": "Expert Team",
       "mobileLine2": "Big Result",

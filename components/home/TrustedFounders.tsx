@@ -3,6 +3,7 @@
 import "./TrustedFounders.css";
 
 import { useLayoutEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { SLIDER_IMAGES } from "@/lib/home-assets";
 import homeContent from "@/data/home-content.json";
@@ -295,7 +296,14 @@ export default function TrustedFounders() {
               className="trusted-image-card size-4"
               style={{ backfaceVisibility: "hidden" }}
             >
-              <img src={item.src} alt="" draggable={false} />
+              <Image
+                src={item.src}
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 40vw, 495px"
+                className="object-cover"
+                draggable={false}
+              />
             </div>
           ))}
         </div>

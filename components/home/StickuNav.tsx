@@ -26,6 +26,13 @@ type Sheet = "projects" | "services" | "more" | null;
 export default function StickyNav() {
   const pathname = usePathname();
   const [sheet, setSheet] = useState<Sheet>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Client-only mount avoids hydration mismatches (e.g. browser tooling
+  // mutating the DOM, or env(safe-area) differences).
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setSheet(null);
@@ -39,6 +46,8 @@ export default function StickyNav() {
       document.body.style.overflow = prev;
     };
   }, [sheet]);
+
+  if (!mounted) return null;
 
   const close = () => setSheet(null);
   const toggle = (next: Sheet) =>

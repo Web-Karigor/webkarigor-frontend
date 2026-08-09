@@ -89,7 +89,7 @@
   },
   "customBanner": {
     "backgroundSrc": "/pricing/rectangle-79.png",
-    "overlaySrc": "/rr.png",
+    "overlaySrc": "/rr.webp",
     "titleLines": [
       "Every product is different",
       "Your pricing should be too"
@@ -102,7 +102,7 @@
   },
   "package": {
     "title": "A Complete Package Of Everything You Need To Grow",
-    "ellipseSrc": "/pricing/ellipse-1569.png",
+    "ellipseSrc": "/pricing/ellipse-1569.webp",
     "starSrc": "/pricing/star-17.png",
     "columns": [
       [
@@ -200,11 +200,11 @@
       "href": "/projects"
     },
     "items": [
-      { "src": "/sm1.png", "alt": "Simple is More website" },
-      { "src": "/sm4.png", "alt": "Fashion mobile app screens" },
+      { "src": "/sm1.webp", "alt": "Simple is More website" },
+      { "src": "/sm4.webp", "alt": "Fashion mobile app screens" },
       { "src": "/services/why-choose-main.jpg", "alt": "Desktop product interface" },
-      { "src": "/sm3.jpg", "alt": "Analytics dashboard" },
-      { "src": "/ecommerce/hero-composite.png", "alt": "Lifestyle commerce UI" }
+      { "src": "/sm3.webp", "alt": "Analytics dashboard" },
+      { "src": "/ecommerce/hero-composite.webp", "alt": "Lifestyle commerce UI" }
     ]
   }
 }

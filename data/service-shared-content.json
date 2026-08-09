@@ -17,7 +17,7 @@
     "email": "hello@webkarigor.com",
     "emailHref": "mailto:hello@webkarigor.com",
     "profile": {
-      "image": "/sm4.png",
+      "image": "/sm4.webp",
       "name": "Esther Howard",
       "role": "CEO, Webkarigor"
     },
@@ -54,24 +54,24 @@
   "teamSection": {
     "headingLines": ["Expert Team", "Big Result"],
     "featuredPhoto": {
-      "src": "/sm2.jpg",
+      "src": "/sm2.webp",
       "alt": "Team member — top right"
     },
     "photos": [
       {
-        "src": "/sm1.png",
+        "src": "/sm1.webp",
         "alt": "Team member — middle left"
       },
       {
-        "src": "/h2.png",
+        "src": "/h2.webp",
         "alt": "Team member — center small"
       },
       {
-        "src": "/sm3.jpg",
+        "src": "/sm3.webp",
         "alt": "Team member — bottom left"
       },
       {
-        "src": "/sm4.png",
+        "src": "/sm4.webp",
         "alt": "Team member — bottom right"
       }
     ]

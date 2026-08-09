@@ -19,9 +19,9 @@
     },
     "hotlineLabel": "Say hello",
     "hotline": "01624-283328",
-    "heroImage": "/ecommerce/hero-composite.png",
+    "heroImage": "/ecommerce/hero-composite.webp",
     "heroImageAlt": "Ecommerce shopping experience",
-    "phoneImage": "/ecommerce/hero-phone.png",
+    "phoneImage": "/ecommerce/hero-phone.webp",
     "phoneImageAlt": "Ecommerce mobile shopping app",
     "clientsLabel": "Our Top Clients",
     "clients": [
@@ -220,10 +220,10 @@
     "ratingLabel": "(60+ Reviews)",
     "title": "Trusted by Founders and Growing Businesses",
     "avatars": [
-      "/sm1.png",
-      "/sm2.jpg",
-      "/sm3.jpg",
-      "/sm4.png"
+      "/sm1.webp",
+      "/sm2.webp",
+      "/sm3.webp",
+      "/sm4.webp"
     ],
     "items": [
       {

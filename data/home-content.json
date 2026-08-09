@@ -39,8 +39,8 @@
       "avatarSrc": "/hero/hello-avatar.png"
     },
     "photos": {
-      "left": "/h2.png",
-      "right": "/h2.png"
+      "left": "/h2.webp",
+      "right": "/h2.webp"
     },
     "backgroundWord": "PROJECTS"
   },
@@ -50,8 +50,8 @@
     "label": "Years"
   },
   "assets": {
-    "sliderImages": ["/s1.png", "/s2.png", "/s3.png", "/s4.png"],
-    "teamImages": ["/sm1.png", "/sm2.jpg", "/sm3.jpg", "/sm4.png"]
+    "sliderImages": ["/s1.webp", "/s2.webp", "/s3.webp", "/s4.webp"],
+    "teamImages": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"]
   },
   "services": {
     "badge": "Services",
@@ -372,22 +372,22 @@
     "cardAriaLabel": "Team member",
     "members": [
       {
-        "src": "/sm1.png",
+        "src": "/sm1.webp",
         "name": "Sarah Ahmed",
         "designation": "Product Designer"
       },
       {
-        "src": "/sm2.jpg",
+        "src": "/sm2.webp",
         "name": "Rakib Hasan",
         "designation": "Lead Engineer"
       },
       {
-        "src": "/sm3.jpg",
+        "src": "/sm3.webp",
         "name": "Nadia Rahman",
         "designation": "UX Researcher"
       },
       {
-        "src": "/sm4.png",
+        "src": "/sm4.webp",
         "name": "Arif Khan",
         "designation": "Brand Strategist"
       }
@@ -508,7 +508,7 @@
     ]
   },
   "banner": {
-    "backgroundImage": "/rr.png",
+    "backgroundImage": "/rr.webp",
     "titleLines": [
       "Every product is different",
       "Your pricing should be too"
@@ -555,7 +555,7 @@
     "title": "Let's Build Something Great Together",
     "description": "From your first message to project delivery, we keep the process clear, responsive, and focused on your goals.",
     "founder": {
-      "image": "/sm4.png",
+      "image": "/sm4.webp",
       "name": "Esther Howard",
       "role": "CEO, Webkarigor"
     },

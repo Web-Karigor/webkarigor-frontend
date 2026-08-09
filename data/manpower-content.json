@@ -20,7 +20,7 @@
     },
     "hotlineLabel": "Say hello",
     "hotline": "01624-283328",
-    "heroImage": "/manpower/hero.png",
+    "heroImage": "/manpower/hero.webp",
     "heroImageAlt": "Happy student giving thumbs up",
     "doodleSrc": "/manpower/vector-16.png"
   },
@@ -179,56 +179,56 @@
         "quote": "Webkarigor helped us staff a full product squad in weeks. The talent quality and communication have been outstanding.",
         "name": "Jenny Wilson",
         "role": "Head of Product, Bright Labs",
-        "avatar": "/sm1.png",
+        "avatar": "/sm1.webp",
         "highlight": false
       },
       {
         "quote": "Finally a partner that understands both hiring speed and engineering depth. Our release cadence doubled.",
         "name": "Robert Fox",
         "role": "CTO, NovaPay",
-        "avatar": "/sm2.jpg",
+        "avatar": "/sm2.webp",
         "highlight": false
       },
       {
         "quote": "From designers to backend leads, every placement clicked with our culture. Highly recommend their manpower desk.",
         "name": "Kathryn Murphy",
         "role": "COO, Lumen Soft",
-        "avatar": "/sm3.jpg",
+        "avatar": "/sm3.webp",
         "highlight": false
       },
       {
         "quote": "Clear contracts, strong onboarding, and people who actually ship. We extended the engagement twice.",
         "name": "Theresa Webb",
         "role": "VP Engineering, Orbit HR",
-        "avatar": "/sm4.png",
+        "avatar": "/sm4.webp",
         "highlight": false
       },
       {
         "quote": "They filled critical roles without the usual agency noise. Transparent, fast, and reliable.",
         "name": "Wade Warren",
         "role": "Founder, Stackline",
-        "avatar": "/h2.png",
+        "avatar": "/h2.webp",
         "highlight": false
       },
       {
         "quote": "With Webkarigor, we're able to easily scale our team in full detail. It's become an essential partner for growth.",
         "name": "Jaquon Hart",
         "role": "Digital Marketing Executive, Hypebeast",
-        "avatar": "/sm1.png",
+        "avatar": "/sm1.webp",
         "highlight": true
       },
       {
         "quote": "The designers they placed elevated our product UI overnight. Stakeholders noticed the difference immediately.",
         "name": "Cody Fisher",
         "role": "Design Lead, Peak Commerce",
-        "avatar": "/h1.png",
+        "avatar": "/h1.webp",
         "highlight": false
       },
       {
         "quote": "Supportive account managers and talent that treats our roadmap like their own. Rare combination.",
         "name": "Esther Howard",
         "role": "People Ops, Northwind",
-        "avatar": "/sm3.jpg",
+        "avatar": "/sm3.webp",
         "highlight": false
       }
     ]

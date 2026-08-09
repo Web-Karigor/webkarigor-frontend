@@ -78,7 +78,7 @@
     {
       "id": "p2",
       "title": "Mobile App Suite",
-      "src": "/sm2.jpg",
+      "src": "/sm2.webp",
       "alt": "Colorful mobile app interface collection",
       "w": 640,
       "h": 720
@@ -86,7 +86,7 @@
     {
       "id": "p3",
       "title": "Desktop Dashboard",
-      "src": "/sm3.jpg",
+      "src": "/sm3.webp",
       "alt": "Desktop monitor with clean website UI",
       "w": 640,
       "h": 720
@@ -94,7 +94,7 @@
     {
       "id": "p4",
       "title": "Travel App",
-      "src": "/ecommerce/hero-composite.png",
+      "src": "/ecommerce/hero-composite.webp",
       "alt": "Travel mobile app mockups",
       "w": 640,
       "h": 680
@@ -102,7 +102,7 @@
     {
       "id": "p5",
       "title": "Lifestyle Commerce",
-      "src": "/h1.png",
+      "src": "/h1.webp",
       "alt": "Lifestyle e-commerce website design",
       "w": 640,
       "h": 680
@@ -110,7 +110,7 @@
     {
       "id": "p6",
       "title": "Fashion Mobile",
-      "src": "/sm1.png",
+      "src": "/sm1.webp",
       "alt": "Fashion mobile app screen",
       "w": 640,
       "h": 760
@@ -118,7 +118,7 @@
     {
       "id": "p7",
       "title": "Retail Screens",
-      "src": "/sm4.png",
+      "src": "/sm4.webp",
       "alt": "Retail mobile app screens",
       "w": 640,
       "h": 760
@@ -126,7 +126,7 @@
     {
       "id": "p8",
       "title": "Ventures 3D",
-      "src": "/s1.png",
+      "src": "/s1.webp",
       "alt": "Abstract 3D ventures brand visual",
       "w": 640,
       "h": 980,
@@ -135,7 +135,7 @@
     {
       "id": "p9",
       "title": "Brand Mark V",
-      "src": "/s2.png",
+      "src": "/s2.webp",
       "alt": "Orange brand mark visual",
       "w": 640,
       "h": 470,
@@ -144,7 +144,7 @@
     {
       "id": "p10",
       "title": "Health App",
-      "src": "/s3.png",
+      "src": "/s3.webp",
       "alt": "Mobile health dashboard interface",
       "w": 640,
       "h": 490
@@ -160,7 +160,7 @@
     {
       "id": "p12",
       "title": "Tablet Experience",
-      "src": "/h2.png",
+      "src": "/h2.webp",
       "alt": "Tablet content experience",
       "w": 640,
       "h": 560

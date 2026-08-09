@@ -195,7 +195,6 @@ export default function ManpowerPortfolio() {
                   fill
                   className="object-cover object-top"
                   sizes={imageSizes}
-                  unoptimized
                 />
               </article>
             ))}
