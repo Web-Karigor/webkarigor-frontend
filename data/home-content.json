@@ -406,7 +406,7 @@
     "popularLabel": "Most popular",
     "featuresHeading": "What's Included:",
     "cancelLabel": "Cancel any time",
-    "noExtraFee": "No Extra Fee",
+    "noExtraFee": "Everything Included",
     "billing": {
       "monthly": "Monthly",
       "quarterly": "Yearly",
@@ -419,7 +419,7 @@
         "description": "Perfect for small projects or testing the waters",
         "availability": "3 Slots Available, Hurry!",
         "availabilityTone": "green",
-        "cta": "Book a free call",
+        "cta": "Explore Package",
         "price": { "monthly": "$2600", "quarterly": "$2340" },
         "features": [
           "40 hours of dedicated design support",
@@ -444,7 +444,7 @@
         "availability": "2 Slots Available, Hurry!",
         "availabilityTone": "red",
         "availabilityMarquee": true,
-        "cta": "Book a free call",
+        "cta": "Explore Package",
         "price": { "monthly": "$4800", "quarterly": "$4320" },
         "features": [
           "80 hours of dedicated design support",
@@ -468,7 +468,7 @@
         "description": "For established businesses with high-volume design demands",
         "availability": "Limited availability",
         "availabilityTone": "gray",
-        "cta": "Book a free call",
+        "cta": "Explore Package",
         "price": { "monthly": "$7800", "quarterly": "$7020" },
         "features": [
           "160 hours of dedicated design support",

@@ -1,5 +1,7 @@
 "use client";
 
+import "./FAQ.css";
+
 import Link from "next/link";
 import { useState } from "react";
 import homeContent from "@/data/home-content.json";
@@ -99,7 +101,7 @@ export default function FAQ({
           </p>
           <Link
             href={ctaHref}
-            className="cursor-pointer rounded-lg capitalize border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold text-[#000000] transition-colors md:px-6 md:py-3 md:text-lg"
+            className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
           >
             {ctaLabel}
           </Link>

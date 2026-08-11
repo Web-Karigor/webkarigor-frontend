@@ -244,7 +244,7 @@
   }
 
   .team2-tornado-item {
-    width: clamp(100px, 26vw, 150px);
+    width: clamp(96px, 24vw, 140px);
   }
 
   .team2-big-circle {
@@ -260,12 +260,7 @@
   }
 
   .team2-actions {
-    margin-top: min(10vh, 90px);
-  }
-
-  .team2-link-title {
-    font-size: 1.05rem;
-    font-weight: 700;
+    display: none;
   }
 
   .team2-title-big {

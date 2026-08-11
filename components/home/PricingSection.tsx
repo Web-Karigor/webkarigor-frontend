@@ -73,11 +73,22 @@ function InfoIcon() {
   );
 }
 
-export default function PricingSection() {
+export default function PricingSection({
+  backgroundColor,
+  ctaHref,
+}: {
+  /** Override section background (e.g. service subpages keep their local bg) */
+  backgroundColor?: string;
+  /** Explore Package / Contact Us target (e.g. "#contact" on pricing page) */
+  ctaHref?: string;
+} = {}) {
   const [period, setPeriod] = useState<Billing>("quarterly");
 
   return (
-    <section className="home-pricing-section">
+    <section
+      className="home-pricing-section"
+      style={backgroundColor ? { background: backgroundColor } : undefined}
+    >
       <div className="home-pricing-shell">
         <div className="home-pricing-header">
           <span className="home-pricing-badge">
@@ -200,8 +211,21 @@ export default function PricingSection() {
                 <p className="home-pricing-cancel">{cancelLabel}</p>
 
                 <Link
-                  href={plan.customPrice ? "/contact-us" : "/pricing"}
+                  href={
+                    ctaHref ??
+                    (plan.customPrice ? "/contact-us" : "/pricing")
+                  }
                   className="home-pricing-cta capitalize"
+                  onClick={
+                    ctaHref?.startsWith("#")
+                      ? (e) => {
+                          e.preventDefault();
+                          document
+                            .querySelector(ctaHref)
+                            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                      : undefined
+                  }
                 >
                   {plan.cta}
                 </Link>

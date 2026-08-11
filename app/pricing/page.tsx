@@ -22,16 +22,14 @@ export default function PricingPage() {
     <div className="bg-[#FFFDF6]">
       <ProjectHoverCursor />
       <PricingHero />
-      <PricingSection />
+      <PricingSection ctaHref="#contact" />
       <PricingCustomBanner />
       <PricingPackage />
       <TrustedFounders />
       <PricingBuiltFor />
       <PricingFeaturedWork />
       <FAQ />
-      <div id="contact">
-        <HomeConsultation />
-      </div>
+      <HomeConsultation />
       <Footer />
     </div>
   );

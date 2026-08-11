@@ -71,7 +71,8 @@ export default function HeroSlider() {
         const scale = computeScale(cardCenterX, viewportRect);
 
         gsap.set(card, {
-          scale,
+          scaleX: 1,
+          scaleY: scale,
           transformOrigin: "50% 100%",
           force3D: true,
         });

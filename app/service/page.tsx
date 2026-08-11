@@ -23,8 +23,8 @@ const ServicePricing = dynamic(
   () => import("@/components/services/ServicePricing"),
 );
 const FAQ = dynamic(() => import("@/components/home/FAQ"));
-const ServiceContact = dynamic(
-  () => import("@/components/services/ServiceContact"),
+const HomeConsultation = dynamic(
+  () => import("@/components/home/HomeConsultation"),
 );
 const ServiceFooter = dynamic(
   () => import("@/components/services/ServiceFooter"),
@@ -50,7 +50,7 @@ export default function ServicePage() {
       <ServicePricing />
       <FAQ className="bg-white" />
       <ServiceMarquee />
-      <ServiceContact />
+      <HomeConsultation hideSchedule backgroundColor="#FFFEFB" />
       <ServiceFooter />
     </div>
   );

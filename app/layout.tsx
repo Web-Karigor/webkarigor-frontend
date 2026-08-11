@@ -5,6 +5,7 @@ import "@/styles/section-shared.css";
 import "@/styles/pricing.css";
 import Navbar from "@/components/home/Navbar";
 import StickyNav from "@/components/home/StickuNav";
+import FloatingActions from "@/components/FloatingActions";
 import GlobalCursor from "@/components/GlobalCursor";
 import GsapProvider from "@/components/providers/GsapProvider";
 import homeContent from "@/data/home-content.json";
@@ -51,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`
           ${inter.variable}
@@ -71,6 +72,7 @@ export default function RootLayout({
             <main className="pb-[88px] lg:pb-0">{children}</main>
           </div>
           <StickyNav />
+          <FloatingActions />
         </GsapProvider>
       </body>
     </html>

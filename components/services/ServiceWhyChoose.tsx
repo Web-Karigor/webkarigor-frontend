@@ -76,125 +76,107 @@ function HireUsBadge() {
           ))}
         </g>
 
-        <circle
-          cx="100"
-          cy="100"
-          r="16"
-          fill="#FFE94A"
-        />
+        <circle cx="100" cy="100" r="16" fill="#FFE94A" />
       </svg>
     </div>
+  );
+}
+
+function FeatureCard({
+  title: cardTitle,
+  description: cardDescription,
+  icon: Icon,
+  grow,
+}: {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  /** Flex grow ratio for zigzag columns on lg+ */
+  grow: "tall" | "short";
+}) {
+  return (
+    <article
+      className={`flex min-h-[220px] flex-col rounded-[clamp(16px,1.4vw,20px)] bg-white p-6 shadow-[0_8px_28px_rgba(16,24,40,0.04)] sm:min-h-[240px] lg:min-h-0 lg:p-[clamp(20px,1.8vw,36px)] ${
+        grow === "tall" ? "lg:flex-[1.15]" : "lg:flex-[1]"
+      }`}
+    >
+      <span className="mb-3 inline-flex text-[#15d286] lg:mb-4">
+        <Icon
+          className="h-6 w-6 lg:h-7 lg:w-7"
+          strokeWidth={1.75}
+          aria-hidden
+        />
+      </span>
+      <h3 className="m-0 font-montserrat text-[clamp(18px,1.6vw,30px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
+        {cardTitle}
+      </h3>
+      <p className="mt-2 font-montserrat text-[clamp(13px,0.95vw,15px)] font-medium leading-[1.55] text-[#98a2b3] lg:mt-3">
+        {cardDescription}
+      </p>
+    </article>
   );
 }
 
 export default function ServiceWhyChoose() {
   return (
     <section className="bg-[#f5f7fa] py-[clamp(56px,8vw,96px)]">
-      <div className="mx-auto w-full max-w-[1678px] px-[clamp(16px,4vw,40px)]">
-        {/* Header — Figma Frame: 650 × 151 Hug */}
-        <div className="mx-auto mb-[clamp(36px,5vw,56px)] flex w-full max-w-[650px] flex-col items-center gap-3 text-center lg:min-h-[151px] lg:justify-center">
-          <p className="m-0 font-montserrat text-[18px] font-semibold leading-none text-[#15d286] lg:text-[20px]">
+      <div className="mx-auto w-full max-w-[1678px] px-[clamp(16px,3.5vw,40px)]">
+        {/* Header */}
+        <div className="mx-auto mb-[clamp(32px,4.5vw,56px)] flex w-full max-w-[650px] flex-col items-center gap-3 text-center">
+          <p className="m-0 font-montserrat text-[clamp(16px,1.3vw,20px)] font-semibold leading-none text-[#15d286]">
             {eyebrow}
           </p>
-          <h2 className="m-0 font-montserrat text-[28px] font-bold leading-[1.15] tracking-[-0.02em] text-black sm:text-[32px] lg:text-[36px]">
+          <h2 className="m-0 font-montserrat text-[clamp(26px,2.6vw,36px)] font-bold leading-[1.15] tracking-[-0.02em] text-black">
             {title}
           </h2>
-          <p className="m-0 max-w-[650px] font-montserrat text-[14px] font-medium leading-[1.4] text-[#98a2b3] sm:text-[15px] lg:text-[16px]">
+          <p className="m-0 max-w-[650px] font-montserrat text-[clamp(14px,1.1vw,16px)] font-medium leading-[1.4] text-[#98a2b3]">
             {description}
           </p>
         </div>
 
         {/*
-          Figma Frame 268: 1678 × hug, horizontal, space-between
-          Left Frame 267: 728 × 631
-          Right cards container: 797 × 631, gap 32
+          Figma: images 728 / cards 797 — fluid fr columns so lg→xl never overflow.
+          Both columns stretch to the same height; card zigzag via flex ratios.
         */}
-        <div className="mx-auto flex w-full max-w-[1678px] flex-col items-stretch justify-between gap-8 lg:flex-row lg:items-start lg:gap-8 xl:gap-10">
-          {/* LEFT — Frame 267 (728×631) — keep as is */}
-          <div className="grid w-full max-w-[728px] shrink-0 grid-cols-[1fr_1.05fr] gap-4 lg:h-[631px] lg:gap-5">
-            <div className="relative min-h-[320px] overflow-hidden rounded-[20px] shadow-[0_12px_32px_rgba(0,0,0,0.08)] lg:min-h-0 lg:h-full">
+        <div className="mx-auto grid w-full grid-cols-1 items-stretch gap-8 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-[clamp(20px,2.2vw,40px)] xl:grid-cols-[minmax(0,728fr)_minmax(0,797fr)]">
+          {/* LEFT — images + hire badge */}
+          <div className="grid min-h-0 w-full min-w-0 grid-cols-[1fr_1.05fr] gap-3 sm:gap-4 lg:min-h-[clamp(440px,48vw,631px)] lg:gap-[clamp(12px,1.3vw,20px)]">
+            <div className="relative min-h-[280px] overflow-hidden rounded-[clamp(14px,1.2vw,20px)] shadow-[0_12px_32px_rgba(0,0,0,0.08)] sm:min-h-[320px] lg:min-h-0 lg:h-full">
               <Image
                 src={images.left.src}
                 alt={images.left.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 50vw, 350px"
+                sizes="(max-width: 1023px) 48vw, 28vw"
               />
             </div>
 
-            <div className="grid h-full grid-rows-[1.15fr_auto] gap-4 lg:gap-5">
-              <div className="relative min-h-[200px] overflow-hidden rounded-[20px] shadow-[0_12px_32px_rgba(0,0,0,0.08)] lg:min-h-0">
+            <div className="grid h-full min-h-0 grid-rows-[minmax(0,1.15fr)_auto] gap-3 sm:gap-4 lg:gap-[clamp(12px,1.3vw,20px)]">
+              <div className="relative min-h-[160px] overflow-hidden rounded-[clamp(14px,1.2vw,20px)] shadow-[0_12px_32px_rgba(0,0,0,0.08)] sm:min-h-[200px] lg:min-h-0">
                 <Image
                   src={images.right.src}
                   alt={images.right.alt}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1024px) 50vw, 360px"
+                  sizes="(max-width: 1023px) 48vw, 26vw"
                 />
               </div>
 
-              <div className="mx-auto flex h-[148px] w-[148px] items-center justify-center lg:h-[233px] lg:w-[233px]">
+              <div className="mx-auto aspect-square w-[clamp(120px,22vw,233px)] max-w-full shrink-0">
                 <HireUsBadge />
               </div>
             </div>
           </div>
 
-          {/* RIGHT — zigzag heights, bottoms of both columns aligned */}
-          <div className="grid w-full max-w-[797px] grid-cols-1 gap-8 sm:grid-cols-2 lg:shrink-0">
-            {/* Left column: tall → short */}
-            <div className="flex flex-col gap-8">
-              {[FEATURE_CARDS[0], FEATURE_CARDS[2]].map((feature, i) => {
-                const Icon = feature.icon;
-                const isTall = i === 0;
-                return (
-                  <article
-                    key={feature.title}
-                    className={`flex flex-col rounded-[20px] bg-white p-8 lg:p-9 ${
-                      isTall
-                        ? "min-h-[248px] lg:h-[300px]"
-                        : "min-h-[220px] lg:h-[260px]"
-                    }`}
-                  >
-                    <span className="mb-4 inline-flex text-[#15d286]">
-                      <Icon className="h-7 w-7" strokeWidth={1.75} aria-hidden />
-                    </span>
-                    <h3 className="m-0 font-montserrat text-[clamp(22px,1.8vw,30px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-                      {feature.title}
-                    </h3>
-                    <p className="mt-3 font-montserrat text-[clamp(13px,0.95vw,15px)] font-medium leading-[1.55] text-[#98a2b3]">
-                      {feature.description}
-                    </p>
-                  </article>
-                );
-              })}
+          {/* RIGHT — zigzag feature cards */}
+          <div className="grid min-h-0 w-full min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-5 lg:gap-[clamp(16px,1.8vw,32px)]">
+            <div className="flex min-h-0 flex-col gap-5 lg:h-full lg:gap-[clamp(16px,1.8vw,32px)]">
+              <FeatureCard {...FEATURE_CARDS[0]} grow="tall" />
+              <FeatureCard {...FEATURE_CARDS[2]} grow="short" />
             </div>
-
-            {/* Right column: short → tall (same total height → bottom aligns) */}
-            <div className="flex flex-col gap-8">
-              {[FEATURE_CARDS[1], FEATURE_CARDS[3]].map((feature, i) => {
-                const Icon = feature.icon;
-                const isTall = i === 1;
-                return (
-                  <article
-                    key={feature.title}
-                    className={`flex flex-col rounded-[20px] bg-white p-8 lg:p-9 ${
-                      isTall
-                        ? "min-h-[248px] lg:h-[300px]"
-                        : "min-h-[220px] lg:h-[260px]"
-                    }`}
-                  >
-                    <span className="mb-4 inline-flex text-[#15d286]">
-                      <Icon className="h-7 w-7" strokeWidth={1.75} aria-hidden />
-                    </span>
-                    <h3 className="m-0 font-montserrat text-[clamp(22px,1.8vw,30px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-                      {feature.title}
-                    </h3>
-                    <p className="mt-3 font-montserrat text-[clamp(13px,0.95vw,15px)] font-medium leading-[1.55] text-[#98a2b3]">
-                      {feature.description}
-                    </p>
-                  </article>
-                );
-              })}
+            <div className="flex min-h-0 flex-col gap-5 lg:h-full lg:gap-[clamp(16px,1.8vw,32px)]">
+              <FeatureCard {...FEATURE_CARDS[1]} grow="short" />
+              <FeatureCard {...FEATURE_CARDS[3]} grow="tall" />
             </div>
           </div>
         </div>

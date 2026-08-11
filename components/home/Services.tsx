@@ -13,6 +13,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
 
 /* -------------------------------------------------------------------------- */
@@ -27,7 +28,7 @@ const {
   items: services,
 } = homeContent.services;
 
-const VIEW_PROJECT_LABEL = "view project";
+const VIEW_PROJECT_LABEL = "View Details";
 const VIEW_PROJECT_HREF = "/projects";
 
 type Service = (typeof services)[number];
@@ -35,14 +36,10 @@ type Service = (typeof services)[number];
 /** One viewport of scroll for intro header exit */
 const INTRO_SCROLL_VIEWS = 1;
 
-const DESKTOP_GROUP_STEP_PX = 680 + 160;
-const LG_GROUP_STEP_PX = 520 + 100;
-
-function getSlideHeightWithGap(el: HTMLElement | null) {
-  if (!el) return 0;
-  const marginBottom = Number.parseFloat(getComputedStyle(el).marginBottom) || 0;
-  return el.offsetHeight + marginBottom;
-}
+const DESKTOP_GROUP_STEP_PX = 820 + 160;
+const LG_GROUP_STEP_PX = 600 + 100;
+/** Mobile stack: scroll length per card (higher = slower) */
+const MOBILE_SCROLL_VH = 1.6;
 
 function getGroupStepPx(width: number, mobileSlotHeight: number) {
   if (width >= 1280) return DESKTOP_GROUP_STEP_PX;
@@ -68,8 +65,6 @@ function computeSectionHeight(
 const SCROLL_SMOOTH = 7.2;
 /** Extra scroll room per service = slower, more controlled scrub */
 const SCROLL_VH_PER_STEP = 1.15;
-/** Extra push on last mobile slide to trim visible bottom gap */
-const MOBILE_END_TRIM_PX = 36;
 
 /**
  * Hysteresis keeps active row stable while smoothed progress drifts near edges.
@@ -178,7 +173,7 @@ const ServicesListPanel = memo(function ServicesListPanel({
   activeIndex: number;
 }) {
   return (
-    <div className="services-story-text-panel hidden w-full min-w-0 items-start font-montserrat lg:flex lg:h-full lg:items-center">
+    <div className="services-story-text-panel hidden w-full min-w-0 items-start font-montserrat lg:flex lg:items-center">
       <ul className="services-story-list w-full">
         {services.map((service, index) => {
           const isActive = index === activeIndex;
@@ -197,18 +192,22 @@ const ServicesListPanel = memo(function ServicesListPanel({
               <div className="services-story-list-desc-wrap" aria-hidden={!isActive}>
                 <div className="services-story-list-desc-inner">
                   <p className="services-story-list-desc">{service.desc}</p>
-                  <Link
-                    href={VIEW_PROJECT_HREF}
-                    className="services-story-list-cta"
-                    tabIndex={isActive ? 0 : -1}
-                  >
-                    <span>{VIEW_PROJECT_LABEL}</span>
-                    <ArrowRight
-                      className="services-story-list-cta-icon"
-                      strokeWidth={2.25}
-                      aria-hidden
-                    />
-                  </Link>
+                  <div className="services-story-list-cta-slot">
+                    <div className="services-story-list-cta-slot-inner">
+                      <Link
+                        href={VIEW_PROJECT_HREF}
+                        className="services-story-list-cta"
+                        tabIndex={isActive ? 0 : -1}
+                      >
+                        <span>{VIEW_PROJECT_LABEL}</span>
+                        <ArrowRight
+                          className="services-story-list-cta-icon"
+                          strokeWidth={2.25}
+                          aria-hidden
+                        />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </li>
@@ -315,39 +314,20 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
 });
 
 /* -------------------------------------------------------------------------- */
-/* Mobile — image + text paired per scroll step                               */
+/* Mobile — natural scroll + slow fade in / out per card                        */
 /* -------------------------------------------------------------------------- */
 
 const ServicesMobileSlide = memo(function ServicesMobileSlide({
   service,
-  index,
-  progress,
-  total,
-  measureRef,
   eager,
 }: {
   service: Service;
-  index: number;
-  progress: MotionValue<number>;
-  total: number;
-  measureRef?: React.Ref<HTMLDivElement>;
   eager?: boolean;
 }) {
-  const focus = useTransform(progress, (p) => {
-    const pos = p * (total - 1);
-    return Math.max(0, 1 - Math.abs(pos - index));
-  });
-  const scale = useTransform(focus, [0, 1], [0.98, 1]);
-  const opacity = useTransform(focus, [0, 0.35, 1], [0.45, 0.78, 1]);
-
   const fullTitle = [service.title, service.highlight].filter(Boolean).join(" ");
 
   return (
-    <motion.article
-      ref={measureRef}
-      className="services-story-mobile-slide"
-      style={{ scale, opacity }}
-    >
+    <article className="services-story-mobile-slide">
       <div className="services-story-mobile-slide-image">
         <Image
           src={service.images[0]}
@@ -372,53 +352,31 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
           />
         </Link>
       </div>
-    </motion.article>
+    </article>
   );
 });
 
 const ServicesMobileTrack = memo(function ServicesMobileTrack({
-  columnY,
-  progress,
   viewportRef,
-  slideMeasureRef,
-  lastSlideMeasureRef,
+  stackRef,
 }: {
-  columnY: MotionValue<number>;
-  progress: MotionValue<number>;
   viewportRef: React.Ref<HTMLDivElement>;
-  slideMeasureRef: React.Ref<HTMLDivElement>;
-  lastSlideMeasureRef: React.Ref<HTMLDivElement>;
+  stackRef: React.Ref<HTMLDivElement>;
 }) {
-  const total = services.length;
-  const lastIndex = total - 1;
-
   return (
     <div
       ref={viewportRef}
-      className="services-story-mobile-viewport relative min-h-0 w-full flex-1 overflow-hidden lg:hidden"
+      className="services-story-mobile-viewport relative w-full lg:hidden"
     >
-      <motion.div
-        className="services-story-mobile-track"
-        style={{ y: columnY, willChange: "transform" }}
-      >
+      <div ref={stackRef} className="services-story-mobile-track">
         {services.map((service, index) => (
           <ServicesMobileSlide
             key={`mobile-${index}-${service.link}`}
             service={service}
-            index={index}
-            progress={progress}
-            total={total}
-            measureRef={
-              index === 0
-                ? slideMeasureRef
-                : index === lastIndex
-                  ? lastSlideMeasureRef
-                  : undefined
-            }
             eager={index === 0}
           />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 });
@@ -431,10 +389,8 @@ export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageViewportRef = useRef<HTMLDivElement>(null);
   const mobileViewportRef = useRef<HTMLDivElement>(null);
-  const mobileSlideMeasureRef = useRef<HTMLDivElement>(null);
-  const mobileLastSlideMeasureRef = useRef<HTMLDivElement>(null);
+  const mobileStackRef = useRef<HTMLDivElement>(null);
   const groupStepRef = useRef(DESKTOP_GROUP_STEP_PX);
-  const mobileEndOffsetRef = useRef(0);
   const total = services.length;
   const [slotHeight, setSlotHeight] = useState(420);
   const [introViews, setIntroViews] = useState(INTRO_SCROLL_VIEWS);
@@ -469,20 +425,7 @@ export default function Services() {
 
   const columnY = useTransform(storyProgress, (p) => {
     const step = groupStepRef.current;
-    let y = -p * (total - 1) * step;
-
-    if (typeof window !== "undefined" && window.innerWidth < 1024 && total > 1) {
-      const endOffset = mobileEndOffsetRef.current;
-      if (endOffset > 0) {
-        const lastSegmentStart = (total - 2) / (total - 1);
-        if (p >= lastSegmentStart) {
-          const t = (p - lastSegmentStart) / (1 - lastSegmentStart);
-          y += endOffset * t;
-        }
-      }
-    }
-
-    return y;
+    return -p * (total - 1) * step;
   });
 
   useLayoutEffect(() => {
@@ -497,6 +440,7 @@ export default function Services() {
     return () => mq.removeEventListener("change", syncIntro);
   }, []);
 
+  /* Desktop scroll progress (framer) + layout measure */
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const viewport = imageViewportRef.current;
@@ -509,25 +453,20 @@ export default function Services() {
       if (width >= 1024) {
         setSlotHeight(0);
         groupStepRef.current = getGroupStepPx(width, 0);
-        mobileEndOffsetRef.current = 0;
         setSectionHeight(
-          computeSectionHeight(width, total, introViewsRef.current, groupStepRef.current, viewportH),
+          computeSectionHeight(
+            width,
+            total,
+            introViewsRef.current,
+            groupStepRef.current,
+            viewportH,
+          ),
         );
       } else {
-        const slideH = getSlideHeightWithGap(mobileSlideMeasureRef.current);
-        const viewportTrackH = mobileViewportRef.current?.offsetHeight ?? 0;
-        const nextSlot = slideH || viewportTrackH;
-        const lastSlideH = mobileLastSlideMeasureRef.current?.offsetHeight ?? nextSlot;
-
-        setSlotHeight(nextSlot);
-        groupStepRef.current = slideH || getGroupStepPx(width, nextSlot);
-        mobileEndOffsetRef.current = Math.max(
-          0,
-          viewportTrackH - lastSlideH + MOBILE_END_TRIM_PX,
-        );
-        setSectionHeight(
-          computeSectionHeight(width, total, introViewsRef.current, groupStepRef.current, viewportH),
-        );
+        /* Natural document flow on mobile — no tall pin spacer / bottom gap */
+        groupStepRef.current = Math.round(viewportH * MOBILE_SCROLL_VH);
+        setSlotHeight(0);
+        setSectionHeight("auto");
       }
     };
 
@@ -567,28 +506,79 @@ export default function Services() {
       readTarget();
       smoothProgressRef.current = targetProgressRef.current;
       overall.set(smoothProgressRef.current);
+      ScrollTrigger.refresh();
     };
 
     const observer = new ResizeObserver(onResize);
     if (viewport) observer.observe(viewport);
-    const mobileViewport = mobileViewportRef.current;
-    if (mobileViewport) observer.observe(mobileViewport);
-    const mobileSlide = mobileSlideMeasureRef.current;
-    if (mobileSlide) observer.observe(mobileSlide);
-    const mobileLastSlide = mobileLastSlideMeasureRef.current;
-    if (mobileLastSlide) observer.observe(mobileLastSlide);
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     rafRef.current = requestAnimationFrame(tick);
 
     return () => {
-      observer?.disconnect();
+      observer.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
-  }, [overall, introViews]);
+  }, [overall, introViews, total]);
+
+  /* Mobile: natural scroll + slow fade in / fade out per card */
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const stack = mobileStackRef.current;
+    if (!section || !stack) return;
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(max-width: 1023px)", () => {
+        const slides = gsap.utils.toArray<HTMLElement>(
+          stack.querySelectorAll(".services-story-mobile-slide"),
+        );
+        if (!slides.length) return;
+
+        gsap.set(slides, { autoAlpha: 0.1, y: 64 });
+
+        const triggers: ScrollTrigger[] = [];
+
+        slides.forEach((slide) => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: slide,
+              start: "top 98%",
+              end: "bottom 8%",
+              scrub: 2.6,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          tl.fromTo(
+            slide,
+            { autoAlpha: 0.08, y: 72 },
+            { autoAlpha: 1, y: 0, duration: 1.15, ease: "none" },
+          ).to(slide, {
+            autoAlpha: 0.08,
+            y: -56,
+            duration: 1.15,
+            ease: "none",
+          });
+
+          if (tl.scrollTrigger) triggers.push(tl.scrollTrigger);
+        });
+
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+
+        return () => {
+          triggers.forEach((t) => t.kill());
+          gsap.set(slides, { clearProps: "transform,opacity,visibility" });
+        };
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, [total]);
 
   return (
     <section
@@ -596,17 +586,14 @@ export default function Services() {
       className="services-story relative"
       style={{ height: sectionHeight }}
     >
-      <div className="services-story-pin sticky top-0 h-[100dvh] overflow-hidden">
-        <div className="services-story-shell">
+      <div className="services-story-pin sticky top-0 h-[100dvh] overflow-hidden max-lg:relative max-lg:h-auto max-lg:overflow-visible">
+        <div className="services-story-shell max-lg:h-auto">
           <ServicesIntroHeader introProgress={introProgress} />
 
-          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-0 lg:min-h-0 lg:gap-0">
+          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-0 max-lg:flex-none lg:min-h-0 lg:gap-0">
             <ServicesMobileTrack
-              columnY={columnY}
-              progress={storyProgress}
               viewportRef={mobileViewportRef}
-              slideMeasureRef={mobileSlideMeasureRef}
-              lastSlideMeasureRef={mobileLastSlideMeasureRef}
+              stackRef={mobileStackRef}
             />
 
             <ServicesListPanel activeIndex={activeIndex} />

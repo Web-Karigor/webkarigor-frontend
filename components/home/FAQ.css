@@ -1,0 +1,43 @@
+/* FAQ bottom CTA — desktop/tablet: fill from left on hover; mobile unchanged */
+.faq-cta {
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.faq-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #88ef92 0%, #bef264 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: none;
+}
+
+@media (min-width: 768px) {
+  .faq-cta {
+    transition:
+      color 1.15s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 1.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-cta::before {
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-cta:hover {
+    color: #111111;
+    border-color: transparent;
+  }
+
+  .faq-cta:hover::before {
+    transform: scaleX(1);
+  }
+}

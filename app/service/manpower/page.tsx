@@ -8,7 +8,7 @@ import ManpowerReviews from "@/components/services/manpower/ManpowerReviews";
 import ManpowerTeam from "@/components/services/manpower/ManpowerTeam";
 import ManpowerTrusted from "@/components/services/manpower/ManpowerTrusted";
 import ManpowerWhyChoose from "@/components/services/manpower/ManpowerWhyChoose";
-import ServiceContact from "@/components/services/ServiceContact";
+import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { MANPOWER_METADATA } from "@/lib/manpower-data";
@@ -28,7 +28,7 @@ export default function ManpowerServicePage() {
       <ManpowerPricing />
       <FAQ className="bg-white" />
       <ServiceMarquee />
-      <ServiceContact />
+      <HomeConsultation hideSchedule backgroundColor="#FFFEFB" />
       <ServiceFooter />
     </div>
   );

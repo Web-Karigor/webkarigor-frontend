@@ -665,3 +665,52 @@
     max-width: min(calc(100% - 84px), 360px);
   }
 }
+
+/* Service page pricing — same home cards, market wrappers keep local bg */
+.service-pricing-markets {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 2.5vw, 30px);
+}
+
+@media (min-width: 1100px) {
+  .service-pricing-markets {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.service-pricing-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: clamp(16px, 2vw, 24px);
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .service-pricing-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+.service-pricing-cards .home-pricing-plan {
+  min-width: 0;
+  width: 100%;
+}
+
+.service-pricing-cards .home-pricing-card {
+  min-height: 0;
+  height: 100%;
+  padding: clamp(22px, 2vw, 31px) clamp(16px, 1.6vw, 24px);
+}
+
+@media (min-width: 640px) and (max-width: 1099px) {
+  .service-pricing-cards .home-pricing-title {
+    font-size: clamp(22px, 3.2vw, 30px);
+  }
+
+  .service-pricing-cards .home-pricing-price {
+    font-size: clamp(28px, 4vw, 38px);
+  }
+}

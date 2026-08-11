@@ -579,10 +579,11 @@
   color: #fff;
 }
 
-/* Figma Frame 135 — Let's Do It
-   W 321 · H Hug (68) · r20 · gap 10 · pad 20/32 · #38F8AB → #FEED35 */
+/* Let's Do It — outline + white text; hover fills from left (FAQ-style) */
 .home-consultation-submit {
   box-sizing: border-box;
+  position: relative;
+  z-index: 0;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -594,20 +595,46 @@
   min-height: 68px;
   margin: 6px auto 0;
   padding: 20px 32px;
-  border: none;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1.5px solid #ffffff;
   border-radius: 20px;
-  background: linear-gradient(90deg, #38f8ab 0%, #feed35 100%);
-  color: #111;
+  background: transparent;
+  color: #ffffff;
   font-family: var(--font-montserrat);
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    color 1.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 1.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-consultation-submit > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-consultation-submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #38f8ab 0%, #feed35 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
 .home-consultation-submit:hover {
-  opacity: 0.94;
-  transform: translateY(-1px);
+  color: #111111;
+  border-color: transparent;
+}
+
+.home-consultation-submit:hover::before {
+  transform: scaleX(1);
 }
 
 @media (max-width: 768px) {

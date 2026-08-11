@@ -24,7 +24,7 @@ export const COUNTRY_OPTIONS: CountryOption[] = getCountryDataList()
   .sort((a, b) => a.name.localeCompare(b.name));
 
 export const DEFAULT_COUNTRY =
-  COUNTRY_OPTIONS.find((c) => c.iso2 === "US") ?? COUNTRY_OPTIONS[0];
+  COUNTRY_OPTIONS.find((c) => c.iso2 === "BD") ?? COUNTRY_OPTIONS[0];
 
 export const DEFAULT_DIAL_COUNTRY =
   COUNTRY_OPTIONS.find((c) => c.iso2 === "BD") ?? DEFAULT_COUNTRY;

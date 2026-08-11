@@ -102,7 +102,15 @@ function useClickOutside(
   }, [open, onClose, ref]);
 }
 
-export default function HomeConsultation() {
+export default function HomeConsultation({
+  backgroundColor,
+  hideSchedule = false,
+}: {
+  /** Override outer section background (service pages keep #FFFEFB) */
+  backgroundColor?: string;
+  /** Hide calendar + time picker (service subpages) */
+  hideSchedule?: boolean;
+} = {}) {
   const [dialCountry, setDialCountry] = useState<CountryOption>(DEFAULT_DIAL_COUNTRY);
   const [region, setRegion] = useState<CountryOption>(DEFAULT_COUNTRY);
   const [dialOpen, setDialOpen] = useState(false);
@@ -118,8 +126,11 @@ export default function HomeConsultation() {
   useClickOutside(regionRef, regionOpen, () => setRegionOpen(false));
 
   const calendarCells = useMemo(
-    () => getCalendarCells(calendarDate.getFullYear(), calendarDate.getMonth()),
-    [calendarDate],
+    () =>
+      hideSchedule
+        ? []
+        : getCalendarCells(calendarDate.getFullYear(), calendarDate.getMonth()),
+    [calendarDate, hideSchedule],
   );
 
   const monthLabel = calendarDate.toLocaleString("en-US", {
@@ -144,7 +155,11 @@ export default function HomeConsultation() {
   const phoneLabelHint = fields.phone.label.match(/\(([^)]+)\)/)?.[1];
 
   return (
-    <section className="home-consultation-section">
+    <section
+      id="contact"
+      className="home-consultation-section scroll-mt-28"
+      style={backgroundColor ? { background: backgroundColor } : undefined}
+    >
       <div className="home-consultation-shell">
         <div className="home-consultation-card">
           <div className="home-consultation-layout">
@@ -359,84 +374,90 @@ export default function HomeConsultation() {
                 />
               </label>
 
-              <div className="home-consultation-schedule">
-                <div className="home-consultation-schedule-panel">
-                  <p className="home-consultation-schedule-title">{schedule.dateTitle}</p>
+              {!hideSchedule ? (
+                <div className="home-consultation-schedule">
+                  <div className="home-consultation-schedule-panel">
+                    <p className="home-consultation-schedule-title">
+                      {schedule.dateTitle}
+                    </p>
 
-                  <div className="home-consultation-calendar">
-                    <div className="home-consultation-calendar-head">
-                      <button
-                        type="button"
-                        className="home-consultation-calendar-nav"
-                        onClick={() => shiftMonth(-1)}
-                        aria-label={schedule.prevMonthAria}
-                      >
-                        <ChevronLeft className="h-4 w-4" />
-                      </button>
-                      <span>{monthLabel}</span>
-                      <button
-                        type="button"
-                        className="home-consultation-calendar-nav"
-                        onClick={() => shiftMonth(1)}
-                        aria-label={schedule.nextMonthAria}
-                      >
-                        <ChevronRight className="h-4 w-4" />
-                      </button>
+                    <div className="home-consultation-calendar">
+                      <div className="home-consultation-calendar-head">
+                        <button
+                          type="button"
+                          className="home-consultation-calendar-nav"
+                          onClick={() => shiftMonth(-1)}
+                          aria-label={schedule.prevMonthAria}
+                        >
+                          <ChevronLeft className="h-4 w-4" />
+                        </button>
+                        <span>{monthLabel}</span>
+                        <button
+                          type="button"
+                          className="home-consultation-calendar-nav"
+                          onClick={() => shiftMonth(1)}
+                          aria-label={schedule.nextMonthAria}
+                        >
+                          <ChevronRight className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      <div className="home-consultation-calendar-weekdays">
+                        {WEEKDAYS.map((day, index) => (
+                          <span key={`${day}-${index}`}>{day}</span>
+                        ))}
+                      </div>
+
+                      <div className="home-consultation-calendar-grid">
+                        {calendarCells.map((day, index) =>
+                          day ? (
+                            <button
+                              key={`${day}-${index}`}
+                              type="button"
+                              className={`home-consultation-calendar-day${
+                                selectedDay === day ? " is-selected" : ""
+                              }`}
+                              onClick={() => setSelectedDay(day)}
+                            >
+                              {day}
+                            </button>
+                          ) : (
+                            <span
+                              key={`empty-${index}`}
+                              className="home-consultation-calendar-day is-empty"
+                            />
+                          ),
+                        )}
+                      </div>
                     </div>
+                  </div>
 
-                    <div className="home-consultation-calendar-weekdays">
-                      {WEEKDAYS.map((day, index) => (
-                        <span key={`${day}-${index}`}>{day}</span>
+                  <div className="home-consultation-schedule-panel">
+                    <p className="home-consultation-schedule-title">
+                      {schedule.timeTitle} <span>{schedule.timeOptional}</span>
+                    </p>
+
+                    <div className="home-consultation-times">
+                      {TIME_SLOTS.map((slot) => (
+                        <button
+                          key={slot}
+                          type="button"
+                          className={`home-consultation-time${
+                            selectedTime === slot ? " is-selected" : ""
+                          }`}
+                          onClick={() =>
+                            setSelectedTime((current) =>
+                              current === slot ? null : slot,
+                            )
+                          }
+                        >
+                          {slot}
+                        </button>
                       ))}
                     </div>
-
-                    <div className="home-consultation-calendar-grid">
-                      {calendarCells.map((day, index) =>
-                        day ? (
-                          <button
-                            key={`${day}-${index}`}
-                            type="button"
-                            className={`home-consultation-calendar-day${
-                              selectedDay === day ? " is-selected" : ""
-                            }`}
-                            onClick={() => setSelectedDay(day)}
-                          >
-                            {day}
-                          </button>
-                        ) : (
-                          <span
-                            key={`empty-${index}`}
-                            className="home-consultation-calendar-day is-empty"
-                          />
-                        ),
-                      )}
-                    </div>
                   </div>
                 </div>
-
-                <div className="home-consultation-schedule-panel">
-                  <p className="home-consultation-schedule-title">
-                    {schedule.timeTitle} <span>{schedule.timeOptional}</span>
-                  </p>
-
-                  <div className="home-consultation-times">
-                    {TIME_SLOTS.map((slot) => (
-                      <button
-                        key={slot}
-                        type="button"
-                        className={`home-consultation-time${
-                          selectedTime === slot ? " is-selected" : ""
-                        }`}
-                        onClick={() =>
-                          setSelectedTime((current) => (current === slot ? null : slot))
-                        }
-                      >
-                        {slot}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              ) : null}
 
               <button type="submit" className="home-consultation-submit">
                 <span>{submitLabel}</span>

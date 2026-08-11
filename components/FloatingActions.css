@@ -1,0 +1,211 @@
+/* Global floating actions — back to top (left) + messenger stack (right) */
+
+.floating-actions {
+  --float-bottom: max(4.5rem, env(safe-area-inset-bottom, 0px) + 4rem);
+  --float-side: max(1rem, env(safe-area-inset-left, 0px) + 0.85rem);
+  --float-z: 60;
+  pointer-events: none;
+}
+
+@media (max-width: 1023px) {
+  /* Clear mobile sticky nav + sit a bit higher */
+  .floating-actions {
+    --float-bottom: calc(88px + env(safe-area-inset-bottom, 0px) + 36px);
+  }
+}
+
+.floating-actions-glyph {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* —— Back to top (left) —— */
+.floating-back-top {
+  position: fixed;
+  left: var(--float-side);
+  /* Same bottom alignment as messenger FAB */
+  bottom: var(--float-bottom);
+  z-index: var(--float-z);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px 10px 16px;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.18);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.25s ease;
+}
+
+.floating-back-top.is-visible {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.floating-back-top:hover {
+  background: #222;
+}
+
+.floating-back-top:focus-visible {
+  outline: 2px solid #0ec47b;
+  outline-offset: 3px;
+}
+
+.floating-back-top-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* —— Messenger stack (right) —— */
+.floating-messenger {
+  position: fixed;
+  right: var(--float-side);
+  bottom: var(--float-bottom);
+  z-index: var(--float-z);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.floating-messenger-main {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: #0084ff;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 12px 32px rgba(0, 132, 255, 0.35);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    background-color 0.3s ease;
+}
+
+.floating-messenger-main:hover {
+  transform: scale(1.05);
+  box-shadow: 0 14px 36px rgba(0, 132, 255, 0.42);
+}
+
+.floating-messenger-main:focus-visible {
+  outline: 2px solid #0ec47b;
+  outline-offset: 3px;
+}
+
+/* Anchored above the main FAB — opens upward only */
+.floating-messenger-stack {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  z-index: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 10px;
+  transform: translateX(-50%);
+}
+
+.floating-messenger-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* Rise upward into place */
+  transform: translateY(18px) scale(0.72);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.7s,
+    box-shadow 0.35s ease;
+  transition-delay: 0s;
+  box-shadow: 0 8px 22px rgba(17, 24, 39, 0.16);
+}
+
+.floating-messenger-item.is-whatsapp {
+  background: #25d366;
+}
+
+.floating-messenger-item.is-phone {
+  background: #0ec47b;
+}
+
+.floating-messenger-item.is-email {
+  background: #111;
+}
+
+/* Hover / focus-within: reveal stack upward, staggered + slow */
+.floating-messenger:hover .floating-messenger-item,
+.floating-messenger:focus-within .floating-messenger-item {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition-delay: calc(var(--stack-i, 1) * 90ms);
+}
+
+.floating-messenger:hover .floating-messenger-item:hover,
+.floating-messenger:focus-within .floating-messenger-item:hover {
+  transform: translateY(-2px) scale(1.06);
+}
+
+@media (max-width: 640px) {
+  .floating-back-top-label {
+    /* Keep label — user asked for text + icon */
+    font-size: 12px;
+  }
+
+  .floating-back-top {
+    padding: 9px 12px 9px 14px;
+  }
+
+  .floating-messenger-main {
+    width: 52px;
+    height: 52px;
+  }
+
+  .floating-messenger-item {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-back-top,
+  .floating-messenger-main,
+  .floating-messenger-item {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}

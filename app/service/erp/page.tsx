@@ -7,7 +7,7 @@ import ErpPortfolio from "@/components/services/erp/ErpPortfolio";
 import ErpPricing from "@/components/services/erp/ErpPricing";
 import ErpReviews from "@/components/services/erp/ErpReviews";
 import ErpTeam from "@/components/services/erp/ErpTeam";
-import ServiceContact from "@/components/services/ServiceContact";
+import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { ERP_METADATA } from "@/lib/erp-data";
@@ -26,7 +26,7 @@ export default function ErpServicePage() {
       <ErpPricing />
       <FAQ className="bg-white" />
       <ServiceMarquee />
-      <ServiceContact />
+      <HomeConsultation hideSchedule backgroundColor="#FFFEFB" />
       <ServiceFooter />
     </div>
   );

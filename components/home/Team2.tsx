@@ -44,7 +44,9 @@ export default function Team2() {
       // Full viewport width for a wider section ring
       const w = window.innerWidth;
       const h = stage.clientHeight || window.innerHeight;
-      radiusRef.current = Math.min(w * 0.5, h * 0.68, 820);
+      // Mobile: larger radius so cards don't stack on top of each other
+      const radiusFactor = w < 768 ? 0.64 : 0.5;
+      radiusRef.current = Math.min(w * radiusFactor, h * 0.68, 820);
     };
 
     measure();

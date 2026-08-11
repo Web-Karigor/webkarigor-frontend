@@ -47,7 +47,7 @@ export default function PricingCustomBanner() {
         <div className="flex w-full justify-center md:w-auto md:justify-end">
           <Link
             href={cta.href}
-            className="inline-flex w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3 font-montserrat text-lg font-semibold text-black shadow-lg transition hover:bg-[#f3f3f3] sm:w-auto sm:px-7 sm:text-xl md:text-[24px]"
+            className="inline-flex w-full items-center justify-center rounded-xl bg-black px-6 py-3 font-montserrat text-base font-medium capitalize text-white transition hover:bg-[#1a1a1a] sm:w-auto sm:px-7 sm:text-lg md:text-[18px]"
             style={{ minWidth: "min(100%, 170px)" }}
           >
             {cta.label}

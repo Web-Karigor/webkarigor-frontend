@@ -51,5 +51,6 @@ export const STICKY_NAV_MORE_LINKS = [
   { href: "/", title: "Home", desc: "Back to Webkarigor home" },
   { href: "/about-us", title: "About us", desc: "Who we are and how we work" },
   { href: "/projects", title: "All Projects", desc: "Browse the full portfolio" },
+  { href: "/team", title: "Team", desc: "Meet the people behind the work" },
   { href: "/contact-us", title: "Contact us", desc: "Say hello — we reply fast" },
 ] as const;

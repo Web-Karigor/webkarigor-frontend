@@ -78,25 +78,27 @@ const WEB_BLOB: Blob = {
     "left-1/2 top-1/2 z-[-1] size-[clamp(88px,10vw,130px)] -translate-x-[38%] -translate-y-[52%]",
 };
 
-/** Inside card so glass blur doesn't wash them out */
-const CARD_GLOWS = [
+/** Mid glows — section bg (behind cards), same layer as corner ellipses */
+const MID_BLOBS: Blob[] = [
   {
-    id: "card-2",
+    id: "e5-mid",
     src: "/technologies/ellipse-5.png",
     width: 320,
     height: 320,
-    wrapClassName:
-      "pointer-events-none absolute -left-28 bottom-10 z-0 hidden size-[clamp(160px,42%,220px)] sm:block",
+    className:
+      "bottom-[28%] left-[21%] z-0 hidden size-[clamp(160px,14vw,220px)] opacity-65 brightness-105 sm:block",
+    imageClassName: "brightness-105 opacity-100",
   },
   {
-    id: "card-3",
+    id: "e7-mid",
     src: "/technologies/ellipse-7.png",
     width: 168,
     height: 168,
-    wrapClassName:
-      "pointer-events-none absolute -right-16 top-10 z-0 hidden size-[clamp(140px,38%,200px)] sm:block",
+    className:
+      "top-[28%] left-[68%] z-0 hidden size-[clamp(140px,12vw,200px)] opacity-65 brightness-105 sm:block",
+    imageClassName: "brightness-105 opacity-100",
   },
-] as const;
+];
 
 function BlobLayer({ blob }: { blob: Blob }) {
   return (
@@ -123,41 +125,14 @@ function BlobLayer({ blob }: { blob: Blob }) {
   );
 }
 
-function TechColumn({
-  items,
-  glow,
-}: {
-  items: TechItem[];
-  glow?: (typeof CARD_GLOWS)[number];
-}) {
+function TechColumn({ items }: { items: TechItem[] }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <article
-      className="relative box-border flex w-full max-w-[440px] flex-col gap-3 overflow-visible rounded-[32px] border-none bg-white/40 p-[22px] backdrop-blur-[40px] sm:max-w-none lg:h-[460px] lg:max-w-[440px] lg:justify-start lg:px-[22px] lg:py-[43.5px] max-md:rounded-3xl max-md:p-4"
+      className="relative z-[1] box-border flex w-full max-w-[440px] flex-col gap-3 overflow-visible rounded-[32px] border-none bg-white/40 p-[22px] backdrop-blur-[40px] sm:max-w-none lg:h-[460px] lg:max-w-[440px] lg:justify-start lg:px-[22px] lg:py-[43.5px] max-md:rounded-3xl max-md:p-4"
       onMouseLeave={() => setHoveredIndex(null)}
     >
-      {glow ? (
-        <span className={glow.wrapClassName} aria-hidden>
-          <span
-            className="absolute inset-[-10%] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(187,255,104,0.18) 0%, rgba(56,248,171,0.09) 45%, transparent 70%)",
-              filter: "blur(10px)",
-            }}
-          />
-          <Image
-            src={glow.src}
-            alt=""
-            width={glow.width}
-            height={glow.height}
-            className="relative block size-full max-w-none object-contain brightness-105 opacity-65"
-            unoptimized
-          />
-        </span>
-      ) : null}
-
       {items.map((tech, index) => {
         const distance =
           hoveredIndex === null ? -1 : Math.abs(index - hoveredIndex);
@@ -212,6 +187,9 @@ export default function Technologies() {
       {FIXED_BLOBS.map((blob) => (
         <BlobLayer key={blob.id} blob={blob} />
       ))}
+      {MID_BLOBS.map((blob) => (
+        <BlobLayer key={blob.id} blob={blob} />
+      ))}
 
       <div className="relative z-[1] mx-auto flex w-full max-w-[1851px] flex-col lg:h-full lg:max-h-[732px] lg:justify-between">
         <h2 className="relative order-1 m-0 font-montserrat text-[clamp(2rem,5.5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black">
@@ -232,18 +210,8 @@ export default function Technologies() {
         </p>
 
         <div className="order-3 mt-9 grid grid-cols-1 justify-items-center gap-7 sm:mt-10 sm:grid-cols-2 sm:justify-items-stretch sm:gap-8 lg:order-2 lg:mt-8 lg:mb-6 lg:grid-cols-4 lg:gap-[clamp(20px,1.5vw,31px)]">
-          {technologyGroups.map((group, index) => (
-            <TechColumn
-              key={group.title}
-              items={group.items}
-              glow={
-                index === 1
-                  ? CARD_GLOWS[0]
-                  : index === 2
-                    ? CARD_GLOWS[1]
-                    : undefined
-              }
-            />
+          {technologyGroups.map((group) => (
+            <TechColumn key={group.title} items={group.items} />
           ))}
         </div>
       </div>

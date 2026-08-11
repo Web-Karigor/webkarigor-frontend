@@ -8,7 +8,7 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import Image from "next/image";
-import { Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import servicesContent from "@/data/services-content.json";
 import { TESTIMONIALS } from "@/lib/services-data";
 
@@ -198,8 +198,8 @@ export default function ServiceTestimonials() {
           </p>
         </div>
 
-        <div className="flex flex-col items-stretch gap-4 lg:flex-row lg:gap-[10px]">
-          <article className="flex w-full shrink-0 flex-col items-center justify-center rounded-[24px] bg-[#0a7d5f] px-8 py-10 text-center text-white lg:w-[min(360px,32%)] lg:min-h-[360px]">
+        <div className="flex flex-col items-stretch gap-4 lg:flex-row lg:items-stretch lg:gap-[10px]">
+          <article className="flex w-full shrink-0 flex-col items-center justify-center rounded-[24px] bg-[#0a7d5f] px-8 py-10 text-center text-white lg:w-[min(360px,32%)] lg:min-h-[380px]">
             <span className="font-montserrat text-[clamp(48px,5vw,72px)] font-bold leading-none">
               {summary.rating}
             </span>
@@ -236,77 +236,102 @@ export default function ServiceTestimonials() {
           </article>
 
           <div
-            className="min-w-0 flex-1"
+            className="flex min-w-0 flex-1 flex-col lg:min-h-[380px]"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => {
               if (!isDragging) setPaused(false);
             }}
           >
-            <div
-              ref={viewportRef}
-              className={`overflow-hidden touch-pan-y ${
-                isDragging ? "cursor-grabbing select-none" : "cursor-grab"
-              }`}
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={onPointerUp}
-              onPointerCancel={onPointerCancel}
-            >
-              <div
-                className={`flex gap-4 ease-out ${
-                  isDragging ? "transition-none" : "transition-transform duration-500"
-                }`}
-                style={{ transform: trackTransform }}
+            <div className="mb-4 flex items-center justify-end gap-2">
+              <button
+                type="button"
+                aria-label="Previous testimonials"
+                disabled={active <= 0}
+                onClick={() => goTo(active - 1)}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d1d5db] bg-white text-[#111827] transition-colors hover:border-[#9ca3af] hover:bg-[#f9fafb] disabled:cursor-not-allowed disabled:opacity-35"
               >
-                {TESTIMONIALS.map((item) => (
-                  <article
-                    key={`${item.name}-${item.role}`}
-                    className="w-full min-w-0 shrink-0 basis-full sm:basis-[calc((100%-1rem)/2)]"
-                  >
-                    <div className="flex h-full min-h-[280px] flex-col rounded-[20px] bg-white p-7 lg:min-h-[320px] lg:p-8">
-                      <div className="flex items-center gap-2">
-                        <Stars count={item.rating} size={16} />
-                        <span className="font-montserrat text-[14px] font-semibold text-[#111827]">
-                          {item.rating.toFixed(1)}
-                        </span>
-                      </div>
-
-                      <p className="mt-5 flex-1 font-montserrat text-[15px] font-medium leading-[1.65] text-[#98a2b3] lg:text-[16px]">
-                        {item.quote}
-                      </p>
-
-                      <div className="mt-6">
-                        <p className="m-0 font-montserrat text-[16px] font-bold text-[#111827]">
-                          {item.name}
-                        </p>
-                        <p className="mt-1 font-montserrat text-[13px] font-medium text-[#98a2b3]">
-                          {item.role}
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
+                <ChevronLeft className="h-5 w-5" strokeWidth={2.25} aria-hidden />
+              </button>
+              <button
+                type="button"
+                aria-label="Next testimonials"
+                disabled={active >= maxIndex}
+                onClick={() => goTo(active + 1)}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d1d5db] bg-white text-[#111827] transition-colors hover:border-[#9ca3af] hover:bg-[#f9fafb] disabled:cursor-not-allowed disabled:opacity-35"
+              >
+                <ChevronRight className="h-5 w-5" strokeWidth={2.25} aria-hidden />
+              </button>
             </div>
 
-            <div className="mt-5 flex items-center justify-center gap-1.5">
-              {Array.from({ length: maxIndex + 1 }).map((_, index) => {
-                const isActive = index === active;
-                return (
-                  <button
-                    key={`dot-${index}`}
-                    type="button"
-                    aria-label={`Go to slide ${index + 1}`}
-                    aria-current={isActive ? "true" : undefined}
-                    onClick={() => goTo(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      isActive
-                        ? "w-9 bg-[#4b5563]"
-                        : "w-4 bg-[#d1d5db] hover:bg-[#9ca3af]"
-                    }`}
-                  />
-                );
-              })}
+            <div className="mt-auto flex flex-col">
+              <div
+                ref={viewportRef}
+                className={`overflow-hidden touch-pan-y ${
+                  isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+                }`}
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                onPointerCancel={onPointerCancel}
+              >
+                <div
+                  className={`flex gap-4 ease-out ${
+                    isDragging
+                      ? "transition-none"
+                      : "transition-transform duration-500"
+                  }`}
+                  style={{ transform: trackTransform }}
+                >
+                  {TESTIMONIALS.map((item) => (
+                    <article
+                      key={`${item.name}-${item.role}`}
+                      className="w-full min-w-0 shrink-0 basis-full sm:basis-[calc((100%-1rem)/2)]"
+                    >
+                      <div className="flex h-full min-h-[280px] flex-col rounded-[20px] bg-white p-7 lg:min-h-[300px] lg:p-8">
+                        <div className="flex items-center gap-2">
+                          <Stars count={item.rating} size={16} />
+                          <span className="font-montserrat text-[14px] font-semibold text-[#111827]">
+                            {item.rating.toFixed(1)}
+                          </span>
+                        </div>
+
+                        <p className="mt-5 flex-1 font-montserrat text-[15px] font-medium leading-[1.65] text-[#98a2b3] lg:text-[16px]">
+                          {item.quote}
+                        </p>
+
+                        <div className="mt-6">
+                          <p className="m-0 font-montserrat text-[16px] font-bold text-[#111827]">
+                            {item.name}
+                          </p>
+                          <p className="mt-1 font-montserrat text-[13px] font-medium text-[#98a2b3]">
+                            {item.role}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center justify-center gap-1.5">
+                {Array.from({ length: maxIndex + 1 }).map((_, index) => {
+                  const isActive = index === active;
+                  return (
+                    <button
+                      key={`dot-${index}`}
+                      type="button"
+                      aria-label={`Go to slide ${index + 1}`}
+                      aria-current={isActive ? "true" : undefined}
+                      onClick={() => goTo(index)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        isActive
+                          ? "w-9 bg-[#4b5563]"
+                          : "w-4 bg-[#d1d5db] hover:bg-[#9ca3af]"
+                      }`}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

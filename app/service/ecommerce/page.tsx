@@ -8,7 +8,7 @@ import EcoReviews from "@/components/services/ecommerce/EcoReviews";
 import EcoTeam from "@/components/services/ecommerce/EcoTeam";
 import EcoTechStack from "@/components/services/ecommerce/EcoTechStack";
 import ServiceFooter from "@/components/services/ServiceFooter";
-import ServiceContact from "@/components/services/ServiceContact";
+import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { ECO_METADATA } from "@/lib/ecommerce-data";
 
@@ -26,7 +26,7 @@ export default function EcommerceServicePage() {
       <EcoPricing />
       <FAQ className="bg-white" />
       <ServiceMarquee />
-      <ServiceContact />
+      <HomeConsultation hideSchedule backgroundColor="#FFFEFB" />
       <ServiceFooter />
     </div>
   );
