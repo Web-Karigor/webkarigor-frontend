@@ -229,6 +229,41 @@
   color: rgba(20, 20, 20, 0.5);
 }
 
+.services-story-list-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #0ec47b;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.services-story-list-cta:hover {
+  color: #0a9e63;
+}
+
+.services-story-list-cta:focus-visible {
+  outline: 2px solid #0ec47b;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.services-story-list-cta-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.services-story-list-cta:hover .services-story-list-cta-icon {
+  transform: translateX(3px);
+}
+
 .services-story-images-viewport {
   min-height: 0;
 }

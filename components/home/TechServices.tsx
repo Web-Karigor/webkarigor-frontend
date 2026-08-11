@@ -38,15 +38,33 @@ const CYCLE_SIZES = portfolioImages.map(
 const CYCLE_SIZE = portfolioImages.length;
 const REPEAT_CYCLES = 4;
 const ANCHOR_INDEX = CYCLE_SIZE * (REPEAT_CYCLES / 2);
-const SLIDE_DURATION = 40;
-const MARQUEE_DURATION = 32;
+/** Shared linear speed so text marquee + image strip stay in sync. */
+const SCROLL_SPEED_PX_PER_SEC = 72;
+/** Slower on mobile so the strip is easier to follow. */
+const SCROLL_SPEED_MOBILE_PX_PER_SEC = 40;
 const MARQUEE_COPIES = 2;
 const BASE_GAP = 28;
 const MAX_CARD_HEIGHT = LARGE_SIZE.height;
+const MOBILE_BREAKPOINT = 768;
+const MOBILE_VISIBLE_CARDS = 3;
+
+function getScrollSpeedPxPerSec() {
+  if (typeof window === "undefined") return SCROLL_SPEED_PX_PER_SEC;
+  return window.innerWidth < MOBILE_BREAKPOINT
+    ? SCROLL_SPEED_MOBILE_PX_PER_SEC
+    : SCROLL_SPEED_PX_PER_SEC;
+}
 /** Design width of one full 5-card motif — used to pick a sensible scale. */
 const PATTERN_WIDTH =
   SIZE_PATTERN.reduce((sum, s) => sum + s.width, 0) +
   (SIZE_PATTERN.length - 1) * BASE_GAP;
+/** Width of first 3 cards in the motif — mobile shows ~3 at a time. */
+const MOBILE_THREE_CARD_WIDTH =
+  SIZE_PATTERN.slice(0, MOBILE_VISIBLE_CARDS).reduce(
+    (sum, s) => sum + s.width,
+    0,
+  ) +
+  (MOBILE_VISIBLE_CARDS - 1) * BASE_GAP;
 
 const cards = Array.from({ length: CYCLE_SIZE * REPEAT_CYCLES }, (_, i) => {
   const cycleIndex = i % CYCLE_SIZE;
@@ -78,16 +96,23 @@ function useTrackScale(viewportRef: React.RefObject<HTMLDivElement | null>) {
     const update = () => {
       const available = viewport.clientWidth;
       if (available <= 0) return;
-      // Fit roughly one design motif; never upscale past 1.
-      setScale(Math.min(1, available / PATTERN_WIDTH));
+
+      const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+      const motifWidth = isMobile ? MOBILE_THREE_CARD_WIDTH : PATTERN_WIDTH;
+      // Fit motif to viewport; never upscale past 1.
+      setScale(Math.min(1, available / motifWidth));
     };
 
     update();
 
     const observer = new ResizeObserver(update);
     observer.observe(viewport);
+    window.addEventListener("resize", update);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+    };
   }, [viewportRef]);
 
   return scale;
@@ -106,11 +131,14 @@ function CategoryMarquee() {
     const buildMarquee = () => {
       tweenRef.current?.kill();
       const setWidth = set.offsetWidth;
+      if (setWidth <= 0) return;
+
+      const duration = Math.max(setWidth / getScrollSpeedPxPerSec(), 1);
       gsap.set(track, { x: -setWidth });
 
       tweenRef.current = gsap.to(track, {
         x: 0,
-        duration: MARQUEE_DURATION,
+        duration,
         ease: "none",
         repeat: -1,
       });
@@ -181,14 +209,18 @@ function PortfolioCard({
         height: size.height * scale,
       }}
     >
-      <Image
-        src={src}
-        alt=""
-        fill
-        sizes="(max-width: 640px) 202px, 515px"
-        className="object-cover"
-        draggable={false}
-      />
+      <div className="tech-services-card-mid">
+        <div className="tech-services-card-frame">
+          <Image
+            src={src}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 202px, 515px"
+            className="object-cover"
+            draggable={false}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -230,10 +262,14 @@ function PortfolioSlider() {
       render();
 
       const state = { offset: scrollOffset };
+      const durationPerCycle = Math.max(
+        cycleWidth / getScrollSpeedPxPerSec(),
+        1,
+      );
 
       tweenRef.current = gsap.to(state, {
         offset: scrollOffset + cycleWidth * 1_000_000,
-        duration: SLIDE_DURATION * 1_000_000,
+        duration: durationPerCycle * 1_000_000,
         ease: "none",
         modifiers: {
           offset: (value) => String(wrapOffset(parseFloat(value))),

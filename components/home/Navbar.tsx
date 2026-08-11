@@ -33,6 +33,20 @@ type PillBox = {
   width: number;
 };
 
+type DropdownAlign = "left" | "right";
+
+const MENU_DROPDOWN_ALIGN: Record<NavMenu, DropdownAlign> = {
+  projects: "left",
+  services: "left",
+  more: "right",
+};
+
+const MENU_TO_ITEM_ID: Record<NavMenu, string> = {
+  projects: "case",
+  services: "service",
+  more: "more",
+};
+
 const MENU_TO_ACTIVE: Record<NavMenu, string> = {
   projects: "case",
   services: "service",
@@ -67,47 +81,15 @@ export default function Navbar() {
   const [activeId, setActiveId] = useState(() => getActiveIdFromPath(pathname));
   const [pill, setPill] = useState<PillBox | null>(null);
   const [openMenu, setOpenMenu] = useState<NavMenu | null>(null);
+  const [dropdownOffset, setDropdownOffset] = useState<number | null>(null);
 
   const navRef = useRef<HTMLDivElement>(null);
+  const navShellRef = useRef<HTMLElement | null>(null);
   const itemRefs = useRef<Record<string, HTMLElement | null>>({});
   const pillLockRef = useRef(false);
   const pillLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hoverCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const closeMenu = useCallback(() => setOpenMenu(null), []);
-
-  const openMenuById = useCallback((menu: NavMenu) => {
-    if (hoverCloseTimerRef.current) {
-      clearTimeout(hoverCloseTimerRef.current);
-      hoverCloseTimerRef.current = null;
-    }
-    setOpenMenu(menu);
-    setActiveId(MENU_TO_ACTIVE[menu]);
-  }, []);
-
-  const toggleMenu = useCallback((menu: NavMenu) => {
-    setOpenMenu((curr) => {
-      const next = curr === menu ? null : menu;
-      if (next) setActiveId(MENU_TO_ACTIVE[next]);
-      return next;
-    });
-  }, []);
-
-  const scheduleCloseMenu = useCallback(() => {
-    if (hoverCloseTimerRef.current) clearTimeout(hoverCloseTimerRef.current);
-    hoverCloseTimerRef.current = setTimeout(() => {
-      setOpenMenu(null);
-      hoverCloseTimerRef.current = null;
-    }, 160);
-  }, []);
-
-  const cancelCloseMenu = useCallback(() => {
-    if (hoverCloseTimerRef.current) {
-      clearTimeout(hoverCloseTimerRef.current);
-      hoverCloseTimerRef.current = null;
-    }
-  }, []);
 
   const measurePill = useCallback((id: string): PillBox | null => {
     const nav = navRef.current;
@@ -121,6 +103,71 @@ export default function Navbar() {
       left: linkBox.left - navBox.left,
       width: linkBox.width,
     };
+  }, []);
+
+  const measureDropdownOffset = useCallback((menu: NavMenu): number | null => {
+    const shell = navShellRef.current;
+    const el = itemRefs.current[MENU_TO_ITEM_ID[menu]];
+    if (!shell || !el) return null;
+
+    const shellBox = shell.getBoundingClientRect();
+    const linkBox = el.getBoundingClientRect();
+
+    if (MENU_DROPDOWN_ALIGN[menu] === "right") {
+      return shellBox.right - linkBox.right;
+    }
+
+    return linkBox.left - shellBox.left;
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setOpenMenu(null);
+    setDropdownOffset(null);
+  }, []);
+
+  const openMenuById = useCallback(
+    (menu: NavMenu) => {
+      if (hoverCloseTimerRef.current) {
+        clearTimeout(hoverCloseTimerRef.current);
+        hoverCloseTimerRef.current = null;
+      }
+      setOpenMenu(menu);
+      setActiveId(MENU_TO_ACTIVE[menu]);
+      setDropdownOffset(measureDropdownOffset(menu));
+    },
+    [measureDropdownOffset],
+  );
+
+  const toggleMenu = useCallback(
+    (menu: NavMenu) => {
+      setOpenMenu((curr) => {
+        const next = curr === menu ? null : menu;
+        if (next) {
+          setActiveId(MENU_TO_ACTIVE[next]);
+          setDropdownOffset(measureDropdownOffset(next));
+        } else {
+          setDropdownOffset(null);
+        }
+        return next;
+      });
+    },
+    [measureDropdownOffset],
+  );
+
+  const scheduleCloseMenu = useCallback(() => {
+    if (hoverCloseTimerRef.current) clearTimeout(hoverCloseTimerRef.current);
+    hoverCloseTimerRef.current = setTimeout(() => {
+      setOpenMenu(null);
+      setDropdownOffset(null);
+      hoverCloseTimerRef.current = null;
+    }, 160);
+  }, []);
+
+  const cancelCloseMenu = useCallback(() => {
+    if (hoverCloseTimerRef.current) {
+      clearTimeout(hoverCloseTimerRef.current);
+      hoverCloseTimerRef.current = null;
+    }
   }, []);
 
   const updatePill = useCallback(
@@ -209,21 +256,32 @@ export default function Navbar() {
     };
   }, [activeId, openMenu, updatePill]);
 
+  useLayoutEffect(() => {
+    if (!openMenu) {
+      setDropdownOffset(null);
+      return;
+    }
+    setDropdownOffset(measureDropdownOffset(openMenu));
+  }, [openMenu, measureDropdownOffset, pill]);
+
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
 
-    const onResize = () => updatePill();
+    const onResize = () => {
+      updatePill();
+      if (openMenu) setDropdownOffset(measureDropdownOffset(openMenu));
+    };
     window.addEventListener("resize", onResize);
 
-    const ro = new ResizeObserver(() => updatePill());
+    const ro = new ResizeObserver(onResize);
     ro.observe(nav);
 
     return () => {
       window.removeEventListener("resize", onResize);
       ro.disconnect();
     };
-  }, [updatePill]);
+  }, [updatePill, openMenu, measureDropdownOffset]);
 
   if (pathname?.startsWith("/service")) {
     return null;
@@ -263,6 +321,7 @@ export default function Navbar() {
               <div aria-hidden />
 
               <nav
+                ref={navShellRef}
                 className="relative"
                 onMouseLeave={scheduleCloseMenu}
                 onMouseEnter={cancelCloseMenu}
@@ -382,7 +441,13 @@ export default function Navbar() {
 
                 <AnimatePresence mode="wait">
                   {openMenu === "projects" ? (
-                    <NavDropdown key="projects" title="Latest Projects" onClose={closeMenu}>
+                    <NavDropdown
+                      key="projects"
+                      title="Latest Projects"
+                      align="left"
+                      offset={dropdownOffset}
+                      onClose={closeMenu}
+                    >
                       <div className="space-y-1">
                         {STICKY_NAV_PROJECTS.map((item) => (
                           <Link
@@ -419,7 +484,13 @@ export default function Navbar() {
                   ) : null}
 
                   {openMenu === "services" ? (
-                    <NavDropdown key="services" title="Services" onClose={closeMenu}>
+                    <NavDropdown
+                      key="services"
+                      title="Services"
+                      align="left"
+                      offset={dropdownOffset}
+                      onClose={closeMenu}
+                    >
                       <div className="space-y-1">
                         {STICKY_NAV_SERVICES.map((item) => (
                           <Link
@@ -444,7 +515,13 @@ export default function Navbar() {
                   ) : null}
 
                   {openMenu === "more" ? (
-                    <NavDropdown key="more" title="More" onClose={closeMenu}>
+                    <NavDropdown
+                      key="more"
+                      title="More"
+                      align="right"
+                      offset={dropdownOffset}
+                      onClose={closeMenu}
+                    >
                       <div className="space-y-1">
                         {STICKY_NAV_MORE_LINKS.map((item) => (
                           <Link
@@ -478,18 +555,32 @@ function NavDropdown({
   title,
   children,
   onClose,
+  align = "left",
+  offset = null,
 }: {
   title: string;
   children: React.ReactNode;
   onClose: () => void;
+  align?: DropdownAlign;
+  offset?: number | null;
 }) {
+  const hasOffset = offset != null;
+  const positionStyle = hasOffset
+    ? align === "right"
+      ? { right: offset }
+      : { left: offset }
+    : undefined;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 8, scale: 0.98 }}
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-      className="navbar-dropdown pointer-events-auto absolute left-1/2 top-[calc(100%+14px)] z-[10000] w-[min(100vw-2rem,360px)] -translate-x-1/2 overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_rgba(0,0,0,0.18)]"
+      className={`navbar-dropdown pointer-events-auto absolute top-[calc(100%+14px)] z-[10000] w-[min(100vw-2rem,360px)] overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_rgba(0,0,0,0.18)] ${
+        hasOffset ? "" : "left-1/2 -translate-x-1/2"
+      }`}
+      style={positionStyle}
       role="dialog"
       aria-modal="true"
       aria-label={title}

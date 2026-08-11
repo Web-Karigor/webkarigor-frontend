@@ -180,34 +180,35 @@
     "items": [
       {
         "number": "(01)",
-        "title": "Branding that drives conversion & funding.",
-        "description": "We clarify your positioning, define a distinctive tone of voice, and build a visual system that works across acquisition and product. Each sprint ships a robust logo, pragmatic brand guidelines, and a social kit so you can launch fast. The goal is simple: perceived value up.",
-        "color": "hsla(246.88524590163937, 56.48%, 42.35%, 1)",
+        "tags": ["E-commerce", "Healthcare"],
+        "title": "Trusted Online Pharmacy",
+        "titleOneLine": true,
+        "description": "The platform targets families and individuals needing everyday health essentials, featuring brands from major Bangladeshi pharma companies like Incepta and Square. Overall, it's a practical e-commerce site emphasizing safety, speed, and value in the growing digital healthcare market.",
+        "platforms": ["Web", "Android", "iOS"],
+        "color": "#48a396",
         "href": "/case",
-        "quote": "Working with Brand Appart has been an absolute pleasure. Beyond their creativity and professionalism, there's a real sense of kindness and care in everything they do. The team is always open, generous, and never gets stuck on small details, they never say no. I was truly impressed by their reliability, flexibility, and collaborative spirit. I couldn't recommend them more!",
+        "quote": "Working with Brand Appart has been an absolute pleasure. Beyond their creativity and professionalism, there's a real sense of kindness and care in everything they do.",
         "author": {
-          "name": "Jérémy Bendayan",
-          "role": "Co-founder & COO @Jaws Group",
+          "name": "Darlene Robertson",
+          "role": "CEO & Founder • Mouripharma",
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68403ea61d62eda6b245af20_1738708560978.avif"
         },
         "images": [
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e1f900620069168863_branding-01.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e11dd5b6cd8f6f8560_branding-02.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e1186f7124847bd445_branding-03.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e0f43b55dc529e97b9_branding-04.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e622e103809778f67dd98c_branding-05.avif"
+          "/case/pharmacy.webp"
         ]
       },
       {
         "number": "(02)",
+        "tags": ["Product", "SaaS"],
         "title": "Product experiences users adopt & keep using",
         "description": "We start from business goals, map the critical journeys, and prototype what actually moves the needle. Every sprint ships clear flows, a reusable UI library, and a dev-ready. Expect time-to-value down, UX friction down, retention/NPS up.",
+        "platforms": ["Web", "iOS", "Android"],
         "color": "#f72",
         "href": "/case",
         "quote": "A huge thank you to the entire Brand Appart team for your outstanding work on our rebranding! We're thrilled to have you as an integral part of the Incard team, and we can't wait to reveal what's coming next.",
         "author": {
           "name": "Théo Cesarini",
-          "role": "CEO & Co-Founder @Incard & @Fundree",
+          "role": "CEO & Co-Founder • Incard & Fundree",
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df0223365b8119da39098_1722618592452.avif"
         },
         "images": [
@@ -220,14 +221,16 @@
       },
       {
         "number": "(03)",
+        "tags": ["Web Design", "Branding"],
         "title": "Web Design for growing teams & business.",
         "description": "We align messaging, page architecture, and UI. You get clear structure, sections. The site loads fast, tells the right story, and pushes to action without dev firefighting. Your team gets a scalable base they can evolve without calling us for every change.",
+        "platforms": ["Web", "CMS"],
         "color": "#ff3c34",
         "href": "/case",
-        "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is. That speed and agility are exactly what we needed at Ircam Amplify.",
+        "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
         "author": {
           "name": "Alexis Botaya",
-          "role": "Managing director @Sound Experience",
+          "role": "Managing director • Sound Experience",
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df55bfbee02637c53da16_1664138677695.avif"
         },
         "images": [
@@ -240,8 +243,10 @@
       },
       {
         "number": "(04)",
+        "tags": ["Pitch", "Fundraising"],
         "title": "Investor-proof decks that raise faster.",
         "description": "We craft the narrative that gets meetings and a precise ask. Design serves the story: readable numbers, rhythm across slides, and versions for teaser/one-pager. Your deck can be pitched in 5 minutes, read solo, and generates faster responses.",
+        "platforms": ["Deck", "PDF"],
         "color": "#785f47",
         "href": "/case",
         "images": [

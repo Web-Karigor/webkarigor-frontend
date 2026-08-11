@@ -4,6 +4,8 @@ import "./Services.css";
 
 import { memo, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
   motion,
   useMotionValue,
@@ -24,6 +26,9 @@ const {
   description: servicesDescription,
   items: services,
 } = homeContent.services;
+
+const VIEW_PROJECT_LABEL = "view project";
+const VIEW_PROJECT_HREF = "/projects";
 
 type Service = (typeof services)[number];
 
@@ -192,6 +197,18 @@ const ServicesListPanel = memo(function ServicesListPanel({
               <div className="services-story-list-desc-wrap" aria-hidden={!isActive}>
                 <div className="services-story-list-desc-inner">
                   <p className="services-story-list-desc">{service.desc}</p>
+                  <Link
+                    href={VIEW_PROJECT_HREF}
+                    className="services-story-list-cta"
+                    tabIndex={isActive ? 0 : -1}
+                  >
+                    <span>{VIEW_PROJECT_LABEL}</span>
+                    <ArrowRight
+                      className="services-story-list-cta-icon"
+                      strokeWidth={2.25}
+                      aria-hidden
+                    />
+                  </Link>
                 </div>
               </div>
             </li>
@@ -346,6 +363,14 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
         <h3 className="services-story-mobile-slide-title">{fullTitle}</h3>
         <p className="services-story-mobile-slide-subtitle">{service.subtitle}</p>
         <p className="services-story-mobile-slide-desc">{service.desc}</p>
+        <Link href={VIEW_PROJECT_HREF} className="services-story-list-cta">
+          <span>{VIEW_PROJECT_LABEL}</span>
+          <ArrowRight
+            className="services-story-list-cta-icon"
+            strokeWidth={2.25}
+            aria-hidden
+          />
+        </Link>
       </div>
     </motion.article>
   );
