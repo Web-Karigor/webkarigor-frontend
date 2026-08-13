@@ -3,25 +3,32 @@ import { Inter, Manrope, Montserrat, MuseoModerno } from "next/font/google";
 import "./globals.css";
 import "@/styles/section-shared.css";
 import "@/styles/pricing.css";
-import "@/styles/legacy-solution.css";
 import Navbar from "@/components/home/Navbar";
+import StickyNav from "@/components/home/StickuNav";
+import FloatingActions from "@/components/FloatingActions";
+import GlobalCursor from "@/components/GlobalCursor";
 import GsapProvider from "@/components/providers/GsapProvider";
+import homeContent from "@/data/home-content.json";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
   variable: "--font-montserrat",
+  display: "swap",
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
   weight: ["600", "700"],
   variable: "--font-manrope",
+  display: "swap",
 });
 
 const museoModerno = MuseoModerno({
@@ -29,10 +36,14 @@ const museoModerno = MuseoModerno({
   weight: ["500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-museoModerno",
+  display: "swap",
 });
+
+const { title, description } = homeContent.metadata;
+
 export const metadata: Metadata = {
-  title: "Webkarigor - Company Website",
-  description: "Webkarigor Company Website",
+  title,
+  description,
 };
 
 export default function RootLayout({
@@ -41,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`
           ${inter.variable}
@@ -55,14 +66,15 @@ export default function RootLayout({
         `}
       >
         <GsapProvider>
-        {/* CONTENT LAYER */}
-        <div className="relative z-10 overflow-x-clip">
-          <Navbar />
-          <main>{children}</main>
-        </div>
+          <GlobalCursor />
+          <div className="relative z-10 overflow-x-clip">
+            <Navbar />
+            <main className="pb-[88px] lg:pb-0">{children}</main>
+          </div>
+          <StickyNav />
+          <FloatingActions />
         </GsapProvider>
       </body>
     </html>
   );
 }
-

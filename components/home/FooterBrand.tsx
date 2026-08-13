@@ -3,6 +3,9 @@
 import "./Footer.css";
 
 import { useLayoutEffect, useRef } from "react";
+import homeContent from "@/data/home-content.json";
+
+const { wordmark } = homeContent.footer;
 
 export default function FooterBrand() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -42,7 +45,7 @@ export default function FooterBrand() {
   return (
     <div ref={wrapRef} className="footer-brand-wrap" aria-hidden>
       <p ref={textRef} className="footer-brand">
-        WEBKARIGOR
+        {wordmark}
       </p>
     </div>
   );

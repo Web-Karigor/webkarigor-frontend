@@ -43,19 +43,219 @@
   border-radius: 4px;
 }
 
+/* Figma: Say hello CTA — path79 arrow + label + avatar/phone, gap 10 */
 .hero-hello {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 4px 2px;
   font-family: var(--font-montserrat);
   font-weight: 600;
-  font-size: clamp(0.75rem, 2vw, 1.5rem);
-  display: flex;
-  flex-wrap: wrap;
+  font-size: clamp(0.875rem, 1.6vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #1f1e1c;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.hero-hello:hover {
+  transform: translateY(-1px);
+}
+
+.hero-hello:focus-visible {
+  outline: 2px solid #38f8ab;
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+.hero-hello-arrow {
+  width: clamp(22px, 2.2vw, 28px);
+  height: auto;
+  flex-shrink: 0;
+  display: block;
+  object-fit: contain;
+}
+
+.hero-hello-label {
+  white-space: nowrap;
+  color: #1f1e1c;
+}
+
+.hero-hello-icons {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: clamp(56px, 5.8vw, 68px);
+  height: clamp(34px, 3.6vw, 42px);
+}
+
+.hero-hello-avatar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 0;
+  width: clamp(30px, 3.2vw, 38px);
+  height: clamp(30px, 3.2vw, 38px);
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  object-fit: cover;
+  display: block;
+  border: 1.5px solid #fff;
+}
+
+.hero-hello-phone {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  display: inline-flex;
+  width: clamp(34px, 3.6vw, 42px);
+  height: clamp(34px, 3.6vw, 42px);
   align-items: center;
-  gap: clamp(6px, 1.5vw, 10px);
   justify-content: center;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  border: 1.5px solid rgba(31, 30, 28, 0.12);
+  color: #1f1e1c;
+  background: linear-gradient(145deg, #1fd98f 0%, #0ec47b 52%, #12b56f 100%);
+  background-size: 180% 180%;
+  box-shadow: 0 2px 10px rgba(14, 196, 123, 0.32);
+  animation: hero-hello-pulse 1.8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+  will-change: transform, box-shadow;
+}
+
+.hero-hello-phone-icon {
+  width: 46%;
+  height: 46%;
+  display: block;
+  color: inherit;
+}
+
+@keyframes hero-hello-pulse {
+  0%,
+  100% {
+    transform: translateY(-50%) scale(1);
+    background-position: 0% 40%;
+    box-shadow:
+      0 2px 10px rgba(14, 196, 123, 0.3),
+      0 0 0 0 rgba(14, 196, 123, 0);
+  }
+  35% {
+    transform: translateY(calc(-50% - 4px)) scale(1.04);
+    background-position: 55% 50%;
+    box-shadow:
+      0 8px 18px rgba(14, 196, 123, 0.36),
+      0 0 0 6px rgba(14, 196, 123, 0.12);
+  }
+  55% {
+    transform: translateY(calc(-50% - 1px)) scale(1.01);
+    background-position: 100% 60%;
+    box-shadow:
+      0 4px 14px rgba(14, 196, 123, 0.32),
+      0 0 0 10px rgba(14, 196, 123, 0);
+  }
 }
 
 .hero-projects-text {
   font-size: clamp(48px, 18vw, 76px);
+}
+
+/* =========================================================
+   Mobile hero mid — stats + photo slider (Figma sizes)
+   Photo: 167×96, radius 0 · Badge: ~123×76, radius 0
+========================================================= */
+@media (max-width: 1023px) {
+  .hero-mobile-mid {
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-mobile-stats {
+    width: 123px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .hero-mobile-stats > .flex {
+    gap: 4px;
+    height: 100%;
+    align-items: center;
+  }
+
+  .hero-mobile-stats .stats-number {
+    font-size: 76px;
+    font-weight: 600;
+    line-height: 76px;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-mobile-stats .stats-plus {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .hero-mobile-stats .stats-years {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .hero-mobile-stats .stats-pill {
+    padding: 3px 8px;
+    border-radius: 0;
+  }
+
+  .hero-mobile-slider {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  .hero-mobile-slider-track {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-right: 24px;
+  }
+
+  .hero-mobile-slider-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-mobile-slide {
+    flex: 0 0 auto;
+    width: 167px;
+    height: 96px;
+    scroll-snap-align: start;
+    border-radius: 0;
+    overflow: hidden;
+    background: #ece7dc;
+  }
+
+  .hero-mobile-slide-img {
+    display: block;
+    width: 167px;
+    height: 96px;
+    max-width: none;
+    aspect-ratio: auto;
+    object-fit: cover;
+    border-radius: 0;
+  }
 }
 
 @media (min-width: 768px) {

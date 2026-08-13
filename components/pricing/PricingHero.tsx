@@ -8,12 +8,12 @@ import {
   Compass,
   type LucideIcon,
 } from "lucide-react";
-import { PRICING_HERO_FEATURES, PR } from "@/lib/pricing-data";
+import { PRICING_HERO, PRICING_HERO_FEATURES, PR } from "@/lib/pricing-data";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.2 } as const;
 
-const ICONS: Record<(typeof PRICING_HERO_FEATURES)[number]["icon"], LucideIcon> = {
+const ICONS: Record<string, LucideIcon> = {
   pointer: MousePointer2,
   code: Code2,
   calendar: CalendarCheck2,
@@ -65,7 +65,7 @@ export default function PricingHero() {
               backgroundClip: "text",
             }}
           >
-            From Idea to Launch
+            {PRICING_HERO.eyebrow}
           </p>
 
           <h1
@@ -77,8 +77,11 @@ export default function PricingHero() {
               letterSpacing: PR.heroTitle.titleTracking,
             }}
           >
-            <span className="block">Transparent Pricing for</span>
-            <span className="block">Supports Your Growth</span>
+            {PRICING_HERO.titleLines.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
           </h1>
         </motion.div>
 

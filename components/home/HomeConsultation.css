@@ -40,92 +40,151 @@
 .home-consultation-copy {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 40px;
+  min-width: 0;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
 }
 
+.home-consultation-copy-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+}
+
+.home-consultation-copy-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 0;
+  width: 100%;
+}
+
+/* Figma left — badge with gradient text */
 .home-consultation-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   align-self: flex-start;
-  padding: 8px 18px;
+  box-sizing: border-box;
+  min-height: 36px;
+  padding: 8px 16px;
   border: 1px solid #38f8ab;
   border-radius: 999px;
-  font-family: var(--font-montserrat);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #38f8ab;
+  background: rgba(56, 248, 171, 0.1);
 }
 
+.home-consultation-badge-text {
+  font-family: var(--font-museoModerno);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.05em;
+  text-align: center;
+  background-image: linear-gradient(to right, #0ec47b, #2eeda0, #ffef3f, #15d286);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Figma: 500 × 112 · Montserrat SemiBold 600 · 40px · LH 140% · LS -5% */
 .home-consultation-title {
-  margin: 8px 0 0;
+  box-sizing: border-box;
+  margin: 24px 0 0;
+  width: 100%;
+  max-width: 500px;
+  min-height: 0;
   font-family: var(--font-montserrat);
-  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.05em;
   color: #fff;
 }
 
+/* Figma left — desc 18 / LH 160% / max 420 */
 .home-consultation-desc {
-  margin: 0;
-  max-width: 34ch;
+  margin: 16px 0 0;
+  width: 100%;
+  max-width: 420px;
   font-family: var(--font-montserrat);
-  font-size: clamp(0.9375rem, 1.2vw, 1rem);
-  line-height: 1.65;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 400;
+  line-height: 160%;
   color: rgba(255, 255, 255, 0.72);
 }
 
+/* Figma: photo 160×160 — tighter gap from desc */
 .home-consultation-founder {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 18px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  margin-top: 28px;
 }
 
 .home-consultation-founder-photo {
   position: relative;
-  width: 112px;
-  height: 112px;
+  width: 160px;
+  height: 160px;
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 16px;
 }
 
 .home-consultation-founder-name {
-  margin: 0;
+  margin: 12px 0 0;
   font-family: var(--font-montserrat);
-  font-size: 1.125rem;
+  font-size: 20px;
   font-weight: 700;
+  line-height: 140%;
   color: #fff;
 }
 
 .home-consultation-founder-role {
   margin: 4px 0 0;
   font-family: var(--font-montserrat);
-  font-size: 0.9375rem;
-  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 140%;
+  color: rgba(255, 255, 255, 0.55);
 }
 
+/* Figma left — talk 18 */
 .home-consultation-talk {
-  margin: 18px 0 0;
+  margin: 0;
   font-family: var(--font-montserrat);
-  font-size: 0.9375rem;
+  font-size: 18px;
   font-weight: 600;
+  line-height: 140%;
   color: #38f8ab;
 }
 
+/* Figma left — WhatsApp pill H 48 */
 .home-consultation-whatsapp {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 8px;
   align-self: flex-start;
-  margin-top: 8px;
-  padding: 12px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-sizing: border-box;
+  height: 48px;
+  margin: 0;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
+  background: transparent;
   font-family: var(--font-montserrat);
-  font-size: 0.875rem;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 1;
   color: #fff;
   text-decoration: none;
   transition: border-color 0.2s ease, background-color 0.2s ease;
@@ -161,9 +220,14 @@
 
 .home-consultation-label {
   font-family: var(--font-montserrat);
-  font-size: 0.875rem;
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.home-consultation-label-hint {
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .home-consultation-input,
@@ -198,6 +262,81 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+.home-consultation-phone-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+
+.home-consultation-phone-row .home-consultation-select-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.home-consultation-phone-row .home-consultation-select-menu {
+  left: 0;
+  right: auto;
+  min-width: 280px;
+  width: max(280px, 100%);
+  max-width: min(340px, 85vw);
+  z-index: 50;
+}
+
+.home-consultation-code-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 52px;
+  min-height: 52px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-montserrat);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.home-consultation-code-btn:hover,
+.home-consultation-code-btn[aria-expanded="true"] {
+  border-color: rgba(56, 248, 171, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.home-consultation-code-globe {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.home-consultation-code-value {
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.home-consultation-code-chevron,
+.home-consultation-inline-chevron {
+  width: 14px;
+  height: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  flex-shrink: 0;
+}
+
+.home-consultation-input--phone {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+}
+
 .home-consultation-input-wrap {
   position: relative;
 }
@@ -229,7 +368,7 @@
 .home-consultation-select {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px;
   cursor: pointer;
   text-align: left;
@@ -238,7 +377,23 @@
 .home-consultation-select-value {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  min-width: 0;
+}
+
+.home-consultation-select-value > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-consultation-flag {
+  width: 22px;
+  height: 15px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
 }
 
 .home-consultation-select-chevron {
@@ -252,14 +407,17 @@
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  z-index: 20;
+  z-index: 30;
+  max-height: 260px;
   margin: 0;
   padding: 8px;
+  overflow-y: auto;
   list-style: none;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   background: #111;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  scrollbar-width: thin;
 }
 
 .home-consultation-select-option {
@@ -276,6 +434,20 @@
   font-size: 0.875rem;
   text-align: left;
   cursor: pointer;
+}
+
+.home-consultation-option-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-consultation-option-code {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
 }
 
 .home-consultation-select-option:hover,
@@ -407,10 +579,11 @@
   color: #fff;
 }
 
-/* Figma Frame 135 — Let's Do It
-   W 321 · H Hug (68) · r20 · gap 10 · pad 20/32 · #38F8AB → #FEED35 */
+/* Let's Do It — outline + white text; hover fills from left (FAQ-style) */
 .home-consultation-submit {
   box-sizing: border-box;
+  position: relative;
+  z-index: 0;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -422,20 +595,46 @@
   min-height: 68px;
   margin: 6px auto 0;
   padding: 20px 32px;
-  border: none;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1.5px solid #ffffff;
   border-radius: 20px;
-  background: linear-gradient(90deg, #38f8ab 0%, #feed35 100%);
-  color: #111;
+  background: transparent;
+  color: #ffffff;
   font-family: var(--font-montserrat);
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    color 1.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 1.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-consultation-submit > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-consultation-submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #38f8ab 0%, #feed35 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
 .home-consultation-submit:hover {
-  opacity: 0.94;
-  transform: translateY(-1px);
+  color: #111111;
+  border-color: transparent;
+}
+
+.home-consultation-submit:hover::before {
+  transform: scaleX(1);
 }
 
 @media (max-width: 768px) {
@@ -454,6 +653,42 @@
     box-sizing: border-box;
   }
 
+  .home-consultation-copy {
+    max-width: none;
+  }
+
+  .home-consultation-founder {
+    align-items: center;
+    text-align: center;
+  }
+
+  .home-consultation-founder-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 16px;
+  }
+
+  .home-consultation-founder-name,
+  .home-consultation-founder-role {
+    text-align: center;
+  }
+
+  .home-consultation-copy-bottom {
+    align-items: center;
+    text-align: center;
+  }
+
+  .home-consultation-talk {
+    text-align: center;
+    width: 100%;
+  }
+
+  .home-consultation-whatsapp {
+    align-self: stretch;
+    width: 100%;
+  }
+
   .home-consultation-submit {
     width: 100%;
     max-width: none;
@@ -464,9 +699,38 @@
 
 @media (min-width: 1024px) {
   .home-consultation-layout {
-    grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.28fr);
-    gap: clamp(28px, 3vw, 40px);
+    grid-template-columns: 500px minmax(0, 1fr);
+    gap: 72px;
     align-items: start;
+  }
+
+  .home-consultation-copy {
+    width: 500px;
+    max-width: 500px;
+    gap: 40px;
+  }
+
+  .home-consultation-title {
+    width: 500px;
+    max-width: 500px;
+    height: 112px;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: -0.05em;
+  }
+
+  .home-consultation-desc {
+    font-size: 18px;
+  }
+
+  .home-consultation-founder {
+    margin-top: 28px;
+  }
+
+  .home-consultation-founder-photo {
+    width: 160px;
+    height: 160px;
   }
 
   .home-consultation-form-grid--two {

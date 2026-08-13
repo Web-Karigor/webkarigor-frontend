@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, MessageCircle, Star } from "lucide-react";
-import { ERP_TESTIMONIALS } from "@/lib/erp-data";
+import { ERP_REVIEWS_SECTION, ERP_TESTIMONIALS } from "@/lib/erp-data";
 
 /** Figma Testimonial — 1792 × 592 · cards 555 × 388 */
 const CARD_W = 555;
@@ -77,7 +77,7 @@ export default function ErpReviews() {
               <MessageCircle className="h-4 w-4" fill="currentColor" strokeWidth={0} />
             </span>
             <h2 className="m-0 font-montserrat text-[clamp(24px,2.8vw,32px)] font-bold leading-none tracking-[-0.02em] text-[#18214D]">
-              Ehya is loved by users
+              {ERP_REVIEWS_SECTION.title}
             </h2>
           </div>
 

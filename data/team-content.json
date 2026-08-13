@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "title": "Team — Webkarigor",
+    "description": "Meet the handpicked team behind Webkarigor — designers, engineers, and product thinkers building digital products that perform."
+  },
+  "headline": {
+    "line1Left": "Our Team",
+    "line1Right": "Is",
+    "line2": "Our",
+    "line3": "Strength"
+  },
+  "intro": "A small, focused team building products with craft, clarity, and care — turning ideas into digital experiences that help businesses grow.",
+  "members": [
+    {
+      "id": "sarah-ahmed",
+      "name": "Sarah Ahmed",
+      "role": "Product Designer",
+      "image": "/sm1.webp",
+      "bio": "I shape how products feel in people's hands — from first sketch to polished UI. Clarity, craft, and a little obsession with the details that make software feel effortless."
+    },
+    {
+      "id": "rakib-hasan",
+      "name": "Rakib Hasan",
+      "role": "Lead Engineer",
+      "image": "/sm2.webp",
+      "bio": "I lead the engineering side of builds that need to ship clean and scale well. Good architecture, honest timelines, and code the next person on the team can actually love."
+    },
+    {
+      "id": "nadia-rahman",
+      "name": "Nadia Rahman",
+      "role": "UX Researcher",
+      "image": "/sm3.webp",
+      "bio": "I talk to users so we don't guess. Interviews, tests, and synthesis that turn messy feedback into decisions the whole team can move on."
+    },
+    {
+      "id": "arif-khan",
+      "name": "Arif Khan",
+      "role": "Brand Strategist",
+      "image": "/sm4.webp",
+      "bio": "I help brands find a sharper story — positioning, voice, and the through-line that makes every touchpoint feel like the same company."
+    },
+    {
+      "id": "farhan-islam",
+      "name": "Farhan Islam",
+      "role": "Co-founder & CEO",
+      "image": "/h2.webp",
+      "bio": "I started Webkarigor to build digital products that actually perform for businesses. Strategy, delivery, and making sure the team has what they need to do their best work."
+    },
+    {
+      "id": "lima-chowdhury",
+      "name": "Lima Chowdhury",
+      "role": "Senior Product Designer",
+      "image": "/h1.webp",
+      "bio": "I design systems and screens that stay consistent under pressure. Design ops, interaction detail, and the kind of polish that shows up when you use the product every day."
+    },
+    {
+      "id": "imran-hossain",
+      "name": "Imran Hossain",
+      "role": "Full-Stack Engineer",
+      "image": "/s4.webp",
+      "bio": "Frontend to backend — I like shipping end-to-end features that feel fast and hold up. Clean APIs, solid UI, and fewer surprises in production."
+    },
+    {
+      "id": "tania-akter",
+      "name": "Tania Akter",
+      "role": "Head of Brand",
+      "image": "/s2.webp",
+      "bio": "I look after how Webkarigor shows up in the world — visual language, campaigns, and the small cues that make a brand feel intentional."
+    },
+    {
+      "id": "sabbir-ahmed",
+      "name": "Sabbir Ahmed",
+      "role": "Project Manager",
+      "image": "/s1.webp",
+      "bio": "I keep projects moving without the chaos. Clear scopes, honest updates, and making sure clients and makers stay aligned from kickoff to launch."
+    },
+    {
+      "id": "nushrat-jahan",
+      "name": "Nushrat Jahan",
+      "role": "Motion Designer",
+      "image": "/s3.webp",
+      "bio": "I add motion that earns its place — transitions, micro-interactions, and branded moments that make the product feel alive without getting in the way."
+    },
+    {
+      "id": "karim-ullah",
+      "name": "Karim Ullah",
+      "role": "Backend Engineer",
+      "image": "/sm2.webp",
+      "bio": "I build the systems under the UI — reliable APIs, data models, and performance work that users never notice until something's missing."
+    },
+    {
+      "id": "meherin-sultana",
+      "name": "Meherin Sultana",
+      "role": "Brand Designer",
+      "image": "/sm4.webp",
+      "bio": "I craft visual identity that holds across decks, sites, and product. Type, color, and layout with enough personality to stand out and enough restraint to last."
+    }
+  ],
+  "join": {
+    "eyebrow": "Join our team",
+    "lead": "We're always looking for talented creatives to join the team.",
+    "sub": "Think we should know you?\nSend us your portfolio.",
+    "ctaLabel": "Join us",
+    "ctaHref": "/contact-us"
+  }
+}

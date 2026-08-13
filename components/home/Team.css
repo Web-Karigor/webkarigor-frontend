@@ -12,6 +12,33 @@
   font-size: clamp(2rem, 8vw, 2.5rem);
 }
 
-.team-heading-desktop {
-  font-size: clamp(3.5rem, 7vw, 5.75rem);
+/* Figma: Expert/Small Team — Montserrat 700, 160px, LH 140%, LS -5% */
+.team-heading-desktop-expert {
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  font-size: 160px;
+  line-height: 140%;
+  letter-spacing: -0.05em;
+  color: #1f1e1c;
+}
+
+/* Figma: Big Result — MuseoModerno 700, 160px, LH 140%, LS -5% */
+.team-heading-desktop-result {
+  font-family: var(--font-museoModerno);
+  font-weight: 700;
+  font-size: 160px;
+  line-height: 140%;
+  letter-spacing: -0.05em;
+  color: #bababa;
+}
+
+.team-manual-scroll,
+.team-infinite-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.team-manual-scroll::-webkit-scrollbar,
+.team-infinite-scroll::-webkit-scrollbar {
+  display: none;
 }

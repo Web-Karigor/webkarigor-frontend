@@ -1,0 +1,115 @@
+import type { CircuitGeometry } from "./types";
+import TopLeftPath from "./paths/TopLeftPath";
+import TopCenterPath from "./paths/TopCenterPath";
+import TopRightPath from "./paths/TopRightPath";
+import BottomLeftPath from "./paths/BottomLeftPath";
+import BottomCenterPath from "./paths/BottomCenterPath";
+import BottomRightPath from "./paths/BottomRightPath";
+
+type SvgConnectionsProps = {
+  geometry: CircuitGeometry;
+};
+
+function CircuitDefs() {
+  return (
+    <defs>
+      <linearGradient
+        id="connectionGradient"
+        gradientUnits="userSpaceOnUse"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="100%"
+      >
+        <stop offset="0%" stopColor="#38F8AB" />
+        <stop offset="100%" stopColor="#FEED35" />
+      </linearGradient>
+      <radialGradient id="aiCircuitDot" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#FEED35" />
+        <stop offset="45%" stopColor="#38F8AB" />
+        <stop offset="100%" stopColor="#38F8AB" />
+      </radialGradient>
+      <filter
+        id="aiCircuitDotGlow"
+        x="-120%"
+        y="-120%"
+        width="340%"
+        height="340%"
+      >
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+  );
+}
+
+const STAGGER = 0.35;
+/** Slightly slower than default (3.5s) — left/right paths are longer. */
+const SIDE_DURATION = 7;
+
+export default function SvgConnections({ geometry }: SvgConnectionsProps) {
+  return (
+    <svg className="ai-feature-circuit-svg" aria-hidden>
+      <CircuitDefs />
+      <TopLeftPath
+        path={geometry.topLeft}
+        dotPath={geometry.topLeftDot}
+        delay={STAGGER * 0}
+        duration={SIDE_DURATION}
+      />
+      <TopCenterPath
+        path={geometry.topCenter}
+        dotPath={geometry.topCenterDot}
+        delay={STAGGER * 1}
+      />
+      <TopRightPath
+        path={geometry.topRight}
+        dotPath={geometry.topRightDot}
+        delay={STAGGER * 2}
+        duration={SIDE_DURATION}
+      />
+      <BottomLeftPath
+        path={geometry.bottomLeft}
+        dotPath={geometry.bottomLeftDot}
+        delay={STAGGER * 3}
+        duration={SIDE_DURATION}
+      />
+      <BottomCenterPath
+        path={geometry.bottomCenter}
+        dotPath={geometry.bottomCenterDot}
+        delay={STAGGER * 4}
+      />
+      <BottomRightPath
+        path={geometry.bottomRight}
+        dotPath={geometry.bottomRightDot}
+        delay={STAGGER * 5}
+        duration={SIDE_DURATION}
+      />
+      {geometry.centerLeft ? (
+        <path
+          d={geometry.centerLeft}
+          className="ai-feature-circuit-path"
+          stroke="url(#connectionGradient)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      ) : null}
+      {geometry.centerRight ? (
+        <path
+          d={geometry.centerRight}
+          className="ai-feature-circuit-path"
+          stroke="url(#connectionGradient)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      ) : null}
+    </svg>
+  );
+}

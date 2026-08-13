@@ -1,51 +1,32 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import homeContent from "@/data/home-content.json";
 
-/** Figma Frame 182: Back end → Front end → Design → Tools & Cloud */
-const technologyGroups = [
-  {
-    title: "Back end",
-    items: [
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg", name: "Laravel" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node js" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", name: "Python" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg", name: "Golang" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg", name: "Kotlin" },
-    ],
-  },
-  {
-    title: "Front end",
-    items: [
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", name: "React" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", name: "Next js" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg", name: "Tailwind" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg", name: "Vue" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg", name: "Bootstrap" },
-    ],
-  },
-  {
-    title: "Design",
-    items: [
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", name: "Figma" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg", name: "Sketch" },
-      { icon: "https://www.vectorlogo.zone/logos/framer/framer-icon.svg", name: "Framer" },
-      { icon: "/technologies/webflow.svg", name: "Webflow" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg", name: "Adobe" },
-    ],
-  },
-  {
-    title: "Tools & Cloud",
-    items: [
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg", name: "Notion" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", name: "Github" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", name: "Vercel" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg", name: "Google Workspace" },
-      { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", name: "AWS" },
-    ],
-  },
-];
+const {
+  headingPrefix,
+  headingAccent,
+  footerPrefix,
+  footerAccent,
+  footerSuffix,
+  groups: technologyGroups,
+} = homeContent.technologies;
+
+type TechItem = (typeof technologyGroups)[number]["items"][number];
+
+/** Wave scale by distance from hovered row (0 = hovered). */
+function waveScale(distance: number): number {
+  if (distance === 0) return 1.1;
+  if (distance === 1) return 1.055;
+  if (distance === 2) return 1.025;
+  if (distance === 3) return 1.01;
+  return 1;
+}
+
+const WAVE_EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+const WAVE_DURATION_MS = 700;
 
 type Blob = {
   id: string;
@@ -54,6 +35,7 @@ type Blob = {
   height: number;
   rotate?: boolean;
   className: string;
+  imageClassName?: string;
 };
 
 /** Ellipse 2 & 3 — unchanged */
@@ -96,22 +78,25 @@ const WEB_BLOB: Blob = {
     "left-1/2 top-1/2 z-[-1] size-[clamp(88px,10vw,130px)] -translate-x-[38%] -translate-y-[52%]",
 };
 
-const CARD_BLOBS: Blob[] = [
+/** Mid glows — section bg (behind cards), same layer as corner ellipses */
+const MID_BLOBS: Blob[] = [
   {
-    id: "card-2",
+    id: "e5-mid",
     src: "/technologies/ellipse-5.png",
     width: 320,
     height: 320,
     className:
-      "hidden sm:block left-[22%] top-[54%] size-[clamp(88px,10vw,130px)] lg:left-[27%] lg:top-[52%]",
+      "bottom-[28%] left-[21%] z-0 hidden size-[clamp(160px,14vw,220px)] opacity-65 brightness-105 sm:block",
+    imageClassName: "brightness-105 opacity-100",
   },
   {
-    id: "card-3",
+    id: "e7-mid",
     src: "/technologies/ellipse-7.png",
     width: 168,
     height: 168,
     className:
-     "hidden sm:block left-[58%] top-[38%] size-[clamp(72px,8vw,110px)] lg:left-[65%] lg:top-[30%]",
+      "top-[28%] left-[68%] z-0 hidden size-[clamp(140px,12vw,200px)] opacity-65 brightness-105 sm:block",
+    imageClassName: "brightness-105 opacity-100",
   },
 ];
 
@@ -121,7 +106,7 @@ function BlobLayer({ blob }: { blob: Blob }) {
       className={cn(
         "pointer-events-none absolute z-0 block select-none",
         blob.rotate && "rotate-180",
-        blob.className
+        blob.className,
       )}
       aria-hidden
     >
@@ -130,10 +115,67 @@ function BlobLayer({ blob }: { blob: Blob }) {
         alt=""
         width={blob.width}
         height={blob.height}
-        className="block size-full max-w-none object-contain"
+        className={cn(
+          "block size-full max-w-none object-contain",
+          blob.imageClassName,
+        )}
         unoptimized
       />
     </span>
+  );
+}
+
+function TechColumn({ items }: { items: TechItem[] }) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  return (
+    <article
+      className="relative z-[1] box-border flex w-full max-w-[440px] flex-col gap-3 overflow-visible rounded-[32px] border-none bg-white/40 p-[22px] backdrop-blur-[40px] sm:max-w-none lg:h-[460px] lg:max-w-[440px] lg:justify-start lg:px-[22px] lg:py-[43.5px] max-md:rounded-3xl max-md:p-4"
+      onMouseLeave={() => setHoveredIndex(null)}
+    >
+      {items.map((tech, index) => {
+        const distance =
+          hoveredIndex === null ? -1 : Math.abs(index - hoveredIndex);
+        const scale = distance < 0 ? 1 : waveScale(distance);
+        const isHovered = hoveredIndex === index;
+        const delayMs =
+          distance > 0 ? distance * 55 : hoveredIndex === null ? 40 : 0;
+
+        return (
+          <div
+            key={tech.name}
+            onMouseEnter={() => setHoveredIndex(index)}
+            style={{
+              transform: `scale(${scale})`,
+              transitionProperty:
+                "transform, box-shadow, background-color, backdrop-filter",
+              transitionDuration: `${WAVE_DURATION_MS}ms`,
+              transitionTimingFunction: WAVE_EASE,
+              transitionDelay: `${delayMs}ms`,
+            }}
+            className={cn(
+              "relative z-[1] box-border flex h-[65px] min-h-[65px] max-h-[65px] w-full shrink-0 flex-row items-center gap-3 rounded-2xl border border-white/30 bg-white/15 p-3 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)] backdrop-blur-[40px] will-change-transform max-md:h-14 max-md:min-h-14 max-md:max-h-14",
+              isHovered &&
+                "z-10 bg-white/25 shadow-[0px_3px_8px_0px_rgba(0,0,0,0.06)] backdrop-blur-[56px]",
+              distance === 1 && "z-[5]",
+              distance === 2 && "z-[1]",
+            )}
+          >
+            <Image
+              src={tech.icon}
+              alt=""
+              width={28}
+              height={28}
+              className="size-7 shrink-0 object-contain"
+              unoptimized
+            />
+            <span className="overflow-hidden text-ellipsis whitespace-nowrap font-montserrat text-lg font-medium leading-[1.2] text-[#1F1E1C] max-md:text-[15px]">
+              {tech.name}
+            </span>
+          </div>
+        );
+      })}
+    </article>
   );
 }
 
@@ -145,56 +187,33 @@ export default function Technologies() {
       {FIXED_BLOBS.map((blob) => (
         <BlobLayer key={blob.id} blob={blob} />
       ))}
-
-      {CARD_BLOBS.map((blob) => (
+      {MID_BLOBS.map((blob) => (
         <BlobLayer key={blob.id} blob={blob} />
       ))}
 
       <div className="relative z-[1] mx-auto flex w-full max-w-[1851px] flex-col lg:h-full lg:max-h-[732px] lg:justify-between">
-        <h2 className="relative m-0 font-montserrat text-[clamp(2rem,5.5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black">
-          Technologies{" "}
+        <h2 className="relative order-1 m-0 font-montserrat text-[clamp(2rem,5.5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black">
+          {headingPrefix}{" "}
           <span className="relative inline-block">
-            Used
+            {headingAccent}
             <BlobLayer blob={USED_BLOB} />
           </span>
         </h2>
 
-        <div className="mt-9 grid grid-cols-1 justify-items-center gap-7 sm:mt-10 sm:grid-cols-2 sm:justify-items-stretch sm:gap-8 lg:mt-8 lg:mb-6 lg:grid-cols-4 lg:gap-[clamp(20px,1.5vw,31px)]">
-          {technologyGroups.map((group) => (
-            <article
-              key={group.title}
-              className="box-border flex w-full max-w-[440px] flex-col gap-3 overflow-visible rounded-[32px] border-none bg-white/40 p-[22px] backdrop-blur-[40px] sm:max-w-none lg:h-[460px] lg:max-w-[440px] lg:justify-start lg:px-[22px] lg:py-[43.5px] max-md:rounded-3xl max-md:p-4"
-            >
-              {group.items.map((tech) => (
-                <div
-                  key={tech.name}
-                  className="relative box-border flex h-[65px] min-h-[65px] max-h-[65px] w-full shrink-0 flex-row items-center gap-3 rounded-2xl border-none bg-white p-3 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.08)] transition-all duration-500 ease-out will-change-transform hover:z-10 hover:scale-110 hover:bg-white hover:shadow-[0px_8px_20px_0px_rgba(0,0,0,0.12)] max-md:h-14 max-md:min-h-14 max-md:max-h-14"
-                >
-                  <Image
-                    src={tech.icon}
-                    alt=""
-                    width={28}
-                    height={28}
-                    className="size-7 shrink-0 object-contain"
-                    unoptimized
-                  />
-                  <span className="overflow-hidden text-ellipsis whitespace-nowrap font-montserrat text-lg font-medium leading-[1.2] text-[#1F1E1C] max-md:text-[15px]">
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
-            </article>
-          ))}
-        </div>
-
-        <p className="relative mt-10 text-left font-montserrat text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black sm:mt-12 md:mt-16 md:text-right lg:mt-auto">
-          In{" "}
+        <p className="relative order-2 mt-3 text-left font-montserrat text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black sm:mt-4 lg:order-3 lg:mt-auto lg:text-right">
+          {footerPrefix}{" "}
           <span className="relative inline-block">
-            Web
+            {footerAccent}
             <BlobLayer blob={WEB_BLOB} />
           </span>
-          karigor
+          {footerSuffix}
         </p>
+
+        <div className="order-3 mt-9 grid grid-cols-1 justify-items-center gap-7 sm:mt-10 sm:grid-cols-2 sm:justify-items-stretch sm:gap-8 lg:order-2 lg:mt-8 lg:mb-6 lg:grid-cols-4 lg:gap-[clamp(20px,1.5vw,31px)]">
+          {technologyGroups.map((group) => (
+            <TechColumn key={group.title} items={group.items} />
+          ))}
+        </div>
       </div>
     </section>
   );

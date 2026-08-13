@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import AboutCapabilities from "@/components/about/AboutCapabilities";
+import dynamic from "next/dynamic";
 import AboutHero from "@/components/about/AboutHero";
 import AboutImpact from "@/components/about/AboutImpact";
-import AboutTeam from "@/components/about/AboutTeam";
-import AboutVision from "@/components/about/AboutVision";
-import AboutWhyChoose from "@/components/about/AboutWhyChoose";
-import FAQ from "@/components/home/FAQ";
-import Footer from "@/components/home/Footer";
-import HomeConsultation from "@/components/home/HomeConsultation";
+import { ABOUT_METADATA } from "@/lib/about-data";
+
+const AboutVision = dynamic(() => import("@/components/about/AboutVision"));
+const AboutCapabilities = dynamic(
+  () => import("@/components/about/AboutCapabilities"),
+);
+const Team = dynamic(() => import("@/components/home/Team"));
+const AboutWhyChoose = dynamic(() => import("@/components/about/AboutWhyChoose"));
+const FAQ = dynamic(() => import("@/components/home/FAQ"));
+const HomeConsultation = dynamic(() => import("@/components/home/HomeConsultation"));
+const Footer = dynamic(() => import("@/components/home/Footer"));
 
 export const metadata: Metadata = {
-  title: "About Us — Webkarigor",
-  description:
-    "Building digital products that empower businesses and delight users. Learn about Webkarigor’s vision, team, and approach.",
+  title: ABOUT_METADATA.title,
+  description: ABOUT_METADATA.description,
 };
 
 export default function AboutUsPage() {
@@ -22,7 +26,7 @@ export default function AboutUsPage() {
       <AboutImpact />
       <AboutVision />
       <AboutCapabilities />
-      <AboutTeam />
+      <Team />
       <AboutWhyChoose />
       <FAQ />
       <HomeConsultation />

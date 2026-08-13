@@ -1,11 +1,12 @@
 import { Fragment } from "react";
-import { MARQUEE_ITEMS } from "@/lib/services-data";
+import serviceSharedContent from "@/data/service-shared-content.json";
 
 type ServiceMarqueeProps = {
   className?: string;
 };
 
 const MARQUEE_COPIES = 4;
+const MARQUEE_ITEMS = serviceSharedContent.marquee.items;
 
 function MarqueeSeparator() {
   return (
@@ -45,7 +46,7 @@ export default function ServiceMarquee({ className = "" }: ServiceMarqueeProps) 
 
   return (
     <div
-      className={`overflow-hidden bg-gradient-to-r from-[#0ec47b] via-[#38f8ab] to-[#15d286] px-[clamp(24px,6.25vw,120px)] py-[18px] ${className}`.trim()}
+      className={`overflow-hidden bg-[linear-gradient(to_right,#38f8ab_0%,#0ec47b_18%,#0ec47b_82%,#38f8ab_100%)] px-[clamp(24px,6.25vw,120px)] py-[18px] ${className}`.trim()}
       aria-hidden
     >
       <div className="flex w-max animate-marquee-scroll items-center gap-[clamp(32px,4vw,64px)]">

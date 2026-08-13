@@ -3,6 +3,7 @@
 import "./HeroSlider.css";
 
 import { useLayoutEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { SLIDER_IMAGES } from "@/lib/home-assets";
 
@@ -70,7 +71,8 @@ export default function HeroSlider() {
         const scale = computeScale(cardCenterX, viewportRect);
 
         gsap.set(card, {
-          scale,
+          scaleX: 1,
+          scaleY: scale,
           transformOrigin: "50% 100%",
           force3D: true,
         });
@@ -134,9 +136,26 @@ export default function HeroSlider() {
     observer.observe(viewport);
     observer.observe(track);
 
+    let inView = true;
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        const next = Boolean(entry?.isIntersecting);
+        if (next === inView) return;
+        inView = next;
+        if (inView) {
+          startMarquee(scrollOffset);
+        } else {
+          tween?.pause();
+        }
+      },
+      { rootMargin: "160px 0px" },
+    );
+    visibility.observe(viewport);
+
     return () => {
       tween?.kill();
       observer.disconnect();
+      visibility.disconnect();
       cancelAnimationFrame(resizeRaf);
     };
   }, []);
@@ -147,7 +166,15 @@ export default function HeroSlider() {
         <div ref={trackRef} className="slanted-track">
           {cards.map((card, i) => (
             <div key={i} className="slanted-card">
-              <img src={card.src} alt="" draggable={false} />
+              <Image
+                src={card.src}
+                alt=""
+                fill
+                sizes="(max-width: 640px) 160px, (max-width: 767px) 220px, (max-width: 1023px) 300px, (max-width: 1279px) 320px, (max-width: 1535px) 380px, 478px"
+                className="object-cover"
+                draggable={false}
+                priority={i >= ANCHOR_INDEX && i < ANCHOR_INDEX + 3}
+              />
             </div>
           ))}
         </div>

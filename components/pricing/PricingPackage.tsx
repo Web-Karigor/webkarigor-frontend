@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { PACKAGE_COLUMNS } from "@/lib/pricing-data";
+import { PACKAGE_COLUMNS, PACKAGE_SECTION } from "@/lib/pricing-data";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.15 } as const;
@@ -11,6 +11,8 @@ const vp = { once: true, amount: 0.15 } as const;
 const PACKAGE_W = 1520;
 
 export default function PricingPackage() {
+  const { title, ellipseSrc, starSrc } = PACKAGE_SECTION;
+
   return (
     <section className="bg-[#F8F6EF] py-[clamp(48px,6vw,80px)]">
       <div
@@ -31,7 +33,7 @@ export default function PricingPackage() {
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
             {/* Top-left — slightly inward from left */}
             <Image
-              src="/pricing/ellipse-1569.png"
+              src={ellipseSrc}
               alt=""
               width={480}
               height={480}
@@ -39,7 +41,7 @@ export default function PricingPackage() {
             />
             {/* Top-right — slightly inward from right */}
             <Image
-              src="/pricing/ellipse-1569.png"
+              src={ellipseSrc}
               alt=""
               width={480}
               height={480}
@@ -47,7 +49,7 @@ export default function PricingPackage() {
             />
             {/* Bottom-left — more inward from left */}
             <Image
-              src="/pricing/ellipse-1569.png"
+              src={ellipseSrc}
               alt=""
               width={480}
               height={480}
@@ -55,7 +57,7 @@ export default function PricingPackage() {
             />
             {/* Bottom-right — more inward from right */}
             <Image
-              src="/pricing/ellipse-1569.png"
+              src={ellipseSrc}
               alt=""
               width={480}
               height={480}
@@ -65,7 +67,7 @@ export default function PricingPackage() {
 
           <div className="relative z-[1] flex flex-col px-[clamp(20px,5vw,72px)] pb-[clamp(32px,5vw,56px)] pt-[clamp(32px,5vw,56px)] lg:min-h-[696px]">
             <h2 className="m-0 mx-auto max-w-[820px] text-center font-montserrat text-[clamp(22px,5.5vw,40px)] font-bold leading-[1.3] tracking-[-0.03em] text-white">
-              A Complete Package Of Everything You Need To Grow
+              {title}
             </h2>
 
             <div className="mt-[clamp(28px,5vw,56px)] grid flex-1 grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-12">
@@ -80,7 +82,7 @@ export default function PricingPackage() {
                       className="flex items-center gap-2.5 font-montserrat text-[clamp(14px,3.5vw,18px)] font-medium leading-[1.4] text-white"
                     >
                       <Image
-                        src="/pricing/star-17.png"
+                        src={starSrc}
                         alt=""
                         width={17}
                         height={17}

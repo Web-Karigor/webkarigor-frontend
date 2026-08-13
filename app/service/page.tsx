@@ -1,27 +1,43 @@
 import type { Metadata } from "next";
-import TechServices from "@/components/home/TechServices";
-import Team from "@/components/home/Team";
-import ServiceClients from "@/components/services/ServiceClients";
-import ServiceContact from "@/components/services/ServiceContact";
-import ServiceFAQ from "@/components/services/ServiceFAQ";
-import ServiceFooter from "@/components/services/ServiceFooter";
+import dynamic from "next/dynamic";
 import ServiceHero from "@/components/services/ServiceHero";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
-import ServiceOfferings from "@/components/services/ServiceOfferings";
-import ServicePricing from "@/components/services/ServicePricing";
-import ServiceTechGrid from "@/components/services/ServiceTechGrid";
-import ServiceTestimonials from "@/components/services/ServiceTestimonials";
-import ServiceWhyChoose from "@/components/services/ServiceWhyChoose";
+import ServiceClients from "@/components/services/ServiceClients";
+import servicesContent from "@/data/services-content.json";
+
+const ServiceOfferings = dynamic(
+  () => import("@/components/services/ServiceOfferings"),
+);
+const TechServices = dynamic(() => import("@/components/home/TechServices"));
+const ServiceTechGrid = dynamic(
+  () => import("@/components/services/ServiceTechGrid"),
+);
+const ServiceWhyChoose = dynamic(
+  () => import("@/components/services/ServiceWhyChoose"),
+);
+const Team = dynamic(() => import("@/components/home/Team"));
+const ServiceTestimonials = dynamic(
+  () => import("@/components/services/ServiceTestimonials"),
+);
+const ServicePricing = dynamic(
+  () => import("@/components/services/ServicePricing"),
+);
+const FAQ = dynamic(() => import("@/components/home/FAQ"));
+const HomeConsultation = dynamic(
+  () => import("@/components/home/HomeConsultation"),
+);
+const ServiceFooter = dynamic(
+  () => import("@/components/services/ServiceFooter"),
+);
 
 export const metadata: Metadata = {
-  title: "Services — Webkarigor",
-  description:
-    "Web design, SEO, digital marketing, mobile apps, branding, and full-stack development tailored to your business goals.",
+  title: servicesContent.metadata.title,
+  description: servicesContent.metadata.description,
 };
 
 export default function ServicePage() {
   return (
-    <div className="bg-[#fffdf6]">
+    <div className="bg-white">
       <ServiceHero />
       <ServiceMarquee />
       <ServiceClients />
@@ -32,9 +48,9 @@ export default function ServicePage() {
       <Team />
       <ServiceTestimonials />
       <ServicePricing />
-      <ServiceFAQ />
+      <FAQ className="bg-white" />
       <ServiceMarquee />
-      <ServiceContact />
+      <HomeConsultation hideSchedule backgroundColor="#FFFEFB" />
       <ServiceFooter />
     </div>
   );

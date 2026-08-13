@@ -4,19 +4,19 @@
 ========================= */
 
 .footer-shell {
-  padding: 72px 20px 40px;
+  padding: 40px 20px 12px;
   background: #fffdf6;
 }
 
 @media (min-width: 768px) {
   .footer-shell {
-    padding: 80px 40px 48px;
+    padding: 48px 40px 14px;
   }
 }
 
 @media (min-width: 1280px) {
   .footer-shell {
-    padding: 88px 60px 56px;
+    padding: 56px 60px 16px;
   }
 }
 
@@ -86,7 +86,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: clamp(72px, 8vw, 104px) clamp(24px, 4vw, 56px) 0;
+  padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 56px) 0;
   text-align: center;
 }
 
@@ -102,13 +102,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(10px, 1.35vw, 22px);
-  width: min(100%, 1046px);
-  min-height: clamp(100px, 12vw, 180px);
+  gap: clamp(6px, 0.9vw, 14px);
+  width: min(100%, 1120px);
+  min-height: 0;
   margin-inline: auto;
   margin-block: 0;
   font-family: var(--font-montserrat);
-  font-size: clamp(1.9rem, 4.6vw, 3.5rem);
+  font-size: clamp(1.7rem, 4vw, 3.75rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   text-align: center;
@@ -117,7 +117,14 @@
 
 .footer-heading-line {
   display: block;
-  line-height: 1.12;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+@media (max-width: 639px) {
+  .footer-heading {
+    font-size: clamp(1.35rem, 5.2vw, 1.85rem);
+  }
 }
 
 .footer-tagline {
@@ -126,14 +133,14 @@
   align-items: center;
   justify-content: space-between;
   width: min(100%, 1225px);
-  min-height: 38px;
+  min-height: 44px;
   margin: clamp(24px, 3vw, 34px) auto 0;
   font-family: var(--font-montserrat);
-  font-size: clamp(0.875rem, 1.25vw, 1.125rem);
-  font-weight: 500;
-  line-height: 38px;
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
   color: #111;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 @media (min-width: 768px) {
@@ -149,8 +156,12 @@
 }
 
 .footer-tagline-sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
-  font-weight: 500;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
   line-height: 1;
 }
 
@@ -160,7 +171,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-bottom: clamp(48px, 6vw, 72px);
+  margin-bottom: clamp(40px, 4.5vw, 56px);
 }
 
 .footer-social-link {
@@ -190,7 +201,7 @@
   width: min(100%, 1331px);
   margin-inline: auto;
   margin-top: auto;
-  padding-bottom: clamp(120px, 22vw, 280px);
+  padding-bottom: clamp(88px, 14vw, 200px);
 }
 
 @media (min-width: 640px) {
@@ -199,7 +210,7 @@
     justify-content: space-between;
     align-items: flex-start;
     width: min(100%, 1331px);
-    padding-bottom: clamp(160px, 22vw, 280px);
+    padding-bottom: clamp(100px, 14vw, 210px);
   }
 }
 
@@ -253,11 +264,15 @@
   align-items: flex-end;
   justify-content: center;
   width: 100%;
+  height: auto;
+  margin: 0;
   box-sizing: border-box;
-  padding: 0 clamp(18px, 5vw, 40px) 0;
-  overflow: hidden;
+  padding: 0 clamp(18px, 5vw, 40px);
+  overflow: visible;
   pointer-events: none;
   user-select: none;
+  /* Sit flush on the card’s bottom edge (slight clip is intentional). */
+  transform: translateY(5%);
 }
 
 .footer-brand {
@@ -268,12 +283,11 @@
   font-family: var(--font-montserrat);
   font-size: clamp(1.5rem, 14cqi, 14.5rem);
   font-weight: 800;
-  line-height: 0.82;
+  line-height: 0.78;
   letter-spacing: -0.045em;
   text-align: center;
   color: #111;
   white-space: nowrap;
-  transform: translateY(0);
   transform-origin: center bottom;
   will-change: transform;
 }
@@ -281,5 +295,23 @@
 @supports not (font-size: 1cqi) {
   .footer-brand {
     font-size: clamp(1.25rem, calc((100vw - 5rem) / 6.8), 14.5rem);
+  }
+}
+
+.footer-copyright {
+  margin: 0;
+  padding: 12px 16px 0;
+  text-align: center;
+  font-family: var(--font-montserrat);
+  font-size: clamp(12px, 1.2vw, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #525151;
+}
+
+@media (min-width: 768px) {
+  .footer-copyright {
+    padding-top: 14px;
   }
 }

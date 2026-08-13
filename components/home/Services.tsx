@@ -2,147 +2,110 @@
 
 import "./Services.css";
 
-import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { memo, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
-  AnimatePresence,
   motion,
   useMotionValue,
   useMotionValueEvent,
-  useSpring,
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import homeContent from "@/data/home-content.json";
 
 /* -------------------------------------------------------------------------- */
 /* Data                                                                       */
 /* -------------------------------------------------------------------------- */
 
-const services = [
-  {
-    title: "Web Application Development",
-    highlight: "And Design",
-    subtitle: "Fast, scalable, and secure solutions for modern businesses.",
-    desc:
-      "From concept to deployment, we develop custom web applications engineered for performance and reliability. Our team transforms complex workflows into smooth digital operations, ensuring your platform grows as your business evolves.",
-    link: "/services/ui-ux",
-    images: [
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/679a9c4888217669122eebaf_3d41798d228903d42862a148dd56aeb1_Project%20Cards%20%2810%29%20%281%29.avif",
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78087a5b72120cc3e5db_d1a5f14e5e5fc69f2dbac575600f06f4_Project%20Cards-6.avif",
-    ],
-  },
-  {
-    title: "Mobile App",
-    highlight: "Development",
-    subtitle: "Seamless mobile experiences that connect with people.",
-    desc: "",
-    link: "/services/web-design",
-    images: [
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78084947770a14f1eb7c_d1cec41f22346c1c941376236623384b_Project%20Cards.avif",
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78089c9a93e810fbfa6e_Project%20Cards-1.avif",
-    ],
-  },
-  {
-    title: "Branding & Digital",
-    highlight: "Identity",
-    subtitle: "Meaningful brands built to inspire confidence.",
-    desc:
-      "Logo Design, Brand Identity, Visual Strategy, Social Media Branding.",
-    link: "/services/logo-branding",
-    images: [
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac7809638da68108df9847_Project%20Cards-4.avif",
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78089a0d6cfed1675211_Project%20Cards-5.avif",
-    ],
-  },
-  {
-    title: "Product Strategy & ",
-    highlight: "Consultation",
-    subtitle: "Expert guidance to turn ideas into scalable products.",
-    desc:
-      "Webflow, Framer Prototypes, CMS Integration, Rapid Landing Pages.",
-    link: "/services/framer-design",
-    images: [
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac780912dabe81710b65ed_8e70a34a4056237eca17e1209cecdebe_Project%20Cards-2.avif",
-      "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78088c2757d4cdf75977_Project%20Cards-3.avif",
-    ],
-  },
-] as const;
+const {
+  badge: servicesBadge,
+  headingAccent: servicesHeadingAccent,
+  headingTitle: servicesHeadingTitle,
+  description: servicesDescription,
+  items: services,
+} = homeContent.services;
+
+const VIEW_PROJECT_LABEL = "View Details";
+const VIEW_PROJECT_HREF = "/projects";
 
 type Service = (typeof services)[number];
 
-const CTA_ARROW =
-  "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67326d59201cc3b185432b90_CTA%20Arrow.svg";
-
-/**
- * Design Monks–style inertia: soft spring lag (Lenis-like),
- * longer text crossfade, hull-height sticky stage.
- */
-const SCROLL_SPRING = { stiffness: 30, damping: 30, mass: 1.05, restDelta: 0.001 };
-const TEXT_DURATION = 0.72;
-const TEXT_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-/** One viewport of scroll for intro header exit (Design Monks style) */
+/** One viewport of scroll for intro header exit */
 const INTRO_SCROLL_VIEWS = 1;
 
-const DESKTOP_GROUP_STEP_PX = 720 + 160;
-const LG_GROUP_STEP_PX = 580 + 100;
-const MOBILE_CARD_GAP = 12;
+const DESKTOP_GROUP_STEP_PX = 820 + 160;
+const LG_GROUP_STEP_PX = 600 + 100;
+/** Mobile stack: scroll length per card (higher = slower) */
+const MOBILE_SCROLL_VH = 1.6;
 
 function getGroupStepPx(width: number, mobileSlotHeight: number) {
   if (width >= 1280) return DESKTOP_GROUP_STEP_PX;
   if (width >= 1024) return LG_GROUP_STEP_PX;
-  return Math.max(mobileSlotHeight + MOBILE_CARD_GAP, 280);
+  return Math.max(mobileSlotHeight, 280);
 }
 
-const SERIF = { fontFamily: "Georgia, 'Times New Roman', serif" } as const;
-
-/* -------------------------------------------------------------------------- */
-/* Helpers                                                                    */
-/* -------------------------------------------------------------------------- */
-
-function getDescription(service: Service) {
-  return service.desc
-    ? `${service.subtitle} ${service.desc}`
-    : service.subtitle;
+function computeSectionHeight(
+  width: number,
+  total: number,
+  introViews: number,
+  stepPx: number,
+  viewportH: number,
+) {
+  if (width < 1024) {
+    const introScroll = introViews * viewportH;
+    return `${viewportH + introScroll + Math.max(total - 1, 0) * stepPx}px`;
+  }
+  return `${(total + introViews) * SCROLL_VH_PER_STEP * 100}vh`;
 }
 
-function getActiveIndex(progress: number, total: number) {
-  return Math.min(total - 1, Math.max(0, Math.floor(progress * total)));
+/** Frame-rate independent ease — silky follow, zero overshoot */
+const SCROLL_SMOOTH = 7.2;
+/** Extra scroll room per service = slower, more controlled scrub */
+const SCROLL_VH_PER_STEP = 1.15;
+
+/**
+ * Hysteresis keeps active row stable while smoothed progress drifts near edges.
+ */
+function getActiveIndex(progress: number, total: number, prev: number) {
+  if (total <= 1) return 0;
+  const exact = progress * (total - 1);
+  if (Math.abs(exact - prev) < 0.38) return prev;
+  return Math.min(total - 1, Math.max(0, Math.round(exact)));
 }
 
 function useActiveIndex(progress: MotionValue<number>, total: number) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useMotionValueEvent(progress, "change", (latest) => {
-    const next = getActiveIndex(latest, total);
-    setActiveIndex((prev) => (prev === next ? prev : next));
+    setActiveIndex((prev) => {
+      const next = getActiveIndex(latest, total, prev);
+      return next === prev ? prev : next;
+    });
   });
 
   return activeIndex;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Header                                                                     */
-/* -------------------------------------------------------------------------- */
 
 const ServicesHeader = memo(function ServicesHeader() {
   return (
     <>
-      <span className="inline-block rounded-full border border-[#38F8AB] px-5 py-2 text-sm font-medium text-[#15D286]">
-        Services
+      <span className="inline-block rounded-full border border-[#38F8AB] px-6 py-2.5 text-[15px] font-medium text-[#15D286] sm:px-7 md:text-lg">
+        {servicesBadge}
       </span>
 
       <h2 className="section-heading">
         <span className="section-heading-split-accent section-accent-text">
-          We Work to
+          {servicesHeadingAccent}
         </span>
-        <span className="section-heading-split-title">Build Brands</span>
+        <span className="section-heading-split-title">{servicesHeadingTitle}</span>
       </h2>
 
       <p className="mx-auto mt-3 max-w-2xl px-2 text-sm text-gray-600 sm:mt-4 sm:text-base">
-        From idea to execution, we help build brands through modern software,
-        intuitive design, and strategic product thinking that drives real
-        business results.
+        {servicesDescription}
       </p>
     </>
   );
@@ -201,77 +164,56 @@ const ServicesIntroHeader = memo(function ServicesIntroHeader({
 });
 
 /* -------------------------------------------------------------------------- */
-/* Left — single active text                                                    */
+/* Left — sticky list; active row expands description                         */
 /* -------------------------------------------------------------------------- */
 
-const textVariants = {
-  enter: { opacity: 0, y: 28, filter: "blur(6px)" },
-  center: { opacity: 1, y: 0, filter: "blur(0px)" },
-  exit: { opacity: 0, y: -28, filter: "blur(6px)" },
-};
-
-const ServiceActiveText = memo(function ServiceActiveText({
-  service,
-}: {
-  service: Service;
-}) {
-  return (
-    <motion.div
-      variants={textVariants}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      transition={{ duration: TEXT_DURATION, ease: TEXT_EASE }}
-      className="w-full"
-      style={{ willChange: "transform, opacity, filter" }}
-    >
-      <h3
-        className="text-[1.75rem] font-bold leading-[1.05] text-[#141414] sm:text-[2.25rem] lg:text-[2.75rem] xl:text-[4rem]"
-        style={{ letterSpacing: "-1.5px" }}
-      >
-        {service.title}
-        <span className="italic text-[#62F7B3]" style={SERIF}>
-          {service.highlight}
-        </span>
-      </h3>
-
-      <div
-        className="services-story-divider services-story-divider--mobile"
-        aria-hidden
-      />
-
-      <p className="text-sm leading-[1.65] text-[#141414]/60 sm:text-base lg:text-lg lg:leading-[1.8]">
-        {getDescription(service)}
-      </p>
-
-      <Link
-        href={service.link}
-        className="group mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#141414] transition-colors duration-300 hover:text-[#62F7B3] lg:mt-8 lg:gap-3 lg:text-[15px]"
-      >
-        <span>See More</span>
-        <img
-          src={CTA_ARROW}
-          alt=""
-          className="h-[18px] w-[18px] transition-transform duration-500 ease-out group-hover:translate-x-1.5"
-          loading="lazy"
-        />
-      </Link>
-    </motion.div>
-  );
-});
-
-const ServicesTextPanel = memo(function ServicesTextPanel({
+const ServicesListPanel = memo(function ServicesListPanel({
   activeIndex,
 }: {
   activeIndex: number;
 }) {
-  const service = services[activeIndex];
-
   return (
-    <div className="services-story-text-panel flex w-full min-w-0 items-start pt-2 lg:h-full lg:items-center lg:py-0 lg:pt-0">
-      <AnimatePresence mode="wait" initial={false}>
-        <ServiceActiveText key={service.link} service={service} />
-      </AnimatePresence>
+    <div className="services-story-text-panel hidden w-full min-w-0 items-start font-montserrat lg:flex lg:items-center">
+      <ul className="services-story-list w-full">
+        {services.map((service, index) => {
+          const isActive = index === activeIndex;
+          const fullTitle = [service.title, service.highlight]
+            .filter(Boolean)
+            .join(" ");
+
+          return (
+            <li
+              key={`${index}-${service.link}`}
+              className={`services-story-list-item${isActive ? " is-active" : ""}`}
+            >
+              <h3 className="services-story-list-title">{fullTitle}</h3>
+              <p className="services-story-list-subtitle">{service.subtitle}</p>
+
+              <div className="services-story-list-desc-wrap" aria-hidden={!isActive}>
+                <div className="services-story-list-desc-inner">
+                  <p className="services-story-list-desc">{service.desc}</p>
+                  <div className="services-story-list-cta-slot">
+                    <div className="services-story-list-cta-slot-inner">
+                      <Link
+                        href={VIEW_PROJECT_HREF}
+                        className="services-story-list-cta"
+                        tabIndex={isActive ? 0 : -1}
+                      >
+                        <span>{VIEW_PROJECT_LABEL}</span>
+                        <ArrowRight
+                          className="services-story-list-cta-icon"
+                          strokeWidth={2.25}
+                          aria-hidden
+                        />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 });
@@ -297,13 +239,14 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
     const pos = p * (total - 1);
     return Math.max(0, 1 - Math.abs(pos - index));
   });
-  const scale = useTransform(focus, [0, 1], [0.96, 1]);
-  const opacity = useTransform(focus, [0, 0.4, 1], [0, 0, 1]);
+  // Soft ease — never fully disappears, gentle scale
+  const scale = useTransform(focus, [0, 1], [0.97, 1]);
+  const opacity = useTransform(focus, [0, 0.35, 1], [0.4, 0.72, 1]);
 
   return (
     <motion.div
       className="services-story-image-group"
-      style={{ scale, opacity, willChange: "transform, opacity" }}
+      style={{ scale, opacity }}
     >
       <div className="services-story-img services-story-img--primary">
         <Image
@@ -313,7 +256,6 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
           sizes="(max-width: 1023px) 100vw, 420px"
           className="object-cover object-top"
           priority={eager}
-          unoptimized
         />
       </div>
       <div className="services-story-img services-story-img--secondary">
@@ -323,7 +265,6 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
           fill
           sizes="(max-width: 1023px) 100vw, 360px"
           className="object-cover object-top"
-          unoptimized
         />
       </div>
     </motion.div>
@@ -346,7 +287,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
   return (
     <div
       ref={viewportRef}
-      className="services-story-images-viewport relative min-h-0 w-full flex-1 overflow-hidden lg:h-full lg:w-[var(--services-layout-w)] lg:max-w-[var(--services-layout-w)] lg:flex-none"
+      className="services-story-images-viewport relative hidden min-h-0 w-full flex-1 overflow-hidden lg:block lg:h-full lg:w-[var(--services-layout-w)] lg:max-w-[var(--services-layout-w)] lg:flex-none"
       style={
         {
           "--services-slot-h": `${slotHeight}px`,
@@ -359,7 +300,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
       >
         {services.map((service, index) => (
           <ServiceImageGroup
-            key={service.link}
+            key={`${index}-${service.link}`}
             service={service}
             index={index}
             progress={progress}
@@ -373,25 +314,96 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
 });
 
 /* -------------------------------------------------------------------------- */
+/* Mobile — natural scroll + slow fade in / out per card                        */
+/* -------------------------------------------------------------------------- */
+
+const ServicesMobileSlide = memo(function ServicesMobileSlide({
+  service,
+  eager,
+}: {
+  service: Service;
+  eager?: boolean;
+}) {
+  const fullTitle = [service.title, service.highlight].filter(Boolean).join(" ");
+
+  return (
+    <article className="services-story-mobile-slide">
+      <div className="services-story-mobile-slide-image">
+        <Image
+          src={service.images[0]}
+          alt={`${service.title} preview`}
+          fill
+          sizes="100vw"
+          className="object-cover object-top"
+          priority={eager}
+        />
+      </div>
+
+      <div className="services-story-mobile-slide-text">
+        <h3 className="services-story-mobile-slide-title">{fullTitle}</h3>
+        <p className="services-story-mobile-slide-subtitle">{service.subtitle}</p>
+        <p className="services-story-mobile-slide-desc">{service.desc}</p>
+        <Link href={VIEW_PROJECT_HREF} className="services-story-list-cta">
+          <span>{VIEW_PROJECT_LABEL}</span>
+          <ArrowRight
+            className="services-story-list-cta-icon"
+            strokeWidth={2.25}
+            aria-hidden
+          />
+        </Link>
+      </div>
+    </article>
+  );
+});
+
+const ServicesMobileTrack = memo(function ServicesMobileTrack({
+  viewportRef,
+  stackRef,
+}: {
+  viewportRef: React.Ref<HTMLDivElement>;
+  stackRef: React.Ref<HTMLDivElement>;
+}) {
+  return (
+    <div
+      ref={viewportRef}
+      className="services-story-mobile-viewport relative w-full lg:hidden"
+    >
+      <div ref={stackRef} className="services-story-mobile-track">
+        {services.map((service, index) => (
+          <ServicesMobileSlide
+            key={`mobile-${index}-${service.link}`}
+            service={service}
+            eager={index === 0}
+          />
+        ))}
+      </div>
+    </div>
+  );
+});
+
+/* -------------------------------------------------------------------------- */
 /* Section                                                                    */
 /* -------------------------------------------------------------------------- */
 
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageViewportRef = useRef<HTMLDivElement>(null);
+  const mobileViewportRef = useRef<HTMLDivElement>(null);
+  const mobileStackRef = useRef<HTMLDivElement>(null);
   const groupStepRef = useRef(DESKTOP_GROUP_STEP_PX);
   const total = services.length;
   const [slotHeight, setSlotHeight] = useState(420);
   const [introViews, setIntroViews] = useState(INTRO_SCROLL_VIEWS);
-  const introViewsRef = useRef(INTRO_SCROLL_VIEWS);
-
-  const sectionHeight = useMemo(
-    () => `${(total + introViews) * 100}vh`,
-    [total, introViews],
+  const [sectionHeight, setSectionHeight] = useState(
+    `${(total + INTRO_SCROLL_VIEWS) * SCROLL_VH_PER_STEP * 100}vh`,
   );
+  const introViewsRef = useRef(INTRO_SCROLL_VIEWS);
+  const targetProgressRef = useRef(0);
+  const smoothProgressRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const lastTimeRef = useRef(0);
 
-  const rawOverall = useMotionValue(0);
-  const overall = useSpring(rawOverall, SCROLL_SPRING);
+  const overall = useMotionValue(0);
 
   /** 0→1: intro header slides up; 0→1: service story after intro */
   const introProgress = useTransform(overall, (p) => {
@@ -412,7 +424,8 @@ export default function Services() {
   const activeIndex = useActiveIndex(storyProgress, total);
 
   const columnY = useTransform(storyProgress, (p) => {
-    return -p * (total - 1) * groupStepRef.current;
+    const step = groupStepRef.current;
+    return -p * (total - 1) * step;
   });
 
   useLayoutEffect(() => {
@@ -427,6 +440,7 @@ export default function Services() {
     return () => mq.removeEventListener("change", syncIntro);
   }, []);
 
+  /* Desktop scroll progress (framer) + layout measure */
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const viewport = imageViewportRef.current;
@@ -434,48 +448,137 @@ export default function Services() {
 
     const measureLayout = () => {
       const width = window.innerWidth;
-      const nextSlot = width >= 1024 ? 0 : viewport?.offsetHeight ?? 0;
-      setSlotHeight(nextSlot);
-      groupStepRef.current = getGroupStepPx(width, nextSlot);
+      const viewportH = window.innerHeight;
+
+      if (width >= 1024) {
+        setSlotHeight(0);
+        groupStepRef.current = getGroupStepPx(width, 0);
+        setSectionHeight(
+          computeSectionHeight(
+            width,
+            total,
+            introViewsRef.current,
+            groupStepRef.current,
+            viewportH,
+          ),
+        );
+      } else {
+        /* Natural document flow on mobile — no tall pin spacer / bottom gap */
+        groupStepRef.current = Math.round(viewportH * MOBILE_SCROLL_VH);
+        setSlotHeight(0);
+        setSectionHeight("auto");
+      }
     };
 
-    const measureProgress = () => {
+    const readTarget = () => {
       const rect = section.getBoundingClientRect();
       const scrollable = Math.max(section.offsetHeight - window.innerHeight, 1);
       const passed = Math.min(Math.max(-rect.top, 0), scrollable);
-      rawOverall.set(passed / scrollable);
+      targetProgressRef.current = passed / scrollable;
     };
 
     measureLayout();
-    measureProgress();
+    readTarget();
+    smoothProgressRef.current = targetProgressRef.current;
+    overall.set(smoothProgressRef.current);
 
-    let ticking = false;
+    const tick = (now: number) => {
+      const last = lastTimeRef.current || now;
+      const dt = Math.min(0.048, (now - last) / 1000);
+      lastTimeRef.current = now;
+
+      const alpha = 1 - Math.exp(-SCROLL_SMOOTH * dt);
+      const target = targetProgressRef.current;
+      const current = smoothProgressRef.current;
+      const next = current + (target - current) * alpha;
+      smoothProgressRef.current = next;
+      overall.set(next);
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
     const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        measureProgress();
-        ticking = false;
-      });
+      readTarget();
     };
 
     const onResize = () => {
       measureLayout();
-      measureProgress();
+      readTarget();
+      smoothProgressRef.current = targetProgressRef.current;
+      overall.set(smoothProgressRef.current);
+      ScrollTrigger.refresh();
     };
 
-    const observer = viewport ? new ResizeObserver(onResize) : null;
-    if (viewport && observer) observer.observe(viewport);
+    const observer = new ResizeObserver(onResize);
+    if (viewport) observer.observe(viewport);
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
+    rafRef.current = requestAnimationFrame(tick);
 
     return () => {
-      observer?.disconnect();
+      observer.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
-  }, [rawOverall]);
+  }, [overall, introViews, total]);
+
+  /* Mobile: natural scroll + slow fade in / fade out per card */
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const stack = mobileStackRef.current;
+    if (!section || !stack) return;
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(max-width: 1023px)", () => {
+        const slides = gsap.utils.toArray<HTMLElement>(
+          stack.querySelectorAll(".services-story-mobile-slide"),
+        );
+        if (!slides.length) return;
+
+        gsap.set(slides, { autoAlpha: 0.1, y: 64 });
+
+        const triggers: ScrollTrigger[] = [];
+
+        slides.forEach((slide) => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: slide,
+              start: "top 98%",
+              end: "bottom 8%",
+              scrub: 2.6,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          tl.fromTo(
+            slide,
+            { autoAlpha: 0.08, y: 72 },
+            { autoAlpha: 1, y: 0, duration: 1.15, ease: "none" },
+          ).to(slide, {
+            autoAlpha: 0.08,
+            y: -56,
+            duration: 1.15,
+            ease: "none",
+          });
+
+          if (tl.scrollTrigger) triggers.push(tl.scrollTrigger);
+        });
+
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+
+        return () => {
+          triggers.forEach((t) => t.kill());
+          gsap.set(slides, { clearProps: "transform,opacity,visibility" });
+        };
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, [total]);
 
   return (
     <section
@@ -483,12 +586,17 @@ export default function Services() {
       className="services-story relative"
       style={{ height: sectionHeight }}
     >
-      <div className="services-story-pin sticky top-0 h-[100dvh] overflow-hidden">
-        <div className="services-story-shell">
+      <div className="services-story-pin sticky top-0 h-[100dvh] overflow-hidden max-lg:relative max-lg:h-auto max-lg:overflow-visible">
+        <div className="services-story-shell max-lg:h-auto">
           <ServicesIntroHeader introProgress={introProgress} />
 
-          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-3 lg:min-h-0 lg:gap-0">
-            <ServicesTextPanel activeIndex={activeIndex} />
+          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-0 max-lg:flex-none lg:min-h-0 lg:gap-0">
+            <ServicesMobileTrack
+              viewportRef={mobileViewportRef}
+              stackRef={mobileStackRef}
+            />
+
+            <ServicesListPanel activeIndex={activeIndex} />
             <ServicesImageTrack
               columnY={columnY}
               progress={storyProgress}

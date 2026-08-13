@@ -6,6 +6,18 @@ import { ChevronDown, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { MANPOWER_HERO } from "@/lib/manpower-data";
 
+/** Desktop hero image geometry — Figma placement */
+const HERO_LAYOUT = {
+  width: 869,
+  height: 873,
+} as const;
+
+/** Doodle positions — layout only; src from JSON */
+const DOODLE_LAYOUT = [
+  { width: 161.41, height: 286.6, top: 124, left: 1047, rotate: -29.01 },
+  { width: 161.41, height: 286.6, top: 84, left: 1677, rotate: -29.01 },
+] as const;
+
 function BdFlag({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -22,7 +34,6 @@ function BdFlag({ className = "" }: { className?: string }) {
 
 export default function ManpowerHero() {
   const [phone, setPhone] = useState("");
-  const { heroLayout } = MANPOWER_HERO;
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -46,16 +57,16 @@ export default function ManpowerHero() {
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-white shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         <div className="mx-auto flex h-[72px] w-full max-w-[1800px] items-center justify-between px-[clamp(16px,3.5vw,50px)] sm:h-[88px] lg:h-[108px]">
           <Link
-            href="/"
+            href={MANPOWER_HERO.brandHref}
             className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
           >
-            Webkarigor
+            {MANPOWER_HERO.brand}
           </Link>
           <Link
-            href="#contact"
+            href={MANPOWER_HERO.navCta.href}
             className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#0EC47B] px-5 py-2.5 font-montserrat text-[clamp(13px,1vw,15px)] font-bold text-white transition-opacity hover:opacity-90 sm:px-6 sm:py-3"
           >
-            {MANPOWER_HERO.headerCta}
+            {MANPOWER_HERO.navCta.label}
           </Link>
         </div>
       </header>
@@ -64,9 +75,9 @@ export default function ManpowerHero() {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 top-0 z-[2] mx-auto hidden h-full w-full max-w-[1920px] lg:block">
         <Image
           src={MANPOWER_HERO.heroImage}
-          alt="Happy student giving thumbs up"
-          width={heroLayout.width}
-          height={heroLayout.height}
+          alt={MANPOWER_HERO.heroImageAlt}
+          width={HERO_LAYOUT.width}
+          height={HERO_LAYOUT.height}
           priority
           className="absolute object-contain object-bottom"
           style={{
@@ -79,10 +90,10 @@ export default function ManpowerHero() {
           sizes="(max-width: 1280px) 48vw, 629px"
         />
 
-        {MANPOWER_HERO.doodles.map((doodle, i) => (
+        {DOODLE_LAYOUT.map((doodle, i) => (
           <Image
             key={`doodle-${i}`}
-            src={doodle.src}
+            src={MANPOWER_HERO.doodleSrc}
             alt=""
             width={Math.round(doodle.width)}
             height={Math.round(doodle.height)}
@@ -143,7 +154,7 @@ export default function ManpowerHero() {
                 type="submit"
                 className="w-full shrink-0 rounded-full bg-[#0EC47B] px-5 py-3 font-montserrat text-[14px] font-bold text-white transition-opacity hover:opacity-90 md:w-auto md:px-6"
               >
-                {MANPOWER_HERO.ctaLabel}
+                {MANPOWER_HERO.primaryCta.label}
               </button>
             </form>
 
@@ -163,7 +174,7 @@ export default function ManpowerHero() {
             <div className="relative mx-auto aspect-[629/673] w-full">
               <Image
                 src={MANPOWER_HERO.heroImage}
-                alt="Happy student giving thumbs up"
+                alt={MANPOWER_HERO.heroImageAlt}
                 fill
                 priority
                 className="object-contain object-bottom"

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ManpowerFAQ from "@/components/services/manpower/ManpowerFAQ";
+import FAQ from "@/components/home/FAQ";
 import ManpowerFeaturesOrbit from "@/components/services/manpower/ManpowerFeaturesOrbit";
 import ManpowerHero from "@/components/services/manpower/ManpowerHero";
 import ManpowerPortfolio from "@/components/services/manpower/ManpowerPortfolio";
@@ -8,15 +8,12 @@ import ManpowerReviews from "@/components/services/manpower/ManpowerReviews";
 import ManpowerTeam from "@/components/services/manpower/ManpowerTeam";
 import ManpowerTrusted from "@/components/services/manpower/ManpowerTrusted";
 import ManpowerWhyChoose from "@/components/services/manpower/ManpowerWhyChoose";
-import ServiceContact from "@/components/services/ServiceContact";
+import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
+import { MANPOWER_METADATA } from "@/lib/manpower-data";
 
-export const metadata: Metadata = {
-  title: "Manpower Services — Webkarigor",
-  description:
-    "Hire verified talent, scale teams fast, and deliver with Webkarigor manpower services — staffing, squads, and flexible engagement models.",
-};
+export const metadata: Metadata = MANPOWER_METADATA;
 
 export default function ManpowerServicePage() {
   return (
@@ -29,9 +26,9 @@ export default function ManpowerServicePage() {
       <ManpowerTeam />
       <ManpowerReviews />
       <ManpowerPricing />
-      <ManpowerFAQ />
+      <FAQ className="bg-white" />
       <ServiceMarquee />
-      <ServiceContact />
+      <HomeConsultation hideSchedule backgroundColor="#FFFEFB" />
       <ServiceFooter />
     </div>
   );

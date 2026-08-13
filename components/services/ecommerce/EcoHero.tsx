@@ -5,11 +5,9 @@ import Link from "next/link";
 import { Phone } from "lucide-react";
 import { SERVICE_PAGE_GUTTER } from "@/lib/service-layout";
 import { ECO_HERO } from "@/lib/ecommerce-data";
-import { CLIENT_LOGOS } from "@/lib/services-data";
 
 /** Figma: OUR TOP CLIENTS row — 461 × 60, each mark 60 × 60 */
-const ECO_CLIENTS = CLIENT_LOGOS.slice(0, 5);
-
+const ECO_CLIENTS = ECO_HERO.clients;
 
 export default function EcoHero() {
   return (
@@ -17,16 +15,16 @@ export default function EcoHero() {
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         <div className={`${SERVICE_PAGE_GUTTER} flex h-[72px] items-center justify-between sm:h-[88px] lg:h-[108px]`}>
           <Link
-            href="/"
+            href={ECO_HERO.brandHref}
             className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
           >
-            Webkarigor
+            {ECO_HERO.brand}
           </Link>
           <Link
-            href="#contact"
+            href={ECO_HERO.navCta.href}
             className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#0EC47B] px-5 py-2.5 font-montserrat text-[clamp(13px,1vw,15px)] font-bold text-white transition-opacity hover:opacity-90 sm:px-6 sm:py-3"
           >
-            Get a Quote
+            {ECO_HERO.navCta.label}
           </Link>
         </div>
       </header>
@@ -61,7 +59,7 @@ export default function EcoHero() {
         >
           <Image
             src={ECO_HERO.heroImage}
-            alt="Ecommerce shopping experience"
+            alt={ECO_HERO.heroImageAlt}
             fill
             priority
             className="object-contain object-right-bottom"
@@ -92,24 +90,24 @@ export default function EcoHero() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
-              href="#contact"
+              href={ECO_HERO.primaryCta.href}
               className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"
             >
-              Start Your Project
+              {ECO_HERO.primaryCta.label}
             </Link>
             <a
               href={`tel:${ECO_HERO.hotline.replace(/-/g, "")}`}
               className="inline-flex items-center gap-2.5 rounded-full border border-[#1f1e1c] bg-transparent px-5 py-3.5 font-montserrat text-[14px] font-semibold text-black transition-colors hover:bg-black/[0.03]"
             >
               <Phone className="h-4 w-4 shrink-0" aria-hidden />
-              Say hello: {ECO_HERO.hotline}
+              {ECO_HERO.hotlineLabel}: {ECO_HERO.hotline}
             </a>
           </div>
 
           {/* OUR TOP CLIENTS — logo row 461 × 60 */}
           <div className="mt-auto">
             <p className="m-0 font-montserrat text-[12px] font-bold uppercase tracking-[0.08em] text-[#1f1e1c]">
-              Our Top Clients
+              {ECO_HERO.clientsLabel}
             </p>
             <div
               className="mt-4 flex h-[60px] w-[461px] max-w-full items-center justify-between"
@@ -117,14 +115,14 @@ export default function EcoHero() {
               {ECO_CLIENTS.map((client) => (
                 <div
                   key={client.name}
-                  className="relative flex h-[60px] w-[60px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80"
+                  className="group relative flex h-[60px] w-[60px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80"
                 >
                   <Image
                     src={client.src}
                     alt={client.name}
                     width={60}
                     height={60}
-                    className="h-[60px] w-[60px] object-contain opacity-80 grayscale"
+                    className="h-[60px] w-[60px] object-contain opacity-80 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
                     unoptimized
                   />
                 </div>
@@ -157,24 +155,24 @@ export default function EcoHero() {
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link
-              href="#contact"
+              href={ECO_HERO.primaryCta.href}
               className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-7 py-3.5 font-montserrat text-[14px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)]"
             >
-              Start Your Project
+              {ECO_HERO.primaryCta.label}
             </Link>
             <a
               href={`tel:${ECO_HERO.hotline.replace(/-/g, "")}`}
               className="inline-flex items-center gap-2 rounded-full border border-[#1f1e1c] bg-transparent px-4 py-3 font-montserrat text-[13px] font-semibold text-black"
             >
               <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
-              Say hello: {ECO_HERO.hotline}
+              {ECO_HERO.hotlineLabel}: {ECO_HERO.hotline}
             </a>
           </div>
 
           <div className="relative mx-auto mt-10 aspect-[808/712] w-full max-w-[480px]">
             <Image
               src={ECO_HERO.heroImage}
-              alt="Ecommerce shopping experience"
+              alt={ECO_HERO.heroImageAlt}
               fill
               priority
               className="object-contain object-bottom"
@@ -184,20 +182,20 @@ export default function EcoHero() {
 
           <div className="mt-8">
             <p className="m-0 font-montserrat text-[12px] font-bold uppercase tracking-[0.08em] text-[#1f1e1c]">
-              Our Top Clients
+              {ECO_HERO.clientsLabel}
             </p>
             <div className="mt-4 flex h-[60px] w-full max-w-[461px] items-center justify-between gap-2">
               {ECO_CLIENTS.map((client) => (
                 <div
                   key={client.name}
-                  className="relative flex h-[52px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80 sm:h-[60px] sm:w-[60px]"
+                  className="group relative flex h-[52px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80 sm:h-[60px] sm:w-[60px]"
                 >
                   <Image
                     src={client.src}
                     alt={client.name}
                     width={60}
                     height={60}
-                    className="h-full w-full object-contain opacity-80 grayscale"
+                    className="h-full w-full object-contain opacity-80 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
                     unoptimized
                   />
                 </div>

@@ -3,14 +3,14 @@
   position: relative;
   isolation: isolate;
   z-index: 1;
-  overflow: hidden;
+  overflow: clip;
   background: #fbf9f3;
-  padding: clamp(72px, 8vw, 120px) 0 clamp(48px, 6vw, 88px);
-  --case-section-w: 1344px;
+  padding: clamp(72px, 8vw, 120px) 0 0;
+  /* Figma card frame 1446 */
+  --case-section-w: 1446px;
 }
 
 .case-section .pin-spacer {
-  overflow: hidden;
   background: #fbf9f3;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .case-section-header {
-  margin-bottom: clamp(48px, 6vw, 80px);
+  margin-bottom: clamp(4px, 1vw, 8px);
   text-align: center;
 }
 
@@ -28,11 +28,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 28px;
-  padding: 0 20px;
+  min-height: 0;
+  height: auto;
+  padding: 10px 22px;
   border-radius: 999px;
   border: 1px solid #38f8ab;
-  background: rgba(56, 248, 171, 0.1);
+  background: transparent;
 }
 
 .case-section-heading {
@@ -40,8 +41,36 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 24px 0 20px;
+  margin: 14px 0 12px;
   line-height: 140%;
+}
+
+.case-section-heading .section-heading-split-accent {
+  transform: translate(-0.15rem, -0.2rem);
+}
+
+.case-section-heading .section-heading-split-title {
+  transform: translate(0.15rem, 0.35rem);
+}
+
+@media (min-width: 640px) {
+  .case-section-heading .section-heading-split-accent {
+    transform: translate(-0.3rem, -0.35rem);
+  }
+
+  .case-section-heading .section-heading-split-title {
+    transform: translate(0.3rem, 0.65rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .case-section-heading .section-heading-split-accent {
+    transform: translate(-0.45rem, -0.5rem);
+  }
+
+  .case-section-heading .section-heading-split-title {
+    transform: translate(0.45rem, 1rem);
+  }
 }
 
 .case-section-desc {
@@ -73,49 +102,9 @@
   position: relative;
 }
 
-.case-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-  display: none;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px 7px;
-  border-radius: 6px;
-  background: #fff;
-  color: #111;
-  pointer-events: none;
-  transform-origin: 0 0;
-  transition: opacity 0.15s ease;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  will-change: transform, opacity;
-}
-
-.case-cursor__text {
-  font-family: var(--font-montserrat);
-  font-size: 0.72rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.case-cursor__icon {
-  display: inline-flex;
-  width: 12px;
-  height: 13px;
-  flex-shrink: 0;
-}
-
 @media (min-width: 1024px) {
   .case-stack {
-    cursor: none;
-  }
-
-  .case-cursor {
-    display: flex;
+    cursor: pointer;
   }
 }
 
@@ -147,25 +136,28 @@
 
 .tiles_stack_list {
   position: relative;
-  width: 100%;
-  height: var(--case-card-height, 564px);
-  max-height: min(var(--case-card-height, 564px), calc(100dvh - 80px));
+  /* Same centered width as header — before & during pin */
+  width: min(var(--case-section-w), calc(100% - 40px));
+  height: 694px;
   margin: 0 auto;
   transform-style: preserve-3d;
   perspective: 1200px;
   overflow: visible;
-  --case-card-height: clamp(420px, 70dvh, 756px);
+  --case-card-height: 694px;
 }
 
 .tiles_stack_pin {
   height: 100vh;
   height: 100dvh;
   width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #fbf9f3;
-  will-change: transform;
+  box-sizing: border-box;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .tiles_stack_item {
@@ -176,19 +168,23 @@
   will-change: transform;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
+/* Figma card: radius 40 · padding 40 · gap 24 · height 694 · left text / right image */
 .service-card {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: var(--case-card-height, 564px);
-  border-radius: clamp(20px, 2vw, 32px);
-  padding: clamp(24px, 3vw, 40px);
-  color: #fbf9ef;
+  height: 694px;
+  min-height: 694px;
+  max-height: 694px;
+  border-radius: 40px;
+  padding: 40px;
+  color: #ffffff;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .service-card-link {
@@ -204,7 +200,7 @@
   flex: 1;
   flex-direction: row;
   align-items: stretch;
-  gap: clamp(20px, 3vw, 40px);
+  gap: 24px;
   min-height: 0;
 }
 
@@ -216,73 +212,150 @@
 }
 
 .service-card-title {
-  flex: 1 1 58%;
+  flex: 1 1 56%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: clamp(24px, 3vw, 40px);
+  gap: 40px;
   min-width: 0;
-  padding-right: clamp(32px, 4vw, 56px);
+  padding-right: 0;
 }
 
 .service-card-copy {
   display: flex;
   flex-direction: column;
-  gap: clamp(12px, 1.6vw, 20px);
+  gap: 0;
+  max-width: min(655px, 100%);
 }
 
-.service-card-count {
-  position: absolute;
-  top: clamp(24px, 3vw, 40px);
-  right: clamp(24px, 3vw, 40px);
-  z-index: 3;
-  font-family: var(--font-montserrat);
-  font-size: clamp(1.25rem, 2vw, 2.35rem);
-  font-weight: 500;
-  line-height: 1;
-  opacity: 0.95;
-}
-
-.service_card_title {
-  font-family: var(--font-montserrat);
-  font-size: clamp(1.75rem, 3.1vw, 3.75rem);
+/* Figma — tags Montserrat 20 · hug 24 · gap to title 21 */
+.service-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 0 24px;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
-  margin: 0;
-  max-width: 100%;
+  font-style: italic;
+  line-height: 120%;
+  letter-spacing: 0;
+  color: #ffffff;
+  white-space: nowrap;
 }
 
-.service-card-desc {
-  font-family: var(--font-montserrat);
-  font-size: clamp(0.8125rem, 1.05vw, 1.0625rem);
-  line-height: 1.35;
-  font-weight: 500;
+.service-card-tags-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.service-card-sep {
+  display: inline-block;
+  margin: 0 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Figma — Montserrat Bold Italic 40 / 120% / +5% · W fill 584 · H hug */
+.service_card_title {
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 120%;
+  letter-spacing: 0.05em;
+  margin: 0 0 28px;
   max-width: 100%;
-  opacity: 0.92;
+  color: #ffffff;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.service_card_title.is-one-line {
+  white-space: nowrap;
+}
+
+/* Figma — body Montserrat Medium 18 / 149% / +5% · W 655 · H hug ~135 */
+.service-card-desc {
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 149%;
+  letter-spacing: 0.05em;
+  max-width: 655px;
+  margin: 0 0 64px;
+  color: #ffffff;
 }
 
 .service-card-desc p {
   margin: 0;
 }
 
+.service-card-platforms {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 0;
+}
+
+/* Figma — Platforms Montserrat Bold 32 / 120% / 0% · 319×38 */
+.service-card-platforms-label {
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+/* Figma — Web • Android • iOS · Montserrat SemiBold 20 / 120% · gap 24 */
+.service-card-platforms-list {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+.service-card-platforms-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.service-card-platforms-sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  line-height: 1;
+}
+
 .service-card-content {
-  flex: 0 1 42%;
+  flex: 0 0 auto;
+  width: 493px;
   display: flex;
   align-items: stretch;
-  align-self: stretch;
+  align-self: center;
   min-width: 0;
 }
 
+/* Figma — right image 493 × 614 */
 .service-card-media {
   position: relative;
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  min-height: clamp(240px, 38vh, 100%);
-  border-radius: clamp(16px, 2vw, 24px);
+  flex: none;
+  width: 493px;
+  height: 614px;
+  border-radius: 28px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .service-card-featured-img {
@@ -292,7 +365,7 @@
 .service-card-author {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-top: auto;
 }
 
@@ -312,20 +385,39 @@
 
 .author_name,
 .author_job {
-  display: block;
-  font-family: var(--font-montserrat);
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
 }
 
 .author_name {
-  font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+  display: block;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 140%;
+  color: #ffffff;
 }
 
 .author_job {
-  font-size: clamp(0.6875rem, 0.9vw, 0.8125rem);
-  opacity: 0.88;
-  line-height: 1.2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 140%;
+  color: #ffffff;
+}
+
+.author_job-part {
+  display: inline-flex;
+  align-items: center;
+}
+
+.author_job-sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35em;
+  line-height: 1;
 }
 
 /* md / lg / xl — desktop stack (mobile unchanged below 1024px) */
@@ -336,14 +428,16 @@
   }
 
   .tiles_stack_list {
-    --case-card-height: clamp(460px, 74dvh, 540px);
-    max-height: min(var(--case-card-height), calc(100dvh - 40px));
+    width: calc(100% - 40px);
+    max-width: 720px;
+    height: 694px;
+    --case-card-height: 694px;
   }
 
   .service-card {
     gap: 20px;
-    padding: 22px;
-    border-radius: 20px;
+    padding: 28px;
+    border-radius: 28px;
   }
 
   .service-card-body {
@@ -353,15 +447,35 @@
 
   .service-card-title {
     flex: none;
-    padding-right: 48px;
+    padding-right: 0;
   }
 
   .service_card_title {
-    font-size: clamp(1.375rem, 3.2vw, 1.75rem);
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+
+  .service-card-tags {
+    font-size: 18px;
+    margin-bottom: 18px;
   }
 
   .service-card-desc {
-    font-size: 0.8125rem;
+    font-size: 15px;
+    margin-bottom: 44px;
+  }
+
+  .service-card-platforms {
+    gap: 12px;
+  }
+
+  .service-card-platforms-label {
+    font-size: 26px;
+  }
+
+  .service-card-platforms-list {
+    font-size: 18px;
+    gap: 20px;
   }
 
   .service-card-content {
@@ -370,79 +484,83 @@
   }
 
   .service-card-media {
+    width: 100%;
+    height: auto;
     min-height: clamp(200px, 48vw, 280px);
+    border-radius: 20px;
   }
 }
 
 @media (min-width: 1024px) and (max-width: 1279px) {
-  .case-section {
-    --case-section-w: 1344px;
-  }
-
   .case-section-inner {
     width: min(var(--case-section-w), calc(100% - 48px));
   }
 
   .tiles_stack_list {
-    --case-card-height: clamp(500px, 72dvh, 680px);
-    max-height: min(var(--case-card-height), calc(100dvh - 56px));
+    width: min(var(--case-section-w), calc(100% - 48px));
+    height: 694px;
+    --case-card-height: 694px;
   }
 
   .service-card {
     padding: 32px;
+    border-radius: 32px;
+  }
+
+  .service-card-body {
+    gap: 20px;
   }
 
   .service_card_title {
-    font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+    font-size: 36px;
+    margin-bottom: 18px;
   }
 
   .service-card-content {
-    flex: 0 1 40%;
+    width: min(493px, 42%);
+  }
+
+  .service-card-media {
+    width: 100%;
+    height: 100%;
+    max-height: 614px;
+    aspect-ratio: 493 / 614;
+    border-radius: 24px;
   }
 }
 
 @media (min-width: 1280px) and (max-width: 1535px) {
-  .case-section {
-    --case-section-w: 1344px;
-  }
-
   .case-section-inner {
     width: min(var(--case-section-w), calc(100% - 56px));
   }
 
   .tiles_stack_list {
-    --case-card-height: clamp(560px, 70dvh, 720px);
-    max-height: min(var(--case-card-height), calc(100dvh - 72px));
+    width: min(var(--case-section-w), calc(100% - 56px));
+    height: 694px;
+    --case-card-height: 694px;
   }
 
   .service_card_title {
-    font-size: clamp(1.75rem, 2.8vw, 3rem);
-  }
-
-  .service-card-content {
-    flex: 0 1 42%;
+    font-size: 38px;
   }
 }
 
 @media (min-width: 1536px) {
-  .case-section {
-    --case-section-w: 1344px;
-  }
-
   .case-section-inner {
     width: min(var(--case-section-w), calc(100% - 72px));
   }
 
   .tiles_stack_list {
-    --case-card-height: 756px;
-    max-height: min(756px, calc(100dvh - 96px));
+    width: min(var(--case-section-w), calc(100% - 72px));
+    height: 694px;
+    --case-card-height: 694px;
   }
 }
 
 @media (max-width: 1023px) {
   .case-section {
-    padding: 64px 0 80px;
-    overflow: visible;
+    padding: 48px 0 72px;
+    overflow: clip;
   }
 
   .case-section-inner {
@@ -454,56 +572,100 @@
   }
 
   .tiles_stack_pin {
-    height: auto;
-    display: block;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: visible;
+    padding-bottom: 72px;
+    box-sizing: border-box;
   }
 
   .tiles_stack_list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: auto;
-    max-height: none;
+    position: relative;
+    display: block;
+    width: calc(100% - 32px);
+    height: 694px;
+    --case-card-height: 694px;
   }
 
   .tiles_stack_item {
-    position: relative;
-    inset: unset;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
+    height: 100%;
+    will-change: transform;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
 
   .service-card {
-    min-height: 0;
-    height: auto;
-    border-radius: 20px;
+    height: 694px;
+    min-height: 694px;
+    max-height: 694px;
+    border-radius: 24px;
     overflow: hidden;
+    padding: 20px;
   }
 
   .service-card-body {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
 
   .service-card-title {
     flex: none;
-    padding-right: 56px;
+    padding-right: 0;
+    gap: 16px;
+  }
+
+  .service-card-copy {
+    gap: 12px;
+    max-width: none;
   }
 
   .service_card_title {
     max-width: none;
+    font-size: 28px;
+    margin-bottom: 12px;
+    white-space: normal;
+  }
+
+  .service_card_title.is-one-line {
+    white-space: nowrap;
+  }
+
+  .service-card-tags {
+    font-size: 16px;
+    margin-bottom: 14px;
   }
 
   .service-card-desc {
     max-width: none;
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .service-card-platforms {
+    gap: 10px;
+  }
+
+  .service-card-platforms-label {
+    font-size: 22px;
+  }
+
+  .service-card-platforms-list {
+    font-size: 16px;
+    gap: 16px;
+  }
+
+  .author_name {
+    font-size: 15px;
+  }
+
+  .author_job {
+    font-size: 14px;
+    gap: 12px;
   }
 
   .service-card-content {
@@ -512,6 +674,9 @@
   }
 
   .service-card-media {
-    min-height: clamp(220px, 52vw, 320px);
+    width: 100%;
+    height: auto;
+    min-height: clamp(160px, 38vw, 220px);
+    border-radius: 16px;
   }
 }

@@ -1,21 +1,11 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { ABOUT_IMPACT } from "@/lib/about-data";
 
 export default function AboutImpact() {
   return (
     <section className="bg-[#FFFAEA] xl:h-[756px] xl:min-h-[756px] xl:flex xl:items-center mt-10 mb-14">
       <div className="mx-auto grid w-full pt-10 pb-10 max-w-[1920px] grid-cols-1 items-center gap-12 px-[clamp(16px,4.75vw,99px)] lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 xl:gap-16">
-        {/* Left — copy + stats */}
-        <motion.div
-          initial={{ opacity: 0, x: -32 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="min-w-0"
-        >
+        <div className="min-w-0">
           <p className="m-0 max-w-[523px] font-montserrat text-[clamp(15px,1.2vw,18px)] font-medium leading-[1.7] text-[#0A0A0A]">
             {ABOUT_IMPACT.intro}
           </p>
@@ -46,21 +36,14 @@ export default function AboutImpact() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Right — main image + overlapping gallery */}
-        <motion.div
-          initial={{ opacity: 0, x: 32 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="min-w-0"
-        >
+        <div className="min-w-0">
           <div className="relative xl:pt-1">
             <div className="relative aspect-[16/11] w-full overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px] xl:max-w-[1100px]">
               <Image
                 src={ABOUT_IMPACT.mainImage}
-                alt="Webkarigor team collaborating"
+                alt={ABOUT_IMPACT.mainImageAlt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 900px"
@@ -85,7 +68,7 @@ export default function AboutImpact() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

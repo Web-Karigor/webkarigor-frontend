@@ -14,34 +14,12 @@ import {
 } from "lucide-react";
 import { ERP_HERO, ERP_TRUSTED_LOGOS } from "@/lib/erp-data";
 
-const CUSTOMERS = [
-  {
-    name: "Kadin Herwitz",
-    id: "87364523",
-    rate: "70.00",
-    balance: "-270.00",
-    balanceNeg: true,
-    deposit: "500.00",
-    status: "ACTIVE" as const,
-  },
-  {
-    name: "Kadin Herwitz",
-    id: "87364523",
-    rate: "70.00",
-    balance: "270.00",
-    balanceNeg: false,
-    deposit: "500.00",
-    status: "INACTIVE" as const,
-  },
-  {
-    name: "Kadin Herwitz",
-    id: "87364523",
-    rate: "70.00",
-    balance: "270.00",
-    balanceNeg: false,
-    deposit: "500.00",
-    status: "ACTIVE" as const,
-  },
+const DEMO = ERP_HERO.demo;
+const TECH_CARD = DEMO.technologyCard;
+
+/** Chart bar heights — layout only */
+const TECH_BAR_HEIGHTS = [
+  35, 55, 42, 78, 50, 88, 62, 70, 45, 82, 58, 90, 48, 75, 60, 68,
 ];
 
 
@@ -51,16 +29,16 @@ export default function ErpHero() {
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         <div className="mx-auto flex h-[72px] w-full max-w-[1680px] items-center justify-between px-[clamp(16px,3.5vw,50px)] sm:h-[88px] lg:h-[108px]">
           <Link
-            href="/"
+            href={ERP_HERO.brandHref}
             className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
           >
-            Webkarigor
+            {ERP_HERO.brand}
           </Link>
           <Link
-            href="#contact"
+            href={ERP_HERO.navCta.href}
             className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#0EC47B] px-5 py-2.5 font-montserrat text-[clamp(13px,1vw,15px)] font-bold text-white transition-opacity hover:opacity-90 sm:px-6 sm:py-3"
           >
-            Get a Quote
+            {ERP_HERO.navCta.label}
           </Link>
         </div>
       </header>
@@ -98,17 +76,17 @@ export default function ErpHero() {
 
             <div className="mt-8 flex w-full flex-col items-center gap-3 md:flex-row md:flex-wrap md:items-center md:gap-4">
               <Link
-                href="#contact"
+                href={ERP_HERO.primaryCta.href}
                 className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"
               >
-                Start Your Project
+                {ERP_HERO.primaryCta.label}
               </Link>
               <a
                 href={`tel:${ERP_HERO.hotline.replace(/-/g, "")}`}
                 className="inline-flex items-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-5 py-3.5 font-montserrat text-[14px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03]"
               >
                 <Phone className="h-4 w-4 shrink-0 text-[#111827]" aria-hidden />
-                Say hello: {ERP_HERO.hotline}
+                {ERP_HERO.hotlineLabel}: {ERP_HERO.hotline}
               </a>
             </div>
           </div>
@@ -168,7 +146,7 @@ export default function ErpHero() {
                   <div className="flex h-9 max-w-[200px] flex-1 items-center gap-2 rounded-lg bg-[#F5F6F8] px-3">
                     <Search className="h-3.5 w-3.5 text-[#98A2B3]" aria-hidden />
                     <span className="font-montserrat text-[12px] text-[#98A2B3]">
-                      Search
+                      {DEMO.searchLabel}
                     </span>
                   </div>
                   <button
@@ -176,7 +154,7 @@ export default function ErpHero() {
                     className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2 font-montserrat text-[11px] font-bold text-white sm:px-3.5 sm:text-[12px]"
                   >
                     <Plus className="h-3.5 w-3.5" aria-hidden />
-                    Add Customer
+                    {DEMO.addCustomerLabel}
                   </button>
                 </div>
 
@@ -188,7 +166,7 @@ export default function ErpHero() {
                         <th className="w-8 py-2.5 pl-2">
                           <span className="inline-block h-3.5 w-3.5 rounded border border-[#D0D5DD]" />
                         </th>
-                        {["NAME", "DESCRIPTION", "RATE", "BALANCE", "DEPOSIT", "STATUS", ""].map(
+                        {DEMO.tableHeaders.map(
                           (h) => (
                             <th
                               key={h || "act"}
@@ -201,7 +179,7 @@ export default function ErpHero() {
                       </tr>
                     </thead>
                     <tbody>
-                      {CUSTOMERS.map((row, i) => (
+                      {DEMO.customers.map((row, i) => (
                         <tr key={i} className="border-b border-[#F5F5F5]">
                           <td className="py-2.5 pl-2">
                             <span className="inline-block h-3.5 w-3.5 rounded border border-[#D0D5DD]" />
@@ -215,20 +193,20 @@ export default function ErpHero() {
                             </p>
                           </td>
                           <td className="hidden py-2.5 pr-2 font-montserrat text-[10px] text-[#98A2B3] sm:table-cell">
-                            Lorem ipsum...
+                            {DEMO.descriptionCell}
                           </td>
                           <td className="py-2.5 pr-2 font-montserrat text-[10px] text-[#475467]">
-                            {row.rate} INR
+                            {row.rate} {DEMO.currencySuffix}
                           </td>
                           <td
                             className={`py-2.5 pr-2 font-montserrat text-[10px] font-semibold ${
                               row.balanceNeg ? "text-[#F04438]" : "text-[#12B76A]"
                             }`}
                           >
-                            {row.balance} INR
+                            {row.balance} {DEMO.currencySuffix}
                           </td>
                           <td className="hidden py-2.5 pr-2 font-montserrat text-[10px] text-[#475467] md:table-cell">
-                            {row.deposit} INR
+                            {row.deposit} {DEMO.currencySuffix}
                           </td>
                           <td className="py-2.5 pr-1">
                             <span
@@ -288,11 +266,11 @@ export default function ErpHero() {
                 {/* Footer */}
                 <div className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-[#F0F0F0] bg-white px-4 py-2.5">
                   <p className="m-0 font-montserrat text-[9px] font-semibold uppercase tracking-wide text-[#98A2B3]">
-                    Active Customers: 478/708
+                    {DEMO.activeCustomersLabel}
                   </p>
                   <div className="flex items-center gap-3 font-montserrat text-[9px] text-[#667085]">
-                    <span className="hidden sm:inline">Rows per page: 10</span>
-                    <span>1-10 of 708</span>
+                    <span className="hidden sm:inline">{DEMO.rowsPerPageLabel}</span>
+                    <span>{DEMO.paginationLabel}</span>
                     <span className="inline-flex gap-1">
                       <ChevronLeft className="h-3.5 w-3.5" aria-hidden />
                       <ChevronRight className="h-3.5 w-3.5" aria-hidden />
@@ -331,17 +309,17 @@ export default function ErpHero() {
               >
                 <div className="flex items-start justify-between gap-2">
                   <p className="m-0 font-montserrat text-[10px] font-bold uppercase tracking-wider text-[#98A2B3]">
-                    Technology
+                    {TECH_CARD.label}
                   </p>
                   <p className="m-0 text-right font-montserrat text-[16px] font-bold leading-none text-[#111827]">
-                    27.24
+                    {TECH_CARD.value}
                     <span className="ml-0.5 text-[10px] font-semibold text-[#98A2B3]">
-                      ROI
+                      {TECH_CARD.valueSuffix}
                     </span>
                   </p>
                 </div>
                 <div className="mt-3 flex h-12 items-end gap-1 border-b border-[#F2F4F7] pb-1">
-                  {[35, 55, 42, 78, 50, 88, 62, 70, 45, 82, 58, 90, 48, 75, 60, 68].map(
+                  {TECH_BAR_HEIGHTS.map(
                     (h, i) => (
                       <span
                         key={i}
@@ -352,11 +330,7 @@ export default function ErpHero() {
                   )}
                 </div>
                 <ul className="mt-3 m-0 list-none space-y-2 p-0">
-                  {[
-                    { label: "Cloud Services", pct: 81, color: "#F79009" },
-                    { label: "Automation", pct: 28, color: "#FBBF24" },
-                    { label: "Business Transformation", pct: 11, color: "#D0D5DD" },
-                  ].map((row) => (
+                  {TECH_CARD.items.map((row) => (
                     <li
                       key={row.label}
                       className="flex items-center justify-between gap-2"

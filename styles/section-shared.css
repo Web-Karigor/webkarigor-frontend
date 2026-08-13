@@ -6,7 +6,15 @@
     font-style: italic;
     line-height: 140%;
     letter-spacing: -0.05em;
-    background-image: linear-gradient(to right, #0EC47B, #2EEDA0, #FFEF3F, #15D286);
+    /* Green fills most of the word; light yellow only at bottom-right end */
+    background-image: linear-gradient(
+      160deg,
+      #0ec47b 0%,
+      #2eeda0 48%,
+      #15d286 72%,
+      #b8e070 90%,
+      #e4ef96 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -20,7 +28,14 @@
     line-height: 140%;
     letter-spacing: -0.05em;
     text-align: center;
-    background-image: linear-gradient(to right, #0EC47B, #2EEDA0, #FFEF3F, #15D286);
+    background-image: linear-gradient(
+      160deg,
+      #0ec47b 0%,
+      #2eeda0 48%,
+      #15d286 72%,
+      #b8e070 90%,
+      #e4ef96 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -67,5 +82,104 @@
     }
     .section-heading-split-title {
       transform: translate(1rem, 1rem);
+    }
+  }
+
+  /* FAQ header — badge + heading match design */
+  .faq-section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Exact brand colors; very light yellow only at bottom-right end */
+  .faq-gradient-text {
+    font-family: var(--font-museoModerno);
+    font-weight: 500;
+    font-style: italic;
+    line-height: 140%;
+    letter-spacing: -0.05em;
+    background-image: linear-gradient(
+      160deg,
+      #0ec47b 0%,
+      #2eeda0 48%,
+      #15d286 72%,
+      #b8e070 90%,
+      #e4ef96 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .faq-badge-text {
+    font-family: var(--font-museoModerno);
+    font-size: clamp(0.875rem, 2vw, 1.25rem);
+    font-weight: 500;
+    font-style: normal;
+    line-height: 140%;
+    letter-spacing: -0.05em;
+    text-align: center;
+    background-image: linear-gradient(
+      160deg,
+      #0ec47b 0%,
+      #2eeda0 48%,
+      #15d286 72%,
+      #b8e070 90%,
+      #e4ef96 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .faq-accent-text {
+    font-size: clamp(1.75rem, 5vw, 3rem);
+  }
+
+  .faq-section-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    height: auto;
+    padding: 10px clamp(16px, 3vw, 22px);
+    border-radius: 999px;
+    border: 1px solid #38f8ab;
+    background: transparent;
+  }
+
+  .faq-section-header .section-heading {
+    margin-top: clamp(0.85rem, 2vw, 1.25rem);
+  }
+
+  .faq-section-header .section-heading-split-accent {
+    transform: translate(-0.15rem, -0.2rem);
+  }
+
+  .faq-section-header .section-heading-split-title {
+    transform: translate(0.15rem, 0.35rem);
+  }
+
+  @media (min-width: 640px) {
+    .faq-section-header .section-heading-split-accent {
+      transform: translate(-0.3rem, -0.35rem);
+    }
+
+    .faq-section-header .section-heading-split-title {
+      transform: translate(0.3rem, 0.65rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .faq-section-header .section-heading-split-accent {
+      transform: translate(-0.45rem, -0.5rem);
+    }
+
+    .faq-section-header .section-heading-split-title {
+      transform: translate(0.45rem, 1rem);
     }
   }

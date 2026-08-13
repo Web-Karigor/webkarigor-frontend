@@ -1,35 +1,35 @@
 import type { Metadata } from "next";
 import PricingHero from "@/components/pricing/PricingHero";
-import PricingPlans from "@/components/pricing/PricingPlans";
 import PricingCustomBanner from "@/components/pricing/PricingCustomBanner";
 import PricingPackage from "@/components/pricing/PricingPackage";
 import PricingBuiltFor from "@/components/pricing/PricingBuiltFor";
 import PricingFeaturedWork from "@/components/pricing/PricingFeaturedWork";
+import ProjectHoverCursor from "@/components/projects/ProjectHoverCursor";
 import FAQ from "@/components/home/FAQ";
+import PricingSection from "@/components/home/PricingSection";
 import TrustedFounders from "@/components/home/TrustedFounders";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import Footer from "@/components/home/Footer";
+import { PRICING_METADATA } from "@/lib/pricing-data";
 
 export const metadata: Metadata = {
-  title: "Pricing — Webkarigor",
-  description:
-    "Transparent monthly pricing for product design and development. Seed, Growth, and Expert plans with no long-term contracts.",
+  title: PRICING_METADATA.title,
+  description: PRICING_METADATA.description,
 };
 
 export default function PricingPage() {
   return (
     <div className="bg-[#FFFDF6]">
+      <ProjectHoverCursor />
       <PricingHero />
-      <PricingPlans />
+      <PricingSection ctaHref="#contact" />
       <PricingCustomBanner />
       <PricingPackage />
       <TrustedFounders />
       <PricingBuiltFor />
       <PricingFeaturedWork />
       <FAQ />
-      <div id="contact">
-        <HomeConsultation />
-      </div>
+      <HomeConsultation />
       <Footer />
     </div>
   );

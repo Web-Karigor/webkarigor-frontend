@@ -4,7 +4,7 @@ import {
   TrendingUp,
   UserRound,
 } from "lucide-react";
-import { ECO_FEATURES } from "@/lib/ecommerce-data";
+import { ECO_FEATURES, ECO_FEATURES_SECTION } from "@/lib/ecommerce-data";
 
 const ICONS = {
   user: UserRound,
@@ -23,15 +23,13 @@ export default function EcoFeatures() {
         {/* Header */}
         <div className="mx-auto flex w-full max-w-[720px] flex-col items-center gap-3 text-center">
           <p className="m-0 font-montserrat text-[16px] font-semibold leading-none text-[#15d286] sm:text-[18px]">
-            Why Webkarigor
+            {ECO_FEATURES_SECTION.eyebrow}
           </p>
           <h2 className="m-0 font-montserrat text-[clamp(28px,3.2vw,36px)] font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
-            More Than Beautiful Interfaces
+            {ECO_FEATURES_SECTION.title}
           </h2>
           <p className="m-0 max-w-[640px] font-montserrat text-[15px] font-medium leading-[1.55] text-[#98A2B3] sm:text-[16px]">
-            We combine strategy, research, and design thinking to create products
-            that not only look good but perform exceptionally well in the real
-            world.
+            {ECO_FEATURES_SECTION.description}
           </p>
         </div>
 

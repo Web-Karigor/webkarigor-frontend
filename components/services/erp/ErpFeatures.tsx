@@ -4,7 +4,7 @@ import {
   TrendingUp,
   UserRound,
 } from "lucide-react";
-import { ERP_FEATURES } from "@/lib/erp-data";
+import { ERP_FEATURES, ERP_FEATURES_SECTION } from "@/lib/erp-data";
 
 const ICONS = {
   user: UserRound,
@@ -22,17 +22,15 @@ export default function ErpFeatures() {
         <div className="flex w-full flex-col gap-5 md:gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div className="max-w-[640px] shrink-0">
             <p className="m-0 font-montserrat text-[16px] font-semibold leading-none text-[#15d286] sm:text-[18px]">
-              Why Webkarigor
+              {ERP_FEATURES_SECTION.eyebrow}
             </p>
             <h2 className="mt-3 m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-black">
-              More Than Beautiful Interfaces
+              {ERP_FEATURES_SECTION.title}
             </h2>
           </div>
           {/* Figma: 650×54 · Manrope SemiBold 600 · 18px · LH 150% · #A7A7A7 */}
           <p className="m-0 w-full max-w-[650px] font-manrope text-[clamp(15px,1.5vw,18px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:shrink-0">
-            We combine strategy, research, and design thinking to create products
-            that not only look good but perform exceptionally well in the real
-            world.
+            {ERP_FEATURES_SECTION.description}
           </p>
         </div>
 

@@ -1,0 +1,93 @@
+.related-project-flip {
+  perspective: 1600px;
+}
+
+.related-project-flip-link {
+  height: 100%;
+}
+
+.related-project-flip-inner {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1400ms cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+}
+
+.related-project-flip-link:hover .related-project-flip-inner,
+.related-project-flip-link:focus-visible .related-project-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.related-project-flip-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 768px) {
+  .related-project-flip-face {
+    border-radius: 24px;
+  }
+}
+
+.related-project-flip-front {
+  background: #e8e4dc;
+}
+
+.related-project-flip-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #edeae3;
+  background: #fff;
+  padding: 1.25rem;
+  transform: rotateY(180deg);
+}
+
+@media (min-width: 640px) {
+  .related-project-flip-back {
+    padding: 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .related-project-flip-back {
+    padding: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .related-project-flip-inner {
+    transition: none;
+  }
+
+  .related-project-flip-link:hover .related-project-flip-inner,
+  .related-project-flip-link:focus-visible .related-project-flip-inner {
+    transform: none;
+  }
+
+  .related-project-flip-back {
+    position: relative;
+    inset: auto;
+    transform: none;
+    margin-top: 0.75rem;
+    box-shadow: none;
+  }
+
+  .related-project-flip-front {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .related-project-flip-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

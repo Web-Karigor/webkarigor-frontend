@@ -7,8 +7,13 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   isolation: isolate;
+  background-color: #2ec4b6;
+  background-image: url("/tech-services-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
 
 .tech-services-nav {
@@ -17,14 +22,15 @@
   width: 100%;
   height: 96px;
   padding: 0 24px;
-  background: #fff5d4;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: transparent;
+  border-bottom: none;
   overflow: hidden;
 }
 
 .tech-services-nav-track {
   display: flex;
   width: max-content;
+  gap: 18px;
   will-change: transform;
   backface-visibility: hidden;
 }
@@ -34,7 +40,7 @@
   align-items: center;
   flex-wrap: nowrap;
   flex-shrink: 0;
-  gap: 10px;
+  gap: 18px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -44,75 +50,73 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  gap: 10px;
+  gap: 18px;
 }
 
 .tech-services-nav-dot {
-  color: #000;
+  color: #fff;
   font-family: var(--font-montserrat);
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 120%;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
   letter-spacing: 0.02em;
   user-select: none;
 }
 
 .tech-services-nav-text {
   font-family: var(--font-montserrat);
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 700;
   line-height: 120%;
   letter-spacing: 0.02em;
-  color: #000;
+  color: #fff;
   white-space: nowrap;
 }
 
 .tech-services-slider {
   width: 100%;
-  background-color: #2ec4b6;
-  background-image: url("/tech-services-gradient.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
+  background: transparent;
   padding: 48px 0 64px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 @media (max-width: 1023px) {
-  .tech-services {
-    overflow-x: hidden;
-  }
-
   .tech-services-slider {
     box-sizing: border-box;
-    height: auto;
-    min-height: fit-content;
-    overflow: hidden;
+    padding: 14px 0 18px;
   }
 
-  .tech-services-viewport {
-    overflow: hidden;
-    min-height: fit-content;
-    height: auto;
+  .tech-services-card {
+    --frame-radius: 14px;
+    --outer-white: 2px;
+    --gray-band: 3px;
+    --inner-white: 2px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .tech-services-slider {
-    padding: 40px 24px;
+    padding: 18px 12px 22px;
   }
 }
 
 @media (max-width: 767px) {
   .tech-services-slider {
-    padding: 32px 16px;
+    padding: 16px 0 20px;
+  }
+
+  .tech-services-card {
+    --frame-radius: 12px;
+    --outer-white: 2px;
+    --gray-band: 2.5px;
+    --inner-white: 1.5px;
   }
 }
 
 .tech-services-viewport {
   position: relative;
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   align-items: center;
 }
@@ -121,32 +125,70 @@
   display: flex;
   align-items: center;
   width: max-content;
-  overflow: visible;
   will-change: transform;
   backface-visibility: hidden;
   transform: translateZ(0);
 }
 
+/*
+  Frame: outer white → soft gray → inner white.
+  Nested radii = outer radius − outer layers, so corner thickness stays even.
+*/
 .tech-services-card {
+  --frame-radius: 18px;
+  --outer-white: 2.5px;
+  --gray-band: 3.5px;
+  --inner-white: 2.5px;
   position: relative;
   flex-shrink: 0;
+  box-sizing: border-box;
+  padding: var(--outer-white);
+  border: none;
+  border-radius: var(--frame-radius);
   overflow: hidden;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-  transform-origin: center center;
-  will-change: transform, width, height;
-  backface-visibility: hidden;
-  cursor: pointer;
-  transition: box-shadow 0.72s cubic-bezier(0.19, 1, 0.22, 1);
+  background: #ffffff;
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
 }
 
-.tech-services-card:hover,
-.tech-services-card:focus-within {
-  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.22);
+.tech-services-card-mid {
+  --mid-radius: calc(var(--frame-radius) - var(--outer-white));
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: var(--gray-band);
+  border-radius: var(--mid-radius);
+  overflow: hidden;
+  background: transparent;
+  isolation: isolate;
 }
 
-.tech-services-card img {
+.tech-services-card-mid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: rgba(110, 110, 110, 0.32);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.tech-services-card-frame {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: var(--inner-white) solid #ffffff;
+  border-radius: calc(var(--mid-radius) - var(--gray-band));
+  background: #0f766e;
+}
+
+.tech-services-card-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -161,21 +203,22 @@
     padding: 0 16px;
   }
 
-  .tech-services-nav-list {
-    gap: 8px;
-  }
-
   .tech-services-nav-item {
-    gap: 8px;
+    gap: 14px;
   }
 
-  .tech-services-nav-text,
+  .tech-services-nav-text {
+    font-size: 18px;
+  }
+
   .tech-services-nav-dot {
-    font-size: 16px;
-    letter-spacing: 0.015em;
+    font-size: 22px;
   }
 
   .tech-services-card {
-    border-radius: 10px;
+    --frame-radius: 12px;
+    --outer-white: 2px;
+    --gray-band: 2.5px;
+    --inner-white: 1.5px;
   }
 }

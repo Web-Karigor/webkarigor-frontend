@@ -1,0 +1,79 @@
+{
+  "footer": {
+    "brand": "Webkarigor",
+    "brandHref": "/",
+    "copyright": "© 2024 Webkarigor. All rights reserved.",
+    "ariaLabel": "Footer",
+    "links": [
+      { "label": "About Us", "href": "/about-us" },
+      { "label": "Privacy Policy", "href": "/policies" },
+      { "label": "Terms of Service", "href": "/policies" },
+      { "label": "FAQ", "href": "/service#faq" }
+    ]
+  },
+  "contact": {
+    "headingLines": ["Let's Build Something", "Users Will Love."],
+    "description": "Ready to transform your digital product? Reach out for a free consultation. No obligation. Response within 24 hours.",
+    "email": "hello@webkarigor.com",
+    "emailHref": "mailto:hello@webkarigor.com",
+    "profile": {
+      "image": "/sm4.webp",
+      "name": "Esther Howard",
+      "role": "CEO, Webkarigor"
+    },
+    "projectTypes": [
+      "Product Design",
+      "Product Development",
+      "Branding",
+      "Marketing",
+      "Mobile App",
+      "Other"
+    ],
+    "placeholders": {
+      "name": "Your Name",
+      "email": "Email",
+      "mobile": "Mobile",
+      "company": "Company",
+      "projectType": "Project Type",
+      "details": "Project Details"
+    },
+    "submitLabel": "Get Free Quote"
+  },
+  "marquee": {
+    "items": [
+      "Web Design",
+      "SEO",
+      "Marketing",
+      "Branding",
+      "Mobile App",
+      "UI/UX",
+      "Development",
+      "Consulting"
+    ]
+  },
+  "teamSection": {
+    "headingLines": ["Expert Team", "Big Result"],
+    "featuredPhoto": {
+      "src": "/sm2.webp",
+      "alt": "Team member — top right"
+    },
+    "photos": [
+      {
+        "src": "/sm1.webp",
+        "alt": "Team member — middle left"
+      },
+      {
+        "src": "/h2.webp",
+        "alt": "Team member — center small"
+      },
+      {
+        "src": "/sm3.webp",
+        "alt": "Team member — bottom left"
+      },
+      {
+        "src": "/sm4.webp",
+        "alt": "Team member — bottom right"
+      }
+    ]
+  }
+}

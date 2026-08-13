@@ -1,4 +1,4 @@
-import { ECO_TECH_ROWS } from "@/lib/ecommerce-data";
+import { ECO_TECH_ROWS, ECO_TECH_STACK_SECTION } from "@/lib/ecommerce-data";
 
 export default function EcoTechStack() {
   return (
@@ -9,13 +9,11 @@ export default function EcoTechStack() {
       */}
       <div className="mx-auto flex w-full max-w-[1014px] flex-col items-center gap-2.5 px-[clamp(16px,4vw,24px)] text-center">
         <h2 className="m-0 font-montserrat text-[clamp(26px,3vw,36px)] font-bold leading-[1.25] tracking-[-0.02em] text-[#111827]">
-          Technologies used in webkarigor
+          {ECO_TECH_STACK_SECTION.title}
         </h2>
 
         <p className="m-0 max-w-[640px] font-montserrat text-[15px] font-medium leading-[1.65] text-[#667085]">
-          We combine strategy, research, and design thinking to create products
-          that not only look good but perform exceptionally well in the real
-          world.
+          {ECO_TECH_STACK_SECTION.description}
         </p>
 
         <div className="mt-8 flex w-full flex-col items-center gap-4 sm:mt-10 sm:gap-5">

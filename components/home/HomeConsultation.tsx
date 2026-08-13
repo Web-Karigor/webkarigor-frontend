@@ -4,7 +4,16 @@ import "./HomeConsultation.css";
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import {
+  FormEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ComponentType,
+  type SVGProps,
+} from "react";
+import * as FlagIcons from "country-flag-icons/react/3x2";
 import {
   ArrowRight,
   ChevronDown,
@@ -12,30 +21,45 @@ import {
   ChevronRight,
   Globe,
 } from "lucide-react";
+import homeContent from "@/data/home-content.json";
+import {
+  COUNTRY_OPTIONS,
+  DEFAULT_COUNTRY,
+  DEFAULT_DIAL_COUNTRY,
+  type CountryOption,
+} from "@/lib/countries";
 
-const PROFILE_IMAGE = "/sm4.png";
+const {
+  badge,
+  title,
+  description,
+  founder,
+  talkPrompt,
+  whatsapp,
+  fields,
+  schedule,
+  submitLabel,
+  timeSlots: TIME_SLOTS,
+  weekdays: WEEKDAYS,
+} = homeContent.consultation;
 
-const REGIONS = [
-  { label: "United States", flag: "🇺🇸" },
-  { label: "United Kingdom", flag: "🇬🇧" },
-  { label: "Bangladesh", flag: "🇧🇩" },
-  { label: "Canada", flag: "🇨🇦" },
-  { label: "Australia", flag: "🇦🇺" },
-];
+const PROFILE_IMAGE = founder.image;
 
-const TIME_SLOTS = [
-  "9:00 AM",
-  "10:00 AM",
-  "11:00 AM",
-  "12:00 PM",
-  "1:00 PM",
-  "2:00 PM",
-  "3:00 PM",
-  "4:00 PM",
-  "5:00 PM",
-];
+type FlagComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
-const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
+function CountryFlag({
+  iso2,
+  className,
+  title,
+}: {
+  iso2: string;
+  className?: string;
+  title?: string;
+}) {
+  const Flag = (FlagIcons as Record<string, FlagComponent | undefined>)[iso2];
+  if (!Flag) return null;
+  return <Flag className={className} title={title ?? iso2} />;
+}
 
 function WhatsAppIcon() {
   return (
@@ -52,22 +76,61 @@ function getCalendarCells(year: number, month: number) {
 
   for (let i = 0; i < firstDay; i += 1) cells.push(null);
   for (let day = 1; day <= daysInMonth; day += 1) cells.push(day);
-
   while (cells.length % 7 !== 0) cells.push(null);
 
   return cells;
 }
 
-export default function HomeConsultation() {
-  const [region, setRegion] = useState(REGIONS[0]);
+function useClickOutside(
+  ref: React.RefObject<HTMLElement | null>,
+  open: boolean,
+  onClose: () => void,
+) {
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointer = (event: MouseEvent) => {
+      const target = event.target as Node | null;
+      if (target && ref.current && !ref.current.contains(target)) {
+        onClose();
+      }
+    };
+
+    // Use click (not mousedown) so toggle button can open first
+    document.addEventListener("click", onPointer);
+    return () => document.removeEventListener("click", onPointer);
+  }, [open, onClose, ref]);
+}
+
+export default function HomeConsultation({
+  backgroundColor,
+  hideSchedule = false,
+}: {
+  /** Override outer section background (service pages keep #FFFEFB) */
+  backgroundColor?: string;
+  /** Hide calendar + time picker (service subpages) */
+  hideSchedule?: boolean;
+} = {}) {
+  const [dialCountry, setDialCountry] = useState<CountryOption>(DEFAULT_DIAL_COUNTRY);
+  const [region, setRegion] = useState<CountryOption>(DEFAULT_COUNTRY);
+  const [dialOpen, setDialOpen] = useState(false);
   const [regionOpen, setRegionOpen] = useState(false);
   const [calendarDate, setCalendarDate] = useState(() => new Date(2026, 5, 12));
   const [selectedDay, setSelectedDay] = useState(12);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
+  const dialRef = useRef<HTMLDivElement>(null);
+  const regionRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(dialRef, dialOpen, () => setDialOpen(false));
+  useClickOutside(regionRef, regionOpen, () => setRegionOpen(false));
+
   const calendarCells = useMemo(
-    () => getCalendarCells(calendarDate.getFullYear(), calendarDate.getMonth()),
-    [calendarDate],
+    () =>
+      hideSchedule
+        ? []
+        : getCalendarCells(calendarDate.getFullYear(), calendarDate.getMonth()),
+    [calendarDate, hideSchedule],
   );
 
   const monthLabel = calendarDate.toLocaleString("en-US", {
@@ -88,71 +151,75 @@ export default function HomeConsultation() {
     event.preventDefault();
   };
 
+  const phoneLabelMain = fields.phone.label.replace(/\s*\(.*\)\s*$/, "");
+  const phoneLabelHint = fields.phone.label.match(/\(([^)]+)\)/)?.[1];
+
   return (
-    <section className="home-consultation-section">
+    <section
+      id="contact"
+      className="home-consultation-section scroll-mt-28"
+      style={backgroundColor ? { background: backgroundColor } : undefined}
+    >
       <div className="home-consultation-shell">
         <div className="home-consultation-card">
           <div className="home-consultation-layout">
             <aside className="home-consultation-copy">
-              <span className="home-consultation-badge">Get Free Consultation</span>
+              <div className="home-consultation-copy-top">
+                <span className="home-consultation-badge">
+                  <span className="home-consultation-badge-text">{badge}</span>
+                </span>
 
-              <h2 className="home-consultation-title">
-                Let&apos;s Build Something Great Together
-              </h2>
+                <h2 className="home-consultation-title">{title}</h2>
+                <p className="home-consultation-desc">{description}</p>
 
-              <p className="home-consultation-desc">
-                From your first message to project delivery, we keep the process
-                clear, responsive, and focused on your goals.
-              </p>
-
-              <div className="home-consultation-founder">
-                <div className="home-consultation-founder-photo">
-                  <Image
-                    src={PROFILE_IMAGE}
-                    alt="Esther Howard"
-                    fill
-                    className="object-cover"
-                    sizes="112px"
-                  />
-                </div>
-                <div>
-                  <p className="home-consultation-founder-name">Esther Howard</p>
-                  <p className="home-consultation-founder-role">CEO, Webkarigor</p>
+                <div className="home-consultation-founder">
+                  <div className="home-consultation-founder-photo">
+                    <Image
+                      src={PROFILE_IMAGE}
+                      alt={founder.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 160px"
+                    />
+                  </div>
+                  <p className="home-consultation-founder-name">{founder.name}</p>
+                  <p className="home-consultation-founder-role">{founder.role}</p>
                 </div>
               </div>
 
-              <p className="home-consultation-talk">Prefer to talk first?</p>
-
-              <Link
-                href="https://wa.me/8801624283328"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="home-consultation-whatsapp"
-              >
-                <WhatsAppIcon />
-                <span>WhatsApp: 01624-283328</span>
-              </Link>
+              <div className="home-consultation-copy-bottom">
+                <p className="home-consultation-talk">{talkPrompt}</p>
+                <Link
+                  href={whatsapp.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="home-consultation-whatsapp"
+                >
+                  <WhatsAppIcon />
+                  <span>{whatsapp.label}</span>
+                </Link>
+              </div>
             </aside>
 
             <form className="home-consultation-form" onSubmit={handleSubmit}>
               <div className="home-consultation-form-grid home-consultation-form-grid--two">
                 <label className="home-consultation-field">
-                  <span className="home-consultation-label">Full Name</span>
+                  <span className="home-consultation-label">{fields.fullName.label}</span>
                   <input
                     type="text"
                     name="name"
-                    placeholder="Esther Howard"
+                    placeholder={fields.fullName.placeholder}
                     className="home-consultation-input"
                     required
                   />
                 </label>
 
                 <label className="home-consultation-field">
-                  <span className="home-consultation-label">Contact Email</span>
+                  <span className="home-consultation-label">{fields.email.label}</span>
                   <input
                     type="email"
                     name="email"
-                    placeholder="your-mail@gmail.com"
+                    placeholder={fields.email.placeholder}
                     className="home-consultation-input"
                     required
                   />
@@ -160,151 +227,240 @@ export default function HomeConsultation() {
               </div>
 
               <div className="home-consultation-form-grid home-consultation-form-grid--two">
-                <label className="home-consultation-field">
-                  <span className="home-consultation-label">Contact Number (WhatsApp)</span>
-                  <span className="home-consultation-input-wrap">
-                    <Globe className="home-consultation-input-icon" aria-hidden />
+                <div className="home-consultation-field">
+                  <span className="home-consultation-label">
+                    {phoneLabelMain}
+                    {phoneLabelHint ? (
+                      <span className="home-consultation-label-hint">
+                        {" "}
+                        ({phoneLabelHint})
+                      </span>
+                    ) : null}
+                  </span>
+
+                  <div className="home-consultation-phone-row">
+                    <div className="home-consultation-select-wrap" ref={dialRef}>
+                      <button
+                        type="button"
+                        className="home-consultation-code-btn"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          setRegionOpen(false);
+                          setDialOpen((open) => !open);
+                        }}
+                        aria-expanded={dialOpen}
+                        aria-haspopup="listbox"
+                        aria-label={`Country code ${dialCountry.dialCode}`}
+                      >
+                        <Globe className="home-consultation-code-globe" aria-hidden />
+                        <span className="home-consultation-code-value">
+                          {dialCountry.dialCode}
+                        </span>
+                        <ChevronDown className="home-consultation-code-chevron" aria-hidden />
+                      </button>
+
+                      {dialOpen ? (
+                        <ul
+                          className="home-consultation-select-menu"
+                          role="listbox"
+                          onMouseDown={(event) => event.stopPropagation()}
+                        >
+                          {COUNTRY_OPTIONS.map((option) => (
+                            <li key={`dial-${option.iso2}`}>
+                              <button
+                                type="button"
+                                role="option"
+                                aria-selected={dialCountry.iso2 === option.iso2}
+                                className="home-consultation-select-option"
+                                onClick={() => {
+                                  setDialCountry(option);
+                                  setDialOpen(false);
+                                }}
+                              >
+                                <CountryFlag
+                                  iso2={option.iso2}
+                                  className="home-consultation-flag"
+                                  title={option.name}
+                                />
+                                <span className="home-consultation-option-name">
+                                  {option.name}
+                                </span>
+                                <span className="home-consultation-option-code">
+                                  {option.dialCode}
+                                </span>
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+
                     <input
                       type="tel"
                       name="phone"
-                      placeholder="123 4567 890"
-                      className="home-consultation-input home-consultation-input--with-icon"
+                      placeholder={fields.phone.placeholder}
+                      className="home-consultation-input home-consultation-input--phone"
                       required
                     />
-                  </span>
-                </label>
+                    <input type="hidden" name="dialCode" value={dialCountry.dialCode} />
+                  </div>
+                </div>
 
                 <div className="home-consultation-field">
-                  <span className="home-consultation-label">Your Current Region</span>
-                  <div className="home-consultation-select-wrap">
+                  <span className="home-consultation-label">{fields.region.label}</span>
+                  <div className="home-consultation-select-wrap" ref={regionRef}>
                     <button
                       type="button"
                       className="home-consultation-select"
-                      onClick={() => setRegionOpen((open) => !open)}
+                      onClick={() => {
+                        setRegionOpen((open) => !open);
+                        setDialOpen(false);
+                      }}
                       aria-expanded={regionOpen}
                       aria-haspopup="listbox"
                     >
                       <span className="home-consultation-select-value">
-                        <span aria-hidden>{region.flag}</span>
-                        {region.label}
+                        <CountryFlag
+                          iso2={region.iso2}
+                          className="home-consultation-flag"
+                          title={region.name}
+                        />
+                        <ChevronDown className="home-consultation-inline-chevron" aria-hidden />
+                        <span>{region.name}</span>
                       </span>
-                      <ChevronDown className="home-consultation-select-chevron" aria-hidden />
                     </button>
 
-                    {regionOpen && (
+                    {regionOpen ? (
                       <ul className="home-consultation-select-menu" role="listbox">
-                        {REGIONS.map((option) => (
-                          <li key={option.label}>
+                        {COUNTRY_OPTIONS.map((option) => (
+                          <li key={`region-${option.iso2}`}>
                             <button
                               type="button"
                               role="option"
-                              aria-selected={region.label === option.label}
+                              aria-selected={region.iso2 === option.iso2}
                               className="home-consultation-select-option"
                               onClick={() => {
                                 setRegion(option);
                                 setRegionOpen(false);
                               }}
                             >
-                              <span aria-hidden>{option.flag}</span>
-                              {option.label}
+                              <CountryFlag
+                                iso2={option.iso2}
+                                className="home-consultation-flag"
+                                title={option.name}
+                              />
+                              <span className="home-consultation-option-name">
+                                {option.name}
+                              </span>
                             </button>
                           </li>
                         ))}
                       </ul>
-                    )}
+                    ) : null}
                   </div>
+                  <input type="hidden" name="region" value={region.name} />
                 </div>
               </div>
 
               <label className="home-consultation-field">
-                <span className="home-consultation-label">Project Details</span>
+                <span className="home-consultation-label">{fields.details.label}</span>
                 <textarea
                   name="details"
                   rows={4}
-                  placeholder="I need to build my ecommerce dashboard..."
+                  placeholder={fields.details.placeholder}
                   className="home-consultation-textarea"
                   required
                 />
               </label>
 
-              <div className="home-consultation-schedule">
-                <div className="home-consultation-schedule-panel">
-                  <p className="home-consultation-schedule-title">Select a date</p>
+              {!hideSchedule ? (
+                <div className="home-consultation-schedule">
+                  <div className="home-consultation-schedule-panel">
+                    <p className="home-consultation-schedule-title">
+                      {schedule.dateTitle}
+                    </p>
 
-                  <div className="home-consultation-calendar">
-                    <div className="home-consultation-calendar-head">
-                      <button
-                        type="button"
-                        className="home-consultation-calendar-nav"
-                        onClick={() => shiftMonth(-1)}
-                        aria-label="Previous month"
-                      >
-                        <ChevronLeft className="h-4 w-4" />
-                      </button>
-                      <span>{monthLabel}</span>
-                      <button
-                        type="button"
-                        className="home-consultation-calendar-nav"
-                        onClick={() => shiftMonth(1)}
-                        aria-label="Next month"
-                      >
-                        <ChevronRight className="h-4 w-4" />
-                      </button>
+                    <div className="home-consultation-calendar">
+                      <div className="home-consultation-calendar-head">
+                        <button
+                          type="button"
+                          className="home-consultation-calendar-nav"
+                          onClick={() => shiftMonth(-1)}
+                          aria-label={schedule.prevMonthAria}
+                        >
+                          <ChevronLeft className="h-4 w-4" />
+                        </button>
+                        <span>{monthLabel}</span>
+                        <button
+                          type="button"
+                          className="home-consultation-calendar-nav"
+                          onClick={() => shiftMonth(1)}
+                          aria-label={schedule.nextMonthAria}
+                        >
+                          <ChevronRight className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      <div className="home-consultation-calendar-weekdays">
+                        {WEEKDAYS.map((day, index) => (
+                          <span key={`${day}-${index}`}>{day}</span>
+                        ))}
+                      </div>
+
+                      <div className="home-consultation-calendar-grid">
+                        {calendarCells.map((day, index) =>
+                          day ? (
+                            <button
+                              key={`${day}-${index}`}
+                              type="button"
+                              className={`home-consultation-calendar-day${
+                                selectedDay === day ? " is-selected" : ""
+                              }`}
+                              onClick={() => setSelectedDay(day)}
+                            >
+                              {day}
+                            </button>
+                          ) : (
+                            <span
+                              key={`empty-${index}`}
+                              className="home-consultation-calendar-day is-empty"
+                            />
+                          ),
+                        )}
+                      </div>
                     </div>
+                  </div>
 
-                    <div className="home-consultation-calendar-weekdays">
-                      {WEEKDAYS.map((day, index) => (
-                        <span key={`${day}-${index}`}>{day}</span>
+                  <div className="home-consultation-schedule-panel">
+                    <p className="home-consultation-schedule-title">
+                      {schedule.timeTitle} <span>{schedule.timeOptional}</span>
+                    </p>
+
+                    <div className="home-consultation-times">
+                      {TIME_SLOTS.map((slot) => (
+                        <button
+                          key={slot}
+                          type="button"
+                          className={`home-consultation-time${
+                            selectedTime === slot ? " is-selected" : ""
+                          }`}
+                          onClick={() =>
+                            setSelectedTime((current) =>
+                              current === slot ? null : slot,
+                            )
+                          }
+                        >
+                          {slot}
+                        </button>
                       ))}
                     </div>
-
-                    <div className="home-consultation-calendar-grid">
-                      {calendarCells.map((day, index) =>
-                        day ? (
-                          <button
-                            key={`${day}-${index}`}
-                            type="button"
-                            className={`home-consultation-calendar-day${
-                              selectedDay === day ? " is-selected" : ""
-                            }`}
-                            onClick={() => setSelectedDay(day)}
-                          >
-                            {day}
-                          </button>
-                        ) : (
-                          <span key={`empty-${index}`} className="home-consultation-calendar-day is-empty" />
-                        ),
-                      )}
-                    </div>
                   </div>
                 </div>
-
-                <div className="home-consultation-schedule-panel">
-                  <p className="home-consultation-schedule-title">
-                    Pick any time <span>(Optional)</span>
-                  </p>
-
-                  <div className="home-consultation-times">
-                    {TIME_SLOTS.map((slot) => (
-                      <button
-                        key={slot}
-                        type="button"
-                        className={`home-consultation-time${
-                          selectedTime === slot ? " is-selected" : ""
-                        }`}
-                        onClick={() =>
-                          setSelectedTime((current) => (current === slot ? null : slot))
-                        }
-                      >
-                        {slot}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              ) : null}
 
               <button type="submit" className="home-consultation-submit">
-                <span>Let&apos;s Do It</span>
+                <span>{submitLabel}</span>
                 <ArrowRight className="h-5 w-5" aria-hidden />
               </button>
             </form>

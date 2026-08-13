@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Star } from "lucide-react";
-import { MANPOWER_TESTIMONIALS } from "@/lib/manpower-data";
+import { MANPOWER_REVIEWS_SECTION, MANPOWER_TESTIMONIALS } from "@/lib/manpower-data";
 
 type Testimonial = (typeof MANPOWER_TESTIMONIALS)[number];
 
@@ -100,10 +100,10 @@ export default function ManpowerReviews() {
     <section className="w-full overflow-hidden bg-white py-[clamp(56px,8vw,96px)]">
       <div className="mx-auto mb-10 w-full max-w-[1800px] px-[clamp(16px,3.5vw,50px)] text-center lg:mb-12">
         <p className="m-0 font-montserrat text-[14px] font-semibold uppercase tracking-[0.06em] text-[#0EC47B]">
-          What our clients say
+          {MANPOWER_REVIEWS_SECTION.eyebrow}
         </p>
         <h2 className="mt-3 m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.2] tracking-[-0.02em] text-[#18214D]">
-          The world&apos;s best companies are using our service
+          {MANPOWER_REVIEWS_SECTION.title}
         </h2>
       </div>
 

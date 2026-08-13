@@ -1,104 +1,109 @@
 "use client";
 
+import "./FAQ.css";
+
 import Link from "next/link";
 import { useState } from "react";
+import homeContent from "@/data/home-content.json";
 
-const faqs = [
-  {
-    question: "Who do you work with and what projects do you take on?",
-    answer:
-      "We partner with startups, established companies, and agencies of all sizes. Our team takes on digital product design and development projects that are mission-driven and innovative.",
-  },
-  {
-    question: "How do you take a product from idea to launch?",
-    answer:
-      "We start with understanding your vision, users, and markets. We ideate, wireframe, prototype, design, and develop iteratively, collaborating closely with you through each phase and ensuring each milestone is met before launch.",
-  },
-  {
-    question: "How do you approach UX, design, and technology decisions?",
-    answer:
-      "All decisions are driven by your business goals, user needs, and best-in-class modern technology. We combine research-driven UX, elegant UI, and practical engineering for scalable solutions.",
-  },
-  {
-    question: "How involved will we be during the project?",
-    answer:
-      "You stay as involved as you want throughout the project. We encourage your feedback in each phase, use frequent check-ins, and provide clear, collaborative communication. You’re never left in the dark.",
-  },
-  {
-    question: "Do you provide ongoing support after launch?",
-    answer:
-      "Yes! We offer continuous maintenance, support, and opportunities for evolution and improvement after your product launches. We’re your partner for the long run.",
-  },
-  {
-    question: "How do pricing and timelines work?",
-    answer:
-      "We offer flexible pricing models (fixed, retainer, or hourly) depending on project needs. Timelines are validated during our initial call and adjusted collaboratively. Transparency is key.",
-  },
-];
+const {
+  badge,
+  headingAccent,
+  headingTitle,
+  ctaText,
+  ctaLabel,
+  ctaHref,
+  items: faqs,
+} = homeContent.faq;
 
-export default function FAQ() {
+export default function FAQ({
+  className = "bg-[#FFFDF6]",
+}: {
+  className?: string;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndex((current) => (current === index ? null : index));
   };
 
   return (
-    <section className="relative py-16 md:py-24 px-4 md:px-6 bg-[#FFFDF6] pb-8 md:pb-12">
-      <div className="max-w-[1320px] mx-auto">
-        {/* Header — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
-        <div className="mb-12 text-center md:mb-16">
-          <h2 className="m-0 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
-            <span className="italic text-[#39B770]">Questions</span>
-            <span className="ml-1 not-italic">Answered?</span>
+    <section
+      id="faq"
+      className={`relative scroll-mt-24 px-4 py-16 pb-8 font-montserrat md:px-6 md:py-24 md:pb-12 ${className}`}
+    >
+      <div className="mx-auto max-w-[1320px]">
+        <div className="faq-section-header mb-12 text-center md:mb-16">
+          <span className="faq-section-badge">
+            <span className="faq-badge-text">{badge}</span>
+          </span>
+
+          <h2 className="section-heading">
+            <span className="section-heading-split-accent faq-gradient-text faq-accent-text">
+              {headingAccent}
+            </span>
+            <span className="section-heading-split-title">{headingTitle}</span>
           </h2>
         </div>
 
-        {/* FAQ List */}
-        <div className="space-y-1 md:space-y-1 mb-12 md:mb-16">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="border-b border-[#e5e5e5]"
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className={`w-full flex items-center justify-between py-5 text-left hover:bg-[#faf9f4] transition focus:outline-none`}
-              >
-                <span className="block min-w-0 flex-1 pr-3 text-base md:text-[17px] font-medium text-[#141414]">
-                  {faq.question}
-                </span>
-                <span
-                  className="flex shrink-0 items-center justify-center w-6 h-6 rounded-full text-[#141414] font-bold text-xl transition-colors duration-200"
+        <div className="mb-12 space-y-1 md:mb-16">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div key={index} className="border-b border-[#e5e5e5]">
+                <button
+                  type="button"
+                  onClick={() => toggleFAQ(index)}
+                  aria-expanded={isOpen}
+                  className="flex w-full cursor-pointer items-center justify-between py-7 text-left focus:outline-none md:py-8"
                 >
-                  {openIndex === index ? (
-                    <svg width="18" height="18" viewBox="0 0 18 18" className="text-[#39B770]"><line x1="4" y1="9" x2="14" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
-                  ) : (
-                    <svg width="18" height="18" viewBox="0 0 18 18" className="text-[#141414]"><line x1="9" y1="4" x2="9" y2="14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><line x1="4" y1="9" x2="14" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
-                  )}
-                </span>
-              </button>
-              {openIndex === index && (
-                <div className="pr-0 pb-5">
-                  <p className="text-base md:text-[17px] text-[#444] leading-relaxed">
-                    {faq.answer}
-                  </p>
+                  <span className="block min-w-0 flex-1 pr-3 font-montserrat text-base font-semibold leading-[100%] tracking-[-0.05em] text-[#141414] md:text-[26px]">
+                    {faq.question}
+                  </span>
+                  <span
+                    className={`relative flex h-6 w-6 shrink-0 items-center justify-center text-[#141414] transition-colors duration-300 ease-out ${
+                      isOpen ? "text-[#39B770]" : "text-[#141414]"
+                    }`}
+                    aria-hidden
+                  >
+                    {/* Horizontal bar always visible */}
+                    <span className="absolute h-[2px] w-[14px] rounded-full bg-current" />
+                    {/* Vertical bar rotates away for minus */}
+                    <span
+                      className={`absolute h-[14px] w-[2px] rounded-full bg-current transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        isOpen ? "scale-y-0" : "scale-y-100"
+                      }`}
+                    />
+                  </span>
+                </button>
+
+                {/* Height-only animation — no opacity (avoids flicker/shake) */}
+                <div
+                  className={`grid overflow-hidden transition-[grid-template-rows] duration-[450ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <p className="pb-7 pr-0 font-montserrat text-base font-medium tracking-[-0.05em] text-[#525151] md:pb-8 md:text-[20px]">
+                      {faq.answer}
+                    </p>
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
 
-        {/* CTA — Figma: Montserrat SemiBold 26 / 140% / -5% / Center / #000 */}
         <div className="text-center">
           <p className="mb-6 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
-            Still curious? We&#39;re happy to help
+            {ctaText}
           </p>
           <Link
-            href="/contact-us"
-            className="px-5 md:px-6 py-2 md:py-3 border border-[#000000] text-[#000000] font-semibold text-base md:text-lg rounded-lg transition-colors"
+            href={ctaHref}
+            className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
           >
-            Let&apos;s talk
+            {ctaLabel}
           </Link>
         </div>
       </div>

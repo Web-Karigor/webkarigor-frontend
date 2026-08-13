@@ -1,120 +1,300 @@
 /* Split from globals.css — UI unchanged */
-  /* Navbar Styles */
+
+@property --navbar-border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes navbar-border-spin {
+  to {
+    --navbar-border-angle: 360deg;
+  }
+}
+
+/*
+  Border only: thin animated gradient ring (::before).
+  Background: flat color + blur — never gradient, never motion.
+*/
+.navbar-sticky {
+  transition:
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.28s ease;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.navbar-sticky.is-hidden {
+  transform: translateY(calc(-100% - 24px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar-border-ring,
+.navbar-mobile-ring {
+  position: relative;
+  display: inline-flex;
+  background: none;
+}
+
+.navbar-border-ring {
+  border-radius: 24px;
+}
+
+.navbar-mobile-ring {
+  border-radius: 12px;
+}
+
+.navbar-mobile-ring--btn {
+  border-radius: 8px;
+}
+
+.navbar-border-ring::before,
+.navbar-mobile-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  padding: 1px;
+  box-sizing: border-box;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--navbar-border-angle),
+    #38f8ab 0%,
+    #feed35 25%,
+    #0ec47b 50%,
+    #feed35 75%,
+    #38f8ab 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: navbar-border-spin 6s linear infinite;
+}
+
+/* Flat bg only — no gradient, no animation */
+.navbar-container {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  max-width: min(820px, calc(100vw - 2rem));
+  height: auto;
+  min-height: 56px;
+  padding: 8px clamp(6px, 1vw, 12px);
+  gap: 6px;
+  border-radius: 24px;
+  background-color: transparent;
+  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.08);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease,
+    -webkit-backdrop-filter 0.3s ease;
+}
+
+.navbar-container--scrolled {
+  background-color: #fffdf6;
+  -webkit-backdrop-filter: blur(40px) saturate(1.2);
+  backdrop-filter: blur(40px) saturate(1.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transform: translateZ(0);
+}
+
+@media (min-width: 1280px) {
   .navbar-container {
-    width: fit-content;
-    max-width: min(628px, calc(100vw - 2rem));
-    height: auto;
-    min-height: 56px;
-    padding: 8px clamp(12px, 2vw, 32px);
-    gap: 8px;
-    background-color: rgba(255, 253, 246, 0.4);
-    border: 0.5px solid #00E68A;
-    box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.08);
+    height: 72px;
+    min-height: 72px;
+    padding: 10px 12px;
+    gap: 6px;
   }
+}
 
-  @media (min-width: 1280px) {
-    .navbar-container {
-      height: 72px;
-      min-height: 72px;
-      padding: 10px 32px;
-      gap: 10px;
-    }
+/* lg — reduce horizontal padding only; height unchanged */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .navbar-container {
+    padding-left: 10px;
+    padding-right: 10px;
   }
+}
 
-  /* lg — reduce horizontal padding only; height unchanged */
-  @media (min-width: 1024px) and (max-width: 1279px) {
-    .navbar-container {
-      padding-left: 14px;
-      padding-right: 14px;
-    }
+/* xl — reduce horizontal padding only; height unchanged (72px from ≥1280) */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .navbar-container {
+    padding-left: 12px;
+    padding-right: 12px;
   }
+}
 
-  /* xl — reduce horizontal padding only; height unchanged (72px from ≥1280) */
-  @media (min-width: 1280px) and (max-width: 1535px) {
-    .navbar-container {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-  }
+/* Figma Ellipse — 1700×585 · Layer blur 400 · behind navbar */
+.navbar-glow {
+  position: fixed;
+  top: -454px;
+  left: 50%;
+  z-index: 9998;
+  width: min(1700px, 92vw);
+  height: 585px;
+  pointer-events: none;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, #bbff68 80%, transparent 70%);
+  opacity: 0.28;
+  filter: blur(400px);
+}
 
-  /* Figma Ellipse — 1700×585 · Layer blur 400 · behind navbar */
+@media (min-width: 1024px) {
   .navbar-glow {
-    position: fixed;
-    top: -454px;
-    left: 50%;
-    z-index: 9998;
-    width: min(1700px, 92vw);
-    height: 585px;
-    pointer-events: none;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, #bbff68 80%, transparent 70%);
-    opacity: 0.28;
-    filter: blur(400px);
+    top: -420px;
   }
+}
 
-  @media (min-width: 1024px) {
-    .navbar-glow {
-      top: -420px;
-    }
-  }
+.navbar-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  min-height: 44px;
+  gap: clamp(8px, 1vw, 14px);
+}
 
+@media (min-width: 1280px) {
   .navbar-content {
-    width: 100%;
-    height: auto;
-    min-height: 44px;
-    gap: clamp(12px, 2vw, 32px);
+    height: 52px;
+    min-height: 52px;
   }
+}
 
-  @media (min-width: 1280px) {
-    .navbar-content {
-      height: 52px;
-      min-height: 52px;
-    }
-  }
+.navbar-link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: clamp(8px, 1vw, 12px) clamp(6px, 0.9vw, 12px);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: clamp(14px, 1.4vw, 20px);
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: #1f1e1c;
+  text-decoration: none;
+  white-space: nowrap;
+}
 
+@media (min-width: 1280px) {
   .navbar-link {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: clamp(14px, 1.4vw, 20px);
-    line-height: 140%;
-    letter-spacing: 0%;
-    color: #1F1E1C;
-    white-space: nowrap;
+    min-height: 52px;
   }
+}
 
-  .webkarigor-button {
-    width: fit-content;
-    height: auto;
-    min-height: 44px;
-    padding: 1px;
-    background: linear-gradient(to right, #38F8AB, #FEED35, #38F8AB, #FEED35, #38F8AB);
-    border-radius: 12px;
-  }
+.navbar-link-label {
+  position: relative;
+  z-index: 1;
+}
 
-  @media (min-width: 1280px) {
-    .webkarigor-button {
-      height: 52px;
-      min-height: 52px;
-    }
-  }
+/* Absolute sliding pill — left/width only (no layoutId center morph) */
+.navbar-active-pill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  box-sizing: border-box;
+  border-radius: 14px;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    #38f8ab,
+    #feed35,
+    #38f8ab,
+    #feed35,
+    #38f8ab
+  );
+  box-shadow:
+    0 0 6px rgba(56, 248, 171, 0.18),
+    0 0 10px rgba(254, 237, 53, 0.1),
+    0 1px 6px rgba(14, 196, 123, 0.08);
+}
 
-  .webkarigor-inner {
-    background-color: #FFFAEA;
-    padding: clamp(8px, 1vw, 12px) clamp(10px, 1.2vw, 16px);
-    border-radius: 11px;
-  }
+.navbar-active-pill::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 13px;
+  background-color: #fffaea;
+}
 
-  .webkarigor-text {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: clamp(14px, 1.4vw, 20px);
-    line-height: 140%;
-    letter-spacing: 0%;
-    background-image: linear-gradient(to right, #0EC47B, #15D286, #E4D20E);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.navbar-link.is-active .navbar-link-label {
+  /* Green through most of the word; light yellow only at bottom-right end */
+  background-image: linear-gradient(
+    160deg,
+    #0ec47b 0%,
+    #2eeda0 48%,
+    #15d286 72%,
+    #b8e070 90%,
+    #e4ef96 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.navbar-menu-trigger {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.navbar-more-icon {
+  color: #1f1e1c;
+}
+
+.navbar-link.is-active .navbar-more-icon {
+  color: #0ec47b;
+}
+
+.navbar-dropdown-link {
+  display: block;
+  border-radius: 12px;
+  padding: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-dropdown-link:hover {
+  background-color: #f3f4f6;
+}
+
+.navbar-mobile-surface {
+  position: relative;
+  z-index: 1;
+  border-radius: inherit;
+  background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease,
+    -webkit-backdrop-filter 0.3s ease;
+}
+
+.navbar-mobile-surface--scrolled {
+  background-color: #fffdf6;
+  -webkit-backdrop-filter: blur(40px) saturate(1.2);
+  backdrop-filter: blur(40px) saturate(1.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transform: translateZ(0);
+}
+

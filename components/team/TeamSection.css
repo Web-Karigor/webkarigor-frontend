@@ -1,0 +1,444 @@
+/* Brand Appart layout + Waveyu clean card chrome / blur popup */
+
+.team-page {
+  background: #fbf9ef;
+  min-height: 100vh;
+}
+
+.team-section {
+  position: relative;
+  padding: clamp(100px, 12vw, 160px) 0 clamp(64px, 8vw, 96px);
+  color: #171412;
+  background: #fbf9ef;
+}
+
+.team-container {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+/* —— Headline —— */
+.team_headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 5vw, 48px);
+  margin-bottom: clamp(72px, 12vw, 120px);
+}
+
+.team_section_title {
+  width: 100%;
+  max-width: 860px;
+}
+
+.team_section_title h2 {
+  margin: 0;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: #171412;
+}
+
+.team-line {
+  display: flex;
+  width: 100%;
+}
+
+.team-line--split {
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.team-line--center {
+  justify-content: center;
+}
+
+.team-line--end {
+  justify-content: flex-end;
+}
+
+.team-line span {
+  display: block;
+}
+
+.team_section_intro {
+  width: 100%;
+  max-width: 860px;
+}
+
+.team_section_intro p {
+  margin: 0;
+  max-width: 22rem;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(0.875rem, 1.15vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.55;
+  color: #171412;
+}
+
+/* —— Grid —— */
+.team_grid_wrapper {
+  width: 100%;
+}
+
+.team_grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(14px, 1.6vw, 20px);
+  row-gap: clamp(48px, 6vw, 72px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.team_grid_item {
+  min-width: 0;
+}
+
+.teammate_card {
+  display: block;
+  width: 100%;
+}
+
+/* Card shell — clips heavy blur inside radius */
+.teammate_card_thumbnail {
+  --card-pad: 14px;
+  --btn: 36px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 325 / 402;
+  border-radius: clamp(22px, 2.4vw, 30px);
+  overflow: hidden;
+  isolation: isolate;
+  background: #1a1a1a;
+  transform: translateZ(0);
+}
+
+/* Photo — oversized so blur stays inside clip */
+.teammate_card_media {
+  position: absolute;
+  inset: -14%;
+  z-index: 0;
+  transform: scale(1.02);
+  filter: blur(0);
+  transition:
+    filter 1.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: filter, transform;
+}
+
+.teammate_card_thumbnail.is-open .teammate_card_media {
+  filter: blur(40px);
+  transform: scale(1.18);
+}
+
+.teammate_card_media .u-cover,
+.teammate_card_media img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Frost chrome */
+.teammate_card_chrome {
+  position: absolute;
+  z-index: 3;
+  top: var(--card-pad);
+  left: var(--card-pad);
+  right: var(--card-pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.teammate_card_chrome.is-bottom {
+  top: auto;
+  bottom: var(--card-pad);
+  justify-content: flex-end;
+}
+
+.badge.u-frost {
+  display: inline-flex;
+  align-items: center;
+  max-width: calc(100% - 48px);
+  padding: 0.5em 0.9em;
+  border-radius: 999px;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(0.6875rem, 0.95vw, 0.8125rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: rgba(35, 35, 35, 0.42);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal_trigger.u-frost {
+  pointer-events: auto;
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--btn);
+  height: var(--btn);
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(35, 35, 35, 0.42);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.modal_trigger.u-frost:hover,
+.modal_trigger.u-frost:focus-visible {
+  background: rgba(35, 35, 35, 0.6);
+  outline: none;
+}
+
+.modal_trigger .icon-svg {
+  display: flex;
+  width: 18px;
+  height: 18px;
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.teammate_card_thumbnail.is-open .modal_trigger .icon-svg {
+  transform: rotate(45deg);
+}
+
+/*
+  Popup expands from the + button via clip-path —
+  smooth Waveyu-style reveal, clipped by card overflow.
+*/
+.teammate_popup {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.52);
+  color: #171412;
+  pointer-events: none;
+  clip-path: circle(0 at calc(100% - (var(--card-pad) + var(--btn) / 2)) calc(var(--card-pad) + var(--btn) / 2));
+  transition: clip-path 1.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.teammate_card_thumbnail.is-open .teammate_popup {
+  clip-path: circle(150% at calc(100% - (var(--card-pad) + var(--btn) / 2)) calc(var(--card-pad) + var(--btn) / 2));
+}
+
+.teammate_popup_content {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(14px, 1.6vw, 22px);
+  width: 100%;
+  max-width: 18rem;
+  padding: 0 clamp(1.1rem, 6%, 2rem);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
+}
+
+.teammate_card_thumbnail.is-open .teammate_popup_content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.teammate_card_thumbnail:not(.is-open) .teammate_popup_content {
+  transition-delay: 0s;
+  transition-duration: 0.45s;
+}
+
+.teammate_popup_heading {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #171412;
+}
+
+.teammate_popup_bio {
+  margin: 0;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(0.75rem, 1.05vw, 0.875rem);
+  font-weight: 450;
+  line-height: 1.4;
+  color: rgba(23, 20, 18, 0.78);
+}
+
+/* —— Join CTA —— */
+.team_join {
+  margin-top: clamp(80px, 14vw, 160px);
+  padding: 0 0 clamp(48px, 8vw, 80px);
+}
+
+.team_join_container {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.team_join_eyebrow {
+  flex: 1 1 0%;
+  margin: 0;
+  padding-right: 24px;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(0.625rem, 0.85vw, 0.75rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8e827c;
+}
+
+.team_join_content {
+  flex: 0 1 auto;
+  width: 100%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.team_join_lead,
+.team_join_sub {
+  margin: 0;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: #171412;
+}
+
+.team_join_cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  width: fit-content;
+  text-decoration: none;
+  color: #171412;
+  transition: opacity 0.2s ease;
+}
+
+.team_join_cta:hover {
+  opacity: 0.7;
+}
+
+.team_join_cta_label {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(0.6875rem, 0.95vw, 0.8125rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.team_join_cta_icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #171412;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.team_join_cta_icon svg {
+  width: 11px;
+  height: 11px;
+}
+
+/* —— Responsive —— */
+@media (max-width: 720px) {
+  .team-container,
+  .team_join_container {
+    width: calc(100% - 32px);
+  }
+
+  .team_section_title h2 {
+    font-size: clamp(2.75rem, 12vw, 3.75rem);
+  }
+
+  .team_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 36px;
+  }
+
+  .team_grid_item {
+    grid-column: auto !important;
+  }
+
+  .team_join_container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .team_join_eyebrow {
+    flex: none;
+    padding-right: 0;
+  }
+
+  .team_join_content {
+    max-width: 100%;
+  }
+
+  .teammate_card_thumbnail {
+    --card-pad: 10px;
+    --btn: 30px;
+  }
+
+  .modal_trigger .icon-svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-section {
+    padding-top: 96px;
+  }
+
+  .team_grid {
+    column-gap: 10px;
+    row-gap: 28px;
+  }
+
+  .badge.u-frost {
+    font-size: 0.625rem;
+    padding: 0.4em 0.7em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teammate_card_media,
+  .teammate_popup,
+  .teammate_popup_content,
+  .modal_trigger .icon-svg {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}

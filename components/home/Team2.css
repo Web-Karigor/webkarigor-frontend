@@ -1,0 +1,275 @@
+/* Full round 3D team circle — Brand Appart tornado */
+
+.team2 {
+  position: relative;
+  overflow: hidden;
+  background: #fefcf6;
+  padding: 28px 0 8px;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.team2-container {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  min-height: min(50vh, 480px);
+  padding: 0;
+}
+
+.team2-headline {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1em;
+  pointer-events: none;
+  text-align: center;
+  width: 100%;
+}
+
+.team2-title-small {
+  margin: 0;
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6.5vw, 4.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: #171412;
+}
+
+.team2-title-big {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  font-size: clamp(5.5rem, 24vw, 18rem);
+  line-height: 0.78;
+  letter-spacing: -0.055em;
+  color: #8e827c;
+  user-select: none;
+}
+
+.team2-word-big,
+.team2-word-results {
+  position: relative;
+  display: block;
+  text-align: center;
+}
+
+.team2-word-big {
+  width: auto;
+  /* Room above so the i-circle isn’t clipped */
+  padding-top: 0.5em;
+  margin-top: -0.1em;
+}
+
+.team2-word-results {
+  width: 100%;
+}
+
+/* “i” in big — circle sits on top like Brand Appart */
+.team2-i {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.team2-i-stem {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  line-height: 1;
+}
+
+.team2-big-circle {
+  position: absolute;
+  left: 50%;
+  /* Directly above the ı stem */
+  bottom: 0.72em;
+  z-index: 2;
+  width: 0.2em;
+  height: 0.2em;
+  border-radius: 50%;
+  background: #8e827c;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.team2-tornado {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.team2-tornado-wrapper {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 100vw;
+  max-width: none;
+  height: min(52vh, 520px);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1600px;
+  perspective-origin: 50% 42%;
+}
+
+.team2-tornado-list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform-style: preserve-3d;
+  transform: rotateX(14deg) rotateZ(5deg);
+}
+
+.team2-tornado-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Keep card/image size — do not grow with section */
+  width: clamp(120px, 14vw, 200px);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  backface-visibility: visible;
+}
+
+.team2-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 190 / 210;
+  border-radius: 8px;
+  overflow: visible;
+  transform-style: preserve-3d;
+}
+
+.team2-pic {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(165deg, #ff5a3c 0%, #ff8a3d 42%, #ffb347 100%);
+  will-change: transform;
+  backface-visibility: visible;
+  box-shadow: 0 18px 40px rgba(23, 20, 18, 0.18);
+}
+
+.team2-pic-img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.team2-actions {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  margin-top: min(10vh, 100px);
+  padding-bottom: 0;
+}
+
+.team2-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #171412;
+  transition: opacity 0.2s ease;
+}
+
+.team2-link:hover {
+  opacity: 0.7;
+}
+
+.team2-link-title {
+  font-family: var(--font-montserrat);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.team2-link-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  color: #171412;
+}
+
+.team2-link-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .team2 {
+    padding: 20px 0 8px;
+  }
+
+  .team2-container {
+    min-height: min(46vh, 400px);
+  }
+
+  .team2-tornado-wrapper {
+    width: 100vw;
+    height: min(42vh, 360px);
+    top: 50%;
+    perspective: 900px;
+  }
+
+  .team2-tornado-list {
+    transform: rotateX(16deg) rotateZ(4deg);
+  }
+
+  .team2-tornado-item {
+    width: clamp(96px, 24vw, 140px);
+  }
+
+  .team2-big-circle {
+    width: 0.38em;
+    height: 0.38em;
+    bottom: 0.7em;
+    top: auto;
+  }
+
+  .team2-card,
+  .team2-pic {
+    border-radius: 6px;
+  }
+
+  .team2-actions {
+    display: none;
+  }
+
+  .team2-title-big {
+    font-size: clamp(3.75rem, 22vw, 6.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team2-tornado-list {
+    transform: rotateX(10deg);
+  }
+}

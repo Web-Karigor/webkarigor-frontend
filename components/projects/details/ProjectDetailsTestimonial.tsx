@@ -1,13 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-import type { ProjectDetail } from "@/lib/project-details-data";
+import {
+  PROJECT_DETAILS_UI,
+  type ProjectDetail,
+} from "@/lib/project-details-data";
 import { PD } from "@/lib/project-details-layout";
-
-const ease = [0.16, 1, 0.3, 1] as const;
-const vp = { once: true, amount: 0.15, margin: "0px 0px -80px 0px" } as const;
 
 export default function ProjectDetailsTestimonial({
   project,
@@ -23,18 +20,14 @@ export default function ProjectDetailsTestimonial({
         style={{ maxWidth: PD.content + 80 }}
       >
         <div className="mx-auto w-full" style={{ maxWidth: PD.content }}>
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={vp}
-            transition={{ duration: 1.05, ease }}
+          <div
             className="rounded-2xl px-[clamp(20px,4vw,64px)] py-8 text-white sm:rounded-3xl sm:py-10 md:rounded-[32px] md:py-12 lg:py-14"
             style={{
               backgroundColor: PD.testimonial.bg,
             }}
           >
             <p className="m-0 font-montserrat text-[12px] font-semibold tracking-[0.16em] uppercase sm:text-[13px]">
-              Testimonial
+              {PROJECT_DETAILS_UI.testimonial}
             </p>
             <p className="mt-5 m-0 max-w-[980px] font-montserrat text-[clamp(16px,4vw,28px)] font-medium leading-[155%] tracking-[-0.01em] sm:mt-6">
               {testimonial.quote}
@@ -67,7 +60,7 @@ export default function ProjectDetailsTestimonial({
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

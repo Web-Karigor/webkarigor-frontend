@@ -5,6 +5,7 @@
 
 .trusted-wrapper {
   width: 100%;
+  max-width: 100%;
   padding: clamp(48px, 8vw, 100px) 0;
   overflow: hidden;
   background: #fbfaf7;
@@ -12,8 +13,10 @@
 
 .trusted-layout {
   max-width: 1920px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 clamp(16px, 4vw, 40px);
+  overflow: hidden;
 }
 
 /* =========================
@@ -21,7 +24,7 @@
 ========================= */
 
 .trusted-image-row {
-  max-width: 1920px;
+  max-width: none;
   margin: auto;
   display: flex;
   align-items: flex-end;
@@ -52,17 +55,21 @@
 
 .trusted-text {
   min-width: 0;
+  /* Room so badge top border isn't clipped by parent overflow */
+  padding-top: 2px;
 }
 
 .trusted-badge {
   display: inline-block;
-  padding: 6px 14px;
+  box-sizing: border-box;
+  padding: 8px 18px;
   border-radius: 999px;
   border: 1px solid #c7f2d0;
   color: #2cbf6d;
-  font-size: clamp(0.75rem, 2vw, 0.8125rem);
+  font-size: clamp(0.875rem, 2.2vw, 1rem);
   font-weight: 500;
-  margin-bottom: clamp(12px, 3vw, 20px);
+  line-height: 1.3;
+  margin-bottom: clamp(14px, 3vw, 22px);
 }
 
 .trusted-heading {
@@ -110,13 +117,6 @@
 @media (min-width: 1025px) and (max-width: 1279px) {
   .trusted-image-row {
     gap: clamp(10px, 1.2vw, 20px);
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .trusted-image-row::-webkit-scrollbar {
-    display: none;
   }
 
   .trusted-image-card {
@@ -216,14 +216,11 @@
 
 @media (max-width: 640px) {
   .trusted-image-row {
-    overflow-x: auto;
-    padding-bottom: 12px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    /* Marquee is transform-driven — never allow page/row x-scroll */
+    overflow: visible;
   }
 
   .trusted-image-card {
     flex: 0 0 auto;
-    scroll-snap-align: start;
   }
 }

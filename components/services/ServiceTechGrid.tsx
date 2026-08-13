@@ -1,60 +1,14 @@
 "use client";
 
+import servicesContent from "@/data/services-content.json";
+
 type TechItem = {
   name: string;
   icon: string;
 };
 
-const TECH_ITEMS: TechItem[] = [
-  {
-    name: "Laravel",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg",
-  },
-  {
-    name: "React",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  },
-  {
-    name: "Next js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  },
-  {
-    name: "Node js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "Bootstrap",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
-  },
-  {
-    name: "Vercel",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
-  },
-  {
-    name: "Tailwind",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-  },
-  {
-    name: "Python",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  },
-  {
-    name: "Kotlin",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
-  },
-  {
-    name: "Github",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-  },
-  {
-    name: "Notion",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg",
-  },
-  {
-    name: "Figma",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-  },
-];
+const { eyebrow, title, description, items: TECH_ITEMS } =
+  servicesContent.techGrid;
 
 const TOP_ROW = TECH_ITEMS.slice(0, 6);
 const BOTTOM_ROW = TECH_ITEMS.slice(6);
@@ -102,16 +56,14 @@ export default function ServiceTechGrid() {
         <div className="mb-9 text-center">
           <h2 className="m-0 font-montserrat text-[clamp(26px,4.2vw,56px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#111827]">
             <span className="block text-[24px] text-[#15d286]">
-              Why Webkarigor
+              {eyebrow}
             </span>
             <span className="mt-2 block text-[#000000] text-[32px]">
-              More Than Beautiful Interfaces
+              {title}
             </span>
           </h2>
           <p className="mx-auto mt-3 max-w-[900px] font-montserrat text-[12px] font-semibold leading-[1.45] text-[#A7A7A7] sm:mt-4 sm:text-[18px]">
-            We combine strategy, research, and design thinking to create products
-            that not only look good but perform exceptionally well in the real
-            world.
+            {description}
           </p>
         </div>
 

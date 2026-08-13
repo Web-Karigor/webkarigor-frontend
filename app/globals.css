@@ -23,4 +23,19 @@
     @apply bg-background text-foreground;
     background-color: #FFFDF6;
   }
+
+  a[href],
+  button,
+  label[for],
+  summary,
+  select,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  [role="button"],
+  [role="link"],
+  [data-cursor="pointer"],
+  .cursor-pointer {
+    cursor: pointer;
+  }
 }

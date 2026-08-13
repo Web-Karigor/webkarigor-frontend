@@ -1,0 +1,210 @@
+{
+  "metadata": {
+    "title": "Pricing — Webkarigor",
+    "description": "Transparent monthly pricing for product design and development. Seed, Growth, and Expert plans with no long-term contracts."
+  },
+  "hero": {
+    "eyebrow": "From Idea to Launch",
+    "titleLines": ["Transparent Pricing for", "Supports Your Growth"],
+    "features": [
+      {
+        "title": "Clickable Design Prototype",
+        "description": "Visualize and test your product experience before development.",
+        "icon": "pointer"
+      },
+      {
+        "title": "Developer-Ready Files",
+        "description": "Organized assets and specifications for a smoother build process.",
+        "icon": "code"
+      },
+      {
+        "title": "Efficient Project Management",
+        "description": "A clear workflow helps keep projects aligned and moving forward.",
+        "icon": "calendar"
+      },
+      {
+        "title": "Ongoing Design Guidance",
+        "description": "Receive expert guidance to support informed product decisions.",
+        "icon": "compass"
+      }
+    ]
+  },
+  "plans": {
+    "saveBadge": "Save 25%",
+    "includedLabel": "Everything Included",
+    "popularLabel": "Popular",
+    "whatYouGetLabel": "What you get:",
+    "cta": {
+      "label": "Book a Call",
+      "href": "#contact"
+    },
+    "items": [
+      {
+        "id": "launch",
+        "name": "Launch Ready",
+        "subtitle": "MVP Product Design & Development",
+        "monthly": 3500,
+        "features": [
+          "UX/UI design for a single product or core feature",
+          "Web or mobile app development",
+          "Clean, scalable, and maintainable code",
+          "Essential user flows and usability focus",
+          "Basic testing and quality checks",
+          "Deployment-ready build with source files",
+          "Clear delivery timeline and milestone tracking"
+        ]
+      },
+      {
+        "id": "build",
+        "name": "Build & Validate",
+        "subtitle": "Full Product Design with Research & Development",
+        "monthly": 5000,
+        "popular": true,
+        "features": [
+          "User research and product discovery sessions",
+          "End-to-end UX/UI design for the full product",
+          "Design system for consistency and scale",
+          "Web or mobile app development",
+          "Usability testing and design iteration",
+          "Performance and security best practices",
+          "Post-launch support and proper handover"
+        ]
+      },
+      {
+        "id": "scale",
+        "name": "Scale & Optimize",
+        "subtitle": "Advanced Product Design & Development",
+        "monthly": 7000,
+        "features": [
+          "User research, audit, and competitor analysis",
+          "Strategic roadmap and feature prioritization",
+          "UX/UI design with system-level thinking",
+          "Full development with scalable architecture",
+          "Dedicated design and engineering team",
+          "Continuous monitoring and optimization",
+          "Priority support, maintenance"
+        ]
+      }
+    ]
+  },
+  "customBanner": {
+    "backgroundSrc": "/pricing/rectangle-79.png",
+    "overlaySrc": "/rr.webp",
+    "titleLines": [
+      "Every product is different",
+      "Your pricing should be too"
+    ],
+    "description": "Looking for a custom solution or specific service?",
+    "cta": {
+      "label": "Request a quote",
+      "href": "#contact"
+    }
+  },
+  "package": {
+    "title": "A Complete Package Of Everything You Need To Grow",
+    "ellipseSrc": "/pricing/ellipse-1569.webp",
+    "starSrc": "/pricing/star-17.png",
+    "columns": [
+      [
+        "UI/UX Design",
+        "Product Strategy",
+        "UX Research",
+        "Wireframing",
+        "Interactive Prototyping",
+        "Website Design",
+        "Landing Page Design",
+        "UX Audit"
+      ],
+      [
+        "Back-end Development",
+        "Full-Stack Development",
+        "API Development & Integration",
+        "React Development",
+        "Next.js Development",
+        "Laravel Development",
+        "Node.js Development",
+        "WordPress Development"
+      ],
+      [
+        "Brand Identity Design",
+        "Logo Design",
+        "Motion Graphics",
+        "UI Animation",
+        "Prototype",
+        "Illustration Design",
+        "Pitch Deck Design",
+        "Marketing Creatives"
+      ],
+      [
+        "Mobile App Development",
+        "SaaS Product Design",
+        "Framer Development",
+        "Front-end Development",
+        "Dashboard Design",
+        "Webflow Development",
+        "Ongoing Maintenance & Support",
+        "Mobile App Design"
+      ]
+    ]
+  },
+  "builtFor": {
+    "title": "Built for Growing Products",
+    "cta": {
+      "label": "Book a Call",
+      "href": "#contact"
+    },
+    "columns": {
+      "ours": "Webkarigor",
+      "others": "Other Agencies"
+    },
+    "items": [
+      {
+        "label": "Discovery and research before design",
+        "otherHas": true
+      },
+      {
+        "label": "Interactive prototypes for key flows",
+        "otherHas": false
+      },
+      {
+        "label": "Developer-ready handoff documentation",
+        "otherHas": true
+      },
+      {
+        "label": "Design system and reusable components",
+        "otherHas": false
+      },
+      {
+        "label": "Flexible engagement based on project needs",
+        "otherHas": true
+      },
+      {
+        "label": "Ongoing design consultation",
+        "otherHas": false
+      },
+      {
+        "label": "Transparent communication throughout the project",
+        "otherHas": false
+      },
+      {
+        "label": "Structured process from concept to delivery",
+        "otherHas": true
+      }
+    ]
+  },
+  "featuredWork": {
+    "title": "Featured Work That Turns Ideas Into Digital Products",
+    "description": "Explore selected work that highlights our design, development, and problem-solving approach.",
+    "seeAll": {
+      "label": "See All",
+      "href": "/projects"
+    },
+    "items": [
+      { "src": "/sm1.webp", "alt": "Simple is More website" },
+      { "src": "/sm4.webp", "alt": "Fashion mobile app screens" },
+      { "src": "/services/why-choose-main.jpg", "alt": "Desktop product interface" },
+      { "src": "/sm3.webp", "alt": "Analytics dashboard" },
+      { "src": "/ecommerce/hero-composite.webp", "alt": "Lifestyle commerce UI" }
+    ]
+  }
+}
