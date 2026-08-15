@@ -15,13 +15,13 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
   ];
 
   return (
-    <section className="bg-[#FFFDF6] pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 lg:pt-[100px] lg:pb-10">
+    <section className="pd-body bg-[#FFFDF6] pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 lg:pt-[100px] lg:pb-10">
       <div
         className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
         style={{ maxWidth: PD.content + 80 }}
       >
         <div className="mx-auto w-full" style={{ maxWidth: PD.content }}>
-          <h1 className="m-0 max-w-[1100px] text-left font-montserrat text-[clamp(24px,6vw,48px)] font-bold leading-[1.3] tracking-[-0.04em] text-black">
+          <h1 className="pd-title m-0 max-w-[1100px] text-left font-montserrat text-[clamp(24px,6vw,48px)] font-bold leading-[1.3] tracking-[-0.04em] text-black">
             {project.titleLines ? (
               <>
                 <span className="md:hidden">{project.title}</span>
@@ -37,7 +37,7 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
           </h1>
           <div className="mt-6 h-px w-full bg-[#E5E1D8] sm:mt-8 md:mt-10" />
 
-          <div className="mt-8 grid grid-cols-1 gap-8 sm:mt-10 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-[60px]">
+          <div className="pd-body-split mt-8 grid grid-cols-1 gap-8 sm:mt-10 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-[60px]">
             <div className="flex flex-col gap-5 sm:gap-6 lg:sticky lg:top-[120px] lg:self-start">
               <aside className="rounded-2xl bg-[#FFF8DC] p-5 sm:rounded-[24px] sm:p-6 lg:p-8">
                 <h2 className="m-0 font-montserrat text-[clamp(17px,4vw,20px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
@@ -85,7 +85,7 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
 
               <div
                 data-project-cursor
-                className="relative mt-8 aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[#f3f1ea] sm:mt-10 sm:aspect-[16/10] sm:rounded-3xl lg:aspect-auto lg:h-[692px] lg:rounded-[40px]"
+                className="pd-mockup relative mt-8 aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[#f3f1ea] sm:mt-10 sm:aspect-[16/10] sm:rounded-3xl lg:aspect-auto lg:h-[692px] lg:rounded-[40px]"
               >
                 <Image
                   src={project.mockupImage}
@@ -106,7 +106,7 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
                   </p>
                 </div>
 
-                <div className="w-full max-w-[734px] ml-0 sm:ml-8 md:ml-12 lg:ml-[100px]">
+                <div className="pd-solution w-full max-w-[734px] ml-0 sm:ml-8 md:ml-12 lg:ml-[100px]">
                   <h3 className="m-0 font-montserrat text-[clamp(20px,5vw,28px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
                     {PROJECT_DETAILS_UI.solution}
                   </h3>

@@ -5,7 +5,7 @@ const { title, description, logos } = servicesContent.clients;
 
 export default function ServiceClients() {
   return (
-    <section className="bg-[#f8fafc] px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px]">
+    <section className="svc-clients bg-[#f8fafc] px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px]">
       <div className="mx-auto flex w-full max-w-[1208px] flex-col items-center gap-8 lg:gap-[60px]">
         <h2 className="m-0 text-center font-montserrat text-[clamp(1.875rem,4vw,2.5rem)] font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
           {title}

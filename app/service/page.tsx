@@ -4,6 +4,7 @@ import ServiceHero from "@/components/services/ServiceHero";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import ServiceClients from "@/components/services/ServiceClients";
 import servicesContent from "@/data/services-content.json";
+import "@/styles/service-pages-laptop.css";
 
 const ServiceOfferings = dynamic(
   () => import("@/components/services/ServiceOfferings"),
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function ServicePage() {
   return (
-    <div className="bg-white">
+    <div className="svc-laptop bg-white">
       <ServiceHero />
       <ServiceMarquee />
       <ServiceClients />

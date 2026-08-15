@@ -11,7 +11,7 @@ const ECO_CLIENTS = ECO_HERO.clients;
 
 export default function EcoHero() {
   return (
-    <section className="relative overflow-hidden bg-[#F7F9FB]">
+    <section className="eco-hero relative overflow-hidden bg-[#F7F9FB]">
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         <div className={`${SERVICE_PAGE_GUTTER} flex h-[72px] items-center justify-between sm:h-[88px] lg:h-[108px]`}>
           <Link
@@ -31,13 +31,13 @@ export default function EcoHero() {
 
       {/* Desktop — Figma 1920 × 870 */}
       <div
-        className="relative mx-auto hidden w-full max-w-[1920px] lg:block"
+        className="eco-hero-desktop relative mx-auto hidden w-full max-w-[1920px] lg:block"
         style={{ height: 870 }}
       >
         {/* Bottom mint glow — top 733, h 137 */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 z-[1]"
+          className="eco-hero-glow pointer-events-none absolute inset-x-0 z-[1]"
           style={{
             top: 758,
             height: 137,
@@ -48,7 +48,7 @@ export default function EcoHero() {
 
         {/* Absolute visual — 808 × 712 @ left 1052, top 47 */}
         <div
-          className="pointer-events-none absolute z-[2]"
+          className="eco-hero-visual pointer-events-none absolute z-[2]"
           style={{
             left: "calc(1052 / 1920 * 100%)",
             top: 47,
@@ -69,7 +69,7 @@ export default function EcoHero() {
 
         {/* Left column — left 60, below header; clients sit above glow */}
         <div
-          className="absolute z-10 flex flex-col"
+          className="eco-hero-copy absolute z-10 flex flex-col"
           style={{
             left: "clamp(24px, 3.125vw, 60px)",
             top: 143,

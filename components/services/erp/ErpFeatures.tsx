@@ -35,13 +35,13 @@ export default function ErpFeatures() {
         </div>
 
         {/* Cards — 2×2, gap 52, card 568×234 · r24 · p48 */}
-        <div className="mx-auto grid w-full max-w-[1188px] grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8 lg:gap-[52px]">
+        <div className="erp-features-grid mx-auto grid w-full max-w-[1188px] grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8 lg:gap-[52px]">
           {ERP_FEATURES.map((feature) => {
             const Icon = ICONS[feature.icon as keyof typeof ICONS];
             return (
               <article
                 key={feature.title}
-                className="flex h-full w-full items-start gap-5 rounded-[20px] border-[0.5px] border-[#E0E0E0] bg-white p-6 shadow-[0_26px_60px_rgba(0,0,0,0.05)] md:gap-6 md:rounded-[22px] md:p-8 lg:gap-6 lg:rounded-[24px] lg:p-12"
+                className="erp-feature-card flex h-full w-full items-start gap-5 rounded-[20px] border-[0.5px] border-[#E0E0E0] bg-white p-6 shadow-[0_26px_60px_rgba(0,0,0,0.05)] md:gap-6 md:rounded-[22px] md:p-8 lg:gap-6 lg:rounded-[24px] lg:p-12"
               >
                 <span
                   className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full"

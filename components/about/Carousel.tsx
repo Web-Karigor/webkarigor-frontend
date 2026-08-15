@@ -15,6 +15,7 @@ const LOOP_COPIES = 3;
 function getVisibleCount(width: number): number {
   if (width < 768) return 2;
   if (width < 1024) return 4;
+  if (width <= 1440) return 5;
   return 7;
 }
 

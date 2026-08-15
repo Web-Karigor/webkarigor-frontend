@@ -103,6 +103,22 @@
   }
 }
 
+/* Laptop mid — 620px cards dominate 720–900px-tall screens */
+@media (min-width: 1280px) and (max-width: 1440px) {
+  .slanted-wrapper {
+    padding: 48px 0;
+  }
+
+  .slanted-viewport {
+    min-height: 560px;
+  }
+
+  .slanted-card {
+    width: 344px;
+    height: 560px;
+  }
+}
+
 /* Tablet */
 @media (max-width: 767px) {
   .slanted-viewport {

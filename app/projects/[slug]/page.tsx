@@ -14,6 +14,7 @@ import {
   getAllProjectSlugs,
   getProjectDetail,
 } from "@/lib/project-details-data";
+import "@/styles/site-pages-laptop.css";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -43,7 +44,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
   if (!project) notFound();
 
   return (
-    <div className="bg-[#FFFDF6]">
+    <div className="site-laptop bg-[#FFFDF6]">
       <ProjectHoverCursor />
       <ProjectDetailsHero project={project} />
       <ProjectDetailsBody project={project} />

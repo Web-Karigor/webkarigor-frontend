@@ -26,7 +26,7 @@ export default function ServiceHero() {
   };
 
   return (
-    <section className="relative overflow-visible bg-[#f5f5f5] pb-[clamp(48px,6vw,72px)] pt-[120px]">
+    <section className="svc-hero relative overflow-visible bg-[#f5f5f5] pb-[clamp(48px,6vw,72px)] pt-[120px]">
       <header className="fixed inset-x-0 top-0 z-[50] w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         <div className={`${SERVICE_PAGE_GUTTER} flex h-[72px] items-center justify-between sm:h-[88px] lg:h-[108px]`}>
           <Link
@@ -110,7 +110,7 @@ export default function ServiceHero() {
           </div>
 
           <div className="mx-auto w-full max-w-[620px] overflow-visible pt-3 lg:ml-auto lg:justify-self-end lg:pt-0">
-            <div className="relative aspect-[1/1.05] w-full max-h-[620px] overflow-visible">
+            <div className="svc-hero-visual relative aspect-[1/1.05] w-full max-h-[620px] overflow-visible">
               <div className="absolute inset-0 overflow-hidden rounded-[clamp(96px,15vw,160px)_clamp(8px,1vw,14px)_clamp(96px,15vw,160px)_clamp(36px,5vw,52px)] shadow-[0_24px_64px_rgba(0,0,0,0.12)]">
                 <Image
                   src={hero.image.src}

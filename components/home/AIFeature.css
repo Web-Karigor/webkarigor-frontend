@@ -116,6 +116,22 @@
   }
 }
 
+/* Laptop only */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .ai-feature-section {
+    padding: 64px 24px;
+  }
+
+  .ai-feature-card {
+    min-height: 300px;
+  }
+
+  .ai-feature-center-node {
+    width: clamp(5rem, 8vw, 6.75rem);
+    height: clamp(5rem, 8vw, 6.75rem);
+  }
+}
+
 .ai-feature-circuit-svg {
   position: absolute;
   inset: 0;

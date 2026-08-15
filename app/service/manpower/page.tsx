@@ -12,12 +12,13 @@ import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { MANPOWER_METADATA } from "@/lib/manpower-data";
+import "@/styles/service-pages-laptop.css";
 
 export const metadata: Metadata = MANPOWER_METADATA;
 
 export default function ManpowerServicePage() {
   return (
-    <div className="bg-[#FFFEFB]">
+    <div className="svc-laptop bg-[#FFFEFB]">
       <ManpowerHero />
       <ManpowerTrusted />
       <ManpowerPortfolio />

@@ -3,8 +3,8 @@ import { ABOUT_IMPACT } from "@/lib/about-data";
 
 export default function AboutImpact() {
   return (
-    <section className="bg-[#FFFAEA] xl:h-[756px] xl:min-h-[756px] xl:flex xl:items-center mt-10 mb-14">
-      <div className="mx-auto grid w-full pt-10 pb-10 max-w-[1920px] grid-cols-1 items-center gap-12 px-[clamp(16px,4.75vw,99px)] lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 xl:gap-16">
+    <section className="about-impact bg-[#FFFAEA] xl:h-[756px] xl:min-h-[756px] xl:flex xl:items-center mt-10 mb-14">
+      <div className="about-impact-inner mx-auto grid w-full pt-10 pb-10 max-w-[1920px] grid-cols-1 items-center gap-12 px-[clamp(16px,4.75vw,99px)] lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 xl:gap-16">
         <div className="min-w-0">
           <p className="m-0 max-w-[523px] font-montserrat text-[clamp(15px,1.2vw,18px)] font-medium leading-[1.7] text-[#0A0A0A]">
             {ABOUT_IMPACT.intro}
@@ -22,7 +22,7 @@ export default function AboutImpact() {
               >
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-5 md:gap-8">
                   <div className="shrink-0">
-                    <p className="m-0 font-montserrat text-[clamp(40px,10vw,72px)] font-bold leading-none tracking-[-0.04em] text-[#0A0A0A]">
+                    <p className="about-impact-stat m-0 font-montserrat text-[clamp(40px,10vw,72px)] font-bold leading-none tracking-[-0.04em] text-[#0A0A0A]">
                       {stat.value}
                     </p>
                     <p className="mt-1 m-0 font-montserrat text-[clamp(16px,4vw,24px)] font-bold leading-none text-[#0A0A0A]">

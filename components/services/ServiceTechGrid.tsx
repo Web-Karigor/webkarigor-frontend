@@ -39,7 +39,7 @@ function TechMarqueeRow({
               loading="lazy"
               decoding="async"
             />
-            <span className="font-montserrat text-[12px] leading-none font-semibold tracking-[-0.01em] sm:text-[25px]">
+            <span className="svc-tech-name font-montserrat text-[12px] leading-none font-semibold tracking-[-0.01em] sm:text-[25px]">
               {item.name}
             </span>
           </article>

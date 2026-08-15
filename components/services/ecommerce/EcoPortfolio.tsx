@@ -30,6 +30,9 @@ function getPortfolioLayout(width: number): PortfolioLayout {
   if (width < 1024) {
     return { visibleCards: 2, cardHeight: 460, cardGap: 20, leftInset: 72 };
   }
+  if (width < 1280) {
+    return { visibleCards: 3, cardHeight: 440, cardGap: 18, leftInset: 72 };
+  }
   return { visibleCards: 4, cardHeight: 500, cardGap: 24, leftInset: 96 };
 }
 

@@ -65,12 +65,12 @@ export default function PricingPackage() {
             />
           </div>
 
-          <div className="relative z-[1] flex flex-col px-[clamp(20px,5vw,72px)] pb-[clamp(32px,5vw,56px)] pt-[clamp(32px,5vw,56px)] lg:min-h-[696px]">
+          <div className="pricing-package-inner relative z-[1] flex flex-col px-[clamp(20px,5vw,72px)] pb-[clamp(32px,5vw,56px)] pt-[clamp(32px,5vw,56px)] lg:min-h-[696px]">
             <h2 className="m-0 mx-auto max-w-[820px] text-center font-montserrat text-[clamp(22px,5.5vw,40px)] font-bold leading-[1.3] tracking-[-0.03em] text-white">
               {title}
             </h2>
 
-            <div className="mt-[clamp(28px,5vw,56px)] grid flex-1 grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-12">
+            <div className="pricing-package-grid mt-[clamp(28px,5vw,56px)] grid flex-1 grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-12">
               {PACKAGE_COLUMNS.map((column, colIndex) => (
                 <ul
                   key={colIndex}

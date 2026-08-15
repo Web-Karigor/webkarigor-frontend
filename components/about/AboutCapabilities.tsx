@@ -69,7 +69,7 @@ export default function AboutCapabilities() {
               return (
                 <p
                   key={`${label}-${index}`}
-                  className="absolute left-1/2 top-1/2 m-0 w-full max-w-[900px] whitespace-nowrap text-center font-montserrat text-[clamp(28px,5vw,64px)] font-bold leading-[1.05] tracking-[-0.03em] transition-[transform,color,opacity] duration-500 ease-out will-change-transform"
+                  className="about-cap-label absolute left-1/2 top-1/2 m-0 w-full max-w-[900px] whitespace-nowrap text-center font-montserrat text-[clamp(28px,5vw,64px)] font-bold leading-[1.05] tracking-[-0.03em] transition-[transform,color,opacity] duration-500 ease-out will-change-transform"
                   style={{
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",

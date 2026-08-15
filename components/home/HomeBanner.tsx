@@ -1,5 +1,6 @@
 import Image from "next/image";
 import homeContent from "@/data/home-content.json";
+import "./HomeBanner.css";
 
 const { backgroundImage, titleLines, description, ctaLabel } = homeContent.banner;
 
@@ -18,7 +19,7 @@ export default function HomeBanner() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6 gap-8">
         <div className="md:w-2/3 w-full">
-          <h2 className="text-xl sm:text-2xl md:text-[32px] lg:text-[40px] font-bold font-montserrat text-black mb-2 flex flex-col gap-y-2 md:gap-y-5">
+          <h2 className="home-banner-title text-xl sm:text-2xl md:text-[32px] lg:text-[40px] font-bold font-montserrat text-black mb-2 flex flex-col gap-y-2 md:gap-y-5">
             {titleLines.map((line) => (
               <span key={line}>{line}</span>
             ))}

@@ -11,6 +11,7 @@ import TrustedFounders from "@/components/home/TrustedFounders";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import Footer from "@/components/home/Footer";
 import { PRICING_METADATA } from "@/lib/pricing-data";
+import "@/styles/site-pages-laptop.css";
 
 export const metadata: Metadata = {
   title: PRICING_METADATA.title,
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="bg-[#FFFDF6]">
+    <div className="site-laptop bg-[#FFFDF6]">
       <ProjectHoverCursor />
       <PricingHero />
       <PricingSection ctaHref="#contact" />

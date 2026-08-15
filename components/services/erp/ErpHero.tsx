@@ -25,7 +25,7 @@ const TECH_BAR_HEIGHTS = [
 
 export default function ErpHero() {
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section className="erp-hero relative overflow-hidden bg-white">
       <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
         <div className="mx-auto flex h-[72px] w-full max-w-[1680px] items-center justify-between px-[clamp(16px,3.5vw,50px)] sm:h-[88px] lg:h-[108px]">
           <Link
@@ -44,9 +44,9 @@ export default function ErpHero() {
       </header>
 
       <div className="mx-auto w-full max-w-[1850px] px-[clamp(16px,3.5vw,50px)] pb-14 pt-[80px] sm:pt-[100px] lg:pb-20 lg:pt-[128px]">
-        <div className="flex w-full flex-col items-stretch gap-12 py-4 max-md:gap-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-12">
+        <div className="erp-hero-split flex w-full flex-col items-stretch gap-12 py-4 max-md:gap-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-12">
           {/* Left copy — Figma 636 × 388 */}
-          <div className="flex w-full max-w-[636px] shrink-0 flex-col justify-center lg:min-h-[388px]">
+          <div className="erp-hero-copy flex w-full max-w-[636px] shrink-0 flex-col justify-center lg:min-h-[388px]">
             <h1 className="m-0 font-montserrat text-[clamp(2.5rem,4.5vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
               {ERP_HERO.titleLine1}
               <br />
@@ -92,7 +92,7 @@ export default function ErpHero() {
           </div>
 
           {/* Right visual — 1st Figma image composition */}
-          <div className="relative w-full max-w-[720px] shrink-0 pt-14 max-lg:mx-auto lg:ml-auto">
+          <div className="erp-hero-visual relative w-full max-w-[720px] shrink-0 pt-14 max-lg:mx-auto lg:ml-auto">
             <div className="relative w-full">
               {/* Dot pattern — Figma 107.59×124.47 · #5A7184 @ 10% · top-left */}
               <div

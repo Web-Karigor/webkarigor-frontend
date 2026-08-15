@@ -43,19 +43,19 @@
 /* lg only */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .stats-number {
-    font-size: clamp(4.5rem, 7vw, 6.25rem);
+    font-size: clamp(6.25rem, 9vw, 8rem);
   }
 
   .stats-plus {
-    font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+    font-size: clamp(1.85rem, 2.7vw, 2.7rem);
   }
 
   .stats-years {
-    font-size: clamp(0.8rem, 1.15vw, 1.1rem);
+    font-size: clamp(1rem, 1.4vw, 1.35rem);
   }
 
   .stats-pill {
-    padding: 4px 12px;
+    padding: 6px 16px;
   }
 }
 
@@ -75,5 +75,24 @@
 
   .stats-pill {
     padding: 4px 16px;
+  }
+}
+
+/* Laptop mid — a bit larger than the previous laptop scale */
+@media (min-width: 1280px) and (max-width: 1440px) {
+  .stats-number {
+    font-size: clamp(7.75rem, 10.5vw, 10.25rem);
+  }
+
+  .stats-plus {
+    font-size: clamp(2.2rem, 3.2vw, 3.5rem);
+  }
+
+  .stats-years {
+    font-size: clamp(1.2rem, 1.65vw, 1.75rem);
+  }
+
+  .stats-pill {
+    padding: 6px 22px;
   }
 }

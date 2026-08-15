@@ -14,7 +14,7 @@ export default function ProjectDetailsTestimonial({
   const { testimonial } = project;
 
   return (
-    <section className="bg-[#FFFDF6] pt-8 pb-12 sm:pt-10 sm:pb-16 md:pb-20 lg:pb-[100px]">
+    <section className="pd-testimonial bg-[#FFFDF6] pt-8 pb-12 sm:pt-10 sm:pb-16 md:pb-20 lg:pb-[100px]">
       <div
         className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
         style={{ maxWidth: PD.content + 80 }}
@@ -29,7 +29,7 @@ export default function ProjectDetailsTestimonial({
             <p className="m-0 font-montserrat text-[12px] font-semibold tracking-[0.16em] uppercase sm:text-[13px]">
               {PROJECT_DETAILS_UI.testimonial}
             </p>
-            <p className="mt-5 m-0 max-w-[980px] font-montserrat text-[clamp(16px,4vw,28px)] font-medium leading-[155%] tracking-[-0.01em] sm:mt-6">
+            <p className="pd-testimonial-quote mt-5 m-0 max-w-[980px] font-montserrat text-[clamp(16px,4vw,28px)] font-medium leading-[155%] tracking-[-0.01em] sm:mt-6">
               {testimonial.quote}
             </p>
 

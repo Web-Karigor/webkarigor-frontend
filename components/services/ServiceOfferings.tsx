@@ -173,18 +173,18 @@ export default function ServiceOfferings() {
   };
 
   return (
-    <section className="overflow-hidden bg-[#f8fafc] py-12">
-      <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-[60px] px-[clamp(16px,4vw,40px)]">
+    <section className="svc-offerings overflow-hidden bg-[#f8fafc] py-12">
+      <div className="svc-offerings-inner mx-auto flex w-full max-w-[1680px] flex-col gap-[60px] px-[clamp(16px,4vw,40px)]">
         <div className="grid grid-cols-1 items-center gap-[clamp(20px,3vw,32px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,913px)] lg:gap-[clamp(64px,10vw,140px)]">
           <div>
-            <span className="mb-3 block font-montserrat text-sm font-bold leading-[1.2] tracking-[-0.01em] text-[#15d286] lg:text-2xl">
+            <span className="svc-offerings-eyebrow mb-3 block font-montserrat text-sm font-bold leading-[1.2] tracking-[-0.01em] text-[#15d286] lg:text-2xl">
               {eyebrow}
             </span>
             <h2 className="m-0 max-w-[460px] font-['Geist'] text-[clamp(24px,6vw,32px)] font-bold text-black">
               {title}
             </h2>
           </div>
-          <p className="m-0 w-full max-w-[913px] justify-start text-left font-['Manrope'] text-[clamp(14px,3.5vw,16px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:min-h-[96px] lg:text-[32px]">
+          <p className="svc-offerings-lead m-0 w-full max-w-[913px] justify-start text-left font-['Manrope'] text-[clamp(14px,3.5vw,16px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:min-h-[96px] lg:text-[32px]">
             {description}
           </p>
         </div>

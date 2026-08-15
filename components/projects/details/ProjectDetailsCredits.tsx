@@ -112,7 +112,7 @@ export default function ProjectDetailsCredits({ project }: { project: ProjectDet
   const groups = groupCredits(project.credits);
 
   return (
-    <section className="bg-[#FFFDF6] pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 lg:pt-[100px] lg:pb-10">
+    <section className="pd-credits bg-[#FFFDF6] pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 lg:pt-[100px] lg:pb-10">
       <div
         className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
         style={{ maxWidth: PD.content + 80 }}
