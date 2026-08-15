@@ -42,7 +42,7 @@ export default function ManpowerHero() {
 
   return (
     <section
-      className="relative overflow-hidden lg:h-[742px]"
+      className="mp-hero relative overflow-hidden lg:h-[742px]"
       style={{
         /* Figma Frame 1920×850 — Fill #F4FFFB + soft lime/cyan blobs */
         backgroundColor: "#F4FFFB",
@@ -79,7 +79,7 @@ export default function ManpowerHero() {
           width={HERO_LAYOUT.width}
           height={HERO_LAYOUT.height}
           priority
-          className="absolute object-contain object-bottom"
+          className="mp-hero-visual absolute object-contain object-bottom"
           style={{
             right: 0,
             bottom: 0,
@@ -113,7 +113,7 @@ export default function ManpowerHero() {
       <div className="relative z-[1] mx-auto flex h-full w-full max-w-[1800px] items-center px-[clamp(16px,3.5vw,50px)] pt-[80px] pb-6 sm:pt-[96px] sm:pb-8 lg:pt-[108px] lg:pb-0">
         <div className="flex w-full flex-col items-stretch gap-6 md:gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           {/* Left — copy + phone CTA */}
-          <div className="flex w-full max-w-[620px] shrink-0 flex-col lg:max-w-[620px]">
+          <div className="mp-hero-copy flex w-full max-w-[620px] shrink-0 flex-col lg:max-w-[620px]">
             <h1 className="m-0 font-montserrat text-[clamp(1.75rem,5.5vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
               {MANPOWER_HERO.title}
             </h1>

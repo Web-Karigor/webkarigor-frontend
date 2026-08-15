@@ -47,7 +47,7 @@ export default function ProjectCard({
               "radial-gradient(circle at 50% 45%, #ff8a3d 0%, #ff4d2e 45%, #c41e0a 100%)",
           }}
         >
-          <span className="font-montserrat text-[clamp(56px,14vw,140px)] font-bold leading-none text-white/95">
+          <span className="projects-brand-v font-montserrat text-[clamp(56px,14vw,140px)] font-bold leading-none text-white/95">
             V
           </span>
         </div>

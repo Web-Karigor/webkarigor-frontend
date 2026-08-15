@@ -911,3 +911,152 @@
     text-align: center;
   }
 }
+
+/* Laptop only — 1024px–1440px.
+   Mobile (<1024) and large desktop (>1440) stay on the rules above. */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .contact-page {
+    overflow-x: clip;
+  }
+
+  .contact-hero {
+    padding: 118px 32px 140px;
+  }
+
+  .contact-hero-title {
+    font-size: clamp(2.15rem, 3.4vw, 2.85rem);
+  }
+
+  .contact-hero-orb {
+    width: clamp(200px, 22vw, 280px);
+    height: clamp(200px, 22vw, 280px);
+    top: 96px;
+  }
+
+  .contact-form-wrap {
+    margin-top: -80px;
+    padding-bottom: 56px;
+  }
+
+  .contact-form-panel {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 28px;
+    padding: 28px 32px;
+  }
+
+  .contact-form-intro-title {
+    margin-bottom: 18px;
+    font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  }
+
+  .contact-benefits {
+    gap: 10px;
+  }
+
+  .contact-benefits li {
+    font-size: 14px;
+  }
+
+  .contact-form-grid {
+    gap: 14px;
+  }
+
+  .contact-input,
+  .contact-textarea {
+    padding: 11px 14px;
+  }
+
+  .contact-phone-input {
+    padding: 11px 14px;
+  }
+
+  .contact-textarea {
+    min-height: 96px;
+  }
+
+  .contact-submit {
+    padding: 13px 20px;
+  }
+
+  .contact-connect {
+    padding: 56px 32px;
+  }
+
+  .contact-logo-row {
+    margin-bottom: 40px;
+  }
+
+  .contact-connect-title,
+  .contact-deck-title,
+  .contact-stories-title,
+  .contact-cta-title {
+    font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+  }
+
+  .contact-connect-title {
+    margin-bottom: 28px;
+  }
+
+  .contact-email-card,
+  .contact-office-card {
+    padding: 16px 18px;
+  }
+
+  .contact-deck {
+    padding-bottom: 56px;
+  }
+
+  .contact-deck-panel {
+    gap: 28px;
+    padding: 24px 28px;
+  }
+
+  .contact-stories {
+    padding: 56px 32px;
+  }
+
+  .contact-story-card {
+    min-height: 360px;
+  }
+
+  .contact-story-quote {
+    padding: 28px;
+    gap: 12px;
+  }
+
+  .contact-bottom-cta {
+    padding: 56px 32px;
+  }
+
+  .contact-cta-desc {
+    margin-bottom: 22px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .contact-hero {
+    padding: 110px 28px 120px;
+  }
+
+  .contact-form-wrap {
+    margin-top: -72px;
+    padding-bottom: 48px;
+  }
+
+  .contact-form-panel {
+    gap: 22px;
+    padding: 22px 24px;
+  }
+
+  .contact-email-card a {
+    font-size: 1.05rem;
+  }
+
+  .contact-story-card {
+    min-height: 320px;
+  }
+
+  .contact-deck-media {
+    aspect-ratio: 16 / 11;
+  }
+}

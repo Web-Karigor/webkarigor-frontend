@@ -11,12 +11,13 @@ import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { ERP_METADATA } from "@/lib/erp-data";
+import "@/styles/service-pages-laptop.css";
 
 export const metadata: Metadata = ERP_METADATA;
 
 export default function ErpServicePage() {
   return (
-    <div className="bg-[#FFFEFB]">
+    <div className="svc-laptop bg-[#FFFEFB]">
       <ErpHero />
       <ErpFeatures />
       <ErpIntegrations />

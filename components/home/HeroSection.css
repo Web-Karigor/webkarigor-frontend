@@ -293,29 +293,31 @@
     /* Clear navbar (~72–90px) then sit content mid-upper */
     --hero-left-mt: 12vh;
     --hero-left-gap: 2.5vh;
-    --hero-photo-left-mt: 2vh;
+    --hero-photo-left-mt: 4.5rem;
     --hero-center-mt: 18vh;
-    --hero-title-pull: 0.75rem;
+    --hero-title-pull: 0px;
     --hero-desc-mt: 2vh;
     --hero-hello-mt: 1.5vh;
     --hero-photo-right-mt: 14vh;
   }
 
   .hero-title {
-    font-size: clamp(2.35rem, 3.55vw, 3.55rem); /* ~15% under 2xl feel */
-    line-height: 118%;
+    font-size: clamp(2.1rem, 3.2vw, 2.85rem);
+    line-height: 122%;
     letter-spacing: -0.035em;
   }
 
   .hero-subtitle {
-    font-size: clamp(0.95rem, 1.35vw, 1.3rem);
-    line-height: 125%;
+    font-size: clamp(0.9rem, 1.25vw, 1.15rem);
+    line-height: 130%;
     letter-spacing: 0.06em;
+    padding-top: 0.4rem;
+    padding-bottom: 0.5rem;
   }
 
   .hero-desc {
-    font-size: clamp(0.9rem, 1.15vw, 1.1rem);
-    line-height: 140%;
+    font-size: clamp(0.85rem, 1.05vw, 1rem);
+    line-height: 145%;
   }
 
   .hero-hello {
@@ -386,5 +388,42 @@
   .hero-projects-text {
     font-size: clamp(150px, 14vw, 210px);
     transform: translateY(45%) !important;
+  }
+}
+
+/* Laptop mid — keep 1441–1535 on existing xl; tighten 1280–1440 only */
+@media (min-width: 1280px) and (max-width: 1440px) {
+  .hero-section {
+    padding-bottom: 5.5rem;
+    --hero-left-mt: 10vh;
+    --hero-center-mt: 16vh;
+    --hero-photo-left-mt: 5rem;
+    --hero-title-pull: 0px;
+    --hero-photo-right-mt: 12vh;
+  }
+
+  .hero-title {
+    font-size: clamp(2.35rem, 3.15vw, 3.15rem);
+    line-height: 124%;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+    line-height: 132%;
+    padding-top: 0.45rem;
+    padding-bottom: 0.55rem;
+  }
+
+  .hero-desc {
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    line-height: 150%;
+  }
+
+  .hero-photo-img {
+    max-width: 230px !important;
+  }
+
+  .hero-projects-text {
+    font-size: clamp(140px, 13vw, 190px);
   }
 }

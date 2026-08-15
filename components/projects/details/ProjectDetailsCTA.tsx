@@ -10,7 +10,7 @@ import { PD } from "@/lib/project-details-layout";
 
 export default function ProjectDetailsCTA({ project }: { project: ProjectDetail }) {
   return (
-    <section className="bg-[#FFFDF6] py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="pd-cta bg-[#FFFDF6] py-12 sm:py-16 md:py-20 lg:py-24">
       <div
         className="mx-auto flex w-full flex-col items-center gap-6 px-[clamp(16px,4vw,40px)] text-center sm:gap-8 lg:gap-10"
         style={{ maxWidth: PD.cta.w }}
@@ -48,7 +48,7 @@ export default function ProjectDetailsCTA({ project }: { project: ProjectDetail 
 
 export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
   return (
-    <section className="bg-[#FFFDF6] pb-12 sm:pb-16 md:pb-20 lg:pb-[120px]">
+    <section className="pd-related bg-[#FFFDF6] pb-12 sm:pb-16 md:pb-20 lg:pb-[120px]">
       <div
         className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
         style={{ maxWidth: PD.related.w + 80 }}
@@ -62,7 +62,7 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
             {project.related.map((item, index) => (
               <article
                 key={`${item.slug}-${index}`}
-                className="related-project-flip relative aspect-[4/5] md:aspect-auto md:h-[420px]"
+                className="pd-related-card related-project-flip relative aspect-[4/5] md:aspect-auto md:h-[420px]"
               >
                 <Link
                   href={`/projects/${item.slug}`}

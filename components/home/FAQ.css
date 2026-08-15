@@ -41,3 +41,20 @@
     transform: scaleX(1);
   }
 }
+
+/* Laptop only — md:text-[26px] questions are desktop-scale on 13–15" */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  #faq {
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  #faq button > span.block {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  #faq .text-\[26px\] {
+    font-size: 1.375rem;
+  }
+}

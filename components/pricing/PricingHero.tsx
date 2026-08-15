@@ -28,7 +28,7 @@ const GAP_GLOWS = ["25%", "50%", "75%"] as const;
 
 export default function PricingHero() {
   return (
-    <section className="relative bg-[#F8F6EF] pt-[120px] pb-8 sm:pt-[140px] sm:pb-10 lg:pb-12">
+    <section className="pricing-hero relative bg-[#F8F6EF] pt-[120px] pb-8 sm:pt-[140px] sm:pb-10 lg:pb-12">
       {/* Soft green glow — top center */}
       <div
         aria-hidden
@@ -52,7 +52,7 @@ export default function PricingHero() {
         >
           {/* Figma: MuseoModerno Medium Italic 48 — gradient, NO underline */}
           <p
-            className="m-0 mx-auto font-museoModerno font-medium italic text-center"
+            className="pricing-hero-eyebrow m-0 mx-auto font-museoModerno font-medium italic text-center"
             style={{
               maxWidth: PR.heroTitle.eyebrowW,
               minHeight: PR.heroTitle.eyebrowH,
@@ -69,7 +69,7 @@ export default function PricingHero() {
           </p>
 
           <h1
-            className="m-0 font-montserrat font-bold text-[#1A1A1A]"
+            className="pricing-hero-title m-0 font-montserrat font-bold text-[#1A1A1A]"
             style={{
               marginTop: PR.heroTitle.titleGap,
               fontSize: `clamp(28px, 4.2vw, ${PR.heroTitle.titleSize}px)`,
@@ -86,7 +86,7 @@ export default function PricingHero() {
         </motion.div>
 
         <div
-          className="relative mt-12 sm:mt-14"
+          className="pricing-hero-grid relative mt-12 sm:mt-14"
         >
           {/* ——— Gradients between cards (the red-circle spots) ——— */}
           <div
@@ -151,7 +151,7 @@ export default function PricingHero() {
           </div>
 
           <div
-            className="relative z-[1] grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-5"
+            className="pricing-hero-cards relative z-[1] grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-5"
           >
             {PRICING_HERO_FEATURES.map((item, index) => {
               const Icon = ICONS[item.icon];
@@ -162,7 +162,7 @@ export default function PricingHero() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
                   transition={{ duration: 0.8, delay: index * 0.06, ease }}
-                  className="relative flex w-full max-w-[370px] flex-col gap-4 rounded-[20px] p-5 sm:gap-5 sm:p-6 lg:min-h-[329px] lg:p-8"
+                  className="pricing-hero-card relative flex w-full max-w-[370px] flex-col gap-4 rounded-[20px] p-5 sm:gap-5 sm:p-6 lg:min-h-[329px] lg:p-8"
                   style={{
                     backgroundColor: PR.heroCard.bg,
                     boxShadow: PR.heroCard.shadow,

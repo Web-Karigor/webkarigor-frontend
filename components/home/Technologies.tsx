@@ -1,5 +1,7 @@
 "use client";
 
+import "./Technologies.css";
+
 import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -130,7 +132,7 @@ function TechColumn({ items }: { items: TechItem[] }) {
 
   return (
     <article
-      className="relative z-[1] box-border flex w-full max-w-[440px] flex-col gap-3 overflow-visible rounded-[32px] border-none bg-white/40 p-[22px] backdrop-blur-[40px] sm:max-w-none lg:h-[460px] lg:max-w-[440px] lg:justify-start lg:px-[22px] lg:py-[43.5px] max-md:rounded-3xl max-md:p-4"
+      className="technologies-column relative z-[1] box-border flex w-full max-w-[440px] flex-col gap-3 overflow-visible rounded-[32px] border-none bg-white/40 p-[22px] backdrop-blur-[40px] sm:max-w-none lg:h-[460px] lg:max-w-[440px] lg:justify-start lg:px-[22px] lg:py-[43.5px] max-md:rounded-3xl max-md:p-4"
       onMouseLeave={() => setHoveredIndex(null)}
     >
       {items.map((tech, index) => {
@@ -181,7 +183,7 @@ function TechColumn({ items }: { items: TechItem[] }) {
 
 export default function Technologies() {
   return (
-    <section className="relative box-border w-full overflow-hidden bg-[#F2F2F2] px-4 py-12 sm:px-8 md:px-10 lg:flex lg:h-[860px] lg:min-h-[860px] lg:max-h-[860px] lg:flex-col lg:justify-center lg:px-[49px] lg:py-16 min-[1920px]:px-[49px]">
+    <section className="technologies-section relative box-border w-full overflow-hidden bg-[#F2F2F2] px-4 py-12 sm:px-8 md:px-10 lg:flex lg:h-[860px] lg:min-h-[860px] lg:max-h-[860px] lg:flex-col lg:justify-center lg:px-[49px] lg:py-16 min-[1920px]:px-[49px]">
       <div className="pointer-events-none absolute inset-0 bg-[#F2F2F2]" aria-hidden />
 
       {FIXED_BLOBS.map((blob) => (
@@ -192,7 +194,7 @@ export default function Technologies() {
       ))}
 
       <div className="relative z-[1] mx-auto flex w-full max-w-[1851px] flex-col lg:h-full lg:max-h-[732px] lg:justify-between">
-        <h2 className="relative order-1 m-0 font-montserrat text-[clamp(2rem,5.5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black">
+        <h2 className="technologies-heading relative order-1 m-0 font-montserrat text-[clamp(2rem,5.5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black">
           {headingPrefix}{" "}
           <span className="relative inline-block">
             {headingAccent}
@@ -200,7 +202,7 @@ export default function Technologies() {
           </span>
         </h2>
 
-        <p className="relative order-2 mt-3 text-left font-montserrat text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black sm:mt-4 lg:order-3 lg:mt-auto lg:text-right">
+        <p className="technologies-footer relative order-2 mt-3 text-left font-montserrat text-[clamp(2rem,5vw,4.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-black sm:mt-4 lg:order-3 lg:mt-auto lg:text-right">
           {footerPrefix}{" "}
           <span className="relative inline-block">
             {footerAccent}

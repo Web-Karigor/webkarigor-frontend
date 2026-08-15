@@ -431,6 +431,45 @@
   .services-story-list-subtitle {
     font-size: 16px;
   }
+
+  .services-story-body {
+    column-gap: 12px;
+  }
+
+  .services-story-text-panel {
+    padding-right: 8px;
+  }
+
+  .services-story-list-item {
+    padding: 1.25rem 0;
+  }
+}
+
+/* Laptop mid — desktop image vars (380+320) squeeze the text column */
+@media (min-width: 1280px) and (max-width: 1440px) {
+  .services-story {
+    --services-img-1-w: min(44cqi, 340px);
+    --services-img-1-h: min(68cqi, 540px);
+    --services-img-2-w: min(36cqi, 280px);
+    --services-img-2-h: min(58cqi, 470px);
+    --services-img-2-top: 120px;
+    --services-img-gap: 16px;
+    --services-layout-h: min(110cqi, 680px);
+    --services-group-mb: 120px;
+    --services-img-radius: 24px;
+  }
+
+  .services-story-list-title {
+    font-size: 28px;
+  }
+
+  .services-story-list-subtitle {
+    font-size: 18px;
+  }
+
+  .services-story-list-desc {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 1023px) {

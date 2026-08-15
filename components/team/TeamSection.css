@@ -287,95 +287,9 @@
   color: rgba(23, 20, 18, 0.78);
 }
 
-/* —— Join CTA —— */
-.team_join {
-  margin-top: clamp(80px, 14vw, 160px);
-  padding: 0 0 clamp(48px, 8vw, 80px);
-}
-
-.team_join_container {
-  width: min(1120px, calc(100% - 48px));
-  margin: 0 auto;
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-}
-
-.team_join_eyebrow {
-  flex: 1 1 0%;
-  margin: 0;
-  padding-right: 24px;
-  font-family: var(--font-montserrat), system-ui, sans-serif;
-  font-size: clamp(0.625rem, 0.85vw, 0.75rem);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #8e827c;
-}
-
-.team_join_content {
-  flex: 0 1 auto;
-  width: 100%;
-  max-width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.team_join_lead,
-.team_join_sub {
-  margin: 0;
-  font-family: var(--font-montserrat), system-ui, sans-serif;
-  font-size: clamp(0.875rem, 1.2vw, 1rem);
-  font-weight: 500;
-  line-height: 1.45;
-  color: #171412;
-}
-
-.team_join_cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 6px;
-  width: fit-content;
-  text-decoration: none;
-  color: #171412;
-  transition: opacity 0.2s ease;
-}
-
-.team_join_cta:hover {
-  opacity: 0.7;
-}
-
-.team_join_cta_label {
-  font-family: var(--font-montserrat), system-ui, sans-serif;
-  font-size: clamp(0.6875rem, 0.95vw, 0.8125rem);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.team_join_cta_icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  background: #171412;
-  color: #fff;
-  flex-shrink: 0;
-}
-
-.team_join_cta_icon svg {
-  width: 11px;
-  height: 11px;
-}
-
 /* —— Responsive —— */
 @media (max-width: 720px) {
-  .team-container,
-  .team_join_container {
+  .team-container {
     width: calc(100% - 32px);
   }
 
@@ -390,20 +304,6 @@
 
   .team_grid_item {
     grid-column: auto !important;
-  }
-
-  .team_join_container {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .team_join_eyebrow {
-    flex: none;
-    padding-right: 0;
-  }
-
-  .team_join_content {
-    max-width: 100%;
   }
 
   .teammate_card_thumbnail {
@@ -440,5 +340,58 @@
   .modal_trigger .icon-svg {
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
+  }
+}
+
+/* Laptop only — 1024px–1440px.
+   Mobile (≤720 / ≤480) and large desktop (>1440) stay on the rules above. */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .team-page {
+    overflow-x: clip;
+  }
+
+  .team-section {
+    padding: 118px 0 56px;
+  }
+
+  .team_headline {
+    gap: 28px;
+    margin-bottom: 56px;
+  }
+
+  .team_section_title h2 {
+    font-size: clamp(2.75rem, 4.8vw, 4.25rem);
+  }
+
+  .team_grid {
+    column-gap: 16px;
+    row-gap: 48px;
+  }
+
+  .teammate_card_thumbnail {
+    --card-pad: 12px;
+    --btn: 34px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .team-section {
+    padding-top: 110px;
+  }
+
+  .team_section_title h2 {
+    font-size: clamp(2.5rem, 4.4vw, 3.35rem);
+  }
+
+  .team_headline {
+    margin-bottom: 48px;
+  }
+
+  .team_grid {
+    row-gap: 40px;
+  }
+
+  .teammate_popup_heading {
+    font-size: 1.35rem;
   }
 }

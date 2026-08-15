@@ -34,7 +34,7 @@ export default function PricingCustomBanner() {
 
       <div className="relative z-10 mx-auto flex min-h-[300px] w-full max-w-7xl flex-col items-center justify-between gap-8 px-4 py-12 sm:px-6 sm:py-14 md:flex-row">
         <div className="w-full md:w-2/3">
-          <h2 className="m-0 mb-2 flex flex-col gap-y-2 font-montserrat text-xl font-bold text-black sm:text-2xl md:gap-y-5 md:text-[32px] lg:text-[40px]">
+          <h2 className="pricing-banner-title m-0 mb-2 flex flex-col gap-y-2 font-montserrat text-xl font-bold text-black sm:text-2xl md:gap-y-5 md:text-[32px] lg:text-[40px]">
             {titleLines.map((line) => (
               <span key={line}>{line}</span>
             ))}

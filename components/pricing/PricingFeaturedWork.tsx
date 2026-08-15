@@ -48,7 +48,7 @@ export default function PricingFeaturedWork() {
   const [topLeft, topRight, bottomLeft, bottomMid, bottomRight] = FEATURED_WORK;
 
   return (
-    <section className="bg-black py-[clamp(64px,8vw,100px)]">
+    <section className="pricing-featured bg-black py-[clamp(64px,8vw,100px)]">
       <div
         className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
         style={{ maxWidth: FEATURED_W + 80 }}

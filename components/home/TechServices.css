@@ -113,6 +113,26 @@
   }
 }
 
+/* Laptop only */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .tech-services-nav {
+    height: 80px;
+    padding: 0 20px;
+  }
+
+  .tech-services-nav-text {
+    font-size: 20px;
+  }
+
+  .tech-services-nav-dot {
+    font-size: 22px;
+  }
+
+  .tech-services-slider {
+    padding: 36px 0 48px;
+  }
+}
+
 .tech-services-viewport {
   position: relative;
   width: 100%;

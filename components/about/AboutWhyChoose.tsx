@@ -24,7 +24,7 @@ function WhyChooseCard({
 
   return (
     <article
-      className="flex w-full max-w-[600px] flex-col items-center justify-center gap-4 rounded-[24px] border-2 border-transparent p-5 text-center shadow-[0_12px_40px_rgba(63,255,178,0.18),0_4px_20px_rgba(255,239,63,0.12)] sm:gap-6 sm:p-6 md:min-h-[280px] lg:min-h-[329px] xl:w-[min(600px,calc(50%-1rem))]"
+      className="about-why-card flex w-full max-w-[600px] flex-col items-center justify-center gap-4 rounded-[24px] border-2 border-transparent p-5 text-center shadow-[0_12px_40px_rgba(63,255,178,0.18),0_4px_20px_rgba(255,239,63,0.12)] sm:gap-6 sm:p-6 md:min-h-[280px] lg:min-h-[329px] xl:w-[min(600px,calc(50%-1rem))]"
       style={{
         background: `
           linear-gradient(135deg, #AEFFDF 0%, #FFF68F 100%) padding-box,
@@ -49,10 +49,10 @@ function WhyChooseCard({
 
 export default function AboutWhyChoose() {
   return (
-    <section className="bg-[#FFFEFB] py-16 sm:py-20 md:py-28">
+    <section className="about-why bg-[#FFFEFB] py-16 sm:py-20 md:py-28">
       <div className="mx-auto w-full max-w-[1478px] px-[clamp(16px,4vw,40px)]">
         <div className="mb-10 text-center sm:mb-14">
-          <h2 className="m-0 mx-auto max-w-[533px] font-museoModerno text-[clamp(26px,6vw,48px)] font-medium italic leading-[140%] tracking-[-0.05em] text-[#15D286]">
+          <h2 className="about-why-title m-0 mx-auto max-w-[533px] font-museoModerno text-[clamp(26px,6vw,48px)] font-medium italic leading-[140%] tracking-[-0.05em] text-[#15D286]">
             {ABOUT_WHY_CHOOSE.title}
           </h2>
           <p className="mt-3 m-0 px-1 font-montserrat text-[clamp(14px,1.15vw,16px)] font-medium text-[#6b7280]">
@@ -60,7 +60,7 @@ export default function AboutWhyChoose() {
           </p>
         </div>
 
-        <div className="mx-auto flex w-full max-w-[1478px] flex-col gap-5 sm:gap-8 xl:min-h-[739px] xl:justify-between xl:gap-0">
+        <div className="about-why-stack mx-auto flex w-full max-w-[1478px] flex-col gap-5 sm:gap-8 xl:min-h-[739px] xl:justify-between xl:gap-0">
           <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6 xl:justify-start xl:gap-8">
             {TOP_CARDS.map((item) => (
               <WhyChooseCard

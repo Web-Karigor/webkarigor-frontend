@@ -32,6 +32,15 @@
   color: #bababa;
 }
 
+/* Laptop only — Figma 160px is desktop; scale down so heading doesn't eat the row */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .team-heading-desktop-expert,
+  .team-heading-desktop-result {
+    font-size: clamp(4.25rem, 7.2vw, 6.25rem);
+    line-height: 120%;
+  }
+}
+
 .team-manual-scroll,
 .team-infinite-scroll {
   -ms-overflow-style: none;

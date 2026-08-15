@@ -1,0 +1,8 @@
+/* Laptop only */
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .home-banner-title {
+    font-size: clamp(1.5rem, 2.2vw, 2rem) !important;
+    gap: 0.65rem !important;
+  }
+}

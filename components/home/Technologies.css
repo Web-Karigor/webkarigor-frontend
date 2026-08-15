@@ -1,0 +1,30 @@
+/* Laptop only — lg:h-[860px] + lg:px-[49px] is desktop-scale */
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .technologies-section {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+
+  .technologies-section > .relative.z-\[1\] {
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  .technologies-heading,
+  .technologies-footer {
+    font-size: clamp(2rem, 4vw, 3.25rem) !important;
+  }
+
+  .technologies-column {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+}

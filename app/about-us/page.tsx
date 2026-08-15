@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import AboutHero from "@/components/about/AboutHero";
 import AboutImpact from "@/components/about/AboutImpact";
 import { ABOUT_METADATA } from "@/lib/about-data";
+import "@/styles/site-pages-laptop.css";
 
 const AboutVision = dynamic(() => import("@/components/about/AboutVision"));
 const AboutCapabilities = dynamic(
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function AboutUsPage() {
   return (
-    <div className="bg-[#FFFEFB]">
+    <div className="site-laptop bg-[#FFFEFB]">
       <AboutHero />
       <AboutImpact />
       <AboutVision />

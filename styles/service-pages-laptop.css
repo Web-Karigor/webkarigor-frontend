@@ -1,0 +1,128 @@
+/* Laptop only — 1024px–1440px.
+   Imported by service / ERP / manpower / ecommerce pages.
+   Mobile (<1024) and large desktop (>1440) are untouched. */
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .svc-laptop header > div {
+    height: 80px !important;
+  }
+
+  /* —— Service hero —— */
+  .svc-hero {
+    padding-top: 100px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .svc-hero h1 {
+    font-size: clamp(2.05rem, 3.3vw, 3.15rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .svc-hero-visual {
+    max-height: 460px !important;
+  }
+
+  .svc-offerings {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .svc-offerings-inner {
+    gap: 36px !important;
+  }
+
+  .svc-offerings-eyebrow {
+    font-size: 1.125rem !important;
+  }
+
+  .svc-offerings-lead {
+    font-size: clamp(1rem, 1.35vw, 1.25rem) !important;
+    min-height: 0 !important;
+    line-height: 1.5 !important;
+  }
+
+  .svc-tech-name {
+    font-size: 16px !important;
+  }
+
+  .svc-laptop .svc-clients {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+
+  /* —— ERP hero —— */
+  .erp-hero-split {
+    gap: 24px !important;
+  }
+
+  .erp-hero-copy {
+    max-width: min(520px, 46%) !important;
+  }
+
+  .erp-hero-copy h1 {
+    font-size: clamp(2rem, 3.2vw, 2.85rem) !important;
+  }
+
+  .erp-hero-copy p {
+    font-size: 16px !important;
+    margin-top: 1.15rem !important;
+  }
+
+  .erp-hero-visual {
+    max-width: min(560px, 50%) !important;
+  }
+
+  .erp-feature-card {
+    padding: 28px !important;
+    gap: 18px !important;
+  }
+
+  .erp-features-grid {
+    gap: 24px !important;
+  }
+
+  /* —— Manpower hero —— */
+  .mp-hero {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .mp-hero-copy {
+    max-width: min(520px, 50%) !important;
+  }
+
+  .mp-hero-copy h1 {
+    font-size: clamp(1.85rem, 3.4vw, 2.85rem) !important;
+  }
+
+  .mp-hero-visual {
+    width: min(520px, 44%) !important;
+  }
+
+  /* —— Ecommerce hero —— */
+  .eco-hero-desktop {
+    height: 680px !important;
+  }
+
+  .eco-hero-copy {
+    top: 108px !important;
+    bottom: 36px !important;
+    width: min(560px, 50%) !important;
+  }
+
+  .eco-hero-copy h1 {
+    font-size: clamp(2.15rem, 3.5vw, 3.25rem) !important;
+  }
+
+  .eco-hero-visual {
+    width: min(620px, 40%) !important;
+    height: 560px !important;
+    top: 72px !important;
+  }
+
+  .eco-hero-glow {
+    top: auto !important;
+    bottom: 0 !important;
+    height: 96px !important;
+  }
+}

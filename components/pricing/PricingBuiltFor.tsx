@@ -32,7 +32,7 @@ export default function PricingBuiltFor() {
   const { title, cta, columns } = BUILT_FOR_SECTION;
 
   return (
-    <section className="bg-[#F8F6EF] py-[clamp(64px,8vw,100px)]">
+    <section className="pricing-built bg-[#F8F6EF] py-[clamp(64px,8vw,100px)]">
       <div
         className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
         style={{ maxWidth: BUILT_FOR_W + 80 }}

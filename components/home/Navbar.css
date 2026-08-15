@@ -122,6 +122,17 @@
   .navbar-container {
     padding-left: 10px;
     padding-right: 10px;
+    max-width: min(720px, calc(100vw - 2rem));
+  }
+
+  .navbar-link {
+    font-size: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .navbar-content {
+    gap: 4px;
   }
 }
 

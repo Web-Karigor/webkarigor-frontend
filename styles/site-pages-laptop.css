@@ -1,0 +1,269 @@
+/* Laptop only — 1024px–1440px.
+   Imported by About / Projects / Project Details / Pricing pages.
+   Mobile (<1024) and large desktop (>1440) are untouched. */
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .site-laptop {
+    overflow-x: clip;
+  }
+
+  /* —— About Us —— */
+  .about-hero {
+    padding-top: 118px !important;
+  }
+
+  .about-hero-title {
+    margin-top: 2.25rem !important;
+    font-size: clamp(2rem, 3.4vw, 2.75rem) !important;
+    line-height: 1.35 !important;
+  }
+
+  .about-impact {
+    height: auto !important;
+    min-height: 0 !important;
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .about-impact-inner {
+    gap: 2rem !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .about-impact-stat {
+    font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
+  }
+
+  .about-vision {
+    padding-bottom: 4rem !important;
+  }
+
+  .about-vision-title {
+    font-size: clamp(1.125rem, 1.6vw, 1.5rem) !important;
+  }
+
+  .about-vision-title > span {
+    font-size: clamp(1.75rem, 3vw, 2.5rem) !important;
+  }
+
+  .about-vision-grid {
+    height: min(520px, 40vw) !important;
+    margin-top: 2.25rem !important;
+    gap: 1.15rem !important;
+  }
+
+  .about-cap-label {
+    font-size: clamp(1.75rem, 3.6vw, 3rem) !important;
+  }
+
+  .about-why {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  .about-why-title {
+    font-size: clamp(1.75rem, 3.2vw, 2.25rem) !important;
+  }
+
+  .about-why-stack {
+    min-height: 0 !important;
+    gap: 1.25rem !important;
+  }
+
+  .about-why-card {
+    min-height: 0 !important;
+    padding: 1.35rem 1.25rem !important;
+    gap: 1rem !important;
+  }
+
+  /* —— Projects —— */
+  .projects-hero {
+    padding-top: 118px !important;
+  }
+
+  .projects-hero-title {
+    font-size: clamp(2.25rem, 4vw, 3.25rem) !important;
+  }
+
+  .projects-hero-body {
+    margin-top: 1rem !important;
+    max-width: 640px !important;
+  }
+
+  .projects-bento {
+    padding-top: 2rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  .projects-brand-v {
+    font-size: clamp(4rem, 8vw, 6.25rem) !important;
+  }
+
+  /* —— Project Details —— */
+  .pd-hero {
+    padding-top: 108px !important;
+  }
+
+  .pd-hero-card {
+    padding: 10px !important;
+    border-radius: 22px !important;
+  }
+
+  .pd-body {
+    padding-top: 3rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .pd-title {
+    font-size: clamp(1.65rem, 3.2vw, 2.35rem) !important;
+  }
+
+  .pd-body-split {
+    gap: 2rem !important;
+  }
+
+  .pd-solution {
+    margin-left: 1.5rem !important;
+  }
+
+  .pd-credits {
+    padding-top: 3rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .pd-credits h2 {
+    font-size: clamp(1.5rem, 2.8vw, 2rem) !important;
+  }
+
+  .pd-mockup {
+    height: min(480px, 42vw) !important;
+    margin-top: 1.75rem !important;
+  }
+
+  .pd-cta {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .pd-cta h2 {
+    font-size: clamp(1.5rem, 2.8vw, 2rem) !important;
+  }
+
+  .pd-related {
+    padding-bottom: 4rem !important;
+  }
+
+  .pd-related h2 {
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem) !important;
+  }
+
+  .pd-related-card {
+    height: 340px !important;
+  }
+
+  .pd-testimonial {
+    padding-bottom: 3.5rem !important;
+  }
+
+  .pd-testimonial-quote {
+    font-size: clamp(1rem, 1.8vw, 1.35rem) !important;
+  }
+
+  /* —— Pricing —— */
+  .pricing-hero {
+    padding-top: 118px !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .pricing-hero-eyebrow {
+    min-height: 0 !important;
+    font-size: clamp(1.5rem, 2.6vw, 2rem) !important;
+  }
+
+  .pricing-hero-title {
+    font-size: clamp(1.65rem, 2.8vw, 2.15rem) !important;
+  }
+
+  .pricing-hero-grid {
+    margin-top: 2.25rem !important;
+  }
+
+  .pricing-hero-cards {
+    gap: 0.85rem !important;
+  }
+
+  .pricing-hero-card {
+    min-height: 0 !important;
+    padding: 1.35rem 1.2rem !important;
+    gap: 0.85rem !important;
+  }
+
+  .pricing-banner-title {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem) !important;
+    gap: 0.5rem !important;
+  }
+
+  .pricing-package-inner {
+    min-height: 0 !important;
+    padding: 2.25rem 2rem !important;
+  }
+
+  .pricing-package-inner h2 {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem) !important;
+  }
+
+  .pricing-package-grid {
+    margin-top: 1.75rem !important;
+    gap: 1rem 1.5rem !important;
+  }
+
+  .pricing-built {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  .pricing-built h2 {
+    font-size: clamp(1.65rem, 2.6vw, 2rem) !important;
+  }
+
+  .pricing-featured {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  .pricing-featured h2 {
+    font-size: clamp(1.65rem, 2.8vw, 2.15rem) !important;
+  }
+}
+
+/* Extra-tight 1024–1279 (iPad landscape / small laptop) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .about-vision-grid {
+    height: min(460px, 44vw) !important;
+  }
+
+  .pd-mockup {
+    height: min(420px, 44vw) !important;
+  }
+
+  .pd-related-card {
+    height: 300px !important;
+  }
+
+  .pd-body-split {
+    grid-template-columns: minmax(0, 280px) 1fr !important;
+  }
+
+  .pricing-hero-card {
+    padding: 1.1rem 0.95rem !important;
+  }
+
+  .pricing-package-inner {
+    padding: 1.75rem 1.35rem !important;
+  }
+
+  .pricing-package-grid {
+    gap: 0.85rem 1rem !important;
+  }
+}

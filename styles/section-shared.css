@@ -183,3 +183,12 @@
       transform: translate(0.45rem, 1rem);
     }
   }
+
+  /* Laptop only — shared headings sit slightly under desktop 3rem */
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    .section-accent-text,
+    .section-heading-split-title,
+    .faq-accent-text {
+      font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+    }
+  }
