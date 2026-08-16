@@ -73,6 +73,12 @@
   }
 }
 
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .case-section {
+    padding-bottom: clamp(80px, 7vw, 112px);
+  }
+}
+
 .case-section-desc {
   max-width: 720px;
   margin: 0 auto;
