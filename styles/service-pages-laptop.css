@@ -144,9 +144,9 @@
   }
 
   .svc-laptop .svc-team-inner {
-    gap: 36px !important;
+    gap: clamp(48px, 5.2vw, 72px) !important;
     justify-content: flex-start !important;
-    padding-right: clamp(56px, 6vw, 88px) !important;
+    padding-right: clamp(40px, 4.5vw, 64px) !important;
   }
 
   .svc-laptop .svc-team-title {
@@ -159,6 +159,7 @@
     width: min(100%, 520px) !important;
     height: clamp(340px, 38vw, 460px) !important;
     flex-shrink: 1 !important;
+    margin-left: clamp(20px, 3.2vw, 48px) !important;
   }
 
   .svc-laptop .svc-team-shot-tr {
