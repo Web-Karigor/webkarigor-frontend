@@ -137,4 +137,52 @@
     bottom: 0 !important;
     height: 96px !important;
   }
+
+  /* —— Shared team collage (ecommerce / ERP / manpower) —— */
+  .svc-laptop .svc-team {
+    min-height: 0 !important;
+  }
+
+  .svc-laptop .svc-team-inner {
+    gap: 36px !important;
+    justify-content: flex-start !important;
+    padding-right: clamp(56px, 6vw, 88px) !important;
+  }
+
+  .svc-laptop .svc-team-title {
+    font-size: clamp(2.75rem, 4.8vw, 3.85rem) !important;
+    line-height: 1.35 !important;
+    max-width: min(520px, 48%) !important;
+  }
+
+  .svc-laptop .svc-team-collage {
+    width: min(100%, 520px) !important;
+    height: clamp(340px, 38vw, 460px) !important;
+    flex-shrink: 1 !important;
+  }
+
+  .svc-laptop .svc-team-shot-tr {
+    width: clamp(148px, 16.5vw, 200px) !important;
+    height: clamp(148px, 16.5vw, 200px) !important;
+  }
+
+  .svc-laptop .svc-team-shot-ml {
+    width: clamp(108px, 12.5vw, 144px) !important;
+    height: clamp(108px, 12.5vw, 144px) !important;
+  }
+
+  .svc-laptop .svc-team-shot-cs {
+    width: clamp(58px, 7vw, 78px) !important;
+    height: clamp(58px, 7vw, 78px) !important;
+  }
+
+  .svc-laptop .svc-team-shot-bl {
+    width: clamp(128px, 15vw, 170px) !important;
+    height: clamp(128px, 15vw, 170px) !important;
+  }
+
+  .svc-laptop .svc-team-shot-br {
+    width: clamp(96px, 11.5vw, 128px) !important;
+    height: clamp(96px, 11.5vw, 128px) !important;
+  }
 }
