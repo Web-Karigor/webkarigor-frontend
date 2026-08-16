@@ -27,21 +27,21 @@ type TeamCardSizes = {
 const LOOP_COPIES = 3;
 const SLIDE_DURATION = 36;
 
-/** Card size = Figma 433 × 448. */
+/** Card size = Figma 433 × 448. Laptop (1024–1440) scales down so 3+ cards show. */
 function getTeamCardSizes(viewportWidth: number): TeamCardSizes {
-  const width = 433;
-  const height = 448;
-
   if (viewportWidth < 640) {
-    return { width, height, gap: 14, radius: 22 };
+    return { width: 433, height: 448, gap: 14, radius: 22 };
   }
   if (viewportWidth < 1024) {
-    return { width, height, gap: 16, radius: 24 };
+    return { width: 433, height: 448, gap: 16, radius: 24 };
   }
-  if (viewportWidth < 1280) {
-    return { width, height, gap: 20, radius: 28 };
+  if (viewportWidth <= 1440) {
+    if (viewportWidth < 1280) {
+      return { width: 300, height: 310, gap: 20, radius: 28 };
+    }
+    return { width: 318, height: 329, gap: 24, radius: 32 };
   }
-  return { width, height, gap: 24, radius: 32 };
+  return { width: 433, height: 448, gap: 24, radius: 32 };
 }
 
 /** SSR + first client paint must match — never read window during useState init. */
