@@ -105,7 +105,7 @@ export default function EcoHero() {
           </div>
 
           {/* OUR TOP CLIENTS — logo row 461 × 60 */}
-          <div className="mt-auto">
+          <div className="eco-hero-clients mt-auto">
             <p className="m-0 font-montserrat text-[12px] font-bold uppercase tracking-[0.08em] text-[#1f1e1c]">
               {ECO_HERO.clientsLabel}
             </p>
