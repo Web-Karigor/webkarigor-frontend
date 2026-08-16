@@ -115,28 +115,30 @@
   }
 
   .erp-integrations-inner {
-    gap: 32px !important;
-    justify-content: flex-start !important;
-    padding-right: clamp(24px, 3vw, 40px) !important;
+    gap: clamp(28px, 3vw, 48px) !important;
+    justify-content: space-between !important;
+    padding-right: clamp(40px, 4.5vw, 64px) !important;
   }
 
   .erp-integrations-copy {
-    max-width: min(380px, 40%) !important;
+    max-width: min(480px, 46%) !important;
     flex-shrink: 1 !important;
   }
 
   .erp-integrations-copy h2 {
-    font-size: clamp(1.45rem, 2.25vw, 1.75rem) !important;
+    font-size: clamp(1.75rem, 2.7vw, 2.15rem) !important;
+    line-height: 1.2 !important;
   }
 
   .erp-integrations-copy p {
     height: auto !important;
-    font-size: 15px !important;
+    font-size: 16px !important;
   }
 
   .erp-integrations-orbit {
-    max-width: min(440px, 46%) !important;
+    max-width: min(500px, 48%) !important;
     flex-shrink: 1 !important;
+    margin-left: auto !important;
   }
 
   /* —— Manpower hero —— */
