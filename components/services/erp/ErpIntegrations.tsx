@@ -21,10 +21,10 @@ const OUTER_ANGLES = [-90, -30, 30, 90, 150, 210] as const;
  */
 export default function ErpIntegrations() {
   return (
-    <section className="overflow-hidden bg-white py-[clamp(48px,6vw,80px)]">
-      <div className="mx-auto flex w-full max-w-[1307px] flex-col items-center gap-12 px-[clamp(16px,4vw,40px)] lg:flex-row lg:items-center lg:justify-between lg:gap-[clamp(48px,11vw,212px)]">
+    <section className="erp-integrations overflow-hidden bg-white py-[clamp(48px,6vw,80px)]">
+      <div className="erp-integrations-inner mx-auto flex w-full max-w-[1307px] flex-col items-center gap-12 px-[clamp(16px,4vw,40px)] lg:flex-row lg:items-center lg:justify-between lg:gap-[clamp(48px,11vw,212px)]">
         {/* Left copy */}
-        <div className="w-full max-w-[650px] shrink-0 text-center lg:text-left">
+        <div className="erp-integrations-copy w-full max-w-[650px] shrink-0 text-center lg:text-left">
           <h2 className="m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
             {ERP_INTEGRATIONS_SECTION.title}
           </h2>
@@ -35,7 +35,7 @@ export default function ErpIntegrations() {
         </div>
 
         {/* Right orbit — ~550 area, icons on rings */}
-        <div className="relative mx-auto aspect-square w-full max-w-[480px] shrink-0 lg:mx-0 lg:max-w-[520px]">
+        <div className="erp-integrations-orbit relative mx-auto aspect-square w-full max-w-[480px] shrink-0 lg:mx-0 lg:max-w-[520px]">
           {/* Soft center disc */}
           <div
             aria-hidden

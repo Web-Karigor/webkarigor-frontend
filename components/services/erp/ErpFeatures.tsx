@@ -16,11 +16,11 @@ const ICONS = {
 
 export default function ErpFeatures() {
   return (
-    <section className="bg-white py-[clamp(48px,6vw,80px)]">
+    <section className="erp-features bg-white py-[clamp(48px,6vw,80px)]">
       <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-8 px-[clamp(16px,4vw,120px)] md:gap-10 lg:gap-12">
         {/* Header — horizontal space-between */}
-        <div className="flex w-full flex-col gap-5 md:gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
-          <div className="max-w-[640px] shrink-0">
+        <div className="erp-features-head flex w-full flex-col gap-5 md:gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+          <div className="erp-features-copy max-w-[640px] shrink-0">
             <p className="m-0 font-montserrat text-[16px] font-semibold leading-none text-[#15d286] sm:text-[18px]">
               {ERP_FEATURES_SECTION.eyebrow}
             </p>
@@ -29,7 +29,7 @@ export default function ErpFeatures() {
             </h2>
           </div>
           {/* Figma: 650×54 · Manrope SemiBold 600 · 18px · LH 150% · #A7A7A7 */}
-          <p className="m-0 w-full max-w-[650px] font-manrope text-[clamp(15px,1.5vw,18px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:shrink-0">
+          <p className="erp-features-lead m-0 w-full max-w-[650px] font-manrope text-[clamp(15px,1.5vw,18px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:shrink-0">
             {ERP_FEATURES_SECTION.description}
           </p>
         </div>
