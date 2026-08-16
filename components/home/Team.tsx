@@ -82,7 +82,7 @@ function TeamCard({
       onFocus={onEnter}
       onBlur={onLeave}
       tabIndex={0}
-      className="relative flex-shrink-0 overflow-hidden border border-[#EFEFEF] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06)] outline-none"
+      className="team-card relative flex-shrink-0 overflow-hidden border border-[#EFEFEF] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06)] outline-none"
       style={{
         width: sizes.width,
         height: sizes.height,

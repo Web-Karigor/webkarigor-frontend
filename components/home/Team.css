@@ -39,6 +39,12 @@
     font-size: clamp(4.25rem, 7.2vw, 6.25rem);
     line-height: 120%;
   }
+
+  .team-card {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
 }
 
 .team-manual-scroll,

@@ -747,3 +747,14 @@
     border-radius: 16px;
   }
 }
+
+@media (max-width: 767px) {
+  .case-section-header {
+    margin-bottom: 32px;
+  }
+
+  .tiles_stack_pin {
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+}
