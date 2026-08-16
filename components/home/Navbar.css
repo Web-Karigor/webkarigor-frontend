@@ -309,3 +309,32 @@
   transform: translateZ(0);
 }
 
+/* Laptop / desktop only — compact bar; mobile + tablet unchanged */
+@media (min-width: 1024px) {
+  .navbar-container {
+    max-width: min(680px, calc(100vw - 2.25rem));
+  }
+
+  .navbar-link {
+    font-size: 14px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .navbar-content {
+    gap: 4px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navbar-container {
+    max-width: min(740px, calc(100vw - 2.5rem));
+  }
+
+  .navbar-link {
+    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+

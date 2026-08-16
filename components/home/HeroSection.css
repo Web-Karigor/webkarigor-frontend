@@ -427,3 +427,39 @@
     font-size: clamp(140px, 13vw, 190px);
   }
 }
+
+/* Laptop + desktop — clear sticky navbar, nudge content down, enlarge side photos.
+   Mobile / tablet (<1024) stay on the rules above. */
+@media (min-width: 1024px) {
+  .hero-section {
+    --hero-center-mt: clamp(10.75rem, calc(20vh + 4.25rem), 17.5rem);
+    --hero-title-pull: 0px;
+    --hero-left-mt: clamp(7.5rem, 14vh, 11rem);
+    --hero-photo-left-mt: 5.25rem;
+    --hero-photo-right-mt: clamp(12rem, 18vh, 18rem);
+    --hero-desc-mt: 2.25vh;
+    --hero-hello-mt: 1.5vh;
+  }
+
+  .hero-photo-img {
+    max-width: min(248px, 23vw) !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-photo-img {
+    max-width: min(320px, 23vw) !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-section {
+    --hero-center-mt: 280px;
+    --hero-title-pull: 0px;
+    --hero-photo-left-mt: 5.5rem;
+  }
+
+  .hero-photo-img {
+    max-width: 430px !important;
+  }
+}
