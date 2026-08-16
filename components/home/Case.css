@@ -77,6 +77,10 @@
   .case-section {
     padding-bottom: clamp(80px, 7vw, 112px);
   }
+
+  .case-section-header {
+    margin-bottom: clamp(36px, 4vw, 56px);
+  }
 }
 
 .case-section-desc {
