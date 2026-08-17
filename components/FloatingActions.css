@@ -94,13 +94,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
   border-radius: 999px;
-  background: #0084ff;
+  background: #0ec47b;
   color: #fff;
-  text-decoration: none;
-  box-shadow: 0 12px 32px rgba(0, 132, 255, 0.35);
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(14, 196, 123, 0.35);
   transition:
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.45s ease,
@@ -109,7 +111,7 @@
 
 .floating-messenger-main:hover {
   transform: scale(1.05);
-  box-shadow: 0 14px 36px rgba(0, 132, 255, 0.42);
+  box-shadow: 0 14px 36px rgba(14, 196, 123, 0.42);
 }
 
 .floating-messenger-main:focus-visible {
@@ -165,9 +167,8 @@
   background: #111;
 }
 
-/* Hover / focus-within: reveal stack upward, staggered + slow */
-.floating-messenger:hover .floating-messenger-item,
-.floating-messenger:focus-within .floating-messenger-item {
+/* Click: reveal stack upward, staggered + slow */
+.floating-messenger.is-open .floating-messenger-item {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -175,8 +176,7 @@
   transition-delay: calc(var(--stack-i, 1) * 90ms);
 }
 
-.floating-messenger:hover .floating-messenger-item:hover,
-.floating-messenger:focus-within .floating-messenger-item:hover {
+.floating-messenger.is-open .floating-messenger-item:hover {
   transform: translateY(-2px) scale(1.06);
 }
 
@@ -191,8 +191,8 @@
   }
 
   .floating-messenger-main {
-    width: 52px;
-    height: 52px;
+    width: 44px;
+    height: 44px;
   }
 
   .floating-messenger-item {

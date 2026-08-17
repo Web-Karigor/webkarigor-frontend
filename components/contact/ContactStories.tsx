@@ -3,8 +3,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
 import contactContent from "@/data/contact-content.json";
+
+function CtaArrow() {
+  return (
+    <svg
+      className="contact-story-cta-icon"
+      viewBox="0 0 36 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M1 6h28.5M24.5 2.25 33 6l-8.5 3.75"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 const {
   badge,
@@ -83,7 +102,7 @@ export default function ContactStories() {
 
             <Link href={ctaHref} className="contact-story-cta">
               {ctaLabel}
-              <ArrowRight className="h-4 w-4" aria-hidden />
+              <CtaArrow />
             </Link>
           </div>
         </article>

@@ -12,7 +12,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { ChevronRight, EllipsisVertical, X } from "lucide-react";
+import { ChevronRight, EllipsisVertical } from "lucide-react";
 import homeContent from "@/data/home-content.json";
 import {
   STICKY_NAV_MORE_LINKS,
@@ -446,7 +446,6 @@ export default function Navbar() {
                       title="Latest Projects"
                       align="left"
                       offset={dropdownOffset}
-                      onClose={closeMenu}
                     >
                       <div className="space-y-1">
                         {STICKY_NAV_PROJECTS.map((item) => (
@@ -489,7 +488,6 @@ export default function Navbar() {
                       title="Services"
                       align="left"
                       offset={dropdownOffset}
-                      onClose={closeMenu}
                     >
                       <div className="space-y-1">
                         {STICKY_NAV_SERVICES.map((item) => (
@@ -520,7 +518,6 @@ export default function Navbar() {
                       title="More"
                       align="right"
                       offset={dropdownOffset}
-                      onClose={closeMenu}
                     >
                       <div className="space-y-1">
                         {STICKY_NAV_MORE_LINKS.map((item) => (
@@ -554,13 +551,11 @@ export default function Navbar() {
 function NavDropdown({
   title,
   children,
-  onClose,
   align = "left",
   offset = null,
 }: {
   title: string;
   children: React.ReactNode;
-  onClose: () => void;
   align?: DropdownAlign;
   offset?: number | null;
 }) {
@@ -585,18 +580,10 @@ function NavDropdown({
       aria-modal="true"
       aria-label={title}
     >
-      <div className="flex items-center justify-between px-4 pt-4">
+      <div className="px-4 pt-4">
         <p className="m-0 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
           {title}
         </p>
-        <button
-          type="button"
-          onClick={onClose}
-          className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f3f4f6] text-[#111827]"
-          aria-label="Close"
-        >
-          <X className="h-4 w-4" />
-        </button>
       </div>
       <div className="max-h-[min(62vh,480px)] overflow-y-auto px-3 pb-4 pt-2">
         {children}

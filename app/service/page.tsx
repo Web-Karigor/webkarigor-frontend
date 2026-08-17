@@ -49,9 +49,9 @@ export default function ServicePage() {
       <Team />
       <ServiceTestimonials />
       <ServicePricing />
-      <FAQ className="bg-white" />
+      <FAQ className="bg-white" ctaHref="#contact" />
       <ServiceMarquee />
-      <HomeConsultation hideSchedule backgroundColor="#FFFEFB" />
+      <HomeConsultation />
       <ServiceFooter />
     </div>
   );

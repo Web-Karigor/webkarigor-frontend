@@ -5,7 +5,6 @@ import "./Services.css";
 import { memo, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import {
   motion,
   useMotionValue,
@@ -30,6 +29,26 @@ const {
 
 const VIEW_PROJECT_LABEL = "View Details";
 const VIEW_PROJECT_HREF = "/projects";
+
+function CtaArrow() {
+  return (
+    <svg
+      className="services-story-list-cta-icon"
+      viewBox="0 0 36 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M1 6h28.5M24.5 2.25 33 6l-8.5 3.75"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 type Service = (typeof services)[number];
 
@@ -200,11 +219,7 @@ const ServicesListPanel = memo(function ServicesListPanel({
                         tabIndex={isActive ? 0 : -1}
                       >
                         <span>{VIEW_PROJECT_LABEL}</span>
-                        <ArrowRight
-                          className="services-story-list-cta-icon"
-                          strokeWidth={2.25}
-                          aria-hidden
-                        />
+                        <CtaArrow />
                       </Link>
                     </div>
                   </div>
@@ -248,7 +263,12 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
       className="services-story-image-group"
       style={{ scale, opacity }}
     >
-      <div className="services-story-img services-story-img--primary">
+      <Link
+        href={VIEW_PROJECT_HREF}
+        data-project-cursor
+        className="services-story-img services-story-img--primary"
+        aria-label={`${service.title} — view projects`}
+      >
         <Image
           src={service.images[0]}
           alt={`${service.title} preview`}
@@ -257,8 +277,13 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
           className="object-cover object-top"
           priority={eager}
         />
-      </div>
-      <div className="services-story-img services-story-img--secondary">
+      </Link>
+      <Link
+        href={VIEW_PROJECT_HREF}
+        data-project-cursor
+        className="services-story-img services-story-img--secondary"
+        aria-label={`${service.title} — view projects`}
+      >
         <Image
           src={service.images[1]}
           alt={`${service.title} detail`}
@@ -266,7 +291,7 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
           sizes="(max-width: 1023px) 100vw, 360px"
           className="object-cover object-top"
         />
-      </div>
+      </Link>
     </motion.div>
   );
 });
@@ -329,14 +354,20 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
   return (
     <article className="services-story-mobile-slide">
       <div className="services-story-mobile-slide-image">
-        <Image
-          src={service.images[0]}
-          alt={`${service.title} preview`}
-          fill
-          sizes="100vw"
-          className="object-cover object-top"
-          priority={eager}
-        />
+        <Link
+          href={VIEW_PROJECT_HREF}
+          className="relative block h-full w-full"
+          aria-label={`${fullTitle} — view projects`}
+        >
+          <Image
+            src={service.images[0]}
+            alt={`${service.title} preview`}
+            fill
+            sizes="100vw"
+            className="object-cover object-top"
+            priority={eager}
+          />
+        </Link>
       </div>
 
       <div className="services-story-mobile-slide-text">
@@ -345,11 +376,7 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
         <p className="services-story-mobile-slide-desc">{service.desc}</p>
         <Link href={VIEW_PROJECT_HREF} className="services-story-list-cta">
           <span>{VIEW_PROJECT_LABEL}</span>
-          <ArrowRight
-            className="services-story-list-cta-icon"
-            strokeWidth={2.25}
-            aria-hidden
-          />
+          <CtaArrow />
         </Link>
       </div>
     </article>

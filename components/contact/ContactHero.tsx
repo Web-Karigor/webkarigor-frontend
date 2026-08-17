@@ -9,13 +9,7 @@ export default function ContactHero() {
     <section className="contact-hero" aria-labelledby="contact-hero-heading">
       <div className="contact-hero-orb" aria-hidden />
       <div className="contact-hero-inner">
-        <nav className="contact-breadcrumb" aria-label="Breadcrumb">
-          <Link href={breadcrumbHomeHref}>{breadcrumbHome}</Link>
-          <span className="contact-breadcrumb-sep" aria-hidden>
-            &gt;
-          </span>
-          <span className="contact-breadcrumb-current">{breadcrumbCurrent}</span>
-        </nav>
+        
 
         <h1 id="contact-hero-heading" className="contact-hero-title">
           <span className="block">{headingLine1}</span>

@@ -27,9 +27,9 @@ export default function ManpowerServicePage() {
       <ManpowerTeam />
       <ManpowerReviews />
       <ManpowerPricing />
-      <FAQ className="bg-white" />
+      <FAQ className="bg-white" ctaHref="#contact" />
       <ServiceMarquee />
-      <HomeConsultation hideSchedule backgroundColor="#FFFEFB" />
+      <HomeConsultation />
       <ServiceFooter />
     </div>
   );

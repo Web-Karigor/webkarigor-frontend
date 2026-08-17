@@ -2,7 +2,7 @@
 
 import "./FloatingActions.css";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   ArrowUp,
   Mail,
@@ -13,7 +13,6 @@ import {
 const WHATSAPP_HREF = "https://wa.me/8801624283328";
 const PHONE_HREF = "tel:+8801624283328";
 const EMAIL_HREF = "mailto:hello@webkarigor.com";
-const MESSENGER_HREF = "https://m.me/";
 
 function WhatsAppGlyph() {
   return (
@@ -52,6 +51,8 @@ const STACK_LINKS = [
 
 export default function FloatingActions() {
   const [showTop, setShowTop] = useState(false);
+  const [stackOpen, setStackOpen] = useState(false);
+  const messengerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -61,6 +62,26 @@ export default function FloatingActions() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!stackOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (!messengerRef.current?.contains(event.target as Node)) {
+        setStackOpen(false);
+      }
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setStackOpen(false);
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [stackOpen]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -81,8 +102,14 @@ export default function FloatingActions() {
         </span>
       </button>
 
-      <div className="floating-messenger">
-        <div className="floating-messenger-stack" aria-hidden="true">
+      <div
+        ref={messengerRef}
+        className={`floating-messenger${stackOpen ? " is-open" : ""}`}
+      >
+        <div
+          className="floating-messenger-stack"
+          aria-hidden={stackOpen ? undefined : "true"}
+        >
           {STACK_LINKS.map((item, index) => (
             <a
               key={item.id}
@@ -96,26 +123,26 @@ export default function FloatingActions() {
               className={`floating-messenger-item ${item.className}`}
               style={{ "--stack-i": index + 1 } as CSSProperties}
               aria-label={item.label}
-              tabIndex={-1}
+              tabIndex={stackOpen ? 0 : -1}
             >
               {item.icon}
             </a>
           ))}
         </div>
 
-        <a
-          href={MESSENGER_HREF}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
           className="floating-messenger-main"
-          aria-label="Open Messenger"
+          aria-label={stackOpen ? "Close contact options" : "Open contact options"}
+          aria-expanded={stackOpen}
+          onClick={() => setStackOpen((open) => !open)}
         >
           <MessageCircle
             className="floating-actions-glyph"
             strokeWidth={2.25}
             aria-hidden
           />
-        </a>
+        </button>
       </div>
     </div>
   );

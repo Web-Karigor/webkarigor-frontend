@@ -113,7 +113,7 @@
     "headingLine2": "That",
     "headingAccent2": "Inspire Us",
     "ctaLabel": "Book a call",
-    "ctaHref": "#contact-form",
+    "ctaHref": "#contact",
     "categories": [
       {
         "id": "uiux",
@@ -173,6 +173,6 @@
     "headingAccent": "Next Level!",
     "description": "Get expert advice and a custom strategy session at no cost.",
     "ctaLabel": "Let's Talk",
-    "ctaHref": "#contact-form"
+    "ctaHref": "#contact"
   }
 }

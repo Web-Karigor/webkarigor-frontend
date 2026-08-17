@@ -19,14 +19,15 @@ export default function ContactConnect() {
       <div className="contact-connect-inner">
         <div className="contact-logo-row" aria-label="Clients">
           {logos.map((logo) => (
-            <Image
-              key={logo.name}
-              src={logo.src}
-              alt={logo.name}
-              width={120}
-              height={32}
-              unoptimized
-            />
+            <span key={logo.name} className="contact-logo-item">
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                width={56}
+                height={56}
+                unoptimized
+              />
+            </span>
           ))}
         </div>
 

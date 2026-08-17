@@ -18,9 +18,12 @@ const {
 
 export default function FAQ({
   className = "bg-[#FFFDF6]",
+  ctaHref: ctaHrefProp,
 }: {
   className?: string;
+  ctaHref?: string;
 }) {
+  const talkHref = ctaHrefProp ?? ctaHref;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -96,11 +99,11 @@ export default function FAQ({
         </div>
 
         <div className="text-center">
-          <p className="mb-6 font-montserrat text-[26px] font-semibold leading-[140%] tracking-[-0.05em] text-black">
+          <p className="faq-cta-heading mx-auto mb-6 max-w-[669px] font-montserrat text-[clamp(22px,4.2vw,42px)] font-bold leading-[140%] tracking-[-0.05em] text-black">
             {ctaText}
           </p>
           <Link
-            href={ctaHref}
+            href={talkHref}
             className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
           >
             {ctaLabel}

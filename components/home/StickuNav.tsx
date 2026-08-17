@@ -77,7 +77,7 @@ export default function StickyNav() {
         >
           <AnimatePresence mode="wait">
             {sheet === "projects" ? (
-              <MobileSheet key="projects" onClose={close}>
+              <MobileSheet key="projects">
                 <p className="mb-3 px-1 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
                   Latest Projects
                 </p>
@@ -117,7 +117,7 @@ export default function StickyNav() {
             ) : null}
 
             {sheet === "services" ? (
-              <MobileSheet key="services" onClose={close}>
+              <MobileSheet key="services">
                 <p className="mb-3 px-1 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
                   Services
                 </p>
@@ -145,7 +145,7 @@ export default function StickyNav() {
             ) : null}
 
             {sheet === "more" ? (
-              <MobileSheet key="more" onClose={close}>
+              <MobileSheet key="more">
                 <p className="mb-3 px-1 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
                   More
                 </p>
@@ -246,10 +246,8 @@ export default function StickyNav() {
 
 function MobileSheet({
   children,
-  onClose,
 }: {
   children: React.ReactNode;
-  onClose: () => void;
 }) {
   return (
     <motion.div
@@ -261,17 +259,7 @@ function MobileSheet({
       role="dialog"
       aria-modal="true"
     >
-      <div className="flex items-center justify-end px-3 pt-3">
-        <button
-          type="button"
-          onClick={onClose}
-          className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f3f4f6] text-[#111827]"
-          aria-label="Close"
-        >
-          <X className="h-4 w-4" />
-        </button>
-      </div>
-      <div className="max-h-[min(62vh,480px)] overflow-y-auto px-3 pb-4">
+      <div className="max-h-[min(62vh,480px)] overflow-y-auto px-3 pb-4 pt-3">
         {children}
       </div>
     </motion.div>

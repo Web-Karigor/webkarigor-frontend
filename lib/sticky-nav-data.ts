@@ -48,7 +48,6 @@ function buildLatestProjects() {
 export const STICKY_NAV_PROJECTS = buildLatestProjects();
 
 export const STICKY_NAV_MORE_LINKS = [
-  { href: "/", title: "Home", desc: "Back to Webkarigor home" },
   { href: "/about-us", title: "About us", desc: "Who we are and how we work" },
   { href: "/projects", title: "All Projects", desc: "Browse the full portfolio" },
   { href: "/team", title: "Team", desc: "Meet the people behind the work" },

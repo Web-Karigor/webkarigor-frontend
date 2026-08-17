@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import HeroSection from "@/components/home/HeroSection";
 import HeroSlider from "@/components/home/HeroSlider";
 import Services from "@/components/home/Services";
+import ProjectHoverCursor from "@/components/projects/ProjectHoverCursor";
 
 /** Below-the-fold: code-split so first paint stays light. SSR kept so layout/SEO unchanged. */
 const AIFeature = dynamic(() => import("@/components/home/AIFeature"));
@@ -21,6 +22,7 @@ const Footer = dynamic(() => import("@/components/home/Footer"));
 export default function Home() {
   return (
     <div className="relative">
+      <ProjectHoverCursor />
       <HeroSection />
       <HeroSlider />
       <Services />
