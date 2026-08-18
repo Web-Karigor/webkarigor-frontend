@@ -1,8 +1,11 @@
 "use client";
 
+import "./ProjectCard.css";
+
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { PROJECT_CARD_OVERLAY_LABELS } from "@/lib/projects-data";
 
 type ProjectCardProps = {
@@ -14,6 +17,8 @@ type ProjectCardProps = {
   href?: string;
   priority?: boolean;
   variant?: "image" | "brand-v" | "ventures";
+  description?: string;
+  keyPoints?: string[];
 };
 
 export default function ProjectCard({
@@ -25,19 +30,52 @@ export default function ProjectCard({
   href,
   priority = false,
   variant = "image",
+  description,
+  keyPoints = [],
 }: ProjectCardProps) {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.96", "start 0.12"],
+  });
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 26,
+    damping: 32,
+    mass: 1.15,
+    restDelta: 0.001,
+  });
+  const opacity = useTransform(progress, [0, 1], [0, 1]);
+  const y = useTransform(progress, [0, 1], [72, 0]);
+
+  const overlay = description ? (
+    <div className="project-card-overlay" aria-hidden>
+      <div className="project-card-overlay-shade" />
+      <div className="project-card-overlay-copy">
+        <h3 className="project-card-overlay-title">{title}</h3>
+        <p className="project-card-overlay-desc">{description}</p>
+        {keyPoints.length > 0 ? (
+          <ul className="project-card-overlay-points">
+            {keyPoints.map((point) => (
+              <li key={point}>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+    </div>
+  ) : null;
+
   const card = (
     <motion.article
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2, margin: "0px 0px -40px 0px" }}
-      transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -3, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } }}
-      className="group relative w-full max-w-full overflow-hidden rounded-2xl bg-[#f3f1ea] md:rounded-[32px]"
+      ref={ref}
       style={{
+        opacity,
+        y,
         width: `min(100%, ${width}px)`,
         aspectRatio: `${width} / ${height}`,
       }}
+      className="project-card group relative w-full max-w-full overflow-hidden rounded-2xl bg-[#f3f1ea] md:rounded-[32px]"
     >
       {variant === "brand-v" ? (
         <div
@@ -59,16 +97,18 @@ export default function ProjectCard({
             fill
             priority={priority}
             className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
+            sizes="(max-width: 768px) 100vw, min(100vw, 1300px)"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-          <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 sm:bottom-5 sm:left-5 sm:right-5">
-            <p className="m-0 font-montserrat text-[10px] font-semibold tracking-[0.18em] text-white/90 uppercase sm:text-[11px]">
-              {PROJECT_CARD_OVERLAY_LABELS.ventures}
-            </p>
-            <p className="m-0 font-montserrat text-[10px] font-semibold tracking-[0.18em] text-white/70 uppercase sm:text-[11px]">
-              {PROJECT_CARD_OVERLAY_LABELS.venturesPartner}
-            </p>
+          <div className="project-card-default-labels">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 sm:bottom-5 sm:left-5 sm:right-5">
+              <p className="m-0 font-montserrat text-[10px] font-semibold tracking-[0.18em] text-white/90 uppercase sm:text-[11px]">
+                {PROJECT_CARD_OVERLAY_LABELS.ventures}
+              </p>
+              <p className="m-0 font-montserrat text-[10px] font-semibold tracking-[0.18em] text-white/70 uppercase sm:text-[11px]">
+                {PROJECT_CARD_OVERLAY_LABELS.venturesPartner}
+              </p>
+            </div>
           </div>
         </>
       ) : (
@@ -78,10 +118,11 @@ export default function ProjectCard({
           fill
           priority={priority}
           className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
+          sizes="(max-width: 768px) 100vw, min(100vw, 1300px)"
         />
       )}
 
+      {overlay}
       <span className="sr-only">{title}</span>
     </motion.article>
   );
@@ -92,7 +133,7 @@ export default function ProjectCard({
     <Link
       href={href}
       data-project-cursor
-      className="block w-full max-w-full outline-none"
+      className="group block w-full max-w-full outline-none"
       aria-label={title}
     >
       {card}

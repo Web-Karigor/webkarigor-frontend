@@ -1,3 +1,84 @@
+.pd-next-project {
+  position: relative;
+  border-top: 1px solid rgba(142, 136, 116, 0.5);
+  border-bottom: 1px solid rgba(142, 136, 116, 0.5);
+}
+
+.pd-next-project::before,
+.pd-next-project::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #88ef92 0%, #bef264 100%);
+  transform: scaleX(0);
+  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pd-next-project::before {
+  top: -1px;
+  transform-origin: left center;
+}
+
+.pd-next-project::after {
+  bottom: -1px;
+  transform-origin: right center;
+}
+
+.pd-next-project-text {
+  transform-origin: center;
+  transition:
+    font-weight 0.5s ease,
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pd-next-project-label {
+  background-image: linear-gradient(90deg, #3f3c34 0%, #3f3c34 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: background-image 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pd-next-project-icon {
+  flex-shrink: 0;
+  color: #3f3c34;
+  transition: color 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pd-next-project:hover::before,
+.pd-next-project:hover::after,
+.pd-next-project:focus-visible::before,
+.pd-next-project:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.pd-next-project:hover .pd-next-project-text,
+.pd-next-project:focus-visible .pd-next-project-text {
+  font-weight: 700;
+  transform: scale(1.08);
+}
+
+.pd-next-project:hover .pd-next-project-label,
+.pd-next-project:focus-visible .pd-next-project-label {
+  background-image: linear-gradient(90deg, #88ef92 0%, #bef264 100%);
+}
+
+.pd-next-project:hover .pd-next-project-icon,
+.pd-next-project:focus-visible .pd-next-project-icon {
+  color: #9ee070;
+}
+
+@media (min-width: 640px) {
+  .pd-next-project::before,
+  .pd-next-project::after {
+    height: 4px;
+  }
+}
+
 .related-project-flip {
   perspective: 1600px;
 }

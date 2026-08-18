@@ -8,6 +8,8 @@ export type ProjectItem = {
   w: number;
   h: number;
   variant?: "image" | "brand-v" | "ventures";
+  description?: string;
+  keyPoints?: string[];
 };
 
 export type ProjectWatermark = {

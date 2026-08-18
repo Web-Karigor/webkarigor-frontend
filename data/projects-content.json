@@ -73,7 +73,15 @@
       "src": "/services/why-choose-main.jpg",
       "alt": "Simple is More website project",
       "w": 1300,
-      "h": 600
+      "h": 600,
+      "description": "A brand and web experience built around clarity. We stripped away noise so every page feels calm, confident, and easy to act on — from first visit to final conversion.",
+      "keyPoints": [
+        "Brand identity and visual system",
+        "High-converting landing experience",
+        "Responsive layout across devices",
+        "Motion that guides, not distracts",
+        "Launch-ready content structure"
+      ]
     },
     {
       "id": "p2",
@@ -81,7 +89,15 @@
       "src": "/sm2.webp",
       "alt": "Colorful mobile app interface collection",
       "w": 640,
-      "h": 720
+      "h": 720,
+      "description": "A connected family of mobile screens designed for speed and delight. Users can browse, compare, and complete tasks in fewer taps without losing the brand personality.",
+      "keyPoints": [
+        "Multi-screen product flow",
+        "Consistent component library",
+        "Gesture-friendly navigation",
+        "Color system for product states",
+        "Prototype-ready UI kits"
+      ]
     },
     {
       "id": "p3",
@@ -89,7 +105,15 @@
       "src": "/sm3.webp",
       "alt": "Desktop monitor with clean website UI",
       "w": 640,
-      "h": 720
+      "h": 720,
+      "description": "An operations dashboard that turns dense data into a clean working surface. Teams can scan status, spot issues, and move to action without hunting through cluttered panels.",
+      "keyPoints": [
+        "Information architecture",
+        "KPI and status modules",
+        "Filter and search patterns",
+        "Desktop-first density",
+        "Accessible contrast and type"
+      ]
     },
     {
       "id": "p4",
@@ -97,7 +121,15 @@
       "src": "/ecommerce/hero-composite.webp",
       "alt": "Travel mobile app mockups",
       "w": 640,
-      "h": 680
+      "h": 680,
+      "description": "A booking experience that makes complex travel decisions feel simple. Clear search, honest pricing, and guided itineraries help people move from inspiration to a confirmed trip.",
+      "keyPoints": [
+        "Search and filter UX",
+        "Transparent pricing states",
+        "Itinerary building flow",
+        "Mobile booking checkout",
+        "Offline-friendly trip views"
+      ]
     },
     {
       "id": "p5",
@@ -105,7 +137,15 @@
       "src": "/h1.webp",
       "alt": "Lifestyle e-commerce website design",
       "w": 640,
-      "h": 680
+      "h": 680,
+      "description": "A lifestyle storefront that feels editorial and shoppable at once. Product stories, imagery, and checkout are connected so browsing never feels disconnected from buying.",
+      "keyPoints": [
+        "Editorial product storytelling",
+        "Collection and PDP layouts",
+        "Cart and checkout polish",
+        "Merchandising grid system",
+        "Campaign-ready landing pages"
+      ]
     },
     {
       "id": "p6",
@@ -113,7 +153,15 @@
       "src": "/sm1.webp",
       "alt": "Fashion mobile app screen",
       "w": 640,
-      "h": 760
+      "h": 760,
+      "description": "A discovery-first fashion app for mobile shoppers. Curated collections, lookbooks, and one-tap checkout help people find what they love faster and buy with less friction.",
+      "keyPoints": [
+        "Lookbook and collection UX",
+        "Size and variant selection",
+        "Wishlist and save flows",
+        "One-tap checkout path",
+        "Brand-led visual language"
+      ]
     },
     {
       "id": "p7",
@@ -121,7 +169,15 @@
       "src": "/sm4.webp",
       "alt": "Retail mobile app screens",
       "w": 640,
-      "h": 760
+      "h": 760,
+      "description": "Retail product screens designed for in-hand shopping. Hierarchy, imagery, and CTAs stay consistent so customers always know what they are looking at and what to do next.",
+      "keyPoints": [
+        "Product card system",
+        "Promo and offer states",
+        "Inventory-aware UI",
+        "Store pickup journeys",
+        "Cross-sell modules"
+      ]
     },
     {
       "id": "p8",
@@ -130,7 +186,15 @@
       "alt": "Abstract 3D ventures brand visual",
       "w": 640,
       "h": 980,
-      "variant": "ventures"
+      "variant": "ventures",
+      "description": "A 3D brand world for a ventures studio. The visual language feels premium and future-facing while staying flexible enough for decks, web, and campaign use.",
+      "keyPoints": [
+        "3D brand direction",
+        "Render and lighting style",
+        "Web and deck applications",
+        "Motion-ready assets",
+        "Partner-ready presentation kit"
+      ]
     },
     {
       "id": "p9",
@@ -139,7 +203,15 @@
       "alt": "Orange brand mark visual",
       "w": 640,
       "h": 470,
-      "variant": "brand-v"
+      "variant": "brand-v",
+      "description": "A bold mark built to hold attention in a second. The identity is simple enough to scale from app icon to outdoor, with a color system that stays loud and controlled.",
+      "keyPoints": [
+        "Logo construction",
+        "Color and contrast rules",
+        "Icon and lockup set",
+        "Print and digital usage",
+        "Brand application guidelines"
+      ]
     },
     {
       "id": "p10",
@@ -147,7 +219,15 @@
       "src": "/s3.webp",
       "alt": "Mobile health dashboard interface",
       "w": 640,
-      "h": 490
+      "h": 490,
+      "description": "A health dashboard that makes daily progress easy to read. Charts, habits, and alerts are arranged so people can understand their status quickly and feel in control.",
+      "keyPoints": [
+        "Daily health overview",
+        "Chart and trend patterns",
+        "Reminder and alert states",
+        "Care-team sharing views",
+        "Calm, trustworthy UI"
+      ]
     },
     {
       "id": "p11",
@@ -155,7 +235,15 @@
       "src": "/services/why-choose-collage.png",
       "alt": "Data analytics dashboard with charts",
       "w": 640,
-      "h": 560
+      "h": 560,
+      "description": "An analytics surface for teams who need signal, not noise. Charts, filters, and comparisons sit in a layout that supports fast scanning and confident decisions.",
+      "keyPoints": [
+        "Chart library and layout",
+        "Comparison and date ranges",
+        "Saved views and reports",
+        "Role-based data density",
+        "Export and share actions"
+      ]
     },
     {
       "id": "p12",
@@ -163,7 +251,15 @@
       "src": "/h2.webp",
       "alt": "Tablet content experience",
       "w": 640,
-      "h": 560
+      "h": 560,
+      "description": "A tablet-first reading and browsing experience. Large canvases, generous type, and simple gestures make long-form content feel cinematic without losing usability.",
+      "keyPoints": [
+        "Tablet layout system",
+        "Typography for long read",
+        "Gesture navigation",
+        "Media-rich modules",
+        "Split-view content flow"
+      ]
     }
   ]
 }

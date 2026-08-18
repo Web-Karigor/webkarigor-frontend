@@ -41,15 +41,12 @@ export default function ProjectDetailsHero({ project }: { project: ProjectDetail
           {project.heroImages.map((src, index) => (
             <div
               key={`${src}-${index}`}
-              className="pd-hero-card relative w-full max-w-[562px] overflow-hidden rounded-2xl bg-[rgba(221,227,235,0.16)] p-2.5 shadow-[0_0_25px_rgba(0,0,0,0.12)] backdrop-blur-[40px] sm:rounded-[28px] sm:p-3.5 md:rounded-[32px] md:p-4"
+              className="pd-hero-card pointer-events-none relative w-full max-w-[562px] cursor-default overflow-hidden rounded-2xl bg-[rgba(221,227,235,0.16)] p-2.5 shadow-[0_0_25px_rgba(0,0,0,0.12)] backdrop-blur-[40px] select-none sm:rounded-[28px] sm:p-3.5 md:rounded-[32px] md:p-4"
               style={{
                 aspectRatio: `${hero.cardW} / ${hero.cardH}`,
               }}
             >
-              <div
-                data-project-cursor
-                className="relative h-full w-full overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[16px]"
-              >
+              <div className="relative h-full w-full overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[16px]">
                 <Image
                   src={src}
                   alt=""

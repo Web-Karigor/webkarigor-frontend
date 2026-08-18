@@ -16,29 +16,23 @@ function projectHref(id: string) {
 
 export default function ProjectsGrid() {
   const featured = PROJECT_ITEMS[0];
+
+  /*
+  // Previous mixed layouts (featured + 2-col pairs + stacked V/health).
   const rest = PROJECT_ITEMS.slice(1);
-
-  // Pair remaining items into rows of 2 for the 640+20+640 layout
   const pairRows = [
-    [rest[0], rest[1]], // mobile + desktop
-    [rest[2], rest[3]], // travel + lifestyle
-    [rest[4], rest[5]], // fashion + retail
+    [rest[0], rest[1]],
+    [rest[2], rest[3]],
+    [rest[4], rest[5]],
   ];
-
   const ventures = rest[6];
   const brandV = rest[7];
   const health = rest[8];
   const lastRow = [rest[9], rest[10]];
+  */
 
   return (
     <section className="projects-bento relative bg-[#FFFDF6] pb-12 pt-8 sm:pb-20 sm:pt-14 md:pb-28 md:pt-16">
-      {/*
-        Side watermarks (Figma):
-        - top-left PROJECTS
-        - left-bottom (slightly up) WEBKARIGOR
-        - right-upper WEBKARIGOR
-        - right-bottom PROJECTS
-      */}
       {PROJECTS_WATERMARK.items.map((item) => (
         <div
           key={item.id}
@@ -79,7 +73,23 @@ export default function ProjectsGrid() {
             gap: PROJECTS_GAP,
           }}
         >
-          {/* Featured — Figma Rectangle 110: 1300 × 600 */}
+          {PROJECT_ITEMS.map((item, index) => (
+            <ProjectCard
+              key={item.id}
+              title={item.title}
+              src={item.src}
+              alt={item.alt}
+              width={featured.w}
+              height={featured.h}
+              href={projectHref(item.id)}
+              variant={item.variant}
+              description={item.description}
+              keyPoints={item.keyPoints}
+              priority={index === 0}
+            />
+          ))}
+
+          {/*
           <ProjectCard
             title={featured.title}
             src={featured.src}
@@ -112,7 +122,6 @@ export default function ProjectsGrid() {
             </div>
           ))}
 
-          {/* Tall ventures + stacked right (V + health) */}
           <div
             className="grid grid-cols-1 md:grid-cols-2 md:items-start"
             style={{ gap: PROJECTS_GAP }}
@@ -165,6 +174,7 @@ export default function ProjectsGrid() {
               />
             ))}
           </div>
+          */}
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import "@/components/home/FAQ.css";
 import "./ProjectDetailsRelated.css";
 import {
   PROJECT_DETAILS_UI,
@@ -23,7 +24,7 @@ export default function ProjectDetailsCTA({ project }: { project: ProjectDetail 
         </p>
         <Link
           href="/#contact"
-          className="inline-flex h-11 items-center justify-center rounded-[10px] border border-black bg-transparent px-6 font-montserrat text-[14px] font-bold capitalize leading-none text-black transition hover:bg-black hover:text-white sm:h-[48px] sm:px-8 sm:text-[15px]"
+          className="faq-cta inline-flex h-11 cursor-pointer items-center justify-center rounded-[10px] border border-black bg-transparent px-6 font-montserrat text-[14px] font-bold capitalize leading-none text-black sm:h-[48px] sm:px-8 sm:text-[15px]"
         >
           {PROJECT_DETAILS_UI.ctaButton}
         </Link>
@@ -35,11 +36,13 @@ export default function ProjectDetailsCTA({ project }: { project: ProjectDetail 
       >
         <Link
           href={`/projects/${project.nextSlug}`}
-          className="mx-auto flex w-full items-center justify-center gap-2 border-y border-[#8E8874]/50 px-4 py-5 font-montserrat text-[11px] font-medium tracking-[0.08em] text-[#8E8874] uppercase transition hover:text-[#0A0A0A] sm:gap-3 sm:px-8 sm:py-6 sm:text-[13px] sm:tracking-[0.14em]"
+          className="pd-next-project mx-auto flex w-full items-center justify-center gap-2 px-4 py-5 font-montserrat text-[11px] font-medium tracking-[0.08em] text-[#3F3C34] uppercase sm:gap-3 sm:px-8 sm:py-6 sm:text-[13px] sm:tracking-[0.14em]"
           style={{ maxWidth: PD.cta.w }}
         >
-          {PROJECT_DETAILS_UI.nextProject}
-          <ArrowRight className="h-[15px] w-[15px]" strokeWidth={1.75} />
+          <span className="pd-next-project-text inline-flex items-center gap-2 sm:gap-3">
+            <span className="pd-next-project-label">{PROJECT_DETAILS_UI.nextProject}</span>
+            <ArrowRight className="pd-next-project-icon h-[18px] w-[18px] sm:h-5 sm:w-5" strokeWidth={2} />
+          </span>
         </Link>
       </div>
     </section>

@@ -248,10 +248,11 @@
   align-items: center;
   gap: 0.55rem;
   margin-top: 0.85rem;
-  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-family: var(--font-museoModerno), "MuseoModerno", sans-serif;
   font-size: 16.5px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.05em;
   color: #0ec47b;
   text-decoration: none;
   transition:
