@@ -50,7 +50,14 @@
     "label": "Years"
   },
   "assets": {
-    "sliderImages": ["/s1.webp", "/s2.webp", "/s3.webp", "/s4.webp"],
+    "sliderImages": [
+      "/hero/slider/shishu-poribohon-1.jpg",
+      "/hero/slider/shishu-app.jpg",
+      "/hero/slider/shishu-poribohon.jpg",
+      "/hero/slider/multipurpose-saas.jpg",
+      "/hero/slider/mouripharma-app.jpg",
+      "/hero/slider/kapital-properties.jpg"
+    ],
     "teamImages": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"]
   },
   "services": {
