@@ -26,6 +26,22 @@ const VARIANT_SIZES = {
   tab: LARGE_SIZE,
 } as const;
 
+/** Desktop viewport shows ~5 cards; edge tab cards clip slightly (overflow hidden). */
+const VISIBLE_MOTIF = [
+  LARGE_SIZE,
+  MOBILE_SIZE,
+  DESKTOP_SIZE,
+  MOBILE_SIZE,
+  LARGE_SIZE,
+] as const;
+
+/** Scale from center 3 so outer tab/mobile cards overflow and clip at edges. */
+const DESKTOP_SCALE_MOTIF = [
+  MOBILE_SIZE,
+  DESKTOP_SIZE,
+  MOBILE_SIZE,
+] as const;
+
 const portfolioImages = portfolioItems.map((item) => ({
   src: item.src,
   size: VARIANT_SIZES[item.variant as keyof typeof VARIANT_SIZES],
@@ -53,13 +69,13 @@ function getScrollSpeedPxPerSec() {
     ? SCROLL_SPEED_MOBILE_PX_PER_SEC
     : SCROLL_SPEED_PX_PER_SEC;
 }
-/** Design width of one full cycle — used to pick a sensible scale. */
+/** Fit center 3 on desktop → ~5 visible with edge tabs slightly clipped. */
 const PATTERN_WIDTH =
-  CYCLE_SIZES.reduce((sum, size) => sum + size.width, 0) +
-  (CYCLE_SIZES.length - 1) * BASE_GAP;
-/** Width of first 3 cards in the cycle — mobile shows ~3 at a time. */
+  DESKTOP_SCALE_MOTIF.reduce((sum, size) => sum + size.width, 0) +
+  (DESKTOP_SCALE_MOTIF.length - 1) * BASE_GAP;
+/** Width of first 3 cards in the motif — mobile shows ~3 at a time. */
 const MOBILE_THREE_CARD_WIDTH =
-  CYCLE_SIZES.slice(0, MOBILE_VISIBLE_CARDS).reduce(
+  VISIBLE_MOTIF.slice(0, MOBILE_VISIBLE_CARDS).reduce(
     (sum, size) => sum + size.width,
     0,
   ) +
