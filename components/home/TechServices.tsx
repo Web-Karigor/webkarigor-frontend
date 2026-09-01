@@ -5,35 +5,34 @@ import "./TechServices.css";
 import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
-import { PORTFOLIO_IMAGES } from "@/lib/home-assets";
 import homeContent from "@/data/home-content.json";
 
 const categories = homeContent.techServices.categories;
-
-const portfolioImages = PORTFOLIO_IMAGES;
+const portfolioItems = homeContent.techServices.portfolioImages;
 
 /**
  * Max card sizes (user uploads images at these dimensions):
- *   desktop → 515×448
+ *   web     → 515×448
  *   mobile  → 202×376
- *   large   → 515×584
- * Pattern: desktop | mobile | large | mobile | desktop | …
+ *   tab     → 515×584
  */
 const DESKTOP_SIZE = { width: 515, height: 448 } as const;
 const MOBILE_SIZE = { width: 202, height: 376 } as const;
 const LARGE_SIZE = { width: 515, height: 584 } as const;
-const SIZE_PATTERN = [
-  DESKTOP_SIZE,
-  MOBILE_SIZE,
-  LARGE_SIZE,
-  MOBILE_SIZE,
-  DESKTOP_SIZE,
-] as const;
+
+const VARIANT_SIZES = {
+  web: DESKTOP_SIZE,
+  mobile: MOBILE_SIZE,
+  tab: LARGE_SIZE,
+} as const;
+
+const portfolioImages = portfolioItems.map((item) => ({
+  src: item.src,
+  size: VARIANT_SIZES[item.variant as keyof typeof VARIANT_SIZES],
+}));
 
 /** Per-image size in one seamless cycle (length === portfolioImages.length). */
-const CYCLE_SIZES = portfolioImages.map(
-  (_, i) => SIZE_PATTERN[i % SIZE_PATTERN.length],
-);
+const CYCLE_SIZES = portfolioImages.map((item) => item.size);
 
 const CYCLE_SIZE = portfolioImages.length;
 const REPEAT_CYCLES = 4;
@@ -54,14 +53,14 @@ function getScrollSpeedPxPerSec() {
     ? SCROLL_SPEED_MOBILE_PX_PER_SEC
     : SCROLL_SPEED_PX_PER_SEC;
 }
-/** Design width of one full 5-card motif — used to pick a sensible scale. */
+/** Design width of one full cycle — used to pick a sensible scale. */
 const PATTERN_WIDTH =
-  SIZE_PATTERN.reduce((sum, s) => sum + s.width, 0) +
-  (SIZE_PATTERN.length - 1) * BASE_GAP;
-/** Width of first 3 cards in the motif — mobile shows ~3 at a time. */
+  CYCLE_SIZES.reduce((sum, size) => sum + size.width, 0) +
+  (CYCLE_SIZES.length - 1) * BASE_GAP;
+/** Width of first 3 cards in the cycle — mobile shows ~3 at a time. */
 const MOBILE_THREE_CARD_WIDTH =
-  SIZE_PATTERN.slice(0, MOBILE_VISIBLE_CARDS).reduce(
-    (sum, s) => sum + s.width,
+  CYCLE_SIZES.slice(0, MOBILE_VISIBLE_CARDS).reduce(
+    (sum, size) => sum + size.width,
     0,
   ) +
   (MOBILE_VISIBLE_CARDS - 1) * BASE_GAP;
@@ -69,7 +68,7 @@ const MOBILE_THREE_CARD_WIDTH =
 const cards = Array.from({ length: CYCLE_SIZE * REPEAT_CYCLES }, (_, i) => {
   const cycleIndex = i % CYCLE_SIZE;
   return {
-    src: portfolioImages[cycleIndex],
+    src: portfolioImages[cycleIndex].src,
     size: CYCLE_SIZES[cycleIndex],
   };
 });

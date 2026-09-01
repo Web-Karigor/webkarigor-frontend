@@ -75,8 +75,8 @@
         "desc": "From concept to deployment, we develop custom web applications engineered for performance and reliability. Our team transforms complex workflows into smooth digital operations, ensuring your platform grows as your business evolves.",
         "link": "/services/web-application",
         "images": [
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/679a9c4888217669122eebaf_3d41798d228903d42862a148dd56aeb1_Project%20Cards%20%2810%29%20%281%29.avif",
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78087a5b72120cc3e5db_d1a5f14e5e5fc69f2dbac575600f06f4_Project%20Cards-6.avif"
+          "/services/web-application-1.jpg",
+          "/services/web-application-2.jpg"
         ]
       },
       {
@@ -86,8 +86,8 @@
         "desc": "We design and build native and cross-platform mobile apps that feel fast, intuitive, and reliable. From onboarding to retention, every screen is crafted to keep users engaged and your product ready to scale.",
         "link": "/services/web-design",
         "images": [
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78084947770a14f1eb7c_d1cec41f22346c1c941376236623384b_Project%20Cards.avif",
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78089c9a93e810fbfa6e_Project%20Cards-1.avif"
+          "/services/mobile-application-1.jpg",
+          "/services/mobile-application-2.jpg"
         ]
       },
       {
@@ -97,8 +97,8 @@
         "desc": "We craft user flows, wireframes, and polished interfaces that reduce friction and elevate every interaction — so your product is clear, accessible, and delightful across web and mobile.",
         "link": "/services/ui-ux",
         "images": [
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac780912dabe81710b65ed_8e70a34a4056237eca17e1209cecdebe_Project%20Cards-2.avif",
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78088c2757d4cdf75977_Project%20Cards-3.avif"
+          "/services/ux-ui-design-1.jpg",
+          "/services/ux-ui-design-2.jpg"
         ]
       },
       {
@@ -108,8 +108,8 @@
         "desc": "We shape complete brand systems — logo, visual language, voice, and digital presence — so your company looks consistent and memorable across every touchpoint, from website to social.",
         "link": "/services/logo-branding",
         "images": [
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac7809638da68108df9847_Project%20Cards-4.avif",
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78089a0d6cfed1675211_Project%20Cards-5.avif"
+          "/services/branding-1.jpg",
+          "/services/branding-2.jpg"
         ]
       },
       {
@@ -119,8 +119,8 @@
         "desc": "We help you define roadmap, UX priorities, and go-to-market decisions with clear research and practical workshops — so your product launches faster with less risk and stronger user focus.",
         "link": "/services/framer-design",
         "images": [
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac780912dabe81710b65ed_8e70a34a4056237eca17e1209cecdebe_Project%20Cards-2.avif",
-          "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67ac78088c2757d4cdf75977_Project%20Cards-3.avif"
+          "/services/product-strategy-1.jpg",
+          "/services/product-strategy-2.jpg"
         ]
       }
     ]
@@ -176,6 +176,44 @@
       "Branding",
       "Social Media",
       "Digital Marketing"
+    ],
+    "portfolioImages": [
+      {
+        "src": "/tech-services/portfolio/probashi-resort-tab.jpg",
+        "variant": "tab"
+      },
+      {
+        "src": "/tech-services/portfolio/paris-beauty-mobile.jpg",
+        "variant": "mobile"
+      },
+      {
+        "src": "/tech-services/portfolio/shishu-web.jpg",
+        "variant": "web"
+      },
+      {
+        "src": "/tech-services/portfolio/shishu-mobile.jpg",
+        "variant": "mobile"
+      },
+      {
+        "src": "/tech-services/portfolio/saas-tab.jpg",
+        "variant": "tab"
+      },
+      {
+        "src": "/tech-services/portfolio/hamporia-web.jpg",
+        "variant": "web"
+      },
+      {
+        "src": "/tech-services/portfolio/mouripharma-tab.jpg",
+        "variant": "tab"
+      },
+      {
+        "src": "/tech-services/portfolio/mouripharma-mobile.jpg",
+        "variant": "mobile"
+      },
+      {
+        "src": "/tech-services/portfolio/suma-web.jpg",
+        "variant": "web"
+      }
     ]
   },
   "case": {

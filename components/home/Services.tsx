@@ -55,8 +55,8 @@ type Service = (typeof services)[number];
 /** One viewport of scroll for intro header exit */
 const INTRO_SCROLL_VIEWS = 1;
 
-const DESKTOP_GROUP_STEP_PX = 820 + 160;
-const LG_GROUP_STEP_PX = 600 + 100;
+const DESKTOP_GROUP_STEP_PX = 837 + 160;
+const LG_GROUP_STEP_PX = 837 + 100;
 /** Mobile stack: scroll length per card (higher = slower) */
 const MOBILE_SCROLL_VH = 1.6;
 
