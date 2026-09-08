@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Customized HR and Payroll Management Software in Bangladesh",
-    "description": "Web Karigor creates custom-made human resource management software to fit your company's needs. As a strategic technology partner, we create secure and scalable systems that integrate employee data, attendance, shift scheduling and salary calculation into a single platform."
+    "title": "ERP Services — Webkarigor",
+    "description": "Custom ERP solutions for inventory, finance, HR, and operations — built by Webkarigor to streamline your business."
   },
   "hero": {
     "brand": "Webkarigor",
@@ -10,74 +10,180 @@
       "label": "Get a Quote",
       "href": "#contact"
     },
-    "title": "Delight your customers with happy elements",
-    "description": "Welcome to the support portal! Search your answers with the search box above, or if you're stuck you can create a support ticket.",
-    "countryCode": "+880",
-    "phonePlaceholder": "Enter your mobile number",
+    "titleLine1": "Customized HR and ",
+    "titleLine2": "Payroll Management Software",
+    "titleBrand": "In Bangladesh",
+    "description": "Web Karigor creates custom-made human resource management software to fit your company's needs. As a strategic technology partner, we create secure and scalable systems that integrate employee data, attendance, shift scheduling and salary calculation into a single platform.",
     "primaryCta": {
-      "label": "Book A Meeting",
+      "label": "Start Your Project",
       "href": "#contact"
     },
     "hotlineLabel": "Say hello",
     "hotline": "01624-283328",
-    "heroImage": "/manpower/hero.webp",
-    "heroImageAlt": "Happy student giving thumbs up",
-    "doodleSrc": "/manpower/vector-16.png"
+    "trustTitle": "HR and Payroll Solutions Businesses Can Rely On",
+    "trustDescription": "We develop real-world HR and payroll software for small and medium businesses in garments, manufacturing, retail, e-commerce and FMCG.",
+    "dashboardImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+    "avatarImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+    "demo": {
+      "searchLabel": "Search",
+      "addCustomerLabel": "Add Customer",
+      "tableHeaders": [
+        "NAME",
+        "DESCRIPTION",
+        "RATE",
+        "BALANCE",
+        "DEPOSIT",
+        "STATUS",
+        ""
+      ],
+      "descriptionCell": "Lorem ipsum...",
+      "currencySuffix": "INR",
+      "activeCustomersLabel": "Active Customers: 478/708",
+      "rowsPerPageLabel": "Rows per page: 10",
+      "paginationLabel": "1-10 of 708",
+      "customers": [
+        {
+          "name": "Kadin Herwitz",
+          "id": "87364523",
+          "rate": "70.00",
+          "balance": "-270.00",
+          "balanceNeg": true,
+          "deposit": "500.00",
+          "status": "ACTIVE"
+        },
+        {
+          "name": "Kadin Herwitz",
+          "id": "87364523",
+          "rate": "70.00",
+          "balance": "270.00",
+          "balanceNeg": false,
+          "deposit": "500.00",
+          "status": "INACTIVE"
+        },
+        {
+          "name": "Kadin Herwitz",
+          "id": "87364523",
+          "rate": "70.00",
+          "balance": "270.00",
+          "balanceNeg": false,
+          "deposit": "500.00",
+          "status": "ACTIVE"
+        }
+      ],
+      "technologyCard": {
+        "label": "Technology",
+        "value": "27.24",
+        "valueSuffix": "ROI",
+        "items": [
+          {
+            "label": "Cloud Services",
+            "pct": 81,
+            "color": "#F79009"
+          },
+          {
+            "label": "Automation",
+            "pct": 28,
+            "color": "#FBBF24"
+          },
+          {
+            "label": "Business Transformation",
+            "pct": 11,
+            "color": "#D0D5DD"
+          }
+        ]
+      }
+    }
   },
   "trustedLogos": [
     {
-      "name": "Confluent",
-      "src": "https://cdn.simpleicons.org/confluent/252526"
+      "name": "Slack",
+      "src": "https://cdn.simpleicons.org/slack/667085"
     },
     {
-      "name": "Seismic",
-      "src": "https://cdn.simpleicons.org/hubspot/FF7A59"
+      "name": "Netflix",
+      "src": "https://cdn.simpleicons.org/netflix/667085"
     },
     {
-      "name": "Datadog",
-      "src": "https://cdn.simpleicons.org/datadog/632CA6"
+      "name": "Fitbit",
+      "src": "https://cdn.simpleicons.org/fitbit/667085"
     },
     {
-      "name": "SurveyMonkey",
-      "src": "https://cdn.simpleicons.org/surveymonkey/00BF6F"
+      "name": "Google",
+      "src": "https://cdn.simpleicons.org/google/667085"
     },
     {
-      "name": "Salesforce",
-      "src": "https://cdn.simpleicons.org/salesforce/00A1E0"
-    },
-    {
-      "name": "Okta",
-      "src": "https://cdn.simpleicons.org/okta/007DC1"
-    },
-    {
-      "name": "Talkdesk",
-      "src": "https://cdn.simpleicons.org/intercom/6AFDEF"
+      "name": "Airbnb",
+      "src": "https://cdn.simpleicons.org/airbnb/667085"
     }
   ],
-  "trustTitle": "Trusted by over 100+ businesses worldwide.",
-  "techOrbit": {
-    "title": "Technologies used in webkarigor",
+  "features": {
+    "eyebrow": "Why Webkarigor",
+    "title": "More Than Beautiful Interfaces",
     "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
-    "icons": [
+    "items": [
+      {
+        "title": "User-Centered Design",
+        "description": "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
+        "color": "#12B76A",
+        "bg": "#E8F8F0",
+        "icon": "user"
+      },
+      {
+        "title": "Business-Focused",
+        "description": "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
+        "color": "#F79009",
+        "bg": "#FEF4E6",
+        "icon": "briefcase"
+      },
+      {
+        "title": "Collaborative Process",
+        "description": "We act as an extension of your team, maintaining transparent communication throughout.",
+        "color": "#EE46BC",
+        "bg": "#FCE8F5",
+        "icon": "handshake"
+      },
+      {
+        "title": "Scalable Systems",
+        "description": "We deliver robust design systems that make future development faster and consistent.",
+        "color": "#2E90FA",
+        "bg": "#E8F3FE",
+        "icon": "chart"
+      }
+    ]
+  },
+  "integrations": {
+    "title": "Technologies Used in Our HR and Payroll Software",
+    "description": "We leverage technologies like Next.js, React.js, Node.js, Laravel, Vercel, Git, and Notion to create scalable HR dashboard software for HR management, payroll processing, attendance, and employee management.",
+    "inner": [
+      {
+        "name": "GitHub",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+      },
+      {
+        "name": "Notion",
+        "icon": "https://cdn.simpleicons.org/notion/000000"
+      },
+      {
+        "name": "Figma",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+      }
+    ],
+    "outer": [
       {
         "name": "PHP",
         "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-      },
-      {
-        "name": "Node.js",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
       },
       {
         "name": "React",
         "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
       },
       {
-        "name": "Bootstrap",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
-      },
-      {
         "name": "Next.js",
         "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+      },
+      {
+        "name": "Node.js",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
       },
       {
         "name": "Vercel",
@@ -86,74 +192,6 @@
       {
         "name": "Tailwind",
         "icon": "https://cdn.simpleicons.org/tailwindcss/06B6D4"
-      },
-      {
-        "name": "Python",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-      },
-      {
-        "name": "Figma",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
-      },
-      {
-        "name": "Go",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
-      },
-      {
-        "name": "Notion",
-        "icon": "https://cdn.simpleicons.org/notion/000000"
-      },
-      {
-        "name": "AWS",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
-      },
-      {
-        "name": "Sketch",
-        "icon": "https://cdn.simpleicons.org/sketch/F7B500"
-      },
-      {
-        "name": "Kotlin",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
-      }
-    ]
-  },
-  "whyChoose": {
-    "eyebrow": "Why Webkarigor",
-    "title": "More Than Beautiful Interfaces",
-    "image": "/services/why-choose-collage.png",
-    "imageAlt": "Office collaboration and analytics screens",
-    "items": [
-      {
-        "title": "User-Centered Design",
-        "description": "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
-        "icon": "user",
-        "color": "#12B76A",
-        "bg": "#E8F8F0",
-        "border": "#B6E9D1"
-      },
-      {
-        "title": "Business-Focused",
-        "description": "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
-        "icon": "briefcase",
-        "color": "#F79009",
-        "bg": "#FEF4E6",
-        "border": "#F9D9A8"
-      },
-      {
-        "title": "Collaborative Process",
-        "description": "We act as an extension of your team, maintaining transparent communication throughout.",
-        "icon": "handshake",
-        "color": "#EE46BC",
-        "bg": "#FCE8F5",
-        "border": "#F5B8E0"
-      },
-      {
-        "title": "Scalable Systems",
-        "description": "We deliver robust design systems that make future development faster and consistent.",
-        "icon": "chart",
-        "color": "#2E90FA",
-        "bg": "#E8F3FE",
-        "border": "#B5D7FC"
       }
     ]
   },
@@ -193,118 +231,85 @@
     ]
   },
   "reviews": {
-    "eyebrow": "What our clients say",
-    "title": "The world's best companies are using our service",
+    "title": "Hear From Customers Who Worked With Web Karigor",
     "items": [
       {
-        "quote": "Webkarigor helped us staff a full product squad in weeks. The talent quality and communication have been outstanding.",
-        "name": "Jenny Wilson",
-        "role": "Head of Product, Bright Labs",
-        "avatar": "/sm1.webp",
-        "highlight": false
-      },
-      {
-        "quote": "Finally a partner that understands both hiring speed and engineering depth. Our release cadence doubled.",
-        "name": "Robert Fox",
-        "role": "CTO, NovaPay",
-        "avatar": "/sm2.webp",
-        "highlight": false
-      },
-      {
-        "quote": "From designers to backend leads, every placement clicked with our culture. Highly recommend their manpower desk.",
-        "name": "Kathryn Murphy",
-        "role": "COO, Lumen Soft",
-        "avatar": "/sm3.webp",
-        "highlight": false
-      },
-      {
-        "quote": "Clear contracts, strong onboarding, and people who actually ship. We extended the engagement twice.",
-        "name": "Theresa Webb",
-        "role": "VP Engineering, Orbit HR",
-        "avatar": "/sm4.webp",
-        "highlight": false
-      },
-      {
-        "quote": "They filled critical roles without the usual agency noise. Transparent, fast, and reliable.",
-        "name": "Wade Warren",
-        "role": "Founder, Stackline",
-        "avatar": "/h2.webp",
-        "highlight": false
-      },
-      {
-        "quote": "With Webkarigor, we're able to easily scale our team in full detail. It's become an essential partner for growth.",
+        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
         "name": "Jaquon Hart",
         "role": "Digital Marketing Executive, Hypebeast",
-        "avatar": "/sm1.webp",
-        "highlight": true
+        "rating": 5
       },
       {
-        "quote": "The designers they placed elevated our product UI overnight. Stakeholders noticed the difference immediately.",
-        "name": "Cody Fisher",
-        "role": "Design Lead, Peak Commerce",
-        "avatar": "/h1.webp",
-        "highlight": false
+        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
+        "name": "Rickie Baroch",
+        "role": "Product Manager of Salestation Asia",
+        "rating": 4
       },
       {
-        "quote": "Supportive account managers and talent that treats our roadmap like their own. Rare combination.",
-        "name": "Esther Howard",
-        "role": "People Ops, Northwind",
-        "avatar": "/sm3.webp",
-        "highlight": false
+        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
+        "name": "Harinder Bharwal",
+        "role": "Digital Marketing Executive, Hypebeast",
+        "rating": 4
+      },
+      {
+        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
+        "name": "Floyd Miles",
+        "role": "CEO, Shishu Poribohan",
+        "rating": 5
       }
     ]
   },
   "pricing": {
-    "eyebrow": "Pricing plan",
-    "title": "The Right Plan for Your Business",
-    "description": "Flexible manpower packages for startups and enterprises — scale your team without the usual overhead.",
-    "recommendedLabel": "Most Popular",
-    "cta": "Get Started",
+    "eyebrow": "Pricing Plan",
+    "title": "ERP Software Pricing for Your Business",
+    "description": "Web Karigor designs ERP for your business needs; you receive a system that fits your business and a project cost that reflects your needs.",
+    "recommendedLabel": "Recommended",
+    "cta": "Purchase",
     "ctaHref": "#contact",
     "plans": [
       {
         "name": "Basic",
-        "price": "$39",
+        "price": "$29",
         "period": "/mo",
         "recommended": false,
         "priceColor": "dark",
-        "description": "Best for startups needing flexible specialist support.",
+        "description": "Essential ERP modules for small teams getting started.",
         "features": [
-          "Up to 2 active roles",
-          "Shared account manager",
-          "Basic skill matching",
+          "Core dashboard access",
+          "Up to 5 user seats",
+          "Basic reporting",
           "Email support",
-          "Monthly reporting"
+          "Standard integrations"
+        ]
+      },
+      {
+        "name": "Standard",
+        "price": "$99",
+        "period": "/mo",
+        "recommended": true,
+        "priceColor": "green",
+        "description": "Full-featured ERP for growing businesses with multiple departments.",
+        "features": [
+          "All Basic features",
+          "Unlimited project use",
+          "Advanced analytics",
+          "Multivariate components",
+          "Priority phone support"
         ]
       },
       {
         "name": "Pro",
-        "price": "$49",
-        "period": "/mo",
-        "recommended": true,
-        "priceColor": "green",
-        "description": "Most popular for growing teams that need faster placement.",
-        "features": [
-          "Up to 8 active roles",
-          "Priority candidate shortlist",
-          "Dedicated coordinator",
-          "Weekly status calls",
-          "Replacement guarantee"
-        ]
-      },
-      {
-        "name": "Premium",
-        "price": "$339",
+        "price": "$299",
         "period": "/mo",
         "recommended": false,
         "priceColor": "blue",
-        "description": "Enterprise staffing with dedicated pods and SLAs.",
+        "description": "Enterprise-grade ERP with custom modules and dedicated support.",
         "features": [
-          "Unlimited role openings",
-          "Full squad staffing",
-          "On-site / hybrid support",
-          "Custom SLAs",
-          "Quarterly strategy reviews"
+          "All Standard features",
+          "Custom module development",
+          "Dedicated account manager",
+          "SLA-backed uptime",
+          "On-site training"
         ]
       }
     ]
