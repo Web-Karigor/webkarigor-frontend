@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Manpower Services — Webkarigor",
-    "description": "Hire verified talent, scale teams fast, and deliver with Webkarigor manpower services — staffing, squads, and flexible engagement models."
+    "title": "Customized HR and Payroll Management Software in Bangladesh",
+    "description": "Web Karigor creates custom-made human resource management software to fit your company's needs. As a strategic technology partner, we create secure and scalable systems that integrate employee data, attendance, shift scheduling and salary calculation into a single platform."
   },
   "hero": {
     "brand": "Webkarigor",
@@ -25,13 +25,34 @@
     "doodleSrc": "/manpower/vector-16.png"
   },
   "trustedLogos": [
-    { "name": "Confluent", "src": "https://cdn.simpleicons.org/confluent/252526" },
-    { "name": "Seismic", "src": "https://cdn.simpleicons.org/hubspot/FF7A59" },
-    { "name": "Datadog", "src": "https://cdn.simpleicons.org/datadog/632CA6" },
-    { "name": "SurveyMonkey", "src": "https://cdn.simpleicons.org/surveymonkey/00BF6F" },
-    { "name": "Salesforce", "src": "https://cdn.simpleicons.org/salesforce/00A1E0" },
-    { "name": "Okta", "src": "https://cdn.simpleicons.org/okta/007DC1" },
-    { "name": "Talkdesk", "src": "https://cdn.simpleicons.org/intercom/6AFDEF" }
+    {
+      "name": "Confluent",
+      "src": "https://cdn.simpleicons.org/confluent/252526"
+    },
+    {
+      "name": "Seismic",
+      "src": "https://cdn.simpleicons.org/hubspot/FF7A59"
+    },
+    {
+      "name": "Datadog",
+      "src": "https://cdn.simpleicons.org/datadog/632CA6"
+    },
+    {
+      "name": "SurveyMonkey",
+      "src": "https://cdn.simpleicons.org/surveymonkey/00BF6F"
+    },
+    {
+      "name": "Salesforce",
+      "src": "https://cdn.simpleicons.org/salesforce/00A1E0"
+    },
+    {
+      "name": "Okta",
+      "src": "https://cdn.simpleicons.org/okta/007DC1"
+    },
+    {
+      "name": "Talkdesk",
+      "src": "https://cdn.simpleicons.org/intercom/6AFDEF"
+    }
   ],
   "trustTitle": "Trusted by over 100+ businesses worldwide.",
   "techOrbit": {

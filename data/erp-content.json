@@ -10,18 +10,18 @@
       "label": "Get a Quote",
       "href": "#contact"
     },
-    "titleLine1": "Analyze data",
-    "titleLine2": "fast, with",
-    "titleBrand": "Analizar",
-    "description": "It is a software through which you can easily make the right decision by analyzing the data. Data analysis is important in business.",
+    "titleLine1": "Smart ERP Software",
+    "titleLine2": "in Bangladesh",
+    "titleBrand": "for Easy Business Processes",
+    "description": "Professionally develop a scalable ERP software in Bangladesh that is tailored to streamline business operations, enhance visibility, and facilitate future growth. Integrate HR, CRM, inventory, accounting and other essential functions into a scalable ERP system that is designed to improve business management.",
     "primaryCta": {
       "label": "Start Your Project",
       "href": "#contact"
     },
     "hotlineLabel": "Say hello",
     "hotline": "01624-283328",
-    "trustTitle": "We've Worked with them, We Trust Each Other",
-    "trustDescription": "At “WEB KARIGOR”, we have had the privilege of working with a diverse range of clients across various industries.",
+    "trustTitle": "Built on Trust, Strengthened by Collaboration",
+    "trustDescription": "We are proud to have worked with clients in a variety of industries, fostering a sense of collaboration, reliability, and a shared dedication to successful outcomes at Web Karigor.",
     "dashboardImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
     "avatarImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
     "demo": {
@@ -75,19 +75,46 @@
         "value": "27.24",
         "valueSuffix": "ROI",
         "items": [
-          { "label": "Cloud Services", "pct": 81, "color": "#F79009" },
-          { "label": "Automation", "pct": 28, "color": "#FBBF24" },
-          { "label": "Business Transformation", "pct": 11, "color": "#D0D5DD" }
+          {
+            "label": "Cloud Services",
+            "pct": 81,
+            "color": "#F79009"
+          },
+          {
+            "label": "Automation",
+            "pct": 28,
+            "color": "#FBBF24"
+          },
+          {
+            "label": "Business Transformation",
+            "pct": 11,
+            "color": "#D0D5DD"
+          }
         ]
       }
     }
   },
   "trustedLogos": [
-    { "name": "Slack", "src": "https://cdn.simpleicons.org/slack/667085" },
-    { "name": "Netflix", "src": "https://cdn.simpleicons.org/netflix/667085" },
-    { "name": "Fitbit", "src": "https://cdn.simpleicons.org/fitbit/667085" },
-    { "name": "Google", "src": "https://cdn.simpleicons.org/google/667085" },
-    { "name": "Airbnb", "src": "https://cdn.simpleicons.org/airbnb/667085" }
+    {
+      "name": "Slack",
+      "src": "https://cdn.simpleicons.org/slack/667085"
+    },
+    {
+      "name": "Netflix",
+      "src": "https://cdn.simpleicons.org/netflix/667085"
+    },
+    {
+      "name": "Fitbit",
+      "src": "https://cdn.simpleicons.org/fitbit/667085"
+    },
+    {
+      "name": "Google",
+      "src": "https://cdn.simpleicons.org/google/667085"
+    },
+    {
+      "name": "Airbnb",
+      "src": "https://cdn.simpleicons.org/airbnb/667085"
+    }
   ],
   "features": {
     "eyebrow": "Why Webkarigor",
@@ -125,8 +152,8 @@
     ]
   },
   "integrations": {
-    "title": "Technologies used in webkarigor",
-    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+    "title": "Technologies We Use for ERP Software Development",
+    "description": "To ensure reliable systems for growing and complex operations, we choose modern technologies based on your ERP requirements, business processes, scalability, performance, and long-term needs.",
     "inner": [
       {
         "name": "GitHub",
@@ -204,7 +231,7 @@
     ]
   },
   "reviews": {
-    "title": "Ehya is loved by users",
+    "title": "Customers Who Loved Working With Us",
     "items": [
       {
         "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
@@ -234,8 +261,8 @@
   },
   "pricing": {
     "eyebrow": "Pricing Plan",
-    "title": "No Hidden Charges",
-    "description": "Flexible ERP packages designed for teams at every stage — from startup to enterprise.",
+    "title": "ERP Software Pricing for Your Business",
+    "description": "Web Karigor designs ERP for your business needs; you receive a system that fits your business and a project cost that reflects your needs.",
     "recommendedLabel": "Recommended",
     "cta": "Purchase",
     "ctaHref": "#contact",

@@ -6,16 +6,40 @@
   "navbar": {
     "brand": "Webkarigor",
     "desktopLinks": [
-      { "label": "Projects", "href": "/projects" },
-      { "label": "Services", "href": "/service" },
-      { "label": "Contact", "href": "/contact-us" },
-      { "label": "About us", "href": "/about-us" }
+      {
+        "label": "Projects",
+        "href": "/projects"
+      },
+      {
+        "label": "Services",
+        "href": "/service"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact-us"
+      },
+      {
+        "label": "About us",
+        "href": "/about-us"
+      }
     ],
     "mobileLinks": [
-      { "label": "Projects", "href": "/projects" },
-      { "label": "Services", "href": "/service" },
-      { "label": "Contact", "href": "/contact-us" },
-      { "label": "About us", "href": "/about-us" }
+      {
+        "label": "Projects",
+        "href": "/projects"
+      },
+      {
+        "label": "Services",
+        "href": "/service"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact-us"
+      },
+      {
+        "label": "About us",
+        "href": "/about-us"
+      }
     ],
     "aria": {
       "openMenu": "Open menu",
@@ -23,13 +47,17 @@
     }
   },
   "hero": {
-    "titleLines": ["To deliver a 360", "AI driven solution", "project approach"],
+    "titleLines": [
+      "We Are A",
+      "Website Design & Development Company",
+      "in Bangladesh"
+    ],
     "description": {
-      "beforeHighlight": "Your ",
-      "highlight": "vision",
-      "afterHighlight": " deserves to grow. We create the brand identity, digital experience, and investor-ready story that help ",
-      "badge": "businesses",
-      "afterBadge": " move faster with confidence."
+      "beforeHighlight": "Web Karigor is a",
+      "highlight": "website design & development",
+      "afterHighlight": " company in Bangladesh that develops business websites, corporate websites, e-commerce websites, and custom web applications based on real. ",
+      "badge": "operational",
+      "afterBadge": " and customer needs ."
     },
     "cta": {
       "href": "/contact-us",
@@ -58,21 +86,26 @@
       "/hero/slider/mouripharma-app.jpg",
       "/hero/slider/kapital-properties.jpg"
     ],
-    "teamImages": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"]
+    "teamImages": [
+      "/sm1.webp",
+      "/sm2.webp",
+      "/sm3.webp",
+      "/sm4.webp"
+    ]
   },
   "services": {
     "badge": "Services",
-    "headingAccent": "We Work to",
-    "headingTitle": "Build Brands",
-    "description": "From idea to execution, we help build brands through modern software, intuitive design, and strategic product thinking that drives real business results.",
+    "headingAccent": "Brands We’re Proud to",
+    "headingTitle": "Work With",
+    "description": "We work with startups, growing businesses, established organizations, and enterprises, providing professional web design, web development, ecommerce website development, and software development services in Bangladesh and international markets. Our design and development company supports brands from Dhaka to global markets with reliable digital solutions for building, modernizing, and scaling.",
     "seeMoreLabel": "See More",
     "ctaArrow": "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67326d59201cc3b185432b90_CTA%20Arrow.svg",
     "items": [
       {
-        "title": "Web Application Development",
-        "highlight": "And Design",
-        "subtitle": "Fast, scalable, and secure solutions for modern businesses.",
-        "desc": "From concept to deployment, we develop custom web applications engineered for performance and reliability. Our team transforms complex workflows into smooth digital operations, ensuring your platform grows as your business evolves.",
+        "title": "Website Design",
+        "highlight": "And Development",
+        "subtitle": "We Develop Digital Solutions that Drive Brands Forward",
+        "desc": "Web Karigor collaborates with companies to develop clear, credible, and scalable brands. We combine strategic thinking, digital design, website experiences, and technology to assist organizations in communicating what they do, why it matters, and why customers should pick them.",
         "link": "/services/web-application",
         "images": [
           "/services/web-application-1.jpg",
@@ -80,10 +113,10 @@
         ]
       },
       {
-        "title": "Mobile App",
+        "title": "Website",
         "highlight": "Development",
-        "subtitle": "Seamless mobile experiences that connect with people.",
-        "desc": "We design and build native and cross-platform mobile apps that feel fast, intuitive, and reliable. From onboarding to retention, every screen is crafted to keep users engaged and your product ready to scale.",
+        "subtitle": "Website Design and Development Services",
+        "desc": "We offer website design and development solutions to build professional, responsive, SEO friendly websites to boost online presence and drive business growth.",
         "link": "/services/web-design",
         "images": [
           "/services/mobile-application-1.jpg",
@@ -94,7 +127,7 @@
         "title": "UX/UI",
         "highlight": "Design",
         "subtitle": "Human-centered design that elevates every interaction.",
-        "desc": "We craft user flows, wireframes, and polished interfaces that reduce friction and elevate every interaction — so your product is clear, accessible, and delightful across web and mobile.",
+        "desc": "Web design that prioritizes the user experience, designing websites that are responsive, easy to use, and have a delightful user experience, while minimizing friction and making every interaction clear, accessible, and enjoyable.",
         "link": "/services/ui-ux",
         "images": [
           "/services/ux-ui-design-1.jpg",
@@ -102,10 +135,10 @@
         ]
       },
       {
-        "title": "Branding & Digital",
-        "highlight": "Identity",
-        "subtitle": "Meaningful brands built to inspire confidence.",
-        "desc": "We shape complete brand systems — logo, visual language, voice, and digital presence — so your company looks consistent and memorable across every touchpoint, from website to social.",
+        "title": "CRM Software",
+        "highlight": "Development",
+        "subtitle": "CRM Software Development Services",
+        "desc": "We create custom CRM software solutions that enable businesses to leverage intelligent technology to manage customer relationships, automate sales processes, enhance communication, and create better customer experiences.",
         "link": "/services/logo-branding",
         "images": [
           "/services/branding-1.jpg",
@@ -113,10 +146,32 @@
         ]
       },
       {
-        "title": "Product Strategy &",
-        "highlight": "Consultation",
-        "subtitle": "Expert guidance to turn ideas into scalable products.",
-        "desc": "We help you define roadmap, UX priorities, and go-to-market decisions with clear research and practical workshops — so your product launches faster with less risk and stronger user focus.",
+        "title": "HRM Software",
+        "highlight": "Development",
+        "subtitle": "HR Software in Bangladesh",
+        "desc": "HR Software Development in Bangladesh is the process of creating software solutions for human resource management to streamline HR processes, attendance systems, payroll management, leave tracking, and employee management.",
+        "link": "/services/framer-design",
+        "images": [
+          "/services/product-strategy-1.jpg",
+          "/services/product-strategy-2.jpg"
+        ]
+      },
+      {
+        "title": "ERP Software",
+        "highlight": "Development",
+        "subtitle": "ERP Software in Bangladesh",
+        "desc": "With scalable business management systems, our ERP software in Bangladesh enables businesses to streamline operations, gain visibility into workflows, manage resources, and make informed decisions",
+        "link": "/services/framer-design",
+        "images": [
+          "/services/product-strategy-1.jpg",
+          "/services/product-strategy-2.jpg"
+        ]
+      },
+      {
+        "title": "Custom Software",
+        "highlight": "Development",
+        "subtitle": "Custom Software Development Services",
+        "desc": "Our custom software development services provide organizations with customized digital solutions that cater to their distinctive business needs, enabling them to automate processes and create scalable technology platforms.",
         "link": "/services/framer-design",
         "images": [
           "/services/product-strategy-1.jpg",
@@ -219,17 +274,24 @@
   "case": {
     "badge": "Success Across Industries",
     "headingAccent": "Delivering",
-    "headingTitle": "Success",
-    "description": "Helping businesses achieve measurable growth and lasting impact across diverse industries",
+    "headingTitle": "Digital Success",
+    "description": "We're building websites, software, and business systems to help organizations improve, automate, and scale.",
     "cursorLabel": "See our case studies",
     "items": [
       {
         "number": "(01)",
-        "tags": ["E-commerce", "Healthcare"],
+        "tags": [
+          "E-commerce",
+          "Healthcare"
+        ],
         "title": "Trusted Online Pharmacy",
         "titleOneLine": true,
         "description": "The platform targets families and individuals needing everyday health essentials, featuring brands from major Bangladeshi pharma companies like Incepta and Square. Overall, it's a practical e-commerce site emphasizing safety, speed, and value in the growing digital healthcare market.",
-        "platforms": ["Web", "Android", "iOS"],
+        "platforms": [
+          "Web",
+          "Android",
+          "iOS"
+        ],
         "color": "#48a396",
         "href": "/case",
         "quote": "Working with Brand Appart has been an absolute pleasure. Beyond their creativity and professionalism, there's a real sense of kindness and care in everything they do.",
@@ -244,10 +306,17 @@
       },
       {
         "number": "(02)",
-        "tags": ["Product", "SaaS"],
+        "tags": [
+          "Product",
+          "SaaS"
+        ],
         "title": "Product experiences users adopt & keep using",
         "description": "We start from business goals, map the critical journeys, and prototype what actually moves the needle. Every sprint ships clear flows, a reusable UI library, and a dev-ready. Expect time-to-value down, UX friction down, retention/NPS up.",
-        "platforms": ["Web", "iOS", "Android"],
+        "platforms": [
+          "Web",
+          "iOS",
+          "Android"
+        ],
         "color": "#f72",
         "href": "/case",
         "quote": "A huge thank you to the entire Brand Appart team for your outstanding work on our rebranding! We're thrilled to have you as an integral part of the Incard team, and we can't wait to reveal what's coming next.",
@@ -266,10 +335,16 @@
       },
       {
         "number": "(03)",
-        "tags": ["Web Design", "Branding"],
+        "tags": [
+          "Web Design",
+          "Branding"
+        ],
         "title": "Web Design for growing teams & business.",
         "description": "We align messaging, page architecture, and UI. You get clear structure, sections. The site loads fast, tells the right story, and pushes to action without dev firefighting. Your team gets a scalable base they can evolve without calling us for every change.",
-        "platforms": ["Web", "CMS"],
+        "platforms": [
+          "Web",
+          "CMS"
+        ],
         "color": "#ff3c34",
         "href": "/case",
         "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
@@ -288,10 +363,16 @@
       },
       {
         "number": "(04)",
-        "tags": ["Pitch", "Fundraising"],
+        "tags": [
+          "Pitch",
+          "Fundraising"
+        ],
         "title": "Investor-proof decks that raise faster.",
         "description": "We craft the narrative that gets meetings and a precise ask. Design serves the story: readable numbers, rhythm across slides, and versions for teaser/one-pager. Your deck can be pitched in 5 minutes, read solo, and generates faster responses.",
-        "platforms": ["Deck", "PDF"],
+        "platforms": [
+          "Deck",
+          "PDF"
+        ],
         "color": "#785f47",
         "href": "/case",
         "images": [
@@ -411,14 +492,23 @@
   },
   "testimonials": {
     "badge": "Testimonials",
-    "headingLines": ["Trusted", "by"],
+    "headingLines": [
+      "Trusted",
+      "by"
+    ],
     "headingAccent": "Founders"
   },
   "team": {
-    "mobileTitle": "Expert Team",
+    "mobileTitle": "Smart Team",
     "mobileSubtitle": "Big Result",
-    "desktopExpertLines": ["Expert", "Team"],
-    "desktopResultLines": ["Big", "Result"],
+    "desktopExpertLines": [
+      "Expert",
+      "Team"
+    ],
+    "desktopResultLines": [
+      "Smarter",
+      "Solutions"
+    ],
     "cardAriaLabel": "Team member",
     "members": [
       {
@@ -445,9 +535,9 @@
   },
   "pricing": {
     "badge": "Pricing Plans",
-    "headingAccent": "Fair Pricing for",
-    "headingTitle": "Your Product",
-    "description": "Our packages are designed to fit your product’s stage and ambition. Flexible, transparent, and customizable based on what your business truly needs.",
+    "headingAccent": "Transparent ",
+    "headingTitle": "Pricing Solutions ",
+    "description": "We offer flexible pricing for websites, software solutions, and digital platforms, depending on your business needs, project scope, and long-term goals.",
     "popularLabel": "Most popular",
     "featuresHeading": "What's Included:",
     "cancelLabel": "Cancel any time",
@@ -465,7 +555,10 @@
         "availability": "3 Slots Available, Hurry!",
         "availabilityTone": "green",
         "cta": "Explore Package",
-        "price": { "monthly": "$2600", "quarterly": "$2340" },
+        "price": {
+          "monthly": "$2600",
+          "quarterly": "$2340"
+        },
         "features": [
           "40 hours of dedicated design support",
           "Full-Stack Delivery Team",
@@ -490,7 +583,10 @@
         "availabilityTone": "red",
         "availabilityMarquee": true,
         "cta": "Explore Package",
-        "price": { "monthly": "$4800", "quarterly": "$4320" },
+        "price": {
+          "monthly": "$4800",
+          "quarterly": "$4320"
+        },
         "features": [
           "80 hours of dedicated design support",
           "Full-Stack Delivery Team",
@@ -514,7 +610,10 @@
         "availability": "Limited availability",
         "availabilityTone": "gray",
         "cta": "Explore Package",
-        "price": { "monthly": "$7800", "quarterly": "$7020" },
+        "price": {
+          "monthly": "$7800",
+          "quarterly": "$7020"
+        },
         "features": [
           "160 hours of dedicated design support",
           "Full-Stack Delivery Team",
@@ -538,7 +637,10 @@
         "availability": "Limited availability",
         "availabilityTone": "gray",
         "cta": "Contact Us",
-        "price": { "monthly": "", "quarterly": "" },
+        "price": {
+          "monthly": "",
+          "quarterly": ""
+        },
         "features": [
           "Tailored support based on your needs",
           "Full-Stack Delivery Team",
@@ -560,10 +662,10 @@
   "banner": {
     "backgroundImage": "/rr.webp",
     "titleLines": [
-      "Every product is different",
-      "Your pricing should be too"
+      "Your Business Is Unique",
+      "Your Software Solution Should Be Too"
     ],
-    "description": "Looking for a custom solution or specific service?",
+    "description": "Looking for a custom solution for your business?",
     "ctaLabel": "Request a quote"
   },
   "faq": {
@@ -575,28 +677,28 @@
     "ctaHref": "/contact-us",
     "items": [
       {
-        "question": "Who do you work with and what projects do you take on?",
-        "answer": "We partner with startups, established companies, and agencies of all sizes. Our team takes on digital product design and development projects that are mission-driven and innovative."
+        "question": "Who are your clients, and what kind of web design and development work do you do?",
+        "answer": "Web Karigor is a trusted web design agency in Bangladesh, serving startups, businesses, and enterprises. We develop custom websites, corporate websites, eCommerce websites, web applications, and digital solutions throughout Bangladesh."
       },
       {
-        "question": "How do you take a product from idea to launch?",
-        "answer": "We start with understanding your vision, users, and markets. We ideate, wireframe, prototype, design, and develop iteratively, collaborating closely with you through each phase and ensuring each milestone is met before launch."
+        "question": "What is the process of your web development service from idea to launch?",
+        "answer": "Our web design company in Bangladesh takes ideas to successful digital products with strategy, web design, web development, web testing, and web launching. Responsive, user-friendly, and SEO friendly websites with scalable development solutions."
       },
       {
-        "question": "How do you approach UX, design, and technology decisions?",
-        "answer": "All decisions are driven by your business goals, user needs, and best-in-class modern technology. We combine research-driven UX, elegant UI, and practical engineering for scalable solutions."
+        "question": "How do you make website design, UX, and technology decisions?",
+        "answer": "As one of the top web design and development firms in Dhaka, we have the expertise to design a reliable and high-performing website that provides the best user experience, using professional website design, UX research, graphic design, and modern technologies."
       },
       {
-        "question": "How involved will we be during the project?",
-        "answer": "You stay as involved as you want throughout the project. We encourage your feedback in each phase, use frequent check-ins, and provide clear, collaborative communication. You’re never left in the dark."
+        "question": "How involved will we be during the website development process?",
+        "answer": "We involve clients in all aspects of website development. Our design team plans, provides feedback, and makes improvements together to make sure that your custom website reflects your goals, brand identity, and business needs."
       },
       {
-        "question": "Do you provide ongoing support after launch?",
-        "answer": "Yes! We offer continuous maintenance, support, and opportunities for evolution and improvement after your product launches. We’re your partner for the long run."
+        "question": "Do you perform website maintenance and development after launch?",
+        "answer": "Yes, Web Karigor offers website maintenance, web development services, software development, and ongoing support to ensure your website is secure, up-to-date, optimized, and running well after it launches."
       },
       {
-        "question": "How do pricing and timelines work?",
-        "answer": "We offer flexible pricing models (fixed, retainer, or hourly) depending on project needs. Timelines are validated during our initial call and adjusted collaboratively. Transparency is key."
+        "question": "What are the pricing and timelines for website design and development projects?",
+        "answer": "The pricing and timelines are subject to the project requirements, features, and complexity. Our development agency offers clear-cut solutions for business websites, eCommerce website development, mobile app development, and custom web projects."
       }
     ]
   },
@@ -644,11 +746,26 @@
     },
     "submitLabel": "Let's Do It",
     "regions": [
-      { "label": "United States", "flag": "🇺🇸" },
-      { "label": "United Kingdom", "flag": "🇬🇧" },
-      { "label": "Bangladesh", "flag": "🇧🇩" },
-      { "label": "Canada", "flag": "🇨🇦" },
-      { "label": "Australia", "flag": "🇦🇺" }
+      {
+        "label": "United States",
+        "flag": "🇺🇸"
+      },
+      {
+        "label": "United Kingdom",
+        "flag": "🇬🇧"
+      },
+      {
+        "label": "Bangladesh",
+        "flag": "🇧🇩"
+      },
+      {
+        "label": "Canada",
+        "flag": "🇨🇦"
+      },
+      {
+        "label": "Australia",
+        "flag": "🇦🇺"
+      }
     ],
     "timeSlots": [
       "9:00 AM",
@@ -661,62 +778,169 @@
       "4:00 PM",
       "5:00 PM"
     ],
-    "weekdays": ["S", "M", "T", "W", "T", "F", "S"]
+    "weekdays": [
+      "S",
+      "M",
+      "T",
+      "W",
+      "T",
+      "F",
+      "S"
+    ]
   },
   "footer": {
     "headingLines": [
       "Let's build what your users will love",
       "and your business will grow with"
     ],
-    "taglineParts": ["Build Smarter", "Launch Stronger", "Scale Faster"],
+    "taglineParts": [
+      "Build Smarter",
+      "Launch Stronger",
+      "Scale Faster"
+    ],
     "wordmark": "WEBKARIGOR",
     "copyright": "© 2026 Webkarigor. All rights reserved.",
     "linkColumns": [
       {
         "title": "Services",
         "links": [
-          { "label": "Product Design", "href": "/services/product-design" },
-          { "label": "Product Development", "href": "/services/product-development" },
-          { "label": "Branding", "href": "/services/branding" },
-          { "label": "Marketing", "href": "/services/marketing" },
-          { "label": "Consultancy", "href": "/services/consultancy" }
+          {
+            "label": "Product Design",
+            "href": "/services/product-design"
+          },
+          {
+            "label": "Product Development",
+            "href": "/services/product-development"
+          },
+          {
+            "label": "Branding",
+            "href": "/services/branding"
+          },
+          {
+            "label": "Marketing",
+            "href": "/services/marketing"
+          },
+          {
+            "label": "Consultancy",
+            "href": "/services/consultancy"
+          }
         ]
       },
       {
         "title": "Industries",
         "links": [
-          { "label": "E-commerce", "href": "/service/ecommerce" },
-          { "label": "ERP", "href": "/service/erp" },
-          { "label": "Manpower", "href": "/service/manpower" },
-          { "label": "Healthcare", "href": "/industries/healthcare" },
-          { "label": "Fintech", "href": "/industries/fintech" },
-          { "label": "Edtech", "href": "/industries/edtech" },
-          { "label": "CMS", "href": "/industries/cms" }
+          {
+            "label": "E-commerce",
+            "href": "/service/ecommerce"
+          },
+          {
+            "label": "ERP",
+            "href": "/service/erp"
+          },
+          {
+            "label": "Manpower",
+            "href": "/service/manpower"
+          },
+          {
+            "label": "Healthcare",
+            "href": "/industries/healthcare"
+          },
+          {
+            "label": "Fintech",
+            "href": "/industries/fintech"
+          },
+          {
+            "label": "Edtech",
+            "href": "/industries/edtech"
+          },
+          {
+            "label": "CMS",
+            "href": "/industries/cms"
+          }
         ]
       },
       {
         "title": "Important Link",
         "links": [
-          { "label": "Team", "href": "/team" },
-          { "label": "Projects", "href": "/projects" },
-          { "label": "About Us", "href": "/about-us" },
-          { "label": "Contact Us", "href": "/contact-us" },
-          { "label": "Our Policies", "href": "/policies" }
+          {
+            "label": "Team",
+            "href": "/team"
+          },
+          {
+            "label": "Projects",
+            "href": "/projects"
+          },
+          {
+            "label": "About Us",
+            "href": "/about-us"
+          },
+          {
+            "label": "Contact Us",
+            "href": "/contact-us"
+          },
+          {
+            "label": "Our Policies",
+            "href": "/policies"
+          }
         ]
       }
     ],
     "socialLinks": [
-      { "id": "linkedin", "label": "LinkedIn", "href": "https://linkedin.com" },
-      { "id": "facebook", "label": "Facebook", "href": "https://facebook.com" },
-      { "id": "github", "label": "GitHub", "href": "https://github.com" },
-      { "id": "vscode", "label": "VS Code", "href": "https://code.visualstudio.com" },
-      { "id": "whatsapp", "label": "WhatsApp", "href": "https://wa.me/" },
-      { "id": "telegram", "label": "Telegram", "href": "https://t.me/" },
-      { "id": "instagram", "label": "Instagram", "href": "https://instagram.com" },
-      { "id": "youtube", "label": "YouTube", "href": "https://youtube.com" },
-      { "id": "behance", "label": "Behance", "href": "https://behance.net" },
-      { "id": "tiktok", "label": "TikTok", "href": "https://tiktok.com" },
-      { "id": "x", "label": "X", "href": "https://x.com" }
+      {
+        "id": "linkedin",
+        "label": "LinkedIn",
+        "href": "https://linkedin.com"
+      },
+      {
+        "id": "facebook",
+        "label": "Facebook",
+        "href": "https://facebook.com"
+      },
+      {
+        "id": "github",
+        "label": "GitHub",
+        "href": "https://github.com"
+      },
+      {
+        "id": "vscode",
+        "label": "VS Code",
+        "href": "https://code.visualstudio.com"
+      },
+      {
+        "id": "whatsapp",
+        "label": "WhatsApp",
+        "href": "https://wa.me/"
+      },
+      {
+        "id": "telegram",
+        "label": "Telegram",
+        "href": "https://t.me/"
+      },
+      {
+        "id": "instagram",
+        "label": "Instagram",
+        "href": "https://instagram.com"
+      },
+      {
+        "id": "youtube",
+        "label": "YouTube",
+        "href": "https://youtube.com"
+      },
+      {
+        "id": "behance",
+        "label": "Behance",
+        "href": "https://behance.net"
+      },
+      {
+        "id": "tiktok",
+        "label": "TikTok",
+        "href": "https://tiktok.com"
+      },
+      {
+        "id": "x",
+        "label": "X",
+        "href": "https://x.com"
+      }
     ]
   }
 }

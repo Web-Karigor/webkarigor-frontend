@@ -10,9 +10,9 @@
       "label": "Get a Quote",
       "href": "#contact"
     },
-    "titleLine1": "Result that matter",
-    "titleLine2": "expertise you can trust",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
+    "titleLine1": "Professional Website Design",
+    "titleLine2": "and Development Services For Your Business",
+    "description": "Web Karigor is a strategic technology partner to provide professional website design and development services for startups, growing businesses, and enterprises in Bangladesh and international markets.",
     "primaryCta": {
       "label": "Start Your Project",
       "href": "#contact"
@@ -48,46 +48,67 @@
     ]
   },
   "trustedLogos": [
-    { "name": "Slack", "src": "https://cdn.simpleicons.org/slack/667085" },
-    { "name": "Dropbox", "src": "https://cdn.simpleicons.org/dropbox/667085" },
-    { "name": "Spotify", "src": "https://cdn.simpleicons.org/spotify/667085" },
-    { "name": "Shopify", "src": "https://cdn.simpleicons.org/shopify/667085" },
-    { "name": "Stripe", "src": "https://cdn.simpleicons.org/stripe/667085" }
+    {
+      "name": "Slack",
+      "src": "https://cdn.simpleicons.org/slack/667085"
+    },
+    {
+      "name": "Dropbox",
+      "src": "https://cdn.simpleicons.org/dropbox/667085"
+    },
+    {
+      "name": "Spotify",
+      "src": "https://cdn.simpleicons.org/spotify/667085"
+    },
+    {
+      "name": "Shopify",
+      "src": "https://cdn.simpleicons.org/shopify/667085"
+    },
+    {
+      "name": "Stripe",
+      "src": "https://cdn.simpleicons.org/stripe/667085"
+    }
   ],
   "features": {
-    "eyebrow": "Why Webkarigor",
-    "title": "More Than Beautiful Interfaces",
-    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+    "eyebrow": "Why Businesses Work With Web Karigor?",
+    "title": "We Make More Than Good-Looking Websites",
+    "description": "Great website design isn't just about looks. Our web design service combines business thinking, user experience, design, and web development to create digital experiences built around real business goals.",
     "items": [
       {
-        "title": "User-Centered Design",
-        "description": "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
+        "title": "User-Centered Website Design",
+        "description": "We design with the way people use your website in mind. Clear navigation, thoughtful page structure, responsive web design, and intuitive interactions lead to less friction in finding information and taking action.",
         "color": "#12B76A",
         "icon": "user"
       },
       {
-        "title": "Business-Focused",
-        "description": "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
+        "title": "Business-Focused Digital Experiences",
+        "description": "Each design decision should be for a purpose. We take your business goals, customer experience, content strategy, and conversion opportunities into account from the start of your web design project.",
         "color": "#F79009",
         "icon": "briefcase"
       },
       {
-        "title": "Collaborative Process",
-        "description": "We act as an extension of your team, maintaining transparent communication throughout.",
+        "title": "Design and Development Working Together",
+        "description": "As a web development service agency, we see the visual design and technical requirements as part of the same solution. This helps in the development of websites that are not only interesting but also easy to build, maintain, and enhance.",
         "color": "#EE46BC",
         "icon": "handshake"
       },
       {
-        "title": "Scalable Systems",
-        "description": "We deliver robust design systems that make future development faster and consistent.",
+        "title": "Collaborative Project Approach",
+        "description": "We collaborate with your team to understand requirements, review decisions, and ensure the project is aligned with your business needs. Clear communication can help you transform ideas into a website that reflects the business needs.",
+        "color": "#2E90FA",
+        "icon": "chart"
+      },
+      {
+        "title": "Built for Performance and Scalability",
+        "description": "Your site needs to sustain your business after you launch. Performance, responsive behavior, scalable architecture, and long-term development needs are all taken into account so that the platform can continue to grow with your needs.",
         "color": "#2E90FA",
         "icon": "chart"
       }
     ]
   },
   "techStack": {
-    "title": "Technologies used in webkarigor",
-    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+    "title": "Web Development Built Around Your Requirements",
+    "description": "As a website design and development agency, we choose the technology based on project requirements, scalability, performance, functionality, and future business needs.",
     "items": [
       {
         "name": "Laravel",

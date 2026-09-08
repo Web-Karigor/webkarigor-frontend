@@ -41,9 +41,10 @@ export default function ServiceTeamSection() {
 
       <div className="svc-team-inner relative z-[1] mx-auto flex w-full max-w-[1680px] items-center justify-between gap-[clamp(32px,5vw,64px)] px-[clamp(16px,4.4vw,85px)] py-[clamp(48px,6vw,85px)] max-lg:flex-col max-lg:items-start max-lg:justify-start max-lg:gap-[clamp(20px,4vw,32px)] max-lg:py-[clamp(40px,6vw,64px)]">
         <h2 className="svc-team-title m-0 max-w-[696px] shrink-0 font-montserrat text-[clamp(40px,6.5vw,100px)] font-bold leading-[150%] text-[#183b56] max-lg:max-w-full max-lg:flex-none max-lg:text-[clamp(36px,8vw,56px)] max-lg:leading-[1.25]">
-          Expert Team
+          Expert Developers,
+
           <br />
-          Big Result
+          Smarter ERP Solutions
         </h2>
 
         <div className="svc-team-collage relative isolate h-[clamp(400px,46vw,560px)] w-[min(100%,620px)] shrink-0 max-lg:mx-auto max-lg:h-[clamp(360px,88vw,480px)] max-lg:max-w-[520px]">

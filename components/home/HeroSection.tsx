@@ -10,7 +10,7 @@ const photoSlides = [photos.left, photos.right] as const;
 
 function HeroTitle() {
   return (
-    <div className="max-w-[889px] px-1 text-center">
+    <h1 className="max-w-[889px] px-1 text-center">
       <p className="hero-title">{titleLines[0]}</p>
       <span className="hero-subtitle md:-mt-4 lg:-mt-[var(--hero-title-pull,1.5rem)] block">
         {titleLines[1]}
@@ -18,7 +18,7 @@ function HeroTitle() {
       <p className="hero-title md:-mt-4 lg:-mt-[var(--hero-title-pull,1.5rem)]">
         {titleLines[2]}
       </p>
-    </div>
+    </h1>
   );
 }
 

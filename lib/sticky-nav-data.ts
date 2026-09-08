@@ -20,8 +20,8 @@ export const STICKY_NAV_SERVICES = [
     desc: "Custom systems for operations.",
   },
   {
-    href: "/service/manpower",
-    title: "Manpower",
+    href: "/service/hrm",
+    title: "HRM",
     desc: "Specialist talent for your team.",
   },
 ] as const;
