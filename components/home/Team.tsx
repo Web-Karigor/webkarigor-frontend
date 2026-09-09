@@ -13,9 +13,12 @@ const {
   desktopExpertLines,
   desktopResultLines,
   members: TEAM_MEMBERS,
+  members2: TEAM_MEMBERS2,
 } = homeContent.team;
 
 type TeamMember = (typeof TEAM_MEMBERS)[number];
+type TeamMember2 = (typeof TEAM_MEMBERS2)[number];
+
 
 type TeamCardSizes = {
   width: number;
@@ -268,7 +271,7 @@ function InfiniteSlideRow({
 }
 
 const upperMembers = TEAM_MEMBERS;
-const lowerMembers = [...TEAM_MEMBERS].reverse();
+const lowerMembers = TEAM_MEMBERS2;
 
 export default function Team() {
   const sizes = useTeamCardSizes();

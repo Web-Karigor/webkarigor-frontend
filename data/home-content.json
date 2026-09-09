@@ -525,11 +525,24 @@
         "src": "/team/juel.jpeg",
         "name": "Juel",
         "designation": "Front End Developer"
-      },
+      }
+    ],
+
+    "members2" : [
       {
         "src": "/team/aryan.jpeg",
         "name": "Aryan",
         "designation": "UI/UX Designer"
+      },
+      {
+        "src": "/team/zishan.jpeg",
+        "name": "Zishan",
+        "designation": "Video Editor"
+      },
+      {
+        "src": "/team/jayaed.jpeg",
+        "name": "Jayaed",
+        "designation": "Junior Video Editor"
       }
     ]
   },
