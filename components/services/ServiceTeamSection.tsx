@@ -3,7 +3,7 @@ import Image from "next/image";
 /** Exact original collage — classes stay in TSX for Tailwind JIT */
 const TEAM_PHOTOS = [
   {
-    src: "/sm1.webp",
+    src: "/team/imran.jpeg",
     alt: "Team member — middle left",
     className:
       "svc-team-shot svc-team-shot-ml absolute left-0 top-[22%] z-[2] h-[clamp(124px,15vw,168px)] w-[clamp(124px,15vw,168px)]",

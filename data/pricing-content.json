@@ -1,317 +1,210 @@
 {
   "metadata": {
-    "title": "ERP Services — Webkarigor",
-    "description": "Custom ERP solutions for inventory, finance, HR, and operations — built by Webkarigor to streamline your business."
+    "title": "Pricing — Webkarigor",
+    "description": "Transparent monthly pricing for product design and development. Seed, Growth, and Expert plans with no long-term contracts."
   },
   "hero": {
-    "brand": "Webkarigor",
-    "brandHref": "/",
-    "navCta": {
-      "label": "Get a Quote",
-      "href": "#contact"
-    },
-    "titleLine1": "Smart ERP Software",
-    "titleLine2": "in Bangladesh",
-    "titleBrand": "for Easy Business Processes",
-    "description": "Professionally develop a scalable ERP software in Bangladesh that is tailored to streamline business operations, enhance visibility, and facilitate future growth. Integrate HR, CRM, inventory, accounting and other essential functions into a scalable ERP system that is designed to improve business management.",
-    "primaryCta": {
-      "label": "Start Your Project",
-      "href": "#contact"
-    },
-    "hotlineLabel": "Say hello",
-    "hotline": "01624-283328",
-    "trustTitle": "Built on Trust, Strengthened by Collaboration",
-    "trustDescription": "We are proud to have worked with clients in a variety of industries, fostering a sense of collaboration, reliability, and a shared dedication to successful outcomes at Web Karigor.",
-    "dashboardImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
-    "avatarImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
-    "demo": {
-      "searchLabel": "Search",
-      "addCustomerLabel": "Add Customer",
-      "tableHeaders": [
-        "NAME",
-        "DESCRIPTION",
-        "RATE",
-        "BALANCE",
-        "DEPOSIT",
-        "STATUS",
-        ""
-      ],
-      "descriptionCell": "Lorem ipsum...",
-      "currencySuffix": "INR",
-      "activeCustomersLabel": "Active Customers: 478/708",
-      "rowsPerPageLabel": "Rows per page: 10",
-      "paginationLabel": "1-10 of 708",
-      "customers": [
-        {
-          "name": "Kadin Herwitz",
-          "id": "87364523",
-          "rate": "70.00",
-          "balance": "-270.00",
-          "balanceNeg": true,
-          "deposit": "500.00",
-          "status": "ACTIVE"
-        },
-        {
-          "name": "Kadin Herwitz",
-          "id": "87364523",
-          "rate": "70.00",
-          "balance": "270.00",
-          "balanceNeg": false,
-          "deposit": "500.00",
-          "status": "INACTIVE"
-        },
-        {
-          "name": "Kadin Herwitz",
-          "id": "87364523",
-          "rate": "70.00",
-          "balance": "270.00",
-          "balanceNeg": false,
-          "deposit": "500.00",
-          "status": "ACTIVE"
-        }
-      ],
-      "technologyCard": {
-        "label": "Technology",
-        "value": "27.24",
-        "valueSuffix": "ROI",
-        "items": [
-          {
-            "label": "Cloud Services",
-            "pct": 81,
-            "color": "#F79009"
-          },
-          {
-            "label": "Automation",
-            "pct": 28,
-            "color": "#FBBF24"
-          },
-          {
-            "label": "Business Transformation",
-            "pct": 11,
-            "color": "#D0D5DD"
-          }
-        ]
-      }
-    }
-  },
-  "trustedLogos": [
-    {
-      "name": "Slack",
-      "src": "https://cdn.simpleicons.org/slack/667085"
-    },
-    {
-      "name": "Netflix",
-      "src": "https://cdn.simpleicons.org/netflix/667085"
-    },
-    {
-      "name": "Fitbit",
-      "src": "https://cdn.simpleicons.org/fitbit/667085"
-    },
-    {
-      "name": "Google",
-      "src": "https://cdn.simpleicons.org/google/667085"
-    },
-    {
-      "name": "Airbnb",
-      "src": "https://cdn.simpleicons.org/airbnb/667085"
-    }
-  ],
-  "features": {
-    "eyebrow": "Why Webkarigor",
-    "title": "More Than Beautiful Interfaces",
-    "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
-    "items": [
+    "eyebrow": "From Idea to Launch",
+    "titleLines": ["Transparent Pricing for", "Supports Your Growth"],
+    "features": [
       {
-        "title": "User-Centered Design",
-        "description": "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
-        "color": "#12B76A",
-        "bg": "#E8F8F0",
-        "icon": "user"
+        "title": "Clickable Design Prototype",
+        "description": "Visualize and test your product experience before development.",
+        "icon": "pointer"
       },
       {
-        "title": "Business-Focused",
-        "description": "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
-        "color": "#F79009",
-        "bg": "#FEF4E6",
-        "icon": "briefcase"
+        "title": "Developer-Ready Files",
+        "description": "Organized assets and specifications for a smoother build process.",
+        "icon": "code"
       },
       {
-        "title": "Collaborative Process",
-        "description": "We act as an extension of your team, maintaining transparent communication throughout.",
-        "color": "#EE46BC",
-        "bg": "#FCE8F5",
-        "icon": "handshake"
+        "title": "Efficient Project Management",
+        "description": "A clear workflow helps keep projects aligned and moving forward.",
+        "icon": "calendar"
       },
       {
-        "title": "Scalable Systems",
-        "description": "We deliver robust design systems that make future development faster and consistent.",
-        "color": "#2E90FA",
-        "bg": "#E8F3FE",
-        "icon": "chart"
+        "title": "Ongoing Design Guidance",
+        "description": "Receive expert guidance to support informed product decisions.",
+        "icon": "compass"
       }
     ]
   },
-  "integrations": {
-    "title": "Technologies We Use for ERP Software Development",
-    "description": "To ensure reliable systems for growing and complex operations, we choose modern technologies based on your ERP requirements, business processes, scalability, performance, and long-term needs.",
-    "inner": [
+  "plans": {
+    "saveBadge": "Save 25%",
+    "includedLabel": "Everything Included",
+    "popularLabel": "Popular",
+    "whatYouGetLabel": "What you get:",
+    "cta": {
+      "label": "Book a Call",
+      "href": "#contact"
+    },
+    "items": [
       {
-        "name": "GitHub",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+        "id": "launch",
+        "name": "Launch Ready",
+        "subtitle": "MVP Product Design & Development",
+        "monthly": 3500,
+        "features": [
+          "UX/UI design for a single product or core feature",
+          "Web or mobile app development",
+          "Clean, scalable, and maintainable code",
+          "Essential user flows and usability focus",
+          "Basic testing and quality checks",
+          "Deployment-ready build with source files",
+          "Clear delivery timeline and milestone tracking"
+        ]
       },
       {
-        "name": "Notion",
-        "icon": "https://cdn.simpleicons.org/notion/000000"
+        "id": "build",
+        "name": "Build & Validate",
+        "subtitle": "Full Product Design with Research & Development",
+        "monthly": 5000,
+        "popular": true,
+        "features": [
+          "User research and product discovery sessions",
+          "End-to-end UX/UI design for the full product",
+          "Design system for consistency and scale",
+          "Web or mobile app development",
+          "Usability testing and design iteration",
+          "Performance and security best practices",
+          "Post-launch support and proper handover"
+        ]
       },
       {
-        "name": "Figma",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+        "id": "scale",
+        "name": "Scale & Optimize",
+        "subtitle": "Advanced Product Design & Development",
+        "monthly": 7000,
+        "features": [
+          "User research, audit, and competitor analysis",
+          "Strategic roadmap and feature prioritization",
+          "UX/UI design with system-level thinking",
+          "Full development with scalable architecture",
+          "Dedicated design and engineering team",
+          "Continuous monitoring and optimization",
+          "Priority support, maintenance"
+        ]
       }
+    ]
+  },
+  "customBanner": {
+    "backgroundSrc": "/pricing/rectangle-79.png",
+    "overlaySrc": "/rr.webp",
+    "titleLines": [
+      "Every product is different",
+      "Your pricing should be too"
     ],
-    "outer": [
-      {
-        "name": "PHP",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-      },
-      {
-        "name": "React",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-      },
-      {
-        "name": "Next.js",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
-      },
-      {
-        "name": "Node.js",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-      },
-      {
-        "name": "Vercel",
-        "icon": "https://cdn.simpleicons.org/vercel/000000"
-      },
-      {
-        "name": "Tailwind",
-        "icon": "https://cdn.simpleicons.org/tailwindcss/06B6D4"
-      }
+    "description": "Looking for a custom solution or specific service?",
+    "cta": {
+      "label": "Request a quote",
+      "href": "#contact"
+    }
+  },
+  "package": {
+    "title": "A Complete Package Of Everything You Need To Grow",
+    "ellipseSrc": "/pricing/ellipse-1569.webp",
+    "starSrc": "/pricing/star-17.png",
+    "columns": [
+      [
+        "UI/UX Design",
+        "Product Strategy",
+        "UX Research",
+        "Wireframing",
+        "Interactive Prototyping",
+        "Website Design",
+        "Landing Page Design",
+        "UX Audit"
+      ],
+      [
+        "Back-end Development",
+        "Full-Stack Development",
+        "API Development & Integration",
+        "React Development",
+        "Next.js Development",
+        "Laravel Development",
+        "Node.js Development",
+        "WordPress Development"
+      ],
+      [
+        "Brand Identity Design",
+        "Logo Design",
+        "Motion Graphics",
+        "UI Animation",
+        "Prototype",
+        "Illustration Design",
+        "Pitch Deck Design",
+        "Marketing Creatives"
+      ],
+      [
+        "Mobile App Development",
+        "SaaS Product Design",
+        "Framer Development",
+        "Front-end Development",
+        "Dashboard Design",
+        "Webflow Development",
+        "Ongoing Maintenance & Support",
+        "Mobile App Design"
+      ]
     ]
   },
-  "portfolio": {
-    "title": "Our Projects",
+  "builtFor": {
+    "title": "Built for Growing Products",
+    "cta": {
+      "label": "Book a Call",
+      "href": "#contact"
+    },
+    "columns": {
+      "ours": "Webkarigor",
+      "others": "Other Agencies"
+    },
     "items": [
       {
-        "id": "food",
-        "title": "Food Delivery Storefront",
-        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
+        "label": "Discovery and research before design",
+        "otherHas": true
       },
       {
-        "id": "saas",
-        "title": "Business Analytics Platform",
-        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+        "label": "Interactive prototypes for key flows",
+        "otherHas": false
       },
       {
-        "id": "fashion",
-        "title": "Fashion Ecommerce",
-        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80"
+        "label": "Developer-ready handoff documentation",
+        "otherHas": true
       },
       {
-        "id": "corporate",
-        "title": "Corporate Landing",
-        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80"
+        "label": "Design system and reusable components",
+        "otherHas": false
       },
       {
-        "id": "dashboard",
-        "title": "Ops Dashboard",
-        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+        "label": "Flexible engagement based on project needs",
+        "otherHas": true
       },
       {
-        "id": "mobile",
-        "title": "Product App UI",
-        "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80"
+        "label": "Ongoing design consultation",
+        "otherHas": false
+      },
+      {
+        "label": "Transparent communication throughout the project",
+        "otherHas": false
+      },
+      {
+        "label": "Structured process from concept to delivery",
+        "otherHas": true
       }
     ]
   },
-  "reviews": {
-    "title": "Customers Who Loved Working With Us",
+  "featuredWork": {
+    "title": "Featured Work That Turns Ideas Into Digital Products",
+    "description": "Explore selected work that highlights our design, development, and problem-solving approach.",
+    "seeAll": {
+      "label": "See All",
+      "href": "/projects"
+    },
     "items": [
-      {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Jaquon Hart",
-        "role": "Digital Marketing Executive, Hypebeast",
-        "rating": 5
-      },
-      {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Rickie Baroch",
-        "role": "Product Manager of Salestation Asia",
-        "rating": 4
-      },
-      {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Harinder Bharwal",
-        "role": "Digital Marketing Executive, Hypebeast",
-        "rating": 4
-      },
-      {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Floyd Miles",
-        "role": "CEO, Shishu Poribohan",
-        "rating": 5
-      }
-    ]
-  },
-  "pricing": {
-    "eyebrow": "Pricing Plan",
-    "title": "ERP Software Pricing for Your Business",
-    "description": "Web Karigor designs ERP for your business needs; you receive a system that fits your business and a project cost that reflects your needs.",
-    "recommendedLabel": "Recommended",
-    "cta": "Purchase",
-    "ctaHref": "#contact",
-    "plans": [
-      {
-        "name": "Basic",
-        "price": "$29",
-        "period": "/mo",
-        "recommended": false,
-        "priceColor": "dark",
-        "description": "Essential ERP modules for small teams getting started.",
-        "features": [
-          "Core dashboard access",
-          "Up to 5 user seats",
-          "Basic reporting",
-          "Email support",
-          "Standard integrations"
-        ]
-      },
-      {
-        "name": "Standard",
-        "price": "$99",
-        "period": "/mo",
-        "recommended": true,
-        "priceColor": "green",
-        "description": "Full-featured ERP for growing businesses with multiple departments.",
-        "features": [
-          "All Basic features",
-          "Unlimited project use",
-          "Advanced analytics",
-          "Multivariate components",
-          "Priority phone support"
-        ]
-      },
-      {
-        "name": "Pro",
-        "price": "$299",
-        "period": "/mo",
-        "recommended": false,
-        "priceColor": "blue",
-        "description": "Enterprise-grade ERP with custom modules and dedicated support.",
-        "features": [
-          "All Standard features",
-          "Custom module development",
-          "Dedicated account manager",
-          "SLA-backed uptime",
-          "On-site training"
-        ]
-      }
+      { "src": "/sm1.webp", "alt": "Simple is More website" },
+      { "src": "/sm4.webp", "alt": "Fashion mobile app screens" },
+      { "src": "/services/why-choose-main.jpg", "alt": "Desktop product interface" },
+      { "src": "/sm3.webp", "alt": "Analytics dashboard" },
+      { "src": "/ecommerce/hero-composite.webp", "alt": "Lifestyle commerce UI" }
     ]
   }
 }

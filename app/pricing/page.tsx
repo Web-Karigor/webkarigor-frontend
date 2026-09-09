@@ -23,14 +23,14 @@ export default function PricingPage() {
     <div className="site-laptop bg-[#FFFDF6]">
       <ProjectHoverCursor />
       <PricingHero />
-      <PricingSection ctaHref="#contact" />
-      <PricingCustomBanner />
-      <PricingPackage />
-      <TrustedFounders />
-      <PricingBuiltFor />
-      <PricingFeaturedWork />
-      <FAQ />
-      <HomeConsultation />
+      {/* <PricingSection ctaHref="#contact" /> */}
+      {/* <PricingCustomBanner /> */}
+      {/* <PricingPackage /> */}
+      {/* <TrustedFounders /> */}
+      {/* <PricingBuiltFor /> */}
+      {/* <PricingFeaturedWork /> */}
+      {/* <FAQ /> */}
+      {/* <HomeConsultation /> */}
       <Footer />
     </div>
   );

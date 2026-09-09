@@ -512,24 +512,24 @@
     "cardAriaLabel": "Team member",
     "members": [
       {
-        "src": "/sm1.webp",
-        "name": "Sarah Ahmed",
-        "designation": "Product Designer"
+        "src": "/team/imran.jpeg",
+        "name": "Imran Hossain",
+        "designation": "Software Engineer"
       },
       {
-        "src": "/sm2.webp",
-        "name": "Rakib Hasan",
-        "designation": "Lead Engineer"
+        "src": "/team/sajjad.jpeg",
+        "name": "Sajjad",
+        "designation": "Software Engineer"
       },
       {
-        "src": "/sm3.webp",
-        "name": "Nadia Rahman",
-        "designation": "UX Researcher"
+        "src": "/team/juel.jpeg",
+        "name": "Juel",
+        "designation": "Front End Developer"
       },
       {
-        "src": "/sm4.webp",
-        "name": "Arif Khan",
-        "designation": "Brand Strategist"
+        "src": "/team/aryan.jpeg",
+        "name": "Aryan",
+        "designation": "UI/UX Designer"
       }
     ]
   },
