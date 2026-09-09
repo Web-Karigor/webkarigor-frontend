@@ -24,6 +24,11 @@ export const STICKY_NAV_SERVICES = [
     title: "HRM",
     desc: "Specialist talent for your team.",
   },
+  {
+    href: "/service/software-development",
+    title: "Software Development",
+    desc: "Specialist talent for your team.",
+  },
 ] as const;
 
 function buildLatestProjects() {
