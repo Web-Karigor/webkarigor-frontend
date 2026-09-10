@@ -48,8 +48,8 @@
   },
   "hero": {
     "titleLines": [
-      "We Are A",
-      "Website Design & Development Company",
+      "We Are A Website Design & Development Company",
+      "AI Driven",
       "in Bangladesh"
     ],
     "description": {
@@ -214,7 +214,7 @@
     ]
   },
   "video": {
-    "embedUrl": "https://player.vimeo.com/video/411257859?background=1",
+    "embedUrl": "/pr-videos/pr-videos-animated.mp4?autoplay=1&mute=1&playsinline=1",
     "title": "About Video"
   },
   "techServices": {

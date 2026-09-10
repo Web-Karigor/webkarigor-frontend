@@ -17,7 +17,7 @@ const TechGrid = dynamic(
 const WhyChoose = dynamic(
   () => import("@/components/services/crm/WhyChoose"),
 );
-const Team = dynamic(() => import("@/components/home/Team"));
+const TeamSection = dynamic(() => import("@/components/services/crm/TeamSection"));
 const Testimonials = dynamic(
   () => import("@/components/services/crm/Testimonials"),
 );
@@ -47,7 +47,7 @@ export default function CrmPage() {
       <Services />
       <TechGrid />
       <WhyChoose />
-      <Team />
+      <TeamSection />
       <Testimonials />
       <Pricing />
       <FAQ className="bg-white" ctaHref="#contact" />

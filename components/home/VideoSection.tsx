@@ -323,7 +323,7 @@ const VideoSection = () => {
               {loadVideo ? (
                 <iframe
                   src={embedUrl}
-                  className="video-section-iframe pointer-events-none absolute border-0"
+                  className="video-section-iframe absolute border-0"
                   title={videoTitle}
                   frameBorder="0"
                   allow="autoplay; picture-in-picture"
