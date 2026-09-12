@@ -1,7 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  Cloud,
+  Home,
+  Hospital,
+  ShoppingCart,
+} from "lucide-react";
 import homeContent from "@/data/home-content.json";
 
 const { eyebrow, title, description } = homeContent.offerings;
@@ -11,6 +17,13 @@ const  { items }  = homeContent.offerings;
 const CARD_GAP = 24;
 const AUTO_SCROLL_MS = 4500;
 const DRAG_THRESHOLD_PX = 48;
+
+const OFFERING_ICONS = {
+  shoppingCart: ShoppingCart,
+  cloud: Cloud,
+  hospital: Hospital,
+  home: Home,
+} as const;
 
 export default function Offerings() {
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -222,7 +235,7 @@ export default function Offerings() {
               <div className="hidden w-[210px] shrink-0 lg:block" aria-hidden />
 
               {items.map((item, index) => {
-                const Icon = item.icon;
+                const Icon = OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS];
                 return (
                   <article
                     key={`${item.title}-${index}`}
@@ -233,7 +246,7 @@ export default function Offerings() {
                   >
                     <div className="flex items-center gap-[14px]">
                       <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
-                        <Icon className ="h-4 w-4" strokeWidth={2} aria-hidden />
+                        <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
                       </span>
                       <h3 className="m-0 font-montserrat text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
                         {item.title}
