@@ -213,6 +213,67 @@
       }
     ]
   },
+  "offerings": {
+    "eyebrow": "Industries",
+    "title": "Specialized Services",
+    "description": "We've partnered with businesses across diverse industries to create digital experiences that solve specific challenges.",
+    "items": [
+      {
+        "title": "Our Specialized Web Design & Development Services",
+        "description": "Each company should have a website that is tailored to its target market, objectives, and business model. We at Web Karigor offer web design and web development services to various business needs.",
+        "icon": "shoppingCart",
+        "variant": "yellow"
+      },
+      {
+        "title": "Corporate / Company Website",
+        "description": "Professional corporate website solutions combining web design and web development, responsive layouts, user-friendly navigation, and SEO-friendly functionality to strengthen your brand’s digital presence.",
+        "icon": "cloud",
+        "variant": "green"
+      },
+      {
+        "title": "E-commerce Website",
+        "description": "We offer e-commerce website development, professional web design, responsive web design, user-friendly navigation, seamless product discovery, and scalable website development solutions designed for online growth.",
+        "icon": "hospital",
+        "variant": "yellow"
+      },
+      {
+        "title": "Personal Website",
+        "description": "Our website design and web development services build responsive personal websites that feature portfolios, expertise, and personal brands in a custom, professional, and user-friendly digital experience.",
+        "icon": "home",
+        "variant": "green"
+      },
+      {
+        "title": "News Portal",
+        "description": "We create modern news portals with responsive web design, scalable website development, intuitive content structures, powerful web applications, and SEO friendly solutions for perfect publishing and discoverability.",
+        "icon": "hospital",
+        "variant": "yellow"
+      },
+      {
+        "title": "Blogging Website",
+        "description": "We offer blogging website solutions that include professional web design, responsive website layouts, user-friendly content management, SEO-friendly website structure, and reliable website development services for creators and businesses.",
+        "icon": "hospital",
+        "variant": "yellow"
+      },
+      {
+        "title": "Tours & Travels",
+        "description": "We create and design tours and travel websites that are responsive, user-friendly, engaging, and have intuitive navigation and functionality that allows visitors to explore destinations and packages",
+        "icon": "hospital",
+        "variant": "yellow"
+      },
+      {
+        "title": "Medicine E-commerce",
+        "description": "Our medicine e-commerce website development ensures accessible web design, responsive interfaces, easy product browsing, clear categories, and robust e-commerce website functionality for healthcare businesses.",
+        "icon": "hospital",
+        "variant": "yellow"
+      },
+      {
+        "title": "Cosmetics Website",
+        "description": "Beauty brands can rely on us for professional web design, responsive websites, product presentation, user-friendly website navigation, and scalable e-commerce website development solutions for beauty websites.",
+        "icon": "hospital",
+        "variant": "yellow"
+      }
+    ]
+  },
   "video": {
     "embedUrl": "/pr-videos/pr-videos-animated.mp4?autoplay=1&mute=1&playsinline=1",
     "title": "About Video"
