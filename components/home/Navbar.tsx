@@ -283,10 +283,6 @@ export default function Navbar() {
     };
   }, [updatePill, openMenu, measureDropdownOffset]);
 
-  if (pathname?.startsWith("/service")) {
-    return null;
-  }
-
   return (
     <>
       <AnimatePresence>
