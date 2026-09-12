@@ -3,6 +3,7 @@ import HeroSection from "@/components/home/HeroSection";
 import HeroSlider from "@/components/home/HeroSlider";
 import Services from "@/components/home/Services";
 import ProjectHoverCursor from "@/components/projects/ProjectHoverCursor";
+import Clients from "@/components/home/Clients";
 
 /** Below-the-fold: code-split so first paint stays light. SSR kept so layout/SEO unchanged. */
 const AIFeature = dynamic(() => import("@/components/home/AIFeature"));
@@ -24,6 +25,7 @@ export default function Home() {
     <div className="relative">
       <ProjectHoverCursor />
       <HeroSection />
+      <Clients />
       <HeroSlider />
       <Services />
       <AIFeature />

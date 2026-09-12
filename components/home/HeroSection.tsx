@@ -178,12 +178,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-
-      <div className="hero-projects-wrap pointer-events-none absolute inset-x-0 bottom-0 z-[1]">
-        <p className="hero-projects-text translate-y-[calc(54%+30px)] text-center font-bold leading-[0.9] text-[#1F1E1C] opacity-[0.02] md:translate-y-[56%] 2xl:translate-y-[64%]">
-          {backgroundWord}
-        </p>
-      </div>
     </section>
   );
 }
