@@ -5,7 +5,7 @@
 .hero-title {
   font-family: var(--font-montserrat);
   font-weight: 700;
-  font-size: clamp(2rem, 8.5vw, 6.625rem);
+  font-size: clamp(2rem, 8.5vw, 4.125rem);
   line-height: 130%;
   letter-spacing: -0.03em;
   text-align: center;
@@ -15,7 +15,7 @@
 .hero-subtitle {
   font-family: var(--font-montserrat);
   font-weight: 700;
-  font-size: clamp(0.875rem, 3.2vw, 2.5rem);
+  font-size: clamp(0.875rem, 3.2vw, 3.5rem);
   line-height: 140%;
   letter-spacing: 0.08em;
   text-transform: none;
@@ -25,7 +25,7 @@
 .hero-desc {
   font-family: var(--font-montserrat);
   font-weight: 500;
-  font-size: clamp(0.9375rem, 2vw, 1.5rem);
+  font-size: clamp(0.9375rem, 2vw, 1.2rem);
   line-height: 150%;
   text-align: center;
   color: #1f1e1c;
@@ -139,6 +139,7 @@
 }
 
 @keyframes hero-hello-pulse {
+
   0%,
   100% {
     transform: translateY(-50%) scale(1);
@@ -146,12 +147,14 @@
       0 2px 10px rgba(14, 196, 123, 0.3),
       0 0 0 0 rgba(14, 196, 123, 0);
   }
+
   35% {
     transform: translateY(calc(-50% - 4px)) scale(1.04);
     box-shadow:
       0 8px 18px rgba(14, 196, 123, 0.36),
       0 0 0 6px rgba(14, 196, 123, 0.12);
   }
+
   55% {
     transform: translateY(calc(-50% - 1px)) scale(1.01);
     box-shadow:
@@ -183,7 +186,7 @@
     justify-content: flex-start;
   }
 
-  .hero-mobile-stats > .flex {
+  .hero-mobile-stats>.flex {
     gap: 4px;
     height: 100%;
     align-items: center;
@@ -356,7 +359,8 @@
   }
 
   .hero-title {
-    font-size: clamp(3rem, 4.1vw, 4.55rem); /* ~12–15% under full */
+    font-size: clamp(3rem, 4.1vw, 4.55rem);
+    /* ~12–15% under full */
     line-height: 122%;
     letter-spacing: -0.04em;
   }

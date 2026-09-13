@@ -3,7 +3,7 @@ import FAQ from "@/components/home/FAQ";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
-import { MANPOWER_METADATA } from "@/lib/manpower-data";
+// import { MANPOWER_METADATA } from "@/lib/manpower-data";
 import "@/styles/service-pages-laptop.css";
 import HrmHero from "@/components/services/hrm/HrmHero";
 import HrmFeatures from "@/components/services/hrm/HrmFeatures";

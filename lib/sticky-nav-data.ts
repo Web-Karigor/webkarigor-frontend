@@ -10,9 +10,9 @@ export const STICKY_NAV_SERVICES = [
     desc: "Full-stack product design & development.",
   },
   {
-    href: "/service/ecommerce",
-    title: "E-commerce",
-    desc: "Stores built to convert and scale.",
+    href: "/service/website-design-development",
+    title: "Website Design & Development",
+    desc: "Custom websites for your business.",
   },
   {
     href: "/service/erp",

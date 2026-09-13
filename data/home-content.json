@@ -102,17 +102,6 @@
     "ctaArrow": "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67326d59201cc3b185432b90_CTA%20Arrow.svg",
     "items": [
       {
-        "title": "Website Design",
-        "highlight": "And Development",
-        "subtitle": "We Develop Digital Solutions that Drive Brands Forward",
-        "desc": "Web Karigor collaborates with companies to develop clear, credible, and scalable brands. We combine strategic thinking, digital design, website experiences, and technology to assist organizations in communicating what they do, why it matters, and why customers should pick them.",
-        "link": "/services/web-application",
-        "images": [
-          "/services/web-application-1.jpg",
-          "/services/web-application-2.jpg"
-        ]
-      },
-      {
         "title": "Website",
         "highlight": "Development",
         "subtitle": "Website Design and Development Services",
@@ -578,6 +567,11 @@
         "designation": "Software Engineer"
       },
       {
+        "src": "/team/faruque.jpeg",
+        "name": "Rezwan Faruque",
+        "designation": "Sr. Software Engineer"
+      },
+      {
         "src": "/team/sajjad.jpeg",
         "name": "Sajjad",
         "designation": "Software Engineer"
@@ -588,8 +582,7 @@
         "designation": "Front End Developer"
       }
     ],
-
-    "members2" : [
+    "members2": [
       {
         "src": "/team/aryan.jpeg",
         "name": "Aryan",
