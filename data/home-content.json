@@ -142,9 +142,9 @@
   },
   "services": {
     "badge": "Services",
-    "headingAccent": "Brands We’re Proud to",
-    "headingTitle": "Work With",
-    "description": "We work with startups, growing businesses, established organizations, and enterprises, providing professional web design, web development, ecommerce website development, and software development services in Bangladesh and international markets. Our design and development company supports brands from Dhaka to global markets with reliable digital solutions for building, modernizing, and scaling.",
+    "headingAccent": "We Develop Digital Solutions that",
+    "headingTitle": "Drive Brands Forward",
+    "description": "Web Karigor collaborates with companies to develop clear, credible, and scalable brands. We combine strategic thinking, digital design, website experiences, and technology to assist organizations in communicating what they do, why it matters, and why customers should pick them.",
     "seeMoreLabel": "See More",
     "ctaArrow": "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67326d59201cc3b185432b90_CTA%20Arrow.svg",
     "items": [
@@ -281,26 +281,26 @@
       {
         "title": "News Portal",
         "description": "We create modern news portals with responsive web design, scalable website development, intuitive content structures, powerful web applications, and SEO friendly solutions for perfect publishing and discoverability.",
-        "icon": "hospital",
+        "icon": "cloud",
         "variant": "yellow"
       },
       {
         "title": "Blogging Website",
         "description": "We offer blogging website solutions that include professional web design, responsive website layouts, user-friendly content management, SEO-friendly website structure, and reliable website development services for creators and businesses.",
         "icon": "hospital",
-        "variant": "yellow"
+        "variant": "green"
       },
       {
         "title": "Tours & Travels",
         "description": "We create and design tours and travel websites that are responsive, user-friendly, engaging, and have intuitive navigation and functionality that allows visitors to explore destinations and packages",
-        "icon": "hospital",
+        "icon": "home",
         "variant": "yellow"
       },
       {
         "title": "Medicine E-commerce",
         "description": "Our medicine e-commerce website development ensures accessible web design, responsive interfaces, easy product browsing, clear categories, and robust e-commerce website functionality for healthcare businesses.",
-        "icon": "hospital",
-        "variant": "yellow"
+        "icon": "cloud",
+        "variant": "green"
       },
       {
         "title": "Cosmetics Website",

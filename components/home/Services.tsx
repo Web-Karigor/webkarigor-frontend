@@ -192,7 +192,7 @@ const ServicesListPanel = memo(function ServicesListPanel({
   activeIndex: number;
 }) {
   return (
-    <div className="services-story-text-panel hidden w-full min-w-0 items-start font-montserrat lg:flex lg:items-center">
+    <div className="services-story-text-panel hidden w-[50%]  min-w-0 items-start font-montserrat lg:flex lg:items-center">
       <ul className="services-story-list w-full">
         {services.map((service, index) => {
           const isActive = index === activeIndex;
@@ -312,7 +312,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
   return (
     <div
       ref={viewportRef}
-      className="services-story-images-viewport relative hidden min-h-0 w-full flex-1 overflow-hidden lg:block lg:h-full lg:w-[var(--services-layout-w)] lg:max-w-[var(--services-layout-w)] lg:flex-none"
+      className="services-story-images-viewport relative hidden min-h-0 w-[50%] flex-1 overflow-hidden lg:block lg:h-full lg:w-[var(--services-layout-w)] lg:max-w-[var(--services-layout-w)] lg:flex-none"
       style={
         {
           "--services-slot-h": `${slotHeight}px`,
@@ -617,7 +617,7 @@ export default function Services() {
         <div className="services-story-shell max-lg:h-auto">
           <ServicesIntroHeader introProgress={introProgress} />
 
-          <div className="services-story-body flex min-h-0 w-full flex-1 flex-col items-stretch gap-0 max-lg:flex-none lg:min-h-0 lg:gap-0">
+          <div className="services-story-body flex min-h-0 w-full flex-1 flex-row items-stretch gap-0 max-lg:flex-none lg:min-h-0 lg:gap-0">
             <ServicesMobileTrack
               viewportRef={mobileViewportRef}
               stackRef={mobileStackRef}
