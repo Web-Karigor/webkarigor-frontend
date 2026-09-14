@@ -11,19 +11,19 @@ const TEAM_PHOTOS = [
       "svc-team-shot svc-team-shot-ml absolute left-0 top-[22%] z-[2] h-[clamp(124px,15vw,168px)] w-[clamp(124px,15vw,168px)]",
   },
   {
-    src: "/h2.webp",
+    src: "/team/sajjad.jpeg",
     alt: "Team member — center small",
     className:
       "svc-team-shot svc-team-shot-cs absolute left-[40%] top-[44%] z-[4] h-[clamp(68px,8.5vw,92px)] w-[clamp(68px,8.5vw,92px)] rounded-[20px] max-sm:rounded-[14px]",
   },
   {
-    src: "/sm3.webp",
+    src: "/team/aryan.jpeg",
     alt: "Team member — bottom left",
     className:
       "svc-team-shot svc-team-shot-bl absolute bottom-0 left-[4%] z-[3] h-[clamp(148px,18vw,200px)] w-[clamp(148px,18vw,200px)]",
   },
   {
-    src: "/sm4.webp",
+    src: "/team/juel.jpeg",
     alt: "Team member — bottom right",
     className:
       "svc-team-shot svc-team-shot-br absolute bottom-[10%] right-[4%] z-[2] h-[clamp(112px,14vw,152px)] w-[clamp(112px,14vw,152px)]",
@@ -64,7 +64,7 @@ export default function HrmTeam(){
                 />
                 <div className={`relative z-[1] h-full w-full ${SHOT_BASE}`}>
                   <Image
-                    src="/sm2.webp"
+                    src="/team/faruque.jpeg"
                     alt="Team member — top right"
                     fill
                     priority
