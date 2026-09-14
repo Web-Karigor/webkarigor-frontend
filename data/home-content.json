@@ -93,6 +93,53 @@
       "/sm4.webp"
     ]
   },
+  "clients": {
+    "title": "Brands We are Proud",
+    "titleAccent": "to Work With",
+    "description": "We work with startups, growing businesses, established organizations, and enterprises, providing professional web design, web development, ecommerce website development, and software development services in Bangladesh and international markets. Our design and development company supports brands from Dhaka to global markets with reliable digital solutions for building, modernizing, and scaling.",
+    "logos": [
+      {
+        "name": "Government of Bangladesh",
+        "src": "/partners-logo/image-1.png"
+      },
+      {
+        "name": "Robi Axiata",
+        "src": "/partners-logo/image-2.png"
+      },
+      {
+        "name": "Walton",
+        "src": "/partners-logo/image-3.png"
+      },
+      {
+        "name": "Sajeeb Group",
+        "src": "/partners-logo/image-4.png"
+      },
+      {
+        "name": "Oitijjhya",
+        "src": "/partners-logo/image-5.png"
+      },
+      {
+        "name": "Nitol-Niloy Group",
+        "src": "/partners-logo/image-6.png"
+      },
+      {
+        "name": "Gear X",
+        "src": "/partners-logo/image-7.png"
+      },
+      {
+        "name": "The Cafe Rio",
+        "src": "/partners-logo/image-8.png"
+      },
+      {
+        "name": "NIPORT",
+        "src": "/partners-logo/image-9.png"
+      },
+      {
+        "name": "Shyamoli Paribahan",
+        "src": "/partners-logo/image-10.png"
+      }
+    ]
+  },
   "services": {
     "badge": "Services",
     "headingAccent": "Brands We’re Proud to",
