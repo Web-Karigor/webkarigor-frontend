@@ -231,7 +231,8 @@ function PortfolioCard({
             alt=""
             fill
             sizes="(max-width: 640px) 202px, 515px"
-            className="object-cover"
+            quality={100}
+            className="object-contain"
             draggable={false}
           />
         </div>
@@ -265,7 +266,7 @@ function PortfolioSlider() {
 
     const render = () => {
       const viewportCenter = viewport.offsetWidth / 2;
-      const trackX = viewportCenter - anchorCenter - scrollOffset;
+      const trackX = Math.round(viewportCenter - anchorCenter - scrollOffset);
       gsap.set(track, { x: trackX });
     };
 
