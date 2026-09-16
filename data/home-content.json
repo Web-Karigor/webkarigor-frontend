@@ -311,7 +311,7 @@
     ]
   },
   "video": {
-    "embedUrl": "/pr-videos/pr-videos-animated.mp4?autoplay=1&mute=1&playsinline=1",
+    "embedUrl": "https://player.vimeo.com/video/1227251373?background=1",
     "title": "About Video"
   },
   "techServices": {
