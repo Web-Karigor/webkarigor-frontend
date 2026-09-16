@@ -67,8 +67,8 @@
       "avatarSrc": "/hero/hello-avatar.png"
     },
     "photos": {
-      "left": "/h2.webp",
-      "right": "/h2.webp"
+      "left": "/left-down.webp",
+      "right": "/right-upper.webp"
     },
     "backgroundWord": "PROJECTS"
   },
