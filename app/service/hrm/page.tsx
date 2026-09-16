@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import FAQ from "@/components/home/FAQ";
+import FAQ from "@/components/services/hrm/FAQ";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";

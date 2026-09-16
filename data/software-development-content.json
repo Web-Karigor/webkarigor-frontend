@@ -233,6 +233,53 @@
       }
     ]
   },
+  "faq": {
+  "badge": "Frequently Asked Questions",
+  "headingAccent": "Custom Software",
+  "headingTitle": "Questions Answered?",
+  "ctaText": "Talk to Web Karigor About Your Software Needs",
+  "cta_content": "Contact Web Karigor to discuss your custom software development requirements and the type of software solution your business needs.",
+  "ctaLabel": "Let's talk",
+  "ctaHref": "/contact-us",
+  "items": [
+    {
+      "question": "What are custom software development services?",
+      "answer": "Custom software development services involve creating software solutions specifically designed around the needs, processes, objectives, and operational requirements of a business. Unlike off-the-shelf software, custom software can be developed with specific features, workflows, integrations, and functionality required by an organization."
+    },
+    {
+      "question": "What are the advantages of custom software development over off-the-shelf software?",
+      "answer": "Custom software development allows businesses to build solutions around their specific requirements, automate business processes, improve operational workflows, and support future growth. It can also provide greater flexibility, scalability, integration capabilities, and control compared with software that offers limited customization."
+    },
+    {
+      "question": "What types of custom software does Web Karigor develop?",
+      "answer": "Web Karigor develops a range of custom software solutions, including web applications, mobile applications, enterprise software, CRM systems, ERP solutions, business management software, workflow automation platforms, and other software tailored to specific business requirements."
+    },
+    {
+      "question": "What is the custom software development process?",
+      "answer": "The custom software development process generally begins with understanding business requirements and defining the project scope. It can then include solution planning, software architecture, technology selection, UI and UX design, development, integration, quality testing, deployment, and post-launch support. The exact process depends on the project's requirements and complexity."
+    },
+    {
+      "question": "How much does custom software development cost?",
+      "answer": "The cost of custom software development depends on factors such as project complexity, required features, number of users, technology stack, integrations, security requirements, customization, development scope, and ongoing support requirements. A more detailed estimate can be provided after understanding the business requirements and project scope."
+    },
+    {
+      "question": "Can custom software integrate with our existing business systems?",
+      "answer": "Yes. Custom software can be designed to integrate with existing business systems, third-party applications, APIs, databases, payment gateways, ERP systems, CRM platforms, and other relevant services. These integrations can help connect business processes and improve the flow of information between systems."
+    },
+    {
+      "question": "Can custom software be scaled as our business grows?",
+      "answer": "Yes. Custom software can be designed with scalability in mind so that it can accommodate additional users, features, integrations, locations, transactions, and changing business requirements as the organization grows."
+    },
+    {
+      "question": "Can Web Karigor modernize or improve an existing software system?",
+      "answer": "Yes. Existing software can be upgraded, modernized, optimized, or extended depending on its technical architecture and business requirements. This can include improving performance, adding new features, integrating third-party services, updating the technology stack, or improving scalability and maintainability."
+    },
+    {
+      "question": "Does Web Karigor provide software maintenance and support after launch?",
+      "answer": "Yes. Depending on the project scope and business requirements, Web Karigor can provide post-launch maintenance, technical support, performance improvements, bug fixes, feature enhancements, scalability support, and ongoing software development."
+    }
+  ]
+},
   "pricing": {
     "eyebrow": "Pricing plan",
     "title": "Transparent Pricing for Your Software Project",

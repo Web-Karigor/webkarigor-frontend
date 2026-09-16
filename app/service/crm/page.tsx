@@ -24,7 +24,7 @@ const Testimonials = dynamic(
 const Pricing = dynamic(
   () => import("@/components/services/crm/Pricing"),
 );
-const FAQ = dynamic(() => import("@/components/home/FAQ"));
+const FAQ = dynamic(() => import("@/components/services/crm/FAQ"));
 const HomeConsultation = dynamic(
   () => import("@/components/home/HomeConsultation"),
 );

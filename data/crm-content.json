@@ -278,6 +278,46 @@
       }
     ]
   },
+
+  "faq": {
+  "badge": "Frequently Asked Questions",
+  "headingAccent": "Custom CRM",
+  "headingTitle": "Questions Answered?",
+  "ctaText": "Talk to Web Karigor About Your CRM Needs",
+  "cta_content": "Contact Web Karigor to discuss your custom CRM development requirements, business workflows, integrations, and the CRM solution your organization needs.",
+  "ctaLabel": "Let's talk",
+  "ctaHref": "/contact-us",
+  "items": [
+    {
+      "question": "What is custom CRM development?",
+      "answer": "Custom CRM development involves building a CRM system specifically designed around your business needs, processes, customer interactions, workflows, and operational requirements rather than relying on a standard CRM solution."
+    },
+    {
+      "question": "Why invest in a custom CRM?",
+      "answer": "A custom CRM gives businesses greater control over CRM functionality, workflows, customer data, integrations, and business processes. It can be designed around the way your organization manages customer relationships and sales activities."
+    },
+    {
+      "question": "What can influence custom CRM development costs?",
+      "answer": "Custom CRM development costs can depend on factors such as project scope, required features, integrations, technical complexity, customization requirements, number of users, and ongoing maintenance and support needs."
+    },
+    {
+      "question": "Why choose Web Karigor for custom CRM development?",
+      "answer": "Web Karigor brings experience in understanding business requirements, technical development, integrations, and scalable software architecture to build CRM solutions around your workflows and long-term business requirements."
+    },
+    {
+      "question": "Can you upgrade or modernize an existing CRM?",
+      "answer": "Yes. Depending on the existing CRM system and project requirements, we can improve functionality, workflows, performance, integrations, and custom features to help modernize and extend the existing CRM."
+    },
+    {
+      "question": "Do you offer CRM integration services?",
+      "answer": "Yes. Where integration is required within the project scope, a CRM can be connected with relevant business systems, third-party applications, APIs, databases, and other services to support connected business workflows."
+    },
+    {
+      "question": "Can you develop AI-powered CRM solutions?",
+      "answer": "Yes. Web Karigor can develop AI-powered CRM solutions that use AI for business-specific requirements, intelligent workflows, automation, customer data analysis, and other CRM-related use cases."
+    }
+  ]
+},
   "pricing": {
     "eyebrow": "Pricing Plane",
     "title": "Fair Pricing for Your Product",

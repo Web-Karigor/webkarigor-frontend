@@ -1,15 +1,16 @@
 import {
-  Briefcase,
-  Handshake,
   TrendingUp,
   UserRound,
+  Wallet,
+  Workflow,
+  Users,
 } from "lucide-react";
-import { ERP_FEATURES, ERP_FEATURES_SECTION } from "@/lib/erp-data";
+import { HRM_FEATURES, HRM_FEATURES_SECTION } from "@/lib/hrm-data";
 
 const ICONS = {
-  user: UserRound,
-  briefcase: Briefcase,
-  handshake: Handshake,
+  users: Users,
+  workflow: Workflow,
+  wallet: Wallet,
   chart: TrendingUp,
 } as const;
 
@@ -22,21 +23,21 @@ export default function ErpFeatures() {
         <div className="erp-features-head flex w-full flex-col gap-5 md:gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div className="erp-features-copy max-w-[640px] shrink-0">
             <p className="m-0 font-montserrat text-[16px] font-semibold leading-none text-[#15d286] sm:text-[18px]">
-              {ERP_FEATURES_SECTION.eyebrow}
+              {HRM_FEATURES_SECTION.eyebrow}
             </p>
             <h2 className="mt-3 m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-black">
-              {ERP_FEATURES_SECTION.title}
+              {HRM_FEATURES_SECTION.title}
             </h2>
           </div>
           {/* Figma: 650×54 · Manrope SemiBold 600 · 18px · LH 150% · #A7A7A7 */}
           <p className="erp-features-lead m-0 w-full max-w-[650px] font-manrope text-[clamp(15px,1.5vw,18px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:shrink-0">
-            {ERP_FEATURES_SECTION.description}
+            {HRM_FEATURES_SECTION.description}
           </p>
         </div>
 
         {/* Cards — 2×2, gap 52, card 568×234 · r24 · p48 */}
         <div className="erp-features-grid mx-auto grid w-full max-w-[1188px] grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8 lg:gap-[52px]">
-          {ERP_FEATURES.map((feature) => {
+          {HRM_FEATURES.map((feature) => {
             const Icon = ICONS[feature.icon as keyof typeof ICONS];
             return (
               <article
