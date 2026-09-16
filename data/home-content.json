@@ -155,8 +155,8 @@
         "desc": "We offer website design and development solutions to build professional, responsive, SEO friendly websites to boost online presence and drive business growth.",
         "link": "/services/web-design",
         "images": [
-          "/services/mobile-application-1.jpg",
-          "/services/mobile-application-2.jpg"
+          "/services/web-development-1.jpg",
+          "/services/web-development-2.jpg"
         ]
       },
       {
@@ -177,8 +177,8 @@
         "desc": "We create custom CRM software solutions that enable businesses to leverage intelligent technology to manage customer relationships, automate sales processes, enhance communication, and create better customer experiences.",
         "link": "/services/logo-branding",
         "images": [
-          "/services/branding-1.jpg",
-          "/services/branding-2.jpg"
+          "/services/crm-1.jpg",
+          "/services/crm-2.jpg"
         ]
       },
       {
@@ -188,8 +188,8 @@
         "desc": "HR Software Development in Bangladesh is the process of creating software solutions for human resource management to streamline HR processes, attendance systems, payroll management, leave tracking, and employee management.",
         "link": "/services/framer-design",
         "images": [
-          "/services/product-strategy-1.jpg",
-          "/services/product-strategy-2.jpg"
+          "/services/hrm-1.jpg",
+          "/services/hrm-2.jpg"
         ]
       },
       {
@@ -199,8 +199,8 @@
         "desc": "With scalable business management systems, our ERP software in Bangladesh enables businesses to streamline operations, gain visibility into workflows, manage resources, and make informed decisions",
         "link": "/services/framer-design",
         "images": [
-          "/services/product-strategy-1.jpg",
-          "/services/product-strategy-2.jpg"
+          "/services/erp-1.jpg",
+          "/services/erp-2.jpg"
         ]
       },
       {
@@ -210,8 +210,8 @@
         "desc": "Our custom software development services provide organizations with customized digital solutions that cater to their distinctive business needs, enabling them to automate processes and create scalable technology platforms.",
         "link": "/services/framer-design",
         "images": [
-          "/services/product-strategy-1.jpg",
-          "/services/product-strategy-2.jpg"
+          "/services/custom-software-1.jpg",
+          "/services/custom-software-2.jpg"
         ]
       }
     ]
