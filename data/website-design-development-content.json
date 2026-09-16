@@ -159,8 +159,8 @@
         ]
     },
     "integrations": {
-        "title": "Web Development Built Around Your Requirements",
-        "description": "As a website design and development agency, we choose the technology based on project requirements, scalability, performance, functionality, and future business needs.",
+        "title": "Technologies used in webkarigor",
+        "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
         "inner": [
             {
                 "name": "GitHub",
@@ -177,8 +177,8 @@
         ],
         "outer": [
             {
-                "name": "PHP",
-                "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                "name": "Laravel",
+                "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
             },
             {
                 "name": "React",
@@ -197,8 +197,20 @@
                 "icon": "https://cdn.simpleicons.org/vercel/000000"
             },
             {
+                "name": "Bootstrap",
+                "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+            },
+            {
                 "name": "Tailwind",
                 "icon": "https://cdn.simpleicons.org/tailwindcss/06B6D4"
+            },
+            {
+                "name": "Python",
+                "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+            },
+            {
+                "name": "Kotlin",
+                "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
             }
         ]
     },
