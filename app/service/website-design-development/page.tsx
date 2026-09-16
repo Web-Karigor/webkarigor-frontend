@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import FAQ from "@/components/services/website-design-development/FAQ";
-import Features from "@/components/services/website-design-development/Features";
+import Services from "@/components/services/website-design-development/Services";
 import Hero from "@/components/services/website-design-development/Hero";
 import Integrations from "@/components/services/website-design-development/Integrations";
 import Portfolio from "@/components/services/website-design-development/Portfolio";
@@ -19,7 +19,7 @@ export default function ErpServicePage() {
     return (
         <div className="svc-laptop bg-[#FFFEFB]">
             <Hero />
-            <Features />
+            <Services />
             <Integrations />
             <Portfolio />
             <Reviews />

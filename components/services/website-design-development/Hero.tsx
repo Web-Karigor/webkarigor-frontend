@@ -351,33 +351,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Trust / logo bar */}
-      <div className="w-full bg-[#F7F8FA]">
-        <div className="mx-auto flex w-full max-w-[1800px] flex-col gap-8 px-[clamp(16px,3.5vw,50px)] py-10 sm:flex-row sm:items-center sm:justify-between sm:gap-12">
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 sm:gap-x-10">
-            {WEBSITE_DESIGN_DEVELOPMENT_TRUSTED_LOGOS.map((logo) => (
-              <Image
-                key={logo.name}
-                src={logo.src}
-                alt={logo.name}
-                width={88}
-                height={28}
-                className="h-6 w-auto object-contain opacity-60 grayscale sm:h-7"
-                unoptimized
-              />
-            ))}
-          </div>
-          <div className="max-w-[420px] text-left sm:text-right">
-            <p className="m-0 font-montserrat text-[clamp(18px,2vw,22px)] font-bold leading-[1.3] tracking-[-0.02em] text-[#18214D]">
-              {WEBSITE_DESIGN_DEVELOPMENT_HERO.trustTitle}
-            </p>
-            <p className="mt-2 m-0 font-montserrat text-[13px] font-medium leading-[1.55] text-[#98A2B3]">
-              {WEBSITE_DESIGN_DEVELOPMENT_HERO.trustDescription}
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
