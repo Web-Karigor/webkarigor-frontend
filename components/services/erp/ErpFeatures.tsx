@@ -1,16 +1,28 @@
 import {
-  Briefcase,
-  Handshake,
-  TrendingUp,
-  UserRound,
+  Code2,
+  Factory,
+  Layers,
+  Package,
+  RefreshCw,
+  Settings,
+  Truck,
+  UserCheck,
+  Users,
+  Wallet,
 } from "lucide-react";
 import { ERP_FEATURES, ERP_FEATURES_SECTION } from "@/lib/erp-data";
 
 const ICONS = {
-  user: UserRound,
-  briefcase: Briefcase,
-  handshake: Handshake,
-  chart: TrendingUp,
+  code: Code2,
+  layers: Layers,
+  factory: Factory,
+  truck: Truck,
+  users: Users,
+  package: Package,
+  "user-check": UserCheck,
+  wallet: Wallet,
+  refresh: RefreshCw,
+  settings: Settings,
 } as const;
 
 

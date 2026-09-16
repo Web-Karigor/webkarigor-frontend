@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import FAQ from "@/components/home/FAQ";
+import FAQ from "@/components/services/erp/FAQ";
 import ErpFeatures from "@/components/services/erp/ErpFeatures";
 import ErpHero from "@/components/services/erp/ErpHero";
 import ErpIntegrations from "@/components/services/erp/ErpIntegrations";

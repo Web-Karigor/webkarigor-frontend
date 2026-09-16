@@ -1,0 +1,60 @@
+/* FAQ bottom CTA — desktop/tablet: fill from left on hover; mobile unchanged */
+.faq-cta {
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.faq-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #88ef92 0%, #bef264 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: none;
+}
+
+@media (min-width: 768px) {
+  .faq-cta {
+    transition:
+      color 1.15s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 1.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-cta::before {
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-cta:hover {
+    color: #111111;
+    border-color: transparent;
+  }
+
+  .faq-cta:hover::before {
+    transform: scaleX(1);
+  }
+}
+
+/* Laptop only — md:text-[26px] questions are desktop-scale on 13–15" */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  #faq {
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  #faq button > span.block {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  #faq .faq-cta-heading {
+    font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  }
+}
