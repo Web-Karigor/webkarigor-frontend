@@ -11,12 +11,12 @@ import WhyChoose from "@/components/services/website-design-development/WhyChoos
 import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
-import { ERP_METADATA } from "@/lib/erp-data";
+import { WEBSITE_DESIGN_DEVELOPMENT_METADATA } from "@/lib/website-design-development-data";
 import "@/styles/service-pages-laptop.css";
 
-export const metadata: Metadata = ERP_METADATA;
+export const metadata: Metadata = WEBSITE_DESIGN_DEVELOPMENT_METADATA;
 
-export default function ErpServicePage() {
+export default function WebsiteDesignDevelopmentPage() {
     return (
         <div className="svc-laptop bg-[#FFFEFB]">
             <Hero />
