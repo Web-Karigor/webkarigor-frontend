@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { LayoutGrid, Target, TrendingUp, Users, type LucideIcon } from "lucide-react";
-import servicesContent from "@/data/services-content.json";
+import Content from "@/data/crm-content.json";
 
 const {
   eyebrow,
@@ -9,7 +9,7 @@ const {
   images,
   hireUsLabels,
   features,
-} = servicesContent.whyChoose;
+} = Content.whyChoose;
 
 const FEATURE_ICONS = {
   target: Target,
@@ -96,9 +96,8 @@ function FeatureCard({
 }) {
   return (
     <article
-      className={`flex min-h-[220px] flex-col rounded-[clamp(16px,1.4vw,20px)] bg-white p-6 shadow-[0_8px_28px_rgba(16,24,40,0.04)] sm:min-h-[240px] lg:min-h-0 lg:p-[clamp(20px,1.8vw,36px)] ${
-        grow === "tall" ? "lg:flex-[1.15]" : "lg:flex-[1]"
-      }`}
+      className={`flex min-h-[220px] flex-col rounded-[clamp(16px,1.4vw,20px)] bg-white p-6 shadow-[0_8px_28px_rgba(16,24,40,0.04)] sm:min-h-[240px] lg:min-h-0 lg:p-[clamp(20px,1.8vw,36px)] ${grow === "tall" ? "lg:flex-[1.15]" : "lg:flex-[1]"
+        }`}
     >
       <span className="mb-3 inline-flex text-[#15d286] lg:mb-4">
         <Icon

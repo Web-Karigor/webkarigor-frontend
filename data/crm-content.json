@@ -281,8 +281,8 @@
     ]
   },
   "whyChoose": {
-    "eyebrow": "Why Webkarigor",
-    "title": "More Than Beautiful Interfaces",
+    "eyebrow": "Why Web Karigor",
+    "title": "for CRM Development?",
     "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
     "images": {
       "left": {
@@ -301,24 +301,24 @@
     ],
     "features": [
       {
-        "title": "User-Centered Design",
-        "description": "We put your users at the core of our decisions, ensuring every interaction feels natural and intuitive.",
+        "title": "Business-Focused CRM Solutions",
+        "description": "Our custom CRM software is built around your real-world business processes, customer interactions, CRM data and operational priorities, rather than the other way around.",
         "icon": "target"
       },
       {
-        "title": "Business-Focused",
-        "description": "Our designs are crafted to align with your key metrics, driving conversions and ROI.",
-        "icon": "trendingUp"
-      },
-      {
-        "title": "Collaborative Process",
-        "description": "We act as an extension of your team, maintaining transparent communication throughout.",
+        "title": "Collaborative CRM Development Process",
+        "description": "Our development team is with you every step of the CRM development process to understand requirements, identify the appropriate CRM features and ensure that the project is aligned with your business needs.",
         "icon": "users"
       },
       {
-        "title": "Scalable Systems",
-        "description": "We deliver robust design systems that make future development faster and consistent.",
+        "title": "Scalable Custom CRM Systems",
+        "description": "We create bespoke CRM solutions designed for performance, functionality and scalability, providing a solid foundation as users, workflows and operational demands increase.",
         "icon": "layoutGrid"
+      },
+      {
+        "title": "Ongoing CRM Development Support",
+        "description": "In addition to CRM implementation, Web Karigor provides maintenance, feature enhancements, performance improvements and continuous CRM development as your business needs change.",
+        "icon": "trendingUp"
       }
     ]
   },
