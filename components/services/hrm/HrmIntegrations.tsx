@@ -1,8 +1,8 @@
 import {
-  ERP_INTEGRATIONS_SECTION,
-  ERP_TECH_INNER,
-  ERP_TECH_OUTER,
-} from "@/lib/erp-data";
+  HRM_INTEGRATIONS_SECTION,
+  HRM_TECH_INNER,
+  HRM_TECH_OUTER,
+} from "@/lib/hrm-data";
 
 /** Inner triangle positions — Figma soft disc layout */
 const INNER_LAYOUT = [
@@ -19,18 +19,18 @@ const OUTER_ANGLES = [-90, -30, 30, 90, 150, 210] as const;
  * Left: Technologies used in webkarigor
  * Right: soft disc + 2 orbit rings · inner GitHub/Notion/Figma · outer 6 tech icons
  */
-export default function ErpIntegrations() {
+export default function HrmIntegrations() {
   return (
     <section className="erp-integrations overflow-hidden bg-white py-[clamp(48px,6vw,80px)]">
       <div className="erp-integrations-inner mx-auto flex w-full max-w-[1307px] flex-col items-center gap-12 px-[clamp(16px,4vw,40px)] lg:flex-row lg:items-center lg:justify-between lg:gap-[clamp(48px,11vw,212px)]">
         {/* Left copy */}
         <div className="erp-integrations-copy w-full max-w-[650px] shrink-0 text-center lg:text-left">
           <h2 className="m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
-            {ERP_INTEGRATIONS_SECTION.title}
+            {HRM_INTEGRATIONS_SECTION.title}
           </h2>
           {/* Figma: 650×54 · Manrope SemiBold 600 · 18px · LH 150% · #A7A7A7 */}
           <p className="mt-5 m-0 h-auto w-full max-w-[650px] font-manrope text-[18px] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] lg:h-[54px]">
-            {ERP_INTEGRATIONS_SECTION.description}
+            {HRM_INTEGRATIONS_SECTION.description}
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export default function ErpIntegrations() {
           />
 
           {/* Inner logos — GitHub / Notion / Figma */}
-          {ERP_TECH_INNER.map((tech, index) => (
+          {HRM_TECH_INNER.map((tech, index) => (
             <div
               key={tech.name}
               className="absolute z-[2] flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_4px_20px_rgba(15,23,42,0.08)] sm:h-16 sm:w-16"
@@ -73,7 +73,7 @@ export default function ErpIntegrations() {
           ))}
 
           {/* Outer orbit logos — positioned by angle on 88% ring */}
-          {ERP_TECH_OUTER.map((tech, index) => {
+          {HRM_TECH_OUTER.map((tech, index) => {
             const angle = OUTER_ANGLES[index] ?? 0;
             const rad = (angle * Math.PI) / 180;
             const radius = 44; // % of container (matches ~88% diameter / 2)

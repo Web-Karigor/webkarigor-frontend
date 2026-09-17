@@ -29,7 +29,7 @@ export default function AboutUsPage() {
       <AboutCapabilities />
       <Team />
       <AboutWhyChoose />
-      <FAQ />
+      {/* <FAQ /> */}
       <HomeConsultation />
       <Footer />
     </div>
