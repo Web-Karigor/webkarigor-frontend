@@ -773,10 +773,18 @@
 .contact-story-media {
   position: relative;
   min-height: 240px;
+  overflow: hidden;
+  background: #38d9a5;
 }
 
 .contact-story-media img {
-  object-fit: cover;
+  object-fit: contain;
+}
+
+@media (min-width: 900px) {
+  .contact-story-media img {
+    object-position: center;
+  }
 }
 
 .contact-story-quote {

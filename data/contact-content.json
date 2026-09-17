@@ -19,10 +19,21 @@
       "Get access to a team of dedicated product specialists."
     ],
     "fields": {
-      "fullName": { "label": "Full Name", "placeholder": "John Doe" },
-      "email": { "label": "Your Email", "placeholder": "yourmail@gmail.com" },
-      "whatsapp": { "label": "Whatsapp Number", "placeholder": "123 456 7890" },
-      "budget": { "label": "Project Budget" },
+      "fullName": {
+        "label": "Full Name",
+        "placeholder": "John Doe"
+      },
+      "email": {
+        "label": "Your Email",
+        "placeholder": "yourmail@gmail.com"
+      },
+      "whatsapp": {
+        "label": "Whatsapp Number",
+        "placeholder": "123 456 7890"
+      },
+      "budget": {
+        "label": "Project Budget"
+      },
       "details": {
         "label": "Project Details",
         "placeholder": "Tell us about your goals, timeline, and what success looks like..."
@@ -116,50 +127,50 @@
     "ctaHref": "#contact",
     "categories": [
       {
-        "id": "uiux",
-        "label": "UI UX Design",
-        "image": "/ecommerce/hero-phone.webp",
-        "imageAlt": "Mobile product UI showcase",
+        "id": "website-design-development",
+        "label": "Website Design and Development",
+        "image": "/services/web-development-2.jpg",
+        "imageAlt": "Website design and development showcase",
         "quote": "Webkarigor transformed our brand and digital presence. The team delivered beyond expectations — professional, creative, and always on time.",
         "name": "Sarah Mitchell",
         "role": "CEO, TechStart Inc.",
         "avatar": "/sm1.webp"
       },
       {
-        "id": "branding",
-        "label": "Branding",
-        "image": "/services/why-choose-collage.png",
-        "imageAlt": "Brand and visual identity work",
+        "id": "software-development",
+        "label": "Software Development",
+        "image": "/services/custom-software-2.jpg",
+        "imageAlt": "Custom software development showcase",
         "quote": "Thoughtful design and clear communication throughout the project. We saw better conversions within weeks of launch.",
         "name": "Ayesha Rahman",
         "role": "Founder, Bloom Studio",
         "avatar": "/sm3.webp"
       },
       {
-        "id": "web",
-        "label": "Web Design",
-        "image": "/services/why-choose-main.jpg",
-        "imageAlt": "Web design project showcase",
+        "id": "erp-software",
+        "label": "ERP Software",
+        "image": "/services/erp-2.jpg",
+        "imageAlt": "ERP software showcase",
         "quote": "Outstanding work on our e-commerce platform. Sales increased 40% within three months of launch. Highly recommend their services.",
         "name": "James Rodriguez",
         "role": "Founder, ShopEasy",
         "avatar": "/sm2.webp"
       },
       {
-        "id": "mobile",
-        "label": "Mobile App Design",
-        "image": "/ecommerce/hero-composite.webp",
-        "imageAlt": "Mobile app design showcase",
+        "id": "hrm-software",
+        "label": "HRM Software",
+        "image": "/services/hrm-2.jpg",
+        "imageAlt": "HRM software showcase",
         "quote": "From design to development, every milestone landed on time. Our stakeholders noticed the difference immediately.",
         "name": "Kathryn Murphy",
         "role": "COO, Lumen Soft",
         "avatar": "/sm4.webp"
       },
       {
-        "id": "saas",
-        "label": "SaaS Design",
-        "image": "/h1.webp",
-        "imageAlt": "SaaS product interface",
+        "id": "crm-software",
+        "label": "CRM Software",
+        "image": "/services/crm-2.jpg",
+        "imageAlt": "CRM software showcase",
         "quote": "Clear communication, strong craft, and a team that treated our roadmap like their own. Rare combination.",
         "name": "Robert Fox",
         "role": "CTO, NovaPay",
