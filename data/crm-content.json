@@ -14,7 +14,10 @@
       "href": "https://wa.me/8801624283328",
       "label": "Say hello: 01624-283328"
     },
-    "titleLines": ["Bespoke Custom CRM Software", "Develop Services"],
+    "titleLines": [
+      "Bespoke Custom CRM Software",
+      "Develop Services"
+    ],
     "description": "Web Karigor is a CRM software development company that brings together business thinking, design, modern technology and scalable architecture to provide CRM software solutions based on real business needs. It's not just about writing code; it's about crafting a CRM system that can be used and adapted to meet changing needs.",
     "form": {
       "placeholders": {
@@ -34,9 +37,18 @@
       "conversionValue": "+240%"
     },
     "stats": [
-      { "value": "10+", "label": "Years of Experience" },
-      { "value": "300+", "label": "Successful Projects" },
-      { "value": "200+", "label": "Happy Clients" }
+      {
+        "value": "10+",
+        "label": "Years of Experience"
+      },
+      {
+        "value": "300+",
+        "label": "Successful Projects"
+      },
+      {
+        "value": "200+",
+        "label": "Happy Clients"
+      }
     ]
   },
   "clients": {
@@ -177,15 +189,116 @@
       }
     ]
   },
+  "features": {
+    "eyebrow": "Why Webkarigor",
+    "title": "Our Custom CRM Development Services",
+    "description": "Web Karigor offers custom CRM development solutions that meet your business requirements, workflows, customer interactions and long-term operations. Whether you need a new CRM system, want to modernize an existing platform, or require ongoing development, we build scalable CRM solutions around your business needs.",
+    "items": [
+      {
+        "title": "Custom CRM Software Development",
+        "description": "We develop CRM systems customized and geared towards your business needs, customer interactions, workflows, and operational processes.",
+        "color": "#12B76A",
+        "bg": "#EAFBF3",
+        "icon": "code"
+      },
+      {
+        "title": "CRM System Development",
+        "description": "We create tailored CRM solutions that align with your unique workflows, user needs, business processes, and future aspirations.",
+        "color": "#F79009",
+        "bg": "#FFF4E5",
+        "icon": "layers"
+      },
+      {
+        "title": "CRM Application Development",
+        "description": "We develop CRM applications that help teams manage customer relationships, business processes, and vital CRM data more efficiently.",
+        "color": "#E044B8",
+        "bg": "#FCEAF7",
+        "icon": "app-window"
+      },
+      {
+        "title": "CRM Integration Services",
+        "description": "We integrate your CRM solution with appropriate business systems and third-party services based on your project requirements.",
+        "color": "#2E90FA",
+        "bg": "#EAF4FE",
+        "icon": "plug"
+      },
+      {
+        "title": "CRM Implementation Services",
+        "description": "We implement the right CRM structure into your operations and ensure that it fits with your existing business processes.",
+        "color": "#7A5AF8",
+        "bg": "#F0ECFE",
+        "icon": "workflow"
+      },
+      {
+        "title": "CRM Workflow Automation",
+        "description": "We create CRM workflows that automate repetitive tasks, reduce manual work, and help teams handle customer-related activities more efficiently.",
+        "color": "#00A3A3",
+        "bg": "#E7F8F8",
+        "icon": "zap"
+      },
+      {
+        "title": "AI-Powered CRM Development",
+        "description": "We create AI-powered CRM solutions where appropriate to support smarter workflows, data-driven operations, and improved customer management.",
+        "color": "#F04438",
+        "bg": "#FDECEA",
+        "icon": "brain"
+      },
+      {
+        "title": "Mobile CRM Development",
+        "description": "We build responsive CRM experiences that help teams access customer information and manage important workflows across mobile and other devices.",
+        "color": "#16A34A",
+        "bg": "#EAF8EE",
+        "icon": "smartphone"
+      },
+      {
+        "title": "Existing CRM Modernization",
+        "description": "We enhance and modernize existing CRM systems based on business requirements, usability, performance, functionality, and scalability needs.",
+        "color": "#6366F1",
+        "bg": "#EEF0FF",
+        "icon": "refresh"
+      },
+      {
+        "title": "Bespoke CRM Development",
+        "description": "We build fully customized CRM solutions for businesses that need functionality and workflows beyond what standard CRM tools provide.",
+        "color": "#0891B2",
+        "bg": "#E8F8FC",
+        "icon": "settings"
+      },
+      {
+        "title": "Enterprise CRM Development",
+        "description": "We build scalable CRM solutions for businesses that need structured platforms to manage larger teams, complex workflows, and evolving business requirements.",
+        "color": "#9333EA",
+        "bg": "#F5ECFE",
+        "icon": "building"
+      },
+      {
+        "title": "CRM Maintenance and Ongoing Development",
+        "description": "We provide post-launch CRM support including technical enhancements, feature development, performance improvements, scalability support, and ongoing development.",
+        "color": "#DC2626",
+        "bg": "#FDECEC",
+        "icon": "settings"
+      }
+    ]
+  },
   "whyChoose": {
     "eyebrow": "Why Webkarigor",
     "title": "More Than Beautiful Interfaces",
     "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
     "images": {
-      "left": { "src": "/sm1.webp", "alt": "Team collaboration" },
-      "right": { "src": "/sm3.webp", "alt": "Design review session" }
+      "left": {
+        "src": "/sm1.webp",
+        "alt": "Team collaboration"
+      },
+      "right": {
+        "src": "/sm3.webp",
+        "alt": "Design review session"
+      }
     },
-    "hireUsLabels": ["HIRE US", "HIRE US", "HIRE US"],
+    "hireUsLabels": [
+      "HIRE US",
+      "HIRE US",
+      "HIRE US"
+    ],
     "features": [
       {
         "title": "User-Centered Design",
@@ -218,7 +331,12 @@
       "reviewsLabel": "(100+ Reviews)",
       "headline": "Customer experience that speak for them selves"
     },
-    "avatars": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"],
+    "avatars": [
+      "/sm1.webp",
+      "/sm2.webp",
+      "/sm3.webp",
+      "/sm4.webp"
+    ],
     "items": [
       {
         "quote": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
@@ -278,46 +396,45 @@
       }
     ]
   },
-
   "faq": {
-  "badge": "Frequently Asked Questions",
-  "headingAccent": "Custom CRM",
-  "headingTitle": "Questions Answered?",
-  "ctaText": "Talk to Web Karigor About Your CRM Needs",
-  "cta_content": "Contact Web Karigor to discuss your custom CRM development requirements, business workflows, integrations, and the CRM solution your organization needs.",
-  "ctaLabel": "Let's talk",
-  "ctaHref": "/contact-us",
-  "items": [
-    {
-      "question": "What is custom CRM development?",
-      "answer": "Custom CRM development involves building a CRM system specifically designed around your business needs, processes, customer interactions, workflows, and operational requirements rather than relying on a standard CRM solution."
-    },
-    {
-      "question": "Why invest in a custom CRM?",
-      "answer": "A custom CRM gives businesses greater control over CRM functionality, workflows, customer data, integrations, and business processes. It can be designed around the way your organization manages customer relationships and sales activities."
-    },
-    {
-      "question": "What can influence custom CRM development costs?",
-      "answer": "Custom CRM development costs can depend on factors such as project scope, required features, integrations, technical complexity, customization requirements, number of users, and ongoing maintenance and support needs."
-    },
-    {
-      "question": "Why choose Web Karigor for custom CRM development?",
-      "answer": "Web Karigor brings experience in understanding business requirements, technical development, integrations, and scalable software architecture to build CRM solutions around your workflows and long-term business requirements."
-    },
-    {
-      "question": "Can you upgrade or modernize an existing CRM?",
-      "answer": "Yes. Depending on the existing CRM system and project requirements, we can improve functionality, workflows, performance, integrations, and custom features to help modernize and extend the existing CRM."
-    },
-    {
-      "question": "Do you offer CRM integration services?",
-      "answer": "Yes. Where integration is required within the project scope, a CRM can be connected with relevant business systems, third-party applications, APIs, databases, and other services to support connected business workflows."
-    },
-    {
-      "question": "Can you develop AI-powered CRM solutions?",
-      "answer": "Yes. Web Karigor can develop AI-powered CRM solutions that use AI for business-specific requirements, intelligent workflows, automation, customer data analysis, and other CRM-related use cases."
-    }
-  ]
-},
+    "badge": "Frequently Asked Questions",
+    "headingAccent": "Custom CRM",
+    "headingTitle": "Questions Answered?",
+    "ctaText": "Talk to Web Karigor About Your CRM Needs",
+    "cta_content": "Contact Web Karigor to discuss your custom CRM development requirements, business workflows, integrations, and the CRM solution your organization needs.",
+    "ctaLabel": "Let's talk",
+    "ctaHref": "/contact-us",
+    "items": [
+      {
+        "question": "What is custom CRM development?",
+        "answer": "Custom CRM development involves building a CRM system specifically designed around your business needs, processes, customer interactions, workflows, and operational requirements rather than relying on a standard CRM solution."
+      },
+      {
+        "question": "Why invest in a custom CRM?",
+        "answer": "A custom CRM gives businesses greater control over CRM functionality, workflows, customer data, integrations, and business processes. It can be designed around the way your organization manages customer relationships and sales activities."
+      },
+      {
+        "question": "What can influence custom CRM development costs?",
+        "answer": "Custom CRM development costs can depend on factors such as project scope, required features, integrations, technical complexity, customization requirements, number of users, and ongoing maintenance and support needs."
+      },
+      {
+        "question": "Why choose Web Karigor for custom CRM development?",
+        "answer": "Web Karigor brings experience in understanding business requirements, technical development, integrations, and scalable software architecture to build CRM solutions around your workflows and long-term business requirements."
+      },
+      {
+        "question": "Can you upgrade or modernize an existing CRM?",
+        "answer": "Yes. Depending on the existing CRM system and project requirements, we can improve functionality, workflows, performance, integrations, and custom features to help modernize and extend the existing CRM."
+      },
+      {
+        "question": "Do you offer CRM integration services?",
+        "answer": "Yes. Where integration is required within the project scope, a CRM can be connected with relevant business systems, third-party applications, APIs, databases, and other services to support connected business workflows."
+      },
+      {
+        "question": "Can you develop AI-powered CRM solutions?",
+        "answer": "Yes. Web Karigor can develop AI-powered CRM solutions that use AI for business-specific requirements, intelligent workflows, automation, customer data analysis, and other CRM-related use cases."
+      }
+    ]
+  },
   "pricing": {
     "eyebrow": "Pricing Plane",
     "title": "Fair Pricing for Your Product",

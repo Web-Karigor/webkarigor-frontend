@@ -6,6 +6,7 @@ import Clients from "@/components/services/crm/Clients";
 import servicesContent from "@/data/crm-content.json";
 import "@/styles/service-pages-laptop.css";
 import Services from "@/components/home/Services";
+import Features from "@/components/services/crm/Features";
 
 const Offerings = dynamic(
   () => import("@/components/services/crm/Offerings"),
@@ -44,8 +45,9 @@ export default function CrmPage() {
       <Marquee />
       <Clients />
       <Offerings />
-      <Services />
+      {/* <Services /> */}
       <TechGrid />
+      <Features />
       <WhyChoose />
       <TeamSection />
       <Testimonials />
