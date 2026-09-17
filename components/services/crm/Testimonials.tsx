@@ -9,8 +9,8 @@ import {
 } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import servicesContent from "@/data/services-content.json";
-import { TESTIMONIALS } from "@/lib/services-data";
+import servicesContent from "@/data/crm-content.json";
+import { CRM_TESTIMONIALS } from "@/lib/crm-data";
 
 const AUTO_MS = 4200;
 const GAP_PX = 16;
@@ -60,7 +60,7 @@ export default function Testimonials() {
     moved: false,
   });
 
-  const total = TESTIMONIALS.length;
+  const total = CRM_TESTIMONIALS.length;
   const maxIndex = Math.max(0, total - visible);
 
   const goTo = useCallback(
@@ -266,23 +266,21 @@ export default function Testimonials() {
             <div className="mt-auto flex flex-col">
               <div
                 ref={viewportRef}
-                className={`overflow-hidden touch-pan-y ${
-                  isDragging ? "cursor-grabbing select-none" : "cursor-grab"
-                }`}
+                className={`overflow-hidden touch-pan-y ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+                  }`}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={onPointerUp}
                 onPointerCancel={onPointerCancel}
               >
                 <div
-                  className={`flex gap-4 ease-out ${
-                    isDragging
+                  className={`flex gap-4 ease-out ${isDragging
                       ? "transition-none"
                       : "transition-transform duration-500"
-                  }`}
+                    }`}
                   style={{ transform: trackTransform }}
                 >
-                  {TESTIMONIALS.map((item) => (
+                  {CRM_TESTIMONIALS.map((item) => (
                     <article
                       key={`${item.name}-${item.role}`}
                       className="w-full min-w-0 shrink-0 basis-full sm:basis-[calc((100%-1rem)/2)]"
@@ -323,11 +321,10 @@ export default function Testimonials() {
                       aria-label={`Go to slide ${index + 1}`}
                       aria-current={isActive ? "true" : undefined}
                       onClick={() => goTo(index)}
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        isActive
+                      className={`h-2 rounded-full transition-all duration-300 ${isActive
                           ? "w-9 bg-[#4b5563]"
                           : "w-4 bg-[#d1d5db] hover:bg-[#9ca3af]"
-                      }`}
+                        }`}
                     />
                   );
                 })}
