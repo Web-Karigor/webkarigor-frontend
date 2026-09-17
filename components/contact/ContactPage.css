@@ -400,7 +400,7 @@
   transition: color 1.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.contact-submit > * {
+.contact-submit>* {
   position: relative;
   z-index: 1;
 }
@@ -929,7 +929,7 @@
   transition: color 1.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.contact-cta-btn > * {
+.contact-cta-btn>* {
   position: relative;
   z-index: 1;
 }

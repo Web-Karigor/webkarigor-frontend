@@ -5,25 +5,25 @@ import Image from "next/image";
 /** Exact original collage — classes stay in TSX for Tailwind JIT */
 const TEAM_PHOTOS = [
   {
-    src: "/team/faruque.jpeg",
+    src: "/team/faruque.jpg",
     alt: "Team member — middle left",
     className:
       "svc-team-shot svc-team-shot-ml absolute left-0 top-[22%] z-[2] h-[clamp(124px,15vw,168px)] w-[clamp(124px,15vw,168px)]",
   },
   {
-    src: "/team/sajjad.jpeg",
+    src: "/team/sajjad.jpg",
     alt: "Team member — center small",
     className:
       "svc-team-shot svc-team-shot-cs absolute left-[40%] top-[44%] z-[4] h-[clamp(68px,8.5vw,92px)] w-[clamp(68px,8.5vw,92px)] rounded-[20px] max-sm:rounded-[14px]",
   },
   {
-    src: "/team/aryan.jpeg",
+    src: "/team/imran.jpg",
     alt: "Team member — bottom left",
     className:
       "svc-team-shot svc-team-shot-bl absolute bottom-0 left-[4%] z-[3] h-[clamp(148px,18vw,200px)] w-[clamp(148px,18vw,200px)]",
   },
   {
-    src: "/team/juel.jpeg",
+    src: "/team/juel.jpg",
     alt: "Team member — bottom right",
     className:
       "svc-team-shot svc-team-shot-br absolute bottom-[10%] right-[4%] z-[2] h-[clamp(112px,14vw,152px)] w-[clamp(112px,14vw,152px)]",
@@ -64,7 +64,7 @@ export default function Team() {
             />
             <div className={`relative z-[1] h-full w-full ${SHOT_BASE}`}>
               <Image
-                src="/team/imran.jpeg"
+                src="/team/sawan.jpg"
                 alt="Team member — top right"
                 fill
                 priority

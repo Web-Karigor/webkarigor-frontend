@@ -5,7 +5,7 @@ import "../../home/Team.css";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "@/lib/gsap";
-import homeContent from "@/data/home-content.json";
+import crmContent from "@/data/crm-content.json";
 
 const {
   mobileTitle,
@@ -14,7 +14,7 @@ const {
   desktopResultLines,
   members: TEAM_MEMBERS,
   members2: TEAM_MEMBERS2,
-} = homeContent.team;
+} = crmContent.team;
 
 type TeamMember = (typeof TEAM_MEMBERS)[number];
 type TeamMember2 = (typeof TEAM_MEMBERS2)[number];

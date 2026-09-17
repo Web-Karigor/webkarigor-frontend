@@ -435,6 +435,58 @@
       }
     ]
   },
+  "team": {
+    "mobileTitle": "Smart Team",
+    "mobileSubtitle": "Big Result",
+    "desktopExpertLines": [
+      "Expert",
+      "Team"
+    ],
+    "desktopResultLines": [
+      "Smarter",
+      "Solutions"
+    ],
+    "cardAriaLabel": "Team member",
+    "members": [
+      {
+        "src": "/team/sawan.jpg",
+        "name": "Shaon Ahmed",
+        "designation": "Lead Software Engineer"
+      },
+      {
+        "src": "/team/faruque.jpg",
+        "name": "K M Rezwanul Ehsan Faruque",
+        "designation": "Sr. Software Engineer"
+      },
+      {
+        "src": "/team/sajjad.jpg",
+        "name": "Sajjad Hossain",
+        "designation": "Laravel Engineer"
+      },
+      {
+        "src": "/team/juel.jpg",
+        "name": "Mujahid Juel",
+        "designation": "Front End Developer"
+      }
+    ],
+    "members2": [
+      {
+        "src": "/team/aryan.jpg",
+        "name": "Aryan",
+        "designation": "UI/UX Designer"
+      },
+      {
+        "src": "/team/imran.jpg",
+        "name": "Imran Hossain",
+        "designation": "Web Development Specialist"
+      },
+      {
+        "src": "/team/habib.jpg",
+        "name": "Md. Habibullah",
+        "designation": "Web Solutions Consultant"
+      }
+    ]
+  },
   "pricing": {
     "eyebrow": "Pricing Plane",
     "title": "Fair Pricing for Your Product",

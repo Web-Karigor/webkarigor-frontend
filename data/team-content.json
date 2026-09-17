@@ -12,88 +12,95 @@
   "intro": "A small, focused team building products with craft, clarity, and care — turning ideas into digital experiences that help businesses grow.",
   "members": [
     {
-      "id": "sarah-ahmed",
-      "name": "Sarah Ahmed",
+      "id": "md-taufikuzzaman",
+      "name": "Md. Taufikuzzaman",
+      "role": "Chief Operating Officer",
+      "image": "/team/taufiq-sir.jpg",
+      "bio": "Taufikuzzaman oversees the operational backbone of Web Karigor, aligning teams, resources, and strategy toward sustained execution. His leadership anchors the organization's day-to-day functioning while steering long-term operational direction."
+    },
+    {
+      "id": "md-nuruddowla-al-nayeem",
+      "name": "Md. Nuruddowla Al Nayeem",
+      "role": "Strategic Business Analyst",
+      "image": "/team/nayem-sir.jpg",
+      "bio": "Nayeem dissects business needs into structured, actionable insight, serving as the analytical bridge between stakeholders and execution teams. His methodical evaluation of requirements and market context sharpens decision-making across projects."
+    },
+    {
+      "id": "shaon-ahmed",
+      "name": "Shaon Ahmed",
+      "role": "Lead Software Engineer",
+      "image": "/team/sawan.jpg",
+      "bio": "Shaon leads the development team with a blend of technical fluency and people-first management, ensuring projects move forward with clarity and accountability. His leadership balances code quality with team growth and delivery timelines."
+    },
+    {
+      "id": "k-m-rezwanul-ehsan-faruque",
+      "name": "K M Rezwanul Ehsan Faruque",
+      "role": "Senior Software Engineer",
+      "image": "/team/faruque.jpg",
+      "bio": "Faruque operates at an advanced technical tier, engineering scalable software solutions with depth and precision. His experience spans complex problem-solving and system design, positioning him as a core technical contributor to high-stakes development work."
+    },
+    {
+      "id": "md-imran-hossain",
+      "name": "Md. Imran Hossain",
+      "role": "Web Development Specialist",
+      "image": "/team/imran.jpg",
+      "bio": "A dependable architect of clean, functional web builds, Imran translates requirements into working code with consistency and care. His focus on structure and reliability makes him a steady hand across the development pipeline, quietly ensuring every project ships on solid technical footing."
+    },
+    {
+      "id": "sajjad-hossain",
+      "name": "Sajjad Hossain",
+      "role": "Laravel Engineer",
+      "image": "/team/sajjad.jpg",
+      "bio": "Sajjad engineers robust backend systems using the Laravel framework, balancing performance with maintainability. His methodical approach to problem-solving and clean architecture ensures applications remain scalable, secure, and built for long-term reliability."
+    },
+    {
+      "id": "mujahid-juel",
+      "name": "Mujahid Juel",
+      "role": "Front-End Developer",
+      "image": "/team/juel.jpg",
+      "bio": "Juel is developing hands-on expertise in front-end implementation, translating design into functional interfaces with growing technical fluency. His attentiveness to detail and eagerness to learn mark him as a developer building a solid foundation for future contribution."
+    },
+    {
+      "id": "sha-arian",
+      "name": "Sha Arian",
       "role": "Product Designer",
-      "image": "/team/imran.jpeg",
-      "bio": "I shape how products feel in people's hands — from first sketch to polished UI. Clarity, craft, and a little obsession with the details that make software feel effortless."
+      "image": "/team/aryan.jpg",
+      "bio": "Arian shapes intuitive, visually confident digital experiences, bridging user needs with brand identity. With a keen eye for interaction and detail, they craft interfaces that feel effortless to use while maintaining a distinct creative signature across every design touchpoint."
     },
     {
-      "id": "rakib-hasan",
-      "name": "Rakib Hasan",
-      "role": "Lead Engineer",
-      "image": "/team/sajjad.jpeg",
-      "bio": "I lead the engineering side of builds that need to ship clean and scale well. Good architecture, honest timelines, and code the next person on the team can actually love."
+      "id": "mohd-motakabbirul-islam",
+      "name": "Mohd Motakabbirul Islam",
+      "role": "Client Engagement Executive",
+      "image": "/team/motakabbirul.jpg",
+      "bio": "Motakabbirul drives growth through attentive client interaction, identifying needs and matching them to fitting solutions. His persistence and interpersonal clarity support consistent pipeline development and lasting client relationships."
     },
     {
-      "id": "nadia-rahman",
-      "name": "Nadia Rahman",
-      "role": "UX Researcher",
-      "image": "/team/juel.jpeg",
-      "bio": "I talk to users so we don't guess. Interviews, tests, and synthesis that turn messy feedback into decisions the whole team can move on."
+      "id": "md-habibullah",
+      "name": "Md. Habibullah",
+      "role": "Web Solutions Consultant",
+      "image": "/team/habib.jpg",
+      "bio": "Habibullah connects client needs with the right digital solutions, guiding prospects through the sales journey with clarity and product knowledge. His consultative approach builds trust and translates business goals into actionable website engagements."
     },
     {
-      "id": "arif-khan",
-      "name": "Arif Khan",
-      "role": "Brand Strategist",
-      "image": "/team/aryan.jpeg",
-      "bio": "I help brands find a sharper story — positioning, voice, and the through-line that makes every touchpoint feel like the same company."
+      "id": "tasmin-beanty-monju-prithila",
+      "name": "Tasmin Beanty Monju Prithila",
+      "role": "Client Engagement Executive",
+      "image": "/team/prithila.jpg",
+      "bio": "Prithila builds relationships that convert interest into partnership, guiding clients through offerings with warmth and professionalism. Her communicative strength and client-first mindset make her an effective front line for business development."
     },
     {
-      "id": "farhan-islam",
-      "name": "Farhan Islam",
-      "role": "Co-founder & CEO",
-      "image": "/team/zishan.jpeg",
-      "bio": "I started Webkarigor to build digital products that actually perform for businesses. Strategy, delivery, and making sure the team has what they need to do their best work."
+      "id": "nazmul-ahmed-jisan",
+      "name": "Nazmul Ahmed Jisan",
+      "role": "Motion & Visual Storyteller",
+      "image": "/team/zishan.jpg",
+      "bio": "Jisan brings narrative rhythm to raw footage, crafting edits that hold attention and communicate with clarity. His command of pacing, transitions, and visual tone turns everyday content into polished, engaging media that resonates with its audience."
     },
     {
-      "id": "lima-chowdhury",
-      "name": "Lima Chowdhury",
-      "role": "Senior Product Designer",
-      "image": "/team/jayaed.jpeg",
-      "bio": "I design systems and screens that stay consistent under pressure. Design ops, interaction detail, and the kind of polish that shows up when you use the product every day."
-    },
-    {
-      "id": "imran-hossain",
-      "name": "Imran Hossain",
-      "role": "Full-Stack Engineer",
-      "image": "/s4.webp",
-      "bio": "Frontend to backend — I like shipping end-to-end features that feel fast and hold up. Clean APIs, solid UI, and fewer surprises in production."
-    },
-    {
-      "id": "tania-akter",
-      "name": "Tania Akter",
-      "role": "Head of Brand",
-      "image": "/s2.webp",
-      "bio": "I look after how Webkarigor shows up in the world — visual language, campaigns, and the small cues that make a brand feel intentional."
-    },
-    {
-      "id": "sabbir-ahmed",
-      "name": "Sabbir Ahmed",
-      "role": "Project Manager",
-      "image": "/s1.webp",
-      "bio": "I keep projects moving without the chaos. Clear scopes, honest updates, and making sure clients and makers stay aligned from kickoff to launch."
-    },
-    {
-      "id": "nushrat-jahan",
-      "name": "Nushrat Jahan",
-      "role": "Motion Designer",
-      "image": "/s3.webp",
-      "bio": "I add motion that earns its place — transitions, micro-interactions, and branded moments that make the product feel alive without getting in the way."
-    },
-    {
-      "id": "karim-ullah",
-      "name": "Karim Ullah",
-      "role": "Backend Engineer",
-      "image": "/sm2.webp",
-      "bio": "I build the systems under the UI — reliable APIs, data models, and performance work that users never notice until something's missing."
-    },
-    {
-      "id": "meherin-sultana",
-      "name": "Meherin Sultana",
-      "role": "Brand Designer",
-      "image": "/sm4.webp",
-      "bio": "I craft visual identity that holds across decks, sites, and product. Type, color, and layout with enough personality to stand out and enough restraint to last."
+      "id": "al-zayed-bean-pritom",
+      "name": "Al Zayed Bean Pritom",
+      "role": "Motion Editor",
+      "image": "/team/pritom.jpg",
+      "bio": "Pritom is honing his craft in video editing, contributing energy and an evolving technical eye to visual projects. His developing skill set in pacing and post-production reflects a solid start in the motion media space."
     }
   ],
   "join": {
