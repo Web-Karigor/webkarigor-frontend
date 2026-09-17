@@ -12,23 +12,6 @@ const ECO_CLIENTS = ECO_HERO.clients;
 export default function EcoHero() {
   return (
     <section className="eco-hero relative overflow-hidden bg-[#F7F9FB]">
-      <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        <div className={`${SERVICE_PAGE_GUTTER} flex h-[72px] items-center justify-between sm:h-[88px] lg:h-[108px]`}>
-          <Link
-            href={ECO_HERO.brandHref}
-            className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
-          >
-            {ECO_HERO.brand}
-          </Link>
-          <Link
-            href={ECO_HERO.navCta.href}
-            className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#0EC47B] px-5 py-2.5 font-montserrat text-[clamp(13px,1vw,15px)] font-bold text-white transition-opacity hover:opacity-90 sm:px-6 sm:py-3"
-          >
-            {ECO_HERO.navCta.label}
-          </Link>
-        </div>
-      </header>
-
       {/* Desktop — Figma 1920 × 870 */}
       <div
         className="eco-hero-desktop relative mx-auto hidden w-full max-w-[1920px] lg:block"

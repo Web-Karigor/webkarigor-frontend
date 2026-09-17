@@ -27,23 +27,6 @@ export default function ServiceHero() {
 
   return (
     <section className="svc-hero relative overflow-visible bg-[#f5f5f5] pb-[clamp(48px,6vw,72px)] pt-[120px]">
-      <header className="fixed inset-x-0 top-0 z-[50] w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        <div className={`${SERVICE_PAGE_GUTTER} flex h-[72px] items-center justify-between sm:h-[88px] lg:h-[108px]`}>
-          <Link
-            href={hero.brandHref}
-            className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
-          >
-            {hero.brand}
-          </Link>
-          <Link
-            href={hero.navCta.href}
-            className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#0EC47B] px-5 py-2.5 font-montserrat text-[clamp(13px,1vw,15px)] font-bold text-white transition-opacity hover:opacity-90 sm:px-6 sm:py-3"
-          >
-            {hero.navCta.label}
-          </Link>
-        </div>
-      </header>
-
       <div className={`${SERVICE_PAGE_GUTTER} relative z-[1] overflow-visible pt-4`}>
         <div className="grid grid-cols-1 items-start gap-[clamp(36px,5vw,56px)] lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-[clamp(28px,3vw,48px)]">
           <div className="max-w-[640px]">

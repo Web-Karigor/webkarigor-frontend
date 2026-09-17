@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/services/crm/Hero";
 import Marquee from "@/components/services/crm/Marquee";
 import Clients from "@/components/services/crm/Clients";
-import servicesContent from "@/data/services-content.json";
+import servicesContent from "@/data/crm-content.json";
 import "@/styles/service-pages-laptop.css";
 import Services from "@/components/home/Services";
 

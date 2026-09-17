@@ -26,23 +26,6 @@ const TECH_BAR_HEIGHTS = [
 export default function Hero() {
   return (
     <section className="erp-hero relative overflow-hidden bg-white">
-      <header className="fixed inset-x-0 top-0 z-50 w-full bg-[#FFFEFB] shadow-[0_4px_8px_rgba(0,0,0,0.04)]">
-        <div className="mx-auto flex h-[72px] w-full max-w-[1680px] items-center justify-between px-[clamp(16px,3.5vw,50px)] sm:h-[88px] lg:h-[108px]">
-          <Link
-            href={WEBSITE_DESIGN_DEVELOPMENT_HERO.brandHref}
-            className="font-museoModerno text-[clamp(22px,2vw,28px)] font-semibold leading-none text-black"
-          >
-            {WEBSITE_DESIGN_DEVELOPMENT_HERO.brand}
-          </Link>
-          <Link
-            href={WEBSITE_DESIGN_DEVELOPMENT_HERO.navCta.href}
-            className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#0EC47B] px-5 py-2.5 font-montserrat text-[clamp(13px,1vw,15px)] font-bold text-white transition-opacity hover:opacity-90 sm:px-6 sm:py-3"
-          >
-            {WEBSITE_DESIGN_DEVELOPMENT_HERO.navCta.label}
-          </Link>
-        </div>
-      </header>
-
       <div className="mx-auto w-full max-w-[1850px] px-[clamp(16px,3.5vw,50px)] pb-14 pt-[80px] sm:pt-[100px] lg:pb-20 lg:pt-[128px]">
         <div className="erp-hero-split flex w-full flex-col items-stretch gap-12 py-4 max-md:gap-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-12">
           {/* Left copy — Figma 636 × 388 */}

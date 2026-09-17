@@ -307,9 +307,8 @@ export default function Navbar() {
       />
 
       <div
-        className={`navbar-sticky sticky top-4 z-[9999] h-0 overflow-visible sm:top-6 lg:top-[39px]${
-          navHidden ? " is-hidden" : ""
-        }`}
+        className={`navbar-sticky sticky top-4 z-[9999] h-0 overflow-visible sm:top-6 lg:top-[39px]${navHidden ? " is-hidden" : ""
+          }`}
       >
         <header className="relative left-0 right-0 overflow-visible">
           <div className="relative mx-auto max-w-[1800px] px-4 sm:px-6">
@@ -324,9 +323,8 @@ export default function Navbar() {
               >
                 <div className="navbar-border-ring">
                   <div
-                    className={`navbar-container flex items-center justify-center box-border ${
-                      scrolled ? "navbar-container--scrolled" : ""
-                    }`}
+                    className={`navbar-container flex items-center justify-center box-border ${scrolled ? "navbar-container--scrolled" : ""
+                      }`}
                   >
                     <div
                       ref={navRef}
@@ -353,9 +351,8 @@ export default function Navbar() {
 
                         if (item.kind === "menu") {
                           const isOpen = openMenu === item.menu;
-                          const menuClass = `navbar-link navbar-menu-trigger${
-                            isActive || isOpen ? " is-active" : ""
-                          }`;
+                          const menuClass = `navbar-link navbar-menu-trigger${isActive || isOpen ? " is-active" : ""
+                            }`;
                           const menuLabel = (
                             <span className="inline-flex items-center gap-1.5">
                               <span className="navbar-link-label">{item.label}</span>
@@ -536,6 +533,13 @@ export default function Navbar() {
                   ) : null}
                 </AnimatePresence>
               </nav>
+
+              <Link
+                href="/contact-us"
+                className="justify-self-end rounded-lg border border-[#1f1e1c] px-4 py-2.5 font-montserrat text-sm font-semibold text-[#1f1e1c] transition-colors hover:bg-[#1f1e1c] hover:text-white"
+              >
+                Let&apos;s get started
+              </Link>
             </div>
           </div>
         </header>
@@ -568,9 +572,8 @@ function NavDropdown({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 8, scale: 0.98 }}
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-      className={`navbar-dropdown pointer-events-auto absolute top-[calc(100%+14px)] z-[10000] w-[min(100vw-2rem,360px)] overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_rgba(0,0,0,0.18)] ${
-        hasOffset ? "" : "left-1/2 -translate-x-1/2"
-      }`}
+      className={`navbar-dropdown pointer-events-auto absolute top-[calc(100%+14px)] z-[10000] w-[min(100vw-2rem,360px)] overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_rgba(0,0,0,0.18)] ${hasOffset ? "" : "left-1/2 -translate-x-1/2"
+        }`}
       style={positionStyle}
       role="dialog"
       aria-modal="true"

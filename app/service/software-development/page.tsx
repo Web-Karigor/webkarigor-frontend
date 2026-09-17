@@ -11,10 +11,10 @@ import WhyChoose from "@/components/services/software-development/WhyChoose";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
-// import { MANPOWER_METADATA } from "@/lib/manpower-data";
+import { METADATA } from "@/lib/software-development-data";
 import "@/styles/service-pages-laptop.css";
 
-// export const metadata: Metadata = MANPOWER_METADATA;
+export const metadata: Metadata = METADATA;
 
 export default function SoftwareDevelopmentServicePage() {
   return (
