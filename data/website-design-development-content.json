@@ -116,6 +116,43 @@
             "src": "https://cdn.simpleicons.org/airbnb/667085"
         }
     ],
+    "whyChooseUs": {
+        "eyebrow": "Why Webkarigor",
+        "title": "More Than Beautiful Interfaces",
+        "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
+        "items": [
+            {
+                "title": "User-Centered Design",
+                "description": "We design with the way people use your website in mind. Clear navigation, thoughtful page structure, responsive web design, and intuitive interactions lead to less friction in finding information and taking action.",
+                "icon": "UserRound",
+                "color": "#00c982"
+            },
+            {
+                "title": "Business-Focused Digital Experiences",
+                "description": "Each design decision should be for a purpose. We take your business goals, customer experience, content strategy, and conversion opportunities into account from the start of your web design project.",
+                "icon": "Briefcase",
+                "color": "#ff6b35"
+            },
+            {
+                "title": "Design and Development Working Together",
+                "description": "As a web development service agency, we see the visual design and technical requirements as part of the same solution. This helps in the development of websites that are not only interesting but also easy to build, maintain, and enhance.",
+                "icon": "Handshake",
+                "color": "#e400c8"
+            },
+            {
+                "title": "Collaborative Project Approach",
+                "description": "We collaborate with your team to understand requirements, review decisions, and ensure the project is aligned with your business needs. Clear communication can help you transform ideas into a website that reflects the business needs.",
+                "icon": "TrendingUp",
+                "color": "#1498ff"
+            },
+            {
+                "title": "Built for Performance and Scalability",
+                "description": "Your site needs to sustain your business after you launch. Performance, responsive behavior, scalable architecture, and long-term development needs are all taken into account so that the platform can continue to grow with your needs.",
+                "icon": "Handshake",
+                "color": "#1498c7"
+            }
+        ]
+    },
     "features": {
         "eyebrow": "Why Businesses Work With Web Karigor?",
         "title": "We Make More Than Good-Looking Websites",
@@ -334,54 +371,53 @@
         ]
     },
     "faq": {
-    "badge": "Frequently Ask Questions",
-    "headingAccent": "Questions",
-    "headingTitle": "Answered?",
-    "ctaText": "Still curious? We're happy to help",
-    "ctaLabel": "Let's talk",
-    "ctaHref": "/contact-us",
-    "items": [
-      {
-        "question": "Who do you work with for website design and development projects?",
-        "answer": "Web Karigor serves startups, expanding businesses, established organizations, and enterprises that require business websites, corporate websites, e-commerce websites, custom web development, or web applications."
-      },
-      {
-        "question": "How do you take a website or web application from idea to launch?",
-        "answer": "We generally go from requirements and planning to website design, development, testing, and launch, adjusting the steps to match your project's scope, functionality, users, and technical requirements."
-      },
-      {
-        "question": "How do you approach UX, website design, and web development decisions?",
-        "answer": "We base UX, responsive web design, and technology decisions on user needs, business goals, functionality, performance, scalability, and the long-term requirements of the website."
-      },
-      {
-        "question": "How involved will our team be during the web design and development process?",
-        "answer": "Yes, we offer website maintenance, performance optimization, feature enhancement, scalability support, and post-launch web development services, depending on the scope of the project."
-      },
-      {
-        "question": "How do web design and development pricing and timelines work?",
-        "answer": "The cost and timeline are subject to the complexity of the website, design, functionality, custom web development, e-commerce, technology, integrations, testing, and scope of the project."
-      },
-      {
-        "question": "Will my website work properly on mobile devices?",
-        "answer": "It is crucial to have responsive web design. Mobile website content is the primary content that Google uses to index and rank, and a solid mobile experience is crucial for users and search visibility."
-      },
-      {
-        "question": "Can you build an SEO-friendly website?",
-        "answer": "Web Karigor can consider technical SEO fundamentals, mobile usability, page structure, performance, and Core Web Vitals. Google suggests that in addition to valuable, people-first content, you need to have a strong page experience."
-      },
-      {
-        "question": "Which is better, WordPress or custom web development?",
-        "answer": "The choice will depend on the functionality, scalability, performance, and long-term needs. Web Karigor chooses the technology based on the requirements of the project and not a single stack."
-      },
-      {
-        "question": "What makes a website design and development agency a great choice?",
-        "answer": "A trusted web design and development company is a combination of design and technical skills, which allows a company to handle usability, functionality, performance, responsive design, and development all under the same roof."
-      },
-      {
-        "question": "What to look for when selecting the best web design and development companies?",
-        "answer": "Evaluate capabilities, technical skills, project methodology, design, scalability, communication, support, and the company's understanding of your real business needs."
-      }
-    ]
-  }
-    
+        "badge": "Frequently Ask Questions",
+        "headingAccent": "Questions",
+        "headingTitle": "Answered?",
+        "ctaText": "Still curious? We're happy to help",
+        "ctaLabel": "Let's talk",
+        "ctaHref": "/contact-us",
+        "items": [
+            {
+                "question": "Who do you work with for website design and development projects?",
+                "answer": "Web Karigor serves startups, expanding businesses, established organizations, and enterprises that require business websites, corporate websites, e-commerce websites, custom web development, or web applications."
+            },
+            {
+                "question": "How do you take a website or web application from idea to launch?",
+                "answer": "We generally go from requirements and planning to website design, development, testing, and launch, adjusting the steps to match your project's scope, functionality, users, and technical requirements."
+            },
+            {
+                "question": "How do you approach UX, website design, and web development decisions?",
+                "answer": "We base UX, responsive web design, and technology decisions on user needs, business goals, functionality, performance, scalability, and the long-term requirements of the website."
+            },
+            {
+                "question": "How involved will our team be during the web design and development process?",
+                "answer": "Yes, we offer website maintenance, performance optimization, feature enhancement, scalability support, and post-launch web development services, depending on the scope of the project."
+            },
+            {
+                "question": "How do web design and development pricing and timelines work?",
+                "answer": "The cost and timeline are subject to the complexity of the website, design, functionality, custom web development, e-commerce, technology, integrations, testing, and scope of the project."
+            },
+            {
+                "question": "Will my website work properly on mobile devices?",
+                "answer": "It is crucial to have responsive web design. Mobile website content is the primary content that Google uses to index and rank, and a solid mobile experience is crucial for users and search visibility."
+            },
+            {
+                "question": "Can you build an SEO-friendly website?",
+                "answer": "Web Karigor can consider technical SEO fundamentals, mobile usability, page structure, performance, and Core Web Vitals. Google suggests that in addition to valuable, people-first content, you need to have a strong page experience."
+            },
+            {
+                "question": "Which is better, WordPress or custom web development?",
+                "answer": "The choice will depend on the functionality, scalability, performance, and long-term needs. Web Karigor chooses the technology based on the requirements of the project and not a single stack."
+            },
+            {
+                "question": "What makes a website design and development agency a great choice?",
+                "answer": "A trusted web design and development company is a combination of design and technical skills, which allows a company to handle usability, functionality, performance, responsive design, and development all under the same roof."
+            },
+            {
+                "question": "What to look for when selecting the best web design and development companies?",
+                "answer": "Evaluate capabilities, technical skills, project methodology, design, scalability, communication, support, and the company's understanding of your real business needs."
+            }
+        ]
+    }
 }

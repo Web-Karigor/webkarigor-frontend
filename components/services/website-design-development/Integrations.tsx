@@ -15,7 +15,7 @@ export default function Integrations() {
           <h2 className="m-0 font-montserrat text-[clamp(22px,2.5vw,30px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
             {WEBSITE_DESIGN_DEVELOPMENT_INTEGRATIONS_SECTION.title}
           </h2>
-          <p className="mt-3 m-0 font-manrope text-[10px] font-medium leading-[1.55] text-[#667085] sm:text-[11px]">
+          <p className="mt-3 m-0 font-manrope text-[14px] font-medium leading-[1.55] text-[#667085] sm:text-[12px]">
             {WEBSITE_DESIGN_DEVELOPMENT_INTEGRATIONS_SECTION.description}
           </p>
         </div>
@@ -50,7 +50,7 @@ function TechnologyRow({
             className="h-5 w-5 shrink-0 object-contain sm:h-6 sm:w-6"
             loading="lazy"
           />
-          <span className="truncate font-montserrat text-[9px] font-medium text-[#1f2937] sm:text-[10px]">
+          <span className="truncate font-montserrat text-[12px] font-medium text-[#1f2937] sm:text-[12px]">
             {tech.name}
           </span>
         </div>

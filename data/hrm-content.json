@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "ERP Services — Webkarigor",
-    "description": "Custom ERP solutions for inventory, finance, HR, and operations — built by Webkarigor to streamline your business."
+    "title": "Custom Payroll & HRM Software in Bangladesh | Web Karigor",
+    "description": "Boost productivity with custom payroll & HR software in Bangladesh. Handle employee management, payroll, and HRM for your business using hr management software."
   },
   "hero": {
     "brand": "Webkarigor",
@@ -117,40 +117,40 @@
     }
   ],
   "features": {
-  "eyebrow": "Why Webkarigor",
-  "title": "Simplify Your HR Operations",
-  "description": "We develop HR management solutions that bring employee records, attendance, leave, payroll, and workforce information together in one centralized system, helping HR teams manage daily processes more efficiently.",
-  "items": [
-    {
-      "title": "Centralized Employee Management",
-      "description": "Keep employee profiles, records, documents, and essential workforce information organized within a single HR management system.",
-      "color": "#12B76A",
-      "bg": "#E8F8F0",
-      "icon": "users"
-    },
-    {
-      "title": "Streamlined HR Processes",
-      "description": "Manage attendance, leave, employee records, payroll, and other core HR activities through structured digital workflows.",
-      "color": "#F79009",
-      "bg": "#FEF4E6",
-      "icon": "workflow"
-    },
-    {
-      "title": "Efficient Payroll Management",
-      "description": "Support salary structures, allowances, deductions, payroll processing, and other payroll requirements based on your organization's policies.",
-      "color": "#EE46BC",
-      "bg": "#FCE8F5",
-      "icon": "wallet"
-    },
-    {
-      "title": "HR Insights & Reporting",
-      "description": "Give HR teams better visibility into workforce data through organized dashboards, reports, and relevant HR information.",
-      "color": "#2E90FA",
-      "bg": "#E8F3FE",
-      "icon": "chart"
-    }
-  ]
-},
+    "eyebrow": "Why Webkarigor",
+    "title": "Simplify Your HR Operations",
+    "description": "We develop HR management solutions that bring employee records, attendance, leave, payroll, and workforce information together in one centralized system, helping HR teams manage daily processes more efficiently.",
+    "items": [
+      {
+        "title": "Centralized Employee Management",
+        "description": "Keep employee profiles, records, documents, and essential workforce information organized within a single HR management system.",
+        "color": "#12B76A",
+        "bg": "#E8F8F0",
+        "icon": "users"
+      },
+      {
+        "title": "Streamlined HR Processes",
+        "description": "Manage attendance, leave, employee records, payroll, and other core HR activities through structured digital workflows.",
+        "color": "#F79009",
+        "bg": "#FEF4E6",
+        "icon": "workflow"
+      },
+      {
+        "title": "Efficient Payroll Management",
+        "description": "Support salary structures, allowances, deductions, payroll processing, and other payroll requirements based on your organization's policies.",
+        "color": "#EE46BC",
+        "bg": "#FCE8F5",
+        "icon": "wallet"
+      },
+      {
+        "title": "HR Insights & Reporting",
+        "description": "Give HR teams better visibility into workforce data through organized dashboards, reports, and relevant HR information.",
+        "color": "#2E90FA",
+        "bg": "#E8F3FE",
+        "icon": "chart"
+      }
+    ]
+  },
   "integrations": {
     "title": "Technologies Used in Our HR and Payroll Software",
     "description": "We leverage technologies like Next.js, React.js, Node.js, Laravel, Vercel, Git, and Notion to create scalable HR dashboard software for HR management, payroll processing, attendance, and employee management.",
@@ -259,58 +259,57 @@
       }
     ]
   },
-
   "faq": {
-  "badge": "Frequently Asked Questions",
-  "headingAccent": "HRMS",
-  "headingTitle": "Talk to Web Karigor About Your HR Needs",
-  "ctaText": "Ready to Simplify Your HR and Payroll Management?",
-  "cta_content": "Let's talk about your HR processes, payroll requirements, and the appropriate software solution for your business.",
-  "ctaLabel": "Let's talk",
-  "ctaHref": "/contact-us",
-  "items": [
-    {
-      "question": "What is HR software in Bangladesh?",
-      "answer": "HR software is a centralized system that helps businesses manage employee records, attendance, leave, payroll, workforce information, and other core HR activities through one platform."
-    },
-    {
-      "question": "Who can use HR and payroll software?",
-      "answer": "HR and payroll software can be used by SMEs, growing businesses, and organizations across industries such as garment, manufacturing, e-commerce, retail, superstores, FMCG, distribution, and other businesses that need structured workforce management."
-    },
-    {
-      "question": "Can HR management software be customized for our business?",
-      "answer": "Yes. HR management software can be customized according to your employee structure, HR policies, attendance rules, leave processes, payroll requirements, organizational workflows, and other business-specific needs."
-    },
-    {
-      "question": "Does the HRMS include employee, attendance, and leave management?",
-      "answer": "Yes. An HRMS can include employee management, attendance tracking, leave requests and approvals, leave records, employee documentation, and other core HR functions depending on the project's requirements."
-    },
-    {
-      "question": "Can the HR software handle payroll processing?",
-      "answer": "Yes. HR payroll software can support salary information, allowances, deductions, payroll components, payroll records, and structured payroll processing based on your organization's requirements and policies."
-    },
-    {
-      "question": "Can HRMS software support a growing business?",
-      "answer": "Yes. HRMS software can be designed with scalability in mind to support additional employees, departments, locations, HR processes, payroll requirements, and future system enhancements as the organization grows."
-    },
-    {
-      "question": "Can HR software integrate with other business systems?",
-      "answer": "Yes. Depending on the project requirements, an HRMS can be integrated with other business applications and systems through APIs or other integration methods. This can help connect HR processes with payroll, accounting, ERP, attendance devices, or other relevant systems."
-    },
-    {
-      "question": "Can HR managers get reports and dashboards from the system?",
-      "answer": "Yes. An HRMS can provide dashboards and reports for relevant workforce information, including employee data, attendance, leave, payroll, and other HR-related activities."
-    },
-    {
-      "question": "Can HRMS software manage different employee policies and rules?",
-      "answer": "Yes. A customized HRMS can be designed to accommodate different organizational rules and workflows for attendance, leave, payroll, departments, employee types, and other HR processes according to the business requirements."
-    },
-    {
-      "question": "Does Web Karigor provide HRMS maintenance and support?",
-      "answer": "Yes. Depending on the project scope and business requirements, Web Karigor can provide HRMS maintenance, technical support, feature enhancements, performance improvements, scalability support, and ongoing development."
-    }
-  ]
-},
+    "badge": "Frequently Asked Questions",
+    "headingAccent": "HRMS",
+    "headingTitle": "Talk to Web Karigor About Your HR Needs",
+    "ctaText": "Ready to Simplify Your HR and Payroll Management?",
+    "cta_content": "Let's talk about your HR processes, payroll requirements, and the appropriate software solution for your business.",
+    "ctaLabel": "Let's talk",
+    "ctaHref": "/contact-us",
+    "items": [
+      {
+        "question": "What is HR software in Bangladesh?",
+        "answer": "HR software is a centralized system that helps businesses manage employee records, attendance, leave, payroll, workforce information, and other core HR activities through one platform."
+      },
+      {
+        "question": "Who can use HR and payroll software?",
+        "answer": "HR and payroll software can be used by SMEs, growing businesses, and organizations across industries such as garment, manufacturing, e-commerce, retail, superstores, FMCG, distribution, and other businesses that need structured workforce management."
+      },
+      {
+        "question": "Can HR management software be customized for our business?",
+        "answer": "Yes. HR management software can be customized according to your employee structure, HR policies, attendance rules, leave processes, payroll requirements, organizational workflows, and other business-specific needs."
+      },
+      {
+        "question": "Does the HRMS include employee, attendance, and leave management?",
+        "answer": "Yes. An HRMS can include employee management, attendance tracking, leave requests and approvals, leave records, employee documentation, and other core HR functions depending on the project's requirements."
+      },
+      {
+        "question": "Can the HR software handle payroll processing?",
+        "answer": "Yes. HR payroll software can support salary information, allowances, deductions, payroll components, payroll records, and structured payroll processing based on your organization's requirements and policies."
+      },
+      {
+        "question": "Can HRMS software support a growing business?",
+        "answer": "Yes. HRMS software can be designed with scalability in mind to support additional employees, departments, locations, HR processes, payroll requirements, and future system enhancements as the organization grows."
+      },
+      {
+        "question": "Can HR software integrate with other business systems?",
+        "answer": "Yes. Depending on the project requirements, an HRMS can be integrated with other business applications and systems through APIs or other integration methods. This can help connect HR processes with payroll, accounting, ERP, attendance devices, or other relevant systems."
+      },
+      {
+        "question": "Can HR managers get reports and dashboards from the system?",
+        "answer": "Yes. An HRMS can provide dashboards and reports for relevant workforce information, including employee data, attendance, leave, payroll, and other HR-related activities."
+      },
+      {
+        "question": "Can HRMS software manage different employee policies and rules?",
+        "answer": "Yes. A customized HRMS can be designed to accommodate different organizational rules and workflows for attendance, leave, payroll, departments, employee types, and other HR processes according to the business requirements."
+      },
+      {
+        "question": "Does Web Karigor provide HRMS maintenance and support?",
+        "answer": "Yes. Depending on the project scope and business requirements, Web Karigor can provide HRMS maintenance, technical support, feature enhancements, performance improvements, scalability support, and ongoing development."
+      }
+    ]
+  },
   "pricing": {
     "eyebrow": "Pricing Plan",
     "title": "ERP Software Pricing for Your Business",
