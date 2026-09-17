@@ -316,57 +316,128 @@
         ]
     },
     "pricing": {
-        "eyebrow": "Pricing Plan",
-        "title": "ERP Software Pricing for Your Business",
-        "description": "Web Karigor designs ERP for your business needs; you receive a system that fits your business and a project cost that reflects your needs.",
-        "recommendedLabel": "Recommended",
-        "cta": "Purchase",
-        "ctaHref": "#contact",
+        "badge": "Pricing Plans",
+        "headingAccent": "What Is Website",
+        "headingTitle": "Development Cost in Bangladesh?",
+        "description": "We calculate the cost of website development in Bangladesh based on the project's scope, functionality, design, and technical complexity.",
+        "popularLabel": "Most popular",
+        "featuresHeading": "What's Included:",
+        "cancelLabel": "Cancel any time",
+        "noExtraFee": "Everything Included",
+        "billing": {
+            "monthly": "Monthly",
+            "quarterly": "Yearly",
+            "saveBadge": "Save 25%"
+        },
         "plans": [
             {
-                "name": "Basic",
-                "price": "$29",
-                "period": "/mo",
-                "recommended": false,
-                "priceColor": "dark",
-                "description": "Essential ERP modules for small teams getting started.",
+                "id": "starter",
+                "title": "Starter",
+                "description": "Perfect for small projects or testing the waters",
+                "availability": "3 Slots Available, Hurry!",
+                "availabilityTone": "green",
+                "cta": "Explore Package",
+                "price": {
+                    "monthly": "$2600",
+                    "quarterly": "$2340"
+                },
                 "features": [
-                    "Core dashboard access",
-                    "Up to 5 user seats",
-                    "Basic reporting",
-                    "Email support",
-                    "Standard integrations"
-                ]
+                    "40 hours of dedicated design support",
+                    "Full-Stack Delivery Team",
+                    "All design services included",
+                    "Daily communication Slack + Loom",
+                    "1 active request per team member",
+                    "Hours rollover",
+                    "2 meetings per month",
+                    "Same-day response time",
+                    "Unlimited requests",
+                    "Weekly updates and monthly reports",
+                    "MUSE'S Hub (Coming soon)**"
+                ],
+                "highlight": false,
+                "customPrice": false
             },
             {
-                "name": "Standard",
-                "price": "$99",
-                "period": "/mo",
-                "recommended": true,
-                "priceColor": "green",
-                "description": "Full-featured ERP for growing businesses with multiple departments.",
+                "id": "accelerate",
+                "title": "Accelerate",
+                "description": "For growing teams with consistent design needs",
+                "availability": "2 Slots Available, Hurry!",
+                "availabilityTone": "red",
+                "availabilityMarquee": true,
+                "cta": "Explore Package",
+                "price": {
+                    "monthly": "$4800",
+                    "quarterly": "$4320"
+                },
                 "features": [
-                    "All Basic features",
-                    "Unlimited project use",
-                    "Advanced analytics",
-                    "Multivariate components",
-                    "Priority phone support"
-                ]
+                    "80 hours of dedicated design support",
+                    "Full-Stack Delivery Team",
+                    "All design services included",
+                    "Daily communication Slack + Loom",
+                    "1 active request per team member",
+                    "Hours rollover",
+                    "Weekly sync meetings",
+                    "Same-day response time",
+                    "Unlimited requests",
+                    "Weekly updates and monthly reports",
+                    "MUSE'S Hub (Coming soon)**"
+                ],
+                "highlight": true,
+                "customPrice": false
             },
             {
-                "name": "Pro",
-                "price": "$299",
-                "period": "/mo",
-                "recommended": false,
-                "priceColor": "blue",
-                "description": "Enterprise-grade ERP with custom modules and dedicated support.",
+                "id": "scale",
+                "title": "Scale",
+                "description": "For established businesses with high-volume design demands",
+                "availability": "Limited availability",
+                "availabilityTone": "gray",
+                "cta": "Explore Package",
+                "price": {
+                    "monthly": "$7800",
+                    "quarterly": "$7020"
+                },
                 "features": [
-                    "All Standard features",
-                    "Custom module development",
-                    "Dedicated account manager",
-                    "SLA-backed uptime",
-                    "On-site training"
-                ]
+                    "160 hours of dedicated design support",
+                    "Full-Stack Delivery Team",
+                    "All design services included",
+                    "Daily communication Slack + Loom",
+                    "1 active request per team member",
+                    "Hours rollover",
+                    "Up to 8 meetings per month",
+                    "Same-day response time",
+                    "Unlimited requests",
+                    "Weekly updates and monthly reports",
+                    "MUSE'S Hub (Coming soon)**"
+                ],
+                "highlight": false,
+                "customPrice": false
+            },
+            {
+                "id": "enterprise",
+                "title": "Enterprise",
+                "description": "Tailored for large organizations with custom requirements",
+                "availability": "Limited availability",
+                "availabilityTone": "gray",
+                "cta": "Contact Us",
+                "price": {
+                    "monthly": "",
+                    "quarterly": ""
+                },
+                "features": [
+                    "Tailored support based on your needs",
+                    "Full-Stack Delivery Team",
+                    "All design services included",
+                    "Daily communication Slack + Loom",
+                    "1 active request per team member",
+                    "Hours rollover",
+                    "Flexible meetings based on your needs",
+                    "Same-day response time",
+                    "Unlimited requests",
+                    "Weekly updates and monthly reports",
+                    "MUSE'S Hub (Coming soon)**"
+                ],
+                "highlight": false,
+                "customPrice": true
             }
         ]
     },
