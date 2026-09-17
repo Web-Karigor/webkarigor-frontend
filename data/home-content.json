@@ -609,41 +609,41 @@
     "cardAriaLabel": "Team member",
     "members": [
       {
-        "src": "/team/imran.jpeg",
-        "name": "Imran Hossain",
-        "designation": "Software Engineer"
+        "src": "/team/sawan.jpg",
+        "name": "Shaon Ahmed",
+        "designation": "Lead Software Engineer"
       },
       {
-        "src": "/team/faruque.jpeg",
-        "name": "Rezwan Faruque",
+        "src": "/team/faruque.jpg",
+        "name": "K M Rezwanul Ehsan Faruque",
         "designation": "Sr. Software Engineer"
       },
       {
-        "src": "/team/sajjad.jpeg",
-        "name": "Sajjad",
-        "designation": "Software Engineer"
+        "src": "/team/sajjad.jpg",
+        "name": "Sajjad Hossain",
+        "designation": "Laravel Developer"
       },
       {
-        "src": "/team/juel.jpeg",
-        "name": "Juel",
+        "src": "/team/juel.jpg",
+        "name": "Mujahid Juel",
         "designation": "Front End Developer"
       }
     ],
     "members2": [
       {
-        "src": "/team/aryan.jpeg",
-        "name": "Aryan",
-        "designation": "UI/UX Designer"
+        "src": "/team/aryan.jpg",
+        "name": "Sha Arian",
+        "designation": "Product Designer"
       },
       {
-        "src": "/team/zishan.jpeg",
-        "name": "Zishan",
-        "designation": "Video Editor"
+        "src": "/team/imran.jpg",
+        "name": "Imran Hossain",
+        "designation": "Web Development Specialist"
       },
       {
-        "src": "/team/jayaed.jpeg",
-        "name": "Jayaed",
-        "designation": "Junior Video Editor"
+        "src": "/team/zishan.jpg",
+        "name": "Nazmul Ahmed Jisan",
+        "designation": "Motion & Visual Storyteller"
       }
     ]
   },
