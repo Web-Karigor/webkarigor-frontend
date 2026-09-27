@@ -4,6 +4,7 @@ import "./globals.css";
 import "@/styles/section-shared.css";
 import "@/styles/pricing.css";
 import Navbar from "@/components/home/Navbar";
+import Footer from "@/components/home/Footer";
 import StickyNav from "@/components/home/StickuNav";
 import FloatingActions from "@/components/FloatingActions";
 import GlobalCursor from "@/components/GlobalCursor";
@@ -70,6 +71,7 @@ export default function RootLayout({
           <div className="relative z-10 overflow-x-clip">
             <Navbar />
             <main className="pb-[88px] lg:pb-0">{children}</main>
+            <Footer />
           </div>
           <StickyNav />
           <FloatingActions />

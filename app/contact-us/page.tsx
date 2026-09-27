@@ -13,7 +13,6 @@ const FAQ = dynamic(() => import("@/components/home/FAQ"));
 const HomeConsultation = dynamic(
   () => import("@/components/home/HomeConsultation"),
 );
-const Footer = dynamic(() => import("@/components/home/Footer"));
 
 export const metadata: Metadata = {
   title: contactContent.metadata.title,
@@ -29,7 +28,6 @@ export default function ContactUsPage() {
       <ContactStories />
       <FAQ className="bg-[#FFFEFB]" ctaHref="#contact" />
       <HomeConsultation />
-      <Footer />
     </div>
   );
 }

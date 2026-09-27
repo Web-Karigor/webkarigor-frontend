@@ -47,12 +47,6 @@ const MENU_TO_ITEM_ID: Record<NavMenu, string> = {
   more: "more",
 };
 
-const MENU_TO_ACTIVE: Record<NavMenu, string> = {
-  projects: "case",
-  services: "service",
-  more: "more",
-};
-
 const NAV_ITEMS: NavItem[] = [
   { id: "case", label: "Projects", menu: "projects", href: "/projects", kind: "menu" },
   { id: "service", label: "Services", menu: "services", href: "/service", kind: "menu" },
@@ -132,7 +126,6 @@ export default function Navbar() {
         hoverCloseTimerRef.current = null;
       }
       setOpenMenu(menu);
-      setActiveId(MENU_TO_ACTIVE[menu]);
       setDropdownOffset(measureDropdownOffset(menu));
     },
     [measureDropdownOffset],
@@ -143,7 +136,6 @@ export default function Navbar() {
       setOpenMenu((curr) => {
         const next = curr === menu ? null : menu;
         if (next) {
-          setActiveId(MENU_TO_ACTIVE[next]);
           setDropdownOffset(measureDropdownOffset(next));
         } else {
           setDropdownOffset(null);
@@ -351,7 +343,7 @@ export default function Navbar() {
 
                         if (item.kind === "menu") {
                           const isOpen = openMenu === item.menu;
-                          const menuClass = `navbar-link navbar-menu-trigger${isActive || isOpen ? " is-active" : ""
+                          const menuClass = `navbar-link navbar-menu-trigger${isActive ? " is-active" : ""
                             }`;
                           const menuLabel = (
                             <span className="inline-flex items-center gap-1.5">

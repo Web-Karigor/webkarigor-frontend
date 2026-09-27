@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Footer from "@/components/home/Footer";
 import ProjectHoverCursor from "@/components/projects/ProjectHoverCursor";
 import ProjectsGrid from "@/components/projects/ProjectsGrid";
 import ProjectsHero from "@/components/projects/ProjectsHero";
@@ -14,7 +13,6 @@ export default function ProjectsPage() {
       <ProjectHoverCursor />
       <ProjectsHero />
       <ProjectsGrid />
-      <Footer />
     </div>
   );
 }

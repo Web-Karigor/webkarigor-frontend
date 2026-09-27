@@ -19,7 +19,6 @@ const PricingSection = dynamic(() => import("@/components/home/PricingSection"))
 const HomeBanner = dynamic(() => import("@/components/home/HomeBanner"));
 const FAQ = dynamic(() => import("@/components/home/FAQ"));
 const HomeConsultation = dynamic(() => import("@/components/home/HomeConsultation"));
-const Footer = dynamic(() => import("@/components/home/Footer"));
 
 export default function Home() {
   return (
@@ -46,7 +45,6 @@ export default function Home() {
       <HomeBanner />
       <FAQ />
       <HomeConsultation />
-      <Footer />
     </div>
   );
 }

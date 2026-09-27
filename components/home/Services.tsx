@@ -27,8 +27,7 @@ const {
   items: services,
 } = homeContent.services;
 
-const VIEW_PROJECT_LABEL = "View Details";
-const VIEW_PROJECT_HREF = "/projects";
+const VIEW_DETAILS_LABEL = "View Details";
 
 function CtaArrow() {
   return (
@@ -202,7 +201,7 @@ const ServicesListPanel = memo(function ServicesListPanel({
 
           return (
             <li
-              key={`${index}-${service.link}`}
+              key={`${index}-${service.title}`}
               className={`services-story-list-item${isActive ? " is-active" : ""}`}
             >
               <h3 className="services-story-list-title">{fullTitle}</h3>
@@ -211,18 +210,20 @@ const ServicesListPanel = memo(function ServicesListPanel({
               <div className="services-story-list-desc-wrap" aria-hidden={!isActive}>
                 <div className="services-story-list-desc-inner">
                   <p className="services-story-list-desc">{service.desc}</p>
-                  <div className="services-story-list-cta-slot">
-                    <div className="services-story-list-cta-slot-inner">
-                      <Link
-                        href={VIEW_PROJECT_HREF}
-                        className="services-story-list-cta"
-                        tabIndex={isActive ? 0 : -1}
-                      >
-                        <span>{VIEW_PROJECT_LABEL}</span>
-                        <CtaArrow />
-                      </Link>
+                  {service.link ? (
+                    <div className="services-story-list-cta-slot">
+                      <div className="services-story-list-cta-slot-inner">
+                        <Link
+                          href={service.link}
+                          className="services-story-list-cta"
+                          tabIndex={isActive ? 0 : -1}
+                        >
+                          <span>{VIEW_DETAILS_LABEL}</span>
+                          <CtaArrow />
+                        </Link>
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
                 </div>
               </div>
             </li>
@@ -263,35 +264,60 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
       className="services-story-image-group"
       style={{ scale, opacity }}
     >
-      <Link
-        href={VIEW_PROJECT_HREF}
-        data-project-cursor
-        className="services-story-img services-story-img--primary"
-        aria-label={`${service.title} — view projects`}
-      >
-        <Image
-          src={service.images[0]}
-          alt={`${service.title} preview`}
-          fill
-          sizes="(max-width: 1023px) 100vw, 420px"
-          className="object-cover object-top"
-          priority={eager}
-        />
-      </Link>
-      <Link
-        href={VIEW_PROJECT_HREF}
-        data-project-cursor
-        className="services-story-img services-story-img--secondary"
-        aria-label={`${service.title} — view projects`}
-      >
-        <Image
-          src={service.images[1]}
-          alt={`${service.title} detail`}
-          fill
-          sizes="(max-width: 1023px) 100vw, 360px"
-          className="object-cover object-top"
-        />
-      </Link>
+      {service.link ? (
+        <Link
+          href={service.link}
+          data-project-cursor
+          className="services-story-img services-story-img--primary"
+          aria-label={`${service.title} — view details`}
+        >
+          <Image
+            src={service.images[0]}
+            alt={`${service.title} preview`}
+            fill
+            sizes="(max-width: 1023px) 100vw, 420px"
+            className="object-cover object-top"
+            priority={eager}
+          />
+        </Link>
+      ) : (
+        <div className="services-story-img services-story-img--primary">
+          <Image
+            src={service.images[0]}
+            alt={`${service.title} preview`}
+            fill
+            sizes="(max-width: 1023px) 100vw, 420px"
+            className="object-cover object-top"
+            priority={eager}
+          />
+        </div>
+      )}
+      {service.link ? (
+        <Link
+          href={service.link}
+          data-project-cursor
+          className="services-story-img services-story-img--secondary"
+          aria-label={`${service.title} — view details`}
+        >
+          <Image
+            src={service.images[1]}
+            alt={`${service.title} detail`}
+            fill
+            sizes="(max-width: 1023px) 100vw, 360px"
+            className="object-cover object-top"
+          />
+        </Link>
+      ) : (
+        <div className="services-story-img services-story-img--secondary">
+          <Image
+            src={service.images[1]}
+            alt={`${service.title} detail`}
+            fill
+            sizes="(max-width: 1023px) 100vw, 360px"
+            className="object-cover object-top"
+          />
+        </div>
+      )}
     </motion.div>
   );
 });
@@ -325,7 +351,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
       >
         {services.map((service, index) => (
           <ServiceImageGroup
-            key={`${index}-${service.link}`}
+            key={`${index}-${service.title}`}
             service={service}
             index={index}
             progress={progress}
@@ -354,30 +380,45 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
   return (
     <article className="services-story-mobile-slide">
       <div className="services-story-mobile-slide-image">
-        <Link
-          href={VIEW_PROJECT_HREF}
-          className="relative block h-full w-full"
-          aria-label={`${fullTitle} — view projects`}
-        >
-          <Image
-            src={service.images[0]}
-            alt={`${service.title} preview`}
-            fill
-            sizes="100vw"
-            className="object-cover object-top"
-            priority={eager}
-          />
-        </Link>
+        {service.link ? (
+          <Link
+            href={service.link}
+            className="relative block h-full w-full"
+            aria-label={`${fullTitle} — view details`}
+          >
+            <Image
+              src={service.images[0]}
+              alt={`${service.title} preview`}
+              fill
+              sizes="100vw"
+              className="object-cover object-top"
+              priority={eager}
+            />
+          </Link>
+        ) : (
+          <div className="relative h-full w-full">
+            <Image
+              src={service.images[0]}
+              alt={`${service.title} preview`}
+              fill
+              sizes="100vw"
+              className="object-cover object-top"
+              priority={eager}
+            />
+          </div>
+        )}
       </div>
 
       <div className="services-story-mobile-slide-text">
         <h3 className="services-story-mobile-slide-title">{fullTitle}</h3>
         <p className="services-story-mobile-slide-subtitle">{service.subtitle}</p>
         <p className="services-story-mobile-slide-desc">{service.desc}</p>
-        <Link href={VIEW_PROJECT_HREF} className="services-story-list-cta">
-          <span>{VIEW_PROJECT_LABEL}</span>
-          <CtaArrow />
-        </Link>
+        {service.link ? (
+          <Link href={service.link} className="services-story-list-cta">
+            <span>{VIEW_DETAILS_LABEL}</span>
+            <CtaArrow />
+          </Link>
+        ) : null}
       </div>
     </article>
   );
@@ -398,7 +439,7 @@ const ServicesMobileTrack = memo(function ServicesMobileTrack({
       <div ref={stackRef} className="services-story-mobile-track">
         {services.map((service, index) => (
           <ServicesMobileSlide
-            key={`mobile-${index}-${service.link}`}
+            key={`mobile-${index}-${service.title}`}
             service={service}
             eager={index === 0}
           />

@@ -8,7 +8,6 @@ import ErpPricing from "@/components/services/erp/ErpPricing";
 import ErpReviews from "@/components/services/erp/ErpReviews";
 import ErpTeam from "@/components/services/erp/ErpTeam";
 import HomeConsultation from "@/components/home/HomeConsultation";
-import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { ERP_METADATA } from "@/lib/erp-data";
 import "@/styles/service-pages-laptop.css";
@@ -28,7 +27,6 @@ export default function ErpServicePage() {
       <FAQ className="bg-white" ctaHref="#contact" />
       <ServiceMarquee />
       <HomeConsultation />
-      <ServiceFooter />
     </div>
   );
 }

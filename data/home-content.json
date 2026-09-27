@@ -153,7 +153,7 @@
         "highlight": "Development",
         "subtitle": "Website Design and Development Services",
         "desc": "We offer website design and development solutions to build professional, responsive, SEO friendly websites to boost online presence and drive business growth.",
-        "link": "/services/web-design",
+        "link": "/service/website-design-development",
         "images": [
           "/services/web-development-1.jpg",
           "/services/web-development-2.jpg"
@@ -164,7 +164,7 @@
         "highlight": "Design",
         "subtitle": "Human-centered design that elevates every interaction.",
         "desc": "Web design that prioritizes the user experience, designing websites that are responsive, easy to use, and have a delightful user experience, while minimizing friction and making every interaction clear, accessible, and enjoyable.",
-        "link": "/services/ui-ux",
+        "link": "",
         "images": [
           "/services/ux-ui-design-1.jpg",
           "/services/ux-ui-design-2.jpg"
@@ -175,7 +175,7 @@
         "highlight": "Development",
         "subtitle": "CRM Software Development Services",
         "desc": "We create custom CRM software solutions that enable businesses to leverage intelligent technology to manage customer relationships, automate sales processes, enhance communication, and create better customer experiences.",
-        "link": "/services/logo-branding",
+        "link": "/service/crm",
         "images": [
           "/services/crm-1.jpg",
           "/services/crm-2.jpg"
@@ -186,7 +186,7 @@
         "highlight": "Development",
         "subtitle": "HR Software in Bangladesh",
         "desc": "HR Software Development in Bangladesh is the process of creating software solutions for human resource management to streamline HR processes, attendance systems, payroll management, leave tracking, and employee management.",
-        "link": "/services/framer-design",
+        "link": "/service/hrm",
         "images": [
           "/services/hrm-1.jpg",
           "/services/hrm-2.jpg"
@@ -197,7 +197,7 @@
         "highlight": "Development",
         "subtitle": "ERP Software in Bangladesh",
         "desc": "With scalable business management systems, our ERP software in Bangladesh enables businesses to streamline operations, gain visibility into workflows, manage resources, and make informed decisions",
-        "link": "/services/framer-design",
+        "link": "/service/erp",
         "images": [
           "/services/erp-1.jpg",
           "/services/erp-2.jpg"
@@ -208,7 +208,7 @@
         "highlight": "Development",
         "subtitle": "Custom Software Development Services",
         "desc": "Our custom software development services provide organizations with customized digital solutions that cater to their distinctive business needs, enabling them to automate processes and create scalable technology platforms.",
-        "link": "/services/framer-design",
+        "link": "/service/software-development",
         "images": [
           "/services/custom-software-1.jpg",
           "/services/custom-software-2.jpg"

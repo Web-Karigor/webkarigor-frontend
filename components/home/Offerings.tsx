@@ -214,52 +214,51 @@ export default function Offerings() {
               <ArrowLeft className="h-[22px] w-[22px] stroke-[1.5]" aria-hidden />
             </button>
 
-            <div
-              ref={viewportRef}
-              className={`relative flex w-full gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-6 [&::-webkit-scrollbar]:hidden ${
-                dragging
-                  ? "cursor-grabbing select-none"
-                  : "cursor-grab scroll-smooth"
-              }`}
-              style={{ touchAction: "pan-y" }}
-              onMouseEnter={() => pauseAuto()}
-              onMouseLeave={() => {
-                if (!dragRef.current) pauseAuto(AUTO_SCROLL_MS);
-              }}
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={onPointerUp}
-              onPointerCancel={onPointerUp}
-            >
-              {/* Spacer so cards clear the arrow on large screens */}
-              <div className="hidden w-[210px] shrink-0 lg:block" aria-hidden />
+            <div className="lg:pl-[220px]">
+              <div
+                ref={viewportRef}
+                className={`relative flex w-full gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-6 [&::-webkit-scrollbar]:hidden ${
+                  dragging
+                    ? "cursor-grabbing select-none"
+                    : "cursor-grab scroll-smooth"
+                }`}
+                style={{ touchAction: "pan-y" }}
+                onMouseEnter={() => pauseAuto()}
+                onMouseLeave={() => {
+                  if (!dragRef.current) pauseAuto(AUTO_SCROLL_MS);
+                }}
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                onPointerCancel={onPointerUp}
+              >
+                {items.map((item, index) => {
+                  const Icon = OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS];
+                  return (
+                    <article
+                      key={`${item.title}-${index}`}
+                      data-service-offering-card
+                      className={`flex h-[min(320px,70vw)] min-h-[260px] w-[min(300px,calc(100vw-64px))] shrink-0 flex-col gap-[10px] rounded-[12px] px-5 py-6 sm:h-[320px] ${
+                        item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-[14px]">
+                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
+                          <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
+                        </span>
+                        <h3 className="m-0 font-montserrat text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
+                          {item.title}
+                        </h3>
+                      </div>
+                      <p className="m-0 font-montserrat text-[0.9375rem] leading-[1.65] text-[#111827]">
+                        {item.description}
+                      </p>
+                    </article>
+                  );
+                })}
 
-              {items.map((item, index) => {
-                const Icon = OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS];
-                return (
-                  <article
-                    key={`${item.title}-${index}`}
-                    data-service-offering-card
-                    className={`flex h-[min(320px,70vw)] min-h-[260px] w-[min(300px,calc(100vw-64px))] shrink-0 flex-col gap-[10px] rounded-[12px] px-5 py-6 sm:h-[320px] ${
-                      item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"
-                    }`}
-                  >
-                    <div className="flex items-center gap-[14px]">
-                      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
-                        <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
-                      </span>
-                      <h3 className="m-0 font-montserrat text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
-                        {item.title}
-                      </h3>
-                    </div>
-                    <p className="m-0 font-montserrat text-[0.9375rem] leading-[1.65] text-[#111827]">
-                      {item.description}
-                    </p>
-                  </article>
-                );
-              })}
-
-              <div className="w-4 shrink-0 sm:w-6" aria-hidden />
+                <div className="w-4 shrink-0 sm:w-6" aria-hidden />
+              </div>
             </div>
           </div>
         </div>

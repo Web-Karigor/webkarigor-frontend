@@ -29,9 +29,6 @@ const FAQ = dynamic(() => import("@/components/services/crm/FAQ"));
 const HomeConsultation = dynamic(
   () => import("@/components/home/HomeConsultation"),
 );
-const Footer = dynamic(
-  () => import("@/components/services/crm/Footer"),
-);
 
 export const metadata: Metadata = {
   title: servicesContent.metadata.title,
@@ -55,7 +52,6 @@ export default function CrmPage() {
       <FAQ className="bg-white" ctaHref="#contact" />
       <Marquee />
       <HomeConsultation />
-      <Footer />
     </div>
   );
 }

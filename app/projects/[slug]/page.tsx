@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Footer from "@/components/home/Footer";
 import ProjectHoverCursor from "@/components/projects/ProjectHoverCursor";
 import ProjectDetailsBody from "@/components/projects/details/ProjectDetailsBody";
 import ProjectDetailsCredits from "@/components/projects/details/ProjectDetailsCredits";
@@ -52,7 +51,6 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
       <ProjectDetailsTestimonial project={project} />
       <ProjectDetailsCTA project={project} />
       <ProjectDetailsRelated project={project} />
-      <Footer />
     </div>
   );
 }

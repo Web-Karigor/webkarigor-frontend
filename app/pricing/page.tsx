@@ -9,7 +9,6 @@ import FAQ from "@/components/home/FAQ";
 import PricingSection from "@/components/home/PricingSection";
 import TrustedFounders from "@/components/home/TrustedFounders";
 import HomeConsultation from "@/components/home/HomeConsultation";
-import Footer from "@/components/home/Footer";
 import { PRICING_METADATA } from "@/lib/pricing-data";
 import "@/styles/site-pages-laptop.css";
 
@@ -23,15 +22,14 @@ export default function PricingPage() {
     <div className="site-laptop bg-[#FFFDF6]">
       <ProjectHoverCursor />
       <PricingHero />
-      {/* <PricingSection ctaHref="#contact" /> */}
-      {/* <PricingCustomBanner /> */}
-      {/* <PricingPackage /> */}
-      {/* <TrustedFounders /> */}
-      {/* <PricingBuiltFor /> */}
-      {/* <PricingFeaturedWork /> */}
-      {/* <FAQ /> */}
-      {/* <HomeConsultation /> */}
-      <Footer />
+      <PricingSection ctaHref="#contact" />
+      <PricingCustomBanner />
+      <PricingPackage />
+      <TrustedFounders />
+      <PricingBuiltFor />
+      <PricingFeaturedWork />
+      <FAQ />
+      <HomeConsultation />
     </div>
   );
 }

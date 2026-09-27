@@ -7,7 +7,6 @@ import EcoPricing from "@/components/services/ecommerce/EcoPricing";
 import EcoReviews from "@/components/services/ecommerce/EcoReviews";
 import EcoTeam from "@/components/services/ecommerce/EcoTeam";
 import EcoTechStack from "@/components/services/ecommerce/EcoTechStack";
-import ServiceFooter from "@/components/services/ServiceFooter";
 import HomeConsultation from "@/components/home/HomeConsultation";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { ECO_METADATA } from "@/lib/ecommerce-data";
@@ -28,7 +27,6 @@ export default function EcommerceServicePage() {
       <FAQ className="bg-white" ctaHref="#contact" />
       <ServiceMarquee />
       <HomeConsultation />
-      <ServiceFooter />
     </div>
   );
 }

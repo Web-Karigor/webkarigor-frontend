@@ -9,7 +9,6 @@ import Team from "@/components/services/software-development/Team";
 import Trusted from "@/components/services/software-development/Trusted";
 import WhyChoose from "@/components/services/software-development/WhyChoose";
 import HomeConsultation from "@/components/home/HomeConsultation";
-import ServiceFooter from "@/components/services/ServiceFooter";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 // import { MANPOWER_METADATA } from "@/lib/manpower-data";
 import "@/styles/service-pages-laptop.css";
@@ -30,7 +29,6 @@ export default function SoftwareDevelopmentServicePage() {
       <FAQ className="bg-white" ctaHref="#contact" />
       <ServiceMarquee />
       <HomeConsultation />
-      <ServiceFooter />
     </div>
   );
 }

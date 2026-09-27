@@ -27,9 +27,6 @@ const FAQ = dynamic(() => import("@/components/home/FAQ"));
 const HomeConsultation = dynamic(
   () => import("@/components/home/HomeConsultation"),
 );
-const ServiceFooter = dynamic(
-  () => import("@/components/services/ServiceFooter"),
-);
 
 export const metadata: Metadata = {
   title: servicesContent.metadata.title,
@@ -52,7 +49,6 @@ export default function ServicePage() {
       <FAQ className="bg-white" ctaHref="#contact" />
       <ServiceMarquee />
       <HomeConsultation />
-      <ServiceFooter />
     </div>
   );
 }

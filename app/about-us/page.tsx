@@ -13,7 +13,6 @@ const Team = dynamic(() => import("@/components/home/Team"));
 const AboutWhyChoose = dynamic(() => import("@/components/about/AboutWhyChoose"));
 const FAQ = dynamic(() => import("@/components/home/FAQ"));
 const HomeConsultation = dynamic(() => import("@/components/home/HomeConsultation"));
-const Footer = dynamic(() => import("@/components/home/Footer"));
 
 export const metadata: Metadata = {
   title: ABOUT_METADATA.title,
@@ -31,7 +30,6 @@ export default function AboutUsPage() {
       <AboutWhyChoose />
       {/* <FAQ /> */}
       <HomeConsultation />
-      <Footer />
     </div>
   );
 }
