@@ -919,24 +919,24 @@
         "title": "Services",
         "links": [
           {
-            "label": "Product Design",
-            "href": "/services/product-design"
+            "label": "Website Design & Development",
+            "href": "/services/website-design"
           },
           {
-            "label": "Product Development",
-            "href": "/services/product-development"
+            "label": "ERP",
+            "href": "/services/erp"
           },
           {
-            "label": "Branding",
-            "href": "/services/branding"
+            "label": "HRM",
+            "href": "/services/hrm"
           },
           {
-            "label": "Marketing",
-            "href": "/services/marketing"
+            "label": "Software Development",
+            "href": "/services/software-development"
           },
           {
-            "label": "Consultancy",
-            "href": "/services/consultancy"
+            "label": "CRM",
+            "href": "/services/crm"
           }
         ]
       },
@@ -945,31 +945,31 @@
         "links": [
           {
             "label": "E-commerce",
-            "href": "/service/ecommerce"
+            "href": "#"
           },
           {
             "label": "ERP",
-            "href": "/service/erp"
+            "href": "#"
           },
           {
             "label": "Manpower",
-            "href": "/service/manpower"
+            "href": "#"
           },
           {
             "label": "Healthcare",
-            "href": "/industries/healthcare"
+            "href": "#"
           },
           {
             "label": "Fintech",
-            "href": "/industries/fintech"
+            "href": "#"
           },
           {
             "label": "Edtech",
-            "href": "/industries/edtech"
+            "href": "#"
           },
           {
             "label": "CMS",
-            "href": "/industries/cms"
+            "href": "#"
           }
         ]
       },
@@ -991,10 +991,6 @@
           {
             "label": "Contact Us",
             "href": "/contact-us"
-          },
-          {
-            "label": "Our Policies",
-            "href": "/policies"
           }
         ]
       }
