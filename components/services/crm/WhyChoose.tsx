@@ -1,5 +1,10 @@
+"use client";
+
+"use client";
+
 import Image from "next/image";
 import { LayoutGrid, Target, TrendingUp, Users, type LucideIcon } from "lucide-react";
+import { openConsultationModal } from "@/components/home/ConsultationModal";
 import Content from "@/data/crm-content.json";
 
 const {
@@ -25,60 +30,73 @@ const FEATURE_CARDS = features.map((feature) => ({
 
 function HireUsBadge() {
   return (
-    <div className="relative h-full w-full drop-shadow-[0_12px_28px_rgba(4,96,67,0.22)]">
-      <svg viewBox="0 0 200 200" className="h-full w-full" aria-hidden>
+    <button
+      type="button"
+      onClick={openConsultationModal}
+      className="group relative block aspect-square h-full w-full cursor-pointer border-0 bg-transparent p-0 drop-shadow-[0_12px_28px_rgba(4,96,67,0.22)]"
+      aria-label="Hire us"
+    >
+      <span className="sr-only">Hire us</span>
+
+      <img
+        src="/Circle-shape.svg"
+        alt=""
+        className="pointer-events-none absolute inset-0 size-full object-contain"
+      />
+
+      <svg viewBox="0 0 188 188" className="absolute inset-0 size-full" aria-hidden>
         <defs>
           <path
-            id="hireus-circle-path"
-            d="M 100,100 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0"
+            id="crm-hireus-text-path"
+            d="M94,94 m0,-66 a66,66 0 1,1 0,132 a66,66 0 1,1 0,-132"
           />
         </defs>
-
-        <circle cx="100" cy="100" r="78" fill="#0a7d5f" />
-        {[...Array.from({ length: 28 })].map((_, i) => {
-          const angle = (360 / 28) * i - 90;
-          const rad = (angle * Math.PI) / 180;
-          const x = 100 + Math.cos(rad) * 88;
-          const y = 100 + Math.sin(rad) * 88;
-          return <circle key={i} cx={x} cy={y} r="12" fill="#0a7d5f" />;
-        })}
-        <circle cx="100" cy="100" r="76" fill="#0c8a68" />
-        <circle
-          cx="100"
-          cy="100"
-          r="78"
-          fill="none"
-          stroke="#ffffff"
-          strokeWidth="1.75"
-        />
-
-        <g
-          className="animate-hireus-spin"
-          style={{ transformOrigin: "100px 100px" }}
-        >
+        <g className="origin-center animate-[spin_18s_linear_infinite] motion-reduce:animate-none">
           {hireUsLabels.map((label, index) => (
             <text
               key={`${label}-${index}`}
-              fill="#ffffff"
-              fontSize="17.5"
+              fill="#FEFEFC"
+              fontSize="16"
               fontWeight="700"
-              letterSpacing="1"
-              fontFamily="Montserrat, sans-serif"
-              textAnchor="middle"
+              letterSpacing="1.4"
+              fontFamily="var(--font-montserrat), Montserrat, sans-serif"
             >
               <textPath
-                href="#hireus-circle-path"
-                startOffset={`${((index * 2 + 1) * 100) / 6}%`}
+                href="#crm-hireus-text-path"
+                startOffset={["16.667%", "50%", "83.333%"][index] ?? "50%"}
+                textAnchor="middle"
               >
                 {label}
               </textPath>
             </text>
           ))}
         </g>
-
-        <circle cx="100" cy="100" r="16" fill="#FFE94A" />
+        <circle
+          cx="94"
+          cy="94"
+          r="52"
+          fill="none"
+          stroke="#EBB732"
+          strokeWidth="2.2"
+        />
+        <circle
+          cx="94"
+          cy="94"
+          r="46"
+          fill="none"
+          stroke="#EBB732"
+          strokeWidth="1.2"
+          strokeDasharray="2.6 3.4"
+          strokeLinecap="round"
+        />
       </svg>
-    </div>
+
+      <span className="absolute inset-[26.5%] flex items-center justify-center rounded-full">
+        <span className="font-montserrat text-[clamp(18px,4vw,30px)] font-bold leading-none tracking-[0.02em] text-white transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-125 motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+          GO
+        </span>
+      </span>
+    </button>
   );
 }
 

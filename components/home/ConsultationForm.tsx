@@ -1,0 +1,472 @@
+"use client";
+
+import {
+  FormEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ComponentType,
+  type SVGProps,
+} from "react";
+import { usePathname } from "next/navigation";
+import * as FlagIcons from "country-flag-icons/react/3x2";
+import {
+  ArrowRight,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Globe,
+} from "lucide-react";
+import homeContent from "@/data/home-content.json";
+import {
+  COUNTRY_OPTIONS,
+  DEFAULT_COUNTRY,
+  DEFAULT_DIAL_COUNTRY,
+  type CountryOption,
+} from "@/lib/countries";
+import {
+  getQuotationErrorMessage,
+  useQuotationMutation,
+  type QuotationPayload,
+} from "@/hooks/mutations/useQuotationMutation";
+
+const { fields, schedule, submitLabel, timeSlots: TIME_SLOTS, weekdays: WEEKDAYS } =
+  homeContent.consultation;
+
+type FlagComponent = ComponentType<SVGProps<SVGSVGElement>>;
+
+function CountryFlag({
+  iso2,
+  className,
+  title,
+}: {
+  iso2: string;
+  className?: string;
+  title?: string;
+}) {
+  const Flag = (FlagIcons as Record<string, FlagComponent | undefined>)[iso2];
+  if (!Flag) return null;
+  return <Flag className={className} title={title ?? iso2} />;
+}
+
+function getCalendarCells(year: number, month: number) {
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const cells: Array<number | null> = [];
+
+  for (let i = 0; i < firstDay; i += 1) cells.push(null);
+  for (let day = 1; day <= daysInMonth; day += 1) cells.push(day);
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  return cells;
+}
+
+function parsePositiveId(value: string | null) {
+  if (!value) return null;
+  const parsed = Number(value);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : null;
+}
+
+function buildPhone(dialCode: string, raw: string) {
+  const trimmed = raw.trim();
+  if (trimmed.startsWith("+")) return trimmed.replace(/\s+/g, "");
+  const digits = trimmed.replace(/[^\d]/g, "");
+  return `${dialCode}${digits.replace(/^0+/, "")}`;
+}
+
+function formatSelectedDate(year: number, month: number, day: number) {
+  const mm = String(month + 1).padStart(2, "0");
+  const dd = String(day).padStart(2, "0");
+  return `${year}-${mm}-${dd}`;
+}
+
+function useClickOutside(
+  ref: React.RefObject<HTMLElement | null>,
+  open: boolean,
+  onClose: () => void,
+) {
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointer = (event: MouseEvent) => {
+      const target = event.target as Node | null;
+      if (target && ref.current && !ref.current.contains(target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("click", onPointer);
+    return () => document.removeEventListener("click", onPointer);
+  }, [open, onClose, ref]);
+}
+
+export default function ConsultationForm({
+  hideSchedule = false,
+  onSuccess,
+}: {
+  hideSchedule?: boolean;
+  onSuccess?: () => void;
+} = {}) {
+  const pathname = usePathname();
+  const quotation = useQuotationMutation();
+  const [dialCountry, setDialCountry] = useState<CountryOption>(DEFAULT_DIAL_COUNTRY);
+  const [region, setRegion] = useState<CountryOption>(DEFAULT_COUNTRY);
+  const [dialOpen, setDialOpen] = useState(false);
+  const [regionOpen, setRegionOpen] = useState(false);
+  const [calendarDate, setCalendarDate] = useState(() => new Date());
+  const [selectedDay, setSelectedDay] = useState(() => new Date().getDate());
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(
+    null,
+  );
+
+  const dialRef = useRef<HTMLDivElement>(null);
+  const regionRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(dialRef, dialOpen, () => setDialOpen(false));
+  useClickOutside(regionRef, regionOpen, () => setRegionOpen(false));
+
+  const calendarCells = useMemo(
+    () =>
+      hideSchedule
+        ? []
+        : getCalendarCells(calendarDate.getFullYear(), calendarDate.getMonth()),
+    [calendarDate, hideSchedule],
+  );
+
+  const monthLabel = calendarDate.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+
+  const shiftMonth = (delta: number) => {
+    setCalendarDate((current) => {
+      const next = new Date(current);
+      next.setMonth(current.getMonth() + delta);
+      return next;
+    });
+    setSelectedDay(1);
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus(null);
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const phoneRaw = String(data.get("phone") ?? "").trim();
+    const projectDetails = String(data.get("details") ?? "").trim();
+
+    if (!name || !phoneRaw) {
+      setStatus({ type: "error", text: "Name and phone are required." });
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const payload: QuotationPayload = {
+      package_id: parsePositiveId(params.get("package_id")),
+      service_id: parsePositiveId(params.get("service_id")),
+      name,
+      email: email || null,
+      phone: buildPhone(dialCountry.dialCode, phoneRaw),
+      region: region.name || null,
+      date: hideSchedule
+        ? null
+        : formatSelectedDate(
+            calendarDate.getFullYear(),
+            calendarDate.getMonth(),
+            selectedDay,
+          ),
+      project_details: projectDetails || null,
+      page: pathname || null,
+      comment: selectedTime || null,
+    };
+
+    quotation.mutate(payload, {
+      onSuccess: (response) => {
+        form.reset();
+        setDialCountry(DEFAULT_DIAL_COUNTRY);
+        setRegion(DEFAULT_COUNTRY);
+        setSelectedTime(null);
+        setCalendarDate(new Date());
+        setSelectedDay(new Date().getDate());
+        setStatus({
+          type: "success",
+          text: response.message || "Quotation created successfully",
+        });
+        onSuccess?.();
+      },
+      onError: (error) => {
+        setStatus({ type: "error", text: getQuotationErrorMessage(error) });
+      },
+    });
+  };
+
+  const phoneLabelMain = fields.phone.label.replace(/\s*\(.*\)\s*$/, "");
+  const phoneLabelHint = fields.phone.label.match(/\(([^)]+)\)/)?.[1];
+
+  return (
+    <form className="home-consultation-form" onSubmit={handleSubmit}>
+      <div className="home-consultation-form-grid home-consultation-form-grid--two">
+        <label className="home-consultation-field">
+          <span className="home-consultation-label">{fields.fullName.label}</span>
+          <input
+            type="text"
+            name="name"
+            placeholder={fields.fullName.placeholder}
+            className="home-consultation-input"
+            required
+          />
+        </label>
+
+        <label className="home-consultation-field">
+          <span className="home-consultation-label">{fields.email.label}</span>
+          <input
+            type="email"
+            name="email"
+            placeholder={fields.email.placeholder}
+            className="home-consultation-input"
+          />
+        </label>
+      </div>
+
+      <div className="home-consultation-form-grid home-consultation-form-grid--two">
+        <div className="home-consultation-field">
+          <span className="home-consultation-label">
+            {phoneLabelMain}
+            {phoneLabelHint ? (
+              <span className="home-consultation-label-hint"> ({phoneLabelHint})</span>
+            ) : null}
+          </span>
+
+          <div className="home-consultation-phone-row">
+            <div className="home-consultation-select-wrap" ref={dialRef}>
+              <button
+                type="button"
+                className="home-consultation-code-btn"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  setRegionOpen(false);
+                  setDialOpen((open) => !open);
+                }}
+                aria-expanded={dialOpen}
+                aria-haspopup="listbox"
+                aria-label={`Country code ${dialCountry.dialCode}`}
+              >
+                <Globe className="home-consultation-code-globe" aria-hidden />
+                <span className="home-consultation-code-value">{dialCountry.dialCode}</span>
+                <ChevronDown className="home-consultation-code-chevron" aria-hidden />
+              </button>
+
+              {dialOpen ? (
+                <ul
+                  className="home-consultation-select-menu"
+                  role="listbox"
+                  onMouseDown={(event) => event.stopPropagation()}
+                >
+                  {COUNTRY_OPTIONS.map((option) => (
+                    <li key={`dial-${option.iso2}`}>
+                      <button
+                        type="button"
+                        role="option"
+                        aria-selected={dialCountry.iso2 === option.iso2}
+                        className="home-consultation-select-option"
+                        onClick={() => {
+                          setDialCountry(option);
+                          setDialOpen(false);
+                        }}
+                      >
+                        <CountryFlag
+                          iso2={option.iso2}
+                          className="home-consultation-flag"
+                          title={option.name}
+                        />
+                        <span className="home-consultation-option-name">{option.name}</span>
+                        <span className="home-consultation-option-code">{option.dialCode}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder={fields.phone.placeholder}
+              className="home-consultation-input home-consultation-input--phone"
+              required
+            />
+            <input type="hidden" name="dialCode" value={dialCountry.dialCode} />
+          </div>
+        </div>
+
+        <div className="home-consultation-field">
+          <span className="home-consultation-label">{fields.region.label}</span>
+          <div className="home-consultation-select-wrap" ref={regionRef}>
+            <button
+              type="button"
+              className="home-consultation-select"
+              onClick={() => {
+                setRegionOpen((open) => !open);
+                setDialOpen(false);
+              }}
+              aria-expanded={regionOpen}
+              aria-haspopup="listbox"
+            >
+              <span className="home-consultation-select-value">
+                <CountryFlag
+                  iso2={region.iso2}
+                  className="home-consultation-flag"
+                  title={region.name}
+                />
+                <ChevronDown className="home-consultation-inline-chevron" aria-hidden />
+                <span>{region.name}</span>
+              </span>
+            </button>
+
+            {regionOpen ? (
+              <ul className="home-consultation-select-menu" role="listbox">
+                {COUNTRY_OPTIONS.map((option) => (
+                  <li key={`region-${option.iso2}`}>
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={region.iso2 === option.iso2}
+                      className="home-consultation-select-option"
+                      onClick={() => {
+                        setRegion(option);
+                        setRegionOpen(false);
+                      }}
+                    >
+                      <CountryFlag
+                        iso2={option.iso2}
+                        className="home-consultation-flag"
+                        title={option.name}
+                      />
+                      <span className="home-consultation-option-name">{option.name}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+          <input type="hidden" name="region" value={region.name} />
+        </div>
+      </div>
+
+      <label className="home-consultation-field">
+        <span className="home-consultation-label">{fields.details.label}</span>
+        <textarea
+          name="details"
+          rows={4}
+          placeholder={fields.details.placeholder}
+          className="home-consultation-textarea"
+        />
+      </label>
+
+      {!hideSchedule ? (
+        <div className="home-consultation-schedule">
+          <div className="home-consultation-schedule-panel">
+            <p className="home-consultation-schedule-title">{schedule.dateTitle}</p>
+
+            <div className="home-consultation-calendar">
+              <div className="home-consultation-calendar-head">
+                <button
+                  type="button"
+                  className="home-consultation-calendar-nav"
+                  onClick={() => shiftMonth(-1)}
+                  aria-label={schedule.prevMonthAria}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <span>{monthLabel}</span>
+                <button
+                  type="button"
+                  className="home-consultation-calendar-nav"
+                  onClick={() => shiftMonth(1)}
+                  aria-label={schedule.nextMonthAria}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+
+              <div className="home-consultation-calendar-weekdays">
+                {WEEKDAYS.map((day, index) => (
+                  <span key={`${day}-${index}`}>{day}</span>
+                ))}
+              </div>
+
+              <div className="home-consultation-calendar-grid">
+                {calendarCells.map((day, index) =>
+                  day ? (
+                    <button
+                      key={`${day}-${index}`}
+                      type="button"
+                      className={`home-consultation-calendar-day${
+                        selectedDay === day ? " is-selected" : ""
+                      }`}
+                      onClick={() => setSelectedDay(day)}
+                    >
+                      {day}
+                    </button>
+                  ) : (
+                    <span
+                      key={`empty-${index}`}
+                      className="home-consultation-calendar-day is-empty"
+                    />
+                  ),
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="home-consultation-schedule-panel">
+            <p className="home-consultation-schedule-title">
+              {schedule.timeTitle} <span>{schedule.timeOptional}</span>
+            </p>
+
+            <div className="home-consultation-times">
+              {TIME_SLOTS.map((slot) => (
+                <button
+                  key={slot}
+                  type="button"
+                  className={`home-consultation-time${
+                    selectedTime === slot ? " is-selected" : ""
+                  }`}
+                  onClick={() =>
+                    setSelectedTime((current) => (current === slot ? null : slot))
+                  }
+                >
+                  {slot}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {status ? (
+        <p
+          className={`home-consultation-status is-${status.type}`}
+          role={status.type === "error" ? "alert" : "status"}
+        >
+          {status.text}
+        </p>
+      ) : null}
+
+      <button
+        type="submit"
+        className="home-consultation-submit"
+        disabled={quotation.isPending}
+      >
+        <span>{quotation.isPending ? "Sending..." : submitLabel}</span>
+        <ArrowRight className="h-5 w-5" aria-hidden />
+      </button>
+    </form>
+  );
+}

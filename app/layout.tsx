@@ -5,10 +5,12 @@ import "@/styles/section-shared.css";
 import "@/styles/pricing.css";
 import Navbar from "@/components/home/Navbar";
 import Footer from "@/components/home/Footer";
+import ConsultationModal from "@/components/home/ConsultationModal";
 import StickyNav from "@/components/home/StickuNav";
 import FloatingActions from "@/components/FloatingActions";
 import GlobalCursor from "@/components/GlobalCursor";
 import GsapProvider from "@/components/providers/GsapProvider";
+import QueryProvider from "@/components/providers/QueryProvider";
 import homeContent from "@/data/home-content.json";
 
 const inter = Inter({
@@ -66,6 +68,7 @@ export default function RootLayout({
           relative
         `}
       >
+        <QueryProvider>
         <GsapProvider>
           <GlobalCursor />
           <div className="relative z-10 overflow-x-clip">
@@ -73,9 +76,11 @@ export default function RootLayout({
             <main className="pb-[88px] lg:pb-0">{children}</main>
             <Footer />
           </div>
+          <ConsultationModal />
           <StickyNav />
           <FloatingActions />
         </GsapProvider>
+        </QueryProvider>
       </body>
     </html>
   );
