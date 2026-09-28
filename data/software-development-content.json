@@ -120,7 +120,9 @@
   "whyChoose": {
     "eyebrow": "Why Webkarigor?",
     "title": "We Create Scalable Software For Businesses",
-    "image": "/services/why-choose-collage.png",
+    "image": "/services/service-image/web-development-why-web-krigor-1.jpg",
+    "overlayImage": "/services/service-image/web-development-why-web-krigor-2.jpg",
+    "image_2": "/services/service-image/web-development-why-web-krigor-2.jpg",
     "imageAlt": "Office collaboration and analytics screens",
     "items": [
       {
@@ -163,32 +165,22 @@
       {
         "id": "food",
         "title": "Food Delivery Storefront",
-        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/software-development-1.jpg"
       },
       {
         "id": "saas",
         "title": "Business Analytics Platform",
-        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/software-development-2.jpg"
       },
       {
         "id": "fashion",
         "title": "Fashion Ecommerce",
-        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/software-development-3.jpg"
       },
       {
         "id": "corporate",
         "title": "Corporate Landing",
-        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        "id": "dashboard",
-        "title": "Ops Dashboard",
-        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        "id": "mobile",
-        "title": "Product App UI",
-        "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/software-development-4.jpg"
       }
     ]
   },

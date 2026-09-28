@@ -9,21 +9,27 @@ const ICONS = {
   chart: BarChart3,
 } as const;
 
-/**
- * Figma left visual — just the two overlapping images (collage export).
- * Main 600×580 (top-right) + Overlay 380×367 (bottom-left).
- */
 function WhyChooseImages() {
   return (
-    <div className="relative mx-auto w-full max-w-[698px] shrink-0 lg:mx-0">
-      {/* Figma export is just the two photos overlapping (432×393 native) */}
-      <div className="relative aspect-[432/393] w-full">
+    <div className="relative mx-auto w-full max-w-[560px] shrink-0 lg:mx-0">
+      <div className="relative mx-auto aspect-[362/393] w-full max-w-[500px]">
         <Image
           src={WHY.image}
           alt={WHY.imageAlt}
-          fill
-          className="object-contain object-left object-top"
-          sizes="698px"
+          className="absolute right-0 top-0 h-[78%] w-[74%] rounded-[22px] object-cover shadow-[0_16px_35px_rgba(16,24,40,0.12)]"
+          width={600}
+          height={580}
+          sizes="(max-width: 1023px) 74vw, 370px"
+          priority={false}
+        />
+
+        <Image
+          src={WHY.overlayImage}
+          alt="Software analytics dashboard"
+          className="absolute bottom-0 left-0 z-[1] h-[51%] w-[47%] rounded-[20px] object-cover shadow-[0_16px_35px_rgba(16,24,40,0.16)]"
+          width={380}
+          height={367}
+          sizes="(max-width: 1023px) 47vw, 235px"
           priority={false}
         />
       </div>
@@ -37,7 +43,7 @@ function WhyChooseCopy() {
       <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
         {WHY.eyebrow}
       </p>
-      <h2 className="mt-3 m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
+      <h2 className="mt-3 m-0 font-montserrat text-[clamp(22px,3.2vw,28px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
         {WHY.title}
       </h2>
 
@@ -57,10 +63,10 @@ function WhyChooseCopy() {
                 <Icon className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2} aria-hidden />
               </span>
               <div className="min-w-0 pt-0.5">
-                <h3 className="m-0 font-montserrat text-[clamp(16px,1.3vw,18px)] font-bold leading-tight text-[#111827]">
+                <h4 className="m-0 font-montserrat text-[clamp(14px,1.3vw,16px)] font-bold leading-tight text-[#111827]">
                   {feature.title}
-                </h3>
-                <p className="mt-1.5 m-0 max-w-[460px] font-montserrat text-[clamp(13px,1vw,15px)] font-medium leading-[1.55] text-[#98A2B3]">
+                </h4>
+                <p className="mt-1.5 m-0 max-w-[460px] font-montserrat text-[clamp(11px,1vw,13px)] font-medium leading-[1.55] text-[#98A2B3]">
                   {feature.description}
                 </p>
               </div>
