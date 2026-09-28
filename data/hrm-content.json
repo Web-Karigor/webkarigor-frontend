@@ -14,6 +14,7 @@
     "titleLine2": "Payroll Management Software",
     "titleBrand": "In Bangladesh",
     "description": "Web Karigor creates custom-made human resource management software to fit your company's needs. As a strategic technology partner, we create secure and scalable systems that integrate employee data, attendance, shift scheduling and salary calculation into a single platform.",
+    "banner_image": "/services/service-image/hrm-hero.jpg",
     "primaryCta": {
       "label": "Start Your Project",
       "href": "#contact"
