@@ -75,7 +75,7 @@ export default function ContactStories() {
               src={active.image}
               alt={active.imageAlt}
               fill
-              className="object-cover"
+              className="object-cover object-center"
               sizes="(max-width: 900px) 100vw, 60vw"
               priority={false}
             />
