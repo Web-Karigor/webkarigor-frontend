@@ -6,13 +6,13 @@
   "hero": {
     "title": "Building Digital Products That Empower Businesses and Delight Users",
     "images": [
-      "/s1.webp",
-      "/s2.webp",
-      "/sm1.webp",
-      "/s3.webp",
-      "/s4.webp",
-      "/sm2.webp",
-      "/sm3.webp"
+      "/about-us/hero-1.jpg",
+      "/about-us/hero-2.jpg",
+      "/about-us/hero-3.jpg",
+      "/about-us/hero-4.jpg",
+      "/about-us/hero-5.jpg",
+      "/about-us/hero-6.jpg",
+      "/about-us/hero-7.jpg"
     ]
   },
   "impact": {
@@ -29,19 +29,24 @@
         "description": "Successfully delivered across diverse industries, combining thoughtful execution with a strong focus on real business outcomes."
       }
     ],
-    "mainImage": "/services/why-choose-main.jpg",
+    "mainImage": "/about-us/summery-1.jpg",
     "mainImageAlt": "Webkarigor team collaborating",
-    "gallery": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"]
+    "gallery": [
+      "/about-us/summery-2.jpg",
+      "/about-us/summery-3.jpg",
+      "/about-us/summery-4.jpg",
+      "/about-us/summery-5.jpg"
+    ]
   },
   "vision": {
     "title": "Our Vision",
     "lead": "is to turn ideas into scalable, future-ready products that drive real business growth.",
     "body": "We partner with teams who value quality, usability, and long-term success, helping businesses navigate change with confidence.",
     "images": {
-      "large": "/services/why-choose-main.jpg",
-      "top": "/sm2.webp",
-      "bottomLeft": "/sm3.webp",
-      "bottomRight": "/sm4.webp"
+      "large": "/about-us/vision-1.jpg",
+      "top": "/about-us/vision-2.jpg",
+      "bottomLeft": "/about-us/vision-3.jpg",
+      "bottomRight": "/about-us/vision-4.jpg"
     },
     "alts": {
       "large": "Team collaborating on product craft",
@@ -60,12 +65,23 @@
     "Technical Expertise"
   ],
   "team": {
-    "images": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"],
+    "images": [
+      "/sm1.webp",
+      "/sm2.webp",
+      "/sm3.webp",
+      "/sm4.webp"
+    ],
     "heading": {
       "mobileLine1": "Expert Team",
       "mobileLine2": "Big Result",
-      "desktopLeft": ["Expert", "Team"],
-      "desktopRight": ["Big", "Result"]
+      "desktopLeft": [
+        "Expert",
+        "Team"
+      ],
+      "desktopRight": [
+        "Big",
+        "Result"
+      ]
     },
     "cardAriaLabel": "Team member"
   },
