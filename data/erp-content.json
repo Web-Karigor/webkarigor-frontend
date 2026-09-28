@@ -14,6 +14,7 @@
     "titleLine2": "in Bangladesh",
     "titleBrand": "for Easy Business Processes",
     "description": "Professionally develop a scalable ERP software in Bangladesh that is tailored to streamline business operations, enhance visibility, and facilitate future growth. Integrate HR, CRM, inventory, accounting and other essential functions into a scalable ERP system that is designed to improve business management.",
+    "banner_image": "/services/service-image/erp-hero.jpg",
     "primaryCta": {
       "label": "Start Your Project",
       "href": "#contact"
@@ -243,87 +244,81 @@
       {
         "id": "food",
         "title": "Food Delivery Storefront",
-        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/erp-1.jpg"
       },
       {
         "id": "saas",
         "title": "Business Analytics Platform",
-        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/erp-2.jpg"
       },
       {
         "id": "fashion",
         "title": "Fashion Ecommerce",
-        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/erp-3.jpg"
       },
       {
         "id": "corporate",
         "title": "Corporate Landing",
-        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/erp-4.jpg"
       },
       {
         "id": "dashboard",
         "title": "Ops Dashboard",
-        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        "id": "mobile",
-        "title": "Product App UI",
-        "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80"
+        "image": "/services/service-image/erp-5.jpg"
       }
     ]
   },
-
   "faq": {
-  "badge": "Frequently Asked Questions",
-  "headingAccent": "ERP",
-  "headingTitle": "Talk to Web Karigor About Your ERP Needs",
-  "ctaText": "Talk to Web Karigor About Your ERP Needs",
-  "cta_content" : "Contact Web Karigor to discuss your ERP software development requirements and the type of ERP system your business needs.",
-  "ctaLabel": "Let's talk",
-  "ctaHref": "/contact-us",
-  "items": [
-    {
-      "question": "What is ERP software development?",
-      "answer": "ERP software development involves building a centralized business management system that connects different business processes, departments, data, and operations within a single platform. A custom ERP can be designed around the specific workflows and requirements of an organization."
-    },
-    {
-      "question": "What types of businesses can benefit from ERP software?",
-      "answer": "ERP software can support startups, growing businesses, established organizations, and enterprises. It can be particularly useful for manufacturing, garment, distribution, trading, retail, wholesale, and other businesses that need connected systems for managing their operations."
-    },
-    {
-      "question": "What modules can be included in a custom ERP system?",
-      "answer": "Depending on business requirements, an ERP system can include modules for inventory, sales, purchasing, accounting, finance, HR, payroll, attendance, CRM, manufacturing, distribution, reporting, and other operational processes."
-    },
-    {
-      "question": "Can you develop a custom ERP system for our business?",
-      "answer": "Yes. Web Karigor develops custom ERP solutions based on an organization's business processes, operational requirements, users, workflows, integrations, and future scalability needs rather than relying on a one-size-fits-all system."
-    },
-    {
-      "question": "How do you develop an ERP system from planning to implementation?",
-      "answer": "The ERP development process generally includes requirements analysis, business process planning, system architecture, UI and UX design, development, integrations, testing, deployment, and post-launch support. The exact process can vary depending on the scope and complexity of the ERP project."
-    },
-    {
-      "question": "How much does ERP software development cost in Bangladesh?",
-      "answer": "ERP development costs in Bangladesh depend on factors such as the number of modules, business complexity, level of customization, integrations, number of users, reporting requirements, technology, security requirements, and implementation scope. A detailed estimate can be prepared after understanding the project's requirements."
-    },
-    {
-      "question": "Should we choose a cloud-based ERP or an on-premise ERP?",
-      "answer": "The choice depends on your organization's infrastructure, accessibility requirements, security considerations, scalability needs, budget, and technical environment. Cloud-based and on-premise ERP systems can both be appropriate depending on the business and its operational requirements."
-    },
-    {
-      "question": "Can ERP software integrate with our existing systems?",
-      "answer": "Yes. ERP systems can be designed to integrate with existing business applications and third-party services where required. Integrations may include payment gateways, accounting systems, e-commerce platforms, APIs, external databases, logistics systems, and other business applications."
-    },
-    {
-      "question": "Can ERP software be customized as our business grows?",
-      "answer": "Yes. A well-designed ERP system can be structured to support future changes, additional modules, new users, integrations, business locations, and increased transaction volumes. The architecture and development approach should consider both current requirements and future expansion."
-    },
-    {
-      "question": "Does Web Karigor provide ERP maintenance and support after implementation?",
-      "answer": "Yes. Depending on the project scope and business requirements, Web Karigor can provide post-implementation support, maintenance, performance improvements, feature enhancements, scalability support, technical updates, and ongoing ERP development."
-    }
-  ]
-},
+    "badge": "Frequently Asked Questions",
+    "headingAccent": "ERP",
+    "headingTitle": "Talk to Web Karigor About Your ERP Needs",
+    "ctaText": "Talk to Web Karigor About Your ERP Needs",
+    "cta_content": "Contact Web Karigor to discuss your ERP software development requirements and the type of ERP system your business needs.",
+    "ctaLabel": "Let's talk",
+    "ctaHref": "/contact-us",
+    "items": [
+      {
+        "question": "What is ERP software development?",
+        "answer": "ERP software development involves building a centralized business management system that connects different business processes, departments, data, and operations within a single platform. A custom ERP can be designed around the specific workflows and requirements of an organization."
+      },
+      {
+        "question": "What types of businesses can benefit from ERP software?",
+        "answer": "ERP software can support startups, growing businesses, established organizations, and enterprises. It can be particularly useful for manufacturing, garment, distribution, trading, retail, wholesale, and other businesses that need connected systems for managing their operations."
+      },
+      {
+        "question": "What modules can be included in a custom ERP system?",
+        "answer": "Depending on business requirements, an ERP system can include modules for inventory, sales, purchasing, accounting, finance, HR, payroll, attendance, CRM, manufacturing, distribution, reporting, and other operational processes."
+      },
+      {
+        "question": "Can you develop a custom ERP system for our business?",
+        "answer": "Yes. Web Karigor develops custom ERP solutions based on an organization's business processes, operational requirements, users, workflows, integrations, and future scalability needs rather than relying on a one-size-fits-all system."
+      },
+      {
+        "question": "How do you develop an ERP system from planning to implementation?",
+        "answer": "The ERP development process generally includes requirements analysis, business process planning, system architecture, UI and UX design, development, integrations, testing, deployment, and post-launch support. The exact process can vary depending on the scope and complexity of the ERP project."
+      },
+      {
+        "question": "How much does ERP software development cost in Bangladesh?",
+        "answer": "ERP development costs in Bangladesh depend on factors such as the number of modules, business complexity, level of customization, integrations, number of users, reporting requirements, technology, security requirements, and implementation scope. A detailed estimate can be prepared after understanding the project's requirements."
+      },
+      {
+        "question": "Should we choose a cloud-based ERP or an on-premise ERP?",
+        "answer": "The choice depends on your organization's infrastructure, accessibility requirements, security considerations, scalability needs, budget, and technical environment. Cloud-based and on-premise ERP systems can both be appropriate depending on the business and its operational requirements."
+      },
+      {
+        "question": "Can ERP software integrate with our existing systems?",
+        "answer": "Yes. ERP systems can be designed to integrate with existing business applications and third-party services where required. Integrations may include payment gateways, accounting systems, e-commerce platforms, APIs, external databases, logistics systems, and other business applications."
+      },
+      {
+        "question": "Can ERP software be customized as our business grows?",
+        "answer": "Yes. A well-designed ERP system can be structured to support future changes, additional modules, new users, integrations, business locations, and increased transaction volumes. The architecture and development approach should consider both current requirements and future expansion."
+      },
+      {
+        "question": "Does Web Karigor provide ERP maintenance and support after implementation?",
+        "answer": "Yes. Depending on the project scope and business requirements, Web Karigor can provide post-implementation support, maintenance, performance improvements, feature enhancements, scalability support, technical updates, and ongoing ERP development."
+      }
+    ]
+  },
   "reviews": {
     "title": "Customers Who Loved Working With Us",
     "items": [

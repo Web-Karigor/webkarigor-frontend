@@ -56,23 +56,6 @@ export default function Hero() {
     >
       {/* Desktop visual — image flush to gradient bottom + doodles */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 top-0 z-[2] mx-auto hidden h-full w-full max-w-[1920px] lg:block">
-        <Image
-          src={HERO.heroImage}
-          alt={HERO.heroImageAlt}
-          width={HERO_LAYOUT.width}
-          height={HERO_LAYOUT.height}
-          priority
-          className="mp-hero-visual absolute object-contain object-bottom"
-          style={{
-            right: 0,
-            bottom: 0,
-            width: "min(869px, 48%)",
-            height: "auto",
-            maxHeight: "100%",
-          }}
-          sizes="(max-width: 1280px) 48vw, 629px"
-        />
-
         {DOODLE_LAYOUT.map((doodle, i) => (
           <Image
             key={`doodle-${i}`}
@@ -153,21 +136,18 @@ export default function Hero() {
           </div>
 
           {/* Mobile / tablet — bottom-aligned cutout */}
-          <div className="relative mx-auto w-full max-w-[360px] shrink-0 sm:max-w-[460px] md:max-w-[540px] lg:hidden">
-            <div className="relative mx-auto aspect-[629/673] w-full">
+          <div className="erp-hero-visual relative w-full max-w-[720px] shrink-0 pt-14 max-lg:mx-auto lg:ml-auto">
+            <div className="relative aspect-[18/12] w-full">
               <Image
                 src={HERO.heroImage}
-                alt={HERO.heroImageAlt}
+                alt=""
                 fill
-                priority
-                className="object-contain object-bottom"
-                sizes="90vw"
+                className="object-cover"
+                sizes="(100vw)"
+                unoptimized
               />
             </div>
           </div>
-
-          {/* Desktop spacer so left copy doesn't collide with absolute image */}
-          <div className="hidden min-w-0 flex-1 lg:block" aria-hidden />
         </div>
       </div>
     </section>

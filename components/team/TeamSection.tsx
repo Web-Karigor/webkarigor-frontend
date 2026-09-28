@@ -142,7 +142,6 @@ export default function TeamSection() {
                       </div>
 
                       <div className="teammate_card_chrome">
-                        <div className="badge u-frost">{firstName(member.name)}</div>
                         <button
                           type="button"
                           className="modal_trigger u-frost"
