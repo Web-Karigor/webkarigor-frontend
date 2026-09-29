@@ -810,14 +810,14 @@
     "title": "Let's Build Something Great Together",
     "description": "From your first message to project delivery, we keep the process clear, responsive, and focused on your goals.",
     "founder": {
-      "image": "/sm4.webp",
-      "name": "Esther Howard",
-      "role": "CEO, Webkarigor"
+      "image": "/team/taufiq-sir.jpg",
+      "name": "Md. Taufikuzzaman",
+      "role": "COO, Webkarigor"
     },
     "talkPrompt": "Prefer to talk first?",
     "whatsapp": {
       "href": "https://wa.me/8801624283328",
-      "label": "WhatsApp: 01624-283328"
+      "label": "WhatsApp: +880 1624-283328"
     },
     "fields": {
       "fullName": {
