@@ -10,8 +10,12 @@ import {
 } from "lucide-react";
 import homeContent from "@/data/home-content.json";
 
-const { eyebrow, title, description } = homeContent.offerings;
-const  { items }  = homeContent.offerings;
+const {
+  eyebrow: homeEyebrow,
+  title: homeTitle,
+  description: homeDescription,
+  items,
+} = homeContent.offerings;
 
 
 const CARD_GAP = 24;
@@ -25,7 +29,15 @@ const OFFERING_ICONS = {
   home: Home,
 } as const;
 
-export default function Offerings() {
+export default function Offerings({
+  eyebrow = homeEyebrow,
+  title = homeTitle,
+  description = homeDescription,
+}: {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+} = {}) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const pauseAutoRef = useRef(false);
   const resumeTimerRef = useRef<number | null>(null);

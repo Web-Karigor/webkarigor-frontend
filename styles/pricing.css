@@ -581,6 +581,7 @@
   min-height: 48px;
   margin-top: 22px;
   padding: 12px 24px;
+  border: none;
   border-radius: 14px;
   background: #ebeef0;
   font-family: var(--font-montserrat);
@@ -588,6 +589,7 @@
   font-weight: 600;
   color: #111;
   text-decoration: none;
+  cursor: pointer;
   transition: background-color 0.35s ease, color 0.35s ease, transform 0.2s ease;
 }
 

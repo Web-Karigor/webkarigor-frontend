@@ -357,3 +357,65 @@
   }
 }
 
+.navbar-container--cta {
+  max-width: none;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 8px 18px;
+}
+
+.navbar-container--cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #88ef92 0%, #bef264 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+.navbar-cta-start {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: clamp(14px, 1.4vw, 20px);
+  line-height: 140%;
+  color: #1f1e1c;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .navbar-container--cta::after {
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .navbar-cta-start {
+    transition: color 1.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .navbar-container--cta:hover::after {
+    transform: scaleX(1);
+  }
+
+  .navbar-container--cta:hover .navbar-cta-start {
+    color: #111111;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navbar-cta-start {
+    min-height: 52px;
+  }
+}
+

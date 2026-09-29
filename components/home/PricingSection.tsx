@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import homeContent from "@/data/home-content.json";
+import PricingCtaButton from "@/components/home/PricingCtaButton";
 
 const {
   badge,
@@ -75,12 +75,9 @@ function InfoIcon() {
 
 export default function PricingSection({
   backgroundColor,
-  ctaHref,
 }: {
   /** Override section background (e.g. service subpages keep their local bg) */
   backgroundColor?: string;
-  /** Explore Package / Contact Us target (e.g. "#contact" on pricing page) */
-  ctaHref?: string;
 } = {}) {
   const [period, setPeriod] = useState<Billing>("quarterly");
 
@@ -210,25 +207,7 @@ export default function PricingSection({
 
                 <p className="home-pricing-cancel">{cancelLabel}</p>
 
-                <Link
-                  href={
-                    ctaHref ??
-                    (plan.customPrice ? "/contact-us" : "/pricing")
-                  }
-                  className="home-pricing-cta capitalize"
-                  onClick={
-                    ctaHref?.startsWith("#")
-                      ? (e) => {
-                          e.preventDefault();
-                          document
-                            .querySelector(ctaHref)
-                            ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                        }
-                      : undefined
-                  }
-                >
-                  {plan.cta}
-                </Link>
+                <PricingCtaButton>{plan.cta}</PricingCtaButton>
 
                 <div className="home-pricing-features">
                   <p className="home-pricing-features-title">{featuresHeading}</p>

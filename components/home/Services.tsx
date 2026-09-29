@@ -24,8 +24,11 @@ const {
   headingAccent: servicesHeadingAccent,
   headingTitle: servicesHeadingTitle,
   description: servicesDescription,
-  items: services,
+  items: allServices,
 } = homeContent.services;
+
+/** UX/UI stays in home-content.json but is hidden from this section */
+const services = allServices.filter((item) => item.title !== "UX/UI");
 
 const VIEW_DETAILS_LABEL = "View Details";
 
