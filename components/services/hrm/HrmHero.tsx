@@ -75,8 +75,8 @@ export default function ErpHero() {
           </div>
 
           {/* Right visual — 1st Figma image composition */}
-          <div className="erp-hero-visual relative w-full max-w-[720px] shrink-0 pt-14 max-lg:mx-auto lg:ml-auto">
-            <div className="relative aspect-[18/12] w-full">
+          <div className="erp-hero-visual relative w-full max-w-[840px] shrink-0 pt-14 max-lg:mx-auto lg:ml-auto">
+            <div className="relative aspect-[18/13] w-full">
               <Image
                 src={HRM_HERO.banner_image}
                 alt=""
@@ -99,8 +99,8 @@ export default function ErpHero() {
                 key={logo.name}
                 src={logo.src}
                 alt={logo.name}
-                width={88}
-                height={28}
+                width={100}
+                height={100}
                 className="h-6 w-auto object-contain opacity-60 grayscale sm:h-7"
                 unoptimized
               />
