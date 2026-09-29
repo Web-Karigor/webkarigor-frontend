@@ -26,32 +26,32 @@
   },
   "trustedLogos": [
     {
-      "name": "Confluent",
-      "src": "https://cdn.simpleicons.org/confluent/252526"
+      "name": "Government of Bangladesh",
+      "src": "/partners-logo/image-1.png"
     },
     {
-      "name": "Seismic",
-      "src": "https://cdn.simpleicons.org/hubspot/FF7A59"
+      "name": "Robi",
+      "src": "/partners-logo/image-2.png"
     },
     {
-      "name": "Datadog",
-      "src": "https://cdn.simpleicons.org/datadog/632CA6"
+      "name": "Walton",
+      "src": "/partners-logo/image-3.png"
     },
     {
-      "name": "SurveyMonkey",
-      "src": "https://cdn.simpleicons.org/surveymonkey/00BF6F"
+      "name": "Sajeeb Group",
+      "src": "/partners-logo/image-4.png"
     },
     {
-      "name": "Salesforce",
-      "src": "https://cdn.simpleicons.org/salesforce/00A1E0"
+      "name": "ঐতিহ্য",
+      "src": "/partners-logo/image-5.png"
     },
     {
-      "name": "Okta",
-      "src": "https://cdn.simpleicons.org/okta/007DC1"
+      "name": "Nitol Niloy",
+      "src": "/partners-logo/image-6.png"
     },
     {
-      "name": "Talkdesk",
-      "src": "https://cdn.simpleicons.org/intercom/6AFDEF"
+      "name": "The Cafe Rio",
+      "src": "/partners-logo/image-8.png"
     }
   ],
   "trustTitle": "Trusted by over 100+ businesses worldwide.",

@@ -97,24 +97,36 @@
   },
   "trustedLogos": [
     {
-      "name": "Slack",
-      "src": "/slack.png"
+      "name": "Government of Bangladesh",
+      "src": "/partners-logo/image-1.png"
     },
     {
-      "name": "Netflix",
-      "src": "/netflix.png"
+      "name": "Robi",
+      "src": "/partners-logo/image-2.png"
     },
     {
-      "name": "Fitbit",
-      "src": "/fitbit.png"
+      "name": "Walton",
+      "src": "/partners-logo/image-3.png"
     },
     {
-      "name": "Google",
-      "src": "/google.png"
+      "name": "Sajeeb Group",
+      "src": "/partners-logo/image-4.png"
     },
     {
-      "name": "Airbnb",
-      "src": "/airbnb.png"
+      "name": "ঐতিহ্য",
+      "src": "/partners-logo/image-5.png"
+    },
+    {
+      "name": "Nitol Niloy",
+      "src": "/partners-logo/image-6.png"
+    },
+    {
+      "name": "The Cafe Rio",
+      "src": "/partners-logo/image-7.png"
+    },
+    {
+      "name": "Talkdesk",
+      "src": "/partners-logo/image-8.png"
     }
   ],
   "features": {
