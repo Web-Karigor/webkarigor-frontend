@@ -11,7 +11,25 @@ const MODAL_IMAGE = homeContent.consultation.founder.image;
 
 const OPEN_EVENT = "open-consultation-modal";
 
-export function openConsultationModal() {
+export type QuotationContext = {
+  packageId: number | null;
+  serviceId: number | null;
+};
+
+let quotationContext: QuotationContext = {
+  packageId: null,
+  serviceId: null,
+};
+
+export function getQuotationContext(): QuotationContext {
+  return quotationContext;
+}
+
+export function openConsultationModal(context?: Partial<QuotationContext>) {
+  quotationContext = {
+    packageId: context?.packageId ?? null,
+    serviceId: context?.serviceId ?? null,
+  };
   window.dispatchEvent(new Event(OPEN_EVENT));
 }
 

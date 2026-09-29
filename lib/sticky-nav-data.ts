@@ -3,34 +3,6 @@ import {
   PROJECT_ITEMS,
 } from "@/lib/projects-data";
 
-export const STICKY_NAV_SERVICES = [
-  {
-    href: "/service/website-design-development",
-    title: "Website Design & Development",
-    desc: "Custom websites for your business.",
-  },
-  {
-    href: "/service/erp",
-    title: "ERP",
-    desc: "Custom systems for operations.",
-  },
-  {
-    href: "/service/hrm",
-    title: "HRM",
-    desc: "Specialist talent for your team.",
-  },
-  {
-    href: "/service/software-development",
-    title: "Software Development",
-    desc: "Specialist talent for your team.",
-  },
-  {
-    href: "/service/crm",
-    title: "CRM",
-    desc: "Specialist talent for your team.",
-  },
-] as const;
-
 function buildLatestProjects() {
   const seen = new Set<string>();
   const items: { href: string; title: string; desc: string }[] = [];
@@ -51,6 +23,14 @@ function buildLatestProjects() {
 }
 
 export const STICKY_NAV_PROJECTS = buildLatestProjects();
+
+export const SERVICE_NAV_DESC: Record<string, string> = {
+  "website-design-development": "Custom websites for your business.",
+  erp: "Custom systems for operations.",
+  hrm: "Specialist talent for your team.",
+  "software-development": "Specialist talent for your team.",
+  crm: "Specialist talent for your team.",
+};
 
 export const STICKY_NAV_MORE_LINKS = [
   { href: "/about-us", title: "About us", desc: "Who we are and how we work" },

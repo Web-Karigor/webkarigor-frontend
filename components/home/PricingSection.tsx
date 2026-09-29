@@ -4,6 +4,10 @@ import Image from "next/image";
 import { useState } from "react";
 import homeContent from "@/data/home-content.json";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
+import { useHomepagePackagesQuery } from "@/hooks/queries/useHomepagePackagesQuery";
+import { usePackagesQuery } from "@/hooks/queries/usePackagesQuery";
+import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
+import type { HomepagePackage } from "@/types/homepage-package";
 
 const {
   badge,
@@ -15,10 +19,9 @@ const {
   cancelLabel,
   noExtraFee,
   billing,
-  plans,
 } = homeContent.pricing;
 
-type Billing = "monthly" | "quarterly";
+type Billing = "monthly" | "yearly";
 
 function CheckIcon() {
   return (
@@ -73,13 +76,58 @@ function InfoIcon() {
   );
 }
 
+function pickAmount(price: string, discount: string) {
+  const discounted = Number(discount);
+  const base = Number(price);
+  if (discounted > 0) return discounted;
+  return Number.isFinite(base) ? base : 0;
+}
+
+function formatPrice(pkg: HomepagePackage, period: Billing) {
+  const block = period === "monthly" ? pkg.monthly_price : pkg.yearly_price;
+  const amount = pickAmount(block.price, block.discount_price);
+  if (amount <= 0) return "";
+  const monthly = period === "yearly" ? amount / 12 : amount;
+  return `$${Math.round(monthly).toLocaleString("en-US")}`;
+}
+
+function isCustomPrice(pkg: HomepagePackage) {
+  return (
+    pickAmount(pkg.monthly_price.price, pkg.monthly_price.discount_price) <= 0 &&
+    pickAmount(pkg.yearly_price.price, pkg.yearly_price.discount_price) <= 0
+  );
+}
+
 export default function PricingSection({
   backgroundColor,
+  serviceSlug,
+  fromPackages = false,
 }: {
-  /** Override section background (e.g. service subpages keep their local bg) */
   backgroundColor?: string;
+  serviceSlug?: string;
+  fromPackages?: boolean;
 } = {}) {
-  const [period, setPeriod] = useState<Billing>("quarterly");
+  const [period, setPeriod] = useState<Billing>("yearly");
+  const home = useHomepagePackagesQuery(!serviceSlug && !fromPackages);
+  const service = useServiceQuery(serviceSlug ?? "");
+  const all = usePackagesQuery(fromPackages || (!serviceSlug && !fromPackages));
+
+  const servicePackages = service.data?.data.packages ?? [];
+  const homePackages = (home.data?.data ?? []).filter((pkg) => pkg.show_homepage);
+  const allPackages = all.data?.data ?? [];
+  const packages: HomepagePackage[] = [
+    ...(servicePackages.length
+      ? servicePackages
+      : fromPackages
+        ? allPackages
+        : homePackages.length
+          ? homePackages
+          : allPackages),
+  ].sort(
+    (a, b) => (a.package_type?.id ?? a.id) - (b.package_type?.id ?? b.id),
+  );
+
+  const serviceId = service.data?.data.service.id ?? null;
 
   return (
     <section
@@ -117,9 +165,9 @@ export default function PricingSection({
               <button
                 type="button"
                 role="tab"
-                aria-selected={period === "quarterly"}
-                className={`home-pricing-tab${period === "quarterly" ? " is-active" : ""}`}
-                onClick={() => setPeriod("quarterly")}
+                aria-selected={period === "yearly"}
+                className={`home-pricing-tab${period === "yearly" ? " is-active" : ""}`}
+                onClick={() => setPeriod("yearly")}
               >
                 {billing.quarterly}
               </button>
@@ -138,13 +186,19 @@ export default function PricingSection({
         </div>
 
         <div className="home-pricing-grid">
-          {plans.map((plan) => {
-            const price = plan.price[period];
-            const isPopular = plan.highlight;
+          {packages.map((pkg) => {
+            const customPrice = isCustomPrice(pkg);
+            const price = formatPrice(pkg, period);
+            const availText = pkg.availability || "";
+            const desc = pkg.title;
+            const isPopular = pkg.is_popular;
+            const isHurry = /hurry|slots/i.test(availText);
+            const tone = isPopular ? "red" : isHurry ? "green" : "gray";
+            const name = pkg.package_type?.name ?? pkg.slug;
 
             return (
               <div
-                key={plan.id}
+                key={pkg.id}
                 className={`home-pricing-plan${isPopular ? " is-popular" : ""}`}
               >
                 {isPopular ? (
@@ -164,62 +218,65 @@ export default function PricingSection({
                 <article
                   className={`home-pricing-card${isPopular ? " is-popular" : ""}`}
                 >
-                <div
-                  className={`home-pricing-avail is-pill is-${plan.availabilityTone}${
-                    plan.availabilityMarquee ? " is-marquee" : ""
-                  }`}
-                >
-                  <span
-                    className={`home-pricing-dot${
-                      plan.availabilityTone === "red" ? " is-red" : ""
+                  <div
+                    className={`home-pricing-avail is-pill is-${tone}${
+                      isPopular ? " is-marquee" : ""
                     }`}
-                    aria-hidden
                   >
-                    <span className="home-pricing-dot-pulse" />
-                  </span>
+                    <span
+                      className={`home-pricing-dot${tone === "red" ? " is-red" : ""}`}
+                      aria-hidden
+                    >
+                      <span className="home-pricing-dot-pulse" />
+                    </span>
 
-                  {plan.availabilityMarquee ? (
-                    <div className="home-pricing-marquee" aria-label={plan.availability}>
-                      <div className="home-pricing-marquee-track">
-                        {Array.from({ length: 8 }).map((_, i) => (
-                          <span key={i}>{plan.availability}</span>
-                        ))}
+                    {isPopular ? (
+                      <div className="home-pricing-marquee" aria-label={availText}>
+                        <div className="home-pricing-marquee-track">
+                          {Array.from({ length: 8 }).map((_, i) => (
+                            <span key={i}>{availText}</span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    <span className="home-pricing-avail-text">{plan.availability}</span>
-                  )}
-                </div>
+                    ) : (
+                      <span className="home-pricing-avail-text">{availText}</span>
+                    )}
+                  </div>
 
-                <h3 className="home-pricing-title">{plan.title}</h3>
-                <p className="home-pricing-card-desc">{plan.description}</p>
+                  <h3 className="home-pricing-title">{name}</h3>
+                  <p className="home-pricing-card-desc">{desc}</p>
 
-                <div className="home-pricing-amount">
-                  {plan.customPrice ? (
-                    <CustomPriceIcon />
-                  ) : (
-                    <>
-                      <span className="home-pricing-price">{price}</span>
-                      <span className="home-pricing-duration">/month</span>
-                    </>
-                  )}
-                </div>
+                  <div className="home-pricing-amount">
+                    {customPrice ? (
+                      <CustomPriceIcon />
+                    ) : (
+                      <>
+                        <span className="home-pricing-price">{price}</span>
+                        <span className="home-pricing-duration">/month</span>
+                      </>
+                    )}
+                  </div>
 
-                <p className="home-pricing-cancel">{cancelLabel}</p>
+                  <p className="home-pricing-cancel">{cancelLabel}</p>
 
-                <PricingCtaButton>{plan.cta}</PricingCtaButton>
+                  <PricingCtaButton
+                    packageId={pkg.id}
+                    serviceId={serviceId ?? pkg.service?.id ?? null}
+                  >
+                    {customPrice ? "Contact Us" : "Explore Package"}
+                  </PricingCtaButton>
 
-                <div className="home-pricing-features">
-                  <p className="home-pricing-features-title">{featuresHeading}</p>
-                  <ul className="home-pricing-features-list">
-                    {plan.features.map((feature) => (
-                      <li key={feature}>
-                        <CheckIcon />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  <div className="home-pricing-features">
+                    <p className="home-pricing-features-title">{featuresHeading}</p>
+                    <ul className="home-pricing-features-list">
+                      {pkg.features.map((feature) => (
+                        <li key={feature}>
+                          <CheckIcon />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </article>
               </div>
             );

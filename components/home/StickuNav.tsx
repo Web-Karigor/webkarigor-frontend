@@ -16,10 +16,11 @@ import {
   X,
 } from "lucide-react";
 import {
+  SERVICE_NAV_DESC,
   STICKY_NAV_MORE_LINKS,
   STICKY_NAV_PROJECTS,
-  STICKY_NAV_SERVICES,
 } from "@/lib/sticky-nav-data";
+import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 
 type Sheet = "projects" | "services" | "more" | null;
 
@@ -27,6 +28,8 @@ export default function StickyNav() {
   const pathname = usePathname();
   const [sheet, setSheet] = useState<Sheet>(null);
   const [mounted, setMounted] = useState(false);
+  const { data: servicesData } = useServicesQuery();
+  const services = [...(servicesData?.data ?? [])].sort((a, b) => a.id - b.id);
 
   // Client-only mount avoids hydration mismatches (e.g. browser tooling
   // mutating the DOM, or env(safe-area) differences).
@@ -122,10 +125,10 @@ export default function StickyNav() {
                   Services
                 </p>
                 <div className="space-y-1">
-                  {STICKY_NAV_SERVICES.map((item) => (
+                  {services.map((item) => (
                     <Link
-                      key={item.href}
-                      href={item.href}
+                      key={item.id}
+                      href={`/service/${item.slug}`}
                       onClick={close}
                       className="block rounded-xl p-3 transition active:bg-[#f3f4f6]"
                     >
@@ -135,9 +138,11 @@ export default function StickyNav() {
                         </span>
                         <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
                       </div>
-                      <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
-                        {item.desc}
-                      </p>
+                      {SERVICE_NAV_DESC[item.slug] ? (
+                        <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
+                          {SERVICE_NAV_DESC[item.slug]}
+                        </p>
+                      ) : null}
                     </Link>
                   ))}
                 </div>
@@ -208,7 +213,16 @@ export default function StickyNav() {
               </Link>
 
               <Link
-                href="/pricing"
+                href={pathname?.startsWith("/service") ? "#contact" : "/pricing"}
+                onClick={(event) => {
+                  if (!pathname?.startsWith("/service")) return;
+                  event.preventDefault();
+                  close();
+                  document.getElementById("contact")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
                 className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${
                   pathname?.startsWith("/pricing")
                     ? "text-[#0EC47B]"
