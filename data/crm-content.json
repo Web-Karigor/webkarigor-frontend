@@ -286,11 +286,11 @@
     "description": "We combine strategy, research, and design thinking to create products that not only look good but perform exceptionally well in the real world.",
     "images": {
       "left": {
-        "src": "/sm1.webp",
+        "src": "/about-us/hero-3.jpg",
         "alt": "Team collaboration"
       },
       "right": {
-        "src": "/sm3.webp",
+        "src": "/about-us/hero-7.jpg",
         "alt": "Design review session"
       }
     },
