@@ -11,10 +11,17 @@ const { embedUrl, title: videoTitle } = homeContent.video;
 const MOBILE_PAD_X = 20;
 const MOBILE_VIDEO_RATIO = 16 / 9;
 const DESKTOP_START_SCALE = 0.55;
+const GROW_PORTION = 0.82;
+const DESKTOP_LERP = 0.11;
+const MOBILE_LERP = 0.14;
+
+function lerpToward(current: number, target: number, dt: number, smoothing: number) {
+  return current + (target - current) * (1 - Math.pow(1 - smoothing, dt));
+}
 
 /**
- * Desktop + mobile: inset card scrub-grows to true full viewport.
- * Size is transform scale only (no width/height layout) so pin+scrub stays smooth.
+ * Pin stays layout-stable (scale only). Visual progress is lerped on the ticker
+ * so grow/shrink has inertia instead of 1:1 scroll stepping.
  */
 const VideoSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -50,9 +57,13 @@ const VideoSection = () => {
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
+      const easeGrow = gsap.parseEase("power3.inOut");
 
       mm.add("(min-width: 1024px)", () => {
-        const applyStart = () => {
+        const state = { target: 0, current: 0 };
+        const startRadius = 44 / DESKTOP_START_SCALE;
+
+        const applyLayout = () => {
           const vw = window.innerWidth;
           const vh = window.innerHeight;
 
@@ -92,8 +103,6 @@ const VideoSection = () => {
             height: vh,
             maxWidth: "none",
             maxHeight: "none",
-            borderRadius: 44 / DESKTOP_START_SCALE,
-            scale: DESKTOP_START_SCALE,
             x: 0,
             y: 0,
             force3D: true,
@@ -103,43 +112,61 @@ const VideoSection = () => {
           });
         };
 
-        applyStart();
+        const applyVisual = (progress: number) => {
+          const t = easeGrow(gsap.utils.clamp(0, 1, progress / GROW_PORTION));
+          gsap.set(frame, {
+            scale: DESKTOP_START_SCALE + (1 - DESKTOP_START_SCALE) * t,
+            borderRadius: startRadius * (1 - t),
+            force3D: true,
+          });
+        };
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: stage,
-            start: "center center",
-            end: "+=260%",
-            pin: true,
-            pinType: "fixed",
-            pinSpacing: true,
-            scrub: 0.55,
-            anticipatePin: 0,
-            invalidateOnRefresh: true,
-            onRefresh: () => {
-              if (tl.progress() < 0.02) applyStart();
-            },
+        applyLayout();
+        applyVisual(0);
+
+        const st = ScrollTrigger.create({
+          trigger: stage,
+          start: "center center",
+          end: "+=220%",
+          pin: true,
+          pinType: "fixed",
+          pinSpacing: true,
+          anticipatePin: 0,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            state.target = self.progress;
+          },
+          onRefresh: (self) => {
+            applyLayout();
+            state.target = self.progress;
+            if (self.progress < 0.02) {
+              state.current = 0;
+              applyVisual(0);
+            }
           },
         });
 
-        tl.to(
-          frame,
-          {
-            scale: 1,
-            borderRadius: 0,
-            ease: "none",
-            force3D: true,
-            duration: 1,
-          },
-          0,
-        ).to({}, { duration: 0.7 });
+        const onTick = () => {
+          const dt = gsap.ticker.deltaRatio(60);
+          const next = lerpToward(state.current, state.target, dt, DESKTOP_LERP);
+          if (
+            Math.abs(next - state.current) < 0.00006 &&
+            Math.abs(state.target - state.current) < 0.00006
+          ) {
+            return;
+          }
+          state.current = next;
+          applyVisual(state.current);
+        };
+
+        gsap.ticker.add(onTick);
 
         const quickRotY = gsap.quickTo(tilt, "rotateY", {
-          duration: 1.05,
+          duration: 1.2,
           ease: "power3.out",
         });
         const quickRotX = gsap.quickTo(tilt, "rotateX", {
-          duration: 1.05,
+          duration: 1.2,
           ease: "power3.out",
         });
 
@@ -148,8 +175,9 @@ const VideoSection = () => {
           if (rect.width < 1 || rect.height < 1) return;
           const nx = (e.clientX - rect.left) / rect.width - 0.5;
           const ny = (e.clientY - rect.top) / rect.height - 0.5;
-          quickRotY(nx * 9);
-          quickRotX(-ny * 6.5);
+          const rest = 1 - Math.min(state.current / GROW_PORTION, 1);
+          quickRotY(nx * 9 * rest);
+          quickRotX(-ny * 6.5 * rest);
         };
 
         const onLeave = () => {
@@ -161,12 +189,15 @@ const VideoSection = () => {
         stage.addEventListener("mouseleave", onLeave);
 
         const onResize = () => {
-          if (tl.progress() < 0.02) applyStart();
+          applyLayout();
+          applyVisual(state.current);
           ScrollTrigger.refresh();
         };
         window.addEventListener("resize", onResize);
 
         return () => {
+          gsap.ticker.remove(onTick);
+          st.kill();
           stage.removeEventListener("mousemove", onMove);
           stage.removeEventListener("mouseleave", onLeave);
           window.removeEventListener("resize", onResize);
@@ -174,6 +205,8 @@ const VideoSection = () => {
       });
 
       mm.add("(max-width: 1023px)", () => {
+        const state = { target: 0, current: 0 };
+
         const measure = () => {
           const vw = window.innerWidth;
           const vh = window.innerHeight;
@@ -182,7 +215,7 @@ const VideoSection = () => {
           return { vw, vh, startW, startH };
         };
 
-        const applyStart = () => {
+        const applyLayout = () => {
           const { startW, startH } = measure();
 
           gsap.set(section, {
@@ -219,11 +252,8 @@ const VideoSection = () => {
             height: startH,
             maxWidth: "none",
             aspectRatio: "none",
-            borderRadius: 10.5,
             x: 0,
             y: 0,
-            scaleX: 1,
-            scaleY: 1,
             force3D: true,
             transformOrigin: "50% 50%",
             willChange: "transform",
@@ -231,46 +261,68 @@ const VideoSection = () => {
           });
         };
 
-        applyStart();
+        const applyVisual = (progress: number) => {
+          const { startW, startH } = measure();
+          const t = easeGrow(gsap.utils.clamp(0, 1, progress / GROW_PORTION));
+          gsap.set(frame, {
+            scaleX: 1 + (window.innerWidth / startW - 1) * t,
+            scaleY: 1 + (window.innerHeight / startH - 1) * t,
+            borderRadius: 10.5 * (1 - t),
+            force3D: true,
+          });
+        };
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: stage,
-            start: "center center",
-            end: () => `+=${Math.round(window.innerHeight * 2.4)}`,
-            pin: true,
-            pinType: "transform",
-            pinSpacing: true,
-            scrub: 0.45,
-            anticipatePin: 0,
-            invalidateOnRefresh: true,
-            onRefresh: () => {
-              if (tl.progress() < 0.02) applyStart();
-            },
+        applyLayout();
+        applyVisual(0);
+
+        const st = ScrollTrigger.create({
+          trigger: stage,
+          start: "center center",
+          end: () => `+=${Math.round(window.innerHeight * 2.1)}`,
+          pin: true,
+          pinType: "transform",
+          pinSpacing: true,
+          anticipatePin: 0,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            state.target = self.progress;
+          },
+          onRefresh: (self) => {
+            applyLayout();
+            state.target = self.progress;
+            if (self.progress < 0.02) {
+              state.current = 0;
+              applyVisual(0);
+            }
           },
         });
 
-        tl.to(
-          frame,
-          {
-            scaleX: () => window.innerWidth / measure().startW,
-            scaleY: () => window.innerHeight / measure().startH,
-            borderRadius: 0,
-            ease: "none",
-            force3D: true,
-            duration: 1,
-          },
-          0,
-        ).to({}, { duration: 0.85 });
+        const onTick = () => {
+          const dt = gsap.ticker.deltaRatio(60);
+          const next = lerpToward(state.current, state.target, dt, MOBILE_LERP);
+          if (
+            Math.abs(next - state.current) < 0.00006 &&
+            Math.abs(state.target - state.current) < 0.00006
+          ) {
+            return;
+          }
+          state.current = next;
+          applyVisual(state.current);
+        };
+
+        gsap.ticker.add(onTick);
 
         const onResize = () => {
-          if (tl.progress() < 0.02) applyStart();
+          applyLayout();
+          applyVisual(state.current);
           ScrollTrigger.refresh();
         };
         window.addEventListener("resize", onResize);
         window.addEventListener("orientationchange", onResize);
 
         return () => {
+          gsap.ticker.remove(onTick);
+          st.kill();
           window.removeEventListener("resize", onResize);
           window.removeEventListener("orientationchange", onResize);
         };
