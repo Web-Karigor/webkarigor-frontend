@@ -160,17 +160,6 @@
         ]
       },
       {
-        "title": "UX/UI",
-        "highlight": "Design",
-        "subtitle": "Human-centered design that elevates every interaction.",
-        "desc": "Web design that prioritizes the user experience, designing websites that are responsive, easy to use, and have a delightful user experience, while minimizing friction and making every interaction clear, accessible, and enjoyable.",
-        "link": "",
-        "images": [
-          "/services/ux-ui-design-1.jpg",
-          "/services/ux-ui-design-2.jpg"
-        ]
-      },
-      {
         "title": "CRM Software",
         "highlight": "Development",
         "subtitle": "CRM Software Development Services",
@@ -924,19 +913,19 @@
           },
           {
             "label": "ERP",
-            "href": "/services/erp"
+            "href": "/service/erp"
           },
           {
             "label": "HRM",
-            "href": "/services/hrm"
+            "href": "/service/hrm"
           },
           {
             "label": "Software Development",
-            "href": "/services/software-development"
+            "href": "/service/software-development"
           },
           {
             "label": "CRM",
-            "href": "/services/crm"
+            "href": "/service/crm"
           }
         ]
       },

@@ -50,7 +50,7 @@ const MENU_TO_ITEM_ID: Record<NavMenu, string> = {
 
 const NAV_ITEMS: NavItem[] = [
   { id: "case", label: "Projects", menu: "projects", href: "/projects", kind: "menu" },
-  { id: "service", label: "Services", menu: "services", href: "/service", kind: "menu" },
+  { id: "service", label: "Services", menu: "services", href: "#", kind: "menu" },
   { id: "brand", label: brand, href: "/", kind: "link" },
   { id: "pricing", label: "Pricing", href: "/pricing", kind: "link" },
   { id: "more", label: "More", menu: "more", kind: "menu" },

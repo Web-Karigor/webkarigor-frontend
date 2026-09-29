@@ -36,7 +36,7 @@ export default function ErpFeatures() {
         </div>
 
         {/* Cards — 2×2, gap 52, card 568×234 · r24 · p48 */}
-        <div className="erp-features-grid mx-auto grid w-full max-w-[1188px] grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8 lg:gap-[52px]">
+        <div className="erp-features-grid mx-auto grid w-full  grid-cols-1 items-stretch gap-6 md:grid-cols-3 md:gap-8 lg:gap-[52px]">
           {HRM_FEATURES.map((feature) => {
             const Icon = ICONS[feature.icon as keyof typeof ICONS];
             return (

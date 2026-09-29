@@ -96,21 +96,26 @@ function InfiniteLogoRow({
             className="flex shrink-0 gap-3 pr-3 sm:gap-5 sm:pr-5 lg:gap-6 lg:pr-6"
             aria-hidden={copyIndex > 0 ? true : undefined}
           >
-            {items.map((client) => (
-              <div
-                key={`${copyIndex}-${client.name}`}
-                className="flex items-center justify-center"
-              >
-                <Image
-                  src={client.src}
-                  alt={copyIndex === 0 ? client.name : ""}
-                  width={160}
-                  height={160}
-                  className="h-auto max-h-full w-auto max-w-full object-contain"
-                  unoptimized
-                />
-              </div>
-            ))}
+            <div
+              className="flex w-max flex-nowrap items-center justify-center gap-4"
+              aria-label="Clients"
+            >
+              {items.map((client) => (
+                <span
+                  key={`${copyIndex}-${client.name}`}
+                  className="group inline-flex size-[60px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/80"
+                >
+                  <Image
+                    src={client.src}
+                    alt={copyIndex === 0 ? client.name : ""}
+                    width={56}
+                    height={56}
+                    unoptimized
+                    className="h-full w-full max-w-none object-contain grayscale opacity-80 transition-[filter,opacity] duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                  />
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </div>
@@ -121,9 +126,9 @@ function InfiniteLogoRow({
 
 export default function Clients() {
   return (
-    <section className="svc-clients bg-[#f8fafc] px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px] relative">
-      <div className="mx-auto flex w-full max-w-[1208px] flex-col items-center gap-8 lg:gap-[60px]">
-        <div className= "flex w-full flex-row items-center gap-4 lg:gap-6">
+    <section className="svc-clients px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px] relative">
+      <div className="mx-auto flex w-full flex-col items-center gap-8 lg:gap-[60px]">
+        <div className="flex w-full flex-row items-center gap-4 lg:gap-6">
           <h2 className="section-heading">
             <span className="section-heading-split-accent section-accent-text">
               {title}
