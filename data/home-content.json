@@ -924,19 +924,19 @@
           },
           {
             "label": "ERP",
-            "href": "/services/erp"
+            "href": "/service/erp"
           },
           {
             "label": "HRM",
-            "href": "/services/hrm"
+            "href": "/service/hrm"
           },
           {
             "label": "Software Development",
-            "href": "/services/software-development"
+            "href": "/service/software-development"
           },
           {
             "label": "CRM",
-            "href": "/services/crm"
+            "href": "/service/crm"
           }
         ]
       },
