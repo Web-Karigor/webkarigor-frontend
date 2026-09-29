@@ -10,44 +10,6 @@
     "headingLine1": "Have A Question Or",
     "headingAccent": "Just Want To Chat?"
   },
-  "form": {
-    "titleLine1": "Tell Us Your Amazing",
-    "titleAccent": "Project Here",
-    "benefits": [
-      "Expect a response from us within 24 hours",
-      "We're happy to sign an NDA upon request.",
-      "Get access to a team of dedicated product specialists."
-    ],
-    "fields": {
-      "fullName": {
-        "label": "Full Name",
-        "placeholder": "John Doe"
-      },
-      "email": {
-        "label": "Your Email",
-        "placeholder": "yourmail@gmail.com"
-      },
-      "whatsapp": {
-        "label": "Whatsapp Number",
-        "placeholder": "123 456 7890"
-      },
-      "budget": {
-        "label": "Project Budget"
-      },
-      "details": {
-        "label": "Project Details",
-        "placeholder": "Tell us about your goals, timeline, and what success looks like..."
-      }
-    },
-    "budgets": [
-      "Less than $5K",
-      "$5K - $10K",
-      "$10K - $20K",
-      "$20K - $50K",
-      "More than $50K"
-    ],
-    "submitLabel": "Let's Connect"
-  },
   "connect": {
     "badge": "Connect Now",
     "headingLine1": "Get In Touch Now For Business Or",

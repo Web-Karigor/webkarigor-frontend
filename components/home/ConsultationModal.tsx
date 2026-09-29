@@ -1,0 +1,70 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { X } from "lucide-react";
+import ConsultationForm from "@/components/home/ConsultationForm";
+import "@/components/home/HomeConsultation.css";
+
+const OPEN_EVENT = "open-consultation-modal";
+
+export function openConsultationModal() {
+  window.dispatchEvent(new Event(OPEN_EVENT));
+}
+
+export default function ConsultationModal() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener(OPEN_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_EVENT, onOpen);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="consultation-modal-backdrop"
+      onClick={() => setOpen(false)}
+    >
+      <div
+        className="consultation-modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Book a consultation"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          className="consultation-modal-close"
+          onClick={() => setOpen(false)}
+          aria-label="Close form"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        <ConsultationForm
+          onSuccess={() => {
+            window.setTimeout(() => setOpen(false), 1600);
+          }}
+        />
+      </div>
+    </div>
+  );
+}

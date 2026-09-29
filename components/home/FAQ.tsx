@@ -3,7 +3,9 @@
 import "./FAQ.css";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { openConsultationModal } from "@/components/home/ConsultationModal";
 import homeContent from "@/data/home-content.json";
 
 const {
@@ -24,6 +26,8 @@ export default function FAQ({
   ctaHref?: string;
 }) {
   const talkHref = ctaHrefProp ?? ctaHref;
+  const pathname = usePathname();
+  const openInModal = pathname.startsWith("/service");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -102,12 +106,22 @@ export default function FAQ({
           <p className="faq-cta-heading mx-auto mb-6 max-w-[669px] font-montserrat text-[clamp(22px,4.2vw,42px)] font-bold leading-[140%] tracking-[-0.05em] text-black">
             {ctaText}
           </p>
-          <Link
-            href={talkHref}
-            className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
-          >
-            {ctaLabel}
-          </Link>
+          {openInModal ? (
+            <button
+              type="button"
+              onClick={openConsultationModal}
+              className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
+            >
+              {ctaLabel}
+            </button>
+          ) : (
+            <Link
+              href={talkHref}
+              className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
+            >
+              {ctaLabel}
+            </Link>
+          )}
         </div>
       </div>
     </section>

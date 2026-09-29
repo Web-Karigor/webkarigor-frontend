@@ -97,6 +97,7 @@
   },
   "trustedLogos": [
     {
+<<<<<<< HEAD
       "name": "image-1",
       "src": "/partners-logo/image-1.png"
     },
@@ -123,6 +124,26 @@
     {
       "name": "image-7",
       "src": "/partners-logo/image-7.png"
+=======
+      "name": "Slack",
+      "src": "/slack.png"
+    },
+    {
+      "name": "Netflix",
+      "src": "/netflix.png"
+    },
+    {
+      "name": "Fitbit",
+      "src": "/fitbit.png"
+    },
+    {
+      "name": "Google",
+      "src": "/google.png"
+    },
+    {
+      "name": "Airbnb",
+      "src": "/airbnb.png"
+>>>>>>> dd76128269ffa51353dded9a45b1d9fe27c2ff45
     }
   ],
   "features": {

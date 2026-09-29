@@ -99,18 +99,24 @@ export default function ErpHero() {
                 key={logo.name}
                 src={logo.src}
                 alt={logo.name}
+<<<<<<< HEAD
                 width={100}
                 height={100}
                 className="h-6 w-auto object-contain opacity-60 grayscale sm:h-7"
+=======
+                width={88}
+                height={28}
+                className="h-8 w-auto object-contain opacity-60 grayscale"
+>>>>>>> dd76128269ffa51353dded9a45b1d9fe27c2ff45
                 unoptimized
               />
             ))}
           </div>
-          <div className="max-w-[420px] text-left sm:text-right">
-            <p className="m-0 font-montserrat text-[clamp(18px,2vw,22px)] font-bold leading-[1.3] tracking-[-0.02em] text-[#18214D]">
+          <div className="flex h-auto w-full max-w-[566px] shrink-0 flex-col gap-5 text-left sm:w-[566px] sm:text-right">
+            <p className="m-0 font-montserrat text-[36px] font-bold leading-[1.3] tracking-[-0.02em] text-[#183B56]">
               {HRM_HERO.trustTitle}
             </p>
-            <p className="mt-2 m-0 font-montserrat text-[13px] font-medium leading-[1.55] text-[#98A2B3]">
+            <p className="m-0 font-montserrat text-[16px] font-medium leading-[1.55] text-[#5A7184]">
               {HRM_HERO.trustDescription}
             </p>
           </div>

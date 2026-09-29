@@ -98,23 +98,23 @@
   "trustedLogos": [
     {
       "name": "Slack",
-      "src": "https://cdn.simpleicons.org/slack/667085"
+      "src": "/slack.png"
     },
     {
       "name": "Netflix",
-      "src": "https://cdn.simpleicons.org/netflix/667085"
+      "src": "/netflix.png"
     },
     {
       "name": "Fitbit",
-      "src": "https://cdn.simpleicons.org/fitbit/667085"
+      "src": "/fitbit.png"
     },
     {
       "name": "Google",
-      "src": "https://cdn.simpleicons.org/google/667085"
+      "src": "/google.png"
     },
     {
       "name": "Airbnb",
-      "src": "https://cdn.simpleicons.org/airbnb/667085"
+      "src": "/airbnb.png"
     }
   ],
   "features": {

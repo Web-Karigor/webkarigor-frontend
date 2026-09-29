@@ -2,8 +2,8 @@
 
 import "./FAQ.css";
 
-import Link from "next/link";
 import { useState } from "react";
+import { openConsultationModal } from "@/components/home/ConsultationModal";
 import erp_faq from "@/data/erp-content.json";
 
 const {
@@ -24,7 +24,6 @@ export default function FAQ({
   className?: string;
   ctaHref?: string;
 }) {
-  const talkHref = ctaHrefProp ?? ctaHref;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -106,12 +105,13 @@ export default function FAQ({
           <p className="home-pricing-desc">
             {cta_content}
           </p>
-          <Link
-            href={talkHref}
+          <button
+            type="button"
+            onClick={openConsultationModal}
             className="faq-cta cursor-pointer rounded-lg border border-[#000000] mt-5 px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
           >
             {ctaLabel}
-          </Link>
+          </button>
         </div>
       </div>
     </section>
