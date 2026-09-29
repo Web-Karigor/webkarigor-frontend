@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import servicesContent from "@/data/services-content.json";
 import { PRICING_MARKETS } from "@/lib/services-data";
+import PricingCtaButton from "@/components/home/PricingCtaButton";
 
 const {
   eyebrow,
@@ -154,12 +154,7 @@ export default function ServicePricing() {
 
                           <p className="home-pricing-cancel">{CANCEL_LABEL}</p>
 
-                          <Link
-                            href="/pricing"
-                            className="home-pricing-cta capitalize"
-                          >
-                            {ctaLabel}
-                          </Link>
+                          <PricingCtaButton>{ctaLabel}</PricingCtaButton>
 
                           <div className="home-pricing-features">
                             <p className="home-pricing-features-title">

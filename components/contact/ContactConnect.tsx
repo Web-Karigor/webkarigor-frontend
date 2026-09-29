@@ -17,7 +17,7 @@ export default function ContactConnect() {
   return (
     <section className="contact-connect" aria-labelledby="contact-connect-heading">
       <div className="contact-connect-inner">
-        <div className="contact-logo-row" aria-label="Clients">
+        {/* <div className="contact-logo-row" aria-label="Clients">
           {logos.map((logo) => (
             <span key={logo.name} className="contact-logo-item">
               <Image
@@ -29,15 +29,17 @@ export default function ContactConnect() {
               />
             </span>
           ))}
-        </div>
+        </div> */}
 
-        <span className="contact-section-badge">{badge}</span>
+        <span className="contact-section-badge">
+          <span className="contact-section-badge-text">{badge}</span>
+        </span>
         <h2 id="contact-connect-heading" className="contact-connect-title">
           {headingLine1}{" "}
           <span className="contact-title-accent">{headingAccent}</span>
         </h2>
 
-        <div className="contact-email-grid">
+        <div className="contact-info-grid">
           {emails.map((item) => (
             <div key={item.email} className="contact-email-card">
               <p className="contact-email-card-title">{item.title}</p>
@@ -47,9 +49,7 @@ export default function ContactConnect() {
               </Link>
             </div>
           ))}
-        </div>
 
-        <div className="contact-office-grid">
           {offices.map((office) => (
             <article key={office.country} className="contact-office-card">
               <h3 className="contact-office-country">{office.country}</h3>

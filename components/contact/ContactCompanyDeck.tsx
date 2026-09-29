@@ -29,7 +29,9 @@ export default function ContactCompanyDeck() {
         </div>
 
         <div className="contact-deck-copy">
-          <span className="contact-section-badge">{badge}</span>
+          <span className="contact-section-badge">
+            <span className="contact-section-badge-text">{badge}</span>
+          </span>
           <h2 id="contact-deck-heading" className="contact-deck-title">
             {headingLine1}{" "}
             <span className="contact-title-accent">{headingAccent}</span>

@@ -1,9 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { X } from "lucide-react";
 import ConsultationForm from "@/components/home/ConsultationForm";
+import homeContent from "@/data/home-content.json";
 import "@/components/home/HomeConsultation.css";
+
+const MODAL_IMAGE = homeContent.consultation.founder.image;
 
 const OPEN_EVENT = "open-consultation-modal";
 
@@ -51,19 +55,33 @@ export default function ConsultationModal() {
         aria-label="Book a consultation"
         onClick={(event) => event.stopPropagation()}
       >
-        <button
-          type="button"
-          className="consultation-modal-close"
-          onClick={() => setOpen(false)}
-          aria-label="Close form"
-        >
-          <X className="h-5 w-5" />
-        </button>
-        <ConsultationForm
-          onSuccess={() => {
-            window.setTimeout(() => setOpen(false), 1600);
-          }}
-        />
+        <div className="consultation-modal-media" aria-hidden>
+          <Image
+            src={MODAL_IMAGE}
+            alt=""
+            fill
+            sizes="(min-width: 768px) 46vw, 0px"
+            className="consultation-modal-media-img"
+            priority
+          />
+        </div>
+
+        <div className="consultation-modal-body">
+          <button
+            type="button"
+            className="consultation-modal-close"
+            onClick={() => setOpen(false)}
+            aria-label="Close form"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <ConsultationForm
+            showWhatsApp
+            onSuccess={() => {
+              window.setTimeout(() => setOpen(false), 1600);
+            }}
+          />
+        </div>
       </div>
     </div>
   );

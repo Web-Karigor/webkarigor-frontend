@@ -19,6 +19,7 @@ import {
   STICKY_NAV_PROJECTS,
   STICKY_NAV_SERVICES,
 } from "@/lib/sticky-nav-data";
+import { openConsultationModal } from "@/components/home/ConsultationModal";
 
 const { brand } = homeContent.navbar;
 
@@ -526,12 +527,24 @@ export default function Navbar() {
                 </AnimatePresence>
               </nav>
 
-              <Link
-                href="/contact-us"
-                className="justify-self-end rounded-lg border border-[#1f1e1c] px-4 py-2.5 font-montserrat text-sm font-semibold text-[#1f1e1c] transition-colors hover:bg-[#1f1e1c] hover:text-white"
-              >
-                Let&apos;s get started
-              </Link>
+              <div className="navbar-border-ring navbar-border-ring--cta justify-self-end">
+                <div
+                  className={`navbar-container navbar-container--cta${
+                    scrolled ? " navbar-container--scrolled" : ""
+                  }`}
+                >
+                  <button
+                    type="button"
+                    className="navbar-cta-start"
+                    onClick={() => {
+                      closeMenu();
+                      openConsultationModal();
+                    }}
+                  >
+                    Let&apos;s get started
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </header>
