@@ -33,7 +33,9 @@
   overflow: hidden;
   background: #111;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
-  /* width/height/radius driven by GSAP */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .video-section-iframe {
@@ -59,9 +61,6 @@
 
 @media (max-width: 1023px) {
   .video-section-frame {
-    aspect-ratio: 16 / 9;
-    min-height: 0;
-    height: auto;
     box-shadow: none;
   }
 

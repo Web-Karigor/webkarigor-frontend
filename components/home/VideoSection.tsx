@@ -13,9 +13,8 @@ const MOBILE_VIDEO_RATIO = 16 / 9;
 const DESKTOP_START_SCALE = 0.55;
 
 /**
- * Desktop + mobile: inset card scrub-grows to true full viewport (100vw × 100vh).
- * Scale-only grow left gaps because the frame never reached viewport size — now
- * width/height animate to window.innerWidth / innerHeight with radius → 0.
+ * Desktop + mobile: inset card scrub-grows to true full viewport.
+ * Size is transform scale only (no width/height layout) so pin+scrub stays smooth.
  */
 const VideoSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -56,8 +55,6 @@ const VideoSection = () => {
         const applyStart = () => {
           const vw = window.innerWidth;
           const vh = window.innerHeight;
-          const startW = Math.round(vw * DESKTOP_START_SCALE);
-          const startH = Math.round(vh * DESKTOP_START_SCALE);
 
           gsap.set(section, {
             padding: 0,
@@ -91,17 +88,17 @@ const VideoSection = () => {
           });
 
           gsap.set(frame, {
-            width: startW,
-            height: startH,
+            width: vw,
+            height: vh,
             maxWidth: "none",
             maxHeight: "none",
-            borderRadius: 44,
-            scale: 1,
+            borderRadius: 44 / DESKTOP_START_SCALE,
+            scale: DESKTOP_START_SCALE,
             x: 0,
             y: 0,
             force3D: true,
             transformOrigin: "50% 50%",
-            willChange: "width,height,border-radius,transform",
+            willChange: "transform",
             backfaceVisibility: "hidden",
           });
         };
@@ -114,10 +111,10 @@ const VideoSection = () => {
             start: "center center",
             end: "+=260%",
             pin: true,
-            pinType: "transform",
+            pinType: "fixed",
             pinSpacing: true,
-            scrub: 2.4,
-            anticipatePin: 1,
+            scrub: 0.55,
+            anticipatePin: 0,
             invalidateOnRefresh: true,
             onRefresh: () => {
               if (tl.progress() < 0.02) applyStart();
@@ -126,28 +123,16 @@ const VideoSection = () => {
         });
 
         tl.to(
-          stage,
+          frame,
           {
-            width: () => window.innerWidth,
-            height: () => window.innerHeight,
-            ease: "power2.inOut",
+            scale: 1,
+            borderRadius: 0,
+            ease: "none",
+            force3D: true,
             duration: 1,
           },
           0,
-        )
-          .to(
-            frame,
-            {
-              width: () => window.innerWidth,
-              height: () => window.innerHeight,
-              borderRadius: 0,
-              ease: "power2.inOut",
-              force3D: true,
-              duration: 1,
-            },
-            0,
-          )
-          .to({}, { duration: 0.7 });
+        ).to({}, { duration: 0.7 });
 
         const quickRotY = gsap.quickTo(tilt, "rotateY", {
           duration: 1.05,
@@ -205,6 +190,7 @@ const VideoSection = () => {
             paddingRight: MOBILE_PAD_X,
             paddingTop: 40,
             paddingBottom: 40,
+            overflow: "visible",
           });
 
           gsap.set(stage, {
@@ -224,20 +210,23 @@ const VideoSection = () => {
             justifyContent: "center",
             x: 0,
             y: 0,
+            force3D: true,
+            backfaceVisibility: "hidden",
           });
 
           gsap.set(frame, {
             width: startW,
             height: startH,
             maxWidth: "none",
-            aspectRatio: "auto",
+            aspectRatio: "none",
             borderRadius: 10.5,
             x: 0,
             y: 0,
-            scale: 1,
+            scaleX: 1,
+            scaleY: 1,
             force3D: true,
             transformOrigin: "50% 50%",
-            willChange: "width,height,border-radius,transform",
+            willChange: "transform",
             backfaceVisibility: "hidden",
           });
         };
@@ -252,8 +241,8 @@ const VideoSection = () => {
             pin: true,
             pinType: "transform",
             pinSpacing: true,
-            scrub: 1.15,
-            anticipatePin: 1,
+            scrub: 0.45,
+            anticipatePin: 0,
             invalidateOnRefresh: true,
             onRefresh: () => {
               if (tl.progress() < 0.02) applyStart();
@@ -262,40 +251,17 @@ const VideoSection = () => {
         });
 
         tl.to(
-          section,
+          frame,
           {
-            paddingLeft: 0,
-            paddingRight: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
+            scaleX: () => window.innerWidth / measure().startW,
+            scaleY: () => window.innerHeight / measure().startH,
+            borderRadius: 0,
             ease: "none",
+            force3D: true,
             duration: 1,
           },
           0,
-        )
-          .to(
-            stage,
-            {
-              height: () => window.innerHeight,
-              width: () => window.innerWidth,
-              ease: "none",
-              duration: 1,
-            },
-            0,
-          )
-          .to(
-            frame,
-            {
-              width: () => window.innerWidth,
-              height: () => window.innerHeight,
-              borderRadius: 0,
-              ease: "none",
-              force3D: true,
-              duration: 1,
-            },
-            0,
-          )
-          .to({}, { duration: 0.85 });
+        ).to({}, { duration: 0.85 });
 
         const onResize = () => {
           if (tl.progress() < 0.02) applyStart();
