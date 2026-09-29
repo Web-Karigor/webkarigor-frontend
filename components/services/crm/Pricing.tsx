@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
-import servicesContent from "@/data/services-content.json";
-import { PRICING_MARKETS } from "@/lib/services-data";
+import servicesContent from "@/data/crm-content.json";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
+import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
+import type { HomepagePackage } from "@/types/homepage-package";
 
 const {
   eyebrow,
@@ -13,20 +16,6 @@ const {
 const POPULAR_LABEL = "Most popular";
 const FEATURES_HEADING = "What's Included:";
 const CANCEL_LABEL = "Cancel any time";
-
-/** Match home pricing card availability chrome (1st = green, 2nd popular = red marquee) */
-const CARD_AVAIL = [
-  {
-    text: "3 Slots Available, Hurry!",
-    tone: "green" as const,
-    marquee: false,
-  },
-  {
-    text: "2 Slots Available, Hurry!",
-    tone: "red" as const,
-    marquee: true,
-  },
-];
 
 function CheckIcon() {
   return (
@@ -47,7 +36,46 @@ function CheckIcon() {
   );
 }
 
+function formatPrice(pkg: HomepagePackage) {
+  const amount = Number(pkg.monthly_price?.price);
+  if (!Number.isFinite(amount) || amount <= 0) return "";
+  return `$${Math.round(amount).toLocaleString("en-US")}`;
+}
+
+function groupByCategory(packages: HomepagePackage[]) {
+  const groups = new Map<
+    number,
+    { id: number; name: string; slug: string; plans: HomepagePackage[] }
+  >();
+
+  for (const pkg of packages) {
+    const category = pkg.package_category;
+    if (!category) continue;
+    const current = groups.get(category.id) ?? {
+      id: category.id,
+      name: category.name,
+      slug: category.slug,
+      plans: [],
+    };
+    current.plans.push(pkg);
+    groups.set(category.id, current);
+  }
+
+  return [...groups.values()]
+    .sort((a, b) => a.id - b.id)
+    .map((group) => ({
+      ...group,
+      plans: [...group.plans].sort(
+        (a, b) => Number(a.is_popular) - Number(b.is_popular),
+      ),
+    }));
+}
+
 export default function Pricing() {
+  const { data } = useServiceQuery("crm");
+  const serviceId = data?.data.service.id ?? 6;
+  const markets = groupByCategory(data?.data.packages ?? []);
+
   return (
     <section className="bg-white py-[clamp(48px,7vw,80px)]">
       <div className="mx-auto w-full max-w-[1800px] px-[clamp(16px,4vw,40px)]">
@@ -64,12 +92,12 @@ export default function Pricing() {
         </div>
 
         <div className="service-pricing-markets">
-          {PRICING_MARKETS.map((market) => {
-            const isYellow = market.theme === "yellow";
+          {markets.map((market) => {
+            const isYellow = market.slug === "ecommerce";
 
             return (
               <div
-                key={market.label}
+                key={market.id}
                 className={`service-pricing-market rounded-[24px] ${
                   isYellow
                     ? "border border-[#e8d48a] bg-[#fff8d9]"
@@ -81,17 +109,17 @@ export default function Pricing() {
                     isYellow ? "bg-[#feed35]" : "bg-[#38f8ab]"
                   }`}
                 >
-                  {market.label}
+                  {market.name}
                 </div>
 
                 <div className="service-pricing-cards">
-                  {market.plans.map((plan, index) => {
-                    const isPopular = index === 1;
-                    const avail = CARD_AVAIL[index] ?? CARD_AVAIL[0];
+                  {market.plans.map((pkg) => {
+                    const isPopular = pkg.is_popular;
+                    const availText = pkg.availability || pkg.title;
 
                     return (
                       <div
-                        key={`${market.label}-${plan.title}-${index}`}
+                        key={pkg.id}
                         className={`home-pricing-plan${isPopular ? " is-popular" : ""}`}
                       >
                         {isPopular ? (
@@ -114,54 +142,63 @@ export default function Pricing() {
                           className={`home-pricing-card${isPopular ? " is-popular" : ""}`}
                         >
                           <div
-                            className={`home-pricing-avail is-pill is-${avail.tone}${
-                              avail.marquee ? " is-marquee" : ""
-                            }`}
+                            className={`home-pricing-avail is-pill is-${
+                              isPopular ? "red" : "green"
+                            }${isPopular ? " is-marquee" : ""}`}
                           >
                             <span
                               className={`home-pricing-dot${
-                                avail.tone === "red" ? " is-red" : ""
+                                isPopular ? " is-red" : ""
                               }`}
                               aria-hidden
                             >
                               <span className="home-pricing-dot-pulse" />
                             </span>
 
-                            {avail.marquee ? (
+                            {isPopular ? (
                               <div
                                 className="home-pricing-marquee"
-                                aria-label={avail.text}
+                                aria-label={availText}
                               >
                                 <div className="home-pricing-marquee-track">
                                   {Array.from({ length: 8 }).map((_, i) => (
-                                    <span key={i}>{avail.text}</span>
+                                    <span key={i}>{availText}</span>
                                   ))}
                                 </div>
                               </div>
                             ) : (
                               <span className="home-pricing-avail-text">
-                                {avail.text}
+                                {availText}
                               </span>
                             )}
                           </div>
 
-                          <h3 className="home-pricing-title">{plan.title}</h3>
-                          <p className="home-pricing-card-desc">{plan.subtitle}</p>
+                          <h3 className="home-pricing-title">
+                            {pkg.package_type?.name ?? pkg.slug}
+                          </h3>
+                          <p className="home-pricing-card-desc">{pkg.title}</p>
 
                           <div className="home-pricing-amount">
-                            <span className="home-pricing-price">{plan.price}</span>
+                            <span className="home-pricing-price">
+                              {formatPrice(pkg)}
+                            </span>
                           </div>
 
                           <p className="home-pricing-cancel">{CANCEL_LABEL}</p>
 
-                          <PricingCtaButton>{ctaLabel}</PricingCtaButton>
+                          <PricingCtaButton
+                            packageId={pkg.id}
+                            serviceId={pkg.service?.id ?? serviceId}
+                          >
+                            {ctaLabel}
+                          </PricingCtaButton>
 
                           <div className="home-pricing-features">
                             <p className="home-pricing-features-title">
                               {FEATURES_HEADING}
                             </p>
                             <ul className="home-pricing-features-list">
-                              {plan.features.map((feature) => (
+                              {pkg.features.map((feature) => (
                                 <li key={feature}>
                                   <CheckIcon />
                                   <span>{feature}</span>

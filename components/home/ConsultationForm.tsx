@@ -31,6 +31,8 @@ import {
   useQuotationMutation,
   type QuotationPayload,
 } from "@/hooks/mutations/useQuotationMutation";
+import { getQuotationContext } from "@/components/home/ConsultationModal";
+import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 
 const {
   fields,
@@ -77,12 +79,6 @@ function getCalendarCells(year: number, month: number) {
   return cells;
 }
 
-function parsePositiveId(value: string | null) {
-  if (!value) return null;
-  const parsed = Number(value);
-  return Number.isInteger(parsed) && parsed > 0 ? parsed : null;
-}
-
 function buildPhone(dialCode: string, raw: string) {
   const trimmed = raw.trim();
   if (trimmed.startsWith("+")) return trimmed.replace(/\s+/g, "");
@@ -127,6 +123,7 @@ export default function ConsultationForm({
 } = {}) {
   const pathname = usePathname();
   const quotation = useQuotationMutation();
+  const { data: servicesData } = useServicesQuery();
   const [dialCountry, setDialCountry] = useState<CountryOption>(DEFAULT_DIAL_COUNTRY);
   const [region, setRegion] = useState<CountryOption>(DEFAULT_COUNTRY);
   const [dialOpen, setDialOpen] = useState(false);
@@ -182,10 +179,18 @@ export default function ConsultationForm({
       return;
     }
 
-    const params = new URLSearchParams(window.location.search);
+    const ctx = getQuotationContext();
+    const slug = pathname?.startsWith("/service/")
+      ? pathname.split("/")[2] || null
+      : null;
+    const pathServiceId =
+      slug && servicesData?.data
+        ? (servicesData.data.find((item) => item.slug === slug)?.id ?? null)
+        : null;
+
     const payload: QuotationPayload = {
-      package_id: parsePositiveId(params.get("package_id")),
-      service_id: parsePositiveId(params.get("service_id")),
+      package_id: ctx.packageId,
+      service_id: ctx.serviceId ?? pathServiceId,
       name,
       email: email || null,
       phone: buildPhone(dialCountry.dialCode, phoneRaw),

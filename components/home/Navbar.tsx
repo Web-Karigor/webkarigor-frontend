@@ -15,11 +15,12 @@ import {
 import { ChevronRight, EllipsisVertical } from "lucide-react";
 import homeContent from "@/data/home-content.json";
 import {
+  SERVICE_NAV_DESC,
   STICKY_NAV_MORE_LINKS,
   STICKY_NAV_PROJECTS,
-  STICKY_NAV_SERVICES,
 } from "@/lib/sticky-nav-data";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
+import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 
 const { brand } = homeContent.navbar;
 
@@ -56,6 +57,17 @@ const NAV_ITEMS: NavItem[] = [
   { id: "more", label: "More", menu: "more", kind: "menu" },
 ];
 
+function isServicePath(pathname: string | null) {
+  return Boolean(pathname?.startsWith("/service"));
+}
+
+function scrollToConsultation() {
+  document.getElementById("contact")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}
+
 function getActiveIdFromPath(pathname: string | null): string {
   if (!pathname) return "brand";
   if (pathname.startsWith("/pricing")) return "pricing";
@@ -85,6 +97,8 @@ export default function Navbar() {
   const pillLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hoverCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { data: servicesData } = useServicesQuery();
+  const services = [...(servicesData?.data ?? [])].sort((a, b) => a.id - b.id);
 
   const measurePill = useCallback((id: string): PillBox | null => {
     const nav = navRef.current;
@@ -405,15 +419,24 @@ export default function Navbar() {
                         return (
                           <Link
                             key={item.id}
-                            href={item.href}
+                            href={
+                              item.id === "pricing" && isServicePath(pathname)
+                                ? "#contact"
+                                : item.href
+                            }
                             ref={(el) => {
                               itemRefs.current[item.id] = el;
                             }}
                             className={`navbar-link${isActive ? " is-active" : ""}`}
                             aria-current={isActive ? "page" : undefined}
                             onMouseEnter={scheduleCloseMenu}
-                            onClick={() => {
+                            onClick={(event) => {
                               closeMenu();
+                              if (item.id === "pricing" && isServicePath(pathname)) {
+                                event.preventDefault();
+                                scrollToConsultation();
+                                return;
+                              }
                               setActiveId(item.id);
                             }}
                           >
@@ -476,10 +499,10 @@ export default function Navbar() {
                       offset={dropdownOffset}
                     >
                       <div className="space-y-1">
-                        {STICKY_NAV_SERVICES.map((item) => (
+                        {services.map((item) => (
                           <Link
-                            key={item.href}
-                            href={item.href}
+                            key={item.id}
+                            href={`/service/${item.slug}`}
                             onClick={closeMenu}
                             className="navbar-dropdown-link"
                           >
@@ -489,9 +512,11 @@ export default function Navbar() {
                               </span>
                               <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
                             </div>
-                            <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
-                              {item.desc}
-                            </p>
+                            {SERVICE_NAV_DESC[item.slug] ? (
+                              <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
+                                {SERVICE_NAV_DESC[item.slug]}
+                              </p>
+                            ) : null}
                           </Link>
                         ))}
                       </div>
