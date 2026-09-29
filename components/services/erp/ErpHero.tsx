@@ -98,15 +98,9 @@ export default function ErpHero() {
                 key={logo.name}
                 src={logo.src}
                 alt={logo.name}
-<<<<<<< HEAD
                 width={100}
                 height={100}
                 className="h-20 w-auto object-contain opacity-60 grayscale sm:h-7"
-=======
-                width={88}
-                height={28}
-                className="h-8 w-auto object-contain opacity-60 grayscale"
->>>>>>> dd76128269ffa51353dded9a45b1d9fe27c2ff45
                 unoptimized
               />
             ))}
