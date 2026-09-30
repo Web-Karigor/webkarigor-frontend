@@ -101,7 +101,7 @@ export default function ErpHero() {
                 alt={logo.name}
                 width={100}
                 height={100}
-                className="h-6 w-auto object-contain opacity-60 grayscale sm:h-7"
+                className="h-6 w-auto object-contain  sm:h-14"
                 unoptimized
               />
             ))}
