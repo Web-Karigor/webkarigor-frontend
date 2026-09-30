@@ -24,7 +24,7 @@ function HeroTitle() {
 
 function HeroDesc() {
   return (
-    <p className="hero-desc mt-8 max-w-[840px] px-2 sm:mt-12 md:mt-[75px] lg:mt-[var(--hero-desc-mt,75px)]">
+    <p className="hero-desc mt-8 max-w-[840px] px-2 sm:mt-12 md:mt-[96px] lg:mt-[var(--hero-desc-mt,96px)]">
       {description.beforeHighlight}
       <span className="hero-highlight">{description.highlight}</span>
       {description.afterHighlight}

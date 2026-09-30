@@ -29,52 +29,252 @@
   "sharedCredits": [
     {
       "role": "Project Manager",
-      "name": "Kristin Watson",
-      "avatar": "/sm1.webp"
-    },
-    {
-      "role": "Creative Director",
-      "name": "Kristin Watson",
-      "avatar": "/h1.webp"
-    },
+      "name": "Shaon Ahmed",
+      "avatar": "/team/sawan.jpg"
+    },  
     {
       "role": "Product Designer",
-      "name": "Floyd Miles",
-      "avatar": "/sm2.webp"
-    },
-    {
-      "role": "Brand Designer",
-      "name": "Floyd Miles",
-      "avatar": "/sm4.webp"
+      "name": "Sha Arian",
+      "avatar": "/team/aryan.jpg"
     },
     {
       "role": "Developer (Front-End)",
-      "name": "Floyd Miles",
-      "avatar": "/sm3.webp"
+      "name": "Mujahid Juel",
+      "avatar": "/team/juel.jpg"
     },
     {
       "role": "Developer (Back-End)",
-      "name": "Floyd Miles",
-      "avatar": "/s1.webp"
+      "name": "K M Rezwanul Ehsan Faruque",
+      "avatar": "/team/faruque.jpg"
     },
     {
       "role": "Developer (Back-End)",
-      "name": "Floyd Miles",
-      "avatar": "/h1.webp"
+      "name": "Md. Imran Hossain",
+      "avatar": "/team/imran.jpg"
     },
     {
-      "role": "SQA Engineer",
-      "name": "Floyd Miles",
-      "avatar": "/s2.webp"
-    },
-    {
-      "role": "UI Designer",
-      "name": "Floyd Miles",
-      "avatar": "/s3.webp"
+      "role": "Developer (Back-End)",
+      "name": "Sajjad Hossain",
+      "avatar": "/team/sajjad.jpg"
     }
   ],
   "sharedCtaBody": "We'll schedule a call to discuss your idea. After discovery sessions, we'll send a proposal, and upon approval, we'll get started.",
   "projects": {
+    "suma-international": {
+      "slug": "suma-international",
+      "title": "Travel Services Website Design | Suma International",
+      "titleLines": [
+        "Travel Services Website Design",
+        "Suma International"
+      ],
+      "heroImages": [
+        "/suma/Suma - Project Detail - Thumbnail - Left.jpg",
+        "/suma/Suma - Project Detail - Thumbnail - Middle.jpg",
+        "/suma/Suma - Project Detail - Thumbnail - Right.jpg"
+      ],
+      "meta": {
+        "execution": "30 Days",
+        "clientName": "Suma International",
+        "projectArea": "Travel Agency",
+        "status": "Delivered",
+        "technologies": "Next Js, Laravel · Figma, Adobe"
+      },
+      "about": {
+        "eyebrow": "About Project",
+        "headline": "When Intent Meets Uncertainty",
+        "body": "People are ready to plan their journey, but hesitation wins before they reach out. Not due to lack of interest, but due to a lack of clarity, structure and trust in the service itself.",
+        "items": [
+          {
+            "title": "Too Many Variations",
+            "body": "Packages come in many types and versions. Without a clear way to tell them apart, users struggle to find the one that fits them."
+          },
+          {
+            "title": "Trust Is Low",
+            "body": "Travel involves money and commitment. Without visible proof of credibility, users default to caution and avoid making an inquiry."
+          },
+          {
+            "title": "Scattered Information",
+            "body": "Details are spread across different places, making it hard for users to understand what they are asking for."
+          },
+          {
+            "title": "Outdated Design",
+            "body": "A dated look weakens first impressions and makes the service feel less reliable before users read a single word."
+          },
+          {
+            "title": "No Visual Hierarchy",
+            "body": "When everything looks equally important, users cannot tell where to look or what to do next."
+          },
+          {
+            "title": "Result",
+            "body": "A gap forms between intent and action, where interested users leave before they inquire."
+          }
+        ],
+        "more": {
+          "headline": "Discovery Before Designing",
+          "body": "The design started with understanding the business, not with screens. The project brief, the brand book and the eight service lines shaped the first decisions.",
+          "subhead": "Three patterns stood out:",
+          "items": [
+            {
+              "title": "Options exist",
+              "body": "but they are hard to compare"
+            },
+            {
+              "title": "Information is available",
+              "body": "but it is not in one place"
+            },
+            {
+              "title": "The service is real",
+              "body": "but it does not look trusted"
+            }
+          ],
+          "closing": "The challenge was not only usability. It was making a service feel clear and credible at every step."
+        }
+      },
+      "clientVoice": "Our vision was to build a modern, professional website that presents all our travel services in one place. Customers should be able to explore Hajj & Umrah, visa assistance, hotel accommodation, holiday packages, customized tours, medical tourism and corporate travel, read our travel guides, and send an inquiry easily. The website needed to work well on desktop, tablet and mobile, load fast, and be built to perform in search. We also wanted a clear, trustworthy digital presence that reflects the quality of our company.",
+      "mockupImage": "/suma/Suma - Project List Page.jpg",
+      "problem": "",
+      "solution": "This was never just about a good-looking travel website. It was about making people feel safe enough to ask. The design aims to reduce hesitation by giving users clear information and visible signals of trust.\n\n01. Show Trust Early — Trust badges are part of the interface, so users can see credibility signals before they decide to inquire.\n\n02. Describe Everything Clearly — Every service and package comes with a clear description. Users do not need to guess what is included or what they are asking for.\n\n03. Make Packages Easy to Find — Services are organized so users can move from browsing to the right package with less effort.\n\n04. Keep Services Transparent — Details are presented openly and in one place, so users can judge a service on facts, not assumptions.",
+      "extraSections": [
+        {
+          "title": "Information That Knows Its Place",
+          "intro": "The site is organized around what users need to know, in the order they need it. Each section introduces information at the moment it becomes relevant.",
+          "groups": [
+            {
+              "title": "Home Page",
+              "items": [
+                "Company Overview: introduces who Suma is and what it does.",
+                "Featured Services: points users to the service that fits them.",
+                "Latest Promotions: highlights current offers.",
+                "Call to Action: gives users a clear next step.",
+                "Testimonials and Highlights: adds proof from others."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Package Details Page",
+          "groups": [
+            {
+              "title": "Hero",
+              "items": [
+                "Shows the package name and the main action."
+              ]
+            },
+            {
+              "title": "Overview",
+              "items": [
+                "Gives a clear summary of the package."
+              ]
+            },
+            {
+              "title": "Itinerary",
+              "items": [
+                "Lays out the trip step by step."
+              ]
+            },
+            {
+              "title": "Cancellation Policy",
+              "items": [
+                "States the terms upfront."
+              ]
+            },
+            {
+              "title": "Inquiry",
+              "items": [
+                "Lets users ask without leaving the page."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Service Transparency",
+          "paragraphs": [
+            "In a high-trust decision, users look for clear answers, not promises. Services are described in plain language, and the information users need is easy to see. Nothing important is left for the user to find out later."
+          ]
+        },
+        {
+          "title": "Clear Packages, Easy Discovery",
+          "paragraphs": [
+            "Packages are designed to be scanned, compared and found. Clear descriptions and a consistent structure help users understand each option and move toward the right one."
+          ]
+        },
+        {
+          "title": "Design That Carries Meaning",
+          "headline": "Visual design is not used to impress. It is used to guide attention, build credibility and make information easy to read.",
+          "paragraphs": [
+            "Poppins (Font Family) — Typography That Reduces Effort. A clean type system with five weights, from Light to Bold, gives the content a clear hierarchy. Users can scan quickly and see what matters first.",
+            "Color That Signals Confidence. Teal leads actions and Deep Teal anchors headings. Gold appears only as a small accent. Colors follow a 60-30-10 balance.",
+            "Structure That Guides Attention. A 4pt spacing grid, 16px card radius and 8px button radius keep the layout consistent. Five elevation levels separate layers of content."
+          ],
+          "colors": [
+            {
+              "label": "Primary",
+              "value": "#007B7A"
+            },
+            {
+              "label": "Deep Teal",
+              "value": "#0B3A39"
+            }
+          ],
+          "closing": "Desktop View: 1920px · Container: 1740px"
+        },
+        {
+          "title": "Designing for Real Impact",
+          "intro": "Impact is not always captured in numbers. It shows up in behavior. The design focuses on the moments where people usually pause, doubt or leave.",
+          "groups": [
+            {
+              "title": "Less Friction, More Forward Movement",
+              "items": [
+                "A clear hierarchy guides users from discovery to inquiry with fewer decisions along the way."
+              ]
+            },
+            {
+              "title": "Visibility That Replaces Doubt",
+              "items": [
+                "Clear descriptions and open information let users judge a service without relying on assumptions."
+              ]
+            },
+            {
+              "title": "Confidence Built Over Time",
+              "items": [
+                "Trust signals appear across the journey, so confidence builds gradually instead of being asked for all at once."
+              ]
+            }
+          ]
+        }
+      ],
+      "testimonial": {
+        "quote": "Working with the Web Karigor team on our website was a great experience. They took our requirements and turned them into a clear, structured and professional design. The final result presents our services, packages and inquiry process in a modern, easy-to-navigate way, and reflects the quality of our company. We are happy with the approved design and appreciate the effort the Web Karigor team put into it.",
+        "name": "Darrell Steward",
+        "role": "Director, Suma International",
+        "avatar": "/h1.webp",
+        "rating": 5
+      },
+      "related": [
+        {
+          "slug": "kids-ecommerce",
+          "title": "Shishu Poribohon",
+          "description": "Shishu Poribohon is a trust-centered hybrid commerce platform built to simplify how parents shop for children's products. The design process focused on reducing uncertainty through clear information architecture, guided product discovery, and strong trust indicators. Every design decision was driven by usability principles and behavioral UX patterns to create a safer, more confident buying experience for modern families.",
+          "image": "/shishu/Shishu Poribohon - Project List Page.jpg",
+          "variant": "image"
+        },
+        {
+          "slug": "times-today",
+          "title": "Times Today",
+          "description": "Times Today BD is a digital news platform designed to make news discovery and reading more structured, accessible, and engaging. Web Karigor focused on transforming an existing text-heavy experience into a clearer and more visually organized news platform.",
+          "image": "/timestoday/Times Today - Project List Page.jpg",
+          "variant": "image"
+        },
+        {
+          "slug": "kapital-properties",
+          "title": "Kapital Properties",
+          "description": "Kapital Properties came to Web Karigor with a vision that extended far beyond a conventional real-estate marketplace.",
+          "image": "/capital/Kapital Properties - Project List Page.jpg",
+          "variant": "image"
+        }
+      ],
+      "nextSlug": "kids-ecommerce"
+    },
     "kids-ecommerce": {
       "slug": "kids-ecommerce",
       "title": "Kids Ecommerce Platform Design & Development | Shishu Poribohon",

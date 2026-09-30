@@ -55,9 +55,13 @@ export type ProjectDetail = {
     eyebrow: string;
     headline: string;
     body: string;
+    items?: { title: string; body: string }[];
     more?: {
       headline: string;
       body: string;
+      subhead?: string;
+      items?: { title: string; body: string }[];
+      closing?: string;
     };
   };
   clientVoice: string;

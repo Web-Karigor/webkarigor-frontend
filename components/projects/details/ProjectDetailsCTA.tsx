@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { openConsultationModal } from "@/components/home/ConsultationModal";
 import "@/components/home/FAQ.css";
 import "./ProjectDetailsRelated.css";
 import {
@@ -23,12 +26,13 @@ export default function ProjectDetailsCTA({ project }: { project: ProjectDetail 
         <p className="m-0 max-w-[780px] font-montserrat text-[clamp(14px,3.5vw,16px)] font-medium leading-[170%] text-black">
           {project.ctaBody}
         </p>
-        <Link
-          href="/#contact"
+        <button
+          type="button"
+          onClick={() => openConsultationModal()}
           className="faq-cta inline-flex h-11 cursor-pointer items-center justify-center rounded-[10px] border border-black bg-transparent px-6 font-montserrat text-[14px] font-bold capitalize leading-none text-black sm:h-[48px] sm:px-8 sm:text-[15px]"
         >
           {PROJECT_DETAILS_UI.ctaButton}
-        </Link>
+        </button>
       </div>
 
       <div

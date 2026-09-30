@@ -304,8 +304,10 @@ export default function Case() {
                       <div className="service-card-media is-rounded">
                         <Image
                           src={item.images[0]}
-                          alt=""
+                          alt={item.title}
                           fill
+                          unoptimized
+                          loading="eager"
                           className="service-card-featured-img"
                           sizes="(max-width: 1023px) 100vw, 493px"
                         />

@@ -53,14 +53,31 @@
     "venturesPartner": "Antler"
   },
   "cardSlugs": {
-    "p1": "times-today",
-    "p2": "kapital-properties",
-    "p3": "probashi-resorts",
-    "p4": "kids-ecommerce"
+    "p1": "suma-international",
+    "p2": "times-today",
+    "p3": "kapital-properties",
+    "p4": "probashi-resorts",
+    "p5": "kids-ecommerce"
   },
   "items": [
     {
       "id": "p1",
+      "title": "Suma International",
+      "src": "/suma/Suma - Project List Page.jpg",
+      "alt": "Suma International travel services website",
+      "w": 1300,
+      "h": 600,
+      "description": "A travel services website designed to simplify how people explore packages, understand services, and send inquiries — with a clear structure for Hajj, Umrah, and related offerings.",
+      "keyPoints": [
+        "Service and package architecture",
+        "Trust-focused content hierarchy",
+        "Inquiry-ready service pages",
+        "Responsive travel experience",
+        "Clear Hajj and Umrah presentation"
+      ]
+    },
+    {
+      "id": "p2",
       "title": "Simple is More",
       "src": "/timestoday/Times Today - Project List Page.jpg",
       "alt": "Simple is More website project",
@@ -76,7 +93,7 @@
       ]
     },
     {
-      "id": "p2",
+      "id": "p3",
       "title": "Mobile App Suite",
       "src": "/capital/Kapital Properties - Project List Page.jpg",
       "alt": "Colorful mobile app interface collection",
@@ -92,7 +109,7 @@
       ]
     },
     {
-      "id": "p3",
+      "id": "p4",
       "title": "Desktop Dashboard",
       "src": "/probashi/Probashi Resorts - Project List Page.jpg",
       "alt": "Desktop monitor with clean website UI",
@@ -108,7 +125,7 @@
       ]
     },
     {
-      "id": "p4",
+      "id": "p5",
       "title": "Travel App",
       "src": "/shishu/Shishu Poribohon - Project List Page.jpg",
       "alt": "Travel mobile app mockups",

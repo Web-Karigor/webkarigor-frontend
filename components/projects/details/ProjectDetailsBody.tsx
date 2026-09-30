@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   PROJECT_DETAILS_UI,
   type ProjectDetail,
@@ -21,6 +20,32 @@ function RichText({ text, className }: { text: string; className?: string }) {
   );
 }
 
+function TitleBodyList({
+  items,
+  className = "mt-6 sm:mt-8",
+}: {
+  items: { title: string; body: string }[];
+  className?: string;
+}) {
+  return (
+    <ul className={`m-0 list-none space-y-5 p-0 sm:space-y-6 ${className}`}>
+      {items.map((item) => (
+        <li key={item.title}>
+          <p className="m-0 font-montserrat text-[clamp(15px,3.8vw,16px)] font-bold leading-[150%] text-[#0A0A0A]">
+            {item.title}
+          </p>
+          <p className="mt-1 m-0 font-montserrat text-[clamp(14px,3.5vw,16px)] font-medium leading-[170%] text-[#4b5563]">
+            {item.body}
+          </p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+const aboutTitleClass =
+  "m-0 max-w-[864px] font-montserrat text-[clamp(20px,5vw,28px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]";
+
 export default function ProjectDetailsBody({ project }: { project: ProjectDetail }) {
   const metaRows = [
     { label: PROJECT_DETAILS_UI.metaLabels.execution, value: project.meta.execution },
@@ -42,7 +67,7 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
           </h1>
           <div className="mt-6 h-px w-full bg-[#E5E1D8] sm:mt-8 md:mt-10" />
 
-          <div className="pd-body-split mt-8 grid grid-cols-1 gap-8 sm:mt-10 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-[60px]">
+          <div className="pd-body-split mt-8 grid grid-cols-1 items-start gap-8 sm:mt-10 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-[60px]">
             <div className="flex flex-col gap-5 sm:gap-6 lg:sticky lg:top-[120px] lg:self-start">
               <aside className="rounded-2xl bg-[#FFF8DC] p-5 sm:rounded-[24px] sm:p-6 lg:p-8">
                 <h2 className="m-0 font-montserrat text-[clamp(17px,4vw,20px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
@@ -76,52 +101,71 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
             </div>
 
             <div className="min-w-0">
-              <div>
+              <div className="max-w-[865px]">
                 <h2 className="m-0 font-montserrat text-[clamp(22px,5.5vw,32px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
                   {project.about.eyebrow}
                 </h2>
-                <h3 className="mt-3 m-0 max-w-[864px] font-montserrat text-[clamp(17px,4vw,22px)] font-medium leading-[145%] tracking-[-0.02em] text-[#0A0A0A] sm:mt-4">
+                <h3 className={`mt-3 sm:mt-4 ${aboutTitleClass}`}>
                   {project.about.headline}
                 </h3>
-                <div className="mt-4 max-w-[865px] sm:mt-5">
+                <div className="mt-4 sm:mt-5">
                   <RichText text={project.about.body} />
                 </div>
+                {project.about.items?.length ? (
+                  <TitleBodyList items={project.about.items} />
+                ) : null}
                 {project.about.more ? (
-                  <div className="mt-8 max-w-[865px] sm:mt-10">
-                    <h3 className="m-0 font-montserrat text-[clamp(17px,4vw,22px)] font-medium leading-[145%] tracking-[-0.02em] text-[#0A0A0A]">
-                      {project.about.more.headline}
-                    </h3>
+                  <div className="mt-8 sm:mt-10">
+                    <h3 className={aboutTitleClass}>{project.about.more.headline}</h3>
                     <div className="mt-4 sm:mt-5">
                       <RichText text={project.about.more.body} />
                     </div>
+                    {project.about.more.subhead ? (
+                      <p className="mt-6 m-0 font-montserrat text-[clamp(15px,3.8vw,16px)] font-bold leading-[150%] text-[#0A0A0A] sm:mt-8">
+                        {project.about.more.subhead}
+                      </p>
+                    ) : null}
+                    {project.about.more.items?.length ? (
+                      <TitleBodyList items={project.about.more.items} className="mt-4 sm:mt-5" />
+                    ) : null}
+                    {project.about.more.closing ? (
+                      <div className="mt-6 sm:mt-8">
+                        <RichText text={project.about.more.closing} />
+                      </div>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
 
+              {/* Mockup image hidden on details page
               <div
                 data-project-cursor
-                className="pd-mockup relative mt-8 aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[#f3f1ea] sm:mt-10 sm:aspect-[16/10] sm:rounded-3xl lg:aspect-auto lg:h-[692px] lg:rounded-[40px]"
+                className="pd-mockup relative mt-8 w-full overflow-hidden rounded-2xl bg-[#f3f1ea] sm:mt-10 sm:rounded-3xl lg:rounded-[40px]"
               >
                 <Image
                   src={project.mockupImage}
                   alt={PROJECT_DETAILS_UI.mockupAlt}
-                  fill
-                  className="object-cover"
+                  width={1600}
+                  height={1000}
+                  className="h-auto w-full object-contain"
                   sizes="(max-width: 1024px) 100vw, 840px"
                 />
               </div>
+              */}
 
               <div className="mt-10 flex flex-col gap-8 sm:mt-14 sm:gap-12 md:mt-16 md:gap-14">
-                <div className="w-full max-w-[865px]">
-                  <h3 className="m-0 font-montserrat text-[clamp(20px,5vw,28px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
-                    {PROJECT_DETAILS_UI.problem}
-                  </h3>
-                  <div className="mt-3 sm:mt-4">
-                    <RichText text={project.problem} />
+                {project.problem ? (
+                  <div className="w-full max-w-[865px]">
+                    <h3 className="m-0 font-montserrat text-[clamp(20px,5vw,28px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
+                      {PROJECT_DETAILS_UI.problem}
+                    </h3>
+                    <div className="mt-3 sm:mt-4">
+                      <RichText text={project.problem} />
+                    </div>
                   </div>
-                </div>
+                ) : null}
 
-                <div className="pd-solution w-full max-w-[734px] ml-0 sm:ml-8 md:ml-12 lg:ml-[100px]">
+                <div className="pd-solution w-full max-w-[865px]">
                   <h3 className="m-0 font-montserrat text-[clamp(20px,5vw,28px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
                     {PROJECT_DETAILS_UI.solution}
                   </h3>
@@ -130,11 +174,12 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
                   </div>
                 </div>
               </div>
+
+              {project.extraSections?.length ? (
+                <ProjectDetailsExtra sections={project.extraSections} />
+              ) : null}
             </div>
           </div>
-          {project.extraSections?.length ? (
-            <ProjectDetailsExtra sections={project.extraSections} />
-          ) : null}
         </div>
       </div>
     </section>
