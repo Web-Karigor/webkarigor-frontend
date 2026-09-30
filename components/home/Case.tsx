@@ -228,13 +228,7 @@ export default function Case() {
                             </p>
                           ) : null}
 
-                        <h3
-                          className={`service_card_title${
-                            item.titleOneLine ? " is-one-line" : ""
-                          }`}
-                        >
-                          {item.title}
-                        </h3>
+                        <h3 className="service_card_title">{item.title}</h3>
 
                         <div className="service-card-desc w-richtext">
                           <p>{item.description}</p>

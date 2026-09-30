@@ -4,6 +4,22 @@ import {
   type ProjectDetail,
 } from "@/lib/project-details-data";
 import { PD } from "@/lib/project-details-layout";
+import ProjectDetailsExtra from "@/components/projects/details/ProjectDetailsExtra";
+
+function RichText({ text, className }: { text: string; className?: string }) {
+  return (
+    <div className={className}>
+      {text.split("\n\n").map((para) => (
+        <p
+          key={para.slice(0, 56)}
+          className="mt-4 m-0 font-montserrat text-[clamp(14px,3.5vw,16px)] font-medium leading-[170%] text-[#4b5563] first:mt-0 sm:mt-5 first:sm:mt-0"
+        >
+          {para}
+        </p>
+      ))}
+    </div>
+  );
+}
 
 export default function ProjectDetailsBody({ project }: { project: ProjectDetail }) {
   const metaRows = [
@@ -21,19 +37,8 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
         style={{ maxWidth: PD.content + 80 }}
       >
         <div className="mx-auto w-full" style={{ maxWidth: PD.content }}>
-          <h1 className="pd-title m-0 max-w-[1100px] text-left font-montserrat text-[clamp(24px,6vw,48px)] font-bold leading-[1.3] tracking-[-0.04em] text-black">
-            {project.titleLines ? (
-              <>
-                <span className="md:hidden">{project.title}</span>
-                <span className="hidden md:inline">
-                  {project.titleLines[0]}
-                  <br />
-                  {project.titleLines[1]}
-                </span>
-              </>
-            ) : (
-              project.title
-            )}
+          <h1 className="pd-title m-0 w-full text-left font-montserrat text-[clamp(24px,6vw,48px)] font-bold leading-[1.3] tracking-[-0.02em] text-black">
+            {project.title}
           </h1>
           <div className="mt-6 h-px w-full bg-[#E5E1D8] sm:mt-8 md:mt-10" />
 
@@ -78,9 +83,19 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
                 <h3 className="mt-3 m-0 max-w-[864px] font-montserrat text-[clamp(17px,4vw,22px)] font-medium leading-[145%] tracking-[-0.02em] text-[#0A0A0A] sm:mt-4">
                   {project.about.headline}
                 </h3>
-                <p className="mt-4 m-0 max-w-[865px] font-montserrat text-[clamp(14px,3.5vw,16px)] font-medium leading-[170%] text-[#4b5563] sm:mt-5">
-                  {project.about.body}
-                </p>
+                <div className="mt-4 max-w-[865px] sm:mt-5">
+                  <RichText text={project.about.body} />
+                </div>
+                {project.about.more ? (
+                  <div className="mt-8 max-w-[865px] sm:mt-10">
+                    <h3 className="m-0 font-montserrat text-[clamp(17px,4vw,22px)] font-medium leading-[145%] tracking-[-0.02em] text-[#0A0A0A]">
+                      {project.about.more.headline}
+                    </h3>
+                    <div className="mt-4 sm:mt-5">
+                      <RichText text={project.about.more.body} />
+                    </div>
+                  </div>
+                ) : null}
               </div>
 
               <div
@@ -101,22 +116,25 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
                   <h3 className="m-0 font-montserrat text-[clamp(20px,5vw,28px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
                     {PROJECT_DETAILS_UI.problem}
                   </h3>
-                  <p className="mt-3 m-0 font-montserrat text-[clamp(14px,3.5vw,16px)] font-medium leading-[170%] text-[#4b5563] sm:mt-4">
-                    {project.problem}
-                  </p>
+                  <div className="mt-3 sm:mt-4">
+                    <RichText text={project.problem} />
+                  </div>
                 </div>
 
                 <div className="pd-solution w-full max-w-[734px] ml-0 sm:ml-8 md:ml-12 lg:ml-[100px]">
                   <h3 className="m-0 font-montserrat text-[clamp(20px,5vw,28px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
                     {PROJECT_DETAILS_UI.solution}
                   </h3>
-                  <p className="mt-3 m-0 font-montserrat text-[clamp(14px,3.5vw,16px)] font-medium leading-[170%] text-[#4b5563] sm:mt-4">
-                    {project.solution}
-                  </p>
+                  <div className="mt-3 sm:mt-4">
+                    <RichText text={project.solution} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          {project.extraSections?.length ? (
+            <ProjectDetailsExtra sections={project.extraSections} />
+          ) : null}
         </div>
       </div>
     </section>

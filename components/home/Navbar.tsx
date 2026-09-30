@@ -17,14 +17,13 @@ import homeContent from "@/data/home-content.json";
 import {
   SERVICE_NAV_DESC,
   STICKY_NAV_MORE_LINKS,
-  STICKY_NAV_PROJECTS,
 } from "@/lib/sticky-nav-data";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 
 const { brand } = homeContent.navbar;
 
-type NavMenu = "projects" | "services" | "more";
+type NavMenu = "services" | "more";
 
 type NavItem =
   | { id: string; label: string; href: string; kind: "link" }
@@ -38,19 +37,17 @@ type PillBox = {
 type DropdownAlign = "left" | "right";
 
 const MENU_DROPDOWN_ALIGN: Record<NavMenu, DropdownAlign> = {
-  projects: "left",
   services: "left",
   more: "right",
 };
 
 const MENU_TO_ITEM_ID: Record<NavMenu, string> = {
-  projects: "case",
   services: "service",
   more: "more",
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { id: "case", label: "Projects", menu: "projects", href: "/projects", kind: "menu" },
+  { id: "case", label: "Projects", href: "/projects", kind: "link" },
   { id: "service", label: "Services", menu: "services", href: "#", kind: "menu" },
   { id: "brand", label: brand, href: "/", kind: "link" },
   { id: "pricing", label: "Pricing", href: "/pricing", kind: "link" },
@@ -373,7 +370,7 @@ export default function Navbar() {
                             </span>
                           );
 
-                          /* Projects / Services: click → page, hover → modal */
+                          /* Services: click → page, hover → modal */
                           if (item.href) {
                             return (
                               <Link
@@ -449,48 +446,6 @@ export default function Navbar() {
                 </div>
 
                 <AnimatePresence mode="wait">
-                  {openMenu === "projects" ? (
-                    <NavDropdown
-                      key="projects"
-                      title="Latest Projects"
-                      align="left"
-                      offset={dropdownOffset}
-                    >
-                      <div className="space-y-1">
-                        {STICKY_NAV_PROJECTS.map((item) => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={closeMenu}
-                            className="navbar-dropdown-link"
-                          >
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
-                                {item.title}
-                              </span>
-                              <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
-                            </div>
-                            <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
-                              {item.desc}
-                            </p>
-                          </Link>
-                        ))}
-                        <Link
-                          href="/projects"
-                          onClick={closeMenu}
-                          className="navbar-dropdown-link mt-1 border-t border-[#eef0f3] pt-3"
-                        >
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="font-montserrat text-[15px] font-semibold text-[#0EC47B]">
-                              View all projects
-                            </span>
-                            <ChevronRight className="h-4 w-4 text-[#0EC47B]" />
-                          </div>
-                        </Link>
-                      </div>
-                    </NavDropdown>
-                  ) : null}
-
                   {openMenu === "services" ? (
                     <NavDropdown
                       key="services"

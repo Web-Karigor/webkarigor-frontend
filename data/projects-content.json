@@ -53,24 +53,16 @@
     "venturesPartner": "Antler"
   },
   "cardSlugs": {
-    "p1": "kids-ecommerce",
-    "p2": "fashion-mobile",
-    "p3": "kids-ecommerce",
-    "p4": "travel-app",
-    "p5": "kids-ecommerce",
-    "p6": "fashion-mobile",
-    "p7": "fashion-mobile",
-    "p8": "kids-ecommerce",
-    "p9": "kids-ecommerce",
-    "p10": "kids-ecommerce",
-    "p11": "kids-ecommerce",
-    "p12": "travel-app"
+    "p1": "times-today",
+    "p2": "kapital-properties",
+    "p3": "probashi-resorts",
+    "p4": "kids-ecommerce"
   },
   "items": [
     {
       "id": "p1",
       "title": "Simple is More",
-      "src": "/services/why-choose-main.jpg",
+      "src": "/timestoday/Times Today - Project List Page.jpg",
       "alt": "Simple is More website project",
       "w": 1300,
       "h": 600,
@@ -86,7 +78,7 @@
     {
       "id": "p2",
       "title": "Mobile App Suite",
-      "src": "/sm2.webp",
+      "src": "/capital/Kapital Properties - Project List Page.jpg",
       "alt": "Colorful mobile app interface collection",
       "w": 640,
       "h": 720,
@@ -102,7 +94,7 @@
     {
       "id": "p3",
       "title": "Desktop Dashboard",
-      "src": "/sm3.webp",
+      "src": "/probashi/Probashi Resorts - Project List Page.jpg",
       "alt": "Desktop monitor with clean website UI",
       "w": 640,
       "h": 720,
@@ -118,7 +110,7 @@
     {
       "id": "p4",
       "title": "Travel App",
-      "src": "/ecommerce/hero-composite.webp",
+      "src": "/shishu/Shishu Poribohon - Project List Page.jpg",
       "alt": "Travel mobile app mockups",
       "w": 640,
       "h": 680,
@@ -129,136 +121,6 @@
         "Itinerary building flow",
         "Mobile booking checkout",
         "Offline-friendly trip views"
-      ]
-    },
-    {
-      "id": "p5",
-      "title": "Lifestyle Commerce",
-      "src": "/h1.webp",
-      "alt": "Lifestyle e-commerce website design",
-      "w": 640,
-      "h": 680,
-      "description": "A lifestyle storefront that feels editorial and shoppable at once. Product stories, imagery, and checkout are connected so browsing never feels disconnected from buying.",
-      "keyPoints": [
-        "Editorial product storytelling",
-        "Collection and PDP layouts",
-        "Cart and checkout polish",
-        "Merchandising grid system",
-        "Campaign-ready landing pages"
-      ]
-    },
-    {
-      "id": "p6",
-      "title": "Fashion Mobile",
-      "src": "/sm1.webp",
-      "alt": "Fashion mobile app screen",
-      "w": 640,
-      "h": 760,
-      "description": "A discovery-first fashion app for mobile shoppers. Curated collections, lookbooks, and one-tap checkout help people find what they love faster and buy with less friction.",
-      "keyPoints": [
-        "Lookbook and collection UX",
-        "Size and variant selection",
-        "Wishlist and save flows",
-        "One-tap checkout path",
-        "Brand-led visual language"
-      ]
-    },
-    {
-      "id": "p7",
-      "title": "Retail Screens",
-      "src": "/sm4.webp",
-      "alt": "Retail mobile app screens",
-      "w": 640,
-      "h": 760,
-      "description": "Retail product screens designed for in-hand shopping. Hierarchy, imagery, and CTAs stay consistent so customers always know what they are looking at and what to do next.",
-      "keyPoints": [
-        "Product card system",
-        "Promo and offer states",
-        "Inventory-aware UI",
-        "Store pickup journeys",
-        "Cross-sell modules"
-      ]
-    },
-    {
-      "id": "p8",
-      "title": "Ventures 3D",
-      "src": "/s1.webp",
-      "alt": "Abstract 3D ventures brand visual",
-      "w": 640,
-      "h": 980,
-      "variant": "ventures",
-      "description": "A 3D brand world for a ventures studio. The visual language feels premium and future-facing while staying flexible enough for decks, web, and campaign use.",
-      "keyPoints": [
-        "3D brand direction",
-        "Render and lighting style",
-        "Web and deck applications",
-        "Motion-ready assets",
-        "Partner-ready presentation kit"
-      ]
-    },
-    {
-      "id": "p9",
-      "title": "Brand Mark V",
-      "src": "/s2.webp",
-      "alt": "Orange brand mark visual",
-      "w": 640,
-      "h": 470,
-      "variant": "brand-v",
-      "description": "A bold mark built to hold attention in a second. The identity is simple enough to scale from app icon to outdoor, with a color system that stays loud and controlled.",
-      "keyPoints": [
-        "Logo construction",
-        "Color and contrast rules",
-        "Icon and lockup set",
-        "Print and digital usage",
-        "Brand application guidelines"
-      ]
-    },
-    {
-      "id": "p10",
-      "title": "Health App",
-      "src": "/s3.webp",
-      "alt": "Mobile health dashboard interface",
-      "w": 640,
-      "h": 490,
-      "description": "A health dashboard that makes daily progress easy to read. Charts, habits, and alerts are arranged so people can understand their status quickly and feel in control.",
-      "keyPoints": [
-        "Daily health overview",
-        "Chart and trend patterns",
-        "Reminder and alert states",
-        "Care-team sharing views",
-        "Calm, trustworthy UI"
-      ]
-    },
-    {
-      "id": "p11",
-      "title": "Analytics Dashboard",
-      "src": "/services/why-choose-collage.png",
-      "alt": "Data analytics dashboard with charts",
-      "w": 640,
-      "h": 560,
-      "description": "An analytics surface for teams who need signal, not noise. Charts, filters, and comparisons sit in a layout that supports fast scanning and confident decisions.",
-      "keyPoints": [
-        "Chart library and layout",
-        "Comparison and date ranges",
-        "Saved views and reports",
-        "Role-based data density",
-        "Export and share actions"
-      ]
-    },
-    {
-      "id": "p12",
-      "title": "Tablet Experience",
-      "src": "/h2.webp",
-      "alt": "Tablet content experience",
-      "w": 640,
-      "h": 560,
-      "description": "A tablet-first reading and browsing experience. Large canvases, generous type, and simple gestures make long-form content feel cinematic without losing usability.",
-      "keyPoints": [
-        "Tablet layout system",
-        "Typography for long read",
-        "Gesture navigation",
-        "Media-rich modules",
-        "Split-view content flow"
       ]
     }
   ]

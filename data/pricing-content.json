@@ -200,11 +200,31 @@
       "href": "/projects"
     },
     "items": [
-      { "src": "/sm1.webp", "alt": "Simple is More website" },
-      { "src": "/sm4.webp", "alt": "Fashion mobile app screens" },
-      { "src": "/services/why-choose-main.jpg", "alt": "Desktop product interface" },
-      { "src": "/sm3.webp", "alt": "Analytics dashboard" },
-      { "src": "/ecommerce/hero-composite.webp", "alt": "Lifestyle commerce UI" }
+      {
+        "src": "/shishu/Shishu Poribohon - Pricing Page - Pricing Page.jpg",
+        "alt": "Shishu Poribohon",
+        "href": "/projects/kids-ecommerce"
+      },
+      {
+        "src": "/timestoday/Times Today - Pricing Page - Pricing Page.jpg",
+        "alt": "Times Today BD",
+        "href": "/projects/times-today"
+      },
+      {
+        "src": "/probashi/Probashi Resorts - Pricing Page - Pricing Page.jpg",
+        "alt": "Probashi Resorts",
+        "href": "/projects/probashi-resorts"
+      },
+      {
+        "src": "/capital/Kapital Properties - Pricing Page - Pricing Page.jpg",
+        "alt": "Kapital Properties",
+        "href": "/projects/kapital-properties"
+      },
+      {
+        "src": "/sm3.webp",
+        "alt": "Featured product work",
+        "href": "/projects"
+      }
     ]
   }
 }

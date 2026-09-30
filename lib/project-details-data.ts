@@ -14,6 +14,31 @@ export type RelatedProject = {
   variant?: "image" | "text";
 };
 
+export type ProjectExtraPhaseItem = {
+  title: string;
+  body: string;
+};
+
+export type ProjectExtraPhase = {
+  title: string;
+  period?: string;
+  intro?: string;
+  items: ProjectExtraPhaseItem[];
+};
+
+export type ProjectExtraSection = {
+  title: string;
+  headline?: string;
+  intro?: string;
+  paragraphs?: string[];
+  phases?: ProjectExtraPhase[];
+  flows?: { title: string; items: string[] }[];
+  groups?: { title: string; intro?: string; items: string[] }[];
+  focus?: string[];
+  colors?: { label: string; value: string }[];
+  closing?: string;
+};
+
 export type ProjectDetail = {
   slug: string;
   title: string;
@@ -30,11 +55,16 @@ export type ProjectDetail = {
     eyebrow: string;
     headline: string;
     body: string;
+    more?: {
+      headline: string;
+      body: string;
+    };
   };
   clientVoice: string;
   mockupImage: string;
   problem: string;
   solution: string;
+  extraSections?: ProjectExtraSection[];
   credits: ProjectCredit[];
   testimonial: {
     quote: string;

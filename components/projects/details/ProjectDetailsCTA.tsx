@@ -5,6 +5,7 @@ import "@/components/home/FAQ.css";
 import "./ProjectDetailsRelated.css";
 import {
   PROJECT_DETAILS_UI,
+  getProjectDetail,
   type ProjectDetail,
 } from "@/lib/project-details-data";
 import { PD } from "@/lib/project-details-layout";
@@ -62,7 +63,12 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:gap-5 md:mt-10 md:grid-cols-3 md:gap-5">
-            {project.related.map((item, index) => (
+            {project.related.map((item, index) => {
+              const related = getProjectDetail(item.slug);
+              const flipText =
+                related?.about.body.split("\n\n")[0] ?? item.description;
+
+              return (
               <article
                 key={`${item.slug}-${index}`}
                 className="pd-related-card related-project-flip relative aspect-[4/5] md:aspect-auto md:h-[420px]"
@@ -85,8 +91,8 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
                     </div>
 
                     <div className="related-project-flip-face related-project-flip-back">
-                      <p className="m-0 font-montserrat text-[clamp(14px,3.5vw,15px)] font-medium leading-[170%] text-[#6B7280]">
-                        {item.description}
+                      <p className="m-0 min-h-0 overflow-y-auto font-montserrat text-[clamp(14px,3.5vw,15px)] font-medium leading-[170%] text-[#6B7280]">
+                        {flipText}
                       </p>
                       <span className="mt-6 inline-flex items-center gap-1.5 self-end font-montserrat text-[14px] font-bold leading-none text-[#0A0A0A] underline underline-offset-4">
                         {PROJECT_DETAILS_UI.viewProject}
@@ -96,7 +102,8 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
                   </div>
                 </Link>
               </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

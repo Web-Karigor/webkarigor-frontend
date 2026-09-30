@@ -29,7 +29,7 @@ export default function ProjectDetailsTestimonial({
             <p className="m-0 font-montserrat text-[12px] font-semibold tracking-[0.16em] uppercase sm:text-[13px]">
               {PROJECT_DETAILS_UI.testimonial}
             </p>
-            <p className="pd-testimonial-quote mt-5 m-0 max-w-[980px] font-montserrat text-[clamp(16px,4vw,28px)] font-medium leading-[155%] tracking-[-0.01em] sm:mt-6">
+            <p className="pd-testimonial-quote mt-5 m-0 w-full font-montserrat text-[clamp(16px,4vw,28px)] font-medium leading-[155%] tracking-[-0.01em] sm:mt-6">
               {testimonial.quote}
             </p>
 

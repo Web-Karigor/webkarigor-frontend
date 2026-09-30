@@ -49,7 +49,7 @@
   "hero": {
     "titleLines": [
       "We Are A Website Design & Development Company",
-      "AI Driven",
+      "AI driven solutions",
       "in Bangladesh"
     ],
     "description": {
@@ -367,18 +367,17 @@
       {
         "number": "(01)",
         "tags": [
-          "E-commerce",
-          "Healthcare"
+          "E-commerce & Retail"
         ],
-        "title": "Trusted Online Pharmacy",
+        "title": "Shishu Poribohon — Kids E-commerce",
         "titleOneLine": true,
-        "description": "The platform targets families and individuals needing everyday health essentials, featuring brands from major Bangladeshi pharma companies like Incepta and Square. Overall, it's a practical e-commerce site emphasizing safety, speed, and value in the growing digital healthcare market.",
+        "description": "A trust-focused e-commerce experience for parents to discover and purchase quality kids’ products across Bangladesh, with clear product information, secure checkout, rewards, order tracking, and a scalable foundation for international delivery.",
         "platforms": [
           "Web",
           "Android",
           "iOS"
         ],
-        "color": "#48a396",
+        "color": "#f0841a",
         "href": "/case",
         "quote": "Working with Brand Appart has been an absolute pleasure. Beyond their creativity and professionalism, there's a real sense of kindness and care in everything they do.",
         "author": {
@@ -387,23 +386,21 @@
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68403ea61d62eda6b245af20_1738708560978.avif"
         },
         "images": [
-          "/case/pharmacy.webp"
+          "/shishu/Shishu Poribohon - Thumnail - Home Page Slider.jpg"
         ]
       },
       {
         "number": "(02)",
         "tags": [
-          "Product",
-          "SaaS"
+          "Real Estate"
         ],
-        "title": "Product experiences users adopt & keep using",
-        "description": "We start from business goals, map the critical journeys, and prototype what actually moves the needle. Every sprint ships clear flows, a reusable UI library, and a dev-ready. Expect time-to-value down, UX friction down, retention/NPS up.",
+        "title": "Probashi Resort: Property Investment Platform",
+        "description": "A property investment platform designed to simplify share-based property ownership. The experience helps users explore projects, understand investment options, complete registration and payments, and track their investment through a clear, trustworthy digital experience.",
         "platforms": [
           "Web",
-          "iOS",
-          "Android"
+          "Mobile"
         ],
-        "color": "#f72",
+        "color": "#268e6f",
         "href": "/case",
         "quote": "A huge thank you to the entire Brand Appart team for your outstanding work on our rebranding! We're thrilled to have you as an integral part of the Incard team, and we can't wait to reveal what's coming next.",
         "author": {
@@ -412,26 +409,21 @@
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df0223365b8119da39098_1722618592452.avif"
         },
         "images": [
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e633760e1dd0f55c0e7c0a_product-01.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63376f869c68f5cea9df4_product-02.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337695e0b1cfdaefcf26_product-03.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337619312f05f66e3d5f_product-04.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6337651246334ea0392df_product-05.avif"
+          "/probashi/Probashi Resorts - Thumnail - Home Page Slider.jpg"
         ]
       },
       {
         "number": "(03)",
         "tags": [
-          "Web Design",
-          "Branding"
+          "Real Estate"
         ],
-        "title": "Web Design for growing teams & business.",
-        "description": "We align messaging, page architecture, and UI. You get clear structure, sections. The site loads fast, tells the right story, and pushes to action without dev firefighting. Your team gets a scalable base they can evolve without calling us for every change.",
+        "title": "Kapital Properties: A Modern Digital Property Ecosystem",
+        "description": "A technology-driven property platform designed to simplify property discovery, buying, selling, renting, financing, and management through a trusted, transparent, and connected digital experience.",
         "platforms": [
           "Web",
-          "CMS"
+          "Mobile"
         ],
-        "color": "#ff3c34",
+        "color": "#8e8834",
         "href": "/case",
         "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
         "author": {
@@ -440,29 +432,29 @@
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df55bfbee02637c53da16_1664138677695.avif"
         },
         "images": [
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541167dd0ff79e0f7c6_webdesign-01.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541b8dc1bbd7e988323_webdesign-02.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6354120e45d0ecfb10fb4_webdesign-03.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e6354124be687757a781ef_webdesign-04.avif",
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e63541ae1384d40a6368a5_webdesign-05.avif"
+          "/capital/Kapital Properties - Thumnail - Home Page Slider.jpg"
         ]
       },
       {
         "number": "(04)",
         "tags": [
-          "Pitch",
-          "Fundraising"
+          "News & Media"
         ],
-        "title": "Investor-proof decks that raise faster.",
-        "description": "We craft the narrative that gets meetings and a precise ask. Design serves the story: readable numbers, rhythm across slides, and versions for teaser/one-pager. Your deck can be pitched in 5 minutes, read solo, and generates faster responses.",
+        "title": "Times Today — Modern Digital News Platform",
+        "description": "A modern responsive news platform designed and developed for Times Today BD, focused on clearer content hierarchy, easier news discovery, improved article readability, mobile responsiveness, and a more structured digital news experience.",
         "platforms": [
-          "Deck",
-          "PDF"
+          "Web"
         ],
-        "color": "#785f47",
+        "color": "#d63a2e",
         "href": "/case",
+        "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
+        "author": {
+          "name": "Alexis Botaya",
+          "role": "Managing director • Sound Experience",
+          "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df55bfbee02637c53da16_1664138677695.avif"
+        },
         "images": [
-          "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68e635aa0286520b44dea001_pitch-01.avif"
+          "/timestoday/Times Today - Thumnail - Home Page Slider.jpg"
         ]
       }
     ]

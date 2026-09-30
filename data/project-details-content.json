@@ -77,63 +77,1398 @@
   "projects": {
     "kids-ecommerce": {
       "slug": "kids-ecommerce",
-      "title": "Kids Ecommerce Platform Case Study Product UX UI Design",
+      "title": "Kids Ecommerce Platform Design & Development | Shishu Poribohon",
       "titleLines": [
-        "Kids Ecommerce Platform Case Study Product",
-        "UX UI Design"
+        "Kids Ecommerce Platform Design & Development",
+        "Shishu Poribohon"
       ],
       "heroImages": [
-        "/sm1.webp",
-        "/services/why-choose-main.jpg",
-        "/ecommerce/hero-phone.webp"
+        "/shishu/Shishu Poribohon - Project Detail - Thumbnail - Left.jpg",
+        "/shishu/Shishu Poribohon - Project Detail - Thumbnail - Middle.jpg",
+        "/shishu/Shishu Poribohon - Project Detail - Thumbnail - Right.jpg"
       ],
       "meta": {
-        "execution": "25 June 2024",
-        "clientName": "ADOMM",
-        "projectArea": "Multimedia Design",
-        "status": "Ongoing Project",
-        "technologies": "Next JS, Laravel"
+        "execution": "45 Days",
+        "clientName": "Shishu Poribohon",
+        "projectArea": "E-commerce",
+        "status": "Delivered",
+        "technologies": "Next Js, Laravel · Figma, Adobe"
       },
       "about": {
         "eyebrow": "About Project",
-        "headline": "Building A Trust-Driven Shopping Experience For Modern Parents",
-        "body": "Shishu Poribohon is a kids ecommerce platform designed to help parents discover and buy age-appropriate products with confidence. We focused on clarity, warmth, and trust — so every step of the shopping journey feels simple, safe, and made for modern families."
+        "headline": "Building a Trust-Driven Shopping Experience for Modern Parents",
+        "body": "Shishu Poribohon is a trust-centered hybrid commerce platform built to simplify how parents shop for children's products. The design process focused on reducing uncertainty through clear information architecture, guided product discovery, and strong trust indicators. Every design decision was driven by usability principles and behavioral UX patterns to create a safer, more confident buying experience for modern families.",
+        "more": {
+          "headline": "Designing Trust Into the Buying Experience",
+          "body": "Through better information hierarchy, reassurance elements, and simplified flows, we created a more predictable shopping experience that supports faster evaluation and more confident product selection."
+        }
       },
-      "clientVoice": "Webkarigor understood our brand and our customers from day one. They translated our vision into a product experience that feels premium, trustworthy, and easy for parents to use — and our conversion rates reflect that.",
-      "mockupImage": "/sm3.webp",
-      "problem": "Parents often face uncertainty when buying children’s products online due to inconsistent product information, unclear quality assurance, and overwhelming choices. This lack of clarity can increase decision time and reduce confidence, especially when safety and reliability are critical factors in their purchase decisions.",
+      "clientVoice": "Shishu Poribohon aims to build a trusted e-commerce platform for children’s products, serving parents across Bangladesh and international customers through DHL-supported delivery. The vision is to make finding, evaluating, and purchasing quality kids’ products simple, transparent, and convenient, while creating a reliable foundation for long-term brand growth.",
+      "mockupImage": "/shishu/Shishu Poribohon - Project List Page.jpg",
+      "problem": "Parents often face uncertainty when buying children's products online due to inconsistent product information, unclear quality assurance, and overwhelming choices. This lack of clarity can increase decision time and reduce confidence, especially when safety and reliability are critical factors in their purchase decisions.",
       "solution": "Shishu Poribohon addresses these challenges by creating a trust-focused shopping experience. The platform emphasizes clear product details, structured information hierarchy, and reassurance elements to support informed decisions. The experience was designed to reduce confusion, improve transparency, and help parents shop with greater confidence and ease.",
       "testimonial": {
-        "quote": "Working with Webkarigor was one of the smoothest product partnerships we've had. They cared about the details, challenged our assumptions, and delivered a kids ecommerce experience our customers love.",
+        "quote": "Working with the team on Shishu Poribohon was a great experience. The final product reflects our business goals while making the shopping journey much clearer and easier for our customers. The attention to detail, understanding of our requirements, and thoughtful approach to the user experience made a real difference. We are very happy with how the project came together and appreciate the dedication throughout the process.",
         "name": "Darrell Steward",
-        "role": "CEO of Fooder - Online Food Store",
+        "role": "CEO, Shishu Poribohon",
         "avatar": "/h1.webp",
         "rating": 5
       },
       "related": [
         {
-          "slug": "fashion-mobile",
-          "title": "Fashion Mobile App",
-          "description": "A modern retail app experience focused on discovery, personalization, and seamless checkout.",
-          "image": "/sm4.webp",
+          "slug": "times-today",
+          "title": "Times Today",
+          "description": "Times Today BD is a digital news platform designed to make news discovery and reading more structured, accessible, and engaging. Web Karigor focused on transforming an existing text-heavy experience into a clearer and more visually organized news platform.",
+          "image": "/timestoday/Times Today - Project List Page.jpg",
           "variant": "image"
         },
         {
-          "slug": "fashion-mobile",
-          "title": "Fashion Mobile App",
-          "description": "A trust-focused shopping experience with clear product details, structured information hierarchy, and reassurance for modern parents across web and mobile.",
-          "image": "/services/why-choose-main.jpg",
+          "slug": "kapital-properties",
+          "title": "Kapital Properties",
+          "description": "Kapital Properties came to Web Karigor with a vision that extended far beyond a conventional real-estate marketplace.",
+          "image": "/capital/Kapital Properties - Project List Page.jpg",
           "variant": "image"
         },
         {
-          "slug": "travel-app",
-          "title": "Travel Booking App",
-          "description": "A clean multi-platform booking flow designed to reduce friction and help travelers plan with confidence.",
-          "image": "/ecommerce/hero-composite.webp",
+          "slug": "probashi-resorts",
+          "title": "Probashi Resorts",
+          "description": "People are ready to invest, but hesitation wins at the last moment. Not due to lack of money, but due to a lack of clarity, structure, and most importantly, trust in the system itself.",
+          "image": "/probashi/Probashi Resorts - Project List Page.jpg",
           "variant": "image"
         }
       ],
-      "nextSlug": "fashion-mobile"
+      "nextSlug": "times-today",
+      "extraSections": [
+        {
+          "title": "Thinking Process",
+          "intro": "From research to launch, the project followed a structured UX process focused on real user problems. Each step turned insights into clear design decisions to build a reliable, user-focused shopping experience.",
+          "phases": [
+            {
+              "title": "Discover",
+              "period": "Day 1–15",
+              "intro": "Understanding users, problems, and product direction",
+              "items": [
+                {
+                  "title": "User Research",
+                  "body": "Identify parent pain points, trust concerns, and decision challenges."
+                },
+                {
+                  "title": "Competitor Review",
+                  "body": "Analyze similar platforms to find usability gaps and trust patterns."
+                },
+                {
+                  "title": "Product Strategy",
+                  "body": "Define features, user journeys, and platform structure."
+                },
+                {
+                  "title": "Information Architecture",
+                  "body": "Create sitemap and content hierarchy for clarity and navigation."
+                }
+              ]
+            },
+            {
+              "title": "Design",
+              "period": "Day 16–32",
+              "intro": "Turning insights into usable experience",
+              "items": [
+                {
+                  "title": "Wireframing",
+                  "body": "Create low-fidelity layouts for core flows and pages."
+                },
+                {
+                  "title": "UX Architecture",
+                  "body": "Define interactions, navigation, and task flows."
+                },
+                {
+                  "title": "UI Design",
+                  "body": "Build high-fidelity screens with strong visual hierarchy."
+                },
+                {
+                  "title": "Design System",
+                  "body": "Create reusable components and consistency rules."
+                }
+              ]
+            },
+            {
+              "title": "Deliver",
+              "period": "Day 33–45",
+              "intro": "Refining, validating, and preparing for launch",
+              "items": [
+                {
+                  "title": "Usability Review",
+                  "body": "Identify friction points and clarity issues."
+                },
+                {
+                  "title": "Iteration",
+                  "body": "Refine flows and improve design decisions."
+                },
+                {
+                  "title": "Developer Handoff",
+                  "body": "Prepare specs, assets, and documentation."
+                },
+                {
+                  "title": "Launch Prep",
+                  "body": "Final checks for usability and release readiness."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Information Architecture",
+          "intro": "The architecture prioritizes clear navigation, logical grouping, and predictable flows to help users move from discovery to purchase with minimal friction.",
+          "flows": [
+            {
+              "title": "Trust Validation Flow",
+              "items": [
+                "Home",
+                "Product Page",
+                "Product Details",
+                "Trust Information",
+                "Purchase Decision"
+              ]
+            },
+            {
+              "title": "Exploration Flow",
+              "items": [
+                "Home",
+                "Featured Products",
+                "Categories",
+                "Product Listing",
+                "Product Details"
+              ]
+            },
+            {
+              "title": "Purchase Flow",
+              "items": [
+                "Home",
+                "Search Products",
+                "View Product",
+                "Add to Cart",
+                "Processed Checkout"
+              ]
+            }
+          ],
+          "closing": "The architecture was designed to minimize decision friction and maximize trust at every step."
+        },
+        {
+          "title": "Features",
+          "groups": [
+            {
+              "title": "Customer Experience",
+              "intro": "Core product discovery and browsing experience",
+              "items": [
+                "Smart Search",
+                "Product Categories",
+                "Age Filters",
+                "Product Listing",
+                "Product Details",
+                "Product Gallery",
+                "Wishlist Save",
+                "Related Products"
+              ]
+            },
+            {
+              "title": "Trust Features",
+              "intro": "Reducing uncertainty and improving purchase confidence",
+              "items": [
+                "Product Media",
+                "Safety Info",
+                "Stock Status",
+                "Price Details",
+                "Delivery Info",
+                "Return Policy",
+                "FAQ Section",
+                "Product Reviews"
+              ]
+            },
+            {
+              "title": "Commerce Features",
+              "intro": "Enabling smooth purchase flow",
+              "items": [
+                "Add To Cart",
+                "Cart Manage",
+                "Secure Checkout",
+                "Payment Options",
+                "Address Book",
+                "Order Tracking",
+                "Promo Banners"
+              ]
+            },
+            {
+              "title": "Admin Features",
+              "intro": "Platform management and business operations",
+              "items": [
+                "Admin Dashboard",
+                "Product Manage",
+                "Order Manage",
+                "Content Manage",
+                "Banner Manage",
+                "SEO Settings",
+                "Analytics Panel",
+                "Staff Role Manage"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "One Page Checkout",
+          "headline": "Reducing Friction in the Final Step",
+          "paragraphs": [
+            "To reduce checkout friction, I designed a unified purchase flow where users can review orders, apply offers, manage delivery details, and complete payment in one view—eliminating unnecessary steps and improving completion confidence."
+          ],
+          "focus": [
+            "Cart Review",
+            "Coupon Apply",
+            "Reward Points",
+            "Order Summary",
+            "Address Select",
+            "Delivery Method",
+            "Payment Options",
+            "Place Order"
+          ]
+        },
+        {
+          "title": "User Dashboard",
+          "headline": "A Central Hub for Order and Account Management",
+          "paragraphs": [
+            "Designed as a control center for users, the dashboard simplifies order tracking, profile management, and account actions through a clear layout and priority-based information structure."
+          ],
+          "focus": [
+            "Manage Account",
+            "Saved Items",
+            "My Orders",
+            "Reward & Points",
+            "Address Book",
+            "Payments",
+            "Return & Refund",
+            "Log Out"
+          ]
+        }
+      ]
+    },
+    "times-today": {
+      "slug": "times-today",
+      "title": "Digital News Platform Design & Development | Times Today BD",
+      "titleLines": [
+        "Digital News Platform Design & Development",
+        "Times Today BD"
+      ],
+      "heroImages": [
+        "/timestoday/Times Today - Project Detail - Thumbnail - Left.jpg",
+        "/timestoday/Times Today - Project Detail - Thumbnail - Middle.jpg",
+        "/timestoday/Times Today - Project Detail - Thumbnail - Right.jpg"
+      ],
+      "meta": {
+        "execution": "60 Days",
+        "clientName": "Times Today BD",
+        "projectArea": "News Media",
+        "status": "Live",
+        "technologies": "Next Js, Laravel · Figma, Adobe"
+      },
+      "about": {
+        "eyebrow": "About Project",
+        "headline": "Building a Modern News Experience for a Connected Audience",
+        "body": "Times Today BD is a digital news platform designed to make news discovery and reading more structured, accessible, and engaging. Web Karigor focused on transforming an existing text-heavy experience into a clearer and more visually organized news platform.\n\nThe redesign addressed content hierarchy, navigation, readability, mobile usability, content discovery, and engagement. Every design decision focused on helping readers understand what matters, find relevant stories faster, and move naturally from one piece of content to the next.",
+        "more": {
+          "headline": "Designing Clarity Into the News Experience",
+          "body": "A news platform needs to communicate importance without overwhelming the reader. We improved the experience through stronger visual hierarchy, structured content presentation, clearer navigation, and responsive layouts.\n\nThe result is a more organized environment where breaking stories, important news, trending content, and individual articles can be understood and explored with less friction."
+        }
+      },
+      "clientVoice": "Times Today aims to deliver news from all over the world through a modern digital news platform. The goal was to create a more accessible and engaging experience where readers can discover important stories, navigate content easily, and read news comfortably across devices.",
+      "mockupImage": "/timestoday/Times Today - Project List Page.jpg",
+      "problem": "The existing Times Today experience lacked the structure and visual clarity expected from a modern digital news platform. Weak visual hierarchy, an underdeveloped homepage structure, difficult navigation, inconsistent UI, and a weaker mobile experience made it harder for readers to discover and consume content efficiently.\n\nThe article-reading experience and content discovery also required improvement, while limited engagement capabilities and weak advertisement integration reduced the overall effectiveness of the platform.",
+      "solution": "Web Karigor redesigned Times Today around a clearer editorial structure and a more readable digital experience. The solution focused on strengthening homepage hierarchy, improving article readability, simplifying navigation, supporting mobile news consumption, and creating stronger pathways for discovering related and trending content.\n\nThe platform was also supported by a structured design system and reusable components to maintain consistency across the experience. Development and UI implementation were completed by the Web Karigor team using Next.js and Laravel, followed by implementation review, design revisions, and UI QA.",
+      "testimonial": {
+        "quote": "The Times Today project was a great experience for our team. Web Karigor understood our vision and transformed it into a modern, responsive news platform with a much clearer structure and reading experience. The attention to detail, communication throughout the project, and ability to refine the product based on our requirements made the entire process smooth. We are pleased with the final platform and appreciate the team’s dedication from design through development and launch.",
+        "name": "Alexis Botaya",
+        "role": "Managing director • Sound Experience",
+        "avatar": "/h1.webp",
+        "rating": 5
+      },
+      "related": [
+        {
+          "slug": "kapital-properties",
+          "title": "Kapital Properties",
+          "description": "Kapital Properties came to Web Karigor with a vision that extended far beyond a conventional real-estate marketplace.",
+          "image": "/capital/Kapital Properties - Project List Page.jpg",
+          "variant": "image"
+        },
+        {
+          "slug": "probashi-resorts",
+          "title": "Probashi Resorts",
+          "description": "People are ready to invest, but hesitation wins at the last moment. Not due to lack of money, but due to a lack of clarity, structure, and most importantly, trust in the system itself.",
+          "image": "/probashi/Probashi Resorts - Project List Page.jpg",
+          "variant": "image"
+        },
+        {
+          "slug": "kids-ecommerce",
+          "title": "Shishu Poribohon",
+          "description": "Shishu Poribohon is a trust-centered hybrid commerce platform built to simplify how parents shop for children's products. The design process focused on reducing uncertainty through clear information architecture, guided product discovery, and strong trust indicators. Every design decision was driven by usability principles and behavioral UX patterns to create a safer, more confident buying experience for modern families.",
+          "image": "/shishu/Shishu Poribohon - Project List Page.jpg",
+          "variant": "image"
+        }
+      ],
+      "nextSlug": "kapital-properties",
+      "extraSections": [
+        {
+          "title": "Thinking Process",
+          "intro": "From research to launch, the project followed a structured design and development process focused on understanding the existing product, identifying usability gaps, and turning those findings into a clearer news experience.",
+          "phases": [
+            {
+              "title": "Discover",
+              "period": "Day 1–20",
+              "intro": "Understanding the product, audience, and content experience",
+              "items": [
+                {
+                  "title": "Stakeholder Research",
+                  "body": "Understand business direction, content priorities, product requirements, and stakeholder expectations."
+                },
+                {
+                  "title": "User Research",
+                  "body": "Explore reader needs and identify usability challenges within the existing news experience."
+                },
+                {
+                  "title": "Competitive Analysis",
+                  "body": "Review leading news platforms including Prothom Alo, Kalbela, CNN, The Daily Ittefaq, and Star News."
+                },
+                {
+                  "title": "Product & UX Audit",
+                  "body": "Evaluate the existing experience across hierarchy, navigation, readability, mobile usability, content discovery, engagement, and interface consistency."
+                },
+                {
+                  "title": "Content Analysis",
+                  "body": "Understand how different types of news content need to be organized and presented for faster scanning and reading."
+                }
+              ]
+            },
+            {
+              "title": "Design",
+              "period": "Day 21–45",
+              "intro": "Turning insights into a clearer news experience",
+              "items": [
+                {
+                  "title": "Information Structure",
+                  "body": "Organize content and navigation around clearer discovery and reading patterns."
+                },
+                {
+                  "title": "Wireframing",
+                  "body": "Develop layouts for the major news experiences and validate content hierarchy before high-fidelity design."
+                },
+                {
+                  "title": "UX Architecture",
+                  "body": "Define navigation, content relationships, reading flows, and discovery paths."
+                },
+                {
+                  "title": "UI Design",
+                  "body": "Create high-fidelity interfaces with stronger hierarchy, readability, and editorial presentation."
+                },
+                {
+                  "title": "Design System",
+                  "body": "Establish reusable components, interaction states, responsive patterns, and visual consistency."
+                }
+              ]
+            },
+            {
+              "title": "Deliver",
+              "period": "Day 46–60",
+              "intro": "Refining, validating, and preparing for launch",
+              "items": [
+                {
+                  "title": "Design Refinement",
+                  "body": "Refine layouts and interactions based on review and implementation requirements."
+                },
+                {
+                  "title": "Development Handoff",
+                  "body": "Prepare the finalized design for implementation by the Web Karigor development team."
+                },
+                {
+                  "title": "Implementation Review",
+                  "body": "Review the implemented interface against the approved design and identify visual or interaction differences."
+                },
+                {
+                  "title": "UI QA",
+                  "body": "Validate the implemented experience across the designed interface and responsive layouts."
+                },
+                {
+                  "title": "Launch Preparation",
+                  "body": "Complete final revisions and checks before the platform went live."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Information Architecture",
+          "intro": "The information architecture was designed around the way readers naturally consume news: discovering important stories, exploring categories, opening an article, continuing through related content, and returning to current or trending stories.",
+          "flows": [
+            {
+              "title": "News Discovery Flow",
+              "items": [
+                "Homepage",
+                "Breaking News",
+                "Category Browsing",
+                "News Listing",
+                "Article",
+                "Related News"
+              ]
+            },
+            {
+              "title": "Search & Exploration Flow",
+              "items": [
+                "Homepage",
+                "Search News",
+                "Search Results",
+                "Article",
+                "Related Content"
+              ]
+            },
+            {
+              "title": "Trending & Engagement Flow",
+              "items": [
+                "Homepage",
+                "Trending News",
+                "Article",
+                "Share",
+                "Related News"
+              ]
+            }
+          ],
+          "closing": "The structure was designed to reduce unnecessary friction between discovery and reading while giving readers multiple ways to continue exploring relevant content."
+        },
+        {
+          "title": "Features",
+          "groups": [
+            {
+              "title": "News Experience",
+              "intro": "Core discovery and reading experience",
+              "items": [
+                "Breaking News",
+                "News Categories",
+                "News Search",
+                "News Listing",
+                "Article Reading",
+                "Related News",
+                "Trending News",
+                "Content Discovery",
+                "Responsive News Experience"
+              ]
+            },
+            {
+              "title": "Engagement Features",
+              "intro": "Helping readers interact with and continue exploring content",
+              "items": [
+                "Social Sharing",
+                "Related Content",
+                "Trending Content",
+                "News Discovery Paths",
+                "Notification System"
+              ]
+            },
+            {
+              "title": "Platform Management",
+              "intro": "Supporting content and platform operations",
+              "items": [
+                "Admin Features",
+                "Content Management",
+                "Notification Management",
+                "Platform Management"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Homepage Content Hierarchy",
+          "headline": "Turning a Content-Heavy Homepage Into a Clear Editorial Experience",
+          "paragraphs": [
+            "A news homepage contains many competing pieces of information. Without clear hierarchy, breaking stories, important headlines, trending content, and secondary news can appear equally significant.",
+            "We redesigned the homepage around stronger visual prioritization so readers can quickly identify what matters most before exploring deeper into the platform.",
+            "The interface uses content positioning, scale, spacing, imagery, typography, and grouping to establish a clearer reading order. Instead of presenting news as a collection of equally weighted blocks, the homepage guides readers from the most important stories toward broader content discovery."
+          ],
+          "focus": [
+            "Breaking News",
+            "Major Headlines",
+            "Trending News",
+            "Category Content",
+            "Visual Hierarchy",
+            "Content Discovery",
+            "Responsive Layout"
+          ],
+          "closing": "The result is a homepage that communicates editorial importance more clearly while giving readers a more natural path into the rest of the platform."
+        },
+        {
+          "title": "Article Reading Experience",
+          "headline": "Making News Easier to Read and Understand",
+          "paragraphs": [
+            "The article page is where the platform ultimately delivers its core value. A strong headline alone is not enough; the surrounding interface needs to support comfortable reading, clear context, and continued discovery.",
+            "We focused on improving the article experience through stronger typography, spacing, content structure, visual hierarchy, and related-content pathways.",
+            "The design gives the article itself the necessary focus while keeping supporting actions and discovery elements accessible without creating unnecessary distraction."
+          ],
+          "focus": [
+            "Article Hierarchy",
+            "Readability",
+            "Content Structure",
+            "Related News",
+            "Sharing",
+            "Responsive Reading",
+            "Visual Consistency"
+          ],
+          "closing": "The result is a more focused reading environment that helps users consume an individual story while naturally connecting them to the wider news experience."
+        },
+        {
+          "title": "Mobile News Experience",
+          "headline": "Designing News for Everyday Mobile Consumption",
+          "paragraphs": [
+            "News consumption increasingly happens on smaller screens, where limited space makes hierarchy and readability even more important.",
+            "The Times Today experience was designed responsively rather than simply shrinking the desktop interface. Content blocks, navigation, typography, spacing, and interaction patterns were adapted to maintain clarity across different screen sizes.",
+            "The mobile experience prioritizes quick scanning while preserving the readability needed for longer article consumption."
+          ],
+          "focus": [
+            "Responsive Layouts",
+            "Mobile Navigation",
+            "Content Hierarchy",
+            "Article Readability",
+            "Touch-Friendly Interaction",
+            "News Discovery",
+            "Consistent Components"
+          ],
+          "closing": "The result is a more adaptable experience that keeps the core news journey clear across desktop and mobile environments."
+        },
+        {
+          "title": "Trending News",
+          "headline": "Creating a Clear Path to What People Are Reading",
+          "paragraphs": [
+            "Trending content provides another way for readers to discover stories beyond the primary editorial hierarchy.",
+            "We introduced a structured presentation for trending news so users can quickly identify content receiving attention and move from one story to another.",
+            "Rather than treating trending content as an isolated section, it works as part of the broader discovery experience, connecting readers with additional stories after their initial visit."
+          ],
+          "focus": [
+            "Trending Stories",
+            "Content Prioritization",
+            "Story Discovery",
+            "Related Content",
+            "Responsive Presentation"
+          ],
+          "closing": "This creates an additional discovery layer that helps readers continue exploring the platform beyond the first story they encounter."
+        },
+        {
+          "title": "News Engagement",
+          "headline": "Moving Beyond Passive Reading",
+          "paragraphs": [
+            "A modern news platform needs to support more than simply opening and reading an article. Readers should have clear ways to interact with content and continue their journey through the platform.",
+            "Times Today was designed with engagement and continued discovery in mind, including content sharing, related news, trending stories, and notifications.",
+            "The experience connects these actions to the broader reading journey instead of treating engagement as separate functionality."
+          ],
+          "focus": [
+            "News Sharing",
+            "Related Stories",
+            "Trending Content",
+            "Notifications",
+            "Continued Discovery"
+          ],
+          "closing": "The goal was to create a more connected news experience where one article naturally leads to the next relevant piece of content."
+        },
+        {
+          "title": "Design System",
+          "headline": "Building Consistency Across the News Platform",
+          "paragraphs": [
+            "To maintain consistency across a content-heavy interface, Web Karigor established a reusable design system covering the primary visual and interactive elements of the platform.",
+            "The system includes typography, color, buttons, inputs, cards, navigation, tabs, badges, tags, news cards, article components, icons, image rules, interaction states, responsive components, and other reusable UI patterns."
+          ],
+          "colors": [
+            {
+              "label": "Primary",
+              "value": "#D63A2E"
+            },
+            {
+              "label": "Hover",
+              "value": "#0D9488"
+            },
+            {
+              "label": "Dark / Secondary",
+              "value": "#111111"
+            }
+          ],
+          "closing": "The system was designed to maintain a consistent visual language while allowing different types of news content and interface states to remain distinguishable. Reusable components also helped keep the experience consistent during development and subsequent design revisions."
+        },
+        {
+          "title": "Development & Launch",
+          "headline": "From Design to a Live News Platform",
+          "paragraphs": [
+            "Following the design phase, the finalized interface was handed over to the Web Karigor development team for implementation.",
+            "The platform was developed using Next.js and Laravel, with the development team working closely with the approved Figma designs. Throughout implementation, Web Karigor maintained an iterative process where design and development were reviewed together.",
+            "Design revisions were made where required, followed by UI QA to ensure the implemented experience remained aligned with the intended interface.",
+            "The completed platform was then launched as a fully live responsive news website."
+          ]
+        },
+        {
+          "title": "Post-Launch",
+          "headline": "Continuing the Product Beyond Launch",
+          "paragraphs": [
+            "The work continued after launch through ongoing product and technical improvements.",
+            "The post-launch process included bug fixes, developer support, content-related improvements, performance improvements, analytics-based iteration, and stakeholder-requested changes.",
+            "This allowed the platform to continue evolving beyond its initial launch while maintaining the foundation established during the design and development process."
+          ]
+        },
+        {
+          "title": "Results",
+          "headline": "A More Structured Digital News Experience",
+          "paragraphs": [
+            "The redesigned Times Today platform is now live with a stronger visual structure, clearer content hierarchy, responsive layouts, and a more organized reading and discovery experience.",
+            "Following launch, the platform has reached approximately 200K monthly visitors and 500K+ monthly page views, with an average session duration of around 5 minutes or more.",
+            "The platform continues to receive mobile users, social engagement, and ongoing content activity, supported by continued performance improvements, analytics-based iteration, and stakeholder-driven updates.",
+            "The outcome is a more structured digital environment for delivering news, helping readers discover important stories, read comfortably across devices, and continue exploring relevant content."
+          ]
+        }
+      ]
+    },
+    "kapital-properties": {
+      "slug": "kapital-properties",
+      "title": "A Trusted Digital Experience for Modern Property Management | Kapital Properties Limited",
+      "titleLines": [
+        "A Trusted Digital Experience for Modern Property Management",
+        "Kapital Properties Limited"
+      ],
+      "heroImages": [
+        "/capital/Kapital Properties - Project Detail - Thumbnail - Left.jpg",
+        "/capital/Kapital Properties - Project Detail - Thumbnail - Middle.jpg",
+        "/capital/Kapital Properties - Project Detail - Thumbnail - Right.jpg"
+      ],
+      "meta": {
+        "execution": "45 Days",
+        "clientName": "Kapital Properties Limited",
+        "projectArea": "Real Estate & Property Management",
+        "status": "Delivered",
+        "technologies": "Next Js, Laravel · Figma, Adobe"
+      },
+      "about": {
+        "eyebrow": "About Project",
+        "headline": "Make property decisions feel clearer, more transparent and more connected.",
+        "body": "Kapital Properties came to Web Karigor with a vision that extended far beyond a conventional real-estate marketplace.\n\nThe goal was to create a technology-enabled ecosystem where people could discover, buy, sell, rent, finance and manage properties while accessing the professional services required throughout the property journey.\n\nOur team translated that broad vision into a structured digital product experience. The resulting product brings property discovery, verification, financing, communication, property services and ongoing management into a single ecosystem.",
+        "more": {
+          "headline": "Designing for a Multi-Sided Property Experience",
+          "body": "The platform needed to work for people with very different intentions. A buyer may arrive with a budget and a location in mind. A seller may want to publish a property. A tenant may be looking for a suitable rental. An investor may be evaluating an opportunity. An NRB user may need someone in Bangladesh to inspect and manage a property on their behalf.\n\nThe client brief identifies property buyers, sellers, investors, landlords and tenants as core audiences, alongside institutional and professional stakeholders. Rather than forcing these users through the same experience, our team structured the product around their individual goals. The interface could then remain simple at the point of entry while progressively exposing the information and actions relevant to each journey."
+        }
+      },
+      "clientVoice": "Kapital Properties wanted to build a new kind of property service platform for Bangladesh: one that combines technology with professional human support rather than functioning only as a listing marketplace.\n\nThe vision covered the complete property journey, from finding or listing a property to financing, documentation, regulatory support, interiors and after-sale management. It was also designed to serve buyers, sellers, investors, landlords, tenants, businesses and Bangladeshis living abroad.\n\nAt the heart of the brief was a simple ambition: make property ownership and management more transparent, accessible and technology-enabled. Kapital Properties positioned this vision around trust, professionalism and human care.",
+      "mockupImage": "/capital/Kapital Properties - Project List Page.jpg",
+      "problem": "Real estate is rarely a single transaction. A person looking for a home may need to compare properties, understand ownership information, evaluate financing, communicate with a seller, arrange documentation and eventually manage the property.\n\nFor an owner, the journey can be completely different: listing a property, finding suitable buyers or tenants, handling documents, arranging inspections, managing rent and maintenance, and accessing professional services.\n\nKapital Properties wanted to bring these fragmented activities into one connected ecosystem. The challenge for Web Karigor was therefore not simply to design a property website. We had to translate a broad real-estate business model into a digital product that could accommodate different users, different journeys and different levels of service.",
+      "solution": "We structured the product around discovery, evaluation, verification, financing, communication and ongoing management instead of treating property as a one-time listing transaction.\n\nThe work resulted in a digital product foundation covering property discovery, structured listing, trust and verification, a customer dashboard, financing, communication, property services, an NRB service model, investment-ecosystem concepts, Propertypulse News Network, and a shared design system.\n\nFor customers, the experience can move from finding a property to understanding it, verifying it, financing it, requesting support, and eventually managing the property.",
+      "testimonial": {
+        "quote": "Working with Web Karigor gave us a clear direction for turning our vision for Kapital Properties into a complete digital property ecosystem. The team understood that we needed more than a property listing platform and translated our requirements into a structured, modern and user-focused experience covering property discovery, financing, services and management.\n\nWe appreciated the team’s ability to understand the complexity of our business and turn it into a product that feels clear, professional and trustworthy. Their attention to detail, communication and commitment throughout the project made the collaboration a valuable experience for Kapital Properties.",
+        "name": "Alexis Botaya",
+        "role": "Managing director • Sound Experience",
+        "avatar": "/h1.webp",
+        "rating": 5
+      },
+      "related": [
+        {
+          "slug": "times-today",
+          "title": "Times Today",
+          "description": "Times Today BD is a digital news platform designed to make news discovery and reading more structured, accessible, and engaging. Web Karigor focused on transforming an existing text-heavy experience into a clearer and more visually organized news platform.",
+          "image": "/timestoday/Times Today - Project List Page.jpg",
+          "variant": "image"
+        },
+        {
+          "slug": "probashi-resorts",
+          "title": "Probashi Resorts",
+          "description": "People are ready to invest, but hesitation wins at the last moment. Not due to lack of money, but due to a lack of clarity, structure, and most importantly, trust in the system itself.",
+          "image": "/probashi/Probashi Resorts - Project List Page.jpg",
+          "variant": "image"
+        },
+        {
+          "slug": "kids-ecommerce",
+          "title": "Shishu Poribohon",
+          "description": "Shishu Poribohon is a trust-centered hybrid commerce platform built to simplify how parents shop for children's products. The design process focused on reducing uncertainty through clear information architecture, guided product discovery, and strong trust indicators. Every design decision was driven by usability principles and behavioral UX patterns to create a safer, more confident buying experience for modern families.",
+          "image": "/shishu/Shishu Poribohon - Project List Page.jpg",
+          "variant": "image"
+        }
+      ],
+      "nextSlug": "probashi-resorts",
+      "extraSections": [
+        {
+          "title": "Structuring the Property Experience",
+          "intro": "The property experience was organized as a clear path from first discovery to informed evaluation.",
+          "phases": [
+            {
+              "title": "Discover",
+              "intro": "The homepage concept centers around the message: Find. Finance. Own. Property discovery is supported by search, category navigation, filters and map-based exploration.",
+              "items": [
+                {
+                  "title": "Buy · Rent · Commercial · New Projects",
+                  "body": "The original product brief specifically called for map view, filtering and category-based property exploration."
+                }
+              ]
+            },
+            {
+              "title": "Explore",
+              "intro": "A property card needs to communicate enough information to help someone decide whether to investigate further. Instead of treating the listing as a simple image-and-price card, the product architecture considers richer listing information.",
+              "items": [
+                {
+                  "title": "Listing signals",
+                  "body": "Location, price, property type, key specifications, amenities, verification and media."
+                },
+                {
+                  "title": "Deeper property data",
+                  "body": "The wider property data model also accounts for floor plans, ownership documents, mutation information, tax receipts and geolocation. The intention was to make important information discoverable before users commit to a deeper inquiry."
+                }
+              ]
+            },
+            {
+              "title": "Property Details",
+              "intro": "The property detail experience is where discovery turns into evaluation. The interface brings together the information a user needs to understand the property, its condition, location and legitimacy.",
+              "items": [
+                {
+                  "title": "Information hierarchy",
+                  "body": "Property identity → Visual overview → Price & location → Key facts → Amenities → Detailed information → Documents → Location → Inquiry."
+                },
+                {
+                  "title": "Verified media",
+                  "body": "The original brief also describes verified documents, photographs and 3D tours as part of the intended property experience. This approach gives users a clearer path from curiosity to informed consideration."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Trust Is a Product Feature",
+          "paragraphs": [
+            "For Kapital Properties, trust could not be treated as a branding exercise alone. The client defined a verification process involving NID, ownership papers, mutation records, bank verification and physical inspection before a property is published.",
+            "We reflected this requirement in the product experience by treating verification as visible product information rather than something hidden behind the scenes. The broader platform concept also includes verified profiles and a multi-layer fraud-prevention process combining automated moderation with manual review."
+          ],
+          "closing": "The design language therefore consistently favors clarity over ambiguity, evidence over assumption, and status over uncertainty."
+        },
+        {
+          "title": "Listing a Property",
+          "intro": "Selling property requires a very different interaction model from discovering one. We structured the listing experience into clear stages so that a complex property submission could be completed progressively rather than through one overwhelming form.",
+          "groups": [
+            {
+              "title": "Listing Structure",
+              "items": [
+                "01 — Category: Choose the appropriate property category.",
+                "02 — Basic Information: Establish the property's fundamental identity.",
+                "03 — Location: Define where the property is located and provide relevant location information.",
+                "04 — Property Details: Capture specifications and characteristics.",
+                "05 — Amenities: Describe facilities and available features.",
+                "06 — Pricing: Provide the commercial information.",
+                "07 — Media Upload: Add property imagery and supporting visual material."
+              ]
+            }
+          ],
+          "closing": "The wider platform also needs supporting documents such as title deeds, khatian, mutation records and tax receipts. The structure was designed to make the process understandable to ordinary property owners while giving KPL the information required for verification."
+        },
+        {
+          "title": "Beyond Buying and Selling",
+          "intro": "One of the defining characteristics of the product is that property does not disappear from the platform after a transaction. Kapital Properties also offers a broader set of services.",
+          "groups": [
+            {
+              "title": "Service ecosystem",
+              "items": [
+                "Property Selling — Technology-supported property marketing and sales assistance.",
+                "Property Buying — Verified property discovery with professional guidance.",
+                "Property Renting — Connecting tenants and landlords while simplifying documentation and management.",
+                "Property Financing — Loan eligibility, EMI calculation and application assistance.",
+                "Documentation & Logistics — Support for agreements, transfers, mutation, registration and tax documentation.",
+                "Regulatory Services — Assistance with approvals, VAT, tax and registration.",
+                "Interior Solutions — Interior services from concept through completion.",
+                "Property Management — Rent collection, maintenance, tenant management, inspection, valuation and compliance."
+              ]
+            }
+          ],
+          "closing": "These services are part of the client's documented vision for an end-to-end property platform."
+        },
+        {
+          "title": "Finance Within the Property Journey",
+          "headline": "Check Your Eligibility in 60 Seconds",
+          "paragraphs": [
+            "Financing was not treated as an unrelated financial tool. It was designed as part of the property decision itself.",
+            "The intended experience connects: Property → Financing requirement → Eligibility → EMI → Application → Status.",
+            "The platform brief calls for loan eligibility checking, EMI calculation and direct application submission to partner banks. The homepage concept therefore gives financing a prominent position through an eligibility experience rather than burying it inside a secondary service page.",
+            "Specific banking integrations were identified in the client brief as being under process, so we have not represented them as confirmed production integrations."
+          ]
+        },
+        {
+          "title": "The User Dashboard",
+          "paragraphs": [
+            "A property ecosystem needs somewhere for the customer's ongoing activities to live. The dashboard brings together the user's relationship with Kapital Properties instead of forcing them to repeatedly return to individual pages.",
+            "The documented platform requirements include tracking listings, favorites, chat history and loan applications. The broader UX structure extends this thinking into property requests, bookings, services and account activity."
+          ],
+          "closing": "The dashboard therefore acts less like a generic account page and more like a personal property workspace."
+        },
+        {
+          "title": "Requests, Bookings & Human Assistance",
+          "paragraphs": [
+            "Real estate does not always follow a fully automated transaction model. For KPL, certain actions require review, communication and professional involvement.",
+            "We therefore designed request and booking interactions around a clear processing model rather than pretending every transaction could happen instantly. A user can initiate an action, after which the request can move through an administrative process.",
+            "This reflects the client's stated payment model: initial booking fees and service payments may be handled online, while full property payments and transfers are handled offline with legal documentation."
+          ],
+          "closing": "The result is a product that acknowledges how real property transactions actually work instead of forcing them into a conventional e-commerce checkout model."
+        },
+        {
+          "title": "Communication",
+          "paragraphs": [
+            "Communication is another layer connecting the marketplace with KPL's professional service model. The intended platform includes secure chat, calls and inquiry so buyers and sellers can communicate without directly exposing personal contact information.",
+            "The product also supports communication around requests and services, creating a continuous relationship between the customer and KPL rather than ending the experience at the property detail page."
+          ]
+        },
+        {
+          "title": "A Dedicated Experience for NRBs",
+          "paragraphs": [
+            "Non-Resident Bangladeshis represent a particularly different property journey. Someone living abroad may want to purchase, inspect, invest in, rent or manage property in Bangladesh without being physically present for every step.",
+            "Kapital Properties explicitly identifies NRBs as an important audience and positions its platform as a bridge between Bangladesh-based property services and people living abroad."
+          ],
+          "focus": [
+            "Viewing",
+            "Tours",
+            "Inspection",
+            "Legal Vetting",
+            "Funding",
+            "Security",
+            "Interior Solutions",
+            "Renting",
+            "Marketing",
+            "Representation",
+            "Account Management"
+          ],
+          "closing": "This makes the NRB experience fundamentally service-led rather than simply another property-search interface."
+        },
+        {
+          "title": "Extending the Ecosystem Through Amana",
+          "intro": "The wider product vision also explored an ecosystem of specialized property and financial services under the Amana concept.",
+          "groups": [
+            {
+              "title": "Amana concepts",
+              "items": [
+                "Amanafi — Islamic property and home-finance oriented services.",
+                "Amana Assets — Property-share and asset-oriented investment experiences.",
+                "Amana Crowd — A Shariah-aligned property crowdfunding concept.",
+                "Amana Agents — An agent and referral-oriented service layer."
+              ]
+            }
+          ],
+          "closing": "These concepts were considered as extensions of the broader property ecosystem rather than replacements for the core marketplace. Because the supplied KPL brief does not provide detailed implementation specifications for these services, we treat them as part of the broader product work rather than claiming specific production functionality beyond what was established."
+        },
+        {
+          "title": "Property Management Doesn't End at the Transaction",
+          "headline": "Discover. Acquire. Manage. Maintain. Grow.",
+          "paragraphs": [
+            "Kapital Properties wanted to remain useful after a property is bought, sold or rented. The property management offering covers areas such as rent collection, maintenance, tenant management, inspections, valuation and compliance.",
+            "That changes the product relationship from a one-time transaction into a longer property lifecycle. The UX architecture reflects that longer relationship by keeping property information, requests, communication and services connected to the user's account."
+          ]
+        },
+        {
+          "title": "Propertypulse News Network",
+          "paragraphs": [
+            "The product also includes a knowledge layer through Propertypulse News Network (PNN). Rather than treating content as a conventional company blog, the concept positions PNN around market trends, expert commentary, property analytics, regulatory changes, buyer guides and behavioral trends.",
+            "The client describes PNN as a source of data-driven property insights designed to help buyers, sellers and investors make more informed decisions. The homepage concept therefore includes a dedicated PNN section alongside the marketplace and financial tools."
+          ]
+        },
+        {
+          "title": "Designing for Bangladesh",
+          "paragraphs": [
+            "The product was conceived as a bilingual experience supporting Bangla + English across listings, content, notifications and blogs.",
+            "This requirement influenced the product architecture beyond simply adding a language switch. Content-heavy property interfaces need to remain readable in both languages, while forms, notifications and service information need to preserve their hierarchy regardless of language."
+          ],
+          "closing": "The design direction therefore favors clear typography, generous spacing and structured content rather than overly dense interfaces."
+        },
+        {
+          "title": "The Design System",
+          "headline": "Trustworthy. Modern. Professional. Human.",
+          "paragraphs": [
+            "The visual system was created around the personality Kapital Properties wanted to establish. The client's original direction specified a palette centered on deep navy, emerald green, warm gold and cool gray.",
+            "The design direction calls for a modern sans-serif typeface such as Poppins, Inter or Roboto, supported by a clean grid, generous whitespace and subtle interaction cues.",
+            "Navy provides the foundation for trust and professionalism. Green introduces a sense of progress and reliability. Gold is reserved for moments that need emphasis or a sense of value.",
+            "Together, the system creates a visual language that can move between property discovery, financial information, legal documentation and service management without feeling like four unrelated products."
+          ],
+          "colors": [
+            {
+              "label": "Primary",
+              "value": "#0E2045"
+            },
+            {
+              "label": "Secondary",
+              "value": "#1DBF73"
+            }
+          ],
+          "closing": "The UI therefore avoids excessive decoration and instead relies on hierarchy, spacing, typography, cards, status indicators and structured information to create confidence."
+        },
+        {
+          "title": "From Screens to a System",
+          "paragraphs": [
+            "Because the platform covers many workflows, designing every screen independently would quickly create inconsistency. Our approach was to think in reusable interface patterns.",
+            "Property cards, information cards, status elements, form controls, navigation patterns, dashboard modules, verification indicators, financial summaries and action areas can share the same underlying visual language.",
+            "This makes the product easier to extend as new property categories, services and workflows are introduced. The design system is therefore not just a collection of colors and buttons. It is the visual framework that allows a large property ecosystem to feel like one product."
+          ]
+        },
+        {
+          "title": "Responsive Experience",
+          "paragraphs": [
+            "The product was designed as a multi-device digital experience, with particular attention to information-heavy screens.",
+            "Property discovery, filters, property details, forms, dashboards, financial tools and service requests all require different responsive behaviors.",
+            "The goal is not simply to shrink the desktop interface. Instead, information hierarchy and interaction patterns need to adapt to the available space while preserving the most important actions and property information."
+          ]
+        },
+        {
+          "title": "From UX to UI",
+          "phases": [
+            {
+              "title": "Understand",
+              "items": [
+                {
+                  "title": "Business and audience",
+                  "body": "We started by understanding what Kapital Properties wanted to become, who it needed to serve and how its services connected."
+                }
+              ]
+            },
+            {
+              "title": "Structure",
+              "items": [
+                {
+                  "title": "Product architecture",
+                  "body": "We then translated those requirements into product architecture, information hierarchy and user journeys."
+                }
+              ]
+            },
+            {
+              "title": "Design",
+              "items": [
+                {
+                  "title": "Interface system",
+                  "body": "Once the structure was established, we developed the interface system, visual language and responsive experiences around those journeys."
+                }
+              ]
+            }
+          ],
+          "closing": "This sequence allowed the visual design to follow the product logic rather than becoming a collection of attractive but disconnected screens."
+        },
+        {
+          "title": "The Homepage as the Product's Front Door",
+          "intro": "The homepage was designed to communicate the breadth of KPL without overwhelming first-time visitors. The client's proposed structure gave us a clear foundation.",
+          "flows": [
+            {
+              "title": "Homepage flow",
+              "items": [
+                "Hero",
+                "Property Discovery",
+                "Financing",
+                "Trust",
+                "PNN",
+                "Listing CTA",
+                "Footer"
+              ]
+            }
+          ],
+          "paragraphs": [
+            "The hero establishes the primary property-search action. Property discovery immediately connects users to inventory. Financing introduces another major part of the ecosystem. Trust-focused content communicates why users should feel comfortable continuing. PNN creates a knowledge layer. Finally, the listing CTA gives property owners a direct entry point into the ecosystem."
+          ],
+          "closing": "The result is a homepage that doesn't merely advertise KPL's services. It introduces the different ways users can participate in the platform."
+        },
+        {
+          "title": "Development & Product Delivery",
+          "paragraphs": [
+            "Web Karigor's involvement was not limited to producing visual screens. The project was approached as a digital product requiring coordination between business requirements, UX structure, interface design and implementation considerations.",
+            "The design work was organized so that complex experiences such as listing, verification, dashboards, property details, financial services and service requests could be understood and translated into development-ready interfaces.",
+            "However, the available project material does not document the final engineering stack, hosting architecture, deployment pipeline or individual development technologies. We therefore do not attribute specific technologies or infrastructure to the project here. Likewise, the supplied material does not provide verified production metrics or a documented launch report."
+          ]
+        },
+        {
+          "title": "Designed for an Operational Ecosystem",
+          "headline": "Submit → Review → Process → Update → Complete",
+          "paragraphs": [
+            "A platform like KPL has two sides. There is the experience users see, and there is the operational process behind it.",
+            "A property submitted by a seller may need verification. A booking may need administrative processing. A financing request may need documentation. A service request may require a KPL professional. A property-management issue may need follow-up.",
+            "The product architecture therefore considers these experiences as connected states rather than isolated actions. That model allows KPL's human expertise to remain part of the digital experience instead of trying to automate every interaction."
+          ]
+        },
+        {
+          "title": "What Web Karigor Built",
+          "groups": [
+            {
+              "title": "Product foundation",
+              "items": [
+                "Property discovery — Search, categories, filters, map-based exploration and property information.",
+                "Property listing — Structured submission, property details, amenities, pricing, media and supporting documentation.",
+                "Trust & verification — Interfaces designed around verified properties, profiles and documentation.",
+                "Customer dashboard — A central workspace for listings, favorites, requests, communication and financial activity.",
+                "Financing — Eligibility, EMI and loan application experiences.",
+                "Communication — Inquiry, messaging and contact workflows.",
+                "Property services — Documentation, regulatory, interior and management services.",
+                "NRB experience — A service-oriented model for customers managing property from abroad.",
+                "Investment ecosystem — Broader Amana-related property and financial service concepts.",
+                "PNN — A content and market-insight layer connected to the property experience.",
+                "Design system — A consistent visual and interaction foundation across the ecosystem."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "The Result",
+          "paragraphs": [
+            "Kapital Properties was shaped as more than a digital catalogue of properties. The product brings together the different stages and supporting services surrounding property ownership into a single digital ecosystem.",
+            "For customers, that means the experience can move from finding a property to understanding it, verifying it, financing it, requesting support, and eventually managing the property.",
+            "For Kapital Properties, the platform creates a digital foundation capable of supporting a broader range of property services under one brand."
+          ]
+        },
+        {
+          "title": "A Platform Built Around Trust",
+          "paragraphs": [
+            "The central design challenge was never simply making property search easier. It was creating an environment where users could feel more informed and confident while navigating one of the most complicated categories of personal and financial decision-making.",
+            "That is why verification, documentation, financial clarity, service visibility and professional assistance are woven into the product rather than treated as secondary features.",
+            "The final direction reflects the client's original philosophy: Property is more than an asset. It is a long-term journey."
+          ],
+          "closing": "Web Karigor's role was to turn that philosophy into a structured digital product experience. Strategy · UX · UI · Design System · Product Experience."
+        }
+      ]
+    },
+    "probashi-resorts": {
+      "slug": "probashi-resorts",
+      "title": "Property Investment Website Design | Probashi Resorts",
+      "titleLines": [
+        "Property Investment Website Design",
+        "Probashi Resorts"
+      ],
+      "heroImages": [
+        "/probashi/Probashi Resorts - Project Detail - Thumbnail - Left.jpg",
+        "/probashi/Probashi Resorts - Project Detail - Thumbnail - Middle.jpg",
+        "/probashi/Probashi Resorts - Project Detail - Thumbnail - Right.jpg"
+      ],
+      "meta": {
+        "execution": "60 Days",
+        "clientName": "Probashi Resorts",
+        "projectArea": "Real Estate",
+        "status": "Delivered",
+        "technologies": "Next Js, Laravel · Figma, Adobe"
+      },
+      "about": {
+        "eyebrow": "About Project",
+        "headline": "When Intent Meets Uncertainty",
+        "body": "People are ready to invest, but hesitation wins at the last moment. Not due to lack of money, but due to a lack of clarity, structure, and most importantly, trust in the system itself.",
+        "more": {
+          "headline": "Listening Before Designing",
+          "body": "Instead of assuming behavior, I spoke directly with people who showed interest in property investment but never acted on it. Conversations with 8–10 individuals revealed a consistent pattern: interest exists but confidence does not; information is available but not understandable; opportunities exist but are not trusted.\n\n“I want to invest, but I don’t know who to trust.” The challenge was no longer just about usability, it was about designing trust into every step of the experience."
+        }
+      },
+      "clientVoice": "Our vision was to build a property-sharing platform that makes property investment simple and accessible. The platform should allow people to explore available projects, understand share ownership, pricing and EMI options, register and make payments, and track their investment progress in one place. We also wanted the experience to communicate the quality of our properties, facilities, design, and development process while creating a trustworthy and transparent digital presence for shareholders.",
+      "mockupImage": "/probashi/Probashi Resorts - Project List Page.jpg",
+      "problem": "No Clear Entry Point — Users don’t know how to begin their investment journey. The absence of a structured starting point creates hesitation before any real decision is made.\n\nTrust Is Fragile — Property investment involves high stakes. Without visible proof of authenticity or transparency, users default to caution and avoid taking action.\n\nInvisible Systems — Existing businesses often operate without a clear digital presence or structured communication, making it difficult for users to verify information independently.\n\nCognitive Overload — Investment details are often scattered, complex, or poorly structured—making it hard for users to understand what they’re committing to.\n\nResult — A gap forms between intent and action, where motivated users drop off before investing.",
+      "solution": "This was never just about making screens usable. It was about making decisions feel safe. When money is involved, users do not explore freely. They pause, question, and often step back. The design had to reduce that hesitation by aligning with how people actually evaluate risk, trust information, and move toward commitment.\n\n01. Expose the Truth Early — Critical signals like share availability, real project visuals, and pricing clarity are presented upfront instead of being hidden deeper in the flow.\n\n02. Replace Assumptions with Evidence — Testimonials, visible progress updates, and structured payment breakdowns provide users with tangible information they can evaluate.\n\n03. Turn Complexity into Sequence — Investment details are broken into a logical flow from understanding the concept to evaluating the numbers. Pricing, ownership, and payment options are presented in familiar formats.\n\n04. Keep Momentum Visible — The experience continuously communicates what has been done, what remains, and what comes next, so users feel guided rather than lost.",
+      "testimonial": {
+        "quote": "Working with Sha Arian on the Probashi Resort website was a great experience. He took the initial requirements and turned them into a clear, structured, and professional digital product. Throughout the project, he understood our business goals, suggested practical improvements, and paid close attention to how users would understand the investment process. The final design feels modern, trustworthy, and easy to navigate, while clearly presenting our projects, share ownership model, payment process, and other important information. We are very satisfied with the final outcome and appreciate the thought and effort he put into bringing our vision to life.",
+        "name": "Théo Cesarini",
+        "role": "CEO & Co-Founder • Incard & Fundree",
+        "avatar": "/h1.webp",
+        "rating": 5
+      },
+      "related": [
+        {
+          "slug": "times-today",
+          "title": "Times Today",
+          "description": "Times Today BD is a digital news platform designed to make news discovery and reading more structured, accessible, and engaging. Web Karigor focused on transforming an existing text-heavy experience into a clearer and more visually organized news platform.",
+          "image": "/timestoday/Times Today - Project List Page.jpg",
+          "variant": "image"
+        },
+        {
+          "slug": "kapital-properties",
+          "title": "Kapital Properties",
+          "description": "Kapital Properties came to Web Karigor with a vision that extended far beyond a conventional real-estate marketplace.",
+          "image": "/capital/Kapital Properties - Project List Page.jpg",
+          "variant": "image"
+        },
+        {
+          "slug": "kids-ecommerce",
+          "title": "Shishu Poribohon",
+          "description": "Shishu Poribohon is a trust-centered hybrid commerce platform built to simplify how parents shop for children's products. The design process focused on reducing uncertainty through clear information architecture, guided product discovery, and strong trust indicators. Every design decision was driven by usability principles and behavioral UX patterns to create a safer, more confident buying experience for modern families.",
+          "image": "/shishu/Shishu Poribohon - Project List Page.jpg",
+          "variant": "image"
+        }
+      ],
+      "nextSlug": "kids-ecommerce",
+      "extraSections": [
+        {
+          "title": "Information That Knows Its Place",
+          "intro": "Instead of grouping content by business needs, the architecture is organized around user intent. Each layer introduces information at the moment it becomes relevant, reducing cognitive load and supporting confident decision-making.",
+          "groups": [
+            {
+              "title": "Hero Section",
+              "items": [
+                "A strong headline, supporting context, and a dynamic visual of available projects introduce the platform."
+              ]
+            },
+            {
+              "title": "How It Works",
+              "items": [
+                "Explains share-based ownership in a simple, step-by-step format."
+              ]
+            },
+            {
+              "title": "Amenities",
+              "items": [
+                "Highlights the quality and lifestyle benefits associated with the projects."
+              ]
+            },
+            {
+              "title": "Project Highlights",
+              "items": [
+                "Displays available projects as individual cards with clear actions to explore further or download detailed information."
+              ]
+            },
+            {
+              "title": "Gallery",
+              "items": [
+                "Showcases real images and videos to support authenticity and build confidence."
+              ]
+            },
+            {
+              "title": "Why Invest",
+              "items": [
+                "Communicates the benefits of share ownership in a structured and persuasive format."
+              ]
+            },
+            {
+              "title": "Get Started",
+              "items": [
+                "Breaks down the process of becoming a shareholder into four simple steps."
+              ]
+            },
+            {
+              "title": "Decision Making",
+              "items": [
+                "Combines emotional messaging with a clear call to action to encourage the next step."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Project Details Page",
+          "groups": [
+            {
+              "title": "Hero Section",
+              "items": [
+                "Project name, location, and a clear primary CTA are placed alongside a strong visual."
+              ]
+            },
+            {
+              "title": "Info Card",
+              "items": [
+                "Key data points such as total shares, available shares, share price, and timeline are presented upfront."
+              ]
+            },
+            {
+              "title": "Architecture Overview",
+              "items": [
+                "Provides a high-level understanding of the project’s vision, purpose, and overall design thinking."
+              ]
+            },
+            {
+              "title": "Specifications & Prospectus",
+              "items": [
+                "Breaks down technical and structural details, supported by a downloadable prospectus for deeper review."
+              ]
+            },
+            {
+              "title": "Amenities",
+              "items": [
+                "Highlights lifestyle and functional benefits associated with the project."
+              ]
+            },
+            {
+              "title": "Image Gallery",
+              "items": [
+                "Presents real visuals to help users validate authenticity and quality."
+              ]
+            },
+            {
+              "title": "Video Section",
+              "items": [
+                "Offers a more immersive understanding of the project through motion and narrative."
+              ]
+            },
+            {
+              "title": "Investment Model",
+              "items": [
+                "Explains how share-based ownership works in a structured, step-by-step format."
+              ]
+            },
+            {
+              "title": "Location & Map View",
+              "items": [
+                "Displays geographical positioning along with nearby attractions and points of interest."
+              ]
+            },
+            {
+              "title": "Decision Trigger",
+              "items": [
+                "Combines emotional appeal with a clear call to action, reinforcing the value of investing."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Trust Isn’t Claimed, it’s Proven",
+          "intro": "In high-risk decisions, users don’t rely on promises. They look for proof. Instead of treating trust as a single feature, the experience is designed to provide continuous, visible evidence that supports user judgment at every step.",
+          "groups": [
+            {
+              "title": "Make Availability Visible",
+              "items": [
+                "Live share counts are displayed upfront so users can see real demand and remaining opportunity. This removes ambiguity and helps users understand both scarcity and activity within the system."
+              ]
+            },
+            {
+              "title": "Replace Assumptions with Real Visuals",
+              "items": [
+                "Authentic project images are used instead of generic representations. This allows users to evaluate the property based on actual visuals, reducing reliance on imagination or blind trust."
+              ]
+            },
+            {
+              "title": "Let Users Validate Through Others",
+              "items": [
+                "Testimonials are presented as supporting signals from existing participants. They provide context and reassurance by showing that others have already engaged with the system."
+              ]
+            },
+            {
+              "title": "Break Down Financial Commitment Clearly",
+              "items": [
+                "Payment structures are shown in detail during key decision moments. Users can see exactly what they are paying, how it is structured, and what to expect over time."
+              ]
+            },
+            {
+              "title": "Show Progress Beyond the Purchase",
+              "items": [
+                "Construction updates are accessible after investment, allowing users to track real-world progress. This extends trust beyond the initial decision and keeps users informed over time."
+              ]
+            },
+            {
+              "title": "Balance Transparency with Control",
+              "items": [
+                "Legal and sensitive documents are made available to verified users when relevant. This ensures transparency without exposing critical information unnecessarily."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Trust Moves Through People",
+          "intro": "In high-risk decisions, people rarely trust systems alone. They trust people who have already taken the step. Instead of relying only on platform credibility, the experience extends trust through human connections, allowing users to validate decisions through their own network.",
+          "groups": [
+            {
+              "title": "Familiar Entry Points",
+              "items": [
+                "Users can invite friends and family into the system, turning a complex investment decision into a shared conversation. This lowers the psychological barrier by replacing unknown systems with known relations."
+              ]
+            },
+            {
+              "title": "Transparent Referral Tracking",
+              "items": [
+                "A dedicated dashboard allows users to track referrals, activity, and outcomes in real time. This creates clarity around participation and removes ambiguity from the process."
+              ]
+            },
+            {
+              "title": "Visible Incentive Structure",
+              "items": [
+                "Earnings and rewards are clearly presented, helping users understand the value of participation beyond investment. This aligns motivation with action without relying on hidden mechanics."
+              ]
+            },
+            {
+              "title": "Trust That Scales Organically",
+              "items": [
+                "Each new participant enters through an existing connection, reinforcing credibility at every step. The system grows not just through acquisition, but through layered trust built between people."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Design That Carries Meaning",
+          "headline": "Visual design here is not used to impress. It is used to guide judgment.",
+          "paragraphs": [
+            "Every choice, from color to layout, is aligned with how users interpret risk, value, and credibility in a financial context.",
+            "Manrope (Font Family) — Reading should never feel like work, especially when money is involved. A clean, modern type system ensures clear hierarchy and fast scanning. Information is structured so users can quickly identify what matters without reading everything line by line, reducing cognitive load during decision-making.",
+            "Spacing, grouping, and visual hierarchy work together to surface important information at the right moment. This helps users process complex details in smaller, manageable chunks instead of facing everything at once."
+          ],
+          "colors": [
+            {
+              "label": "Primary",
+              "value": "#0B3D2E"
+            },
+            {
+              "label": "Secondary",
+              "value": "#D4AF37"
+            }
+          ],
+          "closing": "Desktop View: 1920px · Container: 1520px"
+        },
+        {
+          "title": "First Signal of Trust",
+          "groups": [
+            {
+              "title": "First Signal of Trust",
+              "items": [
+                "The entry point answers two questions instantly: what this is and why it matters. A strong headline, contextual subtext, and dynamic project visuals reduce initial confusion and establish credibility. Instead of pushing action too early, this section helps users orient themselves, which is essential for building early-stage confidence."
+              ]
+            },
+            {
+              "title": "Clarity Before Commitment",
+              "items": [
+                "Investment is explained through a structured flow supported by real numbers. Pricing, available shares, and clear calls to action are placed alongside the ownership model so users can connect the concept with actual commitment."
+              ]
+            },
+            {
+              "title": "From Vision to Reality",
+              "items": [
+                "The hero introduces the project visually and geographically, while the architecture section explains its intent, purpose, and overall concept. Together, they help users move beyond surface-level attraction and understand what they are considering."
+              ]
+            },
+            {
+              "title": "Details That Hold Up Under Scrutiny",
+              "items": [
+                "Detailed specifications provide clarity on what the project includes, while the prospectus offers deeper documentation for those who want full transparency. Amenities highlight added value from a lifestyle and utility perspective."
+              ]
+            },
+            {
+              "title": "Opportunities, Made Scannable",
+              "items": [
+                "Available projects are presented as structured, comparable cards so users can explore without friction. Each card balances key information with clear actions like viewing details or downloading the prospectus."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "From Idea to Built Reality",
+          "paragraphs": [
+            "These moments capture how ideas move beyond sketches and discussions into real, tangible outcomes. From early thinking to collaboration with engineers and domain experts, every step is aligned toward one goal: delivering spaces that are not only designed well, but built with intention and quality.",
+            "Probashi Resort approaches development as a continuous translation process, where vision is refined, validated, and executed with precision. For shareholders, this means their investment is not just a concept on paper, but a real asset shaped through expertise, structure, and accountability."
+          ],
+          "closing": "The result is not just architecture — it’s confidence made visible through execution."
+        },
+        {
+          "title": "Designing for Real Impact",
+          "intro": "Impact is not always captured in numbers. It shows up in behavior. When users hesitate less, understand faster, and move forward with confidence, design is doing its job. This work focused on reshaping those moments where people usually pause, doubt, or drop off.",
+          "groups": [
+            {
+              "title": "Less Friction, More Forward Movement",
+              "items": [
+                "A structured flow reduces unnecessary thinking at each step. By guiding users clearly from discovery to action, the experience removes decision bottlenecks that typically slow users down."
+              ]
+            },
+            {
+              "title": "Visibility That Replaces Doubt",
+              "items": [
+                "Uncertainty often comes from what users cannot see. By surfacing key information such as progress, pricing, and availability, the system allows users to evaluate decisions without relying on assumptions."
+              ]
+            },
+            {
+              "title": "Confidence Built Over Time",
+              "items": [
+                "Trust is not created in a single interaction. Layered signals across the journey help users gradually feel more certain about their decisions instead of forcing early commitment."
+              ]
+            },
+            {
+              "title": "Growth Through Participation",
+              "items": [
+                "Users are not just end points in the system. With referral-driven interactions, they become part of how the platform expands, turning trust into a shared experience rather than an isolated one."
+              ]
+            }
+          ]
+        }
+      ]
     },
     "fashion-mobile": {
       "slug": "fashion-mobile",

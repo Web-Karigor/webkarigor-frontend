@@ -36,7 +36,7 @@ function FeaturedImage({
         src={src}
         alt={alt}
         fill
-        className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+        className="object-contain transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
         sizes={sizes}
       />
     </Link>
@@ -91,8 +91,8 @@ export default function PricingFeaturedWork() {
                   <FeaturedImage
                     src={item.src}
                     alt={item.alt}
-                    href={seeAll.href}
-                    className="aspect-[16/10] w-full"
+                    href={item.href ?? seeAll.href}
+                    className="aspect-[750/470] w-full"
                     sizes="(max-width: 640px) 100vw, 760px"
                   />
                 </motion.div>
@@ -111,8 +111,8 @@ export default function PricingFeaturedWork() {
                   <FeaturedImage
                     src={item.src}
                     alt={item.alt}
-                    href={seeAll.href}
-                    className="aspect-[4/3] w-full"
+                    href={item.href ?? seeAll.href}
+                    className="aspect-[750/470] w-full"
                     sizes="(max-width: 640px) 100vw, 500px"
                   />
                 </motion.div>
