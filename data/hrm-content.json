@@ -98,35 +98,35 @@
   "trustedLogos": [
     {
       "name": "Government of Bangladesh",
-      "src": "/partners-logo/image-1.png"
+      "src": "/partners-logo/image-1-color.png"
     },
     {
       "name": "Robi",
-      "src": "/partners-logo/image-2.png"
+      "src": "/partners-logo/image-2-color.png"
     },
     {
       "name": "Walton",
-      "src": "/partners-logo/image-3.png"
+      "src": "/partners-logo/image-3-color.png"
     },
     {
       "name": "Sajeeb Group",
-      "src": "/partners-logo/image-4.png"
+      "src": "/partners-logo/image-4-color.png"
     },
     {
       "name": "ঐতিহ্য",
-      "src": "/partners-logo/image-5.png"
+      "src": "/partners-logo/image-5-color.png"
     },
     {
       "name": "Nitol Niloy",
-      "src": "/partners-logo/image-6.png"
+      "src": "/partners-logo/image-6-color.png"
     },
     {
       "name": "The Cafe Rio",
-      "src": "/partners-logo/image-7.png"
+      "src": "/partners-logo/image-7-color.webp"
     },
     {
       "name": "Talkdesk",
-      "src": "/partners-logo/image-8.png"
+      "src": "/partners-logo/image-8-color.png"
     }
   ],
   "features": {

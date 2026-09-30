@@ -98,31 +98,31 @@
   "trustedLogos": [
     {
       "name": "image-1",
-      "src": "/partners-logo/image-1.png"
+      "src": "/partners-logo/image-1-color.png"
     },
     {
       "name": "image-2",
-      "src": "/partners-logo/image-2.png"
+      "src": "/partners-logo/image-2-color.png"
     },
     {
       "name": "image-3",
-      "src": "/partners-logo/image-3.png"
+      "src": "/partners-logo/image-3-color.png"
     },
     {
       "name": "image-4",
-      "src": "/partners-logo/image-4.png"
+      "src": "/partners-logo/image-4-color.png"
     },
     {
       "name": "image-5",
-      "src": "/partners-logo/image-5.png"
+      "src": "/partners-logo/image-5-color.png"
     },
     {
       "name": "image-6",
-      "src": "/partners-logo/image-6.png"
+      "src": "/partners-logo/image-6-color.png"
     },
     {
       "name": "image-7",
-      "src": "/partners-logo/image-7.png"
+      "src": "/partners-logo/image-7-color.webp"
     }
   ],
   "features": {
