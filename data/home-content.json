@@ -321,7 +321,7 @@
     "portfolioImages": [
       {
         "src": "/tech-services/portfolio/probashi-resort-tab.jpg",
-        "variant": "tab"
+        "variant": "web"
       },
       {
         "src": "/tech-services/portfolio/paris-beauty-mobile.jpg",
@@ -329,7 +329,7 @@
       },
       {
         "src": "/tech-services/portfolio/shishu-web.jpg",
-        "variant": "web"
+        "variant": "tab"
       },
       {
         "src": "/tech-services/portfolio/shishu-mobile.jpg",
@@ -337,23 +337,23 @@
       },
       {
         "src": "/tech-services/portfolio/saas-tab.jpg",
-        "variant": "tab"
-      },
-      {
-        "src": "/tech-services/portfolio/hamporia-web.jpg",
         "variant": "web"
-      },
-      {
-        "src": "/tech-services/portfolio/mouripharma-tab.jpg",
-        "variant": "tab"
       },
       {
         "src": "/tech-services/portfolio/mouripharma-mobile.jpg",
         "variant": "mobile"
       },
       {
-        "src": "/tech-services/portfolio/suma-web.jpg",
+        "src": "/tech-services/portfolio/hamporia-web.jpg",
+        "variant": "tab"
+      },
+      {
+        "src": "/tech-services/portfolio/mouripharma-tab.jpg",
         "variant": "web"
+      },
+      {
+        "src": "/tech-services/portfolio/suma-web.jpg",
+        "variant": "tab"
       }
     ]
   },
@@ -367,6 +367,29 @@
       {
         "number": "(01)",
         "tags": [
+          "Travel Agency"
+        ],
+        "title": "Suma International — Travel Services Website",
+        "description": "A travel services website designed to simplify how people explore packages, understand services and send inquiries. The experience organizes eight service areas into a clear structure and builds trust through transparent, well-described content.",
+        "platforms": [
+          "Web",
+          "Mobile"
+        ],
+        "color": "#007b7a",
+        "href": "/projects/suma-international",
+        "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
+        "author": {
+          "name": "Alexis Botaya",
+          "role": "Managing director • Sound Experience",
+          "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df55bfbee02637c53da16_1664138677695.avif"
+        },
+        "images": [
+          "/suma/suma-home-slider.jpg"
+        ]
+      },
+      {
+        "number": "(02)",
+        "tags": [
           "E-commerce & Retail"
         ],
         "title": "Shishu Poribohon — Kids E-commerce",
@@ -378,7 +401,7 @@
           "iOS"
         ],
         "color": "#f0841a",
-        "href": "/case",
+        "href": "/projects/kids-ecommerce",
         "quote": "Working with Brand Appart has been an absolute pleasure. Beyond their creativity and professionalism, there's a real sense of kindness and care in everything they do.",
         "author": {
           "name": "Darlene Robertson",
@@ -390,7 +413,7 @@
         ]
       },
       {
-        "number": "(02)",
+        "number": "(03)",
         "tags": [
           "Real Estate"
         ],
@@ -401,7 +424,7 @@
           "Mobile"
         ],
         "color": "#268e6f",
-        "href": "/case",
+        "href": "/projects/probashi-resorts",
         "quote": "A huge thank you to the entire Brand Appart team for your outstanding work on our rebranding! We're thrilled to have you as an integral part of the Incard team, and we can't wait to reveal what's coming next.",
         "author": {
           "name": "Théo Cesarini",
@@ -413,7 +436,7 @@
         ]
       },
       {
-        "number": "(03)",
+        "number": "(04)",
         "tags": [
           "Real Estate"
         ],
@@ -424,7 +447,7 @@
           "Mobile"
         ],
         "color": "#8e8834",
-        "href": "/case",
+        "href": "/projects/kapital-properties",
         "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
         "author": {
           "name": "Alexis Botaya",
@@ -436,7 +459,7 @@
         ]
       },
       {
-        "number": "(04)",
+        "number": "(05)",
         "tags": [
           "News & Media"
         ],
@@ -446,7 +469,7 @@
           "Web"
         ],
         "color": "#d63a2e",
-        "href": "/case",
+        "href": "/projects/times-today",
         "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
         "author": {
           "name": "Alexis Botaya",

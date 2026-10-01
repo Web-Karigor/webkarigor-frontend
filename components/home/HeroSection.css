@@ -15,7 +15,7 @@
 .hero-subtitle {
   font-family: var(--font-montserrat);
   font-weight: 700;
-  font-size: clamp(0.875rem, 3.2vw, 3.5rem);
+  font-size: clamp(0.65rem, 2vw, 2.15rem);
   line-height: 140%;
   letter-spacing: 0.08em;
   text-transform: none;
@@ -298,7 +298,7 @@
     --hero-photo-left-mt: 4.5rem;
     --hero-center-mt: 18vh;
     --hero-title-pull: 0px;
-    --hero-desc-mt: 2vh;
+    --hero-desc-mt: 5vh;
     --hero-hello-mt: 1.5vh;
     --hero-photo-right-mt: 14vh;
   }
@@ -310,7 +310,7 @@
   }
 
   .hero-subtitle {
-    font-size: clamp(0.9rem, 1.25vw, 1.15rem);
+    font-size: clamp(0.62rem, 0.84vw, 0.8rem);
     line-height: 130%;
     letter-spacing: 0.06em;
     padding-top: 0.4rem;
@@ -353,7 +353,7 @@
     --hero-photo-left-mt: 2.5vh;
     --hero-center-mt: 20vh;
     --hero-title-pull: 1rem;
-    --hero-desc-mt: 2.5vh;
+    --hero-desc-mt: 5.75vh;
     --hero-hello-mt: 1.75vh;
     --hero-photo-right-mt: 16vh;
   }
@@ -366,7 +366,7 @@
   }
 
   .hero-subtitle {
-    font-size: clamp(1.1rem, 1.55vw, 1.7rem);
+    font-size: clamp(0.74rem, 1vw, 1.1rem);
     line-height: 128%;
     letter-spacing: 0.08em;
   }
@@ -411,7 +411,7 @@
   }
 
   .hero-subtitle {
-    font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+    font-size: clamp(0.66rem, 0.84vw, 0.8rem);
     line-height: 132%;
     padding-top: 0.45rem;
     padding-bottom: 0.55rem;
@@ -440,7 +440,7 @@
     --hero-left-mt: clamp(7.5rem, 14vh, 11rem);
     --hero-photo-left-mt: 5.25rem;
     --hero-photo-right-mt: clamp(12rem, 18vh, 18rem);
-    --hero-desc-mt: 2.25vh;
+    --hero-desc-mt: 5.5vh;
     --hero-hello-mt: 1.5vh;
   }
 

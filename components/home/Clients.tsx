@@ -12,6 +12,7 @@ type ClientLogo = (typeof logos)[number];
 
 const LOOP_COPIES = 3;
 const SLIDE_DURATION = 32;
+const CLIENTS_HEADING_SIZE = "clamp(24px, calc(2.1vw + 18px), 48px)";
 
 function InfiniteLogoRow({
   items,
@@ -126,20 +127,34 @@ function InfiniteLogoRow({
 
 export default function Clients() {
   return (
-    <section className="svc-clients px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px] relative">
-      <div className="mx-auto flex w-full flex-col items-center gap-8 lg:gap-[60px]">
-        <div className="flex w-full flex-row items-center gap-4 lg:gap-6">
-          <h2 className="section-heading">
-            <span className="section-heading-split-accent section-accent-text">
+    <section className="svc-clients relative px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px]">
+      <div className="mx-auto flex w-full max-w-[1750px] flex-col items-stretch gap-8 lg:gap-[60px]">
+        <div
+          className="flex w-full min-w-0 flex-col gap-4 lg:flex-row lg:gap-20"
+          style={{ alignItems: "flex-start" }}
+        >
+          <h2
+            className="section-heading flex shrink-0 flex-col justify-start overflow-visible text-right"
+            style={{ alignItems: "flex-end", marginTop: "-0.75rem" }}
+          >
+            <span
+              className="section-heading-split-accent section-accent-text !transform-none pr-1 leading-[1.15]"
+              style={{ fontSize: CLIENTS_HEADING_SIZE }}
+            >
               {title}
             </span>
-            <span className="section-heading-split-title">{titleAccent}</span>
+            <span
+              className="section-heading-split-title !transform-none mt-2 leading-[1.15]"
+              style={{ fontSize: CLIENTS_HEADING_SIZE }}
+            >
+              {titleAccent}
+            </span>
           </h2>
-          <p className="m-0 w-[70%] max-w-[1208px] text-justify font-montserrat text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-[1.75] text-[#4b5563]">
+          <p className="m-0 w-full min-w-0 text-left font-montserrat text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-[1.75] text-[#4b5563] lg:flex-1 lg:text-justify">
             {description}
           </p>
         </div>
-        <div className="w-[70%] space-y-3 sm:space-y-5 lg:space-y-6">
+        <div className="mx-auto w-[70%] min-w-0">
           <InfiniteLogoRow items={logos} direction="left" />
         </div>
       </div>

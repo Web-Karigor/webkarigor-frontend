@@ -125,7 +125,7 @@ const ServicesHeader = memo(function ServicesHeader() {
         <span className="section-heading-split-title">{servicesHeadingTitle}</span>
       </h2>
 
-      <p className="mx-auto mt-3 max-w-2xl px-2 text-sm text-gray-600 sm:mt-4 sm:text-base">
+      <p className="mx-auto mt-6 max-w-2xl px-2 text-sm text-gray-600 sm:mt-8 sm:text-base">
         {servicesDescription}
       </p>
     </>
