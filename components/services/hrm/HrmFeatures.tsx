@@ -1,7 +1,7 @@
 import {
   CalendarDays,
   TrendingUp,
-  UserRound,
+  UserPlus,
   Wallet,
   Workflow,
   Users,
@@ -16,6 +16,7 @@ const ICONS = {
   chart: TrendingUp,
   calendar: CalendarDays,
   settings: Settings,
+  "user-plus": UserPlus,
 } as const;
 
 

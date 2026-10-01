@@ -189,59 +189,143 @@
     "title": "Providing custom software development services to help businesses create scalable software solutions that meet their specific requirements.",
     "items": [
       {
-        "quote": "Webkarigor helped us staff a full product squad in weeks. The talent quality and communication have been outstanding.",
-        "name": "Jenny Wilson",
-        "role": "Head of Product, Bright Labs",
+        "quote": "Our logistics workflow didn't really fit any of the ready-made software products we evaluated. Web Karigor developed a custom operations platform around our actual process, including shipment tracking and internal task management. That flexibility was the main reason we chose custom development.",
+        "name": "Rayhan Kabir",
+        "role": "Founder & CEO, FleetFlow Technologies",
         "avatar": "/sm1.webp",
         "highlight": false
       },
       {
-        "quote": "Finally a partner that understands both hiring speed and engineering depth. Our release cadence doubled.",
-        "name": "Robert Fox",
-        "role": "CTO, NovaPay",
+        "quote": "We had several operational steps that needed to work together in one system. The custom software brought those workflows into a single platform. The team spent a good amount of time understanding our process before development started.",
+        "name": "Tanzila Rahman",
+        "role": "Managing Director, SwiftCargo Ltd.",
         "avatar": "/sm2.webp",
         "highlight": false
       },
       {
-        "quote": "From designers to backend leads, every placement clicked with our culture. Highly recommend their manpower desk.",
-        "name": "Kathryn Murphy",
-        "role": "COO, Lumen Soft",
+        "quote": "We needed an internal production management system that matched the way our factory operates. Rather than changing our workflow to suit existing software, we built the system around our process. The production dashboard and reporting module have been particularly useful.",
+        "name": "Mehedi Hasan",
+        "role": "Director, Bengal Industrial Works",
         "avatar": "/sm3.webp",
         "highlight": false
       },
       {
-        "quote": "Clear contracts, strong onboarding, and people who actually ship. We extended the engagement twice.",
-        "name": "Theresa Webb",
-        "role": "VP Engineering, Orbit HR",
+        "quote": "Our business had some specific order and fulfilment workflows that standard e-commerce software couldn't handle properly. The custom platform allowed us to build those processes the way we needed them. The development team was quite flexible throughout the project.",
+        "name": "Nabila Sultana",
+        "role": "Founder, Cartly Bangladesh",
         "avatar": "/sm4.webp",
         "highlight": false
       },
       {
-        "quote": "They filled critical roles without the usual agency noise. Transparent, fast, and reliable.",
-        "name": "Wade Warren",
-        "role": "Founder, Stackline",
-        "avatar": "/h2.webp",
-        "highlight": false
-      },
-      {
-        "quote": "With Webkarigor, we're able to easily scale our team in full detail. It's become an essential partner for growth.",
-        "name": "Jaquon Hart",
-        "role": "Digital Marketing Executive, Hypebeast",
+        "quote": "We needed a centralized system for managing warehouse activities, deliveries, and internal operations. The custom software brought these workflows together in one place. The warehouse dashboard is now one of the most useful parts of the system for our team.",
+        "name": "Faruk Ahmed",
+        "role": "Managing Director, EastPoint Distribution Ltd.",
         "avatar": "/sm1.webp",
-        "highlight": true
-      },
-      {
-        "quote": "The designers they placed elevated our product UI overnight. Stakeholders noticed the difference immediately.",
-        "name": "Cody Fisher",
-        "role": "Design Lead, Peak Commerce",
-        "avatar": "/h1.webp",
         "highlight": false
       },
       {
-        "quote": "Supportive account managers and talent that treats our roadmap like their own. Rare combination.",
-        "name": "Esther Howard",
-        "role": "People Ops, Northwind",
+        "quote": "Our platform has a workflow that is quite different from a traditional business application. Web Karigor worked around those requirements rather than trying to fit us into a standard template. The custom admin panel has made managing the platform much easier.",
+        "name": "Sumaiya Akter",
+        "role": "Operations Director, LearnSphere Bangladesh",
+        "avatar": "/sm2.webp",
+        "highlight": false
+      },
+      {
+        "quote": "We had specific requirements around internal data management and approval workflows. A ready-made product would have required too many compromises. The custom software gave us the control we needed while keeping the interface relatively simple.",
+        "name": "Zahidul Islam",
+        "role": "CEO, FinEdge Solutions Ltd.",
         "avatar": "/sm3.webp",
+        "highlight": false
+      },
+      {
+        "quote": "We needed a platform with a workflow designed specifically around our service model. The custom development approach gave us that flexibility. The dashboard, user management, and service request modules all work together quite naturally.",
+        "name": "Nusrat Jahan",
+        "role": "Co-Founder, CarePlus Digital Health",
+        "avatar": "/sm4.webp",
+        "highlight": false
+      },
+      {
+        "quote": "We wanted to build our own business platform instead of depending on several third-party tools. Web Karigor helped us turn the concept into a working product with a custom admin dashboard and user workflow. The overall development experience was positive.",
+        "name": "Arman Hossain",
+        "role": "Founder & CEO, ServiceHub Bangladesh",
+        "avatar": "/sm1.webp",
+        "highlight": false
+      },
+      {
+        "quote": "Our property management process involved several stages that needed to be connected. The custom platform brought property records, customer requests, and internal processing into one system. The workflow is much easier for our team to follow now.",
+        "name": "Mahmuda Rahman",
+        "role": "Managing Partner, Amana Property Services",
+        "avatar": "/sm2.webp",
+        "highlight": false
+      },
+      {
+        "quote": "We were using several different tools for purchasing, internal approvals, and operational records. The custom software allowed us to bring the important parts together. I liked that the team focused on our actual process rather than adding unnecessary features.",
+        "name": "Imran Kabir",
+        "role": "Operations Head, Bengal Trade Link",
+        "avatar": "/sm3.webp",
+        "highlight": false
+      },
+      {
+        "quote": "Recruitment has its own workflow, and we couldn't find an off-the-shelf system that matched it properly. The custom recruitment platform was developed around our process, including candidate management and client tracking. It has made our internal work much more structured.",
+        "name": "Sadia Islam",
+        "role": "Director, TalentBridge Bangladesh",
+        "avatar": "/sm4.webp",
+        "highlight": false
+      },
+      {
+        "quote": "Our requirements changed slightly as we understood the product better during development. The team handled those changes without losing sight of the main objective. The final business management platform covers the workflows we actually needed.",
+        "name": "Rashedul Hasan",
+        "role": "Managing Director, Corporate Link Ltd.",
+        "avatar": "/sm1.webp",
+        "highlight": false
+      },
+      {
+        "quote": "Flexibility was the biggest reason we decided to build custom software. We wanted our order management and internal operations to work exactly according to our business model. The final system gives us much more control than the tools we were using before.",
+        "name": "Farzana Kabir",
+        "role": "Founder, Digital Commerce Hub",
+        "avatar": "/sm2.webp",
+        "highlight": false
+      },
+      {
+        "quote": "Our business has several departments with different workflows, so a standard application wasn't going to work well. The custom management platform connects the important processes while keeping each department's workflow separate where necessary. The project was handled professionally.",
+        "name": "Abdullah Al Mamun",
+        "role": "CEO, Meridian Business Group",
+        "avatar": "/sm3.webp",
+        "highlight": false
+      },
+      {
+        "quote": "We needed a procurement and supplier management system with some very specific approval processes. Web Karigor built those workflows into the software instead of asking us to change the way we operate. The supplier dashboard and approval module are particularly useful.",
+        "name": "Fahim Rahman",
+        "role": "Managing Director, SupplyPro Bangladesh",
+        "avatar": "/sm4.webp",
+        "highlight": false
+      },
+      {
+        "quote": "We wanted a platform where our team could manage clients, projects, tasks, and internal communication from one place. The custom software gave us that structure. The project dashboard has become one of the most useful parts of our daily workflow.",
+        "name": "Marium Chowdhury",
+        "role": "Founder & CEO, ProServe Consulting",
+        "avatar": "/sm1.webp",
+        "highlight": false
+      },
+      {
+        "quote": "Our project involved multiple departments and a fairly detailed approval process. The development team took the time to understand how information moved between those departments. The final operations platform is much easier to manage than our previous collection of tools.",
+        "name": "Shafiq Ahmed",
+        "role": "Operations Director, Metro Manufacturing Group",
+        "avatar": "/sm2.webp",
+        "highlight": false
+      },
+      {
+        "quote": "We didn't just need a list of software features. We needed a complete workflow that matched the way our business operates. Web Karigor understood that during the discovery stage and developed the platform around our actual requirements. That was probably the strongest part of the project.",
+        "name": "Sohana Rahman",
+        "role": "CEO, BizTrack Solutions",
+        "avatar": "/sm3.webp",
+        "highlight": false
+      },
+      {
+        "quote": "Our delivery operation required a custom workflow for orders, riders, delivery status, and internal monitoring. The custom logistics platform brought those processes together. The operations dashboard gives our team a much clearer picture of daily activities.",
+        "name": "Masud Rana",
+        "role": "Founder & Managing Director, RouteX Logistics",
+        "avatar": "/sm4.webp",
         "highlight": false
       }
     ]

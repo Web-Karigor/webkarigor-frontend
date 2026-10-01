@@ -340,58 +340,114 @@
     ],
     "items": [
       {
-        "quote": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "name": "Dianne Russel",
-        "role": "CEO, Shishu Poribohon",
+        "quote": "We were getting a lot of property enquiries, but keeping track of every follow-up was becoming difficult. The CRM lead pipeline gives our sales team a much clearer picture of where each prospect stands. The property enquiry workflow has been particularly useful.",
+        "name": "Ariful Islam",
+        "role": "Sales Director, Bengal Properties Ltd.",
         "rating": 5,
         "highlight": false
       },
       {
-        "quote": "Webkarigor transformed our brand and digital presence. The team delivered beyond expectations — professional, creative, and always on time.",
-        "name": "Sarah Mitchell",
-        "role": "CEO, TechStart Inc.",
-        "rating": 4,
-        "highlight": false
-      },
-      {
-        "quote": "Outstanding work on our e-commerce platform. Sales increased 40% within three months of launch. Highly recommend their services.",
-        "name": "James Rodriguez",
-        "role": "Founder, ShopEasy",
+        "quote": "Our main requirement was a CRM that our sales team would actually use. The pipeline is simple, and the important customer information is easy to access. We also like being able to see previous interactions without searching through separate files.",
+        "name": "Nafisa Rahman",
+        "role": "Head of Sales, CodeNest Technologies",
         "rating": 5,
         "highlight": false
       },
       {
-        "quote": "Thoughtful design and clear communication throughout the project. We saw better conversions within weeks of launch.",
-        "name": "Ayesha Rahman",
-        "role": "Founder, Bloom Studio",
-        "rating": 4,
-        "highlight": false
-      },
-      {
-        "quote": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "name": "Floyd Miles",
-        "role": "CEO, Shishu Poribohon",
-        "rating": 4,
-        "highlight": true
-      },
-      {
-        "quote": "Clear communication, strong craft, and a team that treated our roadmap like their own. Rare combination.",
-        "name": "Robert Fox",
-        "role": "CTO, NovaPay",
+        "quote": "We receive enquiries through several channels, and previously it was difficult to keep them organized. The CRM now gives us one place to manage enquiries, customer details, and follow-ups. It has made the booking workflow much clearer.",
+        "name": "Saiful Haque",
+        "role": "Managing Director, TravelMate Holidays Ltd.",
         "rating": 5,
         "highlight": false
       },
       {
-        "quote": "From design to development, every milestone landed on time. Our stakeholders noticed the difference immediately.",
-        "name": "Kathryn Murphy",
-        "role": "COO, Lumen Soft",
-        "rating": 4,
+        "quote": "We needed a better way to manage student enquiries from the first contact to admission. The CRM lead assignment and follow-up features have helped us create a much clearer process. The dashboard is also easy for the sales team to understand.",
+        "name": "Muntaha Akter",
+        "role": "Sales Manager, EduNext Bangladesh",
+        "rating": 5,
         "highlight": false
       },
       {
-        "quote": "Supportive partners and talent that ships. We extended the engagement twice after the first release.",
-        "name": "Theresa Webb",
-        "role": "VP Engineering, Orbit HR",
+        "quote": "Our sales process has several stages, so a simple contact database wasn't enough for us. The custom CRM pipeline reflects those stages properly. It is now much easier for management to see what the sales team is working on.",
+        "name": "Tanvir Ahmed",
+        "role": "CEO, BizCore Solutions Ltd.",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "Customer information was previously spread across spreadsheets, emails, and individual notes. The CRM gave us a centralized customer profile and activity history. That alone made the transition worthwhile for our team.",
+        "name": "Farhana Hossain",
+        "role": "Business Development Manager, Insight Consulting BD",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "We needed something that sales executives could understand without extensive training. The CRM is fairly straightforward, and the lead stages are easy to follow. The customer follow-up section has become part of our regular sales process.",
+        "name": "Rakibul Hasan",
+        "role": "Sales Head, AutoPoint Bangladesh",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "We wanted to track potential clients from the first enquiry through proposal and conversion. The CRM pipeline does exactly that. I also like that the team can see client communication history before following up.",
+        "name": "Sadia Kabir",
+        "role": "Founder & Managing Director, PixelWave Studio",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "Property leads often require several follow-ups before they make a decision. The CRM lets us keep track of lead status, assigned salespeople, and previous conversations. It has made our sales process much more structured.",
+        "name": "Mahmudul Hasan",
+        "role": "Managing Director, UrbanNest Properties",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "We mainly needed better visibility into customer interactions. The CRM customer profiles and activity history have made that information much easier to access. It is especially helpful when a customer contacts us again after some time.",
+        "name": "Nusrat Jahan",
+        "role": "Customer Experience Manager, FreshMart Ltd.",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "Our B2B sales process can take quite a while, so keeping track of every prospect is important. The CRM pipeline and follow-up reminders have given our team a much clearer process. Management can also review the overall pipeline more easily.",
+        "name": "Imran Hossain",
+        "role": "Head of Business Development, CargoLink Bangladesh",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "We wanted a simple way to track enquiries and make sure follow-ups were not forgotten. The CRM does that without making the sales process unnecessarily complicated. The lead status view is probably the feature our team uses most.",
+        "name": "Sharmin Akter",
+        "role": "Sales Coordinator, MediCare Solutions Ltd.",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "Our recruitment business has a fairly specific client management workflow. The CRM was customized to accommodate that instead of forcing us into a standard sales process. That flexibility made a big difference for us.",
+        "name": "Zubayer Rahman",
+        "role": "Founder, TalentBridge Recruitment",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "We wanted marketing-generated leads to move smoothly into the sales process. The CRM gave us a clearer way to organize and assign those leads. It has also made it easier for our team to understand which opportunities need attention.",
+        "name": "Labiba Sultana",
+        "role": "Marketing Director, GlowCare Bangladesh",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "We were using a combination of spreadsheets and messaging apps to manage prospects. The CRM brought customer information, sales stages, and follow-ups together. It is a much more manageable process now.",
+        "name": "Md. Ashikur Rahman",
+        "role": "CEO, Professional Edge Consulting",
+        "rating": 5,
+        "highlight": false
+      },
+      {
+        "quote": "Our sales cycle can involve several meetings before a client makes a decision. The CRM allows us to keep the project enquiry, contact information, and follow-up history together. It has helped the team stay much more organized.",
+        "name": "Fahim Chowdhury",
+        "role": "Sales Manager, BuildMax Construction Ltd.",
         "rating": 5,
         "highlight": false
       }

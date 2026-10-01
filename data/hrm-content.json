@@ -190,6 +190,13 @@
         "color": "#0F766E",
         "bg": "#F0FDFA",
         "icon": "workflow"
+      },
+      {
+        "title": "Recruitment and Onboarding Management",
+        "description": "Manage recruitment and onboarding processes by organizing candidate information, hiring activities, employee onboarding tasks and related HR records within a centralized HR management system.",
+        "color": "#4F46E5",
+        "bg": "#EEF2FF",
+        "icon": "user-plus"
       }
     ]
   },
@@ -271,27 +278,99 @@
     "title": "Hear From Customers Who Worked With Web Karigor",
     "items": [
       {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Jaquon Hart",
-        "role": "Digital Marketing Executive, Hypebeast",
+        "quote": "We were managing attendance, leave, and employee records through separate processes. The HRM system brought everything into one place. The employee self-service section has also reduced a lot of routine communication with HR.",
+        "name": "Tanzim Ahmed",
+        "role": "Head of HR, ByteCraft Technologies Ltd.",
         "rating": 5
       },
       {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Rickie Baroch",
-        "role": "Product Manager of Salestation Asia",
-        "rating": 4
+        "quote": "Attendance and leave management were the main reasons we started looking for an HRM system. The new workflow is much easier for both employees and HR. I particularly like the leave approval and attendance reporting sections.",
+        "name": "Sadia Islam",
+        "role": "HR Manager, BrandHive Communications",
+        "rating": 5
       },
       {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Harinder Bharwal",
-        "role": "Digital Marketing Executive, Hypebeast",
-        "rating": 4
+        "quote": "We had a fairly large workforce and were still depending heavily on spreadsheets. The HRM software gave us a proper employee database and attendance system. It has made everyday HR administration considerably more organized.",
+        "name": "Mahinur Rahman",
+        "role": "Director, Bengal Manufacturing Ltd.",
+        "rating": 5
       },
       {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Floyd Miles",
-        "role": "CEO, Shishu Poribohan",
+        "quote": "We wanted the HR system to be useful for employees, not just the HR department. The employee portal, leave requests, and profile management are simple enough for everyone to use. That was an important part of the project for us.",
+        "name": "Nusrat Sultana",
+        "role": "Head of People & Culture, SoftPeak Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "Managing attendance across multiple locations was becoming difficult. The HRM attendance module gives us a much clearer overview, while the leave workflow has made approvals easier. The system fits our day-to-day process quite well.",
+        "name": "Arman Kabir",
+        "role": "HR & Admin Manager, DailyNeeds Retail Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "We have employees across several departments, so keeping employee records organized was a challenge. The HRM system gives us one centralized employee database. The reporting features are also useful when management needs a quick overview.",
+        "name": "Farzana Yasmin",
+        "role": "HR Director, Sunrise Education Network",
+        "rating": 5
+      },
+      {
+        "quote": "Shift management and attendance were the areas where we needed the most improvement. The system handles both in a much more structured way. Our supervisors can also access the information they need without going through HR for everything.",
+        "name": "Rakib Hasan",
+        "role": "Operations Manager, SwiftMove Logistics",
+        "rating": 5
+      },
+      {
+        "quote": "We had been planning to automate our HR process for quite some time. Web Karigor understood our existing process before suggesting the system structure. The result feels practical rather than unnecessarily complicated.",
+        "name": "Mehedi Hasan",
+        "role": "Managing Director, CarePoint Services Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "Employee profiles, leave requests, and attendance are now all available from the same platform. The interface is clean and doesn't require much training. Our HR team was able to get comfortable with it fairly quickly.",
+        "name": "Tasnia Rahman",
+        "role": "Head of HR, TrendCart Bangladesh",
+        "rating": 5
+      },
+      {
+        "quote": "We used to maintain employee information across multiple Excel files. The HRM employee database has made that much easier to manage. We also find the attendance and reporting sections useful for monthly reviews.",
+        "name": "Iftekhar Alam",
+        "role": "General Manager, Meghna Engineering Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "From an HR user's perspective, the system is quite straightforward. Employee records, attendance, and leave information are organized logically. It has reduced some of the repetitive administrative work we were doing manually.",
+        "name": "Sumaiya Akter",
+        "role": "HR Executive, NextGen Corporate Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "We wanted a single HR platform rather than several separate tools. Web Karigor developed the system around our employee management process. The HR dashboard gives us a much better overview than our previous setup.",
+        "name": "Kamrul Islam",
+        "role": "CEO, PrimeServe Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "Attendance reporting was taking more time than it should. With the HRM system, we can generate and review the information much more easily. The employee information section is also well organized.",
+        "name": "Nazma Rahman",
+        "role": "Admin Manager, WellCare Medical Services",
+        "rating": 5
+      },
+      {
+        "quote": "We are growing quickly, so we needed an HR system that could keep things organized as the team expanded. The employee profiles, leave management, and attendance features cover what we needed without making the system difficult to use.",
+        "name": "Abir Hossain",
+        "role": "Founder & CEO, StartHub Bangladesh",
+        "rating": 5
+      },
+      {
+        "quote": "The employee self-service feature was particularly important to us. Employees can handle basic requests themselves, while HR still has proper control over approvals and records. It has created a cleaner workflow for everyone.",
+        "name": "Rubaiya Islam",
+        "role": "Head of Administration, Meridian Group",
+        "rating": 5
+      },
+      {
+        "quote": "We were looking for better control over employee records and attendance rather than a system filled with unnecessary features. The HRM solution was structured around those requirements. The reporting and employee database have been particularly useful for our HR team.",
+        "name": "Faisal Ahmed",
+        "role": "HR Director, Capital Finance Ltd.",
         "rating": 5
       }
     ]

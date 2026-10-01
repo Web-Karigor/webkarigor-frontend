@@ -346,27 +346,99 @@
     "title": "Customers Who Loved Working With Us",
     "items": [
       {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Jaquon Hart",
-        "role": "Digital Marketing Executive, Hypebeast",
+        "quote": "We had separate processes for production, inventory, purchasing, and accounts. The ERP system brought these areas into a much more connected workflow. The production and inventory modules have been especially useful for our management team.",
+        "name": "Kamrul Hasan",
+        "role": "Managing Director, Bengal Textile Mills Ltd.",
         "rating": 5
       },
       {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Rickie Baroch",
-        "role": "Product Manager of Salestation Asia",
-        "rating": 4
+        "quote": "Our main requirement was better control over stock movement across our warehouses. The ERP inventory module gives us a much clearer picture now. It also reduced the amount of information we had to maintain manually.",
+        "name": "Rashedul Islam",
+        "role": "Head of Operations, Meghna Distribution Network",
+        "rating": 5
       },
       {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Harinder Bharwal",
-        "role": "Digital Marketing Executive, Hypebeast",
-        "rating": 4
+        "quote": "We were spending a lot of time collecting information before preparing management reports. Having the accounting and sales information within the same ERP has made that process much easier. The reporting dashboard is quite practical.",
+        "name": "Sumaiya Rahman",
+        "role": "Finance Director, Northstar Trading Ltd.",
+        "rating": 5
       },
       {
-        "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-        "name": "Floyd Miles",
-        "role": "CEO, Shishu Poribohan",
+        "quote": "Our biggest challenge was connecting production planning with raw-material inventory. The custom ERP workflow has made that relationship much clearer. The team took the time to understand how our factory actually operates before developing it.",
+        "name": "Zahidul Islam",
+        "role": "General Manager, A1 Manufacturing Industries",
+        "rating": 5
+      },
+      {
+        "quote": "We needed better visibility across our branches, particularly for stock and sales. The branch-wise dashboard and inventory module have been very useful. The system is also relatively easy for our staff to learn.",
+        "name": "Nabila Akter",
+        "role": "Director, Shapla Retail Group",
+        "rating": 5
+      },
+      {
+        "quote": "We handle a large number of purchase and sales transactions every day. The ERP system gives us one place to manage those records instead of relying on several spreadsheets. It has made the overall workflow much more organized.",
+        "name": "Mizanur Rahman",
+        "role": "Managing Partner, Karim Wholesale Mart",
+        "rating": 5
+      },
+      {
+        "quote": "Production, procurement, and inventory were not properly connected in our previous setup. The ERP solution created a much clearer flow between them. I particularly liked the way the production module was adapted to our existing process.",
+        "name": "Faruk Ahmed",
+        "role": "Director of Operations, StyleTex Apparels Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "We mainly needed better visibility into accounts and sales transactions. The finance module and management reports have made it easier for us to review information. We don't have to depend on several separate files anymore.",
+        "name": "Sharmin Yasmin",
+        "role": "Chief Accountant, Rahman & Brothers Trading",
+        "rating": 5
+      },
+      {
+        "quote": "Our business has several operational teams, so we needed a centralized system. The ERP dashboard gives management a much clearer overview of what is happening across the business. The implementation process was also handled professionally.",
+        "name": "Tanvir Kabir",
+        "role": "CEO, Eastern Supply Chain Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "We wanted to bring our HR, purchasing, inventory, and administrative processes into one system. The ERP solution gave us that foundation. Some of the approval workflows have also made internal coordination easier.",
+        "name": "Nasrin Sultana",
+        "role": "Head of Administration, Apex Industrial Group",
+        "rating": 5
+      },
+      {
+        "quote": "We were relying heavily on Excel for purchase records and stock information. The ERP system replaced much of that manual work with a proper workflow. The purchase and inventory modules are probably the parts our team uses most.",
+        "name": "Rezaul Karim",
+        "role": "Managing Director, Bengal Import House",
+        "rating": 5
+      },
+      {
+        "quote": "Managing multiple retail outlets meant that we needed a centralized view of sales and inventory. The ERP gives us branch-level information as well as an overall picture. That visibility has been very helpful for management.",
+        "name": "Afsana Rahman",
+        "role": "Operations Director, Urban Mart Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "Purchase, sales, and warehouse management were the three areas we wanted to improve first. Web Karigor structured the ERP around those processes instead of giving us unnecessary features. The result is quite practical for our business.",
+        "name": "Sakib Hossain",
+        "role": "Managing Director, BuildPro Materials Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "We had requirements from several departments, so there were quite a few discussions before development started. The team was willing to understand each department's workflow. The final ERP feels much more relevant than a generic system.",
+        "name": "Mostafizur Rahman",
+        "role": "Business Head, Metro Manufacturing Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "As our operations expanded, using separate tools for different tasks became difficult. The ERP brought order management, inventory, and purchasing into one platform. It has made the daily workflow much easier for our operations team.",
+        "name": "Lamia Haque",
+        "role": "Chief Operating Officer, ShopGrid Ltd.",
+        "rating": 5
+      },
+      {
+        "quote": "Our business involves a large amount of inventory movement, so accurate stock information is very important. The ERP inventory and purchase modules have given us a more structured way to manage it. The interface is also quite straightforward.",
+        "name": "Abdul Kader",
+        "role": "Managing Director, Medistar Distribution Ltd.",
         "rating": 5
       }
     ]

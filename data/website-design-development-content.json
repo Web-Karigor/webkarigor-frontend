@@ -287,27 +287,99 @@
         "title": "Customers Who Loved Working With Us",
         "items": [
             {
-                "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-                "name": "Jaquon Hart",
-                "role": "Digital Marketing Executive, Hypebeast",
+                "quote": "Our previous website had the basic information, but it didn't really represent the brand. Web Karigor redesigned the entire experience, including the product pages and enquiry flow. The new website feels much cleaner and easier to navigate.",
+                "name": "Tanvir Ahmed",
+                "role": "Managing Director, Apon Foods Ltd.",
                 "rating": 5
             },
             {
-                "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-                "name": "Rickie Baroch",
-                "role": "Product Manager of Salestation Asia",
-                "rating": 4
+                "quote": "We wanted something premium but still simple enough for everyday customers to use. The team understood that balance quite well. I especially liked how they handled the product listing and mobile experience.",
+                "name": "Nusrat Jahan",
+                "role": "Founder & CEO, Nivora Fashion",
+                "rating": 5
             },
             {
-                "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-                "name": "Harinder Bharwal",
-                "role": "Digital Marketing Executive, Hypebeast",
-                "rating": 4
+                "quote": "Our biggest concern was presenting a large number of property details without making the website difficult to use. The new property listing and project detail pages solved that nicely. Everything feels much more structured now.",
+                "name": "Rakibul Hasan",
+                "role": "Director, Bengal Habitat Properties",
+                "rating": 5
             },
             {
-                "quote": "With Ehya, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
-                "name": "Floyd Miles",
-                "role": "CEO, Shishu Poribohan",
+                "quote": "We had a lot of courses, programs, and information to organize. The new website structure made it much easier for visitors to understand what we offer. The team was also patient with our feedback during the revisions.",
+                "name": "Farhana Kabir",
+                "role": "Managing Director, EduBridge Bangladesh",
+                "rating": 5
+            },
+            {
+                "quote": "Healthcare websites need to feel reliable without becoming too formal. Web Karigor kept the design clean and gave important information enough space. The service pages and appointment enquiry flow were particularly well thought out.",
+                "name": "Saiful Islam",
+                "role": "Head of Marketing, Zenith Healthcare Ltd.",
+                "rating": 5
+            },
+            {
+                "quote": "The main thing we needed was a better way to present our tour packages. The package detail pages now make the inclusions, pricing, and itinerary much easier to understand. Overall, the website feels much more professional.",
+                "name": "Arif Hossain",
+                "role": "Founder & Managing Director, TripNest Bangladesh",
+                "rating": 5
+            },
+            {
+                "quote": "The new website is much closer to the visual direction we had in mind for the brand. The team paid attention to typography, product presentation, and responsive layouts. We had several rounds of feedback, and they handled them well.",
+                "name": "Sadia Rahman",
+                "role": "Brand Manager, Urban Loom",
+                "rating": 5
+            },
+            {
+                "quote": "We needed a corporate website that could explain our logistics services clearly without looking like a generic template. The service structure and quotation form are much easier to use now. The overall design feels appropriate for our business.",
+                "name": "Mehedi Hasan",
+                "role": "Chief Operating Officer, FastTrack Logistics Ltd.",
+                "rating": 5
+            },
+            {
+                "quote": "Our old website had too much information on individual pages. Web Karigor helped us reorganize the content and created a much clearer navigation structure. The result is simpler without removing the information we need.",
+                "name": "Tasnim Nowerin",
+                "role": "Director, Greenfield Education Foundation",
+                "rating": 5
+            },
+            {
+                "quote": "We mainly wanted to improve how customers browse our furniture collection. The product catalogue, category structure, and enquiry options are now much easier to understand. It has given us a much stronger digital presence.",
+                "name": "Imran Kabir",
+                "role": "Managing Director, Nova Furniture Ltd.",
+                "rating": 5
+            },
+            {
+                "quote": "We were quite particular about how our handmade products should be presented. The product pages now give enough attention to the photography and product details without feeling crowded. The team understood our visual expectations surprisingly well.",
+                "name": "Rafiul Karim",
+                "role": "Founder, Craftora Bangladesh",
+                "rating": 5
+            },
+            {
+                "quote": "Our website needed to communicate a lot of technical information. The team helped us break it down into service categories and project sections that are much easier to follow. The final result feels professional without being overly complicated.",
+                "name": "Sharmin Akter",
+                "role": "General Manager, Delta Engineering Solutions",
+                "rating": 5
+            },
+            {
+                "quote": "We needed a website that could support our growing list of services and case studies. Web Karigor created a flexible structure for both. I also appreciated that they questioned some of our initial ideas when they thought there was a better UX solution.",
+                "name": "Fahim Rahman",
+                "role": "CEO, Orbit Digital Solutions Ltd.",
+                "rating": 5
+            },
+            {
+                "quote": "For us, parents are the main audience, so the website needed to feel trustworthy and easy to understand. The admissions information and program pages are now much clearer. It feels like a much better representation of our school.",
+                "name": "Marium Chowdhury",
+                "role": "Founder, Little Steps Montessori",
+                "rating": 5
+            },
+            {
+                "quote": "We needed a website where customers could browse different auto parts and quickly find the information they needed. The new catalogue structure has made that process much easier. The mobile version was also an important improvement for us.",
+                "name": "Zubayer Hossain",
+                "role": "Director, Rahman Auto Parts Ltd.",
+                "rating": 5
+            },
+            {
+                "quote": "We wanted the website to look credible without making it feel unnecessarily corporate. The final design is clean and straightforward. The practice-area pages and consultation form are particularly useful for explaining our services.",
+                "name": "Sohana Yasmin",
+                "role": "Managing Partner, Prime Legal Associates",
                 "rating": 5
             }
         ]

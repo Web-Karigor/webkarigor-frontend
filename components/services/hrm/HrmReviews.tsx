@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, MessageCircle, Star } from "lucide-react";
-import { ERP_REVIEWS_SECTION, ERP_TESTIMONIALS } from "@/lib/erp-data";
+import { HRM_REVIEWS_SECTION, HRM_TESTIMONIALS } from "@/lib/hrm-data";
 
 /** Figma Testimonial — 1792 × 592 · cards 555 × 388 */
 const CARD_W = 555;
@@ -36,7 +36,7 @@ function Stars({ count }: { count: number }) {
 export default function ErpReviews() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
-  const maxIndex = Math.max(0, ERP_TESTIMONIALS.length - VISIBLE);
+  const maxIndex = Math.max(0, HRM_TESTIMONIALS.length - VISIBLE);
 
   const scrollTo = useCallback((i: number) => {
     const next = Math.min(Math.max(i, 0), maxIndex);
@@ -77,7 +77,7 @@ export default function ErpReviews() {
               <MessageCircle className="h-4 w-4" fill="currentColor" strokeWidth={0} />
             </span>
             <h2 className="m-0 font-montserrat text-[clamp(24px,2.8vw,32px)] font-bold leading-none tracking-[-0.02em] text-[#18214D]">
-              {ERP_REVIEWS_SECTION.title}
+              {HRM_REVIEWS_SECTION.title}
             </h2>
           </div>
 
@@ -108,7 +108,7 @@ export default function ErpReviews() {
           ref={trackRef}
           className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {ERP_TESTIMONIALS.map((item) => (
+          {HRM_TESTIMONIALS.map((item) => (
             <article
               key={item.name}
               className="flex w-[min(100%,calc(100vw-2rem))] shrink-0 snap-start flex-col rounded-[12px] border border-[#EEF0F3] bg-white p-6 shadow-[0_8px_30px_rgba(24,33,77,0.06)] sm:h-auto sm:w-[min(555px,85vw)] sm:p-10 md:p-12 lg:min-h-[388px]"
