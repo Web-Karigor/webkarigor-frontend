@@ -76,7 +76,7 @@ export default function Hero() {
                 src={WEBSITE_DESIGN_DEVELOPMENT_HERO.banner_image}
                 alt=""
                 fill
-                className="object-cover"
+                className="rounded-[20px] object-cover shadow-[0_24px_64px_rgba(0,0,0,0.12)]"
                 sizes="(100vw)"
                 unoptimized
               />

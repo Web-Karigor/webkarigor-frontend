@@ -1,10 +1,12 @@
 import {
+  BarChart3,
   Code2,
   Factory,
   Layers,
   Package,
   RefreshCw,
   Settings,
+  ShoppingCart,
   Truck,
   UserCheck,
   Users,
@@ -23,6 +25,8 @@ const ICONS = {
   wallet: Wallet,
   refresh: RefreshCw,
   settings: Settings,
+  "shopping-cart": ShoppingCart,
+  "bar-chart": BarChart3,
 } as const;
 
 

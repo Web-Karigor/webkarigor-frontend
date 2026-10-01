@@ -200,6 +200,20 @@
         "color": "#0891B2",
         "bg": "#E8F8FC",
         "icon": "settings"
+      },
+      {
+        "title": "Procurement and Supply Chain Management",
+        "description": "We develop ERP capabilities to manage procurement processes, supplier information, purchase activities, material requirements and related supply chain operations as part of an integrated business management system.",
+        "color": "#EA580C",
+        "bg": "#FFF7ED",
+        "icon": "shopping-cart"
+      },
+      {
+        "title": "Business Reporting and Analytics",
+        "description": "We build reporting and analytics capabilities that help businesses organize ERP data, monitor operational information and generate relevant reports to support business visibility and informed decision-making.",
+        "color": "#2563EB",
+        "bg": "#EFF6FF",
+        "icon": "bar-chart"
       }
     ]
   },
