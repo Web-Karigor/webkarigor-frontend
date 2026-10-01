@@ -3,7 +3,7 @@
    Mobile (<1024) and large desktop (>1440) are untouched. */
 
 @media (min-width: 1024px) and (max-width: 1440px) {
-  .svc-laptop header > div {
+  .svc-laptop header>div {
     height: 80px !important;
   }
 
@@ -68,7 +68,7 @@
   }
 
   .erp-hero-copy {
-    max-width: min(520px, 46%) !important;
+    /* max-width: min(720px, 50%) !important; */
   }
 
   .erp-hero-copy h1 {
@@ -148,7 +148,7 @@
   }
 
   .mp-hero-copy {
-    max-width: min(520px, 50%) !important;
+    /* max-width: min(520px, 50%) !important; */
   }
 
   .mp-hero-copy h1 {
@@ -175,7 +175,7 @@
     line-height: 1.28 !important;
   }
 
-  .eco-hero-copy > p {
+  .eco-hero-copy>p {
     margin-top: 0.9rem !important;
     font-size: 14px !important;
     line-height: 1.6 !important;

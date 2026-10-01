@@ -31,6 +31,7 @@
       "src": "/services/service-image/crm-hero.jpg",
       "alt": "Team member working on a project"
     },
+    "titleBrandUnderline": "/services/service-hero-underline.png",
     "badges": {
       "ai": "AI driven solution",
       "conversionLabel": "Conversion Rate",

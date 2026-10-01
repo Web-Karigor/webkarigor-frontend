@@ -29,7 +29,7 @@ export default function ErpHero() {
       <div className="mx-auto w-full max-w-[1850px] px-[clamp(16px,3.5vw,50px)] pb-14 pt-[80px] sm:pt-[100px] lg:pb-20 lg:pt-[128px]">
         <div className="erp-hero-split flex w-full flex-col items-stretch gap-12 py-4 max-md:gap-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-12">
           {/* Left copy — Figma 636 × 388 */}
-          <div className="erp-hero-copy flex w-full max-w-[636px] shrink-0 flex-col justify-center lg:min-h-[388px]">
+          <div className="erp-hero-copy flex shrink-0 flex-col justify-center lg:min-h-[388px]">
             <h1 className="m-0 font-montserrat text-[clamp(2.5rem,4.5vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
               {HRM_HERO.titleLine1}
               <br />
@@ -37,19 +37,14 @@ export default function ErpHero() {
               <br />
               <span className="relative inline-block">
                 {HRM_HERO.titleBrand}
-                <svg
-                  className="pointer-events-none absolute -bottom-0.5 left-0 w-full"
-                  viewBox="0 0 220 10"
-                  fill="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M1 7 C40 2, 90 9, 140 4 C165 2, 195 6, 218 3"
-                    stroke="#A7F3D0"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <Image
+                  src={HRM_HERO.titleBrandUnderline}
+                  alt=""
+                  width={350}
+                  height={5}
+                  className="absolute left-0 top-[calc(100%+4px)] h-auto"
+                  unoptimized
+                />
               </span>
             </h1>
 
