@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronRight,
   DollarSign,
-  FolderKanban,
+  House,
   Menu,
   MessageCircle,
   Settings,
@@ -18,11 +18,10 @@ import {
 import {
   SERVICE_NAV_DESC,
   STICKY_NAV_MORE_LINKS,
-  STICKY_NAV_PROJECTS,
 } from "@/lib/sticky-nav-data";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 
-type Sheet = "projects" | "services" | "more" | null;
+type Sheet = "services" | "more" | null;
 
 export default function StickyNav() {
   const pathname = usePathname();
@@ -79,46 +78,6 @@ export default function StickyNav() {
           style={{ paddingBottom: "max(12px, env(safe-area-inset-bottom))" }}
         >
           <AnimatePresence mode="wait">
-            {sheet === "projects" ? (
-              <MobileSheet key="projects">
-                <p className="mb-3 px-1 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
-                  Latest Projects
-                </p>
-                <div className="space-y-1">
-                  {STICKY_NAV_PROJECTS.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={close}
-                      className="block rounded-xl p-3 transition active:bg-[#f3f4f6]"
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
-                          {item.title}
-                        </span>
-                        <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
-                      </div>
-                      <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
-                        {item.desc}
-                      </p>
-                    </Link>
-                  ))}
-                  <Link
-                    href="/projects"
-                    onClick={close}
-                    className="mt-1 block rounded-xl border-t border-[#eef0f3] p-3 pt-4 transition active:bg-[#f3f4f6]"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-montserrat text-[15px] font-semibold text-[#0EC47B]">
-                        View all projects
-                      </span>
-                      <ChevronRight className="h-4 w-4 text-[#0EC47B]" />
-                    </div>
-                  </Link>
-                </div>
-              </MobileSheet>
-            ) : null}
-
             {sheet === "services" ? (
               <MobileSheet key="services">
                 <p className="mb-3 px-1 font-montserrat text-[11px] font-semibold tracking-[0.14em] text-[#0EC47B] uppercase">
@@ -177,31 +136,25 @@ export default function StickyNav() {
 
           <div className="pointer-events-auto sticky-nav-ring mt-2">
             <nav className="sticky-nav-bar" aria-label="Mobile sticky navigation">
-              <button
-                type="button"
-                aria-expanded={sheet === "projects"}
-                onClick={() => toggle("projects")}
-                className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${
-                  sheet === "projects" ||
-                  pathname?.startsWith("/projects") ||
-                  pathname?.startsWith("/case")
+              <Link
+                href="/"
+                className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${pathname === "/"
                     ? "text-[#0EC47B]"
                     : "text-[#1f1e1c]/70 active:text-[#1f1e1c]"
-                }`}
+                  }`}
               >
-                <FolderKanban className="h-4 w-4" />
-                <span>Projects</span>
-              </button>
+                <House className="h-4 w-4" />
+                <span>Home</span>
+              </Link>
 
               <button
                 type="button"
                 aria-expanded={sheet === "services"}
                 onClick={() => toggle("services")}
-                className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${
-                  sheet === "services" || pathname?.startsWith("/service")
+                className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${sheet === "services" || pathname?.startsWith("/service")
                     ? "text-[#0EC47B]"
                     : "text-[#1f1e1c]/70 active:text-[#1f1e1c]"
-                }`}
+                  }`}
               >
                 <Settings className="h-4 w-4" />
                 <span>Services</span>
@@ -223,11 +176,10 @@ export default function StickyNav() {
                     block: "start",
                   });
                 }}
-                className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${
-                  pathname?.startsWith("/pricing")
+                className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${pathname?.startsWith("/pricing")
                     ? "text-[#0EC47B]"
                     : "text-[#1f1e1c]/70 active:text-[#1f1e1c]"
-                }`}
+                  }`}
               >
                 <DollarSign className="h-4 w-4" />
                 <span>Pricing</span>
@@ -237,11 +189,10 @@ export default function StickyNav() {
                 type="button"
                 aria-expanded={sheet === "more"}
                 onClick={() => toggle("more")}
-                className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${
-                  sheet === "more"
+                className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${sheet === "more"
                     ? "text-[#0EC47B]"
                     : "text-[#1f1e1c]/70 active:text-[#1f1e1c]"
-                }`}
+                  }`}
               >
                 {sheet === "more" ? (
                   <X className="h-4 w-4" />

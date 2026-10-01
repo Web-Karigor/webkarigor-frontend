@@ -1,29 +1,3 @@
-import {
-  PROJECT_CARD_SLUGS,
-  PROJECT_ITEMS,
-} from "@/lib/projects-data";
-
-function buildLatestProjects() {
-  const seen = new Set<string>();
-  const items: { href: string; title: string; desc: string }[] = [];
-
-  for (const project of PROJECT_ITEMS) {
-    const slug = PROJECT_CARD_SLUGS[project.id] ?? project.id;
-    if (seen.has(slug)) continue;
-    seen.add(slug);
-    items.push({
-      href: `/projects/${slug}`,
-      title: project.title,
-      desc: project.alt,
-    });
-    if (items.length >= 6) break;
-  }
-
-  return items;
-}
-
-export const STICKY_NAV_PROJECTS = buildLatestProjects();
-
 export const SERVICE_NAV_DESC: Record<string, string> = {
   "website-design-development": "Custom websites for your business.",
   erp: "Custom systems for operations.",

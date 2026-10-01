@@ -34,9 +34,7 @@ function getPortfolioLayout(width: number): PortfolioLayout {
 
 function usePortfolioLayout() {
   const [layout, setLayout] = useState<PortfolioLayout>(() =>
-    typeof window !== "undefined"
-      ? getPortfolioLayout(window.innerWidth)
-      : getPortfolioLayout(1280),
+    getPortfolioLayout(1280),
   );
 
   useEffect(() => {
