@@ -1,9 +1,11 @@
 import {
+  CalendarDays,
   TrendingUp,
   UserRound,
   Wallet,
   Workflow,
   Users,
+  Settings,
 } from "lucide-react";
 import { HRM_FEATURES, HRM_FEATURES_SECTION } from "@/lib/hrm-data";
 
@@ -12,10 +14,12 @@ const ICONS = {
   workflow: Workflow,
   wallet: Wallet,
   chart: TrendingUp,
+  calendar: CalendarDays,
+  settings: Settings,
 } as const;
 
 
-export default function ErpFeatures() {
+export default function HrmFeatures() {
   return (
     <section className="erp-features bg-white py-[clamp(48px,6vw,80px)]">
       <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-8 px-[clamp(16px,4vw,120px)] md:gap-10 lg:gap-12">

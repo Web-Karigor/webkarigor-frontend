@@ -136,32 +136,60 @@
     "description": "We develop HR management solutions that bring employee records, attendance, leave, payroll, and workforce information together in one centralized system, helping HR teams manage daily processes more efficiently.",
     "items": [
       {
-        "title": "Centralized Employee Management",
-        "description": "Keep employee profiles, records, documents, and essential workforce information organized within a single HR management system.",
-        "color": "#12B76A",
-        "bg": "#E8F8F0",
+        "title": "Employee Management",
+        "description": "Store employee information, records and critical workforce data in a single HR management system.",
+        "color": "#2563EB",
+        "bg": "#EFF6FF",
         "icon": "users"
       },
       {
-        "title": "Streamlined HR Processes",
-        "description": "Manage attendance, leave, employee records, payroll, and other core HR activities through structured digital workflows.",
-        "color": "#F79009",
-        "bg": "#FEF4E6",
-        "icon": "workflow"
+        "title": "Attendance Management",
+        "description": "Monitor employee attendance and keep attendance records for HR daily activities.",
+        "color": "#0891B2",
+        "bg": "#ECFEFF",
+        "icon": "calendar"
       },
       {
-        "title": "Efficient Payroll Management",
-        "description": "Support salary structures, allowances, deductions, payroll processing, and other payroll requirements based on your organization's policies.",
-        "color": "#EE46BC",
-        "bg": "#FCE8F5",
+        "title": "Leave Management",
+        "description": "Have a proper HR process to handle employee leave requests, approvals and leave records.",
+        "color": "#7C3AED",
+        "bg": "#F5F3FF",
+        "icon": "calendar"
+      },
+      {
+        "title": "Payroll Management",
+        "description": "Classify the payroll information and handle payroll-related tasks according to your business needs.",
+        "color": "#16A34A",
+        "bg": "#F0FDF4",
         "icon": "wallet"
       },
       {
-        "title": "HR Insights & Reporting",
-        "description": "Give HR teams better visibility into workforce data through organized dashboards, reports, and relevant HR information.",
-        "color": "#2E90FA",
-        "bg": "#E8F3FE",
+        "title": "Payroll Processing",
+        "description": "Enable more structured payroll processing and minimize manual HR work.",
+        "color": "#EA580C",
+        "bg": "#FFF7ED",
+        "icon": "settings"
+      },
+      {
+        "title": "Core HR Management",
+        "description": "Handle critical HR processes, employee documentation and regular admin tasks on a single HR platform.",
+        "color": "#DB2777",
+        "bg": "#FDF2F8",
+        "icon": "users"
+      },
+      {
+        "title": "HR Dashboard and Reporting",
+        "description": "Provide HR managers with clear visibility into key HR data with organized dashboards and reporting.",
+        "color": "#4F46E5",
+        "bg": "#EEF2FF",
         "icon": "chart"
+      },
+      {
+        "title": "Customized HR & Payroll Management",
+        "description": "Design HR and payroll software based on your unique workforce structure, HR processes and payroll requirements.",
+        "color": "#0F766E",
+        "bg": "#F0FDFA",
+        "icon": "workflow"
       }
     ]
   },
