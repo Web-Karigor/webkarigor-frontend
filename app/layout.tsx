@@ -4,6 +4,7 @@ import "./globals.css";
 import "@/styles/section-shared.css";
 import "@/styles/pricing.css";
 import Navbar from "@/components/home/Navbar";
+import MobileBrand from "@/components/home/MobileBrand";
 import Footer from "@/components/home/Footer";
 import ConsultationModal from "@/components/home/ConsultationModal";
 import StickyNav from "@/components/home/StickuNav";
@@ -73,6 +74,7 @@ export default function RootLayout({
           <GlobalCursor />
           <div className="relative z-10 overflow-x-clip">
             <Navbar />
+            <MobileBrand />
             <main className="pb-[88px] lg:pb-0">{children}</main>
             <Footer />
           </div>
