@@ -79,8 +79,12 @@
 }
 
 .project-card-overlay-desc {
+  display: -webkit-box;
   margin: 0;
   flex-shrink: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: clamp(13px, 1.1vw, 16px);
   font-weight: 500;

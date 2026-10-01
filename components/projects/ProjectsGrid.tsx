@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  getProjectCardOverview,
   PROJECT_CARD_SLUGS,
   PROJECT_ITEMS,
   PROJECTS_CONTENT_W,
@@ -73,21 +74,25 @@ export default function ProjectsGrid() {
             gap: PROJECTS_GAP,
           }}
         >
-          {PROJECT_ITEMS.map((item, index) => (
-            <ProjectCard
-              key={item.id}
-              title={item.title}
-              src={item.src}
-              alt={item.alt}
-              width={featured.w}
-              height={featured.h}
-              href={projectHref(item.id)}
-              variant={item.variant}
-              description={item.description}
-              keyPoints={item.keyPoints}
-              priority={index === 0}
-            />
-          ))}
+          {PROJECT_ITEMS.map((item, index) => {
+            const overview = getProjectCardOverview(item.id);
+
+            return (
+              <ProjectCard
+                key={item.id}
+                title={overview?.title ?? item.title}
+                src={item.src}
+                alt={item.alt}
+                width={featured.w}
+                height={featured.h}
+                href={projectHref(item.id)}
+                variant={item.variant}
+                description={overview?.description ?? item.description}
+                keyPoints={overview?.keyPoints ?? item.keyPoints}
+                priority={index === 0}
+              />
+            );
+          })}
 
           {/*
           <ProjectCard

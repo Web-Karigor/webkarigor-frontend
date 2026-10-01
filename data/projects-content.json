@@ -66,79 +66,39 @@
       "src": "/suma/Suma - Project List Page.jpg",
       "alt": "Suma International travel services website",
       "w": 1300,
-      "h": 600,
-      "description": "A travel services website designed to simplify how people explore packages, understand services, and send inquiries — with a clear structure for Hajj, Umrah, and related offerings.",
-      "keyPoints": [
-        "Service and package architecture",
-        "Trust-focused content hierarchy",
-        "Inquiry-ready service pages",
-        "Responsive travel experience",
-        "Clear Hajj and Umrah presentation"
-      ]
+      "h": 600
     },
     {
       "id": "p2",
-      "title": "Simple is More",
+      "title": "Times Today BD",
       "src": "/timestoday/Times Today - Project List Page.jpg",
-      "alt": "Simple is More website project",
+      "alt": "Times Today BD news platform",
       "w": 1300,
-      "h": 600,
-      "description": "A brand and web experience built around clarity. We stripped away noise so every page feels calm, confident, and easy to act on — from first visit to final conversion.",
-      "keyPoints": [
-        "Brand identity and visual system",
-        "High-converting landing experience",
-        "Responsive layout across devices",
-        "Motion that guides, not distracts",
-        "Launch-ready content structure"
-      ]
+      "h": 600
     },
     {
       "id": "p3",
-      "title": "Mobile App Suite",
+      "title": "Kapital Properties Limited",
       "src": "/capital/Kapital Properties - Project List Page.jpg",
-      "alt": "Colorful mobile app interface collection",
+      "alt": "Kapital Properties digital property platform",
       "w": 640,
-      "h": 720,
-      "description": "A connected family of mobile screens designed for speed and delight. Users can browse, compare, and complete tasks in fewer taps without losing the brand personality.",
-      "keyPoints": [
-        "Multi-screen product flow",
-        "Consistent component library",
-        "Gesture-friendly navigation",
-        "Color system for product states",
-        "Prototype-ready UI kits"
-      ]
+      "h": 720
     },
     {
       "id": "p4",
-      "title": "Desktop Dashboard",
+      "title": "Probashi Resorts",
       "src": "/probashi/Probashi Resorts - Project List Page.jpg",
-      "alt": "Desktop monitor with clean website UI",
+      "alt": "Probashi Resorts property investment website",
       "w": 640,
-      "h": 720,
-      "description": "An operations dashboard that turns dense data into a clean working surface. Teams can scan status, spot issues, and move to action without hunting through cluttered panels.",
-      "keyPoints": [
-        "Information architecture",
-        "KPI and status modules",
-        "Filter and search patterns",
-        "Desktop-first density",
-        "Accessible contrast and type"
-      ]
+      "h": 720
     },
     {
       "id": "p5",
-      "title": "Travel App",
+      "title": "Shishu Poribohon",
       "src": "/shishu/Shishu Poribohon - Project List Page.jpg",
-      "alt": "Travel mobile app mockups",
+      "alt": "Shishu Poribohon kids ecommerce platform",
       "w": 640,
-      "h": 680,
-      "description": "A booking experience that makes complex travel decisions feel simple. Clear search, honest pricing, and guided itineraries help people move from inspiration to a confirmed trip.",
-      "keyPoints": [
-        "Search and filter UX",
-        "Transparent pricing states",
-        "Itinerary building flow",
-        "Mobile booking checkout",
-        "Offline-friendly trip views"
-      ]
+      "h": 680
     }
   ]
 }
