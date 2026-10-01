@@ -84,15 +84,16 @@ export default function ConsultationModal() {
           />
         </div>
 
+        <button
+          type="button"
+          className="consultation-modal-close"
+          onClick={() => setOpen(false)}
+          aria-label="Close form"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
         <div className="consultation-modal-body">
-          <button
-            type="button"
-            className="consultation-modal-close"
-            onClick={() => setOpen(false)}
-            aria-label="Close form"
-          >
-            <X className="h-5 w-5" />
-          </button>
           <ConsultationForm
             showWhatsApp
             onSuccess={() => {

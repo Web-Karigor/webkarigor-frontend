@@ -847,6 +847,7 @@
 
 .consultation-modal-media {
   display: none;
+  min-height: 0;
 }
 
 .consultation-modal-media-img {
@@ -855,10 +856,15 @@
 }
 
 .consultation-modal-body {
-  position: relative;
   min-width: 0;
+  min-height: 0;
+  max-height: min(90dvh, 960px);
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
   padding: 20px 16px 18px;
 }
 
@@ -997,6 +1003,34 @@
   }
 }
 
+@media (max-width: 1439px) {
+  .consultation-modal-backdrop {
+    overflow: hidden;
+  }
+
+  .consultation-modal-panel {
+    height: min(calc(100dvh - 32px), 960px);
+    max-height: calc(100dvh - 32px);
+    overflow: hidden;
+  }
+
+  .consultation-modal-media {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .consultation-modal-body {
+    height: 100%;
+    max-height: none;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+}
+
 @media (max-width: 639px) {
   .consultation-modal-panel .home-consultation-actions.has-whatsapp {
     grid-template-columns: 1fr;
@@ -1005,15 +1039,19 @@
   .consultation-modal-backdrop {
     padding: 0;
     align-items: flex-end;
+    overflow: hidden;
   }
 
   .consultation-modal-panel {
     width: 100%;
-    max-height: 90dvh;
+    height: 92dvh;
+    max-height: 92dvh;
     border-radius: 24px 24px 0 0;
   }
 
   .consultation-modal-body {
-    padding: 20px 16px 20px;
+    height: 100%;
+    max-height: none;
+    padding: 20px 16px max(20px, env(safe-area-inset-bottom));
   }
 }
