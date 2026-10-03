@@ -19,9 +19,16 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-x: clip;
+    overflow-anchor: none;
+    overscroll-behavior-y: none;
+  }
+
   body {
     @apply bg-background text-foreground;
     background-color: #FFFDF6;
+    overflow-x: visible;
   }
 
   a[href],

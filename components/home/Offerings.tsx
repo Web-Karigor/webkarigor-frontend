@@ -3,12 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
+  ArrowRight,
   Cloud,
   Home,
   Hospital,
   ShoppingCart,
 } from "lucide-react";
 import homeContent from "@/data/home-content.json";
+import { gsap } from "@/lib/gsap";
 
 const {
   eyebrow: homeEyebrow,
@@ -19,8 +21,12 @@ const {
 
 
 const CARD_GAP = 24;
-const AUTO_SCROLL_MS = 4500;
+const AUTO_SCROLL_MS = 2200;
+const DRIFT_PX_PER_SEC = 36;
+const STEP_DURATION = 0.9;
 const DRAG_THRESHOLD_PX = 48;
+
+const LOOP_COPIES = 3;
 
 const OFFERING_ICONS = {
   shoppingCart: ShoppingCart,
@@ -41,7 +47,11 @@ export default function Offerings({
   const viewportRef = useRef<HTMLDivElement>(null);
   const pauseAutoRef = useRef(false);
   const resumeTimerRef = useRef<number | null>(null);
+  const wrappingRef = useRef(false);
   const [dragging, setDragging] = useState(false);
+  const loopItems = Array.from({ length: LOOP_COPIES }, (_, copy) =>
+    items.map((item, index) => ({ item, copy, index })),
+  ).flat();
 
   const dragRef = useRef<{
     pointerId: number;
@@ -75,21 +85,53 @@ export default function Offerings({
     const viewport = viewportRef.current;
     if (!viewport) return 324;
     const card = viewport.querySelector<HTMLElement>("[data-service-offering-card]");
-    return (card?.offsetWidth ?? 300) + CARD_GAP;
+    const gap = Number.parseFloat(getComputedStyle(viewport).columnGap || "") || CARD_GAP;
+    return (card?.offsetWidth ?? 300) + gap;
   }, []);
 
-  const maxScroll = useCallback(() => {
+  const getSetWidth = useCallback(() => {
     const viewport = viewportRef.current;
-    if (!viewport) return 0;
-    return Math.max(0, viewport.scrollWidth - viewport.clientWidth);
-  }, []);
+    if (!viewport) return getStep() * items.length;
+    const cards = viewport.querySelectorAll<HTMLElement>(
+      "[data-service-offering-card]",
+    );
+    const first = cards[0];
+    const nextSet = cards[items.length];
+    if (first && nextSet) {
+      return nextSet.offsetLeft - first.offsetLeft;
+    }
+    return getStep() * items.length;
+  }, [getStep]);
 
-  const scrollTo = useCallback((left: number, smooth = false) => {
+  const normalizeLoop = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport || wrappingRef.current) return;
+    const setW = getSetWidth();
+    if (setW <= 0) return;
+
+    if (viewport.scrollLeft < setW * 0.5) {
+      wrappingRef.current = true;
+      viewport.scrollLeft += setW;
+      wrappingRef.current = false;
+    } else if (viewport.scrollLeft >= setW * 1.5) {
+      wrappingRef.current = true;
+      viewport.scrollLeft -= setW;
+      wrappingRef.current = false;
+    }
+  }, [getSetWidth]);
+
+  const animateTo = useCallback((left: number) => {
     const viewport = viewportRef.current;
     if (!viewport) return;
-    const clamped = Math.max(0, Math.min(left, maxScroll()));
-    viewport.scrollTo({ left: clamped, behavior: smooth ? "smooth" : "auto" });
-  }, [maxScroll]);
+    gsap.killTweensOf(viewport);
+    gsap.to(viewport, {
+      scrollLeft: left,
+      duration: STEP_DURATION,
+      ease: "power2.out",
+      overwrite: true,
+      onUpdate: normalizeLoop,
+    });
+  }, [normalizeLoop]);
 
   const scrollByStep = useCallback(
     (direction: "left" | "right") => {
@@ -97,42 +139,59 @@ export default function Offerings({
       if (!viewport) return;
 
       const step = getStep();
-      const max = maxScroll();
-      const current = viewport.scrollLeft;
       pauseAuto(AUTO_SCROLL_MS);
-
-      if (direction === "right" && current >= max - 4) {
-        scrollTo(0, true);
-        return;
-      }
-      if (direction === "left" && current <= 4) {
-        scrollTo(max, true);
-        return;
-      }
-
-      scrollTo(current + (direction === "left" ? -step : step), true);
+      animateTo(viewport.scrollLeft + (direction === "left" ? -step : step));
     },
-    [getStep, maxScroll, pauseAuto, scrollTo],
+    [animateTo, getStep, pauseAuto],
   );
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      if (pauseAutoRef.current || dragRef.current) return;
-      scrollByStep("right");
-    }, AUTO_SCROLL_MS);
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const placeInMiddle = () => {
+      const setW = getSetWidth();
+      if (setW > 0) viewport.scrollLeft = setW;
+    };
+
+    placeInMiddle();
+    const raf = requestAnimationFrame(placeInMiddle);
+    viewport.addEventListener("scroll", normalizeLoop, { passive: true });
+    window.addEventListener("resize", placeInMiddle);
 
     return () => {
-      clearInterval(timer);
-      clearResumeTimer();
+      cancelAnimationFrame(raf);
+      viewport.removeEventListener("scroll", normalizeLoop);
+      window.removeEventListener("resize", placeInMiddle);
     };
-  }, [scrollByStep]);
+  }, [getSetWidth, normalizeLoop]);
+
+  useEffect(() => {
+    const onTick = () => {
+      const viewport = viewportRef.current;
+      if (!viewport || pauseAutoRef.current || dragRef.current) return;
+      if (gsap.isTweening(viewport)) return;
+      const dt = gsap.ticker.deltaRatio(60) / 60;
+      viewport.scrollLeft += DRIFT_PX_PER_SEC * dt;
+      normalizeLoop();
+    };
+
+    gsap.ticker.add(onTick);
+    return () => {
+      gsap.ticker.remove(onTick);
+      clearResumeTimer();
+      const viewport = viewportRef.current;
+      if (viewport) gsap.killTweensOf(viewport);
+    };
+  }, [normalizeLoop]);
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === "mouse" && event.button !== 0) return;
     const viewport = viewportRef.current;
-    if (!viewport || maxScroll() <= 0) return;
+    if (!viewport) return;
 
     pauseAuto();
+    gsap.killTweensOf(viewport);
     dragRef.current = {
       pointerId: event.pointerId,
       startX: event.clientX,
@@ -192,7 +251,7 @@ export default function Offerings({
         target = Math.round(viewport.scrollLeft / step) * step;
       }
 
-      scrollTo(target, true);
+      animateTo(target);
     }
 
     pauseAuto(AUTO_SCROLL_MS);
@@ -206,7 +265,7 @@ export default function Offerings({
             <span className="svc-offerings-eyebrow mb-3 block font-montserrat text-sm font-bold leading-[1.2] tracking-[-0.01em] text-[#15d286] lg:text-2xl">
               {eyebrow}
             </span>
-            <h2 className="svc-offerings-title m-0 max-w-[460px] font-['Geist'] text-[clamp(24px,6vw,32px)] font-bold text-black">
+            <h2 className="svc-offerings-title m-0 max-w-[460px] font-museoModerno text-[clamp(24px,6vw,32px)] font-bold text-black">
               {title}
             </h2>
           </div>
@@ -226,13 +285,20 @@ export default function Offerings({
               <ArrowLeft className="h-[22px] w-[22px] stroke-[1.5]" aria-hidden />
             </button>
 
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 z-[3] inline-flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[rgba(17,24,39,0.08)] bg-white text-[#111827] shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-[transform,box-shadow] hover:translate-y-[calc(-50%-1px)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] sm:right-5 sm:h-12 sm:w-12 lg:right-40"
+              onClick={() => scrollByStep("right")}
+              aria-label="Next industries"
+            >
+              <ArrowRight className="h-[22px] w-[22px] stroke-[1.5]" aria-hidden />
+            </button>
+
             <div className="lg:pl-[220px]">
               <div
                 ref={viewportRef}
                 className={`relative flex w-full gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-6 [&::-webkit-scrollbar]:hidden ${
-                  dragging
-                    ? "cursor-grabbing select-none"
-                    : "cursor-grab scroll-smooth"
+                  dragging ? "cursor-grabbing select-none" : "cursor-grab"
                 }`}
                 style={{ touchAction: "pan-y" }}
                 onMouseEnter={() => pauseAuto()}
@@ -244,11 +310,11 @@ export default function Offerings({
                 onPointerUp={onPointerUp}
                 onPointerCancel={onPointerUp}
               >
-                {items.map((item, index) => {
+                {loopItems.map(({ item, copy, index }) => {
                   const Icon = OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS];
                   return (
                     <article
-                      key={`${item.title}-${index}`}
+                      key={`${item.title}-${copy}-${index}`}
                       data-service-offering-card
                       className={`flex h-[min(320px,70vw)] min-h-[260px] w-[min(300px,calc(100vw-64px))] shrink-0 flex-col gap-[10px] rounded-[12px] px-5 py-6 sm:h-[320px] ${
                         item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"
@@ -268,8 +334,6 @@ export default function Offerings({
                     </article>
                   );
                 })}
-
-                <div className="w-4 shrink-0 sm:w-6" aria-hidden />
               </div>
             </div>
           </div>

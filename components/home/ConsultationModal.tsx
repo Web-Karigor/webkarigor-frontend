@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import ConsultationForm from "@/components/home/ConsultationForm";
 import homeContent from "@/data/home-content.json";
 import "@/components/home/HomeConsultation.css";
+import { setSmoothScrollLocked } from "@/lib/smooth-scroll";
 
 const MODAL_IMAGE = homeContent.consultation.founder.image;
 
@@ -47,6 +48,7 @@ export default function ConsultationModal() {
 
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    setSmoothScrollLocked(true);
 
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpen(false);
@@ -55,6 +57,7 @@ export default function ConsultationModal() {
 
     return () => {
       document.body.style.overflow = prev;
+      setSmoothScrollLocked(false);
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
@@ -64,6 +67,7 @@ export default function ConsultationModal() {
   return (
     <div
       className="consultation-modal-backdrop"
+      data-lenis-prevent
       onClick={() => setOpen(false)}
     >
       <div

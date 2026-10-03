@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronDown, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { HERO } from "@/lib/software-development-data";
+import { scrollAppTo } from "@/lib/smooth-scroll";
 
 /** Desktop hero image geometry — Figma placement */
 const HERO_LAYOUT = {
@@ -37,7 +38,7 @@ export default function Hero() {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    scrollAppTo("#contact");
   };
 
   return (

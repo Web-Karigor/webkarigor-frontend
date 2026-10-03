@@ -12,7 +12,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap, ScrollTrigger, refreshScrollTriggers } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
 
 /* -------------------------------------------------------------------------- */
@@ -83,7 +83,6 @@ function computeSectionHeight(
 }
 
 /** Frame-rate independent ease — silky follow, zero overshoot */
-const SCROLL_SMOOTH = 7.2;
 /** Extra scroll room per service = slower, more controlled scrub */
 const SCROLL_VH_PER_STEP = 1.15;
 
@@ -469,11 +468,6 @@ export default function Services() {
     `${(total + INTRO_SCROLL_VIEWS) * SCROLL_VH_PER_STEP * 100}vh`,
   );
   const introViewsRef = useRef(INTRO_SCROLL_VIEWS);
-  const targetProgressRef = useRef(0);
-  const smoothProgressRef = useRef(0);
-  const rafRef = useRef<number | null>(null);
-  const lastTimeRef = useRef(0);
-
   const overall = useMotionValue(0);
 
   /** 0→1: intro header slides up; 0→1: service story after intro */
@@ -541,57 +535,49 @@ export default function Services() {
       }
     };
 
-    const readTarget = () => {
-      const rect = section.getBoundingClientRect();
-      const scrollable = Math.max(section.offsetHeight - window.innerHeight, 1);
-      const passed = Math.min(Math.max(-rect.top, 0), scrollable);
-      targetProgressRef.current = passed / scrollable;
+    let sectionTop = 0;
+    let sectionHeightPx = 0;
+
+    const cacheMetrics = () => {
+      sectionTop = window.scrollY + section.getBoundingClientRect().top;
+      sectionHeightPx = section.offsetHeight;
+    };
+
+    const readProgress = () => {
+      const scrollable = Math.max(sectionHeightPx - window.innerHeight, 1);
+      const passed = Math.min(Math.max(window.scrollY - sectionTop, 0), scrollable);
+      overall.set(passed / scrollable);
     };
 
     measureLayout();
-    readTarget();
-    smoothProgressRef.current = targetProgressRef.current;
-    overall.set(smoothProgressRef.current);
+    cacheMetrics();
+    readProgress();
 
-    const tick = (now: number) => {
-      const last = lastTimeRef.current || now;
-      const dt = Math.min(0.048, (now - last) / 1000);
-      lastTimeRef.current = now;
-
-      const alpha = 1 - Math.exp(-SCROLL_SMOOTH * dt);
-      const target = targetProgressRef.current;
-      const current = smoothProgressRef.current;
-      const next = current + (target - current) * alpha;
-      smoothProgressRef.current = next;
-      overall.set(next);
-
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    const onScroll = () => {
-      readTarget();
+    const onTick = () => {
+      const viewBottom = window.scrollY + window.innerHeight;
+      if (viewBottom < sectionTop - 240 || window.scrollY > sectionTop + sectionHeightPx + 240) {
+        return;
+      }
+      readProgress();
     };
 
     const onResize = () => {
       measureLayout();
-      readTarget();
-      smoothProgressRef.current = targetProgressRef.current;
-      overall.set(smoothProgressRef.current);
-      ScrollTrigger.refresh();
+      cacheMetrics();
+      readProgress();
+      refreshScrollTriggers();
     };
 
     const observer = new ResizeObserver(onResize);
     if (viewport) observer.observe(viewport);
 
-    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
-    rafRef.current = requestAnimationFrame(tick);
+    gsap.ticker.add(onTick);
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
-      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+      gsap.ticker.remove(onTick);
     };
   }, [overall, introViews, total]);
 
@@ -639,7 +625,7 @@ export default function Services() {
           if (tl.scrollTrigger) triggers.push(tl.scrollTrigger);
         });
 
-        requestAnimationFrame(() => ScrollTrigger.refresh());
+        requestAnimationFrame(() => refreshScrollTriggers());
 
         return () => {
           triggers.forEach((t) => t.kill());
