@@ -31,6 +31,21 @@
   color: #1f1e1c;
 }
 
+@media (max-width: 767px) {
+  .hero-title {
+    font-size: clamp(1.55rem, 7vw, 1.85rem);
+    line-height: 122%;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.8125rem, 3.6vw, 0.95rem);
+    letter-spacing: 0.04em;
+    line-height: 140%;
+    padding-top: 0.15rem;
+    padding-bottom: 0.2rem;
+  }
+}
+
 .hero-highlight {
   background: #24ff74;
   padding: 2px 6px;

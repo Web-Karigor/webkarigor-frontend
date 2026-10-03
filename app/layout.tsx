@@ -9,6 +9,7 @@ import Footer from "@/components/home/Footer";
 import ConsultationModal from "@/components/home/ConsultationModal";
 import StickyNav from "@/components/home/StickuNav";
 import FloatingActions from "@/components/FloatingActions";
+import ScrollProgress from "@/components/ScrollProgress";
 import GlobalCursor from "@/components/GlobalCursor";
 import GsapProvider from "@/components/providers/GsapProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
@@ -82,6 +83,7 @@ export default function RootLayout({
           <ConsultationModal />
           <StickyNav />
           <FloatingActions />
+          <ScrollProgress />
         </GsapProvider>
         </SmoothScroll>
         </QueryProvider>

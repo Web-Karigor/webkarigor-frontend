@@ -6,7 +6,7 @@ import homeContent from "@/data/home-content.json";
 
 const { titleLines, description, cta, photos, backgroundWord } = homeContent.hero;
 
-const photoSlides = [photos.left, photos.right] as const;
+const photoSlides = [photos.right, photos.left] as const;
 
 function HeroTitle() {
   return (
