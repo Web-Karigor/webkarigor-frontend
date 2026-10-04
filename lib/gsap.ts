@@ -10,13 +10,22 @@ if (typeof window !== "undefined") {
   });
 
   ScrollTrigger.defaults({
-    anticipatePin: 1,
+    anticipatePin: 0,
     invalidateOnRefresh: true,
   });
 }
 
 export function refreshScrollTriggers() {
   if (typeof window === "undefined") return;
+
+  /* Never refresh on the settle frame — that 1px ST remap is the end-jerk. */
+  if (
+    document.documentElement.classList.contains("lenis-scrolling") ||
+    document.documentElement.classList.contains("lenis-smooth")
+  ) {
+    return;
+  }
+
   ScrollTrigger.refresh();
 }
 

@@ -20,6 +20,7 @@ import {
 } from "@/lib/sticky-nav-data";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
+import { scrollAppTo } from "@/lib/smooth-scroll";
 
 const { brand } = homeContent.navbar;
 
@@ -59,10 +60,7 @@ function isServicePath(pathname: string | null) {
 }
 
 function scrollToConsultation() {
-  document.getElementById("contact")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
+  scrollAppTo("#contact");
 }
 
 function getActiveIdFromPath(pathname: string | null): string {

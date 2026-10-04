@@ -26,17 +26,23 @@ function InfiniteLogoRow({
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const pausedRef = useRef(false);
 
+  const wrapRef = useRef<HTMLDivElement>(null);
+
   useLayoutEffect(() => {
     const track = trackRef.current;
     const set = setRef.current;
-    if (!track || !set) return;
+    const wrap = wrapRef.current;
+    if (!track || !set || !wrap) return;
+
+    let lastWidth = 0;
 
     const buildTimeline = () => {
-      timelineRef.current?.kill();
-
-      const setWidth = set.offsetWidth;
+      const setWidth = set.scrollWidth || set.offsetWidth;
       if (setWidth < 1) return;
+      if (Math.abs(setWidth - lastWidth) < 2 && timelineRef.current) return;
+      lastWidth = setWidth;
 
+      timelineRef.current?.kill();
       gsap.set(track, { x: direction === "left" ? -setWidth : 0 });
 
       const timeline = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
@@ -50,9 +56,13 @@ function InfiniteLogoRow({
     };
 
     buildTimeline();
+    const retry = window.setTimeout(buildTimeline, 120);
+    const onLoad = () => buildTimeline();
+    window.addEventListener("load", onLoad);
 
     const observer = new ResizeObserver(buildTimeline);
     observer.observe(set);
+    observer.observe(wrap);
 
     const visibility = new IntersectionObserver(([entry]) => {
       const timeline = timelineRef.current;
@@ -60,9 +70,11 @@ function InfiniteLogoRow({
       if (entry?.isIntersecting && !pausedRef.current) timeline.resume();
       else timeline.pause();
     });
-    visibility.observe(track);
+    visibility.observe(wrap);
 
     return () => {
+      window.clearTimeout(retry);
+      window.removeEventListener("load", onLoad);
       observer.disconnect();
       visibility.disconnect();
       timelineRef.current?.kill();
@@ -82,6 +94,7 @@ function InfiniteLogoRow({
 
   return (
     <div
+      ref={wrapRef}
       className="min-w-0 overflow-hidden py-1"
       onMouseEnter={pause}
       onMouseLeave={resume}
@@ -130,12 +143,11 @@ export default function Clients() {
     <section className="svc-clients relative px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px]">
       <div className="mx-auto flex w-full max-w-[1750px] flex-col items-stretch gap-8 lg:gap-[60px]">
         <div
-          className="flex w-full min-w-0 flex-col gap-4 lg:flex-row lg:gap-20"
-          style={{ alignItems: "flex-start" }}
+          className="flex w-full min-w-0 flex-col items-center gap-4 text-center lg:flex-row lg:items-start lg:gap-20 lg:text-left"
         >
           <h2
-            className="section-heading flex shrink-0 flex-col justify-start overflow-visible text-right"
-            style={{ alignItems: "flex-end", marginTop: "-0.75rem" }}
+            className="section-heading flex shrink-0 flex-col items-center justify-start overflow-visible text-center lg:items-end lg:text-right"
+            style={{ marginTop: "-0.75rem" }}
           >
             <span
               className="section-heading-split-accent section-accent-text !transform-none pr-1 leading-[1.15]"
@@ -150,11 +162,11 @@ export default function Clients() {
               {titleAccent}
             </span>
           </h2>
-          <p className="m-0 w-full min-w-0 text-left font-montserrat text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-[1.75] text-[#4b5563] lg:flex-1 lg:text-justify">
+          <p className="m-0 w-full min-w-0 text-center font-montserrat text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-[1.75] text-[#4b5563] lg:flex-1 lg:text-justify">
             {description}
           </p>
         </div>
-        <div className="mx-auto w-[70%] min-w-0">
+        <div className="mx-auto w-full min-w-0 sm:w-[85%] lg:w-[70%]">
           <InfiniteLogoRow items={logos} direction="left" />
         </div>
       </div>

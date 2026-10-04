@@ -20,9 +20,7 @@ export default function GsapProvider({
     const refresh = () => refreshScrollTriggers();
     const refreshDebounced = debounce(refresh, 180);
 
-    refresh();
     const rafId = requestAnimationFrame(refresh);
-    const t1 = window.setTimeout(refresh, 400);
 
     const onLoad = () => refresh();
     window.addEventListener("load", onLoad);
@@ -31,7 +29,6 @@ export default function GsapProvider({
 
     return () => {
       cancelAnimationFrame(rafId);
-      window.clearTimeout(t1);
       window.removeEventListener("load", onLoad);
       window.removeEventListener("resize", refreshDebounced);
     };

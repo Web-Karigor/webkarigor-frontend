@@ -34,6 +34,7 @@
   background: #111;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
   transform: translate3d(0, 0, 0);
+  transform-origin: 50% 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }

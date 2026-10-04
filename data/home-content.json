@@ -54,8 +54,8 @@
     ],
     "description": {
       "beforeHighlight": "Web Karigor is a",
-      "highlight": "website design & development",
-      "afterHighlight": " company in Bangladesh that develops business websites, corporate websites, e-commerce websites, and custom web applications based on real. ",
+      "highlight": "website",
+      "afterHighlight": "design & development company in Bangladesh that develops business websites, corporate websites, e-commerce websites, and custom web applications based on real. ",
       "badge": "operational",
       "afterBadge": " and customer needs ."
     },
@@ -903,6 +903,36 @@
         "id": "youtube",
         "label": "YouTube",
         "href": "https://www.youtube.com/@WebKarigorBD"
+      },
+      {
+        "id": "dribbble",
+        "label": "Dribbble",
+        "href": "https://dribbble.com/shohozsoftwarebd"
+      },
+      {
+        "id": "behance",
+        "label": "Behance",
+        "href": "https://www.behance.net/shohozsoftware"
+      },
+      {
+        "id": "instagram",
+        "label": "Instagram",
+        "href": "#"
+      },
+      {
+        "id": "linkedin",
+        "label": "LinkedIn",
+        "href": "#"
+      },
+      {
+        "id": "x",
+        "label": "X",
+        "href": "#"
+      },
+      {
+        "id": "github",
+        "label": "GitHub",
+        "href": "#"
       }
     ]
   }

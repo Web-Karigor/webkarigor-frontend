@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Phone,
 } from "lucide-react";
+import { scrollAppTo } from "@/lib/smooth-scroll";
 
 const WHATSAPP_HREF = "https://wa.me/8801624283328";
 const PHONE_HREF = "tel:+8801624283328";
@@ -84,7 +85,7 @@ export default function FloatingActions() {
   }, [stackOpen]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollAppTo(0);
   };
 
   return (

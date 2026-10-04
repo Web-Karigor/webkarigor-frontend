@@ -9,9 +9,11 @@ import Footer from "@/components/home/Footer";
 import ConsultationModal from "@/components/home/ConsultationModal";
 import StickyNav from "@/components/home/StickuNav";
 import FloatingActions from "@/components/FloatingActions";
+import ScrollProgress from "@/components/ScrollProgress";
 import GlobalCursor from "@/components/GlobalCursor";
 import GsapProvider from "@/components/providers/GsapProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
+import SmoothScroll from "@/components/providers/SmoothScroll";
 import homeContent from "@/data/home-content.json";
 
 const inter = Inter({
@@ -56,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
         className={`
           ${inter.variable}
@@ -64,12 +66,12 @@ export default function RootLayout({
           ${manrope.variable}
           ${museoModerno.variable}
           font-sans
-          overflow-x-hidden
           bg-[#FFFDF6]
           relative
         `}
       >
         <QueryProvider>
+        <SmoothScroll>
         <GsapProvider>
           <GlobalCursor />
           <div className="relative z-10 overflow-x-clip">
@@ -81,7 +83,9 @@ export default function RootLayout({
           <ConsultationModal />
           <StickyNav />
           <FloatingActions />
+          <ScrollProgress />
         </GsapProvider>
+        </SmoothScroll>
         </QueryProvider>
       </body>
     </html>

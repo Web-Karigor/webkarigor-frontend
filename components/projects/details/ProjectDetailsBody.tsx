@@ -68,7 +68,7 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
           <div className="mt-6 h-px w-full bg-[#E5E1D8] sm:mt-8 md:mt-10" />
 
           <div className="pd-body-split mt-8 grid grid-cols-1 items-start gap-8 sm:mt-10 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-[60px]">
-            <div className="flex flex-col gap-5 sm:gap-6 lg:sticky lg:top-[120px] lg:self-start">
+            <div className="flex flex-col gap-5 sm:gap-6 lg:sticky lg:top-3 lg:max-h-[calc(100dvh-24px)] lg:self-start lg:overflow-y-auto lg:overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden">
               <aside className="rounded-2xl bg-[#FFF8DC] p-5 sm:rounded-[24px] sm:p-6 lg:p-8">
                 <h2 className="m-0 font-montserrat text-[clamp(17px,4vw,20px)] font-bold leading-[140%] tracking-[-0.02em] text-[#0A0A0A]">
                   {PROJECT_DETAILS_UI.projectDetails}

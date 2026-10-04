@@ -3,17 +3,17 @@
 import "./VideoSection.css";
 
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap, ScrollTrigger, refreshScrollTriggers } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
 
 const { embedUrl, title: videoTitle } = homeContent.video;
 
 const MOBILE_PAD_X = 20;
 const MOBILE_VIDEO_RATIO = 16 / 9;
-const DESKTOP_START_SCALE = 0.55;
-const GROW_PORTION = 0.82;
-const DESKTOP_LERP = 0.11;
-const MOBILE_LERP = 0.14;
+const DESKTOP_START_SCALE = 0.48;
+const GROW_PORTION = 0.9;
+const DESKTOP_LERP = 0.055;
+const MOBILE_LERP = 0.07;
 
 function lerpToward(current: number, target: number, dt: number, smoothing: number) {
   return current + (target - current) * (1 - Math.pow(1 - smoothing, dt));
@@ -57,7 +57,7 @@ const VideoSection = () => {
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
-      const easeGrow = gsap.parseEase("power3.inOut");
+      const easeGrow = gsap.parseEase("power2.out");
 
       mm.add("(min-width: 1024px)", () => {
         const state = { target: 0, current: 0 };
@@ -81,7 +81,7 @@ const VideoSection = () => {
             height: vh,
             maxWidth: "none",
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-end",
             justifyContent: "center",
             overflow: "hidden",
           });
@@ -91,7 +91,7 @@ const VideoSection = () => {
             width: "100%",
             height: "100%",
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-end",
             justifyContent: "center",
             force3D: true,
             willChange: "transform",
@@ -106,7 +106,7 @@ const VideoSection = () => {
             x: 0,
             y: 0,
             force3D: true,
-            transformOrigin: "50% 50%",
+            transformOrigin: "50% 100%",
             willChange: "transform",
             backfaceVisibility: "hidden",
           });
@@ -117,6 +117,7 @@ const VideoSection = () => {
           gsap.set(frame, {
             scale: DESKTOP_START_SCALE + (1 - DESKTOP_START_SCALE) * t,
             borderRadius: startRadius * (1 - t),
+            transformOrigin: "50% 100%",
             force3D: true,
           });
         };
@@ -126,8 +127,8 @@ const VideoSection = () => {
 
         const st = ScrollTrigger.create({
           trigger: stage,
-          start: "center center",
-          end: "+=220%",
+          start: "bottom bottom",
+          end: "+=280%",
           pin: true,
           pinType: "fixed",
           pinSpacing: true,
@@ -191,7 +192,7 @@ const VideoSection = () => {
         const onResize = () => {
           applyLayout();
           applyVisual(state.current);
-          ScrollTrigger.refresh();
+          refreshScrollTriggers();
         };
         window.addEventListener("resize", onResize);
 
@@ -230,7 +231,7 @@ const VideoSection = () => {
             width: "100%",
             height: startH,
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-end",
             justifyContent: "center",
             overflow: "visible",
           });
@@ -239,7 +240,7 @@ const VideoSection = () => {
             width: "100%",
             height: "100%",
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-end",
             justifyContent: "center",
             x: 0,
             y: 0,
@@ -255,7 +256,7 @@ const VideoSection = () => {
             x: 0,
             y: 0,
             force3D: true,
-            transformOrigin: "50% 50%",
+            transformOrigin: "50% 100%",
             willChange: "transform",
             backfaceVisibility: "hidden",
           });
@@ -268,6 +269,7 @@ const VideoSection = () => {
             scaleX: 1 + (window.innerWidth / startW - 1) * t,
             scaleY: 1 + (window.innerHeight / startH - 1) * t,
             borderRadius: 10.5 * (1 - t),
+            transformOrigin: "50% 100%",
             force3D: true,
           });
         };
@@ -277,8 +279,8 @@ const VideoSection = () => {
 
         const st = ScrollTrigger.create({
           trigger: stage,
-          start: "center center",
-          end: () => `+=${Math.round(window.innerHeight * 2.1)}`,
+          start: "bottom bottom",
+          end: () => `+=${Math.round(window.innerHeight * 2.6)}`,
           pin: true,
           pinType: "transform",
           pinSpacing: true,
@@ -315,7 +317,7 @@ const VideoSection = () => {
         const onResize = () => {
           applyLayout();
           applyVisual(state.current);
-          ScrollTrigger.refresh();
+          refreshScrollTriggers();
         };
         window.addEventListener("resize", onResize);
         window.addEventListener("orientationchange", onResize);
@@ -329,7 +331,7 @@ const VideoSection = () => {
       });
     }, section);
 
-    requestAnimationFrame(() => ScrollTrigger.refresh());
+    requestAnimationFrame(() => refreshScrollTriggers());
 
     return () => ctx.revert();
   }, []);

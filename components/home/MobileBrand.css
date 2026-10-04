@@ -1,0 +1,17 @@
+@keyframes mobile-brand-rise {
+  to {
+    opacity: 1;
+  }
+}
+
+.mobile-brand-word {
+  opacity: 0.01;
+  animation: mobile-brand-rise 0.9s ease 2.4s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-brand-word {
+    opacity: 1;
+    animation: none;
+  }
+}

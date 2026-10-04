@@ -151,9 +151,22 @@
   white-space: nowrap;
 }
 
-@media (max-width: 639px) {
+@media (max-width: 767px) {
   .footer-heading {
-    font-size: clamp(1.35rem, 5.2vw, 1.85rem);
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(1.25rem, 6vw, 1.7rem);
+  }
+
+  .footer-heading-line {
+    white-space: normal;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .footer-content {
+    padding-left: clamp(16px, 5vw, 24px);
+    padding-right: clamp(16px, 5vw, 24px);
   }
 }
 
