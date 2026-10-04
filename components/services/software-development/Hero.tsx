@@ -6,6 +6,7 @@ import { ChevronDown, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { HERO } from "@/lib/software-development-data";
 import { scrollAppTo } from "@/lib/smooth-scroll";
+import { ERP_HERO } from "@/lib/erp-data";
 
 /** Desktop hero image geometry — Figma placement */
 const HERO_LAYOUT = {
@@ -89,51 +90,24 @@ export default function Hero() {
               {HERO.description}
             </p>
 
-            <form
-              onSubmit={onSubmit}
-              className="mt-6 flex w-full max-w-[540px] flex-col gap-2 rounded-[20px] border border-[#E5E7EB] bg-white p-2 shadow-[0_10px_32px_rgba(24,33,77,0.08)] md:mt-7 md:flex-row md:flex-nowrap md:items-center md:rounded-full md:p-1.5 lg:mt-8"
-            >
-              <div className="flex min-w-0 flex-1 items-center gap-1 rounded-full bg-[#F9FAFB] px-1 md:bg-transparent md:px-0">
-                <button
-                  type="button"
-                  className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-transparent px-2.5 py-2.5 font-montserrat text-[13px] font-semibold text-[#111827] sm:px-3 sm:text-[14px]"
-                  aria-label="Country code Bangladesh +880"
-                >
-                  <BdFlag className="h-3.5 w-5 shrink-0" />
-                  <span>{HERO.countryCode}</span>
-                  <ChevronDown className="h-4 w-4 text-[#98A2B3]" strokeWidth={2} />
-                </button>
-
-                <span className="hidden h-6 w-px bg-[#E5E7EB] md:block" aria-hidden />
-
-                <input
-                  type="tel"
-                  inputMode="numeric"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder={HERO.phonePlaceholder}
-                  className="min-w-0 flex-1 border-0 bg-transparent px-2 py-2.5 font-montserrat text-[13px] font-medium text-[#111827] outline-none placeholder:text-[#98A2B3] sm:px-3 sm:py-3 sm:text-[14px]"
-                  aria-label="Mobile number"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full shrink-0 rounded-full bg-[#0EC47B] px-5 py-3 font-montserrat text-[14px] font-bold text-white transition-opacity hover:opacity-90 md:w-auto md:px-6"
+            <div className="mt-6 flex w-full max-w-[520px] flex-col gap-3 md:mt-8 md:flex-row md:flex-wrap md:items-center md:gap-4">
+              <Link
+                href={ERP_HERO.primaryCta.href}
+                className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"
               >
-                {HERO.primaryCta.label}
-              </button>
-            </form>
+                {ERP_HERO.primaryCta.label}
+              </Link>
+              <a
+                href={`tel:${HERO.hotline.replace(/-/g, "")}`}
+                className="mt-3 inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-4 py-2.5 font-montserrat text-[13px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] sm:mt-4 sm:w-fit sm:justify-start sm:text-[14px]"
+              >
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#F2F4F7] text-[#111827]">
+                  <Phone className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden />
+                </span>
+                {HERO.hotlineLabel}: {HERO.hotline}
+              </a>
+            </div>
 
-            <a
-              href={`tel:${HERO.hotline.replace(/-/g, "")}`}
-              className="mt-3 inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-4 py-2.5 font-montserrat text-[13px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] sm:mt-4 sm:w-fit sm:justify-start sm:text-[14px]"
-            >
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#F2F4F7] text-[#111827]">
-                <Phone className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden />
-              </span>
-              {HERO.hotlineLabel}: {HERO.hotline}
-            </a>
           </div>
 
           {/* Mobile / tablet — bottom-aligned cutout */}

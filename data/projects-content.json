@@ -61,10 +61,10 @@
   },
   "items": [
     {
-      "id": "p1",
-      "title": "Suma International",
-      "src": "/suma/Suma - Project List Page.jpg",
-      "alt": "Suma International travel services website",
+      "id": "p5",
+      "title": "Shishu Poribohon",
+      "src": "/shishu/Shishu Poribohon - Project List Page.jpg",
+      "alt": "Shishu Poribohon kids ecommerce platform",
       "w": 1300,
       "h": 600
     },
@@ -73,6 +73,14 @@
       "title": "Times Today BD",
       "src": "/timestoday/Times Today - Project List Page.jpg",
       "alt": "Times Today BD news platform",
+      "w": 1300,
+      "h": 600
+    },
+    {
+      "id": "p1",
+      "title": "Suma International",
+      "src": "/suma/Suma - Project List Page.jpg",
+      "alt": "Suma International travel services website",
       "w": 1300,
       "h": 600
     },
@@ -91,14 +99,6 @@
       "alt": "Probashi Resorts property investment website",
       "w": 640,
       "h": 720
-    },
-    {
-      "id": "p5",
-      "title": "Shishu Poribohon",
-      "src": "/shishu/Shishu Poribohon - Project List Page.jpg",
-      "alt": "Shishu Poribohon kids ecommerce platform",
-      "w": 640,
-      "h": 680
     }
   ]
 }
