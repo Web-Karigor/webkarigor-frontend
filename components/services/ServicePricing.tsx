@@ -49,7 +49,7 @@ function CheckIcon() {
 
 export default function ServicePricing() {
   return (
-    <section className="bg-white py-[clamp(48px,7vw,80px)]">
+    <section id="pricing" className="scroll-mt-28 bg-white py-[clamp(48px,7vw,80px)]">
       <div className="mx-auto w-full max-w-[1800px] px-[clamp(16px,4vw,40px)]">
         <div className="mx-auto mb-[clamp(32px,5vw,48px)] max-w-[760px] text-center">
           <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">

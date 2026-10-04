@@ -59,8 +59,8 @@ function isServicePath(pathname: string | null) {
   return Boolean(pathname?.startsWith("/service"));
 }
 
-function scrollToConsultation() {
-  scrollAppTo("#contact");
+function scrollToPricing() {
+  scrollAppTo("#pricing");
 }
 
 function getActiveIdFromPath(pathname: string | null): string {
@@ -416,7 +416,7 @@ export default function Navbar() {
                             key={item.id}
                             href={
                               item.id === "pricing" && isServicePath(pathname)
-                                ? "#contact"
+                                ? "#pricing"
                                 : item.href
                             }
                             ref={(el) => {
@@ -429,7 +429,7 @@ export default function Navbar() {
                               closeMenu();
                               if (item.id === "pricing" && isServicePath(pathname)) {
                                 event.preventDefault();
-                                scrollToConsultation();
+                                scrollToPricing();
                                 return;
                               }
                               if (item.href === "/" && pathname === "/") {

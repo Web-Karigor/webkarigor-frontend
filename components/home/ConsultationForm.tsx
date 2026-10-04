@@ -342,10 +342,10 @@ export default function ConsultationForm({
       date: hideSchedule
         ? null
         : formatSelectedDate(
-            calendarDate.getFullYear(),
-            calendarDate.getMonth(),
-            selectedDay,
-          ),
+          calendarDate.getFullYear(),
+          calendarDate.getMonth(),
+          selectedDay,
+        ),
       project_details: projectDetails || null,
       page: pathname || null,
       comment: selectedTime || null,
@@ -656,15 +656,21 @@ export default function ConsultationForm({
         </button>
 
         {showWhatsApp ? (
-          <Link
-            href={whatsapp.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="home-consultation-whatsapp"
-          >
-            <WhatsAppIcon />
-            <span>{whatsapp.label}</span>
-          </Link>
+
+          <div className="flex w-full flex-row flex-nowrap items-center gap-3">
+            <p className="home-consultation-talk !m-0 !w-auto shrink-0 whitespace-nowrap !text-[14px]">
+              Prefer to talk first?
+            </p>
+            <Link
+              href={whatsapp.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="home-consultation-whatsapp home-consultation-whatsapp--compact"
+            >
+              <WhatsAppIcon />
+              <span className="text-[14px]">{whatsapp.label}</span>
+            </Link>
+          </div>
         ) : null}
       </div>
     </form>

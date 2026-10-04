@@ -718,6 +718,9 @@
       "name": "Md. Taufikuzzaman",
       "role": "COO, Webkarigor"
     },
+    "contact": {
+      "image": "/contact-us/contact-form-image.png"
+    },
     "talkPrompt": "Prefer to talk first?",
     "whatsapp": {
       "href": "https://wa.me/8801624283328",

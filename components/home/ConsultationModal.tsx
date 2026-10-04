@@ -8,7 +8,7 @@ import homeContent from "@/data/home-content.json";
 import "@/components/home/HomeConsultation.css";
 import { setSmoothScrollLocked } from "@/lib/smooth-scroll";
 
-const MODAL_IMAGE = homeContent.consultation.founder.image;
+const MODAL_IMAGE = homeContent.consultation.contact.image;
 
 const OPEN_EVENT = "open-consultation-modal";
 

@@ -131,7 +131,8 @@ export default function PricingSection({
 
   return (
     <section
-      className="home-pricing-section"
+      id="pricing"
+      className="home-pricing-section scroll-mt-28"
       style={backgroundColor ? { background: backgroundColor } : undefined}
     >
       <div className="home-pricing-shell">
