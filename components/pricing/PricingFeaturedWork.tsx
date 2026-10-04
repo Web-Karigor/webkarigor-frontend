@@ -37,8 +37,7 @@ function FeaturedImage({
         alt={alt}
         fill
         className="object-contain transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
-        sizes={sizes}
-      />
+        sizes={sizes} loading="lazy"/>
     </Link>
   );
 }

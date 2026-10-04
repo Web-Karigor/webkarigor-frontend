@@ -67,7 +67,27 @@ export default function TechGrid() {
           </p>
         </div>
 
-        <div className="relative grid w-full max-w-[1260px] gap-[10px] overflow-hidden">
+        <div className="grid w-full grid-cols-3 gap-2.5 sm:hidden">
+          {TECH_ITEMS.map((item) => (
+            <div
+              key={item.name}
+              className="flex h-9 min-w-0 w-full items-center gap-1.5 rounded-md bg-white px-2 shadow-[0_5px_14px_rgba(15,23,42,0.08)]"
+              title={item.name}
+            >
+              <img
+                src={item.icon}
+                alt=""
+                className="h-4 w-4 shrink-0 object-contain"
+                loading="lazy"
+              />
+              <span className="min-w-0 truncate font-montserrat text-[11px] font-medium text-[#1f2937]">
+                {item.name}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="relative hidden w-full max-w-[1260px] gap-[10px] overflow-hidden sm:grid">
           <TechMarqueeRow items={TOP_ROW} reverse />
           <TechMarqueeRow items={BOTTOM_ROW} />
 

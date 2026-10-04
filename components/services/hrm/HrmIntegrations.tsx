@@ -20,6 +20,8 @@ const OUTER_ANGLES = [-90, -30, 30, 90, 150, 210] as const;
  * Right: soft disc + 2 orbit rings · inner GitHub/Notion/Figma · outer 6 tech icons
  */
 export default function HrmIntegrations() {
+  const mobileItems = [...HRM_TECH_OUTER, ...HRM_TECH_INNER];
+
   return (
     <section className="erp-integrations overflow-hidden bg-white py-[clamp(48px,6vw,80px)]">
       <div className="erp-integrations-inner mx-auto flex w-full max-w-[1307px] flex-col items-center gap-12 px-[clamp(16px,4vw,40px)] lg:flex-row lg:items-center lg:justify-between lg:gap-[clamp(48px,11vw,212px)]">
@@ -34,8 +36,29 @@ export default function HrmIntegrations() {
           </p>
         </div>
 
+        <div className="grid w-full grid-cols-3 gap-2.5 sm:hidden">
+          {mobileItems.map((tech) => (
+            <div
+              key={tech.name}
+              className="flex h-9 min-w-0 w-full items-center gap-1.5 rounded-md bg-white px-2 shadow-[0_5px_14px_rgba(15,23,42,0.08)]"
+              title={tech.name}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={tech.icon}
+                alt=""
+                className="h-4 w-4 shrink-0 object-contain"
+                loading="lazy"
+              />
+              <span className="min-w-0 truncate font-montserrat text-[11px] font-medium text-[#1f2937]">
+                {tech.name}
+              </span>
+            </div>
+          ))}
+        </div>
+
         {/* Right orbit — ~550 area, icons on rings */}
-        <div className="erp-integrations-orbit relative mx-auto aspect-square w-full max-w-[480px] shrink-0 lg:mx-0 lg:max-w-[520px]">
+        <div className="erp-integrations-orbit relative mx-auto hidden aspect-square w-full max-w-[480px] shrink-0 sm:block lg:mx-0 lg:max-w-[520px]">
           {/* Soft center disc */}
           <div
             aria-hidden

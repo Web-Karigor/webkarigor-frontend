@@ -12,7 +12,7 @@ const RING_COUNT = 14;
 /** Continuous spin (deg / second) */
 const DEG_PER_SEC = 11;
 
-const BASE_MEMBERS = homeContent.team.members;
+const { members: BASE_MEMBERS, desktopResultLines } = homeContent.team;
 
 const members = Array.from({ length: RING_COUNT }, (_, i) => {
   const m = BASE_MEMBERS[i % BASE_MEMBERS.length];
@@ -121,17 +121,10 @@ export default function Team2() {
     <section className="team2" aria-label="Team">
       <div className="team2-container">
         <div className="team2-headline">
-          <h2 className="team2-title-small">Small team,</h2>
-          <h2 className="team2-title-big" aria-hidden>
-            <span className="team2-word-big">
-              b
-              <span className="team2-i">
-                <span className="team2-big-circle" />
-                <span className="team2-i-stem">ı</span>
-              </span>
-              g
-            </span>
-            <span className="team2-word-results">results</span>
+          <h2 className="team2-title-small">Expert Team,</h2>
+          <h2 className="team2-title-big">
+            <span className="team2-word-big">{desktopResultLines[0]}</span>
+            <span className="team2-word-results">{desktopResultLines[1]}</span>
           </h2>
         </div>
 
@@ -158,10 +151,9 @@ export default function Team2() {
                         src={member.src}
                         alt=""
                         fill
-                        sizes="200px"
+                        sizes="228px"
                         className="team2-pic-img"
-                        draggable={false}
-                      />
+                        draggable={false} loading="lazy"/>
                     </div>
                   </div>
                 </li>

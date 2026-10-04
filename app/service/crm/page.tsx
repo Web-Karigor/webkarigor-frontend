@@ -39,7 +39,6 @@ export default function CrmPage() {
   return (
     <div className="svc-laptop bg-white">
       <Hero />
-      <Marquee />
       <Clients />
       <Offerings />
       {/* <Services /> */}

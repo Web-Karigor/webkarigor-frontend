@@ -30,8 +30,7 @@ function PersonRow({ person }: { person: ProjectCredit }) {
           alt={person.name}
           fill
           className="object-cover"
-          sizes="40px"
-        />
+          sizes="40px" loading="lazy"/>
       </div>
       <p className="m-0 font-montserrat text-[clamp(13px,3.2vw,15px)] font-bold leading-[150%] text-[#0A0A0A]">
         {person.name}

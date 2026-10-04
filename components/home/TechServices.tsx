@@ -233,8 +233,7 @@ function PortfolioCard({
             sizes="(max-width: 640px) 202px, 515px"
             quality={100}
             className="object-contain"
-            draggable={false}
-          />
+            draggable={false} loading="lazy"/>
         </div>
       </div>
     </div>

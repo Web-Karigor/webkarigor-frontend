@@ -6,8 +6,8 @@ import { useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   acquireSmoothScroll,
-  getLenis,
   releaseSmoothScroll,
+  scrollAppToTop,
 } from "@/lib/smooth-scroll";
 import { refreshScrollTriggers } from "@/lib/gsap";
 
@@ -28,6 +28,9 @@ export default function SmoothScroll({
     };
 
     acquireSmoothScroll();
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
     desktop.addEventListener("change", sync);
     reduced.addEventListener("change", sync);
 
@@ -39,9 +42,24 @@ export default function SmoothScroll({
   }, []);
 
   useLayoutEffect(() => {
-    getLenis()?.scrollTo(0, { immediate: true });
-    const id = requestAnimationFrame(() => refreshScrollTriggers());
-    return () => cancelAnimationFrame(id);
+    if (window.location.hash) return;
+
+    scrollAppToTop({ immediate: true });
+
+    const raf = requestAnimationFrame(() => {
+      scrollAppToTop({ immediate: true });
+      refreshScrollTriggers();
+    });
+    const timer = window.setTimeout(() => {
+      if (window.location.hash) return;
+      scrollAppToTop({ immediate: true });
+      refreshScrollTriggers();
+    }, 50);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(timer);
+    };
   }, [pathname]);
 
   return children;

@@ -51,10 +51,8 @@ export default function ProjectDetailsHero({ project }: { project: ProjectDetail
                   src={src}
                   alt=""
                   fill
-                  priority={index < 2}
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 562px"
-                />
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 562px" loading="lazy"/>
               </div>
             </div>
           ))}

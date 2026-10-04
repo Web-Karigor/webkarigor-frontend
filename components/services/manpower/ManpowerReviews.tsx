@@ -47,8 +47,7 @@ function TestimonialCard({ item }: { item: Testimonial }) {
             alt={item.name}
             fill
             className="object-cover"
-            sizes="40px"
-          />
+            sizes="40px" loading="lazy"/>
         </div>
         <div className="min-w-0">
           <p className="m-0 font-montserrat text-[14px] font-bold leading-tight text-[#18214D] transition-colors duration-300 group-hover:text-white">

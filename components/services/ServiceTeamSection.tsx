@@ -63,10 +63,8 @@ export default function ServiceTeamSection() {
                 src="/sm2.webp"
                 alt="Team member — top right"
                 fill
-                priority
                 className="object-cover"
-                sizes="(max-width: 768px) 180px, 240px"
-              />
+                sizes="(max-width: 768px) 180px, 240px" loading="lazy"/>
             </div>
           </div>
 
@@ -77,8 +75,7 @@ export default function ServiceTeamSection() {
                 alt={photo.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 160px, 240px"
-              />
+                sizes="(max-width: 768px) 160px, 240px" loading="lazy"/>
             </div>
           ))}
         </div>

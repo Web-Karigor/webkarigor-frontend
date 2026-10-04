@@ -125,8 +125,7 @@ function InfiniteLogoRow({
                     width={56}
                     height={56}
                     unoptimized
-                    className="h-full w-full max-w-none object-contain grayscale opacity-80 transition-[filter,opacity] duration-300 group-hover:grayscale-0 group-hover:opacity-100"
-                  />
+                    className="h-full w-full max-w-none object-contain grayscale opacity-80 transition-[filter,opacity] duration-300 group-hover:grayscale-0 group-hover:opacity-100" loading="lazy"/>
                 </span>
               ))}
             </div>

@@ -47,8 +47,7 @@ function HeroCta() {
         width={28}
         height={18}
         className="hero-hello-arrow"
-        unoptimized
-      />
+        unoptimized loading="lazy"/>
       <span className="hero-hello-label">{cta.label}</span>
       <span className="hero-hello-icons" aria-hidden>
         <Image
@@ -57,8 +56,7 @@ function HeroCta() {
           width={40}
           height={40}
           className="hero-hello-avatar"
-          unoptimized
-        />
+          unoptimized loading="lazy"/>
         <span className="hero-hello-phone">
           <svg
             className="hero-hello-phone-icon"
@@ -94,9 +92,7 @@ function HeroMobilePhotoSlider() {
               width={167}
               height={96}
               className="hero-mobile-slide-img"
-              sizes="167px"
-              priority={index === 0}
-            />
+              sizes="167px" loading="lazy"/>
           </div>
         ))}
       </div>
@@ -151,9 +147,7 @@ export default function HeroSection() {
                 width={392}
                 height={392}
                 className="hero-photo-img h-auto w-full max-w-[280px] 2xl:max-w-[392px]"
-                sizes="(max-width: 1535px) 280px, 392px"
-                priority
-              />
+                sizes="(max-width: 1535px) 280px, 392px" loading="lazy"/>
             </span>
           </div>
 
@@ -171,9 +165,7 @@ export default function HeroSection() {
                 width={392}
                 height={392}
                 className="hero-photo-img h-auto w-full max-w-[280px] 2xl:max-w-[392px]"
-                sizes="(max-width: 1535px) 280px, 392px"
-                priority
-              />
+                sizes="(max-width: 1535px) 280px, 392px" loading="lazy"/>
             </div>
           </div>
         </div>

@@ -800,6 +800,11 @@
       "Let's build what your users will love",
       "and your business will grow with"
     ],
+    "headingLinesMobile": [
+      "Let's build what your",
+      "users will love and your",
+      "business will grow with"
+    ],
     "taglineParts": [
       "Build Smarter",
       "Launch Stronger",
@@ -816,20 +821,20 @@
             "href": "/services/website-design"
           },
           {
-            "label": "ERP",
-            "href": "/service/erp"
+            "label": "Software Development",
+            "href": "/service/software-development"
           },
           {
             "label": "HRM",
             "href": "/service/hrm"
           },
           {
-            "label": "Software Development",
-            "href": "/service/software-development"
-          },
-          {
             "label": "CRM",
             "href": "/service/crm"
+          },
+          {
+            "label": "ERP",
+            "href": "/service/erp"
           }
         ]
       },
@@ -841,15 +846,11 @@
             "href": "#"
           },
           {
-            "label": "ERP",
+            "label": "Healthcare",
             "href": "#"
           },
           {
             "label": "Manpower",
-            "href": "#"
-          },
-          {
-            "label": "Healthcare",
             "href": "#"
           },
           {
@@ -863,6 +864,10 @@
           {
             "label": "CMS",
             "href": "#"
+          },
+          {
+            "label": "ERP",
+            "href": "#"
           }
         ]
       },
@@ -870,20 +875,20 @@
         "title": "Important Link",
         "links": [
           {
-            "label": "Team",
-            "href": "/team"
-          },
-          {
-            "label": "Projects",
-            "href": "/projects"
+            "label": "Contact Us",
+            "href": "/contact-us"
           },
           {
             "label": "About Us",
             "href": "/about-us"
           },
           {
-            "label": "Contact Us",
-            "href": "/contact-us"
+            "label": "Projects",
+            "href": "/projects"
+          },
+          {
+            "label": "Team",
+            "href": "/team"
           }
         ]
       }

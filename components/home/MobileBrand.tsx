@@ -1,10 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import homeContent from "@/data/home-content.json";
+import { scrollAppToTop } from "@/lib/smooth-scroll";
 import "./MobileBrand.css";
 
 const { brand } = homeContent.navbar;
 
 export default function MobileBrand() {
+  const pathname = usePathname();
+
   return (
     <div
       className="pointer-events-none inset-x-0 top-0 z-[70] flex justify-center lg:hidden"
@@ -13,6 +19,9 @@ export default function MobileBrand() {
       <Link
         href="/"
         aria-label="Webkarigor home"
+        onClick={() => {
+          if (pathname === "/") scrollAppToTop({ immediate: true });
+        }}
         className="mobile-brand-word font-montserrat text-[56px] font-extrabold tracking-[-0.04em] text-[#1f1e1c] md:text-[72px]"
       >
         {/* <span className="flex items-center rounded-full bg-[#fffaea] px-4 py-1.5 font-montserrat text-[15px] font-semibold leading-none tracking-[-0.02em] sm:text-[16px]">

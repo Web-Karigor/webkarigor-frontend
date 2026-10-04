@@ -16,9 +16,7 @@ export default function HomeBanner() {
         alt=""
         fill
         className="object-cover object-center opacity-30 pointer-events-none select-none"
-        style={{ zIndex: 0 }}
-        priority
-      />
+        style={{ zIndex: 0 }} loading="lazy"/>
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6 gap-8">
         <div className="md:w-2/3 w-full">

@@ -100,9 +100,7 @@ export default function ServiceHero() {
                   alt={hero.image.alt}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 620px"
-                  priority
-                />
+                  sizes="(max-width: 1024px) 100vw, 620px" loading="lazy"/>
               </div>
 
               <div className="absolute top-4 left-[4%] z-[3] inline-flex max-w-[calc(100%-8%)] items-center gap-2.5 whitespace-nowrap rounded-full bg-white px-3.5 py-2 font-montserrat text-[13px] font-semibold text-[#15d286] shadow-[0_12px_32px_rgba(0,0,0,0.16)] sm:top-6 sm:left-[2%] sm:max-w-[calc(100%-4%)] sm:-translate-x-[8%] sm:px-4 sm:py-2.5 sm:text-sm lg:top-8 lg:left-0 lg:max-w-none lg:-translate-x-1/4 lg:px-5 lg:py-3 lg:text-[clamp(0.875rem,1.2vw,1rem)] xl:-translate-x-[36%]">

@@ -25,8 +25,7 @@ export default function ContactConnect() {
                 alt={logo.name}
                 width={56}
                 height={56}
-                unoptimized
-              />
+                unoptimized loading="lazy"/>
             </span>
           ))}
         </div> */}

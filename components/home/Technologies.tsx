@@ -121,8 +121,7 @@ function BlobLayer({ blob }: { blob: Blob }) {
           "block size-full max-w-none object-contain",
           blob.imageClassName,
         )}
-        unoptimized
-      />
+        unoptimized loading="lazy"/>
     </span>
   );
 }
@@ -169,8 +168,7 @@ function TechColumn({ items }: { items: TechItem[] }) {
               width={28}
               height={28}
               className="size-7 shrink-0 object-contain"
-              unoptimized
-            />
+              unoptimized loading="lazy"/>
             <span className="overflow-hidden text-ellipsis whitespace-nowrap font-montserrat text-lg font-medium leading-[1.2] text-[#1F1E1C] max-md:text-[15px]">
               {tech.name}
             </span>

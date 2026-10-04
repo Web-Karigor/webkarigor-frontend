@@ -147,8 +147,7 @@ export default function ServiceWhyChoose() {
                 alt={images.left.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1023px) 48vw, 28vw"
-              />
+                sizes="(max-width: 1023px) 48vw, 28vw" loading="lazy"/>
             </div>
 
             <div className="grid h-full min-h-0 grid-rows-[minmax(0,1.15fr)_auto] gap-3 sm:gap-4 lg:gap-[clamp(12px,1.3vw,20px)]">
@@ -158,8 +157,7 @@ export default function ServiceWhyChoose() {
                   alt={images.right.alt}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1023px) 48vw, 26vw"
-                />
+                  sizes="(max-width: 1023px) 48vw, 26vw" loading="lazy"/>
               </div>
 
               <div className="mx-auto aspect-square w-[clamp(120px,22vw,233px)] max-w-full shrink-0">

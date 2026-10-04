@@ -7,6 +7,10 @@ import {
 export default function Integrations() {
   const primary = WEBSITE_DESIGN_DEVELOPMENT_TECH_OUTER.slice(0, 5);
   const secondary = WEBSITE_DESIGN_DEVELOPMENT_TECH_OUTER.slice(5);
+  const mobileItems = [
+    ...WEBSITE_DESIGN_DEVELOPMENT_TECH_OUTER,
+    ...WEBSITE_DESIGN_DEVELOPMENT_TECH_INNER,
+  ];
 
   return (
     <section className="overflow-hidden bg-[#eefafa] px-5 py-[clamp(48px,6vw,72px)]">
@@ -20,13 +24,49 @@ export default function Integrations() {
           </p>
         </div>
 
-        <div className="mt-7 flex w-full flex-col items-center gap-4">
+        <div className="mt-7 grid w-full grid-cols-3 gap-2.5 sm:hidden">
+          {mobileItems.map((tech) => (
+            <TechnologyChip key={tech.name} tech={tech} compact />
+          ))}
+        </div>
+
+        <div className="mt-7 hidden w-full flex-col items-center gap-4 sm:flex">
           <TechnologyRow items={primary} />
           <TechnologyRow items={secondary} />
           <TechnologyRow items={WEBSITE_DESIGN_DEVELOPMENT_TECH_INNER} />
         </div>
       </div>
     </section>
+  );
+}
+
+function TechnologyChip({
+  tech,
+  compact = false,
+}: {
+  tech: { name: string; icon: string };
+  compact?: boolean;
+}) {
+  return (
+    <div
+      className={`flex items-center gap-1.5 rounded-md bg-white shadow-[0_5px_14px_rgba(15,23,42,0.08)] ${
+        compact
+          ? "h-9 min-w-0 w-full px-2"
+          : "h-9 w-[96px] px-3 sm:h-[42px] sm:w-[104px] sm:gap-2"
+      }`}
+      title={tech.name}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={tech.icon}
+        alt=""
+        className="h-4 w-4 shrink-0 object-contain sm:h-6 sm:w-6"
+        loading="lazy"
+      />
+      <span className="min-w-0 truncate font-montserrat text-[11px] font-medium text-[#1f2937] sm:text-[12px]">
+        {tech.name}
+      </span>
+    </div>
   );
 }
 
@@ -38,22 +78,7 @@ function TechnologyRow({
   return (
     <div className="flex flex-wrap justify-center gap-4">
       {items.map((tech) => (
-        <div
-          key={tech.name}
-          className="flex h-9 w-[96px] items-center gap-2 rounded-md bg-white px-3 shadow-[0_5px_14px_rgba(15,23,42,0.08)] sm:h-[42px] sm:w-[104px]"
-          title={tech.name}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={tech.icon}
-            alt=""
-            className="h-5 w-5 shrink-0 object-contain sm:h-6 sm:w-6"
-            loading="lazy"
-          />
-          <span className="truncate font-montserrat text-[12px] font-medium text-[#1f2937] sm:text-[12px]">
-            {tech.name}
-          </span>
-        </div>
+        <TechnologyChip key={tech.name} tech={tech} />
       ))}
     </div>
   );

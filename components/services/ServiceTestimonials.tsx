@@ -228,8 +228,7 @@ export default function ServiceTestimonials() {
                     alt=""
                     fill
                     className="object-cover"
-                    sizes="44px"
-                  />
+                    sizes="44px" loading="lazy"/>
                 </div>
               ))}
             </div>

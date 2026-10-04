@@ -197,7 +197,7 @@ export default function TrustedFounders() {
 
         <div
           ref={containerRef}
-          className="trusted-image-row lg:pt-28 pt-10 md:pt-10 xl:pt-40 2xl:pt-48"
+          className="trusted-image-row lg:pt-28 pt-0 md:pt-10 xl:pt-40 2xl:pt-48"
           style={{ willChange: "transform", backfaceVisibility: "hidden" }}
         >
           {marqueeItems.map((item) => (
@@ -212,8 +212,7 @@ export default function TrustedFounders() {
                 fill
                 sizes="(max-width: 1024px) 40vw, 495px"
                 className="object-cover"
-                draggable={false}
-              />
+                draggable={false} loading="lazy"/>
             </div>
           ))}
         </div>

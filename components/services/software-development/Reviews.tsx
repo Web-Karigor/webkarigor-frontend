@@ -47,8 +47,7 @@ function TestimonialCard({ item }: { item: Testimonial }) {
             alt={item.name}
             fill
             className="object-cover"
-            sizes="40px"
-          />
+            sizes="40px" loading="lazy"/>
         </div>
         <div className="min-w-0">
           <p className="m-0 font-montserrat text-[14px] font-bold leading-tight text-[#18214D] transition-colors duration-300 group-hover:text-white">
@@ -77,8 +76,8 @@ function MarqueeRow({
       <div
         className={`flex w-max gap-5 will-change-transform motion-reduce:animate-none group-hover/testimonials:[animation-play-state:paused] ${
           direction === "rtl"
-            ? "animate-testimonials-rtl"
-            : "animate-testimonials-ltr"
+            ? "animate-testimonials-rtl [animation-duration:110s]"
+            : "animate-testimonials-ltr [animation-duration:110s]"
         }`}
       >
         {copies.map((item, index) => (

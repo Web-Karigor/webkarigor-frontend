@@ -29,8 +29,8 @@ export default function ErpHero() {
       <div className="mx-auto w-full max-w-[1850px] px-[clamp(16px,3.5vw,50px)] pb-14 pt-[80px] sm:pt-[100px] lg:pb-20 lg:pt-[128px]">
         <div className="erp-hero-split flex w-full flex-col items-stretch gap-12 py-4 max-md:gap-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-12">
           {/* Left copy — Figma 636 × 388 */}
-          <div className="erp-hero-copy flex  shrink-0 flex-col justify-center lg:min-h-[388px]">
-            <h1 className="m-0 font-montserrat text-[clamp(2.5rem,4.5vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
+          <div className="erp-hero-copy flex shrink-0 flex-col justify-center max-md:items-center max-md:text-center lg:min-h-[388px]">
+            <h1 className="m-0 font-montserrat text-[clamp(1.5rem,6.6vw,1.8rem)] font-bold leading-[1.2] tracking-[-0.03em] text-[#111827] md:text-[clamp(2.5rem,4.5vw,3.75rem)] md:leading-[1.12]">
               {ERP_HERO.titleLine1}
               <br />
               {ERP_HERO.titleLine2}
@@ -44,24 +44,25 @@ export default function ErpHero() {
                   height={5}
                   className="absolute left-0 top-[calc(100%+4px)] h-auto"
                   unoptimized
+                  loading="lazy"
                 />
               </span>
             </h1>
 
-            <p className="mt-6 m-0 max-w-[520px] font-manrope text-[18px] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7]">
+            <p className="mt-6 m-0 max-w-[520px] font-manrope text-[18px] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] max-md:mx-auto max-md:text-[17px]">
               {ERP_HERO.description}
             </p>
 
-            <div className="mt-8 flex w-full flex-col items-center gap-3 md:flex-row md:flex-wrap md:items-center md:gap-4">
+            <div className="mt-8 flex w-full flex-col items-stretch gap-3 md:flex-row md:flex-wrap md:items-center md:gap-4">
               <Link
                 href={ERP_HERO.primaryCta.href}
-                className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"
+                className="inline-flex w-full items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90 md:w-auto"
               >
                 {ERP_HERO.primaryCta.label}
               </Link>
               <a
                 href={`tel:${ERP_HERO.hotline.replace(/-/g, "")}`}
-                className="inline-flex items-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-5 py-3.5 font-montserrat text-[14px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03]"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-5 py-3.5 font-montserrat text-[14px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] md:w-auto"
               >
                 <Phone className="h-4 w-4 shrink-0 text-[#111827]" aria-hidden />
                 {ERP_HERO.hotlineLabel}: {ERP_HERO.hotline}
@@ -69,16 +70,15 @@ export default function ErpHero() {
             </div>
           </div>
 
-          <div className="erp-hero-visual relative w-full max-w-[840px] shrink-0 pt-14 max-lg:mx-auto lg:ml-auto">
+          <div className="erp-hero-visual relative w-full max-w-[840px] shrink-0 pt-0 max-lg:mx-auto lg:ml-auto lg:pt-14">
             <div className="relative aspect-[18/13] w-full">
               <Image
                 src={ERP_HERO.banner_image}
                 alt=""
                 fill
-                className="rounded-[20px] object-cover shadow-[0_24px_64px_rgba(0,0,0,0.12)]"
+                className="rounded-none object-contain shadow-[0_24px_64px_rgba(0,0,0,0.12)] md:rounded-[20px] md:object-cover"
                 sizes="(100vw)"
-                unoptimized
-              />
+                unoptimized loading="lazy"/>
             </div>
           </div>
         </div>
@@ -96,11 +96,10 @@ export default function ErpHero() {
                 width={100}
                 height={100}
                 className="h-20 w-auto object-contain sm:h-14"
-                unoptimized
-              />
+                unoptimized loading="lazy"/>
             ))}
           </div>
-          <div className="flex h-auto w-full max-w-[566px] shrink-0 flex-col gap-5 text-left sm:w-[566px] sm:text-right">
+          <div className="flex h-auto w-full max-w-[566px] shrink-0 flex-col gap-5 text-center max-md:mx-auto sm:w-[566px] sm:text-right">
             <p className="m-0 font-montserrat text-[36px] font-bold leading-[1.3] tracking-[-0.02em] text-[#183B56]">
               {ERP_HERO.trustTitle}
             </p>

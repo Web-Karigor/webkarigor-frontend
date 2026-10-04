@@ -77,16 +77,16 @@ export default function Services() {
   return (
     <section className="bg-[#f8fafb] py-[clamp(48px,6vw,76px)]">
       <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-8 px-[clamp(20px,4vw,120px)] md:gap-10">
-        <div className="flex w-full flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-12">
-          <div className="max-w-[560px] shrink-0">
+        <div className="flex w-full flex-col gap-5 max-md:items-center max-md:text-center md:flex-row md:items-end md:justify-between md:gap-12">
+          <div className="max-w-[560px] shrink-0 max-md:mx-auto">
             <p className="m-0 font-montserrat text-[15px] font-semibold leading-none text-[#00b873]">
               Our Services
             </p>
-            <h2 className="mt-3 m-0 max-w-[540px] font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#0c0d0e]">
+            <h2 className="mt-3 m-0 max-w-[540px] font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#0c0d0e] max-md:mx-auto">
               Our Web Design and Development Services
             </h2>
           </div>
-          <p className="m-0 w-full max-w-[650px] font-manrope text-[16px] font-medium leading-[1.55] text-[#a4a8ad] md:pb-0.5 lg:text-[18px]">
+          <p className="m-0 w-full max-w-[650px] font-manrope text-[16px] font-medium leading-[1.55] text-[#a4a8ad] max-md:mx-auto md:pb-0.5 lg:text-[18px]">
             Different businesses need different types of websites. Our web design and development services can be tailored to your project&apos;s goals, audience, features, speed, and future direction.
           </p>
         </div>

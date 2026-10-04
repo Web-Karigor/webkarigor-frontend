@@ -44,7 +44,7 @@
 
 .team2-title-big {
   position: relative;
-  margin: 0;
+  margin: clamp(2.5rem, 10vh, 7rem) 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,9 +52,9 @@
   width: 100%;
   font-family: var(--font-montserrat);
   font-weight: 700;
-  font-size: clamp(5.5rem, 24vw, 18rem);
-  line-height: 0.78;
-  letter-spacing: -0.055em;
+  font-size: clamp(3.25rem, 14vw, 10rem);
+  line-height: 0.82;
+  letter-spacing: -0.045em;
   color: #8e827c;
   user-select: none;
 }
@@ -68,9 +68,8 @@
 
 .team2-word-big {
   width: auto;
-  /* Room above so the i-circle isn’t clipped */
-  padding-top: 0.5em;
-  margin-top: -0.1em;
+  padding-top: 0.08em;
+  margin-top: 0;
 }
 
 .team2-word-results {
@@ -144,7 +143,7 @@
   top: 50%;
   left: 50%;
   /* Keep card/image size — do not grow with section */
-  width: clamp(120px, 14vw, 200px);
+  width: clamp(136px, 16vw, 228px);
   margin: 0;
   padding: 0;
   display: flex;
@@ -244,7 +243,7 @@
   }
 
   .team2-tornado-item {
-    width: clamp(96px, 24vw, 140px);
+    width: clamp(110px, 27vw, 158px);
   }
 
   .team2-big-circle {
@@ -264,7 +263,8 @@
   }
 
   .team2-title-big {
-    font-size: clamp(3.75rem, 22vw, 6.5rem);
+    margin-top: clamp(2rem, 8vh, 4.5rem);
+    font-size: clamp(2.5rem, 16vw, 4.5rem);
   }
 }
 

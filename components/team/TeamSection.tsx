@@ -130,8 +130,7 @@ export default function TeamSection() {
                           alt={member.name}
                           fill
                           sizes="(max-width: 720px) 50vw, (max-width: 1200px) 33vw, 360px"
-                          className="u-cover"
-                        />
+                          className="u-cover" loading="lazy"/>
                       </div>
 
                       <div className="teammate_popup" aria-hidden={!isOpen}>

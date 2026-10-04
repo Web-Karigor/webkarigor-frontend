@@ -8,10 +8,11 @@ type CarouselCardProps = {
   src: string;
   index: number;
   cardWidth: number;
+  cardHeight: number;
   gap: number;
   viewportWidth: number;
+  compact?: boolean;
   x: MotionValue<number>;
-  priority?: boolean;
 };
 
 const BASE_WIDTH = 320;
@@ -23,6 +24,14 @@ function interpolateWidth(distanceSlots: number): number {
   if (d <= 2) return 320 + (280 - 320) * (d - 1);
   if (d <= 3) return 280 + (240 - 280) * (d - 2);
   return 240;
+}
+
+function interpolateScale(distanceSlots: number): number {
+  const d = Math.abs(distanceSlots);
+  if (d <= 0) return 1;
+  if (d <= 0.8) return 1 + (0.86 - 1) * (d / 0.8);
+  if (d <= 1.6) return 0.86 + (0.74 - 0.86) * ((d - 0.8) / 0.8);
+  return 0.74;
 }
 
 function interpolateHeight(distanceSlots: number): number {
@@ -44,11 +53,12 @@ function interpolateOpacity(distanceSlots: number): number {
 }
 
 /** Extra breathing room next to the enlarged center card. */
-function interpolateNeighborOffsetX(distanceSlots: number): number {
+function interpolateNeighborOffsetX(distanceSlots: number, compact: boolean): number {
   const abs = Math.abs(distanceSlots);
   if (abs <= 0 || abs >= 2) return 0;
 
-  const magnitude = abs <= 1 ? 7 * abs : 7 * (2 - abs);
+  const amount = compact ? 10 : 7;
+  const magnitude = abs <= 1 ? amount * abs : amount * (2 - abs);
   return distanceSlots < 0 ? -magnitude : magnitude;
 }
 
@@ -67,21 +77,23 @@ function CarouselCard({
   src,
   index,
   cardWidth,
+  cardHeight,
   gap,
   viewportWidth,
+  compact = false,
   x,
-  priority = false,
 }: CarouselCardProps) {
   const stride = cardWidth + gap;
 
-  // GPU transforms only — no layout width/height animation (avoids jitter)
   const scaleX = useTransform(x, (latest) => {
     const d = getDistanceSlots(latest, index, stride, cardWidth, viewportWidth);
+    if (compact) return interpolateScale(d);
     return interpolateWidth(d) / BASE_WIDTH;
   });
 
   const scaleY = useTransform(x, (latest) => {
     const d = getDistanceSlots(latest, index, stride, cardWidth, viewportWidth);
+    if (compact) return interpolateScale(d);
     return interpolateHeight(d) / BASE_HEIGHT;
   });
 
@@ -99,14 +111,19 @@ function CarouselCard({
 
   const offsetX = useTransform(x, (latest) => {
     const d = getDistanceSlots(latest, index, stride, cardWidth, viewportWidth);
-    return interpolateNeighborOffsetX(d);
+    return interpolateNeighborOffsetX(d, compact);
   });
 
   return (
-    <div className="relative flex h-[460px] w-[var(--about-card-w)] shrink-0 items-center justify-center">
+    <div
+      className="relative flex w-[var(--about-card-w)] shrink-0 items-center justify-center"
+      style={{ height: compact ? cardHeight : 460 }}
+    >
       <motion.div
-        className="relative h-[460px] w-[320px] overflow-hidden rounded-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.08)] will-change-transform"
+        className="relative overflow-hidden rounded-[22px] bg-[#F4F1EA] shadow-[0_10px_30px_rgba(0,0,0,0.08)] will-change-transform"
         style={{
+          width: compact ? "100%" : 320,
+          height: compact ? cardHeight : 460,
           x: offsetX,
           scaleX,
           scaleY,
@@ -119,9 +136,9 @@ function CarouselCard({
           src={src}
           alt=""
           fill
-          priority={priority}
-          className="object-cover"
+          className={compact ? "object-contain" : "object-cover"}
           sizes="320px"
+          loading="lazy"
         />
       </motion.div>
     </div>

@@ -41,8 +41,7 @@ function HireUsBadge() {
       <img
         src="/Circle-shape.svg"
         alt=""
-        className="pointer-events-none absolute inset-0 size-full object-contain"
-      />
+        className="pointer-events-none absolute inset-0 size-full object-contain" loading="lazy"/>
 
       <svg viewBox="0 0 188 188" className="absolute inset-0 size-full" aria-hidden>
         <defs>
@@ -63,7 +62,7 @@ function HireUsBadge() {
             >
               <textPath
                 href="#crm-hireus-text-path"
-                startOffset={["16.667%", "50%", "83.333%"][index] ?? "50%"}
+                startOffset={`${((index + 0.5) / hireUsLabels.length) * 100}%`}
                 textAnchor="middle"
               >
                 {label}
@@ -164,8 +163,7 @@ export default function WhyChoose() {
                 alt={images.left.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1023px) 48vw, 28vw"
-              />
+                sizes="(max-width: 1023px) 48vw, 28vw" loading="lazy"/>
             </div>
 
             <div className="grid h-full min-h-0 grid-rows-[minmax(0,1.15fr)_auto] gap-3 sm:gap-4 lg:gap-[clamp(12px,1.3vw,20px)]">
@@ -175,8 +173,7 @@ export default function WhyChoose() {
                   alt={images.right.alt}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1023px) 48vw, 26vw"
-                />
+                  sizes="(max-width: 1023px) 48vw, 26vw" loading="lazy"/>
               </div>
 
               <div className="mx-auto aspect-square w-[clamp(120px,22vw,233px)] max-w-full shrink-0">

@@ -16,9 +16,7 @@ const FeatureCard = forwardRef<HTMLElement, FeatureCardProps>(
           alt={title}
           fill
           className="ai-feature-card-asset"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 384px"
-          priority={false}
-        />
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 384px" loading="lazy"/>
       </article>
     );
   },

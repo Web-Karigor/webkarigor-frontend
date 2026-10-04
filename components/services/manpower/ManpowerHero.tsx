@@ -62,7 +62,6 @@ export default function ManpowerHero() {
           alt={MANPOWER_HERO.heroImageAlt}
           width={HERO_LAYOUT.width}
           height={HERO_LAYOUT.height}
-          priority
           className="mp-hero-visual absolute object-contain object-bottom"
           style={{
             right: 0,
@@ -71,8 +70,7 @@ export default function ManpowerHero() {
             height: "auto",
             maxHeight: "100%",
           }}
-          sizes="(max-width: 1280px) 48vw, 629px"
-        />
+          sizes="(max-width: 1280px) 48vw, 629px" loading="lazy"/>
 
         {DOODLE_LAYOUT.map((doodle, i) => (
           <Image
@@ -89,8 +87,7 @@ export default function ManpowerHero() {
               width: doodle.width,
               height: doodle.height,
               transform: `rotate(${doodle.rotate}deg)`,
-            }}
-          />
+            }} loading="lazy"/>
         ))}
       </div>
 
@@ -160,10 +157,8 @@ export default function ManpowerHero() {
                 src={MANPOWER_HERO.heroImage}
                 alt={MANPOWER_HERO.heroImageAlt}
                 fill
-                priority
                 className="object-contain object-bottom"
-                sizes="90vw"
-              />
+                sizes="90vw" loading="lazy"/>
             </div>
           </div>
 

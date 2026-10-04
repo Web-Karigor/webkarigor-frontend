@@ -30,8 +30,12 @@ export default function Carousel({ images }: CarouselProps) {
   const [viewportWidth, setViewportWidth] = useState(0);
   const x = useMotionValue(0);
 
+  const compact = viewportWidth > 0 && viewportWidth < 768;
   const visibleCount = getVisibleCount(viewportWidth);
   const cardWidth = getCardWidth(viewportWidth, visibleCount);
+  const cardHeight = compact
+    ? Math.round(cardWidth * (460 / 320))
+    : 460;
   const stride = cardWidth + GAP;
   const cycleWidth = images.length * stride;
 
@@ -42,7 +46,6 @@ export default function Carousel({ images }: CarouselProps) {
           src,
           key: `${copy}-${itemIndex}-${src}`,
           index: copy * images.length + itemIndex,
-          priority: copy === 0 && itemIndex < 4,
         }))
       ).flat(),
     [images]
@@ -85,9 +88,11 @@ export default function Carousel({ images }: CarouselProps) {
   return (
     <div
       ref={viewportRef}
-      className="relative h-[min(460px,70vw)] min-h-[280px] w-full overflow-hidden sm:h-[380px] md:h-[420px] lg:h-[460px]"
-      // Dynamic card width for layout math; animation uses MotionValues only.
-      style={{ ["--about-card-w" as string]: `${cardWidth}px` }}
+      className="relative w-full overflow-hidden"
+      style={{
+        ["--about-card-w" as string]: `${cardWidth}px`,
+        height: cardHeight,
+      }}
     >
       <motion.div
         className="absolute inset-y-0 left-0 flex items-center gap-4 will-change-transform"
@@ -100,10 +105,11 @@ export default function Carousel({ images }: CarouselProps) {
               src={slide.src}
               index={slide.index}
               cardWidth={cardWidth}
+              cardHeight={cardHeight}
               gap={GAP}
               viewportWidth={viewportWidth}
+              compact={compact}
               x={x}
-              priority={slide.priority}
             />
           ))}
       </motion.div>

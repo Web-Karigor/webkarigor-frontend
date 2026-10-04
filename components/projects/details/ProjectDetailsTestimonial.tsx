@@ -40,8 +40,7 @@ export default function ProjectDetailsTestimonial({
                   alt={testimonial.name}
                   fill
                   className="object-cover"
-                  sizes="56px"
-                />
+                  sizes="56px" loading="lazy"/>
               </div>
               <div>
                 <div className="mb-1.5 flex items-center gap-0.5">

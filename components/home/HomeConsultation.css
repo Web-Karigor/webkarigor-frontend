@@ -167,18 +167,22 @@
   color: #38f8ab;
 }
 
-/* Figma left — WhatsApp pill H 48 */
+/* Figma left — WhatsApp pill H 48; hover sweeps gradient on border only */
 .home-consultation-whatsapp {
+  position: relative;
+  z-index: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   align-self: flex-start;
   box-sizing: border-box;
+  isolation: isolate;
+  overflow: hidden;
   height: 48px;
   margin: 0;
   padding: 0 20px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
   background: transparent;
   font-family: var(--font-montserrat);
@@ -189,12 +193,40 @@
   color: #fff;
   letter-spacing: 0.02em;
   text-decoration: none;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 1.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-consultation-whatsapp > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-consultation-whatsapp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(90deg, #38f8ab 0%, #feed35 100%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
 .home-consultation-whatsapp:hover {
-  border-color: rgba(56, 248, 171, 0.6);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: transparent;
+  background: transparent;
+}
+
+.home-consultation-whatsapp:hover::before {
+  transform: scaleX(1);
 }
 
 .home-consultation-form {
@@ -202,12 +234,14 @@
   flex-direction: column;
   gap: 14px;
   width: 100%;
+  max-width: 100%;
   min-width: 0;
 }
 
 .home-consultation-form-grid {
   display: grid;
   gap: 14px;
+  min-width: 0;
 }
 
 .home-consultation-form-grid--two {
@@ -218,6 +252,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .home-consultation-label {
@@ -235,7 +271,10 @@
 .home-consultation-input,
 .home-consultation-textarea,
 .home-consultation-select {
+  box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.06);
@@ -265,29 +304,31 @@
 }
 
 .home-consultation-phone-row {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: stretch;
   gap: 8px;
   width: 100%;
+  min-width: 0;
 }
 
 .home-consultation-phone-row .home-consultation-select-wrap {
   position: relative;
-  flex: 0 0 auto;
   width: auto;
+  min-width: 0;
 }
 
 .home-consultation-phone-row .home-consultation-select-menu {
   left: 0;
   right: auto;
-  min-width: 280px;
-  width: max(280px, 100%);
-  max-width: min(340px, 85vw);
+  min-width: min(280px, calc(100vw - 48px));
+  width: max(100%, min(280px, calc(100vw - 48px)));
+  max-width: min(340px, calc(100vw - 32px));
   z-index: 50;
 }
 
 .home-consultation-code-btn {
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -334,9 +375,9 @@
 }
 
 .home-consultation-input--phone {
-  flex: 1 1 auto;
-  width: auto;
+  width: 100%;
   min-width: 0;
+  max-width: 100%;
 }
 
 .home-consultation-input-wrap {
@@ -365,6 +406,8 @@
 
 .home-consultation-select-wrap {
   position: relative;
+  width: 100%;
+  min-width: 0;
 }
 
 .home-consultation-select {
@@ -372,8 +415,10 @@
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
+  width: 100%;
   cursor: pointer;
   text-align: left;
+  overflow: hidden;
 }
 
 .home-consultation-select-value {
@@ -502,6 +547,11 @@
   color: #fff;
 }
 
+.home-consultation-calendar-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .home-consultation-calendar-nav {
   display: inline-flex;
   align-items: center;
@@ -555,6 +605,14 @@
   font-weight: 700;
 }
 
+.home-consultation-calendar-day.is-disabled,
+.home-consultation-calendar-day:disabled {
+  opacity: 0.32;
+  color: rgba(255, 255, 255, 0.38);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .home-consultation-times {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -579,6 +637,14 @@
   border-color: #38f8ab;
   background: rgba(56, 248, 171, 0.14);
   color: #fff;
+}
+
+.home-consultation-time.is-disabled,
+.home-consultation-time:disabled {
+  opacity: 0.32;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Let's Do It — outline + white text; hover fills from left (FAQ-style) */
@@ -667,6 +733,70 @@
 
 .home-consultation-status.is-success {
   color: #38f8ab;
+}
+
+@media (max-width: 767px) {
+  .home-consultation-form,
+  .home-consultation-form-grid,
+  .home-consultation-form-grid--two,
+  .home-consultation-field,
+  .home-consultation-phone-row,
+  .home-consultation-select-wrap {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .home-consultation-phone-row {
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .home-consultation-phone-row .home-consultation-select-wrap {
+    width: auto;
+    max-width: none;
+  }
+
+  .home-consultation-code-btn {
+    height: 48px;
+    min-height: 48px;
+    padding: 0 8px;
+    gap: 4px;
+    font-size: 0.8125rem;
+  }
+
+  .home-consultation-code-globe,
+  .home-consultation-code-chevron,
+  .home-consultation-inline-chevron {
+    width: 14px;
+    height: 14px;
+  }
+
+  .home-consultation-input,
+  .home-consultation-select {
+    min-height: 48px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 0.875rem;
+  }
+
+  .home-consultation-input--phone {
+    padding-left: 12px;
+  }
+
+  .home-consultation-select-value {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .home-consultation-phone-row .home-consultation-select-menu,
+  .home-consultation-select-menu {
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -884,8 +1014,8 @@
 .consultation-modal-panel .home-consultation-input,
 .consultation-modal-panel .home-consultation-select,
 .consultation-modal-panel .home-consultation-code-btn {
-  min-height: 44px;
-  height: 44px;
+  min-height: 48px;
+  height: auto;
 }
 
 .consultation-modal-panel .home-consultation-textarea {
@@ -946,7 +1076,7 @@
   background: rgba(255, 255, 255, 0.18);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .consultation-modal-panel .home-consultation-form-grid--two {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -954,9 +1084,7 @@
   .consultation-modal-panel .home-consultation-schedule {
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   }
-}
 
-@media (min-width: 768px) {
   .consultation-modal-backdrop {
     padding: 24px;
   }

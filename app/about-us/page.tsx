@@ -10,6 +10,7 @@ const AboutCapabilities = dynamic(
   () => import("@/components/about/AboutCapabilities"),
 );
 const Team = dynamic(() => import("@/components/home/Team"));
+const Team2 = dynamic(() => import("@/components/home/Team2"));
 const AboutWhyChoose = dynamic(() => import("@/components/about/AboutWhyChoose"));
 const FAQ = dynamic(() => import("@/components/home/FAQ"));
 const HomeConsultation = dynamic(() => import("@/components/home/HomeConsultation"));
@@ -26,7 +27,12 @@ export default function AboutUsPage() {
       <AboutImpact />
       <AboutVision />
       <AboutCapabilities />
-      <Team />
+      <div className="hidden md:block">
+        <Team />
+      </div>
+      <div className="md:hidden">
+        <Team2 />
+      </div>
       <AboutWhyChoose />
       {/* <FAQ /> */}
       <HomeConsultation />

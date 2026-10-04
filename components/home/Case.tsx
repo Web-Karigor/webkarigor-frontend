@@ -51,14 +51,12 @@ export default function Case() {
     const getLift = () => {
       const cardHeight = cards[0].offsetHeight || 694;
       const pinHeight = pinRef.current?.offsetHeight || window.innerHeight;
-      // Card is vertically centered in the pin — clear top gap + full card + buffer
       const topGap = Math.max(0, (pinHeight - cardHeight) / 2);
       return topGap + cardHeight + 48;
     };
 
     const getStackY = (stackIndex: number) => `${stackIndex * 10}%`;
     const getStackZ = (stackIndex: number) => -stackIndex * 28;
-    /** Lift + next reveal run together so content never goes blank. */
     const stepDuration = 1;
 
     const ctx = gsap.context(() => {
@@ -129,16 +127,8 @@ export default function Case() {
             },
             segment,
           )
-          .to(
-            title,
-            { y: -64, rotateX: 18, duration: stepDuration },
-            segment,
-          )
-          .to(
-            content,
-            { y: -32, rotateX: 18, duration: stepDuration },
-            segment,
-          )
+          .to(title, { y: -64, rotateX: 18, duration: stepDuration }, segment)
+          .to(content, { y: -32, rotateX: 18, duration: stepDuration }, segment)
           .to(
             next,
             {
@@ -269,8 +259,7 @@ export default function Case() {
                               width={48}
                               height={48}
                               className="u-fluid author-img"
-                              unoptimized
-                            />
+                              unoptimized loading="lazy"/>
                           </div>
                           <div className="author-infos">
                             <span className="author_name u-block">
@@ -285,9 +274,7 @@ export default function Case() {
                                       <span
                                         className="author_job-sep"
                                         aria-hidden
-                                      >
-                                        •
-                                      </span>
+                                      />
                                     ) : null}
                                     <span className="author_job-part">
                                       {part}
@@ -307,7 +294,7 @@ export default function Case() {
                           alt={item.title}
                           fill
                           unoptimized
-                          loading="eager"
+                          loading="lazy"
                           className="service-card-featured-img"
                           sizes="(max-width: 1023px) 100vw, 493px"
                         />

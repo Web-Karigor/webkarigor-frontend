@@ -76,9 +76,7 @@ export default function ContactStories() {
               alt={active.imageAlt}
               fill
               className="object-cover object-center"
-              sizes="(max-width: 900px) 100vw, 60vw"
-              priority={false}
-            />
+              sizes="(max-width: 900px) 100vw, 60vw" loading="lazy"/>
           </div>
 
           <div className="contact-story-quote">
@@ -89,8 +87,7 @@ export default function ContactStories() {
                   alt={active.name}
                   fill
                   className="object-cover"
-                  sizes="48px"
-                />
+                  sizes="48px" loading="lazy"/>
               </div>
               <div>
                 <p className="contact-story-name">{active.name}</p>

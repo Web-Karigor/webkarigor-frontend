@@ -310,3 +310,15 @@ export function scrollAppTo(
     block: "start",
   });
 }
+
+export function scrollAppToTop(options?: { immediate?: boolean }) {
+  scrollAppTo(0, { immediate: options?.immediate ?? true });
+  if (typeof window === "undefined") return;
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: options?.immediate === false ? "smooth" : "auto",
+  });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}

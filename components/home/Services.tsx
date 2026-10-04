@@ -245,13 +245,11 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
   index,
   progress,
   total,
-  eager,
 }: {
   service: Service;
   index: number;
   progress: MotionValue<number>;
   total: number;
-  eager?: boolean;
 }) {
   const focus = useTransform(progress, (p) => {
     const pos = p * (total - 1);
@@ -278,9 +276,7 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
             alt={`${service.title} preview`}
             fill
             sizes="(max-width: 1023px) 100vw, 420px"
-            className="object-cover object-top"
-            priority={eager}
-          />
+            className="object-cover object-top" loading="lazy"/>
         </Link>
       ) : (
         <div className="services-story-img services-story-img--primary">
@@ -289,9 +285,7 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
             alt={`${service.title} preview`}
             fill
             sizes="(max-width: 1023px) 100vw, 420px"
-            className="object-cover object-top"
-            priority={eager}
-          />
+            className="object-cover object-top" loading="lazy"/>
         </div>
       )}
       {service.link ? (
@@ -306,8 +300,7 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
             alt={`${service.title} detail`}
             fill
             sizes="(max-width: 1023px) 100vw, 360px"
-            className="object-cover object-top"
-          />
+            className="object-cover object-top" loading="lazy"/>
         </Link>
       ) : (
         <div className="services-story-img services-story-img--secondary">
@@ -316,8 +309,7 @@ const ServiceImageGroup = memo(function ServiceImageGroup({
             alt={`${service.title} detail`}
             fill
             sizes="(max-width: 1023px) 100vw, 360px"
-            className="object-cover object-top"
-          />
+            className="object-cover object-top" loading="lazy"/>
         </div>
       )}
     </motion.div>
@@ -358,7 +350,6 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
             index={index}
             progress={progress}
             total={total}
-            eager={index === 0}
           />
         ))}
       </motion.div>
@@ -372,10 +363,8 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
 
 const ServicesMobileSlide = memo(function ServicesMobileSlide({
   service,
-  eager,
 }: {
   service: Service;
-  eager?: boolean;
 }) {
   const fullTitle = [service.title, service.highlight].filter(Boolean).join(" ");
 
@@ -393,9 +382,7 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
               alt={`${service.title} preview`}
               fill
               sizes="100vw"
-              className="object-cover object-top"
-              priority={eager}
-            />
+              className="object-cover object-top" loading="lazy"/>
           </Link>
         ) : (
           <div className="relative h-full w-full">
@@ -404,9 +391,7 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
               alt={`${service.title} preview`}
               fill
               sizes="100vw"
-              className="object-cover object-top"
-              priority={eager}
-            />
+              className="object-cover object-top" loading="lazy"/>
           </div>
         )}
       </div>
@@ -443,7 +428,6 @@ const ServicesMobileTrack = memo(function ServicesMobileTrack({
           <ServicesMobileSlide
             key={`mobile-${index}-${service.title}`}
             service={service}
-            eager={index === 0}
           />
         ))}
       </div>

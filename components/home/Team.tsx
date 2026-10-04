@@ -97,8 +97,7 @@ function TeamCard({
         src={member.src}
         alt=""
         className="h-full w-full object-cover"
-        draggable={false}
-      />
+        draggable={false} loading="lazy"/>
 
       <motion.div
         aria-hidden

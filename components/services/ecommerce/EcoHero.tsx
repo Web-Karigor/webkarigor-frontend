@@ -44,10 +44,8 @@ export default function EcoHero() {
             src={ECO_HERO.heroImage}
             alt={ECO_HERO.heroImageAlt}
             fill
-            priority
             className="object-contain object-right-bottom"
-            sizes="808px"
-          />
+            sizes="808px" loading="lazy"/>
         </div>
 
         {/* Left column — left 60, below header; clients sit above glow */}
@@ -106,8 +104,7 @@ export default function EcoHero() {
                     width={60}
                     height={60}
                     className="h-[60px] w-[60px] object-contain opacity-80 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
-                    unoptimized
-                  />
+                    unoptimized loading="lazy"/>
                 </div>
               ))}
             </div>
@@ -157,10 +154,8 @@ export default function EcoHero() {
               src={ECO_HERO.heroImage}
               alt={ECO_HERO.heroImageAlt}
               fill
-              priority
               className="object-contain object-bottom"
-              sizes="(max-width: 768px) 90vw, 480px"
-            />
+              sizes="(max-width: 768px) 90vw, 480px" loading="lazy"/>
           </div>
 
           <div className="mt-8">
@@ -179,8 +174,7 @@ export default function EcoHero() {
                     width={60}
                     height={60}
                     className="h-full w-full object-contain opacity-80 grayscale transition-[filter,opacity] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
-                    unoptimized
-                  />
+                    unoptimized loading="lazy"/>
                 </div>
               ))}
             </div>

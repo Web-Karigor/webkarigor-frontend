@@ -15,7 +15,6 @@ type ProjectCardProps = {
   width: number;
   height: number;
   href?: string;
-  priority?: boolean;
   variant?: "image" | "brand-v" | "ventures";
   description?: string;
   keyPoints?: string[];
@@ -28,7 +27,6 @@ export default function ProjectCard({
   width,
   height,
   href,
-  priority = false,
   variant = "image",
   description,
   keyPoints = [],
@@ -95,10 +93,8 @@ export default function ProjectCard({
             src={src}
             alt={alt}
             fill
-            priority={priority}
             className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-            sizes="(max-width: 768px) 100vw, min(100vw, 1300px)"
-          />
+            sizes="(max-width: 768px) 100vw, min(100vw, 1300px)" loading="lazy"/>
           <div className="project-card-default-labels">
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 sm:bottom-5 sm:left-5 sm:right-5">
@@ -116,10 +112,8 @@ export default function ProjectCard({
           src={src}
           alt={alt}
           fill
-          priority={priority}
           className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-          sizes="(max-width: 768px) 100vw, min(100vw, 1300px)"
-        />
+          sizes="(max-width: 768px) 100vw, min(100vw, 1300px)" loading="lazy"/>
       )}
 
       {overlay}

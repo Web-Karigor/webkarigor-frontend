@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent } from "react";
-import { Sparkles, TrendingUp } from "lucide-react";
+// import { Sparkles, TrendingUp } from "lucide-react";
 import CRMContent from "@/data/crm-content.json";
 import { SERVICE_PAGE_GUTTER } from "@/lib/service-layout";
 
@@ -29,23 +29,23 @@ export default function Hero() {
     <section className="svc-hero relative overflow-visible bg-[#f5f5f5] pb-[clamp(48px,6vw,72px)] pt-[120px]">
       <div className={`${SERVICE_PAGE_GUTTER} relative z-[1] overflow-visible pt-4`}>
         <div className="grid grid-cols-1 items-start gap-[clamp(36px,5vw,56px)] lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-[clamp(28px,3vw,48px)]">
-          <div className="max-w-[640px]">
+          <div className="max-w-[640px] max-md:mx-auto max-md:text-center">
             <Link
               href={hero.whatsapp.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full border border-[rgba(31,30,28,0.14)] bg-white px-[18px] py-2.5 font-montserrat text-sm font-medium text-[#1f1e1c] no-underline transition-[border-color,box-shadow] hover:border-[rgba(56,248,171,0.65)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
+              className="inline-flex items-center gap-2.5 rounded-full border border-[rgba(31,30,28,0.14)] bg-white px-[18px] py-2.5 font-montserrat text-sm font-medium text-[#1f1e1c] no-underline transition-[border-color,box-shadow] hover:border-[rgba(56,248,171,0.65)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] max-md:mx-auto"
             >
               <WhatsAppIcon />
               <span>{hero.whatsapp.label}</span>
             </Link>
 
-            <h1 className="mt-[clamp(18px,2.5vw,28px)] font-montserrat text-[clamp(2.25rem,5vw,4.25rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[#1f1e1c]">
+            <h1 className="mt-[clamp(18px,2.5vw,28px)] font-montserrat text-[clamp(1.5rem,6.6vw,1.8rem)] font-bold leading-[1.2] tracking-[-0.04em] text-[#1f1e1c] md:text-[clamp(2.25rem,5vw,4.25rem)] md:leading-[1.08]">
               {hero.titleLines[0]}
               <span className="block">{hero.titleLines[1]}</span>
             </h1>
 
-            <p className="mt-[clamp(16px,2.5vw,24px)] max-w-[560px] font-montserrat text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-[1.7] text-[#6b6b6b]">
+            <p className="mt-[clamp(16px,2.5vw,24px)] max-w-[560px] font-montserrat text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-[1.7] text-[#6b6b6b] max-md:mx-auto">
               {hero.description}
             </p>
 
@@ -92,20 +92,18 @@ export default function Hero() {
             </form>
           </div>
 
-          <div className="mx-auto w-full max-w-[620px] overflow-visible pt-3 lg:ml-auto lg:justify-self-end lg:pt-0">
-            <div className="svc-hero-visual relative aspect-[1/1.05] w-full max-h-[620px] overflow-visible">
-              <div className="absolute inset-0 overflow-hidden rounded-[clamp(96px,15vw,160px)_clamp(8px,1vw,14px)_clamp(96px,15vw,160px)_clamp(36px,5vw,52px)] shadow-[0_24px_64px_rgba(0,0,0,0.12)]">
-                <Image
-                  src={hero.image.src}
-                  alt={hero.image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 620px"
-                  priority
-                />
-              </div>
+          <div className="mx-auto w-full max-w-[720px] pt-3 lg:ml-auto lg:justify-self-end lg:pt-0">
+            <div className="svc-hero-visual relative aspect-[18/12] w-full">
+              <Image
+                src={hero.image.src}
+                alt={hero.image.alt}
+                fill
+                className="rounded-none object-contain shadow-[0_24px_64px_rgba(0,0,0,0.12)] md:rounded-[20px] md:object-cover"
+                sizes="(max-width: 1024px) 100vw, 720px"
+                loading="lazy"
+              />
 
-              <div className="absolute top-4 left-[4%] z-[3] inline-flex max-w-[calc(100%-8%)] items-center gap-2.5 whitespace-nowrap rounded-full bg-white px-3.5 py-2 font-montserrat text-[13px] font-semibold text-[#15d286] shadow-[0_12px_32px_rgba(0,0,0,0.16)] sm:top-6 sm:left-[2%] sm:max-w-[calc(100%-4%)] sm:-translate-x-[8%] sm:px-4 sm:py-2.5 sm:text-sm lg:top-8 lg:left-0 lg:max-w-none lg:-translate-x-1/4 lg:px-5 lg:py-3 lg:text-[clamp(0.875rem,1.2vw,1rem)] xl:-translate-x-[36%]">
+              {/* <div className="absolute top-4 left-[4%] z-[3] inline-flex max-w-[calc(100%-8%)] items-center gap-2.5 whitespace-nowrap rounded-full bg-white px-3.5 py-2 font-montserrat text-[13px] font-semibold text-[#15d286] shadow-[0_12px_32px_rgba(0,0,0,0.16)] sm:top-6 sm:left-[2%] sm:max-w-[calc(100%-4%)] sm:-translate-x-[8%] sm:px-4 sm:py-2.5 sm:text-sm lg:top-8 lg:left-0 lg:max-w-none lg:-translate-x-1/4 lg:px-5 lg:py-3 lg:text-[clamp(0.875rem,1.2vw,1rem)] xl:-translate-x-[36%]">
                 <Sparkles className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4 lg:h-[18px] lg:w-[18px]" aria-hidden />
                 <span>{hero.badges.ai}</span>
               </div>
@@ -122,7 +120,7 @@ export default function Hero() {
                     {hero.badges.conversionValue}
                   </strong>
                 </span>
-              </div>
+              </div> */}
             </div>
 
             <div className="mt-[clamp(24px,3vw,32px)] grid grid-cols-3 gap-[clamp(12px,2vw,24px)] text-center">

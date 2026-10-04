@@ -19,9 +19,7 @@ function WhyChooseImages() {
           className="absolute right-0 top-0 h-[78%] w-[74%] rounded-[22px] object-cover shadow-[0_16px_35px_rgba(16,24,40,0.12)]"
           width={600}
           height={580}
-          sizes="(max-width: 1023px) 74vw, 370px"
-          priority={false}
-        />
+          sizes="(max-width: 1023px) 74vw, 370px" loading="lazy"/>
 
         <Image
           src={WHY.overlayImage}
@@ -29,9 +27,7 @@ function WhyChooseImages() {
           className="absolute bottom-0 left-0 z-[1] h-[51%] w-[47%] rounded-[20px] object-cover shadow-[0_16px_35px_rgba(16,24,40,0.16)]"
           width={380}
           height={367}
-          sizes="(max-width: 1023px) 47vw, 235px"
-          priority={false}
-        />
+          sizes="(max-width: 1023px) 47vw, 235px" loading="lazy"/>
       </div>
     </div>
   );
@@ -39,7 +35,7 @@ function WhyChooseImages() {
 
 function WhyChooseCopy() {
   return (
-    <div className="w-full min-w-0 max-w-[620px] lg:pt-2">
+    <div className="w-full min-w-0 max-w-[620px] max-md:mx-auto max-md:text-center lg:pt-2">
       <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
         {WHY.eyebrow}
       </p>
@@ -51,7 +47,7 @@ function WhyChooseCopy() {
         {WHY.items.map((feature) => {
           const Icon = ICONS[feature.icon as keyof typeof ICONS];
           return (
-            <li key={feature.title} className="flex items-start gap-4 sm:gap-5">
+            <li key={feature.title} className="flex items-start gap-4 max-md:flex-col max-md:items-center sm:gap-5">
               <span
                 className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border sm:h-14 sm:w-14"
                 style={{

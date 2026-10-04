@@ -89,7 +89,6 @@ export default function ProjectsGrid() {
                 variant={item.variant}
                 description={overview?.description ?? item.description}
                 keyPoints={overview?.keyPoints ?? item.keyPoints}
-                priority={index === 0}
               />
             );
           })}

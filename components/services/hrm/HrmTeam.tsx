@@ -67,10 +67,8 @@ export default function HrmTeam() {
                 src="/team/sawan.jpg"
                 alt="Team member — top right"
                 fill
-                priority
                 className="object-cover"
-                sizes="(max-width: 768px) 180px, 240px"
-              />
+                sizes="(max-width: 768px) 180px, 240px" loading="lazy"/>
             </div>
           </div>
 
@@ -81,8 +79,7 @@ export default function HrmTeam() {
                 alt={photo.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 160px, 240px"
-              />
+                sizes="(max-width: 768px) 160px, 240px" loading="lazy"/>
             </div>
           ))}
         </div>

@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import FooterBrand from "@/components/home/FooterBrand";
 import homeContent from "@/data/home-content.json";
 
-const { headingLines, taglineParts, linkColumns, socialLinks, copyright } =
+const { headingLines, headingLinesMobile, taglineParts, linkColumns, socialLinks, copyright } =
   homeContent.footer;
 
 const socialIcons: Record<string, ReactNode> = {
@@ -105,22 +105,27 @@ export default function Footer() {
             <div className="footer-intro">
               <h2 className="footer-heading font-extrabold">
                 {headingLines.map((line) => (
-                  <span key={line} className="footer-heading-line">
+                  <span key={line} className="footer-heading-line footer-heading-line--desktop">
+                    {line}
+                  </span>
+                ))}
+                {headingLinesMobile.map((line) => (
+                  <span key={line} className="footer-heading-line footer-heading-line--mobile">
                     {line}
                   </span>
                 ))}
               </h2>
               <p className="footer-tagline">
-                {taglineParts.flatMap((part, index) =>
-                  index === 0
-                    ? [<span key={part}>{part}</span>]
-                    : [
-                        <span key={`${part}-sep`} className="footer-tagline-sep" aria-hidden="true">
-                          •
-                        </span>,
-                        <span key={part}>{part}</span>,
-                      ],
-                )}
+                {taglineParts.map((part, index) => (
+                  <span key={part} className="footer-tagline-item">
+                    {index > 0 ? (
+                      <span className="footer-tagline-sep" aria-hidden="true">
+                        •
+                      </span>
+                    ) : null}
+                    <span>{part}</span>
+                  </span>
+                ))}
               </p>
             </div>
 

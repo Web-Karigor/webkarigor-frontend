@@ -83,9 +83,7 @@ export default function ConsultationModal() {
             alt=""
             fill
             sizes="(min-width: 768px) 46vw, 0px"
-            className="consultation-modal-media-img"
-            priority
-          />
+            className="consultation-modal-media-img" loading="lazy"/>
         </div>
 
         <button

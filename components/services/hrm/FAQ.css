@@ -1,3 +1,13 @@
+.faq-question-text {
+  line-height: 1.55;
+}
+
+@media (min-width: 768px) {
+  .faq-question-text {
+    line-height: 1.25;
+  }
+}
+
 /* FAQ bottom CTA — desktop/tablet: fill from left on hover; mobile unchanged */
 .faq-cta {
   position: relative;

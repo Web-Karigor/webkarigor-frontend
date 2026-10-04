@@ -148,8 +148,7 @@ export default function ProjectDetailsBody({ project }: { project: ProjectDetail
                   width={1600}
                   height={1000}
                   className="h-auto w-full object-contain"
-                  sizes="(max-width: 1024px) 100vw, 840px"
-                />
+                  sizes="(max-width: 1024px) 100vw, 840px" loading="lazy"/>
               </div>
               */}
 

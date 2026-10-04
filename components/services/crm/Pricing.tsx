@@ -130,8 +130,7 @@ export default function Pricing() {
                               width={174}
                               height={34}
                               className="home-pricing-popular-badge-img"
-                              unoptimized
-                            />
+                              unoptimized loading="lazy"/>
                             <span className="home-pricing-popular-badge-text">
                               {POPULAR_LABEL}
                             </span>

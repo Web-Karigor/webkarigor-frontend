@@ -195,8 +195,7 @@ export default function Portfolio() {
                   alt={item.title}
                   fill
                   className="object-cover object-top"
-                  sizes={imageSizes}
-                />
+                  sizes={imageSizes} loading="lazy"/>
               </article>
             ))}
           </div>

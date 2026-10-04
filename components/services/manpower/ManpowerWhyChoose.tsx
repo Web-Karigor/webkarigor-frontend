@@ -23,9 +23,7 @@ function WhyChooseImages() {
           alt={MANPOWER_WHY.imageAlt}
           fill
           className="object-contain object-left object-top"
-          sizes="698px"
-          priority={false}
-        />
+          sizes="698px" loading="lazy"/>
       </div>
     </div>
   );

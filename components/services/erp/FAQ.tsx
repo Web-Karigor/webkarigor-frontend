@@ -61,7 +61,7 @@ export default function FAQ({
                   aria-expanded={isOpen}
                   className="flex w-full cursor-pointer items-center justify-between py-7 text-left focus:outline-none md:py-8"
                 >
-                  <span className="block min-w-0 flex-1 pr-3 font-montserrat text-base font-semibold leading-[100%] tracking-[-0.05em] text-[#141414] md:text-[26px]">
+                  <span className="faq-question-text block min-w-0 flex-1 pr-3 font-montserrat text-base font-semibold tracking-[-0.02em] text-[#141414] md:text-[26px] md:tracking-[-0.05em]">
                     {faq.question}
                   </span>
                   <span

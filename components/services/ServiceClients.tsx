@@ -26,8 +26,7 @@ export default function ServiceClients() {
                 width={160}
                 height={160}
                 className="h-auto max-h-full w-auto max-w-full object-contain"
-                unoptimized
-              />
+                unoptimized loading="lazy"/>
             </div>
           ))}
         </div>

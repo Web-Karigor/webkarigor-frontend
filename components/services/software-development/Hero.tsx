@@ -72,20 +72,19 @@ export default function Hero() {
               width: doodle.width,
               height: doodle.height,
               transform: `rotate(${doodle.rotate}deg)`,
-            }}
-          />
+            }} loading="lazy"/>
         ))}
       </div>
 
       <div className="relative z-[1] mx-auto flex h-full w-full max-w-[1800px] items-center px-[clamp(16px,3.5vw,50px)] pt-[80px] pb-6 sm:pt-[96px] sm:pb-8 lg:pt-[108px] lg:pb-0">
         <div className="flex w-full flex-col items-stretch gap-6 md:gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           {/* Left — copy + phone CTA */}
-          <div className="mp-hero-copy flex w-full max-w-none shrink-0 flex-col  lg:max-w-[620px]">
-            <h1 className="m-0 font-montserrat text-[clamp(1.75rem,5.5vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
+          <div className="mp-hero-copy flex w-full max-w-none shrink-0 flex-col max-md:items-center max-md:text-center lg:max-w-[620px]">
+            <h1 className="m-0 font-montserrat text-[clamp(1.5rem,6.6vw,1.8rem)] font-bold leading-[1.2] tracking-[-0.03em] text-[#111827] md:text-[clamp(1.75rem,5.5vw,3.75rem)] md:leading-[1.12]">
               {HERO.title}
             </h1>
 
-            <p className="mt-4 m-0 max-w-[520px] font-manrope text-[clamp(15px,1.6vw,17px)] font-semibold leading-[160%] text-[#98A2B3] md:mt-5">
+            <p className="mt-4 m-0 max-w-[520px] font-manrope text-[clamp(15px,1.6vw,17px)] font-semibold leading-[160%] text-[#98A2B3] max-md:mx-auto md:mt-5">
               {HERO.description}
             </p>
 
@@ -127,7 +126,7 @@ export default function Hero() {
 
             <a
               href={`tel:${HERO.hotline.replace(/-/g, "")}`}
-              className="mt-3 inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-4 py-2.5 font-montserrat text-[13px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] sm:mt-4 sm:w-fit sm:justify-start sm:text-[14px]"
+              className="mt-3 inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-4 py-2.5 font-montserrat text-[13px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] sm:mt-4 sm:w-fit sm:text-[14px] md:justify-start"
             >
               <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#F2F4F7] text-[#111827]">
                 <Phone className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden />
@@ -137,16 +136,15 @@ export default function Hero() {
           </div>
 
           {/* Mobile / tablet — bottom-aligned cutout */}
-          <div className="erp-hero-visual relative w-full max-w-[720px] shrink-0 pt-14 max-lg:mx-auto lg:ml-auto">
+          <div className="erp-hero-visual relative w-full max-w-[720px] shrink-0 pt-0 max-lg:mx-auto lg:ml-auto lg:pt-14">
             <div className="relative aspect-[18/12] w-full">
               <Image
                 src={HERO.heroImage}
                 alt=""
                 fill
-                className="rounded-[20px] object-cover shadow-[0_24px_64px_rgba(0,0,0,0.12)]"
+                className="rounded-none object-contain shadow-[0_24px_64px_rgba(0,0,0,0.12)] md:rounded-[20px] md:object-cover"
                 sizes="(100vw)"
-                unoptimized
-              />
+                unoptimized loading="lazy"/>
             </div>
           </div>
         </div>

@@ -90,8 +90,7 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
                         alt={item.title}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 420px"
-                      />
+                        sizes="(max-width: 768px) 100vw, 420px" loading="lazy"/>
                     </div>
 
                     <div className="related-project-flip-face related-project-flip-back">

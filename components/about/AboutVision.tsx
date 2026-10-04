@@ -21,9 +21,7 @@ export default function AboutVision() {
               alt={ABOUT_VISION.alts.large}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 900px"
-              priority
-            />
+              sizes="(max-width: 768px) 100vw, 900px" loading="lazy"/>
           </div>
 
           <div className="relative min-h-[200px] overflow-hidden rounded-[20px] sm:min-h-[240px] sm:rounded-[24px] md:min-h-0 md:rounded-[28px]">
@@ -32,8 +30,7 @@ export default function AboutVision() {
               alt={ABOUT_VISION.alts.top}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 900px"
-            />
+              sizes="(max-width: 768px) 100vw, 900px" loading="lazy"/>
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6">
@@ -43,8 +40,7 @@ export default function AboutVision() {
                 alt={ABOUT_VISION.alts.bottomLeft}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 50vw, 440px"
-              />
+                sizes="(max-width: 768px) 50vw, 440px" loading="lazy"/>
             </div>
             <div className="relative min-h-[160px] overflow-hidden rounded-[16px] sm:min-h-[200px] sm:rounded-[20px] md:min-h-0 md:rounded-[28px]">
               <Image
@@ -52,8 +48,7 @@ export default function AboutVision() {
                 alt={ABOUT_VISION.alts.bottomRight}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 50vw, 440px"
-              />
+                sizes="(max-width: 768px) 50vw, 440px" loading="lazy"/>
             </div>
           </div>
         </div>

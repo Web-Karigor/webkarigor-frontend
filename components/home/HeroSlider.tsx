@@ -173,7 +173,7 @@ export default function HeroSlider() {
                 sizes="(max-width: 640px) 160px, (max-width: 767px) 220px, (max-width: 1023px) 300px, (max-width: 1279px) 320px, (max-width: 1535px) 380px, 478px"
                 className="object-cover"
                 draggable={false}
-                priority={i >= ANCHOR_INDEX && i < ANCHOR_INDEX + 3}
+                loading="lazy"
               />
             </div>
           ))}

@@ -47,7 +47,28 @@ export default function FeaturesOrbit() {
         </p>
       </div>
 
-      <div className="mx-auto flex w-full max-w-[1920px] items-center justify-center px-4 md:px-[clamp(16px,4vw,48px)]">
+      <div className="mx-auto grid w-full max-w-[900px] grid-cols-3 gap-2.5 px-4 sm:hidden">
+        {icons.map((tech) => (
+          <div
+            key={tech.name}
+            className="flex h-9 min-w-0 w-full items-center gap-1.5 rounded-md bg-white px-2 shadow-[0_5px_14px_rgba(15,23,42,0.08)]"
+            title={tech.name}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={tech.icon}
+              alt=""
+              className="h-4 w-4 shrink-0 object-contain"
+              loading="lazy"
+            />
+            <span className="min-w-0 truncate font-montserrat text-[11px] font-medium text-[#1f2937]">
+              {tech.name}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mx-auto hidden w-full max-w-[1920px] items-center justify-center px-4 sm:flex md:px-[clamp(16px,4vw,48px)]">
         <div
           className="relative mx-auto w-full max-w-[min(100%,360px)] [--mp-icon-scale:0.72] sm:max-w-[min(100%,440px)] sm:[--mp-icon-scale:0.82] lg:max-w-[967px] lg:[--mp-icon-scale:1]"
           style={{ aspectRatio: `${FRAME.width} / ${FRAME.height}` }}

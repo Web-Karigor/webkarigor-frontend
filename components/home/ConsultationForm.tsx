@@ -67,8 +67,82 @@ function CountryFlag({
   return <Flag className={className} title={title ?? iso2} />;
 }
 
+const DHAKA_TZ = "Asia/Dhaka";
+
+type DhakaNow = {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+};
+
+function getDhakaNow(at = new Date()): DhakaNow {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: DHAKA_TZ,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    })
+      .formatToParts(at)
+      .map((part) => [part.type, part.value]),
+  );
+
+  return {
+    year: Number(parts.year),
+    month: Number(parts.month),
+    day: Number(parts.day),
+    hour: Number(parts.hour),
+    minute: Number(parts.minute),
+  };
+}
+
+function dayKey(year: number, monthIndex: number, day: number) {
+  return year * 10000 + (monthIndex + 1) * 100 + day;
+}
+
+function isPastDhakaDate(year: number, monthIndex: number, day: number, now: DhakaNow) {
+  return dayKey(year, monthIndex, day) < dayKey(now.year, now.month - 1, now.day);
+}
+
+function isDhakaToday(year: number, monthIndex: number, day: number, now: DhakaNow) {
+  return dayKey(year, monthIndex, day) === dayKey(now.year, now.month - 1, now.day);
+}
+
+function parseSlotMinutes(slot: string) {
+  const match = slot.trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if (!match) return null;
+  let hour = Number(match[1]);
+  const minute = Number(match[2]);
+  const period = match[3].toUpperCase();
+  if (period === "AM") {
+    if (hour === 12) hour = 0;
+  } else if (hour !== 12) {
+    hour += 12;
+  }
+  return hour * 60 + minute;
+}
+
+function isPastDhakaTime(
+  slot: string,
+  year: number,
+  monthIndex: number,
+  day: number,
+  now: DhakaNow,
+) {
+  if (isPastDhakaDate(year, monthIndex, day, now)) return true;
+  if (!isDhakaToday(year, monthIndex, day, now)) return false;
+  const slotMinutes = parseSlotMinutes(slot);
+  if (slotMinutes == null) return false;
+  return slotMinutes < now.hour * 60 + now.minute;
+}
+
 function getCalendarCells(year: number, month: number) {
-  const firstDay = new Date(year, month, 1).getDay();
+  const firstDay = new Date(Date.UTC(year, month, 1, 6, 0, 0)).getUTCDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const cells: Array<number | null> = [];
 
@@ -128,8 +202,13 @@ export default function ConsultationForm({
   const [region, setRegion] = useState<CountryOption>(DEFAULT_COUNTRY);
   const [dialOpen, setDialOpen] = useState(false);
   const [regionOpen, setRegionOpen] = useState(false);
-  const [calendarDate, setCalendarDate] = useState(() => new Date());
-  const [selectedDay, setSelectedDay] = useState(() => new Date().getDate());
+  const [nowTick, setNowTick] = useState(() => Date.now());
+  const dhakaNow = useMemo(() => getDhakaNow(new Date(nowTick)), [nowTick]);
+  const [calendarDate, setCalendarDate] = useState(() => {
+    const now = getDhakaNow();
+    return new Date(now.year, now.month - 1, 1);
+  });
+  const [selectedDay, setSelectedDay] = useState(() => getDhakaNow().day);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(
     null,
@@ -140,6 +219,33 @@ export default function ConsultationForm({
 
   useClickOutside(dialRef, dialOpen, () => setDialOpen(false));
   useClickOutside(regionRef, regionOpen, () => setRegionOpen(false));
+
+  useEffect(() => {
+    const tick = () => setNowTick(Date.now());
+    const id = window.setInterval(tick, 30_000);
+    document.addEventListener("visibilitychange", tick);
+    return () => {
+      window.clearInterval(id);
+      document.removeEventListener("visibilitychange", tick);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (hideSchedule) return;
+    const year = calendarDate.getFullYear();
+    const month = calendarDate.getMonth();
+    if (isPastDhakaDate(year, month, selectedDay, dhakaNow)) {
+      if (year === dhakaNow.year && month === dhakaNow.month - 1) {
+        setSelectedDay(dhakaNow.day);
+      }
+    }
+    if (
+      selectedTime &&
+      isPastDhakaTime(selectedTime, year, month, selectedDay, dhakaNow)
+    ) {
+      setSelectedTime(null);
+    }
+  }, [calendarDate, selectedDay, selectedTime, dhakaNow, hideSchedule]);
 
   const calendarCells = useMemo(
     () =>
@@ -154,13 +260,28 @@ export default function ConsultationForm({
     year: "numeric",
   });
 
+  const viewYear = calendarDate.getFullYear();
+  const viewMonth = calendarDate.getMonth();
+  const canGoPrevMonth =
+    viewYear * 12 + viewMonth > dhakaNow.year * 12 + (dhakaNow.month - 1);
+
   const shiftMonth = (delta: number) => {
+    if (delta < 0 && !canGoPrevMonth) return;
+
     setCalendarDate((current) => {
-      const next = new Date(current);
-      next.setMonth(current.getMonth() + delta);
-      return next;
+      const next = new Date(current.getFullYear(), current.getMonth() + delta, 1);
+      const nextKey = next.getFullYear() * 12 + next.getMonth();
+      const minKey = dhakaNow.year * 12 + (dhakaNow.month - 1);
+      return nextKey < minKey ? current : next;
     });
-    setSelectedDay(1);
+
+    setSelectedDay((currentDay) => {
+      const next = new Date(viewYear, viewMonth + delta, 1);
+      if (next.getFullYear() === dhakaNow.year && next.getMonth() === dhakaNow.month - 1) {
+        return Math.max(currentDay, dhakaNow.day);
+      }
+      return 1;
+    });
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -176,6 +297,29 @@ export default function ConsultationForm({
 
     if (!name || !phoneRaw) {
       setStatus({ type: "error", text: "Name and phone are required." });
+      return;
+    }
+
+    if (
+      !hideSchedule &&
+      isPastDhakaDate(calendarDate.getFullYear(), calendarDate.getMonth(), selectedDay, dhakaNow)
+    ) {
+      setStatus({ type: "error", text: "Please select today or a future date." });
+      return;
+    }
+
+    if (
+      !hideSchedule &&
+      selectedTime &&
+      isPastDhakaTime(
+        selectedTime,
+        calendarDate.getFullYear(),
+        calendarDate.getMonth(),
+        selectedDay,
+        dhakaNow,
+      )
+    ) {
+      setStatus({ type: "error", text: "Please select a present or future time." });
       return;
     }
 
@@ -402,6 +546,7 @@ export default function ConsultationForm({
                   type="button"
                   className="home-consultation-calendar-nav"
                   onClick={() => shiftMonth(-1)}
+                  disabled={!canGoPrevMonth}
                   aria-label={schedule.prevMonthAria}
                 >
                   <ChevronLeft className="h-4 w-4" />
@@ -424,25 +569,33 @@ export default function ConsultationForm({
               </div>
 
               <div className="home-consultation-calendar-grid">
-                {calendarCells.map((day, index) =>
-                  day ? (
+                {calendarCells.map((day, index) => {
+                  if (!day) {
+                    return (
+                      <span
+                        key={`empty-${index}`}
+                        className="home-consultation-calendar-day is-empty"
+                      />
+                    );
+                  }
+
+                  const past = isPastDhakaDate(viewYear, viewMonth, day, dhakaNow);
+                  return (
                     <button
                       key={`${day}-${index}`}
                       type="button"
+                      disabled={past}
                       className={`home-consultation-calendar-day${
                         selectedDay === day ? " is-selected" : ""
-                      }`}
-                      onClick={() => setSelectedDay(day)}
+                      }${past ? " is-disabled" : ""}`}
+                      onClick={() => {
+                        if (!past) setSelectedDay(day);
+                      }}
                     >
                       {day}
                     </button>
-                  ) : (
-                    <span
-                      key={`empty-${index}`}
-                      className="home-consultation-calendar-day is-empty"
-                    />
-                  ),
-                )}
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -453,20 +606,31 @@ export default function ConsultationForm({
             </p>
 
             <div className="home-consultation-times">
-              {TIME_SLOTS.map((slot) => (
-                <button
-                  key={slot}
-                  type="button"
-                  className={`home-consultation-time${
-                    selectedTime === slot ? " is-selected" : ""
-                  }`}
-                  onClick={() =>
-                    setSelectedTime((current) => (current === slot ? null : slot))
-                  }
-                >
-                  {slot}
-                </button>
-              ))}
+              {TIME_SLOTS.map((slot) => {
+                const past = isPastDhakaTime(
+                  slot,
+                  viewYear,
+                  viewMonth,
+                  selectedDay,
+                  dhakaNow,
+                );
+                return (
+                  <button
+                    key={slot}
+                    type="button"
+                    disabled={past}
+                    className={`home-consultation-time${
+                      selectedTime === slot ? " is-selected" : ""
+                    }${past ? " is-disabled" : ""}`}
+                    onClick={() => {
+                      if (past) return;
+                      setSelectedTime((current) => (current === slot ? null : slot));
+                    }}
+                  >
+                    {slot}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -114,8 +114,7 @@ export default function EcoReviews() {
                       alt=""
                       fill
                       className="object-cover"
-                      sizes="40px"
-                    />
+                      sizes="40px" loading="lazy"/>
                   </div>
                 ))}
               </div>

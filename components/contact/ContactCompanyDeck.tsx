@@ -24,8 +24,7 @@ export default function ContactCompanyDeck() {
             alt={imageAlt}
             fill
             className="object-cover"
-            sizes="(max-width: 900px) 100vw, 55vw"
-          />
+            sizes="(max-width: 900px) 100vw, 55vw" loading="lazy"/>
         </div>
 
         <div className="contact-deck-copy">

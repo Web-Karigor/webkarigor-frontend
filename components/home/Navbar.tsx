@@ -20,7 +20,7 @@ import {
 } from "@/lib/sticky-nav-data";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
-import { scrollAppTo } from "@/lib/smooth-scroll";
+import { scrollAppTo, scrollAppToTop } from "@/lib/smooth-scroll";
 
 const { brand } = homeContent.navbar;
 
@@ -431,6 +431,9 @@ export default function Navbar() {
                                 event.preventDefault();
                                 scrollToConsultation();
                                 return;
+                              }
+                              if (item.href === "/" && pathname === "/") {
+                                scrollAppToTop({ immediate: true });
                               }
                               setActiveId(item.id);
                             }}

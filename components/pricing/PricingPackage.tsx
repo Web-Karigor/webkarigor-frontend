@@ -37,32 +37,28 @@ export default function PricingPackage() {
               alt=""
               width={480}
               height={480}
-              className="absolute left-0 top-[-180px] h-[min(320px,80vw)] w-[min(320px,80vw)] max-w-none select-none sm:top-[-250px] sm:h-[480px] sm:w-[480px]"
-            />
+              className="absolute left-0 top-[-180px] h-[min(320px,80vw)] w-[min(320px,80vw)] max-w-none select-none sm:top-[-250px] sm:h-[480px] sm:w-[480px]" loading="lazy"/>
             {/* Top-right — slightly inward from right */}
             <Image
               src={ellipseSrc}
               alt=""
               width={480}
               height={480}
-              className="absolute right-0 top-[-180px] h-[min(320px,80vw)] w-[min(320px,80vw)] max-w-none select-none sm:top-[-250px] sm:h-[480px] sm:w-[480px]"
-            />
+              className="absolute right-0 top-[-180px] h-[min(320px,80vw)] w-[min(320px,80vw)] max-w-none select-none sm:top-[-250px] sm:h-[480px] sm:w-[480px]" loading="lazy"/>
             {/* Bottom-left — more inward from left */}
             <Image
               src={ellipseSrc}
               alt=""
               width={480}
               height={480}
-              className="absolute bottom-[-180px] left-[10%] h-[min(320px,80vw)] w-[min(320px,80vw)] max-w-none select-none sm:bottom-[-250px] sm:left-[160px] sm:h-[480px] sm:w-[480px]"
-            />
+              className="absolute bottom-[-180px] left-[10%] h-[min(320px,80vw)] w-[min(320px,80vw)] max-w-none select-none sm:bottom-[-250px] sm:left-[160px] sm:h-[480px] sm:w-[480px]" loading="lazy"/>
             {/* Bottom-right — more inward from right */}
             <Image
               src={ellipseSrc}
               alt=""
               width={480}
               height={480}
-              className="absolute bottom-[-180px] right-[10%] h-[min(320px,80vw)] w-[min(320px,80vw)] max-w-none select-none sm:bottom-[-250px] sm:right-[160px] sm:h-[480px] sm:w-[480px]"
-            />
+              className="absolute bottom-[-180px] right-[10%] h-[min(320px,80vw)] w-[min(320px,80vw)] max-w-none select-none sm:bottom-[-250px] sm:right-[160px] sm:h-[480px] sm:w-[480px]" loading="lazy"/>
           </div>
 
           <div className="pricing-package-inner relative z-[1] flex flex-col px-[clamp(20px,5vw,72px)] pb-[clamp(32px,5vw,56px)] pt-[clamp(32px,5vw,56px)] lg:min-h-[696px]">
@@ -87,8 +83,7 @@ export default function PricingPackage() {
                         width={17}
                         height={17}
                         className="h-[17px] w-[17px] shrink-0"
-                        aria-hidden
-                      />
+                        aria-hidden loading="lazy"/>
                       <span>{item}</span>
                     </li>
                   ))}

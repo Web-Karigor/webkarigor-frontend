@@ -36,7 +36,27 @@ function Stars({ count }: { count: number }) {
 export default function Reviews() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
-  const maxIndex = Math.max(0, WEBSITE_DESIGN_DEVELOPMENT_TESTIMONIALS.length - VISIBLE);
+  const [isMobile, setIsMobile] = useState(false);
+  const maxIndex = Math.max(
+    0,
+    WEBSITE_DESIGN_DEVELOPMENT_TESTIMONIALS.length - (isMobile ? 1 : VISIBLE),
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  const getStep = useCallback(() => {
+    const track = trackRef.current;
+    const card = track?.querySelector("article");
+    if (!track || !card) return CARD_W + CARD_GAP;
+    const gap = Number.parseFloat(getComputedStyle(track).columnGap || "") || CARD_GAP;
+    return card.getBoundingClientRect().width + gap;
+  }, []);
 
   const scrollTo = useCallback((i: number) => {
     const next = Math.min(Math.max(i, 0), maxIndex);
@@ -44,10 +64,10 @@ export default function Reviews() {
     const track = trackRef.current;
     if (!track) return;
     track.scrollTo({
-      left: next * (CARD_W + CARD_GAP),
+      left: next * getStep(),
       behavior: "smooth",
     });
-  }, [maxIndex]);
+  }, [getStep, maxIndex]);
 
   const prev = useCallback(() => scrollTo(index - 1), [index, scrollTo]);
   const next = useCallback(() => scrollTo(index + 1), [index, scrollTo]);
@@ -56,22 +76,24 @@ export default function Reviews() {
     const track = trackRef.current;
     if (!track) return;
     const onScroll = () => {
-      const i = Math.round(track.scrollLeft / (CARD_W + CARD_GAP));
+      const step = getStep();
+      if (step <= 0) return;
+      const i = Math.round(track.scrollLeft / step);
       setIndex(Math.min(Math.max(i, 0), maxIndex));
     };
     track.addEventListener("scroll", onScroll, { passive: true });
     return () => track.removeEventListener("scroll", onScroll);
-  }, [maxIndex]);
+  }, [getStep, maxIndex]);
 
   return (
     <section className="overflow-hidden bg-white py-[clamp(48px,5vw,72px)]">
       {/* Figma: 1792 × 592 */}
       <div className="mx-auto flex w-full max-w-[1792px] flex-col gap-10 px-[clamp(16px,3vw,64px)]">
         {/* Header — title left, arrows right */}
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex items-start justify-between gap-4 md:items-center">
+          <div className="flex items-start gap-3">
             <span
-              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#0EC47B] text-white"
+              className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#0EC47B] text-white"
               aria-hidden
             >
               <MessageCircle className="h-4 w-4" fill="currentColor" strokeWidth={0} />
@@ -106,12 +128,12 @@ export default function Reviews() {
         {/* Cards — Figma 555 × 388, 3 visible */}
         <div
           ref={trackRef}
-          className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6"
         >
           {WEBSITE_DESIGN_DEVELOPMENT_TESTIMONIALS.map((item) => (
             <article
               key={item.name}
-              className="flex w-[min(100%,calc(100vw-2rem))] shrink-0 snap-start flex-col rounded-[12px] border border-[#EEF0F3] bg-white p-6 shadow-[0_8px_30px_rgba(24,33,77,0.06)] sm:h-auto sm:w-[min(555px,85vw)] sm:p-10 md:p-12 lg:min-h-[388px]"
+              className="flex w-[calc((100%-12px)/1.1)] shrink-0 snap-start flex-col rounded-[12px] border border-[#EEF0F3] bg-white p-6 shadow-[0_8px_30px_rgba(24,33,77,0.06)] sm:h-auto sm:w-[min(555px,85vw)] sm:p-10 md:p-12 lg:min-h-[388px]"
             >
               <Stars count={item.rating} />
 

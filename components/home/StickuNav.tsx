@@ -11,11 +11,11 @@ import {
   DollarSign,
   House,
   Menu,
-  MessageCircle,
+  Phone,
   Settings,
   X,
 } from "lucide-react";
-import { scrollAppTo } from "@/lib/smooth-scroll";
+import { scrollAppTo, scrollAppToTop } from "@/lib/smooth-scroll";
 import {
   SERVICE_NAV_DESC,
   STICKY_NAV_MORE_LINKS,
@@ -139,6 +139,10 @@ export default function StickyNav() {
             <nav className="sticky-nav-bar" aria-label="Mobile sticky navigation">
               <Link
                 href="/"
+                onClick={() => {
+                  close();
+                  if (pathname === "/") scrollAppToTop({ immediate: true });
+                }}
                 className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-2 font-montserrat text-[10px] font-semibold transition ${pathname === "/"
                     ? "text-[#0EC47B]"
                     : "text-[#1f1e1c]/70 active:text-[#1f1e1c]"
@@ -161,10 +165,14 @@ export default function StickyNav() {
                 <span>Services</span>
               </button>
 
-              <Link href="/contact-us" className="sticky-nav-cta">
-                <MessageCircle className="relative z-10 h-3.5 w-3.5" />
+              <a
+                href="tel:+8801624283328"
+                className="sticky-nav-cta"
+                aria-label="Call +880 1624-283328"
+              >
+                <Phone className="relative z-10 h-3.5 w-3.5" />
                 <span className="relative z-10 whitespace-nowrap">Start</span>
-              </Link>
+              </a>
 
               <Link
                 href={pathname?.startsWith("/service") ? "#contact" : "/pricing"}

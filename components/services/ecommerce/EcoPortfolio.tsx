@@ -218,8 +218,7 @@ export default function EcoPortfolio() {
                     alt={item.title}
                     fill
                     className="object-cover object-top"
-                    sizes={imageSizes}
-                  />
+                    sizes={imageSizes} loading="lazy"/>
                 </article>
               ))}
             </div>
