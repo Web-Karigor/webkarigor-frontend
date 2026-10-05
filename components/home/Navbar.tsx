@@ -70,7 +70,12 @@ function getActiveIdFromPath(pathname: string | null): string {
   if (pathname.startsWith("/case") || pathname.startsWith("/projects")) {
     return "case";
   }
-  if (pathname.startsWith("/about") || pathname.startsWith("/contact")) {
+  if (
+    pathname.startsWith("/about") ||
+    pathname.startsWith("/contact") ||
+    pathname.startsWith("/team") ||
+    pathname.startsWith("/blog")
+  ) {
     return "more";
   }
   return "brand";
