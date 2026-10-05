@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Star } from "lucide-react";
 import {
   PROJECT_DETAILS_UI,
@@ -12,6 +11,13 @@ export default function ProjectDetailsTestimonial({
   project: ProjectDetail;
 }) {
   const { testimonial } = project;
+  const initials = testimonial.name
+    .replace(/\./g, "")
+    .split(/\s+/)
+    .filter((part) => part && !["md", "mr", "mrs", "ms"].includes(part.toLowerCase()))
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
 
   return (
     <section className="pd-testimonial bg-[#FFFDF6] pt-8 pb-12 sm:pt-10 sm:pb-16 md:pb-20 lg:pb-[100px]">
@@ -34,13 +40,8 @@ export default function ProjectDetailsTestimonial({
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10 sm:gap-4">
-              <div className="relative h-12 w-12 overflow-hidden rounded-full bg-white/20 sm:h-14 sm:w-14">
-                <Image
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  fill
-                  className="object-cover"
-                  sizes="56px" loading="lazy"/>
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/20 font-montserrat text-[14px] font-bold tracking-wide text-white sm:h-14 sm:w-14 sm:text-[15px]">
+                {initials}
               </div>
               <div>
                 <div className="mb-1.5 flex items-center gap-0.5">

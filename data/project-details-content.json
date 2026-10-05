@@ -245,7 +245,7 @@
       ],
       "testimonial": {
         "quote": "Working with the Web Karigor team on our website was a great experience. They took our requirements and turned them into a clear, structured and professional design. The final result presents our services, packages and inquiry process in a modern, easy-to-navigate way, and reflects the quality of our company. We are happy with the approved design and appreciate the effort the Web Karigor team put into it.",
-        "name": "Darrell Steward",
+        "name": "Md. Kamrul Hasan",
         "role": "Director, Suma International",
         "avatar": "/h1.webp",
         "rating": 5
@@ -309,8 +309,8 @@
       "solution": "Shishu Poribohon addresses these challenges by creating a trust-focused shopping experience. The platform emphasizes clear product details, structured information hierarchy, and reassurance elements to support informed decisions. The experience was designed to reduce confusion, improve transparency, and help parents shop with greater confidence and ease.",
       "testimonial": {
         "quote": "Working with the team on Shishu Poribohon was a great experience. The final product reflects our business goals while making the shopping journey much clearer and easier for our customers. The attention to detail, understanding of our requirements, and thoughtful approach to the user experience made a real difference. We are very happy with how the project came together and appreciate the dedication throughout the process.",
-        "name": "Darrell Steward",
-        "role": "CEO, Shishu Poribohon",
+        "name": "Nusrat Jahan",
+        "role": "Founder, Shishu Poribohon",
         "avatar": "/h1.webp",
         "rating": 5
       },
@@ -581,8 +581,8 @@
       "solution": "Web Karigor redesigned Times Today around a clearer editorial structure and a more readable digital experience. The solution focused on strengthening homepage hierarchy, improving article readability, simplifying navigation, supporting mobile news consumption, and creating stronger pathways for discovering related and trending content.\n\nThe platform was also supported by a structured design system and reusable components to maintain consistency across the experience. Development and UI implementation were completed by the Web Karigor team using Next.js and Laravel, followed by implementation review, design revisions, and UI QA.",
       "testimonial": {
         "quote": "The Times Today project was a great experience for our team. Web Karigor understood our vision and transformed it into a modern, responsive news platform with a much clearer structure and reading experience. The attention to detail, communication throughout the project, and ability to refine the product based on our requirements made the entire process smooth. We are pleased with the final platform and appreciate the team’s dedication from design through development and launch.",
-        "name": "Alexis Botaya",
-        "role": "Managing director • Sound Experience",
+        "name": "Mahmudul Hasan",
+        "role": "Managing Director, Times Today BD",
         "avatar": "/h1.webp",
         "rating": 5
       },
@@ -956,8 +956,8 @@
       "solution": "We structured the product around discovery, evaluation, verification, financing, communication and ongoing management instead of treating property as a one-time listing transaction.\n\nThe work resulted in a digital product foundation covering property discovery, structured listing, trust and verification, a customer dashboard, financing, communication, property services, an NRB service model, investment-ecosystem concepts, Propertypulse News Network, and a shared design system.\n\nFor customers, the experience can move from finding a property to understanding it, verifying it, financing it, requesting support, and eventually managing the property.",
       "testimonial": {
         "quote": "Working with Web Karigor gave us a clear direction for turning our vision for Kapital Properties into a complete digital property ecosystem. The team understood that we needed more than a property listing platform and translated our requirements into a structured, modern and user-focused experience covering property discovery, financing, services and management.\n\nWe appreciated the team’s ability to understand the complexity of our business and turn it into a product that feels clear, professional and trustworthy. Their attention to detail, communication and commitment throughout the project made the collaboration a valuable experience for Kapital Properties.",
-        "name": "Alexis Botaya",
-        "role": "Managing director • Sound Experience",
+        "name": "Farhana Rahman",
+        "role": "Managing Director, Kapital Properties",
         "avatar": "/h1.webp",
         "rating": 5
       },
@@ -1354,8 +1354,8 @@
       "solution": "This was never just about making screens usable. It was about making decisions feel safe. When money is involved, users do not explore freely. They pause, question, and often step back. The design had to reduce that hesitation by aligning with how people actually evaluate risk, trust information, and move toward commitment.\n\n01. Expose the Truth Early — Critical signals like share availability, real project visuals, and pricing clarity are presented upfront instead of being hidden deeper in the flow.\n\n02. Replace Assumptions with Evidence — Testimonials, visible progress updates, and structured payment breakdowns provide users with tangible information they can evaluate.\n\n03. Turn Complexity into Sequence — Investment details are broken into a logical flow from understanding the concept to evaluating the numbers. Pricing, ownership, and payment options are presented in familiar formats.\n\n04. Keep Momentum Visible — The experience continuously communicates what has been done, what remains, and what comes next, so users feel guided rather than lost.",
       "testimonial": {
         "quote": "Working with Sha Arian on the Probashi Resort website was a great experience. He took the initial requirements and turned them into a clear, structured, and professional digital product. Throughout the project, he understood our business goals, suggested practical improvements, and paid close attention to how users would understand the investment process. The final design feels modern, trustworthy, and easy to navigate, while clearly presenting our projects, share ownership model, payment process, and other important information. We are very satisfied with the final outcome and appreciate the thought and effort he put into bringing our vision to life.",
-        "name": "Théo Cesarini",
-        "role": "CEO & Co-Founder • Incard & Fundree",
+        "name": "Tanvir Ahmed",
+        "role": "Managing Director, Probashi Resorts",
         "avatar": "/h1.webp",
         "rating": 5
       },
@@ -1696,8 +1696,8 @@
       "solution": "We rebuilt the browse architecture around visual discovery, smarter filters, and a frictionless purchase path that keeps shoppers in flow.",
       "testimonial": {
         "quote": "Working with Webkarigor was one of the smoothest product partnerships we've had. They cared about the details, challenged our assumptions, and delivered an experience our customers love.",
-        "name": "Darrell Steward",
-        "role": "CEO of Fooder - Online Food Store",
+        "name": "Sadia Islam",
+        "role": "Founder, Atelier Fashion",
         "avatar": "/h1.webp",
         "rating": 5
       },
@@ -1752,8 +1752,8 @@
       "solution": "We redesigned the booking flow with progressive disclosure, clearer trip summaries, and a confidence-building confirmation experience.",
       "testimonial": {
         "quote": "Working with Webkarigor was one of the smoothest product partnerships we've had. They cared about the details, challenged our assumptions, and delivered an experience our customers love.",
-        "name": "Darrell Steward",
-        "role": "CEO of Fooder - Online Food Store",
+        "name": "Rafsan Kabir",
+        "role": "Head of Product, Tripwise",
         "avatar": "/h1.webp",
         "rating": 5
       },
