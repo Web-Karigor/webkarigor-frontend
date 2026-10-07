@@ -110,14 +110,15 @@ export default function Hero() {
 
           {/* Mobile / tablet — bottom-aligned cutout */}
           <div className="erp-hero-visual relative w-full max-w-[720px] shrink-0 pt-0 max-lg:mx-auto lg:ml-auto lg:pt-14">
-            <div className="relative aspect-[18/12] w-full">
+            <div className="relative aspect-[840/522] w-full">
               <Image
                 src={HERO.heroImage}
-                alt=""
+                alt={HERO.heroImageAlt}
                 fill
-                className="rounded-none object-contain shadow-[0_24px_64px_rgba(0,0,0,0.12)] md:rounded-[20px] md:object-cover"
-                sizes="(100vw)"
-                unoptimized loading="lazy"/>
+                className="object-contain"
+                sizes="(max-width: 1024px) 100vw, 720px"
+                unoptimized
+              />
             </div>
           </div>
         </div>
