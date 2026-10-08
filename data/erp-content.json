@@ -453,7 +453,7 @@
     "plans": [
       {
         "name": "Basic",
-        "price": "৳29 BDT",
+        "price": "৳29",
         "period": "/mo",
         "recommended": false,
         "priceColor": "dark",
@@ -468,7 +468,7 @@
       },
       {
         "name": "Standard",
-        "price": "৳99 BDT",
+        "price": "৳99",
         "period": "/mo",
         "recommended": true,
         "priceColor": "green",
@@ -483,7 +483,7 @@
       },
       {
         "name": "Pro",
-        "price": "৳299 BDT",
+        "price": "৳299",
         "period": "/mo",
         "recommended": false,
         "priceColor": "blue",

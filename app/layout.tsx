@@ -50,6 +50,9 @@ const { title, description } = homeContent.metadata;
 export const metadata: Metadata = {
   title,
   description,
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

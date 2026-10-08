@@ -407,8 +407,8 @@
                 "availabilityTone": "green",
                 "cta": "Book Now",
                 "price": {
-                    "monthly": "৳2600 BDT",
-                    "quarterly": "৳2340 BDT"
+                    "monthly": "৳2600",
+                    "quarterly": "৳2340"
                 },
                 "features": [
                     "40 hours of dedicated design support",
@@ -435,8 +435,8 @@
                 "availabilityMarquee": true,
                 "cta": "Book Now",
                 "price": {
-                    "monthly": "৳4800 BDT",
-                    "quarterly": "৳4320 BDT"
+                    "monthly": "৳4800",
+                    "quarterly": "৳4320"
                 },
                 "features": [
                     "80 hours of dedicated design support",
@@ -462,8 +462,8 @@
                 "availabilityTone": "gray",
                 "cta": "Book Now",
                 "price": {
-                    "monthly": "৳7800 BDT",
-                    "quarterly": "৳7020 BDT"
+                    "monthly": "৳7800",
+                    "quarterly": "৳7020"
                 },
                 "features": [
                     "160 hours of dedicated design support",

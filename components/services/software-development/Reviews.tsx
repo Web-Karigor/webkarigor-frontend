@@ -97,11 +97,11 @@ export default function Reviews() {
 
   return (
     <section className="w-full overflow-hidden bg-white py-[clamp(56px,8vw,96px)]">
-      <div className="mx-auto mb-10 w-full max-w-[1800px] px-[clamp(16px,3.5vw,50px)] text-center lg:mb-12">
-        <p className="m-0 font-montserrat text-[14px] font-semibold uppercase tracking-[0.06em] text-[#0EC47B]">
+      <div className="mx-auto mb-10 flex w-full max-w-[1800px] flex-col items-start gap-4 px-[clamp(16px,3.5vw,50px)] md:flex-row md:items-start md:gap-10 lg:mb-12 lg:gap-16">
+        <p className="m-0 shrink-0 font-museoModerno text-[22px] font-semibold uppercase leading-[1.2] tracking-[0.04em] text-[#0EC47B] sm:text-[28px] md:text-[32px] lg:-mt-2 lg:whitespace-nowrap lg:text-[40px]">
           {REVIEWS_SECTION.eyebrow}
         </p>
-        <h2 className="mt-3 m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.2] tracking-[-0.02em] text-[#18214D]">
+        <h2 className="m-0 min-w-0 w-full max-w-[520px] text-left font-montserrat text-[20px] font-medium leading-[1.2] tracking-[-0.02em] text-[#4b5563] md:ml-auto">
           {REVIEWS_SECTION.title}
         </h2>
       </div>

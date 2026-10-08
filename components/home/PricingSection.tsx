@@ -88,7 +88,7 @@ function formatPrice(pkg: HomepagePackage, period: Billing) {
   const amount = pickAmount(block?.price, block?.discount_price);
   if (amount <= 0) return "";
   // return `$${Math.round(amount).toLocaleString("en-US")}`;
-  return `৳${Math.round(amount).toLocaleString("en-US")} BDT`;
+  return `৳${Math.round(amount).toLocaleString("en-US")}`;
 }
 
 function isCustomPrice(pkg: HomepagePackage) {
