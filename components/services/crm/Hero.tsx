@@ -93,12 +93,12 @@ export default function Hero() {
           </div>
 
           <div className="mx-auto w-full max-w-[720px] pt-3 lg:ml-auto lg:justify-self-end lg:pt-0">
-            <div className="svc-hero-visual relative aspect-[18/12] w-full">
+            <div className="svc-hero-visual relative aspect-[796/522] w-full">
               <Image
                 src={hero.image.src}
                 alt={hero.image.alt}
                 fill
-                className="rounded-none object-contain shadow-[0_24px_64px_rgba(0,0,0,0.12)] md:rounded-[20px] md:object-cover"
+                className="object-contain"
                 sizes="(max-width: 1024px) 100vw, 720px"
                 loading="lazy"
               />
