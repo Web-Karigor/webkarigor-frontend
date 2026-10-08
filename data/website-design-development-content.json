@@ -405,10 +405,10 @@
                 "description": "Perfect for small projects or testing the waters",
                 "availability": "3 Slots Available, Hurry!",
                 "availabilityTone": "green",
-                "cta": "Explore Package",
+                "cta": "Book Now",
                 "price": {
-                    "monthly": "$2600",
-                    "quarterly": "$2340"
+                    "monthly": "৳2600 BDT",
+                    "quarterly": "৳2340 BDT"
                 },
                 "features": [
                     "40 hours of dedicated design support",
@@ -433,10 +433,10 @@
                 "availability": "2 Slots Available, Hurry!",
                 "availabilityTone": "red",
                 "availabilityMarquee": true,
-                "cta": "Explore Package",
+                "cta": "Book Now",
                 "price": {
-                    "monthly": "$4800",
-                    "quarterly": "$4320"
+                    "monthly": "৳4800 BDT",
+                    "quarterly": "৳4320 BDT"
                 },
                 "features": [
                     "80 hours of dedicated design support",
@@ -460,10 +460,10 @@
                 "description": "For established businesses with high-volume design demands",
                 "availability": "Limited availability",
                 "availabilityTone": "gray",
-                "cta": "Explore Package",
+                "cta": "Book Now",
                 "price": {
-                    "monthly": "$7800",
-                    "quarterly": "$7020"
+                    "monthly": "৳7800 BDT",
+                    "quarterly": "৳7020 BDT"
                 },
                 "features": [
                     "160 hours of dedicated design support",

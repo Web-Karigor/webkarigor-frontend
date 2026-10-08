@@ -60,7 +60,7 @@ function CreditRow({ group }: { group: CreditGroup }) {
 
 function CreditsColumn({ groups }: { groups: CreditGroup[] }) {
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 sm:gap-x-4 md:gap-x-6">
+    <div className="grid content-start grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 sm:gap-x-4 md:gap-x-6">
       {groups.map((group) => (
         <CreditRow key={group.role} group={group} />
       ))}

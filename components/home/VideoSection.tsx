@@ -3,7 +3,7 @@
 import "./VideoSection.css";
 
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
-import { gsap, ScrollTrigger, refreshScrollTriggers } from "@/lib/gsap";
+import { gsap, ScrollTrigger, isTouchToolbarResize, refreshScrollTriggers } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
 
 const { embedUrl, title: videoTitle } = homeContent.video;
@@ -189,7 +189,10 @@ const VideoSection = () => {
         stage.addEventListener("mousemove", onMove);
         stage.addEventListener("mouseleave", onLeave);
 
+        let viewportWidth = window.innerWidth;
         const onResize = () => {
+          if (isTouchToolbarResize(viewportWidth)) return;
+          viewportWidth = window.innerWidth;
           applyLayout();
           applyVisual(state.current);
           refreshScrollTriggers();
@@ -314,7 +317,10 @@ const VideoSection = () => {
 
         gsap.ticker.add(onTick);
 
+        let viewportWidth = window.innerWidth;
         const onResize = () => {
+          if (isTouchToolbarResize(viewportWidth)) return;
+          viewportWidth = window.innerWidth;
           applyLayout();
           applyVisual(state.current);
           refreshScrollTriggers();

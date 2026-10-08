@@ -1,0 +1,270 @@
+/* Website Design team section — Figma node 4428:2121.
+   Desktop (lg+) scales a 1920×944 clip of the 1920×1554 frame.
+   Below 1024px the collage keeps its internal scatter and the ring is reframed. */
+
+.wdd-team {
+  position: relative;
+  width: 100%;
+  overflow: clip;
+  background: #f7f9fb;
+  color: #183b56;
+}
+
+.wdd-team-desktop {
+  display: none;
+}
+
+.wdd-team-scale {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin-inline: auto;
+  aspect-ratio: 1920 / 944;
+  container-type: inline-size;
+  overflow: hidden;
+}
+
+.wdd-team-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 944px;
+  transform-origin: top left;
+  transform: scale(calc(100cqi / 1920px));
+}
+
+.wdd-canvas-heading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  pointer-events: none;
+}
+
+.wdd-figma-title {
+  position: absolute;
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 104px;
+  letter-spacing: 0;
+  color: #183b56;
+}
+
+.wdd-figma-title-left {
+  top: 28px;
+  left: 221px;
+  width: var(--team-left-width, 632px);
+  height: auto;
+  text-align: left;
+}
+
+.wdd-figma-title-right {
+  top: var(--team-right-top, 647px);
+  right: 222px;
+  width: var(--team-right-width, 398px);
+  height: auto;
+  text-align: right;
+}
+
+.wdd-collage {
+  position: relative;
+  z-index: 1;
+  container-type: inline-size;
+  --u: calc(100cqi / 651.6686401367188px);
+}
+
+.wdd-team-canvas .wdd-collage {
+  position: absolute;
+  top: 154px;
+  left: 634px;
+  width: 651.6686401367188px;
+  height: 663.1011352539062px;
+}
+
+.wdd-layer {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.wdd-ring {
+  z-index: 0;
+}
+
+.wdd-dots {
+  z-index: 1;
+}
+
+.wdd-circle {
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.wdd-circle-green {
+  background: #38f8ab;
+}
+
+.wdd-circle-gray {
+  background: #f1f4f5;
+}
+
+.wdd-shadow {
+  z-index: 3;
+  background: transparent;
+  box-shadow: 0 calc(28.582px * var(--u)) calc(71.455px * var(--u)) 0
+    rgba(15, 24, 44, var(--shadow-alpha, 0.2));
+}
+
+.wdd-shadow-25 {
+  --shadow-alpha: 0.25;
+}
+
+.wdd-shadow-20 {
+  --shadow-alpha: 0.2;
+}
+
+.wdd-shadow-15 {
+  --shadow-alpha: 0.15;
+}
+
+.wdd-photo {
+  overflow: hidden;
+  background: #e8eef6;
+}
+
+.wdd-photo-beard {
+  z-index: 4;
+}
+
+.wdd-photo-woman {
+  z-index: 5;
+}
+
+.wdd-photo-hoodie {
+  z-index: 6;
+}
+
+.wdd-photo-large {
+  z-index: 7;
+}
+
+.wdd-photo-cap {
+  z-index: 8;
+}
+
+.wdd-radius-sm {
+  border-radius: calc(17.149px * var(--u));
+}
+
+.wdd-radius-lg {
+  border-radius: calc(22.866px * var(--u));
+}
+
+.wdd-compact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "lead"
+    "collage"
+    "tail";
+  align-items: start;
+  row-gap: clamp(18px, 3.2vw, 28px);
+  padding: clamp(36px, 7vw, 48px) clamp(16px, 4.5vw, 24px) clamp(40px, 8vw, 52px);
+}
+
+.wdd-compact-heading {
+  display: contents;
+  margin: 0;
+}
+
+.wdd-compact-line {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: clamp(38px, 11.4vw, 48px);
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: #183b56;
+}
+
+.wdd-compact-left {
+  grid-area: lead;
+  width: min(100%, var(--team-left-em, 7.9em));
+}
+
+.wdd-compact-right {
+  grid-area: tail;
+  width: min(100%, var(--team-right-em, 4.975em));
+  justify-self: end;
+  text-align: right;
+}
+
+.wdd-compact .wdd-collage {
+  grid-area: collage;
+  width: min(100%, 460px);
+  height: auto;
+  aspect-ratio: 651.6686401367188 / 663.1011352539062;
+  justify-self: center;
+}
+
+.wdd-compact .wdd-ring {
+  z-index: 0;
+  width: 178%;
+  height: auto;
+  aspect-ratio: 1;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -48%);
+}
+
+@media (min-width: 640px) {
+  .wdd-compact {
+    row-gap: clamp(22px, 3vw, 32px);
+    padding: 48px clamp(24px, 4vw, 36px) 56px;
+  }
+
+  .wdd-compact-line {
+    font-size: clamp(46px, 7.2vw, 52px);
+  }
+
+  .wdd-compact .wdd-collage {
+    width: min(100%, 540px);
+  }
+}
+
+@media (min-width: 768px) {
+  .wdd-compact {
+    row-gap: 36px;
+    padding: 64px 40px 72px;
+  }
+
+  .wdd-compact-line {
+    font-size: clamp(52px, 6.4vw, 68px);
+  }
+
+  .wdd-compact .wdd-collage {
+    width: min(100%, 640px);
+  }
+
+  .wdd-compact .wdd-ring {
+    width: 168%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wdd-compact {
+    display: none;
+  }
+
+  .wdd-team-desktop {
+    display: block;
+  }
+}

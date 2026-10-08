@@ -12,7 +12,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { gsap, ScrollTrigger, refreshScrollTriggers } from "@/lib/gsap";
+import { gsap, ScrollTrigger, isTouchToolbarResize, refreshScrollTriggers } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
 
 /* -------------------------------------------------------------------------- */
@@ -545,10 +545,14 @@ export default function Services() {
       readProgress();
     };
 
+    let viewportWidth = window.innerWidth;
     const onResize = () => {
+      if (isTouchToolbarResize(viewportWidth)) return;
+      viewportWidth = window.innerWidth;
       measureLayout();
       cacheMetrics();
       readProgress();
+      if (window.matchMedia("(max-width: 1023px)").matches) return;
       refreshScrollTriggers();
     };
 

@@ -550,7 +550,7 @@
     "title": "Fair Pricing for Your Product",
     "description": "Our packages are designed to fit your product's stage and ambition. Flexible, transparent, and customizable based on what your business truly needs.",
     "whatYouGetLabel": "What you get:",
-    "ctaLabel": "Explore Package",
+    "ctaLabel": "Book Now",
     "sharedFeatures": [
       "User research and product discovery sessions",
       "End-to-end UX/UI design for the full product",
@@ -567,12 +567,12 @@
         "plans": [
           {
             "title": "Build & Validate",
-            "price": "$5,000",
+            "price": "৳5,000 BDT",
             "subtitle": "Full Product Design with Research & Development"
           },
           {
             "title": "Build & Validate",
-            "price": "$5,000",
+            "price": "৳5,000 BDT",
             "subtitle": "Full Product Design with Research & Development"
           }
         ]
@@ -583,12 +583,12 @@
         "plans": [
           {
             "title": "Build & Validate",
-            "price": "$5,000",
+            "price": "৳5,000 BDT",
             "subtitle": "Full Product Design with Research & Development"
           },
           {
             "title": "Build & Validate",
-            "price": "$5,000",
+            "price": "৳5,000 BDT",
             "subtitle": "Full Product Design with Research & Development"
           }
         ]

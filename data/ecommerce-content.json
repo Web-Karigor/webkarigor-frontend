@@ -289,7 +289,7 @@
     "plans": [
       {
         "name": "Basic",
-        "price": "$39",
+        "price": "৳39 BDT",
         "period": "/month",
         "description": "All the basics for businesses that are just getting started.",
         "priceColor": "dark",
@@ -302,7 +302,7 @@
       },
       {
         "name": "Standard",
-        "price": "$99",
+        "price": "৳99 BDT",
         "period": "/month",
         "description": "Better for growing businesses that want more customers.",
         "priceColor": "green",
@@ -316,7 +316,7 @@
       },
       {
         "name": "Premium",
-        "price": "$339",
+        "price": "৳339 BDT",
         "period": "/month",
         "description": "Advanced features for pros who need more customization.",
         "priceColor": "blue",

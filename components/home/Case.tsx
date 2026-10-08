@@ -57,6 +57,7 @@ export default function Case() {
 
     const getStackY = (stackIndex: number) => `${stackIndex * 10}%`;
     const getStackZ = (stackIndex: number) => -stackIndex * 28;
+    const isCompact = () => window.matchMedia("(max-width: 767px)").matches;
     const stepDuration = 1;
 
     const ctx = gsap.context(() => {
@@ -121,14 +122,30 @@ export default function Case() {
             card,
             {
               y: () => -getLift(),
-              z: 36,
-              rotateX: 8,
+              z: () => (isCompact() ? 0 : 36),
+              rotateX: () => (isCompact() ? 0 : 8),
               duration: stepDuration,
             },
             segment,
           )
-          .to(title, { y: -64, rotateX: 18, duration: stepDuration }, segment)
-          .to(content, { y: -32, rotateX: 18, duration: stepDuration }, segment)
+          .to(
+            title,
+            {
+              y: () => (isCompact() ? 0 : -64),
+              rotateX: () => (isCompact() ? 0 : 18),
+              duration: stepDuration,
+            },
+            segment,
+          )
+          .to(
+            content,
+            {
+              y: () => (isCompact() ? 0 : -32),
+              rotateX: () => (isCompact() ? 0 : 18),
+              duration: stepDuration,
+            },
+            segment,
+          )
           .to(
             next,
             {

@@ -39,7 +39,8 @@ function CheckIcon() {
 function formatPrice(pkg: HomepagePackage) {
   const amount = Number(pkg.monthly_price?.price);
   if (!Number.isFinite(amount) || amount <= 0) return "";
-  return `$${Math.round(amount).toLocaleString("en-US")}`;
+  // return `$${Math.round(amount).toLocaleString("en-US")}`;
+  return `৳${Math.round(amount).toLocaleString("en-US")} BDT`;
 }
 
 function groupByCategory(packages: HomepagePackage[]) {

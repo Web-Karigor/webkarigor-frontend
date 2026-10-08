@@ -76,7 +76,7 @@ function InfoIcon() {
   );
 }
 
-function pickAmount(price: string, discount: string) {
+function pickAmount(price?: string, discount?: string) {
   const discounted = Number(discount);
   const base = Number(price);
   if (discounted > 0) return discounted;
@@ -85,16 +85,16 @@ function pickAmount(price: string, discount: string) {
 
 function formatPrice(pkg: HomepagePackage, period: Billing) {
   const block = period === "monthly" ? pkg.monthly_price : pkg.yearly_price;
-  const amount = pickAmount(block.price, block.discount_price);
+  const amount = pickAmount(block?.price, block?.discount_price);
   if (amount <= 0) return "";
-  const monthly = period === "yearly" ? amount / 12 : amount;
-  return `$${Math.round(monthly).toLocaleString("en-US")}`;
+  // return `$${Math.round(amount).toLocaleString("en-US")}`;
+  return `৳${Math.round(amount).toLocaleString("en-US")} BDT`;
 }
 
 function isCustomPrice(pkg: HomepagePackage) {
   return (
-    pickAmount(pkg.monthly_price.price, pkg.monthly_price.discount_price) <= 0 &&
-    pickAmount(pkg.yearly_price.price, pkg.yearly_price.discount_price) <= 0
+    pickAmount(pkg.monthly_price?.price, pkg.monthly_price?.discount_price) <= 0 &&
+    pickAmount(pkg.yearly_price?.price, pkg.yearly_price?.discount_price) <= 0
   );
 }
 
@@ -188,9 +188,9 @@ export default function PricingSection({
 
         <div className="home-pricing-grid">
           {packages.map((pkg) => {
-            const customPrice = isCustomPrice(pkg);
             const price = formatPrice(pkg, period);
-            const availText = pkg.availability || "";
+            const customPrice = isCustomPrice(pkg) || !price;
+            const availText = pkg.availability?.trim() || "";
             const desc = pkg.title;
             const isPopular = pkg.is_popular;
             const isHurry = /hurry|slots/i.test(availText);
@@ -218,30 +218,34 @@ export default function PricingSection({
                 <article
                   className={`home-pricing-card${isPopular ? " is-popular" : ""}`}
                 >
-                  <div
-                    className={`home-pricing-avail is-pill is-${tone}${
-                      isPopular ? " is-marquee" : ""
-                    }`}
-                  >
-                    <span
-                      className={`home-pricing-dot${tone === "red" ? " is-red" : ""}`}
-                      aria-hidden
+                  {availText ? (
+                    <div
+                      className={`home-pricing-avail is-pill is-${tone}${
+                        isPopular ? " is-marquee" : ""
+                      }`}
                     >
-                      <span className="home-pricing-dot-pulse" />
-                    </span>
+                      <span
+                        className={`home-pricing-dot${tone === "red" ? " is-red" : ""}`}
+                        aria-hidden
+                      >
+                        <span className="home-pricing-dot-pulse" />
+                      </span>
 
-                    {isPopular ? (
-                      <div className="home-pricing-marquee" aria-label={availText}>
-                        <div className="home-pricing-marquee-track">
-                          {Array.from({ length: 8 }).map((_, i) => (
-                            <span key={i}>{availText}</span>
-                          ))}
+                      {isPopular ? (
+                        <div className="home-pricing-marquee" aria-label={availText}>
+                          <div className="home-pricing-marquee-track">
+                            {Array.from({ length: 8 }).map((_, i) => (
+                              <span key={i}>{availText}</span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <span className="home-pricing-avail-text">{availText}</span>
-                    )}
-                  </div>
+                      ) : (
+                        <span className="home-pricing-avail-text">{availText}</span>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="home-pricing-avail is-empty" aria-hidden />
+                  )}
 
                   <h3 className="home-pricing-title">{name}</h3>
                   <p className="home-pricing-card-desc">{desc}</p>
@@ -252,7 +256,9 @@ export default function PricingSection({
                     ) : (
                       <>
                         <span className="home-pricing-price">{price}</span>
-                        <span className="home-pricing-duration">/month</span>
+                        <span className="home-pricing-duration">
+                          {period === "yearly" ? "/year" : "/month"}
+                        </span>
                       </>
                     )}
                   </div>
@@ -263,14 +269,14 @@ export default function PricingSection({
                     packageId={pkg.id}
                     serviceId={serviceId ?? pkg.service?.id ?? null}
                   >
-                    {customPrice ? "Contact Us" : "Explore Package"}
+                    {customPrice ? "Contact Us" : "Book Now"}
                   </PricingCtaButton>
 
                   <div className="home-pricing-features">
                     <p className="home-pricing-features-title">{featuresHeading}</p>
                     <ul className="home-pricing-features-list">
-                      {pkg.features.map((feature) => (
-                        <li key={feature}>
+                      {(pkg.features ?? []).map((feature, index) => (
+                        <li key={`${pkg.id}-${index}`}>
                           <CheckIcon />
                           <span>{feature}</span>
                         </li>
