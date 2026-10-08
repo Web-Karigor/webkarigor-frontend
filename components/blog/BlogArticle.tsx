@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import type { BlogBlock, BlogPost } from "@/lib/blog-data";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import {
+  formatBlogDate,
+  formatBlogReadTime,
+  type BlogBlock,
+  type BlogPost,
+} from "@/lib/blog-data";
+import BlogShare from "./BlogShare";
+import "./BlogRelated.css";
 
 function ArticleFigure({
   src,
@@ -71,39 +78,39 @@ function Block({ block }: { block: BlogBlock }) {
   );
 }
 
-function RelatedImageCard({ post }: { post: BlogPost }) {
+function RelatedBlogCard({ post }: { post: BlogPost }) {
   return (
-    <Link
-      href={`/blog/${post.slug}`}
-      className="group block overflow-hidden rounded-[22px] bg-white p-3 shadow-[0_10px_40px_rgba(17,17,17,0.06)]"
-    >
-      <div className="relative aspect-[3/4] overflow-hidden rounded-[16px] bg-[#F4F1E8]">
-        <Image
-          src={post.image}
-          alt={post.alt}
-          fill
-          sizes="(max-width: 768px) 100vw, 340px"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-        />
-      </div>
-    </Link>
-  );
-}
+    <article className="related-blog-flip relative aspect-[3/4]">
+      <Link
+        href={`/blog/${post.slug}`}
+        className="related-blog-flip-link block h-full w-full outline-none"
+        aria-label={post.title}
+      >
+        <div className="related-blog-flip-inner">
+          <div className="related-blog-flip-face related-blog-flip-front">
+            <div className="relative h-full w-full overflow-hidden rounded-[16px] bg-[#F4F1E8]">
+              <Image
+                src={post.image}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 340px"
+                className="object-cover"
+              />
+            </div>
+          </div>
 
-function RelatedTextCard({ post }: { post: BlogPost }) {
-  return (
-    <Link
-      href={`/blog/${post.slug}`}
-      className="flex h-full min-h-[280px] flex-col rounded-[22px] bg-white p-6 shadow-[0_10px_40px_rgba(17,17,17,0.06)] sm:p-7"
-    >
-      <p className="m-0 font-montserrat text-[14px] font-medium leading-[1.75] text-[#6d6d6d] sm:text-[15px]">
-        {post.excerpt}
-      </p>
-      <span className="mt-auto inline-flex items-center justify-end gap-1.5 pt-8 font-montserrat text-[14px] font-semibold text-[#111] sm:text-[15px]">
-        View Project
-        <ArrowUpRight className="h-4 w-4" strokeWidth={2} aria-hidden />
-      </span>
-    </Link>
+          <div className="related-blog-flip-face related-blog-flip-back">
+            <p className="m-0 min-h-0 overflow-y-auto font-montserrat text-[14px] font-medium leading-[1.75] text-[#6d6d6d] sm:text-[15px]">
+              {post.excerpt}
+            </p>
+            <span className="mt-6 inline-flex shrink-0 items-center gap-1.5 self-end font-montserrat text-[14px] font-semibold text-[#111] sm:text-[15px]">
+              View Project
+              <ArrowUpRight className="h-4 w-4" strokeWidth={2} aria-hidden />
+            </span>
+          </div>
+        </div>
+      </Link>
+    </article>
   );
 }
 
@@ -116,16 +123,31 @@ export default function BlogArticle({
 }) {
   return (
     <article className="bg-[#FFFDF6] pb-16 pt-[112px] sm:pb-20 sm:pt-[132px] lg:pb-24 lg:pt-[156px]">
-      <div className="mx-auto w-full max-w-[760px] px-[clamp(16px,4vw,40px)]">
+      <div className="mx-auto w-full max-w-[820px] px-[clamp(16px,4vw,40px)]">
         <header>
-          <h1 className="m-0 font-montserrat text-[clamp(28px,4vw,42px)] font-extrabold leading-[1.15] tracking-[-0.035em] text-[#1F1E1C]">
+          <Link
+            href="/blog"
+            className="inline-flex h-10 items-center gap-2 rounded-full bg-[#FFE14A] px-4 font-montserrat text-[14px] font-semibold leading-none text-[#111] transition-colors hover:bg-[#f5d63a] sm:h-11 sm:px-5 sm:text-[15px]"
+          >
+            <ArrowLeft className="h-4 w-4" strokeWidth={2.5} aria-hidden />
+            Back to Blogs
+          </Link>
+          <h1 className="m-0 mt-6 font-montserrat text-[clamp(30px,4.2vw,44px)] font-extrabold leading-[1.12] tracking-[-0.035em] text-[#111] sm:mt-7">
             {post.title}
           </h1>
-          <p className="m-0 mt-4 font-montserrat text-[13px] font-medium text-[#8a847c] sm:text-[14px]">
-            {post.date}
-            <span aria-hidden="true"> · </span>
-            {post.readTime}
+          <p className="m-0 mt-4 font-montserrat text-[16px] font-medium leading-[1.55] text-[#8d8d8d] sm:mt-5 sm:text-[18px]">
+            {post.subtitle ?? post.excerpt}
           </p>
+          <div className="mt-6 flex items-center justify-between gap-4 border-t border-[#E4E0D6] pt-4 sm:mt-7">
+            <p className="m-0 font-montserrat text-[13px] font-medium text-[#8d8d8d] sm:text-[15px]">
+              {formatBlogReadTime(post.readTime)}
+              <span className="px-2 text-[#c4c4c4]" aria-hidden="true">
+                |
+              </span>
+              {formatBlogDate(post.date)}
+            </p>
+            <BlogShare title={post.title} />
+          </div>
         </header>
 
         <ArticleFigure
@@ -164,17 +186,23 @@ export default function BlogArticle({
       </div>
 
       {related.length > 0 ? (
-        <section className="mx-auto mt-10 w-full max-w-[1120px] px-[clamp(16px,4vw,40px)] sm:mt-12">
-          <p className="m-0 text-center font-montserrat text-[13px] font-medium uppercase tracking-[0.16em] text-[#b5b5b5] sm:text-[14px]">
-            Read next blog <span aria-hidden="true">→</span>
-          </p>
-          <h2 className="m-0 mt-8 font-montserrat text-[22px] font-bold tracking-[-0.03em] text-[#111] sm:mt-10 sm:text-[26px]">
+        <section className="mx-auto mt-12 w-full max-w-[1120px] px-[clamp(16px,4vw,40px)] sm:mt-16 md:mt-20">
+          <Link
+            href={`/blog/${related[0].slug}`}
+            className="blog-next mx-auto flex w-full items-center justify-center gap-2 px-4 py-5 font-montserrat text-[11px] font-medium tracking-[0.08em] text-[#3F3C34] uppercase sm:gap-3 sm:px-8 sm:py-6 sm:text-[13px] sm:tracking-[0.14em]"
+          >
+            <span className="blog-next-text inline-flex items-center gap-2 sm:gap-3">
+              <span className="blog-next-label">Read next blog</span>
+              <ArrowRight className="blog-next-icon h-[18px] w-[18px] sm:h-5 sm:w-5" strokeWidth={2} />
+            </span>
+          </Link>
+          <h2 className="m-0 mt-10 font-montserrat text-[22px] font-bold tracking-[-0.03em] text-[#111] sm:mt-14 sm:text-[26px] md:mt-16">
             Related Blogs
           </h2>
-          <div className="mt-5 grid grid-cols-1 items-stretch gap-4 sm:mt-6 md:grid-cols-3 md:gap-5">
-            {related[0] ? <RelatedImageCard post={related[0]} /> : null}
-            {related[1] ? <RelatedTextCard post={related[1]} /> : null}
-            {related[2] ? <RelatedImageCard post={related[2]} /> : null}
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:mt-6 md:grid-cols-3 md:gap-5">
+            {related.map((item) => (
+              <RelatedBlogCard key={item.slug} post={item} />
+            ))}
           </div>
         </section>
       ) : null}
