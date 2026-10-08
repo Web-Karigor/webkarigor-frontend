@@ -21,11 +21,44 @@ export type BlogPost = {
   image: string;
   alt: string;
   excerpt: string;
+  /** Short line under the title on the article page. Falls back to excerpt. */
+  subtitle?: string;
   date: string;
   readTime: string;
   author: BlogAuthor;
   blocks: BlogBlock[];
 };
+
+const FULL_MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const SHORT_MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+export function formatBlogDate(value: string) {
+  const match = value.trim().match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+  if (!match) return value;
+  const monthIndex = SHORT_MONTHS.findIndex((month) =>
+    match[2].toLowerCase().startsWith(month),
+  );
+  if (monthIndex < 0) return value;
+  return `${match[1].padStart(2, "0")} ${FULL_MONTHS[monthIndex]}, ${match[3]}`;
+}
+
+export function formatBlogReadTime(value: string) {
+  return value.replace(/\bread\b/i, "reads");
+}
 
 export const BLOG_PAGE = {
   eyebrow: "Beyond the Interface",
@@ -66,6 +99,8 @@ export const BLOG_POSTS: BlogPost[] = [
     alt: "A person studying a long stream of content on a desktop monitor",
     excerpt:
       "Endless feeds feel effortless until shoppers lose their place, miss the footer, and abandon a cart they cannot find again.",
+    subtitle:
+      "Why that smooth, endless scroll might be confusing your users and affecting your conversions",
     date: "18 Mar 2026",
     readTime: "8 min read",
     author: AUTHOR,
