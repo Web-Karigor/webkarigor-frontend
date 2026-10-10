@@ -9,7 +9,7 @@
     "line2": "Our",
     "line3": "Strength"
   },
-  "intro": "A small, focused team building products with craft, clarity, and care — turning ideas into digital experiences that help businesses grow.",
+  "intro": "A expert, focused team building products with craft, clarity, and care — turning ideas into digital experiences that help businesses grow.",
   "members": [
     {
       "id": "md-taufikuzzaman",
@@ -31,6 +31,13 @@
       "role": "Sales Manager",
       "image": "/team/mr-milon.jpg",
       "bio": "Milon leads sales efforts with a focus on driving client acquisition and revenue growth. His managerial oversight of the sales pipeline supports strategic business development and consistent deal closure across the team."
+    },
+    {
+      "id": "md-mashukur-rahman",
+      "name": "Md. Mashukur Rahman",
+      "role": "HR & Administration Executive",
+      "image": "/team/mashukur-rahman.jpg",
+      "bio": "Mashukur oversees people operations and administrative continuity, balancing policy with practical workplace needs. His organizational discipline supports a functional, well-coordinated internal environment across hiring and daily operations."
     },
     {
       "id": "mr-mehedi",
@@ -82,11 +89,18 @@
       "bio": "Arian shapes intuitive, visually confident digital experiences, bridging user needs with brand identity. With a keen eye for interaction and detail, they craft interfaces that feel effortless to use while maintaining a distinct creative signature across every design touchpoint."
     },
     {
-      "id": "md-mashukur-rahman",
-      "name": "Md. Mashukur Rahman",
-      "role": "HR & Administration Executive",
-      "image": "/team/mashukur-rahman.jpg",
-      "bio": "Mashukur oversees people operations and administrative continuity, balancing policy with practical workplace needs. His organizational discipline supports a functional, well-coordinated internal environment across hiring and daily operations."
+      "id": "abdullah-al-mamun",
+      "name": "Abdullah Al Mamun",
+      "role": "Accounts Officer",
+      "image": "/team/al-mamun.jpg",
+      "bio": "Mamun manages the financial record-keeping that keeps operations grounded, maintaining accuracy across transactions and reporting. His diligence with numbers and process provides a dependable backbone for the organization's fiscal health."
+    },
+    {
+      "id": "reshma-akhter",
+      "name": "Reshma Akhter",
+      "role": "Customer Relations Officer",
+      "image": "/team/reshma-akter.jpg",
+      "bio": "Reshma manages client interactions with warmth and clarity, serving as a trusted point of contact for inquiries and concerns. Her communicative ease and responsiveness help maintain strong, ongoing customer relationships."
     },
     {
       "id": "mohd-motakabbirul-islam",
@@ -96,6 +110,13 @@
       "bio": "Motakabbirul drives growth through attentive client interaction, identifying needs and matching them to fitting solutions. His persistence and interpersonal clarity support consistent pipeline development and lasting client relationships."
     },
     {
+      "id": "habibur-rahman",
+      "name": "Habibur Rahman",
+      "role": "Client Engagement Executive",
+      "image": "/team/habibur-rahman.jpg",
+      "bio": "Habibur connects prospective clients with fitting solutions, guiding the sales conversation with attentiveness and professionalism. His relationship-driven approach supports steady business development and client acquisition."
+    },
+    {
       "id": "md-habibullah",
       "name": "Md. Habibullah",
       "role": "Web Solutions Consultant",
@@ -103,8 +124,8 @@
       "bio": "Habibullah connects client needs with the right digital solutions, guiding prospects through the sales journey with clarity and product knowledge. His consultative approach builds trust and translates business goals into actionable website engagements."
     },
     {
-      "id": "tasmin-beanty-monju-prithila",
-      "name": "Tasmin Beanty Monju Prithila",
+      "id": "tasnim-prithila",
+      "name": "Tasnim Prithila",
       "role": "Client Engagement Executive",
       "image": "/team/prithila.jpg",
       "bio": "Prithila builds relationships that convert interest into partnership, guiding clients through offerings with warmth and professionalism. Her communicative strength and client-first mindset make her an effective front line for business development."
@@ -124,25 +145,18 @@
       "bio": "Pritom is honing his craft in video editing, contributing energy and an evolving technical eye to visual projects. His developing skill set in pacing and post-production reflects a solid start in the motion media space."
     },
     {
-      "id": "abdullah-al-mamun",
-      "name": "Abdullah Al Mamun",
-      "role": "Accounts Officer",
-      "image": "/team/al-mamun.jpg",
-      "bio": "Mamun manages the financial record-keeping that keeps operations grounded, maintaining accuracy across transactions and reporting. His diligence with numbers and process provides a dependable backbone for the organization's fiscal health."
+      "id": "md-yeakub-ali",
+      "name": "Md. Yeakub Ali",
+      "role": "Technical Support Specialist",
+      "image": "/team/yakub-ali.jpg",
+      "bio": "Yeakub delivers responsive software support, working through client issues with methodical care. His reliability and technical attentiveness make him a consistent presence in maintaining system stability for users."
     },
     {
-      "id": "habibur-rahman",
-      "name": "Habibur Rahman",
-      "role": "Client Engagement Executive",
-      "image": "/team/habibur-rahman.jpg",
-      "bio": "Habibur connects prospective clients with fitting solutions, guiding the sales conversation with attentiveness and professionalism. His relationship-driven approach supports steady business development and client acquisition."
-    },
-    {
-      "id": "reshma-akhter",
-      "name": "Reshma Akhter",
-      "role": "Customer Relations Officer",
-      "image": "/team/reshma-akter.jpg",
-      "bio": "Reshma manages client interactions with warmth and clarity, serving as a trusted point of contact for inquiries and concerns. Her communicative ease and responsiveness help maintain strong, ongoing customer relationships."
+      "id": "md-rahibul-alam",
+      "name": "Md Rahibul Alam",
+      "role": "Technical Support Specialist",
+      "image": "/team/rahibul-alom.jpg",
+      "bio": "Rahibul addresses software concerns with structured troubleshooting, ensuring clients receive timely and accurate resolutions. His steady technical approach contributes to consistent service quality across the support function."
     },
     {
       "id": "mizanur-rahman-sabuj",
@@ -157,20 +171,6 @@
       "role": "Technical Support Associate",
       "image": "/team/mehadi-hadin.jpg",
       "bio": "Hadin provides direct software assistance, helping users navigate and resolve issues efficiently. His attentiveness and technical grounding make him a reliable contributor to the support team's day-to-day responsiveness."
-    },
-    {
-      "id": "md-rahibul-alam",
-      "name": "Md Rahibul Alam",
-      "role": "Technical Support Specialist",
-      "image": "/team/rahibul-alom.jpg",
-      "bio": "Rahibul addresses software concerns with structured troubleshooting, ensuring clients receive timely and accurate resolutions. His steady technical approach contributes to consistent service quality across the support function."
-    },
-    {
-      "id": "md-yeakub-ali",
-      "name": "Md. Yeakub Ali",
-      "role": "Technical Support Specialist",
-      "image": "/team/yakub-ali.jpg",
-      "bio": "Yeakub delivers responsive software support, working through client issues with methodical care. His reliability and technical attentiveness make him a consistent presence in maintaining system stability for users."
     },
     {
       "id": "md-imran-talukder",

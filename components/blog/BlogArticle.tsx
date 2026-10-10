@@ -1,84 +1,30 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import {
-  formatBlogDate,
-  formatBlogReadTime,
-  type BlogBlock,
-  type BlogPost,
-} from "@/lib/blog-data";
+import { useBlogQuery } from "@/hooks/queries/useBlogQuery";
+import { useBlogsQuery } from "@/hooks/queries/useBlogsQuery";
+import { formatBlogDate, stripHtml } from "@/lib/blog-data";
+import type { Blog } from "@/types/blog";
 import BlogShare from "./BlogShare";
 import "./BlogRelated.css";
 
-function ArticleFigure({
-  src,
-  alt,
-  priority = false,
-  className = "mt-8",
-}: {
-  src: string;
-  alt: string;
-  priority?: boolean;
-  className?: string;
-}) {
+const RELATED_COUNT = 3;
+
+function BackLink() {
   return (
-    <figure className={`${className} m-0`}>
-      <div className="relative aspect-[16/9] overflow-hidden rounded-[18px] bg-[#EFE9DC]">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          priority={priority}
-          sizes="(max-width: 760px) 100vw, 760px"
-          className="object-cover"
-        />
-      </div>
-    </figure>
+    <Link
+      href="/blog"
+      className="inline-flex h-10 items-center gap-2 rounded-full bg-[#FFE14A] px-4 font-montserrat text-[14px] font-semibold leading-none text-[#111] transition-colors hover:bg-[#f5d63a] sm:h-11 sm:px-5 sm:text-[15px]"
+    >
+      <ArrowLeft className="h-4 w-4" strokeWidth={2.5} aria-hidden />
+      Back to Blogs
+    </Link>
   );
 }
 
-function Block({ block }: { block: BlogBlock }) {
-  if (block.type === "heading") {
-    return (
-      <h2 className="m-0 mt-10 font-montserrat text-[clamp(22px,2.4vw,28px)] font-bold leading-[1.25] tracking-[-0.03em] text-[#1F1E1C] sm:mt-12">
-        {block.text}
-      </h2>
-    );
-  }
-
-  if (block.type === "gallery") {
-    return (
-      <div className="mt-8 grid grid-cols-3 gap-2.5 sm:mt-10 sm:gap-4">
-        {block.images.map((image) => (
-          <div
-            key={image.src}
-            className="relative aspect-[4/3] overflow-hidden rounded-[12px] bg-[#EFE9DC] sm:rounded-[16px]"
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="(max-width: 760px) 33vw, 240px"
-              className="object-cover"
-            />
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (block.type === "figure") {
-    return <ArticleFigure src={block.image.src} alt={block.image.alt} />;
-  }
-
-  return (
-    <p className="m-0 mt-4 font-montserrat text-[15px] font-medium leading-[1.8] text-[#3f3e3c] first:mt-0 sm:text-[16px]">
-      {block.text}
-    </p>
-  );
-}
-
-function RelatedBlogCard({ post }: { post: BlogPost }) {
+function RelatedBlogCard({ post }: { post: Blog }) {
   return (
     <article className="related-blog-flip relative aspect-[3/4]">
       <Link
@@ -101,10 +47,10 @@ function RelatedBlogCard({ post }: { post: BlogPost }) {
 
           <div className="related-blog-flip-face related-blog-flip-back">
             <p className="m-0 min-h-0 overflow-y-auto font-montserrat text-[14px] font-medium leading-[1.75] text-[#6d6d6d] sm:text-[15px]">
-              {post.excerpt}
+              {stripHtml(post.description)}
             </p>
             <span className="mt-6 inline-flex shrink-0 items-center gap-1.5 self-end font-montserrat text-[14px] font-semibold text-[#111] sm:text-[15px]">
-              View Project
+              Read Blog
               <ArrowUpRight className="h-4 w-4" strokeWidth={2} aria-hidden />
             </span>
           </div>
@@ -114,75 +60,77 @@ function RelatedBlogCard({ post }: { post: BlogPost }) {
   );
 }
 
-export default function BlogArticle({
-  post,
-  related,
-}: {
-  post: BlogPost;
-  related: BlogPost[];
-}) {
+function ArticleSkeleton() {
+  return (
+    <div aria-busy="true" className="mt-6 sm:mt-7">
+      <div className="h-10 w-full animate-pulse rounded bg-[#EFE9DC]" />
+      <div className="mt-3 h-10 w-2/3 animate-pulse rounded bg-[#EFE9DC]" />
+      <div className="mt-6 h-5 w-1/2 animate-pulse rounded bg-[#EFE9DC]" />
+      <div className="mt-8 aspect-[16/9] animate-pulse rounded-[18px] bg-[#EFE9DC]" />
+    </div>
+  );
+}
+
+export default function BlogArticle({ slug }: { slug: string }) {
+  const { data, isLoading, isError } = useBlogQuery(slug);
+  const { data: listData } = useBlogsQuery();
+
+  const post = data?.data?.[0];
+  const related = (listData?.data ?? [])
+    .filter((item) => item.slug !== slug)
+    .slice(0, RELATED_COUNT);
+
   return (
     <article className="bg-[#FFFDF6] pb-16 pt-[112px] sm:pb-20 sm:pt-[132px] lg:pb-24 lg:pt-[156px]">
       <div className="mx-auto w-full max-w-[820px] px-[clamp(16px,4vw,40px)]">
         <header>
-          <Link
-            href="/blog"
-            className="inline-flex h-10 items-center gap-2 rounded-full bg-[#FFE14A] px-4 font-montserrat text-[14px] font-semibold leading-none text-[#111] transition-colors hover:bg-[#f5d63a] sm:h-11 sm:px-5 sm:text-[15px]"
-          >
-            <ArrowLeft className="h-4 w-4" strokeWidth={2.5} aria-hidden />
-            Back to Blogs
-          </Link>
-          <h1 className="m-0 mt-6 font-montserrat text-[clamp(30px,4.2vw,44px)] font-extrabold leading-[1.12] tracking-[-0.035em] text-[#111] sm:mt-7">
-            {post.title}
-          </h1>
-          <p className="m-0 mt-4 font-montserrat text-[16px] font-medium leading-[1.55] text-[#8d8d8d] sm:mt-5 sm:text-[18px]">
-            {post.subtitle ?? post.excerpt}
-          </p>
-          <div className="mt-6 flex items-center justify-between gap-4 border-t border-[#E4E0D6] pt-4 sm:mt-7">
-            <p className="m-0 font-montserrat text-[13px] font-medium text-[#8d8d8d] sm:text-[15px]">
-              {formatBlogReadTime(post.readTime)}
-              <span className="px-2 text-[#c4c4c4]" aria-hidden="true">
-                |
-              </span>
-              {formatBlogDate(post.date)}
+          <BackLink />
+
+          {isLoading ? (
+            <ArticleSkeleton />
+          ) : isError || !post ? (
+            <p className="m-0 mt-10 font-montserrat text-[16px] font-medium text-[#6b7280]">
+              This article could not be found.
             </p>
-            <BlogShare title={post.title} />
-          </div>
+          ) : (
+            <>
+              <h1 className="m-0 mt-6 font-montserrat text-[clamp(30px,4.2vw,44px)] font-extrabold leading-[1.12] tracking-[-0.035em] text-[#111] sm:mt-7">
+                {post.title}
+              </h1>
+              <div
+                className="mt-4 font-montserrat text-[16px] font-medium leading-[1.55] text-[#8d8d8d] sm:mt-5 sm:text-[18px] [&_a]:underline [&_p]:m-0 [&_p+p]:mt-3"
+                dangerouslySetInnerHTML={{ __html: post.description }}
+              />
+              <div className="mt-6 flex items-center justify-between gap-4 border-t border-[#E4E0D6] pt-4 sm:mt-7">
+                <p className="m-0 font-montserrat text-[13px] font-medium text-[#8d8d8d] sm:text-[15px]">
+                  {post.author}
+                  <span className="px-2 text-[#c4c4c4]" aria-hidden="true">
+                    |
+                  </span>
+                  <time dateTime={post.published_at}>
+                    {formatBlogDate(post.published_at)}
+                  </time>
+                </p>
+                <BlogShare title={post.title} />
+              </div>
+            </>
+          )}
         </header>
 
-        <ArticleFigure
-          src={post.image}
-          alt={post.alt}
-          priority
-          className="mt-6 sm:mt-8"
-        />
-
-        <div className="mt-8 sm:mt-10">
-          {post.blocks.map((block, index) => (
-            <Block key={`${block.type}-${index}`} block={block} />
-          ))}
-        </div>
-
-        <div className="mt-12 flex min-h-[154px] items-center gap-4 bg-[#FAF7EC] pl-6 sm:mt-14 sm:gap-5 sm:pl-8">
-          <div className="relative h-[84px] w-[84px] shrink-0 overflow-hidden rounded-full bg-[#EFE9DC]">
-            <Image
-              src={post.author.image}
-              alt=""
-              fill
-              sizes="84px"
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <p className="m-0 font-montserrat text-[18px] font-bold leading-tight text-[#111] sm:text-[20px]">
-              {post.author.name}
-            </p>
-            <p className="m-0 mt-1 font-montserrat text-[14px] font-medium text-[#9a9a9a] sm:text-[15px]">
-              {post.author.role}
-            </p>
-          </div>
-        </div>
-
+        {post ? (
+          <figure className="m-0 mt-6 sm:mt-8">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[18px] bg-[#EFE9DC]">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                priority
+                sizes="(max-width: 760px) 100vw, 760px"
+                className="object-cover"
+              />
+            </div>
+          </figure>
+        ) : null}
       </div>
 
       {related.length > 0 ? (

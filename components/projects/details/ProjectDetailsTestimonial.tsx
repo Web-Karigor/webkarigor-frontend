@@ -32,30 +32,30 @@ export default function ProjectDetailsTestimonial({
               backgroundColor: PD.testimonial.bg,
             }}
           >
-            <p className="m-0 font-montserrat text-[12px] font-semibold tracking-[0.16em] uppercase sm:text-[13px]">
+            <p className="m-0 font-montserrat text-[16px] font-bold text-[#FFFFFF]/40 tracking-[0.16em] uppercase md:text-[20px] xl:text-[24px]">
               {PROJECT_DETAILS_UI.testimonial}
             </p>
-            <p className="pd-testimonial-quote mt-5 m-0 w-full font-montserrat text-[clamp(16px,4vw,28px)] font-medium leading-[155%] tracking-[-0.01em] sm:mt-6">
+            <p className="pd-testimonial-quote mt-5 m-0 w-full font-montserrat text-base md:text-xl xl:text-[24px] font-medium !leading-[1.7] tracking-[-0.01em] sm:mt-6">
               {testimonial.quote}
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10 sm:gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/20 font-montserrat text-[14px] font-bold tracking-wide text-white sm:h-14 sm:w-14 sm:text-[15px]">
+              {/* <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/20 font-montserrat text-[14px] font-bold tracking-wide text-white sm:h-14 sm:w-14 sm:text-[15px]">
                 {initials}
-              </div>
+              </div> */}
               <div>
                 <div className="mb-1.5 flex items-center gap-0.5">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star
                       key={i}
-                      className="h-3.5 w-3.5 fill-[#FFF68F] text-[#FFF68F] sm:h-4 sm:w-4"
+                      className="h-3.5 w-3.5 fill-[#FFFFFF]/60 text-[#FFFFFF]/60 sm:h-[18px] sm:w-[18px]"
                     />
                   ))}
                 </div>
-                <p className="m-0 font-montserrat text-[15px] font-bold leading-[140%] sm:text-[16px]">
+                <p className="m-0 font-montserrat text-base md:text-xl xl:text-[20px] font-semibold text-[#FFFFFF]">
                   {testimonial.name}
                 </p>
-                <p className="mt-1 m-0 font-montserrat text-[12px] font-medium leading-[140%] text-white/85 sm:text-[13px]">
+                <p className="mt-1 m-0 font-montserrat text-base  text-[#FFFFFF]">
                   {testimonial.role}
                 </p>
               </div>

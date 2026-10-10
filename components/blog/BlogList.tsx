@@ -4,27 +4,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { BLOG_PAGE, BLOG_POSTS } from "@/lib/blog-data";
+import { useBlogsQuery } from "@/hooks/queries/useBlogsQuery";
+import { BLOG_PAGE } from "@/lib/blog-data";
 
 const PAGE_SIZE = 4;
 
 export default function BlogList() {
+  const { data, isLoading, isError } = useBlogsQuery();
   const [query, setQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const posts = useMemo(() => {
+    const all = data?.data ?? [];
     const needle = query.trim().toLowerCase();
-    if (!needle) return BLOG_POSTS;
-    return BLOG_POSTS.filter((post) =>
-      post.title.toLowerCase().includes(needle),
-    );
-  }, [query]);
+    if (!needle) return all;
+    return all.filter((post) => post.title.toLowerCase().includes(needle));
+  }, [data, query]);
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
   }, [query]);
 
   const visiblePosts = posts.slice(0, visibleCount);
+  const hasMore = visibleCount < posts.length;
 
   return (
     <section className="relative overflow-hidden bg-[#FFFDF6] pb-16 pt-[112px] sm:pb-20 sm:pt-[132px] lg:pb-28 lg:pt-[156px]">
@@ -71,7 +73,23 @@ export default function BlogList() {
           </form>
         </header>
 
-        {visiblePosts.length > 0 ? (
+        {isLoading ? (
+          <ul
+            aria-busy="true"
+            className="m-0 mt-10 grid list-none grid-cols-1 gap-x-6 gap-y-8 p-0 sm:mt-12 md:grid-cols-2 md:gap-x-7 md:gap-y-10"
+          >
+            {Array.from({ length: 2 }).map((_, index) => (
+              <li key={index}>
+                <div className="aspect-[5/3] animate-pulse rounded-[18px] bg-[#EFE9DC]" />
+                <div className="mt-3 h-4 w-3/4 animate-pulse rounded bg-[#EFE9DC]" />
+              </li>
+            ))}
+          </ul>
+        ) : isError ? (
+          <p className="mx-auto mt-16 max-w-md text-center font-montserrat text-[15px] font-medium text-[#6b7280]">
+            Articles could not be loaded. Please try again shortly.
+          </p>
+        ) : visiblePosts.length > 0 ? (
           <ul className="m-0 mt-10 grid list-none grid-cols-1 gap-x-6 gap-y-8 p-0 sm:mt-12 md:grid-cols-2 md:gap-x-7 md:gap-y-10">
             {visiblePosts.map((post, index) => (
               <li key={post.slug}>
@@ -79,7 +97,7 @@ export default function BlogList() {
                   <div className="relative aspect-[5/3] overflow-hidden rounded-[18px] bg-[#EFE9DC]">
                     <Image
                       src={post.image}
-                      alt={post.alt}
+                      alt={post.title}
                       fill
                       priority={index < 2}
                       sizes="(max-width: 768px) 100vw, 520px"
@@ -95,23 +113,25 @@ export default function BlogList() {
           </ul>
         ) : (
           <p className="mx-auto mt-16 max-w-md text-center font-montserrat text-[15px] font-medium text-[#6b7280]">
-            No articles match that search.
+            {query.trim() ? "No articles match that search." : "No articles yet."}
           </p>
         )}
 
-        <div className="mt-12 flex justify-center sm:mt-16">
-          <button
-            type="button"
-            onClick={() =>
-              setVisibleCount((count) =>
-                Math.min(count + PAGE_SIZE, posts.length),
-              )
-            }
-            className="rounded-[16px] border-[1.5px] border-[#111] bg-transparent px-12 py-3.5 font-montserrat text-[17px] font-bold leading-none text-[#111] transition-colors hover:bg-[#111]/[0.04] sm:px-14 sm:py-4 sm:text-[18px]"
-          >
-            Load More Blogs
-          </button>
-        </div>
+        {hasMore ? (
+          <div className="mt-12 flex justify-center sm:mt-16">
+            <button
+              type="button"
+              onClick={() =>
+                setVisibleCount((count) =>
+                  Math.min(count + PAGE_SIZE, posts.length),
+                )
+              }
+              className="rounded-[16px] border-[1.5px] border-[#111] bg-transparent px-12 py-3.5 font-montserrat text-[17px] font-bold leading-none text-[#111] transition-colors hover:bg-[#111]/[0.04] sm:px-14 sm:py-4 sm:text-[18px]"
+            >
+              Load More Blogs
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   );

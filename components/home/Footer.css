@@ -60,7 +60,7 @@
   flex-direction: column;
   width: 100%;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
   border-radius: clamp(28px, 5vw, 60px);
   background-color: #0ec47b;
   background-image:
@@ -359,8 +359,6 @@
   overflow: visible;
   pointer-events: none;
   user-select: none;
-  /* Sit flush on the card’s bottom edge (slight clip is intentional). */
-  transform: translateY(5%);
 }
 
 .footer-brand {
@@ -380,6 +378,16 @@
   will-change: transform;
 }
 
+/* 7.1em = rendered width of the former "WEBKARIGOR" text at this font-size */
+.footer-brand-logo {
+  display: block;
+  width: 7.1em;
+  height: auto;
+  /* Letters sit on the card's bottom edge; only the green arrow hangs below.
+     Arrow overhang = 12.07/484 of the logo width (7.1em). */
+  margin-bottom: -0.177em;
+}
+
 @supports not (font-size: 1cqi) {
   .footer-brand {
     font-size: clamp(1.25rem, calc((100vw - 5rem) / 6.8), 14.5rem);
@@ -388,7 +396,8 @@
 
 .footer-copyright {
   margin: 0;
-  padding: 12px 16px 0;
+  /* Clears the logo arrow hanging below the card */
+  padding: clamp(18px, calc(2.2vw + 12px), 56px) 16px 0;
   text-align: center;
   font-family: var(--font-montserrat);
   font-size: clamp(12px, 1.2vw, 14px);
@@ -398,12 +407,6 @@
   color: #525151;
 }
 
-@media (min-width: 768px) {
-  .footer-copyright {
-    padding-top: 14px;
-  }
-}
-
 @media (max-width: 1023px) {
   .footer-shell {
     padding-bottom: 108px;
@@ -411,11 +414,6 @@
 
   .footer-links-grid {
     padding-bottom: clamp(64px, 18vw, 96px);
-  }
-
-  .footer-brand-wrap {
-    transform: none;
-    bottom: 6px;
   }
 
   .footer-brand {

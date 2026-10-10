@@ -212,6 +212,20 @@
   z-index: 1;
 }
 
+/* Same box as the former "Webkarigor" text label */
+.navbar-brand-label {
+  display: inline-flex;
+  align-items: center;
+  height: 1.4em;
+}
+
+/* 6.1em = rendered width of the former "Webkarigor" text at this font-size */
+.navbar-brand-logo {
+  display: block;
+  width: 6.1em;
+  height: auto;
+}
+
 /* Absolute sliding pill — left/width only (no layoutId center morph) */
 .navbar-active-pill {
   position: absolute;

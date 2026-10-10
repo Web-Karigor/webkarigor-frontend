@@ -51,12 +51,8 @@
       "role": "Developer (Back-End)",
       "name": "Md. Imran Hossain",
       "avatar": "/team/imran.jpg"
-    },
-    {
-      "role": "Developer (Back-End)",
-      "name": "Sajjad Hossain",
-      "avatar": "/team/sajjad.jpg"
     }
+    
   ],
   "sharedCtaBody": "We'll schedule a call to discuss your idea. After discovery sessions, we'll send a proposal, and upon approval, we'll get started.",
   "projects": {

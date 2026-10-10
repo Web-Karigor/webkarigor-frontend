@@ -3,6 +3,7 @@
 import "./Navbar.css";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -443,7 +444,21 @@ export default function Navbar() {
                               setActiveId(item.id);
                             }}
                           >
-                            <span className="navbar-link-label">{item.label}</span>
+                            {item.id === "brand" ? (
+                              <span className="navbar-link-label navbar-brand-label">
+                                <Image
+                                  src="/logo.svg"
+                                  alt={item.label}
+                                  width={484}
+                                  height={65}
+                                  unoptimized
+                                  priority
+                                  className="navbar-brand-logo"
+                                />
+                              </span>
+                            ) : (
+                              <span className="navbar-link-label">{item.label}</span>
+                            )}
                           </Link>
                         );
                       })}

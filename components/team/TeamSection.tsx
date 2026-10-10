@@ -9,8 +9,19 @@ import teamContent from "@/data/team-content.json";
 
 const { headline, intro, members } = teamContent;
 
-/** Brand Appart 3-col stagger: 1-2 → 1-3 → 2-3 (repeats) */
-const COL_PATTERN = [1, 2, 1, 3, 2, 3] as const;
+/** Row 2 is the only full row; the rest follow the 1-2 → 1-3 → 2-3 stagger. */
+const LEADING_ROWS = [[1, 2], [1, 2, 3]] as const;
+const REPEATING_ROWS = [[2, 3], [1, 2], [1, 3]] as const;
+
+function columnFor(index: number) {
+  let remaining = index;
+  for (const row of LEADING_ROWS) {
+    if (remaining < row.length) return row[remaining];
+    remaining -= row.length;
+  }
+  const cycle = REPEATING_ROWS.flat();
+  return cycle[remaining % cycle.length];
+}
 
 function firstName(fullName: string) {
   return fullName.trim().split(/\s+/)[0] ?? fullName;
@@ -90,16 +101,12 @@ export default function TeamSection() {
         <div className="team_headline">
           <div className="team_section_title">
             <h2>
-              <div className="team-line team-line--split">
-                <span>{headline.line1Left}</span>
-                <span>{headline.line1Right}</span>
-              </div>
-              <div className="team-line team-line--center">
-                <span>{headline.line2}</span>
-              </div>
-              <div className="team-line team-line--end">
-                <span>{headline.line3}</span>
-              </div>
+              <span className="team-line">
+                {headline.line1Left} {headline.line1Right}
+              </span>
+              <span className="team-line">
+                {headline.line2} {headline.line3}
+              </span>
             </h2>
           </div>
 
@@ -117,7 +124,7 @@ export default function TeamSection() {
                   key={member.id}
                   role="listitem"
                   className="team_grid_item"
-                  style={{ gridColumn: COL_PATTERN[index % COL_PATTERN.length] }}
+                  style={{ gridColumn: columnFor(index) }}
                 >
                   <article className="teammate_card">
                     <div

@@ -269,7 +269,7 @@ export default function Case() {
 
                       {item.author && (
                         <div className="service-card-author">
-                          <div className="author_pic u-rounded is-min">
+                          {/* <div className="author_pic u-rounded is-min">
                             <Image
                               src={item.author.image}
                               alt={item.author.name}
@@ -277,7 +277,7 @@ export default function Case() {
                               height={48}
                               className="u-fluid author-img"
                               unoptimized loading="lazy"/>
-                          </div>
+                          </div> */}
                           <div className="author-infos">
                             <span className="author_name u-block">
                               {item.author.name}

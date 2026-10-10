@@ -19,6 +19,17 @@ function lerpToward(current: number, target: number, dt: number, smoothing: numb
   return current + (target - current) * (1 - Math.pow(1 - smoothing, dt));
 }
 
+/** Viewport height with the mobile URL bar hidden — stays constant while the bar slides. */
+function largeViewportHeight() {
+  const probe = document.createElement("div");
+  probe.style.cssText =
+    "position:fixed;top:0;left:0;width:0;height:100lvh;visibility:hidden;pointer-events:none";
+  document.body.appendChild(probe);
+  const h = probe.offsetHeight;
+  probe.remove();
+  return h > 0 ? Math.max(h, window.innerHeight) : window.innerHeight;
+}
+
 /**
  * Pin stays layout-stable (scale only). Visual progress is lerped on the ticker
  * so grow/shrink has inertia instead of 1:1 scroll stepping.
@@ -210,16 +221,17 @@ const VideoSection = () => {
 
       mm.add("(max-width: 1023px)", () => {
         const state = { target: 0, current: 0 };
+        let stableVh = largeViewportHeight();
 
         const measure = () => {
           const vw = window.innerWidth;
-          const vh = window.innerHeight;
           const startW = Math.max(vw - MOBILE_PAD_X * 2, 280);
           const startH = Math.round(startW / MOBILE_VIDEO_RATIO);
-          return { vw, vh, startW, startH };
+          return { vw, vh: stableVh, startW, startH };
         };
 
         const applyLayout = () => {
+          stableVh = largeViewportHeight();
           const { startW, startH } = measure();
 
           gsap.set(section, {
@@ -266,11 +278,11 @@ const VideoSection = () => {
         };
 
         const applyVisual = (progress: number) => {
-          const { startW, startH } = measure();
+          const { vw, vh, startW, startH } = measure();
           const t = easeGrow(gsap.utils.clamp(0, 1, progress / GROW_PORTION));
           gsap.set(frame, {
-            scaleX: 1 + (window.innerWidth / startW - 1) * t,
-            scaleY: 1 + (window.innerHeight / startH - 1) * t,
+            scaleX: 1 + (vw / startW - 1) * t,
+            scaleY: 1 + (vh / startH - 1) * t,
             borderRadius: 10.5 * (1 - t),
             transformOrigin: "50% 100%",
             force3D: true,
@@ -283,9 +295,10 @@ const VideoSection = () => {
         const st = ScrollTrigger.create({
           trigger: stage,
           start: "bottom bottom",
-          end: () => `+=${Math.round(window.innerHeight * 2.6)}`,
+          end: () => `+=${Math.round(stableVh * 2.6)}`,
           pin: true,
-          pinType: "transform",
+          // Native touch scroll runs off the main thread; transform pins lag a frame and jitter
+          pinType: "fixed",
           pinSpacing: true,
           anticipatePin: 0,
           invalidateOnRefresh: true,

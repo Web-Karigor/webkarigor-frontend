@@ -2,14 +2,12 @@
 
 import "./Footer.css";
 
+import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
-import homeContent from "@/data/home-content.json";
-
-const { wordmark } = homeContent.footer;
 
 export default function FooterBrand() {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const wrap = wrapRef.current;
@@ -35,18 +33,21 @@ export default function FooterBrand() {
     const observer = new ResizeObserver(fit);
     observer.observe(wrap);
 
-    if (document.fonts?.ready) {
-      document.fonts.ready.then(fit);
-    }
-
     return () => observer.disconnect();
   }, []);
 
   return (
     <div ref={wrapRef} className="footer-brand-wrap" aria-hidden>
-      <p ref={textRef} className="footer-brand">
-        {wordmark}
-      </p>
+      <div ref={textRef} className="footer-brand">
+        <Image
+          src="/logo.svg"
+          alt=""
+          width={484}
+          height={65}
+          unoptimized
+          className="footer-brand-logo"
+        />
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import homeContent from "@/data/home-content.json";
@@ -22,14 +23,17 @@ export default function MobileBrand() {
         onClick={() => {
           if (pathname === "/") scrollAppToTop({ immediate: true });
         }}
-        className="mobile-brand-word font-montserrat text-[56px] font-extrabold tracking-[-0.04em] text-[#1f1e1c] md:text-[72px]"
+        className="mobile-brand-word flex h-[1.5em] items-center text-[56px] md:text-[72px]"
       >
-        {/* <span className="flex items-center rounded-full bg-[#fffaea] px-4 py-1.5 font-montserrat text-[15px] font-semibold leading-none tracking-[-0.02em] sm:text-[16px]">
-          <span className="bg-[linear-gradient(160deg,#0ec47b_0%,#2eeda0_48%,#15d286_72%,#b8e070_90%,#e4ef96_100%)] bg-clip-text text-transparent">
-            {brand}
-          </span>
-        </span> */}
-        {brand}
+        <Image
+          src="/logo.svg"
+          alt={brand}
+          width={484}
+          height={65}
+          unoptimized
+          priority
+          className="block h-auto w-[5.93em]"
+        />
       </Link>
     </div>
   );
