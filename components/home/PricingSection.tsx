@@ -1,12 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import homeContent from "@/data/home-content.json";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
 import { useHomepagePackagesQuery } from "@/hooks/queries/useHomepagePackagesQuery";
 import { usePackagesQuery } from "@/hooks/queries/usePackagesQuery";
 import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
+import {
+  formatPackageOriginalPrice,
+  formatPackagePrice,
+  isCustomPackagePrice,
+} from "@/lib/package-price";
 import type { HomepagePackage } from "@/types/homepage-package";
 
 const {
@@ -18,10 +22,8 @@ const {
   featuresHeading,
   cancelLabel,
   noExtraFee,
-  billing,
+  // billing,
 } = homeContent.pricing;
-
-type Billing = "monthly" | "yearly";
 
 function CheckIcon() {
   return (
@@ -76,28 +78,6 @@ function InfoIcon() {
   );
 }
 
-function pickAmount(price?: string, discount?: string) {
-  const discounted = Number(discount);
-  const base = Number(price);
-  if (discounted > 0) return discounted;
-  return Number.isFinite(base) ? base : 0;
-}
-
-function formatPrice(pkg: HomepagePackage, period: Billing) {
-  const block = period === "monthly" ? pkg.monthly_price : pkg.yearly_price;
-  const amount = pickAmount(block?.price, block?.discount_price);
-  if (amount <= 0) return "";
-  // return `$${Math.round(amount).toLocaleString("en-US")}`;
-  return `৳${Math.round(amount).toLocaleString("en-US")}`;
-}
-
-function isCustomPrice(pkg: HomepagePackage) {
-  return (
-    pickAmount(pkg.monthly_price?.price, pkg.monthly_price?.discount_price) <= 0 &&
-    pickAmount(pkg.yearly_price?.price, pkg.yearly_price?.discount_price) <= 0
-  );
-}
-
 export default function PricingSection({
   backgroundColor,
   serviceSlug,
@@ -107,7 +87,6 @@ export default function PricingSection({
   serviceSlug?: string;
   fromPackages?: boolean;
 } = {}) {
-  const [period, setPeriod] = useState<Billing>("yearly");
   const home = useHomepagePackagesQuery(!serviceSlug && !fromPackages);
   const service = useServiceQuery(serviceSlug ?? "");
   const all = usePackagesQuery(fromPackages || (!serviceSlug && !fromPackages));
@@ -153,7 +132,8 @@ export default function PricingSection({
 
         <div className="home-pricing-billing">
           <div className="home-pricing-tabs-row">
-            <div className="home-pricing-tabs" role="tablist" aria-label="Billing period">
+            {/* Monthly / Yearly toggle — hidden while API returns a single price */}
+            {/* <div className="home-pricing-tabs" role="tablist" aria-label="Billing period">
               <button
                 type="button"
                 role="tab"
@@ -172,12 +152,14 @@ export default function PricingSection({
               >
                 {billing.quarterly}
               </button>
-            </div>
-            {billing.saveBadge ? (
+            </div> */}
+            {/* Save % badge — hidden for now
+            {savePercent > 0 ? (
               <span className="home-pricing-save-badge" aria-hidden>
-                {billing.saveBadge}
+                Save {savePercent}%
               </span>
             ) : null}
+            */}
           </div>
 
           <p className="home-pricing-fee-note">
@@ -188,8 +170,9 @@ export default function PricingSection({
 
         <div className="home-pricing-grid">
           {packages.map((pkg) => {
-            const price = formatPrice(pkg, period);
-            const customPrice = isCustomPrice(pkg) || !price;
+            const price = formatPackagePrice(pkg);
+            const originalPrice = formatPackageOriginalPrice(pkg);
+            const customPrice = isCustomPackagePrice(pkg) || !price;
             const availText = pkg.availability?.trim() || "";
             const desc = pkg.title;
             const isPopular = pkg.is_popular;
@@ -254,12 +237,14 @@ export default function PricingSection({
                     {customPrice ? (
                       <CustomPriceIcon />
                     ) : (
-                      <>
+                      <div className="home-pricing-price-stack">
                         <span className="home-pricing-price">{price}</span>
-                        <span className="home-pricing-duration">
-                          {period === "yearly" ? "/year" : "/month"}
-                        </span>
-                      </>
+                        {originalPrice ? (
+                          <span className="home-pricing-price-original">
+                            {originalPrice}
+                          </span>
+                        ) : null}
+                      </div>
                     )}
                   </div>
 

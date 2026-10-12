@@ -45,43 +45,43 @@
     "logos": [
       {
         "name": "Government of Bangladesh",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/BD-Govt.png"
+        "src": "/partners-logo/image-1.png"
       },
       {
         "name": "Robi Axiata",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Robi.png"
+        "src": "/partners-logo/image-2.png"
       },
       {
         "name": "Walton",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Walton.png"
+        "src": "/partners-logo/image-3.png"
       },
       {
         "name": "Sajeeb Group",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Sajeeb-Group.png"
+        "src": "/partners-logo/image-4.png"
       },
       {
         "name": "Oitijjhya",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Oitijjhya.png"
+        "src": "/partners-logo/image-5.png"
       },
       {
         "name": "Nitol-Niloy Group",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Nitol-Niloy.png"
+        "src": "/partners-logo/image-6.png"
       },
       {
         "name": "Gear X",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Gear-X.png"
+        "src": "/partners-logo/image-7.png"
       },
       {
         "name": "The Cafe Rio",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Cafe-Rio.png"
+        "src": "/partners-logo/image-8.png"
       },
       {
         "name": "NIPORT",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Niport.webp"
+        "src": "/partners-logo/image-9.png"
       },
       {
         "name": "Shyamoli Paribahan",
-        "src": "https://webkarigor.com/wp-content/uploads/2024/10/Shyamoli-Poribahan.png"
+        "src": "/partners-logo/image-10.png"
       }
     ]
   },
@@ -129,7 +129,7 @@
     "items": [
       {
         "name": "Laravel",
-        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg"
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
       },
       {
         "name": "React",

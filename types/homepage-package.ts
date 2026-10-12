@@ -1,8 +1,3 @@
-export type HomepagePackagePrice = {
-  price: string;
-  discount_price: string;
-};
-
 export type HomepagePackageType = {
   id: number;
   name: string;
@@ -16,8 +11,9 @@ export type HomepagePackage = {
   availability?: string | null;
   slug: string;
   features: string[];
-  monthly_price: HomepagePackagePrice;
-  yearly_price: HomepagePackagePrice;
+  price: string;
+  discounted_price: string;
+  image?: string;
   is_popular: boolean;
   show_homepage: boolean;
   package_type: HomepagePackageType | null;

@@ -95,7 +95,7 @@
 }
 
 .home-pricing-header {
-  margin-bottom: clamp(28px, 4vw, 40px);
+  margin-bottom: clamp(12px, 2vw, 18px);
   text-align: center;
 }
 
@@ -157,13 +157,28 @@
   display: block;
   width: fit-content;
   max-width: min(calc(100% - 88px), 380px);
-  margin: 0 auto 28px;
+  margin: 0 auto 10px;
   box-sizing: border-box;
 }
 
 .home-pricing-tabs-row {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  min-height: 0;
+}
+
+/* When the Monthly/Yearly toggle is hidden, keep Save badge centered */
+.home-pricing-tabs-row:not(:has(.home-pricing-tabs)) .home-pricing-save-badge {
+  position: static;
+  transform: none;
+  margin: 0 0 8px;
+}
+
+.home-pricing-tabs-row:not(:has(.home-pricing-tabs)) .home-pricing-save-badge::before {
+  display: none;
 }
 
 .home-pricing-tabs {
@@ -246,7 +261,7 @@
   justify-content: center;
   gap: 6px;
   width: 100%;
-  margin: 10px 0 0;
+  margin: 6px 0 0;
   font-family: var(--font-montserrat);
   font-size: 12px;
   font-weight: 500;
@@ -258,7 +273,7 @@
   grid-template-columns: 1fr;
   gap: 20px;
   align-items: stretch;
-  padding-top: 8px;
+  padding-top: 0;
 }
 
 .home-pricing-avail.is-empty {
@@ -277,7 +292,7 @@
   .home-pricing-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
-    padding-top: 8px;
+    padding-top: 0;
     align-items: stretch;
   }
 
@@ -552,6 +567,13 @@
   min-height: 46px;
 }
 
+.home-pricing-price-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
 .home-pricing-custom-icon {
   display: block;
 }
@@ -563,6 +585,16 @@
   line-height: 1;
   letter-spacing: -0.04em;
   color: #111;
+}
+
+.home-pricing-price-original {
+  font-family: var(--font-montserrat);
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #9ca3af;
+  text-decoration: line-through;
 }
 
 .home-pricing-duration {
@@ -671,7 +703,7 @@
   }
 
   .home-pricing-header {
-    margin-bottom: 18px;
+    margin-bottom: 10px;
   }
 
   .home-pricing-header .section-heading {
@@ -700,7 +732,7 @@
 
   .home-pricing-billing {
     max-width: min(calc(100% - 68px), 330px);
-    margin-bottom: 24px;
+    margin-bottom: 10px;
   }
 
   .home-pricing-tabs {
@@ -720,7 +752,7 @@
   }
 
   .home-pricing-fee-note {
-    margin-top: 10px;
+    margin-top: 6px;
     font-size: 12px;
   }
 

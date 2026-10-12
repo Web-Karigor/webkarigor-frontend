@@ -79,7 +79,7 @@
 /* —— Messenger stack (right) —— */
 .floating-messenger {
   position: fixed;
-  right: var(--float-side);
+  right: calc(var(--float-side) + 24px);
   bottom: var(--float-bottom);
   z-index: var(--float-z);
   display: flex;
@@ -94,8 +94,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   padding: 0;
   border: none;
   border-radius: 999px;
@@ -107,6 +107,11 @@
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.45s ease,
     background-color 0.3s ease;
+}
+
+.floating-messenger-main .floating-actions-glyph {
+  width: 28px;
+  height: 28px;
 }
 
 .floating-messenger-main:hover {
@@ -191,8 +196,13 @@
   }
 
   .floating-messenger-main {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .floating-messenger-main .floating-actions-glyph {
+    width: 26px;
+    height: 26px;
   }
 
   .floating-messenger-item {

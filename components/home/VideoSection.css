@@ -59,21 +59,59 @@
   .video-section-tilt {
     transform-style: preserve-3d;
   }
+
+  .video-section-iframe--ambient {
+    display: none;
+  }
 }
 
 @media (max-width: 1023px) {
+  .video-section {
+    background: transparent;
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .video-section-shell,
+  .video-section-stage,
+  .video-section-tilt {
+    width: 100%;
+    max-width: none;
+  }
+
   .video-section-frame {
     box-shadow: none;
+    background: #0a0a0a;
+    border: none;
+    transform: none;
+    will-change: width, height;
   }
 
   .video-section-iframe {
     width: auto;
-    height: 100%;
-    min-width: 100%;
-    min-height: 100%;
-    aspect-ratio: 16 / 9;
+    height: auto;
+    min-width: 0;
+    min-height: 0;
     max-width: none;
-    transform: translate3d(-50%, -50%, 0) scale(1.01);
-    will-change: transform;
+    max-height: none;
+    aspect-ratio: auto;
+    background-color: transparent;
+    /* Size set in JS — keep centered */
+    transform: translate3d(-50%, -50%, 0);
+    will-change: auto;
+  }
+
+  /* SalesMama-style: blurred cover feed fills letterbox with video colors */
+  .video-section-iframe--ambient {
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(56px) saturate(1.35);
+    opacity: 0.92;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  .video-section-iframe--main {
+    z-index: 1;
   }
 }

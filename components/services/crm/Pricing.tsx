@@ -4,6 +4,10 @@ import Image from "next/image";
 import servicesContent from "@/data/crm-content.json";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
 import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
+import {
+  formatPackageOriginalPrice,
+  formatPackagePrice,
+} from "@/lib/package-price";
 import type { HomepagePackage } from "@/types/homepage-package";
 
 const {
@@ -34,13 +38,6 @@ function CheckIcon() {
       />
     </svg>
   );
-}
-
-function formatPrice(pkg: HomepagePackage) {
-  const amount = Number(pkg.monthly_price?.price);
-  if (!Number.isFinite(amount) || amount <= 0) return "";
-  // return `$${Math.round(amount).toLocaleString("en-US")}`;
-  return `৳${Math.round(amount).toLocaleString("en-US")}`;
 }
 
 function groupByCategory(packages: HomepagePackage[]) {
@@ -117,6 +114,8 @@ export default function Pricing() {
                   {market.plans.map((pkg) => {
                     const isPopular = pkg.is_popular;
                     const availText = pkg.availability || pkg.title;
+                    const price = formatPackagePrice(pkg);
+                    const originalPrice = formatPackageOriginalPrice(pkg);
 
                     return (
                       <div
@@ -179,9 +178,14 @@ export default function Pricing() {
                           <p className="home-pricing-card-desc">{pkg.title}</p>
 
                           <div className="home-pricing-amount">
-                            <span className="home-pricing-price">
-                              {formatPrice(pkg)}
-                            </span>
+                            <div className="home-pricing-price-stack">
+                              <span className="home-pricing-price">{price}</span>
+                              {originalPrice ? (
+                                <span className="home-pricing-price-original">
+                                  {originalPrice}
+                                </span>
+                              ) : null}
+                            </div>
                           </div>
 
                           <p className="home-pricing-cancel">{CANCEL_LABEL}</p>

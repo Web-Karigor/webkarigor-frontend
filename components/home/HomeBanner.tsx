@@ -20,9 +20,12 @@ export default function HomeBanner() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6 gap-8">
         <div className="w-full text-center md:w-2/3 md:text-left">
-          <h2 className="home-banner-title mb-2 flex flex-col gap-y-2 text-xl font-bold font-montserrat text-black sm:text-2xl md:gap-y-5 md:text-[32px] lg:text-[40px]">
-            {titleLines.map((line) => (
-              <span key={line}>{line}</span>
+          <h2 className="home-banner-title mb-2 block text-xl font-bold font-montserrat text-black sm:text-2xl md:flex md:flex-col md:gap-y-5 md:text-[32px] lg:text-[40px]">
+            {titleLines.map((line, index) => (
+              <span key={line}>
+                {index > 0 ? " " : null}
+                {line}
+              </span>
             ))}
           </h2>
           <p className="mt-3 text-base font-montserrat font-medium text-[#222] sm:mt-4 sm:text-lg md:text-[20px]">

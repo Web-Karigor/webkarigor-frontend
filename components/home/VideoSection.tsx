@@ -30,6 +30,11 @@ function largeViewportHeight() {
   return h > 0 ? Math.max(h, window.innerHeight) : window.innerHeight;
 }
 
+/** Layout width (excludes scrollbar) — avoids a sudden right-edge gap while pinned. */
+function layoutViewportWidth() {
+  return Math.round(document.documentElement.clientWidth || window.innerWidth);
+}
+
 /**
  * Pin stays layout-stable (scale only). Visual progress is lerped on the ticker
  * so grow/shrink has inertia instead of 1:1 scroll stepping.
@@ -39,25 +44,55 @@ const VideoSection = () => {
   const stageRef = useRef<HTMLDivElement>(null);
   const tiltRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const fitMediaRef = useRef<((w: number, h: number) => void) | null>(null);
   const [loadVideo, setLoadVideo] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
+    let done = false;
+    const load = () => {
+      if (done) return;
+      done = true;
+      setLoadVideo(true);
+    };
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
-          setLoadVideo(true);
+          load();
           io.disconnect();
         }
       },
-      { rootMargin: "280px 0px" },
+      { rootMargin: "400px 0px" },
     );
 
     io.observe(section);
-    return () => io.disconnect();
+    // Fallback: some embedded browsers skip the initial IO callback
+    const fallback = window.setTimeout(load, 1200);
+    return () => {
+      io.disconnect();
+      window.clearTimeout(fallback);
+    };
   }, []);
+
+  // When iframes mount, re-apply cover/contain sizes without rebuilding ScrollTrigger
+  useLayoutEffect(() => {
+    if (!loadVideo || !frameRef.current || !fitMediaRef.current) return;
+    const frame = frameRef.current;
+    const r = frame.getBoundingClientRect();
+    fitMediaRef.current(r.width, r.height);
+  }, [loadVideo, isMobile]);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -73,6 +108,7 @@ const VideoSection = () => {
       mm.add("(min-width: 1024px)", () => {
         const state = { target: 0, current: 0 };
         const startRadius = 44 / DESKTOP_START_SCALE;
+        fitMediaRef.current = null;
 
         const applyLayout = () => {
           const vw = window.innerWidth;
@@ -224,31 +260,91 @@ const VideoSection = () => {
         let stableVh = largeViewportHeight();
 
         const measure = () => {
-          const vw = window.innerWidth;
+          // clientWidth = layout width (no scrollbar strip) so pin never leaves a right gap
+          const vw = layoutViewportWidth();
           const startW = Math.max(vw - MOBILE_PAD_X * 2, 280);
           const startH = Math.round(startW / MOBILE_VIDEO_RATIO);
           return { vw, vh: stableVh, startW, startH };
         };
 
+        /**
+         * SalesMama-style fill: sharp video stays 16:9 contain (no crop),
+         * ambient layer covers the full frame with a heavy blur of the same feed.
+         */
+        const fitMedia = (frameW: number, frameH: number) => {
+          const main = frame.querySelector(".video-section-iframe--main") as HTMLElement | null;
+          const ambient = frame.querySelector(
+            ".video-section-iframe--ambient",
+          ) as HTMLElement | null;
+
+          let mainW = frameW;
+          let mainH = frameW / MOBILE_VIDEO_RATIO;
+          if (mainH > frameH) {
+            mainH = frameH;
+            mainW = frameH * MOBILE_VIDEO_RATIO;
+          }
+          if (main) {
+            gsap.set(main, {
+              width: mainW,
+              height: mainH,
+              x: 0,
+              y: 0,
+              scale: 1,
+              force3D: false,
+            });
+          }
+
+          if (ambient) {
+            let ambW = frameW;
+            let ambH = frameW / MOBILE_VIDEO_RATIO;
+            if (ambH < frameH) {
+              ambH = frameH;
+              ambW = frameH * MOBILE_VIDEO_RATIO;
+            }
+            ambW *= 1.28;
+            ambH *= 1.28;
+            gsap.set(ambient, {
+              width: ambW,
+              height: ambH,
+              x: 0,
+              y: 0,
+              scale: 1,
+              force3D: false,
+            });
+          }
+        };
+
+        fitMediaRef.current = fitMedia;
+
         const applyLayout = () => {
           stableVh = largeViewportHeight();
-          const { startW, startH } = measure();
+          const { vw, startW, startH } = measure();
 
+          // Full-bleed stage from the start — never animate horizontal section
+          // padding during pin (that locked a narrower fixed width → right gap).
           gsap.set(section, {
-            paddingLeft: MOBILE_PAD_X,
-            paddingRight: MOBILE_PAD_X,
+            paddingLeft: 0,
+            paddingRight: 0,
             paddingTop: 40,
             paddingBottom: 40,
-            overflow: "visible",
+            width: "100%",
+            maxWidth: "none",
+            overflowX: "clip",
+            overflowY: "visible",
+            backgroundColor: "transparent",
           });
 
           gsap.set(stage, {
-            width: "100%",
+            width: vw,
+            maxWidth: "none",
             height: startH,
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "center",
             overflow: "visible",
+            backgroundColor: "transparent",
+            x: 0,
+            left: 0,
           });
 
           gsap.set(tilt, {
@@ -259,7 +355,7 @@ const VideoSection = () => {
             justifyContent: "center",
             x: 0,
             y: 0,
-            force3D: true,
+            force3D: false,
             backfaceVisibility: "hidden",
           });
 
@@ -267,26 +363,58 @@ const VideoSection = () => {
             width: startW,
             height: startH,
             maxWidth: "none",
+            flexShrink: 0,
             aspectRatio: "none",
             x: 0,
             y: 0,
-            force3D: true,
+            scaleX: 1,
+            scaleY: 1,
+            force3D: false,
             transformOrigin: "50% 100%",
-            willChange: "transform",
+            willChange: "width, height",
             backfaceVisibility: "hidden",
+            backgroundColor: "#0a0a0a",
           });
+          fitMedia(startW, startH);
         };
 
         const applyVisual = (progress: number) => {
           const { vw, vh, startW, startH } = measure();
           const t = easeGrow(gsap.utils.clamp(0, 1, progress / GROW_PORTION));
+          const frameW = startW + (vw - startW) * t;
+          const frameH = startH + (vh - startH) * t;
+          const padY = 40 * (1 - t);
+
+          // Only collapse vertical inset — keep width locked to layout vw
+          gsap.set(section, {
+            paddingLeft: 0,
+            paddingRight: 0,
+            paddingTop: padY,
+            paddingBottom: padY,
+          });
+
+          // Keep pinned stage glued to the left edge at full layout width
+          gsap.set(stage, {
+            width: vw,
+            maxWidth: "none",
+            left: 0,
+            x: 0,
+            marginLeft: 0,
+            marginRight: 0,
+          });
+
           gsap.set(frame, {
-            scaleX: 1 + (vw / startW - 1) * t,
-            scaleY: 1 + (vh / startH - 1) * t,
+            width: frameW,
+            height: frameH,
+            flexShrink: 0,
+            scaleX: 1,
+            scaleY: 1,
             borderRadius: 10.5 * (1 - t),
             transformOrigin: "50% 100%",
-            force3D: true,
+            force3D: false,
+            backgroundColor: "#0a0a0a",
           });
+          fitMedia(frameW, frameH);
         };
 
         applyLayout();
@@ -297,21 +425,29 @@ const VideoSection = () => {
           start: "bottom bottom",
           end: () => `+=${Math.round(stableVh * 2.6)}`,
           pin: true,
-          // Native touch scroll runs off the main thread; transform pins lag a frame and jitter
           pinType: "fixed",
           pinSpacing: true,
           anticipatePin: 0,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             state.target = self.progress;
+            if (self.isActive) {
+              // ST can re-apply a stale left/width from pin-start — keep full-bleed
+              gsap.set(stage, {
+                left: 0,
+                width: layoutViewportWidth(),
+                x: 0,
+              });
+            }
           },
           onRefresh: (self) => {
             applyLayout();
             state.target = self.progress;
             if (self.progress < 0.02) {
               state.current = 0;
-              applyVisual(0);
             }
+            // Always restore current visual — don't leave start padding/width mid-pin
+            applyVisual(state.current);
           },
         });
 
@@ -330,10 +466,10 @@ const VideoSection = () => {
 
         gsap.ticker.add(onTick);
 
-        let viewportWidth = window.innerWidth;
+        let viewportWidth = layoutViewportWidth();
         const onResize = () => {
           if (isTouchToolbarResize(viewportWidth)) return;
-          viewportWidth = window.innerWidth;
+          viewportWidth = layoutViewportWidth();
           applyLayout();
           applyVisual(state.current);
           refreshScrollTriggers();
@@ -342,6 +478,7 @@ const VideoSection = () => {
         window.addEventListener("orientationchange", onResize);
 
         return () => {
+          if (fitMediaRef.current === fitMedia) fitMediaRef.current = null;
           gsap.ticker.remove(onTick);
           st.kill();
           window.removeEventListener("resize", onResize);
@@ -362,18 +499,32 @@ const VideoSection = () => {
           <div ref={tiltRef} className="video-section-tilt">
             <div ref={frameRef} className="video-section-frame">
               {loadVideo ? (
-                <iframe
-                  src={embedUrl}
-                  className="video-section-iframe absolute border-0"
-                  title={videoTitle}
-                  frameBorder="0"
-                  allow="autoplay; picture-in-picture"
-                  allowFullScreen
-                  sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox"
-                />
+                <>
+                  {isMobile ? (
+                    <iframe
+                      src={embedUrl}
+                      className="video-section-iframe video-section-iframe--ambient absolute border-0"
+                      title=""
+                      aria-hidden
+                      tabIndex={-1}
+                      frameBorder="0"
+                      allow="autoplay; picture-in-picture"
+                      sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox"
+                    />
+                  ) : null}
+                  <iframe
+                    src={embedUrl}
+                    className="video-section-iframe video-section-iframe--main absolute border-0"
+                    title={videoTitle}
+                    frameBorder="0"
+                    allow="autoplay; picture-in-picture"
+                    allowFullScreen
+                    sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox"
+                  />
+                </>
               ) : (
                 <div
-                  className="video-section-iframe pointer-events-none absolute border-0 bg-[#111]"
+                  className="video-section-iframe video-section-iframe--main pointer-events-none absolute border-0 bg-[#111]"
                   aria-hidden
                 />
               )}
