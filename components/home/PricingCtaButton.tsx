@@ -1,6 +1,6 @@
 "use client";
 
-import { openConsultationModal } from "@/components/home/ConsultationModal";
+import { openConsultationModal } from "@/store/consultation-store";
 
 export default function PricingCtaButton({
   children,

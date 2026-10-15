@@ -2,7 +2,7 @@
 
 import "./Services.css";
 
-import { memo, useLayoutEffect, useRef, useState } from "react";
+import { memo, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,23 +13,18 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { gsap, ScrollTrigger, isTouchToolbarResize, refreshScrollTriggers } from "@/lib/gsap";
-import homeContent from "@/data/home-content.json";
+import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
+import { useServicePostsQuery } from "@/hooks/queries/useServicePostsQuery";
+import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
+import { homeSectionItem, splitTrailingWords, stripHtml } from "@/lib/home-page";
+import { mapServicePostsToStory } from "@/lib/service-posts";
+import type { StoryService } from "@/types/service-posts";
 
 /* -------------------------------------------------------------------------- */
 /* Data                                                                       */
 /* -------------------------------------------------------------------------- */
 
-const {
-  badge: servicesBadge,
-  headingAccent: servicesHeadingAccent,
-  headingTitle: servicesHeadingTitle,
-  description: servicesDescription,
-  items: allServices,
-} = homeContent.services;
-
-/** UX/UI stays in home-content.json but is hidden from this section */
-const services = allServices.filter((item) => item.title !== "UX/UI");
-
+const SERVICES_BADGE = "Services";
 const VIEW_DETAILS_LABEL = "View Details";
 
 function CtaArrow() {
@@ -52,7 +47,7 @@ function CtaArrow() {
   );
 }
 
-type Service = (typeof services)[number];
+type Service = StoryService;
 
 /** One viewport of scroll for intro header exit */
 const INTRO_SCROLL_VIEWS = 1;
@@ -111,22 +106,37 @@ function useActiveIndex(progress: MotionValue<number>, total: number) {
 
 
 const ServicesHeader = memo(function ServicesHeader() {
+  const { data } = useHomePageQuery();
+  const item = homeSectionItem(data?.data?.sections?.services);
+  const split = item?.title
+    ? splitTrailingWords(item.title, 3)
+    : { head: "", tail: "" };
+  const description = item?.subtitle ? stripHtml(item.subtitle) : "";
+
   return (
     <>
       <span className="inline-block rounded-full border border-[#38F8AB] px-6 py-2.5 text-[15px] font-medium text-[#15D286] sm:px-7 md:text-lg">
-        {servicesBadge}
+        {SERVICES_BADGE}
       </span>
 
-      <h2 className="section-heading">
-        <span className="section-heading-split-accent section-accent-text">
-          {servicesHeadingAccent}
-        </span>
-        <span className="section-heading-split-title">{servicesHeadingTitle}</span>
-      </h2>
+      {split.head || split.tail ? (
+        <h2 className="section-heading">
+          {split.head ? (
+            <span className="section-heading-split-accent section-accent-text">
+              {split.head}
+            </span>
+          ) : null}
+          {split.tail ? (
+            <span className="section-heading-split-title">{split.tail}</span>
+          ) : null}
+        </h2>
+      ) : null}
 
-      <p className="services-story-header-desc mx-auto mt-6 max-w-2xl px-2 text-sm leading-relaxed text-gray-600 sm:mt-8 sm:text-base">
-        {servicesDescription}
-      </p>
+      {description ? (
+        <p className="services-story-header-desc mx-auto mt-6 max-w-2xl px-2 text-sm leading-relaxed text-gray-600 sm:mt-8 sm:text-base">
+          {description}
+        </p>
+      ) : null}
     </>
   );
 });
@@ -189,8 +199,10 @@ const ServicesIntroHeader = memo(function ServicesIntroHeader({
 
 const ServicesListPanel = memo(function ServicesListPanel({
   activeIndex,
+  services,
 }: {
   activeIndex: number;
+  services: Service[];
 }) {
   return (
     <div className="services-story-text-panel hidden w-[50%]  min-w-0 items-start font-montserrat lg:flex lg:items-center">
@@ -203,7 +215,7 @@ const ServicesListPanel = memo(function ServicesListPanel({
 
           return (
             <li
-              key={`${index}-${service.title}`}
+              key={`${service.id}-${service.title}`}
               className={`services-story-list-item${isActive ? " is-active" : ""}`}
             >
               <h3 className="services-story-list-title">{fullTitle}</h3>
@@ -321,11 +333,13 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
   progress,
   viewportRef,
   slotHeight,
+  services,
 }: {
   columnY: MotionValue<number>;
   progress: MotionValue<number>;
   viewportRef: React.Ref<HTMLDivElement>;
   slotHeight: number;
+  services: Service[];
 }) {
   const total = services.length;
 
@@ -345,7 +359,7 @@ const ServicesImageTrack = memo(function ServicesImageTrack({
       >
         {services.map((service, index) => (
           <ServiceImageGroup
-            key={`${index}-${service.title}`}
+            key={`${service.id}-${service.title}`}
             service={service}
             index={index}
             progress={progress}
@@ -414,9 +428,11 @@ const ServicesMobileSlide = memo(function ServicesMobileSlide({
 const ServicesMobileTrack = memo(function ServicesMobileTrack({
   viewportRef,
   stackRef,
+  services,
 }: {
   viewportRef: React.Ref<HTMLDivElement>;
   stackRef: React.Ref<HTMLDivElement>;
+  services: Service[];
 }) {
   return (
     <div
@@ -424,9 +440,9 @@ const ServicesMobileTrack = memo(function ServicesMobileTrack({
       className="services-story-mobile-viewport relative w-full lg:hidden"
     >
       <div ref={stackRef} className="services-story-mobile-track">
-        {services.map((service, index) => (
+        {services.map((service) => (
           <ServicesMobileSlide
-            key={`mobile-${index}-${service.title}`}
+            key={`mobile-${service.id}-${service.title}`}
             service={service}
           />
         ))}
@@ -440,6 +456,14 @@ const ServicesMobileTrack = memo(function ServicesMobileTrack({
 /* -------------------------------------------------------------------------- */
 
 export default function Services() {
+  const { data: postsData } = useServicePostsQuery();
+  const { data: navServicesData } = useServicesQuery();
+  const services = useMemo(
+    () =>
+      mapServicePostsToStory(postsData?.data?.posts, navServicesData?.data),
+    [postsData, navServicesData],
+  );
+
   const sectionRef = useRef<HTMLElement>(null);
   const imageViewportRef = useRef<HTMLDivElement>(null);
   const mobileViewportRef = useRef<HTMLDivElement>(null);
@@ -449,7 +473,7 @@ export default function Services() {
   const [slotHeight, setSlotHeight] = useState(420);
   const [introViews, setIntroViews] = useState(INTRO_SCROLL_VIEWS);
   const [sectionHeight, setSectionHeight] = useState(
-    `${(total + INTRO_SCROLL_VIEWS) * SCROLL_VH_PER_STEP * 100}vh`,
+    `${(Math.max(total, 1) + INTRO_SCROLL_VIEWS) * SCROLL_VH_PER_STEP * 100}vh`,
   );
   const introViewsRef = useRef(INTRO_SCROLL_VIEWS);
   const overall = useMotionValue(0);
@@ -620,6 +644,8 @@ export default function Services() {
     return () => ctx.revert();
   }, [total]);
 
+  if (!total) return null;
+
   return (
     <section
       ref={sectionRef}
@@ -637,14 +663,16 @@ export default function Services() {
             <ServicesMobileTrack
               viewportRef={mobileViewportRef}
               stackRef={mobileStackRef}
+              services={services}
             />
 
-            <ServicesListPanel activeIndex={activeIndex} />
+            <ServicesListPanel activeIndex={activeIndex} services={services} />
             <ServicesImageTrack
               columnY={columnY}
               progress={storyProgress}
               viewportRef={imageViewportRef}
               slotHeight={slotHeight}
+              services={services}
             />
           </div>
         </div>

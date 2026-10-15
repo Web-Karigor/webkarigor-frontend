@@ -4,9 +4,8 @@ import "./VideoSection.css";
 
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { gsap, ScrollTrigger, isTouchToolbarResize, refreshScrollTriggers } from "@/lib/gsap";
-import homeContent from "@/data/home-content.json";
-
-const { embedUrl, title: videoTitle } = homeContent.video;
+import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
+import { homeSectionItem } from "@/lib/home-page";
 
 const MOBILE_PAD_X = 20;
 const MOBILE_VIDEO_RATIO = 16 / 9;
@@ -47,6 +46,10 @@ const VideoSection = () => {
   const fitMediaRef = useRef<((w: number, h: number) => void) | null>(null);
   const [loadVideo, setLoadVideo] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { data } = useHomePageQuery();
+  const videoItem = homeSectionItem(data?.data?.sections?.video);
+  const embedUrl = videoItem?.video_link ?? "";
+  const videoTitle = "About Video";
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1023px)");
@@ -491,6 +494,8 @@ const VideoSection = () => {
 
     return () => ctx.revert();
   }, []);
+
+  if (!embedUrl) return null;
 
   return (
     <section ref={sectionRef} className="video-section">

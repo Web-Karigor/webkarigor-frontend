@@ -46,37 +46,6 @@
       "closeMenu": "Close menu"
     }
   },
-  "hero": {
-    "titleLines": [
-      "We Are A Website Design & Development Company",
-      "AI driven solutions",
-      "in Bangladesh"
-    ],
-    "description": {
-      "beforeHighlight": "Web Karigor is a",
-      "highlight": "website",
-      "afterHighlight": "design & development company in Bangladesh that develops business websites, corporate websites, e-commerce websites, and custom web applications based on real. ",
-      "badge": "operational",
-      "afterBadge": " and customer needs ."
-    },
-    "cta": {
-      "href": "/contact-us",
-      "label": "Say hello. We're listening",
-      "ariaLabel": "Say hello. We're listening",
-      "arrowSrc": "/hero/arrow.png",
-      "avatarSrc": "/hero/hello-avatar.png"
-    },
-    "photos": {
-      "left": "/left-down.webp",
-      "right": "/right-upper.webp"
-    },
-    "backgroundWord": "PROJECTS"
-  },
-  "stats": {
-    "number": "8",
-    "plus": "+",
-    "label": "Years"
-  },
   "assets": {
     "sliderImages": [
       "/hero/slider/shishu-poribohon-1.jpg",
@@ -93,58 +62,8 @@
       "/sm4.webp"
     ]
   },
-  "clients": {
-    "title": "Brands We are Proud",
-    "titleAccent": "to Work With",
-    "description": "We work with startups, growing businesses, established organizations, and enterprises, providing professional web design, web development, ecommerce website development, and software development services in Bangladesh and international markets. Our design and development company supports brands from Dhaka to global markets with reliable digital solutions for building, modernizing, and scaling.",
-    "logos": [
-      {
-        "name": "Government of Bangladesh",
-        "src": "/partners-logo/image-1.png"
-      },
-      {
-        "name": "Robi Axiata",
-        "src": "/partners-logo/image-2.png"
-      },
-      {
-        "name": "Walton",
-        "src": "/partners-logo/image-3.png"
-      },
-      {
-        "name": "Sajeeb Group",
-        "src": "/partners-logo/image-4.png"
-      },
-      {
-        "name": "Oitijjhya",
-        "src": "/partners-logo/image-5.png"
-      },
-      {
-        "name": "Nitol-Niloy Group",
-        "src": "/partners-logo/image-6.png"
-      },
-      {
-        "name": "Gear X",
-        "src": "/partners-logo/image-7.png"
-      },
-      {
-        "name": "The Cafe Rio",
-        "src": "/partners-logo/image-8.png"
-      },
-      {
-        "name": "NIPORT",
-        "src": "/partners-logo/image-9.png"
-      },
-      {
-        "name": "Shyamoli Paribahan",
-        "src": "/partners-logo/image-10.png"
-      }
-    ]
-  },
   "services": {
     "badge": "Services",
-    "headingAccent": "We Develop Digital Solutions that",
-    "headingTitle": "Drive Brands Forward",
-    "description": "Web Karigor collaborates with companies to develop clear, credible, and scalable brands. We combine strategic thinking, digital design, website experiences, and technology to assist organizations in communicating what they do, why it matters, and why customers should pick them.",
     "seeMoreLabel": "See More",
     "ctaArrow": "https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/67326d59201cc3b185432b90_CTA%20Arrow.svg",
     "items": [
@@ -205,43 +124,7 @@
       }
     ]
   },
-  "aiFeature": {
-    "badge": "Center of Solution",
-    "headingAccent": "Path to",
-    "headingTitle": "Your Solution",
-    "centerImage": "/ai-feature/center-node.png",
-    "centerAlt": "Webkarigor",
-    "cards": [
-      {
-        "title": "Front-End Excellence",
-        "imageSrc": "/ai-feature/front-end.png"
-      },
-      {
-        "title": "AI-Driven Smart Solutions",
-        "imageSrc": "/ai-feature/ai-driven.png"
-      },
-      {
-        "title": "Scalable Back-End Technology",
-        "imageSrc": "/ai-feature/backend.png"
-      },
-      {
-        "title": "Long-Term Product Thinking",
-        "imageSrc": "/ai-feature/product-thinking.png"
-      },
-      {
-        "title": "Cross-Platform Consistency",
-        "imageSrc": "/ai-feature/cross-platform.png"
-      },
-      {
-        "title": "Branding Feels Trustworthy",
-        "imageSrc": "/ai-feature/branding.png"
-      }
-    ]
-  },
   "offerings": {
-    "eyebrow": "Industries",
-    "title": "Specialized Services",
-    "description": "We've partnered with businesses across diverse industries to create digital experiences that solve specific challenges.",
     "items": [
       {
         "title": "Our Specialized Web Design & Development Services",
@@ -298,10 +181,6 @@
         "variant": "yellow"
       }
     ]
-  },
-  "video": {
-    "embedUrl": "https://player.vimeo.com/video/1227251373?background=1",
-    "title": "About Video"
   },
   "techServices": {
     "categories": [
@@ -598,58 +477,6 @@
       "by"
     ],
     "headingAccent": "Founders"
-  },
-  "team": {
-    "mobileTitle": "Smart Team",
-    "mobileSubtitle": "Big Result",
-    "desktopExpertLines": [
-      "Expert",
-      "Team"
-    ],
-    "desktopResultLines": [
-      "Smarter",
-      "Solutions"
-    ],
-    "cardAriaLabel": "Team member",
-    "members": [
-      {
-        "src": "/team/sawan.jpg",
-        "name": "Shaon Ahmed",
-        "designation": "Lead Software Engineer"
-      },
-      {
-        "src": "/team/faruque.jpg",
-        "name": "K M Rezwanul Ehsan Faruque",
-        "designation": "Sr. Software Engineer"
-      },
-      {
-        "src": "/team/sajjad.jpg",
-        "name": "Sajjad Hossain",
-        "designation": "Laravel Developer"
-      },
-      {
-        "src": "/team/juel.jpg",
-        "name": "Mujahid Juel",
-        "designation": "Front End Developer"
-      }
-    ],
-    "members2": [
-      {
-        "src": "/team/aryan.jpg",
-        "name": "Sha Arian",
-        "designation": "Product Designer"
-      },
-      {
-        "src": "/team/imran.jpg",
-        "name": "Imran Hossain",
-        "designation": "Web Development Specialist"
-      },
-      {
-        "src": "/team/zishan.jpg",
-        "name": "Nazmul Ahmed Jisan",
-        "designation": "Motion & Visual Storyteller"
-      }
-    ]
   },
   "pricing": {
     "badge": "Pricing Plans",

@@ -18,6 +18,21 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "demo-admin.webkarigor.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "admin.webkarigor.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "admin.webkarigor.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "cdn.jsdelivr.net",
         pathname: "/**",
       },

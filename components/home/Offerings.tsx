@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -9,16 +9,10 @@ import {
   Hospital,
   ShoppingCart,
 } from "lucide-react";
-import homeContent from "@/data/home-content.json";
 import { gsap } from "@/lib/gsap";
-
-const {
-  eyebrow: homeEyebrow,
-  title: homeTitle,
-  description: homeDescription,
-  items,
-} = homeContent.offerings;
-
+import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
+import { useSpecializedServicesQuery } from "@/hooks/queries/useSpecializedServicesQuery";
+import { homeSectionItem } from "@/lib/home-page";
 
 const CARD_GAP = 24;
 const AUTO_SCROLL_MS = 2200;
@@ -35,23 +29,76 @@ const OFFERING_ICONS = {
   home: Home,
 } as const;
 
+type OfferingItem = {
+  id: number;
+  title: string;
+  description: string;
+  icon: string;
+  variant: string;
+};
+
 export default function Offerings({
-  eyebrow = homeEyebrow,
-  title = homeTitle,
-  description = homeDescription,
+  eyebrow: eyebrowProp,
+  title: titleProp,
+  description: descriptionProp,
 }: {
   eyebrow?: string;
   title?: string;
   description?: string;
 } = {}) {
+  const { data } = useHomePageQuery();
+  const { data: specializedData } = useSpecializedServicesQuery();
+  const industries = homeSectionItem(data?.data?.sections?.industries_work_with);
+  const specialized = homeSectionItem(
+    data?.data?.sections?.specialized_services,
+  );
+  const heading = industries || specialized;
+
+  const items = useMemo<OfferingItem[]>(() => {
+    const posts = specializedData?.data?.posts ?? [];
+    return [...posts]
+      .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+      .map((post) => ({
+        id: post.id,
+        title: post.fields?.title ?? "",
+        description: post.fields?.description ?? "",
+        icon: post.fields?.icon ?? "shoppingCart",
+        variant: post.fields?.variant ?? "yellow",
+      }))
+      .filter((item) => item.title);
+  }, [specializedData]);
+
+  const { eyebrow, title, description } = useMemo(() => {
+    if (eyebrowProp || titleProp || descriptionProp) {
+      return {
+        eyebrow: eyebrowProp ?? "",
+        title: titleProp ?? "",
+        description: descriptionProp ?? "",
+      };
+    }
+    if (!heading?.title) {
+      return { eyebrow: "", title: "", description: "" };
+    }
+    const parts = heading.title.trim().split(/\s+/);
+    return {
+      eyebrow: parts[0] || "",
+      title: parts.slice(1).join(" "),
+      description: heading.subtitle || "",
+    };
+  }, [eyebrowProp, titleProp, descriptionProp, heading]);
+
   const viewportRef = useRef<HTMLDivElement>(null);
   const pauseAutoRef = useRef(false);
   const resumeTimerRef = useRef<number | null>(null);
   const wrappingRef = useRef(false);
   const [dragging, setDragging] = useState(false);
-  const loopItems = Array.from({ length: LOOP_COPIES }, (_, copy) =>
-    items.map((item, index) => ({ item, copy, index })),
-  ).flat();
+  const loopItems = useMemo(
+    () =>
+      Array.from({ length: LOOP_COPIES }, (_, copy) =>
+        items.map((item, index) => ({ item, copy, index })),
+      ).flat(),
+    [items],
+  );
 
   const dragRef = useRef<{
     pointerId: number;
@@ -89,19 +136,21 @@ export default function Offerings({
     return (card?.offsetWidth ?? 300) + gap;
   }, []);
 
+  const itemsCount = items.length;
+
   const getSetWidth = useCallback(() => {
     const viewport = viewportRef.current;
-    if (!viewport) return getStep() * items.length;
+    if (!viewport) return getStep() * itemsCount;
     const cards = viewport.querySelectorAll<HTMLElement>(
       "[data-service-offering-card]",
     );
     const first = cards[0];
-    const nextSet = cards[items.length];
+    const nextSet = cards[itemsCount];
     if (first && nextSet) {
       return nextSet.offsetLeft - first.offsetLeft;
     }
-    return getStep() * items.length;
-  }, [getStep]);
+    return getStep() * itemsCount;
+  }, [getStep, itemsCount]);
 
   const normalizeLoop = useCallback(() => {
     const viewport = viewportRef.current;
@@ -257,6 +306,8 @@ export default function Offerings({
     pauseAuto(AUTO_SCROLL_MS);
   };
 
+  if (!itemsCount) return null;
+
   return (
     <section className="svc-offerings overflow-hidden bg-[#f8fafc] py-12">
       <div className="svc-offerings-inner mx-auto flex w-full max-w-[1680px] flex-col gap-[60px] px-[clamp(16px,4vw,40px)]">
@@ -311,10 +362,12 @@ export default function Offerings({
                 onPointerCancel={onPointerUp}
               >
                 {loopItems.map(({ item, copy, index }) => {
-                  const Icon = OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS];
+                  const Icon =
+                    OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS] ??
+                    ShoppingCart;
                   return (
                     <article
-                      key={`${item.title}-${copy}-${index}`}
+                      key={`${item.id}-${copy}-${index}`}
                       data-service-offering-card
                       className={`flex h-[min(320px,70vw)] min-h-[260px] w-[min(300px,calc(100vw-64px))] shrink-0 flex-col gap-[10px] rounded-[12px] px-5 py-6 sm:h-[320px] ${
                         item.variant === "green" ? "bg-[#42f5a4]" : "bg-[#ffeb3b]"

@@ -19,13 +19,12 @@ import {
   SERVICE_NAV_DESC,
   STICKY_NAV_MORE_LINKS,
 } from "@/lib/sticky-nav-data";
-import { openConsultationModal } from "@/components/home/ConsultationModal";
+import { openConsultationModal } from "@/store/consultation-store";
+import { useNavbarStore, type NavMenu } from "@/store/navbar-store";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 import { scrollAppTo, scrollAppToTop } from "@/lib/smooth-scroll";
 
 const { brand } = homeContent.navbar;
-
-type NavMenu = "services" | "more";
 
 type NavItem =
   | { id: string; label: string; href: string; kind: "link" }
@@ -83,12 +82,17 @@ function getActiveIdFromPath(pathname: string | null): string {
 }
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [navHidden, setNavHidden] = useState(false);
   const pathname = usePathname();
-  const [activeId, setActiveId] = useState(() => getActiveIdFromPath(pathname));
+  const scrolled = useNavbarStore((s) => s.scrolled);
+  const navHidden = useNavbarStore((s) => s.navHidden);
+  const activeId = useNavbarStore((s) => s.activeId);
+  const openMenu = useNavbarStore((s) => s.openMenu);
+  const setScrolled = useNavbarStore((s) => s.setScrolled);
+  const setNavHidden = useNavbarStore((s) => s.setNavHidden);
+  const setActiveId = useNavbarStore((s) => s.setActiveId);
+  const setOpenMenu = useNavbarStore((s) => s.setOpenMenu);
+  const closeStoreMenu = useNavbarStore((s) => s.closeMenu);
   const [pill, setPill] = useState<PillBox | null>(null);
-  const [openMenu, setOpenMenu] = useState<NavMenu | null>(null);
   const [dropdownOffset, setDropdownOffset] = useState<number | null>(null);
 
   const navRef = useRef<HTMLDivElement>(null);
@@ -131,9 +135,9 @@ export default function Navbar() {
   }, []);
 
   const closeMenu = useCallback(() => {
-    setOpenMenu(null);
+    closeStoreMenu();
     setDropdownOffset(null);
-  }, []);
+  }, [closeStoreMenu]);
 
   const openMenuById = useCallback(
     (menu: NavMenu) => {

@@ -21,12 +21,13 @@ import {
   STICKY_NAV_MORE_LINKS,
 } from "@/lib/sticky-nav-data";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
-
-type Sheet = "services" | "more" | null;
+import { useStickyNavStore } from "@/store/sticky-nav-store";
 
 export default function StickyNav() {
   const pathname = usePathname();
-  const [sheet, setSheet] = useState<Sheet>(null);
+  const sheet = useStickyNavStore((s) => s.sheet);
+  const closeSheet = useStickyNavStore((s) => s.closeSheet);
+  const toggleSheet = useStickyNavStore((s) => s.toggleSheet);
   const [mounted, setMounted] = useState(false);
   const { data: servicesData } = useServicesQuery();
   const services = [...(servicesData?.data ?? [])].sort((a, b) => a.id - b.id);
@@ -38,8 +39,8 @@ export default function StickyNav() {
   }, []);
 
   useEffect(() => {
-    setSheet(null);
-  }, [pathname]);
+    closeSheet();
+  }, [pathname, closeSheet]);
 
   useEffect(() => {
     if (!sheet) return;
@@ -52,9 +53,8 @@ export default function StickyNav() {
 
   if (!mounted) return null;
 
-  const close = () => setSheet(null);
-  const toggle = (next: Sheet) =>
-    setSheet((curr) => (curr === next ? null : next));
+  const close = () => closeSheet();
+  const toggle = (next: "services" | "more") => toggleSheet(next);
 
   return (
     <div className="lg:hidden">

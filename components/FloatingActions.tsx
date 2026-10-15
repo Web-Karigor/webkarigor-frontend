@@ -2,7 +2,7 @@
 
 import "./FloatingActions.css";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import {
   ArrowUp,
   Mail,
@@ -10,6 +10,7 @@ import {
   Phone,
 } from "lucide-react";
 import { scrollAppTo } from "@/lib/smooth-scroll";
+import { useFloatingActionsStore } from "@/store/floating-actions-store";
 
 const WHATSAPP_HREF = "https://wa.me/8801624283328";
 const PHONE_HREF = "tel:+8801624283328";
@@ -51,8 +52,11 @@ const STACK_LINKS = [
 ] as const;
 
 export default function FloatingActions() {
-  const [showTop, setShowTop] = useState(false);
-  const [stackOpen, setStackOpen] = useState(false);
+  const showTop = useFloatingActionsStore((s) => s.showTop);
+  const stackOpen = useFloatingActionsStore((s) => s.stackOpen);
+  const setShowTop = useFloatingActionsStore((s) => s.setShowTop);
+  const toggleStack = useFloatingActionsStore((s) => s.toggleStack);
+  const closeStack = useFloatingActionsStore((s) => s.closeStack);
   const messengerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,18 +66,18 @@ export default function FloatingActions() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [setShowTop]);
 
   useEffect(() => {
     if (!stackOpen) return;
 
     const onPointerDown = (event: PointerEvent) => {
       if (!messengerRef.current?.contains(event.target as Node)) {
-        setStackOpen(false);
+        closeStack();
       }
     };
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setStackOpen(false);
+      if (event.key === "Escape") closeStack();
     };
 
     document.addEventListener("pointerdown", onPointerDown);
@@ -82,7 +86,7 @@ export default function FloatingActions() {
       document.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("keydown", onKey);
     };
-  }, [stackOpen]);
+  }, [stackOpen, closeStack]);
 
   const scrollToTop = () => {
     scrollAppTo(0);
@@ -136,7 +140,7 @@ export default function FloatingActions() {
           className="floating-messenger-main"
           aria-label={stackOpen ? "Close contact options" : "Open contact options"}
           aria-expanded={stackOpen}
-          onClick={() => setStackOpen((open) => !open)}
+          onClick={toggleStack}
         >
           <MessageCircle
             className="floating-actions-glyph"

@@ -2,22 +2,20 @@
 
 import "./Team2.css";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import homeContent from "@/data/home-content.json";
+import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
+import {
+  homeSectionItem,
+  splitTwoLineHeading,
+  titleCaseName,
+} from "@/lib/home-page";
 
 /** Full ring — Brand Appart uses 14 */
 const RING_COUNT = 14;
 /** Continuous spin (deg / second) */
 const DEG_PER_SEC = 11;
-
-const { members: BASE_MEMBERS, desktopResultLines } = homeContent.team;
-
-const members = Array.from({ length: RING_COUNT }, (_, i) => {
-  const m = BASE_MEMBERS[i % BASE_MEMBERS.length];
-  return { ...m, key: `${i}-${m.src}` };
-});
 
 const PIC_Y = ["-25%", "0%", "25%"] as const;
 
@@ -34,17 +32,38 @@ export default function Team2() {
   const rafRef = useRef(0);
   const radiusRef = useRef(480);
   const visibleRef = useRef(true);
+  const { data } = useHomePageQuery();
+  const item = homeSectionItem(data?.data?.sections?.team);
+
+  const { members, desktopResultLines } = useMemo(() => {
+    const base =
+      item?.home_team?.map((media) => ({
+        src: media.url,
+        name: media.alt_text || titleCaseName(media.name),
+        designation: "",
+      })) ?? [];
+
+    if (!base.length) {
+      return { members: [] as { src: string; name: string; designation: string; key: string }[], desktopResultLines: ["", ""] as const };
+    }
+
+    return {
+      members: Array.from({ length: RING_COUNT }, (_, i) => {
+        const m = base[i % base.length];
+        return { ...m, key: `${i}-${m.src}` };
+      }),
+      desktopResultLines: splitTwoLineHeading(item?.bottom_left_text || ""),
+    };
+  }, [item]);
 
   useLayoutEffect(() => {
     const stage = stageRef.current;
     const list = listRef.current;
-    if (!stage || !list) return;
+    if (!stage || !list || !members.length) return;
 
     const measure = () => {
-      // Full viewport width for a wider section ring
       const w = window.innerWidth;
       const h = stage.clientHeight || window.innerHeight;
-      // Mobile: larger radius so cards don't stack on top of each other
       const radiusFactor = w < 768 ? 0.64 : 0.5;
       radiusRef.current = Math.min(w * radiusFactor, h * 0.68, 820);
     };
@@ -61,15 +80,10 @@ export default function Team2() {
       items.forEach((el, i) => {
         const θ = baseDeg + i * step;
         const rad = (θ * Math.PI) / 180;
-
-        // Full circle in XZ — Brand Appart formula (front at θ≈0 → z≈0)
         const x = R * Math.sin(rad);
         const z = R * (Math.cos(rad) - 1);
-
-        // Depth scale: front ≈ 1, back ≈ 0.72
-        const depth = (z + 2 * R) / (2 * R); // 0 at back … 1 at front
+        const depth = (z + 2 * R) / (2 * R);
         const scale = 0.72 + depth * 0.28;
-        // Keep back cards visible but softer
         const opacity = 0.35 + depth * 0.65;
 
         el.style.transform = `translate(-50%, -50%) translate3d(${x}px, 0px, ${z}px) rotateY(${θ}deg) scale(${scale})`;
@@ -78,22 +92,23 @@ export default function Team2() {
 
         const pic = pics[i];
         if (pic) {
-          pic.style.transform = `translateY(${PIC_Y[i % PIC_Y.length]})`;
+          const y = PIC_Y[i % PIC_Y.length];
+          pic.style.transform = `translateY(${y})`;
         }
       });
     };
 
-    render(0);
-
     const tick = (now: number) => {
-      const dt = Math.min(now - last, 64);
+      const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       if (visibleRef.current) {
-        angleRef.current += (DEG_PER_SEC * dt) / 1000;
+        angleRef.current = (angleRef.current + DEG_PER_SEC * dt) % 360;
         render(angleRef.current);
       }
       rafRef.current = requestAnimationFrame(tick);
     };
+
+    render(angleRef.current);
     rafRef.current = requestAnimationFrame(tick);
 
     const onResize = () => {
@@ -115,7 +130,9 @@ export default function Team2() {
       window.removeEventListener("resize", onResize);
       io.disconnect();
     };
-  }, []);
+  }, [members]);
+
+  if (!members.length) return null;
 
   return (
     <section className="team2" aria-label="Team">
@@ -153,7 +170,10 @@ export default function Team2() {
                         fill
                         sizes="228px"
                         className="team2-pic-img"
-                        draggable={false} loading="lazy"/>
+                        draggable={false}
+                        loading="lazy"
+                        unoptimized
+                      />
                     </div>
                   </div>
                 </li>

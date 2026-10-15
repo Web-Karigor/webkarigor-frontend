@@ -1,14 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
-import homeContent from "@/data/home-content.json";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
+import { homeSectionItem, splitTrailingWords, stripHtml } from "@/lib/home-page";
 
-const { title, titleAccent, description, logos } = homeContent.clients;
-const { backgroundWord } = homeContent.hero;
-
-type ClientLogo = (typeof logos)[number];
+type ClientLogo = { name: string; src: string };
 
 const LOOP_COPIES = 3;
 const SLIDE_DURATION = 32;
@@ -138,6 +136,27 @@ function InfiniteLogoRow({
 
 
 export default function Clients() {
+  const { data } = useHomePageQuery();
+  const item = homeSectionItem(data?.data?.sections?.brands_work_with);
+
+  const { title, titleAccent } = useMemo(() => {
+    const split = splitTrailingWords(item?.title || "", 3);
+    return { title: split.head, titleAccent: split.tail };
+  }, [item?.title]);
+
+  const description = item?.text ? stripHtml(item.text) : "";
+
+  const logos: ClientLogo[] = useMemo(
+    () =>
+      (item?.brand_logo ?? []).map((logo) => ({
+        name: logo.alt_text || logo.name,
+        src: logo.url,
+      })),
+    [item?.brand_logo],
+  );
+
+  if (!item) return null;
+
   return (
     <section className="svc-clients relative px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px]">
       <div className="mx-auto flex w-full max-w-[1750px] flex-col items-stretch gap-8 lg:gap-[60px]">
@@ -171,7 +190,7 @@ export default function Clients() {
       </div>
       <div className="hero-projects-wrap pointer-events-none absolute inset-x-0 bottom-0 z-[1] pb-50">
         <p className="hero-projects-text translate-y-[calc(54%+30px)] text-center font-bold leading-[0.9] text-[#1F1E1C] opacity-[0.02] md:translate-y-[56%] 2xl:translate-y-[64%]">
-          {backgroundWord}
+          PROJECTS
         </p>
       </div>
     </section>

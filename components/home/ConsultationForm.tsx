@@ -31,7 +31,7 @@ import {
   useQuotationMutation,
   type QuotationPayload,
 } from "@/hooks/mutations/useQuotationMutation";
-import { getQuotationContext } from "@/components/home/ConsultationModal";
+import { getQuotationContext } from "@/store/consultation-store";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 
 const {

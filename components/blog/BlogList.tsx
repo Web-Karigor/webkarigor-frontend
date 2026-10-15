@@ -3,16 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useBlogsQuery } from "@/hooks/queries/useBlogsQuery";
 import { BLOG_PAGE } from "@/lib/blog-data";
+import { useBlogUiStore } from "@/store/blog-ui-store";
 
 const PAGE_SIZE = 4;
 
 export default function BlogList() {
   const { data, isLoading, isError } = useBlogsQuery();
-  const [query, setQuery] = useState("");
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const query = useBlogUiStore((s) => s.query);
+  const visibleCount = useBlogUiStore((s) => s.visibleCount);
+  const setQuery = useBlogUiStore((s) => s.setQuery);
+  const setVisibleCount = useBlogUiStore((s) => s.setVisibleCount);
 
   const posts = useMemo(() => {
     const all = data?.data ?? [];
@@ -23,7 +26,7 @@ export default function BlogList() {
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
-  }, [query]);
+  }, [query, setVisibleCount]);
 
   const visiblePosts = posts.slice(0, visibleCount);
   const hasMore = visibleCount < posts.length;

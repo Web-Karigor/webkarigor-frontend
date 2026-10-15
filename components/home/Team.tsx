@@ -2,22 +2,21 @@
 
 import "./Team.css";
 
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "@/lib/gsap";
-import homeContent from "@/data/home-content.json";
+import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
+import {
+  homeSectionItem,
+  splitTwoLineHeading,
+  titleCaseName,
+} from "@/lib/home-page";
 
-const {
-  mobileTitle,
-  mobileSubtitle,
-  desktopExpertLines,
-  desktopResultLines,
-  members: TEAM_MEMBERS,
-  members2: TEAM_MEMBERS2,
-} = homeContent.team;
-
-type TeamMember = (typeof TEAM_MEMBERS)[number];
-type TeamMember2 = (typeof TEAM_MEMBERS2)[number];
+type TeamMember = {
+  src: string;
+  name: string;
+  designation: string;
+};
 
 
 type TeamCardSizes = {
@@ -269,11 +268,42 @@ function InfiniteSlideRow({
   );
 }
 
-const upperMembers = TEAM_MEMBERS;
-const lowerMembers = TEAM_MEMBERS2;
-
 export default function Team() {
   const sizes = useTeamCardSizes();
+  const { data } = useHomePageQuery();
+  const item = homeSectionItem(data?.data?.sections?.team);
+
+  const mapped = useMemo(() => {
+    if (!item?.home_team?.length) return null;
+    const members: TeamMember[] = item.home_team.map((media) => ({
+      src: media.url,
+      name: media.alt_text || titleCaseName(media.name),
+      designation: "",
+    }));
+    const mid = Math.ceil(members.length / 2) || 1;
+    const expert = splitTwoLineHeading(item.right_top_text || "");
+    const result = splitTwoLineHeading(item.bottom_left_text || "");
+    return {
+      upperMembers: members.slice(0, mid),
+      lowerMembers: members.slice(mid).length
+        ? members.slice(mid)
+        : members.slice(0, mid),
+      expertLines: expert,
+      resultLines: result,
+      mobileTitle: expert[0],
+      mobileSubtitle: result[0],
+    };
+  }, [item]);
+
+  if (!mapped) return null;
+  const {
+    upperMembers,
+    lowerMembers,
+    expertLines,
+    resultLines,
+    mobileTitle,
+    mobileSubtitle,
+  } = mapped;
 
   return (
     <section className="overflow-hidden bg-[#FEFCF6] py-12 sm:py-16 md:py-24">
@@ -296,8 +326,8 @@ export default function Team() {
 
           <div className="hidden flex-shrink-0 lg:block">
             <div className="team-heading-desktop-expert text-left">
-              <div>{desktopExpertLines[0]}</div>
-              <div>{desktopExpertLines[1]}</div>
+              <div>{expertLines[0]}</div>
+              <div>{expertLines[1]}</div>
             </div>
           </div>
         </div>
@@ -305,8 +335,8 @@ export default function Team() {
         <div className="flex items-center justify-between gap-4 sm:gap-6 lg:gap-10">
           <div className="hidden flex-shrink-0 lg:block">
             <div className="team-heading-desktop-result">
-              <div>{desktopResultLines[0]}</div>
-              <div>{desktopResultLines[1]}</div>
+              <div>{resultLines[0]}</div>
+              <div>{resultLines[1]}</div>
             </div>
           </div>
 

@@ -2,19 +2,22 @@
 
 import Image from "next/image";
 import { forwardRef } from "react";
-import homeContent from "@/data/home-content.json";
 
-const { centerImage, centerAlt } = homeContent.aiFeature;
-
-const CenterNode = forwardRef<HTMLDivElement>(function CenterNode(_, ref) {
+const CenterNode = forwardRef<
+  HTMLDivElement,
+  { imageSrc: string }
+>(function CenterNode({ imageSrc }, ref) {
   return (
     <div ref={ref} className="ai-feature-center-node relative">
       <Image
-        src={centerImage}
-        alt={centerAlt}
+        src={imageSrc}
+        alt=""
         fill
         className="ai-feature-center-image"
-        sizes="(max-width: 768px) 84px, 132px" loading="lazy"/>
+        sizes="(max-width: 768px) 84px, 132px"
+        loading="lazy"
+        unoptimized
+      />
     </div>
   );
 });
