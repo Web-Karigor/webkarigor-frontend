@@ -43,7 +43,14 @@ export default function FeatureNetwork() {
     };
   }, [item]);
 
-  if (!featureCards.length || !centerImage) return null;
+  if (!featureCards.length || !centerImage) {
+    return (
+      <section
+        className="ai-feature-section pointer-events-none relative min-h-[720px] overflow-hidden bg-[#fbfaf7] lg:min-h-[900px]"
+        aria-hidden
+      />
+    );
+  }
 
   return (
     <section

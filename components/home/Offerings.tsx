@@ -306,7 +306,15 @@ export default function Offerings({
     pauseAuto(AUTO_SCROLL_MS);
   };
 
-  if (!itemsCount) return null;
+  /* Keep layout height while API loads so Video/Case pins don't jump. */
+  if (!itemsCount) {
+    return (
+      <section
+        className="svc-offerings pointer-events-none overflow-hidden bg-[#f8fafc] py-12 min-h-[520px]"
+        aria-hidden
+      />
+    );
+  }
 
   return (
     <section className="svc-offerings overflow-hidden bg-[#f8fafc] py-12">

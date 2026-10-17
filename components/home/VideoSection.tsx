@@ -7,6 +7,14 @@ import { gsap, ScrollTrigger, isTouchToolbarResize, refreshScrollTriggers } from
 import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
 import { homeSectionItem } from "@/lib/home-page";
 
+/**
+ * Sync defaults = pre-dynamic first paint. Section always mounts so pin spacing
+ * (and Case below) stay identical; API URL swaps in without remounting GSAP.
+ */
+const DEFAULT_EMBED_URL =
+  "https://player.vimeo.com/video/1227251373?background=1";
+const DEFAULT_VIDEO_TITLE = "About Video";
+
 const MOBILE_PAD_X = 20;
 const MOBILE_VIDEO_RATIO = 16 / 9;
 const DESKTOP_START_SCALE = 0.48;
@@ -48,8 +56,8 @@ const VideoSection = () => {
   const [isMobile, setIsMobile] = useState(false);
   const { data } = useHomePageQuery();
   const videoItem = homeSectionItem(data?.data?.sections?.video);
-  const embedUrl = videoItem?.video_link ?? "";
-  const videoTitle = "About Video";
+  const embedUrl = videoItem?.video_link || DEFAULT_EMBED_URL;
+  const videoTitle = DEFAULT_VIDEO_TITLE;
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1023px)");
@@ -494,8 +502,6 @@ const VideoSection = () => {
 
     return () => ctx.revert();
   }, []);
-
-  if (!embedUrl) return null;
 
   return (
     <section ref={sectionRef} className="video-section">

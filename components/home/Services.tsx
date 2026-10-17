@@ -644,7 +644,18 @@ export default function Services() {
     return () => ctx.revert();
   }, [total]);
 
-  if (!total) return null;
+  /* Reserve scroll height while API loads — keeps Video/Case pins from shifting. */
+  if (!total) {
+    return (
+      <section
+        className="services-story relative pointer-events-none"
+        style={{
+          height: `${(5 + INTRO_SCROLL_VIEWS) * SCROLL_VH_PER_STEP * 100}vh`,
+        }}
+        aria-hidden
+      />
+    );
+  }
 
   return (
     <section
