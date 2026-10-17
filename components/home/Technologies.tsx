@@ -2,21 +2,18 @@
 
 import "./Technologies.css";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import homeContent from "@/data/home-content.json";
+import { useTechnologiesQuery } from "@/hooks/queries/useTechnologiesQuery";
+import { mapTechnologyPostsToGroups } from "@/lib/technologies";
+import type { TechItem } from "@/types/technologies";
 
-const {
-  headingPrefix,
-  headingAccent,
-  footerPrefix,
-  footerAccent,
-  footerSuffix,
-  groups: technologyGroups,
-} = homeContent.technologies;
-
-type TechItem = (typeof technologyGroups)[number]["items"][number];
+const headingPrefix = "Technologies";
+const headingAccent = "Used";
+const footerPrefix = "In";
+const footerAccent = "Web";
+const footerSuffix = "karigor";
 
 /** Wave scale by distance from hovered row (0 = hovered). */
 function waveScale(distance: number): number {
@@ -144,7 +141,7 @@ function TechColumn({ items }: { items: TechItem[] }) {
 
         return (
           <div
-            key={tech.name}
+            key={tech.id}
             onMouseEnter={() => setHoveredIndex(index)}
             style={{
               transform: `scale(${scale})`,
@@ -180,6 +177,14 @@ function TechColumn({ items }: { items: TechItem[] }) {
 }
 
 export default function Technologies() {
+  const { data } = useTechnologiesQuery();
+  const technologyGroups = useMemo(
+    () => mapTechnologyPostsToGroups(data?.data?.posts),
+    [data],
+  );
+
+  if (!technologyGroups.length) return null;
+
   return (
     <section className="technologies-section relative box-border w-full overflow-hidden bg-[#F2F2F2] px-4 py-12 sm:px-8 md:px-10 lg:flex lg:h-[860px] lg:min-h-[860px] lg:max-h-[860px] lg:flex-col lg:justify-center lg:px-[49px] lg:py-16 min-[1920px]:px-[49px]">
       <div className="pointer-events-none absolute inset-0 bg-[#F2F2F2]" aria-hidden />

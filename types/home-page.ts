@@ -74,13 +74,30 @@ export type SpecializedServicesItem = {
   subtitle: string;
 };
 
+export type FaqHeadingItem = {
+  id: number;
+  title: string;
+  subtitle: string;
+  cta_title: string;
+  cta_button_text: string;
+};
+
+export type RequestQuoteItem = {
+  id: number;
+  title: string;
+  subtitle: string;
+  button_text: string;
+};
+
 export type HomePageSections = {
   hero?: HomeSection<HeroItem>;
   brands_work_with?: HomeSection<BrandsItem>;
   center_solutions?: HomeSection<CenterSolutionsItem>;
   industries_work_with?: HomeSection<IndustriesItem>;
+  faq?: HomeSection<FaqHeadingItem>;
   video?: HomeSection<VideoItem>;
   team?: HomeSection<TeamItem>;
+  request_quote?: HomeSection<RequestQuoteItem>;
   services?: HomeSection<ServicesHeadingItem>;
   specialized_services?: HomeSection<SpecializedServicesItem>;
 };

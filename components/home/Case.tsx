@@ -4,27 +4,11 @@ import "./Case.css";
 
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useLayoutEffect, useRef } from "react";
-import { gsap, scrollStepsPx } from "@/lib/gsap";
+import { Fragment, useLayoutEffect, useMemo, useRef } from "react";
+import { gsap, refreshScrollTriggers, scrollStepsPx } from "@/lib/gsap";
 import homeContent from "@/data/home-content.json";
-
-type CaseItem = {
-  number: string;
-  tags?: string[];
-  title: string;
-  titleOneLine?: boolean;
-  description: string;
-  platforms?: string[];
-  color: string;
-  href: string;
-  quote?: string;
-  author?: {
-    name: string;
-    role: string;
-    image: string;
-  };
-  images: string[];
-};
+import { useProjectsQuery } from "@/hooks/queries/useProjectsQuery";
+import { mapPostsToCaseItems, type CaseProjectItem } from "@/lib/projects";
 
 const {
   badge: caseBadge,
@@ -33,9 +17,17 @@ const {
   description: caseDescription,
 } = homeContent.case;
 
-const cases = homeContent.case.items as CaseItem[];
-
 export default function Case() {
+  const { data } = useProjectsQuery();
+  const cases = useMemo<CaseProjectItem[]>(
+    () => mapPostsToCaseItems(data?.data?.posts),
+    [data],
+  );
+  const casesKey = useMemo(
+    () => cases.map((item) => item.href).join("|"),
+    [cases],
+  );
+
   const sectionRef = useRef<HTMLElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
@@ -43,8 +35,10 @@ export default function Case() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useLayoutEffect(() => {
+    if (!cases.length) return;
     if (!wrapperRef.current || !pinRef.current || !listRef.current) return;
 
+    cardRefs.current = cardRefs.current.slice(0, cases.length);
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
     if (!cards.length) return;
 
@@ -174,8 +168,10 @@ export default function Case() {
       });
     }, sectionRef.current ?? undefined);
 
+    requestAnimationFrame(() => refreshScrollTriggers());
+
     return () => ctx.revert();
-  }, []);
+  }, [casesKey, cases.length]);
 
   return (
     <section ref={sectionRef} className="case-section">
@@ -197,35 +193,42 @@ export default function Case() {
       {/* Full-bleed pin shell — keeps cards centered before & during pin (no left→middle jump) */}
       <div ref={wrapperRef} className="tiles_stack_wrapper case-stack">
         <div ref={pinRef} className="tiles_stack_pin">
-          <div ref={listRef} role="list" className="tiles_stack_list w-dyn-items">
-            {cases.map((item, index) => (
-              <div
-                key={item.number}
-                role="listitem"
-                ref={(el) => {
-                  cardRefs.current[index] = el;
-                }}
-                className="tiles_stack_item w-dyn-item"
-              >
+          {cases.length ? (
+            <div ref={listRef} role="list" className="tiles_stack_list w-dyn-items">
+              {cases.map((item, index) => (
                 <div
-                  className="service-card"
-                  style={{ backgroundColor: item.color }}
+                  key={item.href}
+                  role="listitem"
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
+                  className="tiles_stack_item w-dyn-item"
                 >
-                  <Link
-                    href={item.href}
-                    className="service-card-link u-cover"
-                    aria-label={item.title}
-                  />
+                  <div
+                    className="service-card"
+                    style={{ backgroundColor: item.color }}
+                  >
+                    <Link
+                      href={item.href}
+                      className="service-card-link u-cover"
+                      aria-label={item.title}
+                    />
 
-                  <div className="service-card-body">
-                    <div className="service-card-title">
-                      <div className="service-card-copy">
+                    <div className="service-card-body">
+                      <div className="service-card-title">
+                        <div className="service-card-copy">
                           {item.tags?.length ? (
                             <p className="service-card-tags">
                               {item.tags.map((tag, i) => (
-                                <span key={`${tag}-${i}`} className="service-card-tags-item">
+                                <span
+                                  key={`${tag}-${i}`}
+                                  className="service-card-tags-item"
+                                >
                                   {i > 0 ? (
-                                    <span className="service-card-sep" aria-hidden>
+                                    <span
+                                      className="service-card-sep"
+                                      aria-hidden
+                                    >
                                       •
                                     </span>
                                   ) : null}
@@ -235,17 +238,17 @@ export default function Case() {
                             </p>
                           ) : null}
 
-                        <h3 className="service_card_title">{item.title}</h3>
+                          <h3 className="service_card_title">{item.title}</h3>
 
-                        <div className="service-card-desc w-richtext">
-                          <p>{item.description}</p>
-                        </div>
+                          <div className="service-card-desc w-richtext">
+                            <p>{item.description}</p>
+                          </div>
 
-                        {item.platforms?.length ? (
-                          <div className="service-card-platforms">
-                            <span className="service-card-platforms-label">
-                              Platforms
-                            </span>
+                          {item.platforms?.length ? (
+                            <div className="service-card-platforms">
+                              <span className="service-card-platforms-label">
+                                Platforms
+                              </span>
                               <p className="service-card-platforms-list">
                                 {item.platforms.map((platform, i) => (
                                   <Fragment key={`${platform}-${i}`}>
@@ -263,65 +266,64 @@ export default function Case() {
                                   </Fragment>
                                 ))}
                               </p>
+                            </div>
+                          ) : null}
+                        </div>
+
+                        {item.author && (
+                          <div className="service-card-author">
+                            {/* Client avatar intentionally omitted */}
+                            <div className="author-infos">
+                              <span className="author_name u-block">
+                                {item.author.name}
+                              </span>
+                              <span className="author_job">
+                                {item.author.role
+                                  .split(/\s*•\s*/)
+                                  .map((part, i) => (
+                                    <Fragment key={`${part}-${i}`}>
+                                      {i > 0 ? (
+                                        <span
+                                          className="author_job-sep"
+                                          aria-hidden
+                                        />
+                                      ) : null}
+                                      <span className="author_job-part">
+                                        {part}
+                                      </span>
+                                    </Fragment>
+                                  ))}
+                              </span>
+                            </div>
                           </div>
-                        ) : null}
+                        )}
                       </div>
 
-                      {item.author && (
-                        <div className="service-card-author">
-                          {/* <div className="author_pic u-rounded is-min">
-                            <Image
-                              src={item.author.image}
-                              alt={item.author.name}
-                              width={48}
-                              height={48}
-                              className="u-fluid author-img"
-                              unoptimized loading="lazy"/>
-                          </div> */}
-                          <div className="author-infos">
-                            <span className="author_name u-block">
-                              {item.author.name}
-                            </span>
-                            <span className="author_job">
-                              {item.author.role
-                                .split(/\s*•\s*/)
-                                .map((part, i) => (
-                                  <Fragment key={`${part}-${i}`}>
-                                    {i > 0 ? (
-                                      <span
-                                        className="author_job-sep"
-                                        aria-hidden
-                                      />
-                                    ) : null}
-                                    <span className="author_job-part">
-                                      {part}
-                                    </span>
-                                  </Fragment>
-                                ))}
-                            </span>
-                          </div>
+                      <div className="service-card-content">
+                        <div className="service-card-media is-rounded">
+                          <Image
+                            src={item.images[0]}
+                            alt={item.title}
+                            fill
+                            unoptimized
+                            loading="lazy"
+                            className="service-card-featured-img"
+                            sizes="(max-width: 1023px) 100vw, 493px"
+                          />
                         </div>
-                      )}
-                    </div>
-
-                    <div className="service-card-content">
-                      <div className="service-card-media is-rounded">
-                        <Image
-                          src={item.images[0]}
-                          alt={item.title}
-                          fill
-                          unoptimized
-                          loading="lazy"
-                          className="service-card-featured-img"
-                          sizes="(max-width: 1023px) 100vw, 493px"
-                        />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div
+              className="tiles_stack_list w-dyn-items pointer-events-none"
+              aria-hidden
+              style={{ minHeight: "min(100dvh, 900px)" }}
+            />
+          )}
         </div>
       </div>
     </section>

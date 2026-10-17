@@ -1,36 +1,23 @@
 "use client";
 
+import { useMemo } from "react";
 import {
-  getProjectCardOverview,
-  PROJECT_CARD_SLUGS,
-  PROJECT_ITEMS,
   PROJECTS_CONTENT_W,
   PROJECTS_GAP,
   PROJECTS_WATERMARK,
 } from "@/lib/projects-data";
+import { useProjectsQuery } from "@/hooks/queries/useProjectsQuery";
+import { mapPostsToGridItems } from "@/lib/projects";
 import ProjectCard from "./ProjectCard";
 
-function projectHref(id: string) {
-  const slug = PROJECT_CARD_SLUGS[id];
-  return slug ? `/projects/${slug}` : undefined;
-}
-
 export default function ProjectsGrid() {
-  const featured = PROJECT_ITEMS[0];
+  const { data } = useProjectsQuery();
+  const items = useMemo(
+    () => mapPostsToGridItems(data?.data?.posts),
+    [data],
+  );
 
-  /*
-  // Previous mixed layouts (featured + 2-col pairs + stacked V/health).
-  const rest = PROJECT_ITEMS.slice(1);
-  const pairRows = [
-    [rest[0], rest[1]],
-    [rest[2], rest[3]],
-    [rest[4], rest[5]],
-  ];
-  const ventures = rest[6];
-  const brandV = rest[7];
-  const health = rest[8];
-  const lastRow = [rest[9], rest[10]];
-  */
+  const featured = items[0];
 
   return (
     <section className="projects-bento relative bg-[#FFFDF6] pb-12 pt-8 sm:pb-20 sm:pt-14 md:pb-28 md:pt-16">
@@ -74,111 +61,19 @@ export default function ProjectsGrid() {
             gap: PROJECTS_GAP,
           }}
         >
-          {PROJECT_ITEMS.map((item, index) => {
-            const overview = getProjectCardOverview(item.id);
-
-            return (
-              <ProjectCard
-                key={item.id}
-                title={overview?.title ?? item.title}
-                src={item.src}
-                alt={item.alt}
-                width={featured.w}
-                height={featured.h}
-                href={projectHref(item.id)}
-                variant={item.variant}
-                description={overview?.description ?? item.description}
-                keyPoints={overview?.keyPoints ?? item.keyPoints}
-              />
-            );
-          })}
-
-          {/*
-          <ProjectCard
-            title={featured.title}
-            src={featured.src}
-            alt={featured.alt}
-            width={featured.w}
-            height={featured.h}
-            href={projectHref(featured.id)}
-            priority
-          />
-
-          {pairRows.map((row) => (
-            <div
-              key={row.map((c) => c.id).join("-")}
-              className="grid grid-cols-1 md:grid-cols-2"
-              style={{ gap: PROJECTS_GAP }}
-            >
-              {row.map((item, index) => (
-                <ProjectCard
-                  key={item.id}
-                  title={item.title}
-                  src={item.src}
-                  alt={item.alt}
-                  width={item.w}
-                  height={item.h}
-                  href={projectHref(item.id)}
-                  variant={item.variant}
-                  priority={index === 0 && item.id === "p2"}
-                />
-              ))}
-            </div>
-          ))}
-
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 md:items-start"
-            style={{ gap: PROJECTS_GAP }}
-          >
+          {items.map((item) => (
             <ProjectCard
-              title={ventures.title}
-              src={ventures.src}
-              alt={ventures.alt}
-              width={ventures.w}
-              height={ventures.h}
-              href={projectHref(ventures.id)}
-              variant={ventures.variant}
+              key={item.id}
+              title={item.title}
+              src={item.src}
+              alt={item.alt}
+              width={featured?.w ?? item.w}
+              height={featured?.h ?? item.h}
+              href={`/projects/${item.slug}`}
+              description={item.description}
+              keyPoints={item.keyPoints}
             />
-            <div className="flex flex-col" style={{ gap: PROJECTS_GAP }}>
-              <ProjectCard
-                title={brandV.title}
-                src={brandV.src}
-                alt={brandV.alt}
-                width={brandV.w}
-                height={brandV.h}
-                href={projectHref(brandV.id)}
-                variant={brandV.variant}
-              />
-              <ProjectCard
-                title={health.title}
-                src={health.src}
-                alt={health.alt}
-                width={health.w}
-                height={health.h}
-                href={projectHref(health.id)}
-                variant={health.variant}
-              />
-            </div>
-          </div>
-
-          <div
-            className="grid grid-cols-1 md:grid-cols-2"
-            style={{ gap: PROJECTS_GAP }}
-          >
-            {lastRow.map((item) => (
-              <ProjectCard
-                key={item.id}
-                title={item.title}
-                src={item.src}
-                alt={item.alt}
-                width={item.w}
-                height={item.h}
-                href={projectHref(item.id)}
-                variant={item.variant}
-              />
-            ))}
-          </div>
-          */}
+          ))}
         </div>
       </div>
     </section>

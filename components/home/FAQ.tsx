@@ -2,18 +2,11 @@
 
 import "./FAQ.css";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
-import homeContent from "@/data/home-content.json";
-
-const {
-  badge,
-  headingAccent,
-  headingTitle,
-  ctaText,
-  ctaLabel,
-  items: faqs,
-} = homeContent.faq;
+import { useFaqHomeQuery } from "@/hooks/queries/useFaqHomeQuery";
+import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
+import { homeSectionItem, splitTrailingWords } from "@/lib/home-page";
 
 export default function FAQ({
   className = "bg-[#FFFDF6]",
@@ -21,11 +14,41 @@ export default function FAQ({
   className?: string;
   ctaHref?: string;
 }) {
+  const { data: homeData } = useHomePageQuery();
+  const { data } = useFaqHomeQuery();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const heading = homeSectionItem(homeData?.data?.sections?.faq);
+
+  const badge = heading?.title?.trim() ?? "";
+  const { head: headingAccent, tail: headingTitle } = useMemo(
+    () => splitTrailingWords(heading?.subtitle ?? "", 1),
+    [heading?.subtitle],
+  );
+  const ctaText = heading?.cta_title?.trim() ?? "";
+  const ctaLabel = heading?.cta_button_text?.trim() ?? "";
+
+  const faqs = useMemo(
+    () =>
+      [...(data?.data?.posts ?? [])]
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+        .map((post) => ({
+          id: post.id,
+          question: post.fields?.question?.trim() ?? "",
+          answer: post.fields?.answer?.trim() ?? "",
+        }))
+        .filter((item) => item.question && item.answer),
+    [data],
+  );
 
   const toggleFAQ = (index: number) => {
     setOpenIndex((current) => (current === index ? null : index));
   };
+
+  if (!faqs.length || !heading) return null;
+
+  const showHeader = Boolean(badge || headingAccent || headingTitle);
+  const showCta = Boolean(ctaText || ctaLabel);
 
   return (
     <section
@@ -33,25 +56,37 @@ export default function FAQ({
       className={`relative scroll-mt-24 px-4 py-16 pb-8 font-montserrat md:px-6 md:py-24 md:pb-12 ${className}`}
     >
       <div className="mx-auto max-w-[1320px]">
-        <div className="faq-section-header mb-12 text-center md:mb-16">
-          <span className="faq-section-badge">
-            <span className="faq-badge-text">{badge}</span>
-          </span>
+        {showHeader ? (
+          <div className="faq-section-header mb-12 text-center md:mb-16">
+            {badge ? (
+              <span className="faq-section-badge">
+                <span className="faq-badge-text">{badge}</span>
+              </span>
+            ) : null}
 
-          <h2 className="section-heading">
-            <span className="section-heading-split-accent faq-gradient-text faq-accent-text">
-              {headingAccent}
-            </span>
-            <span className="section-heading-split-title">{headingTitle}</span>
-          </h2>
-        </div>
+            {headingAccent || headingTitle ? (
+              <h2 className="section-heading">
+                {headingAccent ? (
+                  <span className="section-heading-split-accent faq-gradient-text faq-accent-text">
+                    {headingAccent}
+                  </span>
+                ) : null}
+                {headingTitle ? (
+                  <span className="section-heading-split-title">
+                    {headingTitle}
+                  </span>
+                ) : null}
+              </h2>
+            ) : null}
+          </div>
+        ) : null}
 
         <div className="mb-12 space-y-1 md:mb-16">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <div key={index} className="border-b border-[#e5e5e5]">
+              <div key={faq.id} className="border-b border-[#e5e5e5]">
                 <button
                   type="button"
                   onClick={() => toggleFAQ(index)}
@@ -67,9 +102,7 @@ export default function FAQ({
                     }`}
                     aria-hidden
                   >
-                    {/* Horizontal bar always visible */}
                     <span className="absolute h-[2px] w-[14px] rounded-full bg-current" />
-                    {/* Vertical bar rotates away for minus */}
                     <span
                       className={`absolute h-[14px] w-[2px] rounded-full bg-current transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isOpen ? "scale-y-0" : "scale-y-100"
@@ -78,7 +111,6 @@ export default function FAQ({
                   </span>
                 </button>
 
-                {/* Height-only animation — no opacity (avoids flicker/shake) */}
                 <div
                   className={`grid overflow-hidden transition-[grid-template-rows] duration-[450ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
                     isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
@@ -95,18 +127,24 @@ export default function FAQ({
           })}
         </div>
 
-        <div className="text-center">
-          <p className="faq-cta-heading mx-auto mb-6 max-w-[669px] font-montserrat text-[clamp(22px,4.2vw,42px)] font-bold leading-[140%] tracking-[-0.05em] text-black">
-            {ctaText}
-          </p>
-          <button
-            type="button"
-            onClick={openConsultationModal}
-            className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
-          >
-            {ctaLabel}
-          </button>
-        </div>
+        {showCta ? (
+          <div className="text-center">
+            {ctaText ? (
+              <p className="faq-cta-heading mx-auto mb-6 max-w-[669px] font-montserrat text-[clamp(22px,4.2vw,42px)] font-bold leading-[140%] tracking-[-0.05em] text-black">
+                {ctaText}
+              </p>
+            ) : null}
+            {ctaLabel ? (
+              <button
+                type="button"
+                onClick={openConsultationModal}
+                className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
+              >
+                {ctaLabel}
+              </button>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </section>
   );

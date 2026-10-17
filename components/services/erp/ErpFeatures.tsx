@@ -1,3 +1,6 @@
+"use client";
+
+import { useMemo } from "react";
 import {
   BarChart3,
   Code2,
@@ -11,10 +14,11 @@ import {
   UserCheck,
   Users,
   Wallet,
+  type LucideIcon,
 } from "lucide-react";
-import { ERP_FEATURES, ERP_FEATURES_SECTION } from "@/lib/erp-data";
+import { useErpServicesQuery } from "@/hooks/queries/useErpServicesQuery";
 
-const ICONS = {
+const ICONS: Record<string, LucideIcon> = {
   code: Code2,
   layers: Layers,
   factory: Factory,
@@ -27,36 +31,52 @@ const ICONS = {
   settings: Settings,
   "shopping-cart": ShoppingCart,
   "bar-chart": BarChart3,
-} as const;
-
+};
 
 export default function ErpFeatures() {
+  const { data } = useErpServicesQuery();
+
+  const features = useMemo(
+    () =>
+      [...(data?.data?.posts ?? [])]
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+        .map((post) => ({
+          id: post.id,
+          title: post.fields?.title?.trim() ?? "",
+          description: post.fields?.description?.trim() ?? "",
+          color: post.fields?.color?.trim() || "#12B76A",
+          bg: post.fields?.bg?.trim() || "#EAFBF3",
+          icon: post.fields?.icon?.trim() || "settings",
+        }))
+        .filter((item) => item.title && item.description),
+    [data],
+  );
+
+  if (!features.length) return null;
+
   return (
     <section className="erp-features bg-white py-[clamp(48px,6vw,80px)]">
       <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-8 px-[clamp(16px,4vw,120px)] md:gap-10 lg:gap-12">
-        {/* Header — horizontal space-between */}
         <div className="erp-features-head flex w-full flex-col gap-5 max-md:items-center max-md:text-center md:gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div className="erp-features-copy max-w-[640px] shrink-0 max-md:mx-auto">
             <p className="m-0 font-montserrat text-[16px] font-semibold leading-none text-[#15d286] sm:text-[18px]">
-              {ERP_FEATURES_SECTION.eyebrow}
+              Why Webkarigor
             </p>
             <h2 className="mt-3 m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-black">
-              {ERP_FEATURES_SECTION.title}
+              Our ERP Software Services
             </h2>
           </div>
-          {/* Figma: 650×54 · Manrope SemiBold 600 · 18px · LH 150% · #A7A7A7 */}
           <p className="erp-features-lead m-0 w-full max-w-[650px] font-manrope text-[clamp(15px,1.5vw,18px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] max-md:mx-auto lg:shrink-0">
-            {ERP_FEATURES_SECTION.description}
+            Web Karigor offers ERP software development solutions that are tailored to actual business processes, operating needs and future expansion. Whether you&apos;re developing a new ERP system or enhancing your current one, we&apos;re dedicated to delivering scalable business management solutions that foster enhanced visibility, coordination, and daily operations.
           </p>
         </div>
 
-        {/* Cards — 2×2, gap 52, card 568×234 · r24 · p48 */}
         <div className="erp-features-grid mx-auto grid w-full  grid-cols-1 items-stretch gap-6 md:grid-cols-3 md:gap-8 lg:gap-[52px]">
-          {ERP_FEATURES.map((feature) => {
-            const Icon = ICONS[feature.icon as keyof typeof ICONS] ?? Settings;
+          {features.map((feature) => {
+            const Icon = ICONS[feature.icon] ?? Settings;
             return (
               <article
-                key={feature.title}
+                key={feature.id}
                 className="erp-feature-card flex h-full w-full items-start gap-5 rounded-[20px] border-[0.5px] border-[#E0E0E0] bg-white p-6 shadow-[0_26px_60px_rgba(0,0,0,0.05)] md:gap-6 md:rounded-[22px] md:p-8 lg:gap-6 lg:rounded-[24px] lg:p-12"
               >
                 <span

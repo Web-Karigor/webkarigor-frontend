@@ -1,14 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, MessageCircle, Star } from "lucide-react";
-import { HRM_REVIEWS_SECTION, HRM_TESTIMONIALS } from "@/lib/hrm-data";
+import { useClientReviewHrmQuery } from "@/hooks/queries/useClientReviewHrmQuery";
 
 /** Figma Testimonial — 1792 × 592 · cards 555 × 388 */
 const CARD_W = 555;
-const CARD_H = 388;
 const CARD_GAP = 24;
 const VISIBLE = 3;
+const SECTION_TITLE = "Hear From Customers Who Worked With Web Karigor";
 
 function Stars({ count }: { count: number }) {
   return (
@@ -33,13 +33,29 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-export default function ErpReviews() {
+export default function HrmReviews() {
+  const { data } = useClientReviewHrmQuery();
+  const testimonials = useMemo(
+    () =>
+      [...(data?.data?.posts ?? [])]
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+        .map((post) => ({
+          id: post.id,
+          quote: post.fields?.quote?.trim() ?? "",
+          name: post.fields?.name?.trim() ?? "",
+          role: post.fields?.role?.trim() ?? "",
+          rating: Math.max(1, Math.min(5, Number(post.fields?.rating) || 5)),
+        }))
+        .filter((item) => item.quote && item.name),
+    [data],
+  );
+
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const maxIndex = Math.max(
     0,
-    HRM_TESTIMONIALS.length - (isMobile ? 1 : VISIBLE),
+    testimonials.length - (isMobile ? 1 : VISIBLE),
   );
 
   useEffect(() => {
@@ -85,11 +101,11 @@ export default function ErpReviews() {
     return () => track.removeEventListener("scroll", onScroll);
   }, [getStep, maxIndex]);
 
+  if (!testimonials.length) return null;
+
   return (
     <section className="overflow-hidden bg-white py-[clamp(48px,5vw,72px)]">
-      {/* Figma: 1792 × 592 */}
       <div className="mx-auto flex w-full max-w-[1792px] flex-col gap-10 px-[clamp(16px,3vw,64px)]">
-        {/* Header — title left, arrows right */}
         <div className="flex items-start justify-between gap-4 md:items-center">
           <div className="flex items-start gap-3">
             <span
@@ -99,7 +115,7 @@ export default function ErpReviews() {
               <MessageCircle className="h-4 w-4" fill="currentColor" strokeWidth={0} />
             </span>
             <h2 className="m-0 font-montserrat text-[clamp(24px,2.8vw,32px)] font-bold leading-none tracking-[-0.02em] text-[#18214D]">
-              {HRM_REVIEWS_SECTION.title}
+              {SECTION_TITLE}
             </h2>
           </div>
 
@@ -125,14 +141,13 @@ export default function ErpReviews() {
           </div>
         </div>
 
-        {/* Cards — Figma 555 × 388, 3 visible */}
         <div
           ref={trackRef}
           className="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6"
         >
-          {HRM_TESTIMONIALS.map((item) => (
+          {testimonials.map((item) => (
             <article
-              key={item.name}
+              key={item.id}
               className="flex w-[calc((100%-12px)/1.1)] shrink-0 snap-start flex-col rounded-[12px] border border-[#EEF0F3] bg-white p-6 shadow-[0_8px_30px_rgba(24,33,77,0.06)] sm:h-auto sm:w-[min(555px,85vw)] sm:p-10 md:p-12 lg:min-h-[388px]"
             >
               <Stars count={item.rating} />

@@ -68,6 +68,8 @@ export type ProjectDetail = {
   mockupImage: string;
   problem: string;
   solution: string;
+  /** When set (CMS HTML), body renders this instead of structured about/problem/solution/extras. */
+  detailsHtml?: string;
   extraSections?: ProjectExtraSection[];
   credits: ProjectCredit[];
   testimonial: {

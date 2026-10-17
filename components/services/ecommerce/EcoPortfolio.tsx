@@ -5,6 +5,7 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -15,6 +16,8 @@ import {
 } from "@/lib/ecommerce-data";
 
 const AUTO_SCROLL_MS = 4500;
+const LOOP_COPIES = 3;
+const STEP_SETTLE_MS = 480;
 
 type PortfolioLayout = {
   visibleCards: number;
@@ -52,11 +55,23 @@ function usePortfolioLayout() {
 }
 
 export default function EcoPortfolio() {
+  const cards = ECO_PORTFOLIO_ITEMS;
   const trackRef = useRef<HTMLDivElement>(null);
+  const wrappingRef = useRef(false);
+  const settleTimerRef = useRef<number | null>(null);
   const [cardW, setCardW] = useState(0);
   const layout = usePortfolioLayout();
-  const cards = ECO_PORTFOLIO_ITEMS;
-  const isSlider = cards.length > layout.visibleCards;
+  const loopCards = useMemo(
+    () =>
+      Array.from({ length: LOOP_COPIES }, (_, copy) =>
+        cards.map((item) => ({ item, copy })),
+      ).flat(),
+    [cards],
+  );
+
+  const step = cardW + layout.cardGap;
+  const setWidth = cards.length * step;
+  const isSlider = cards.length > 1;
 
   const measureCards = useCallback(() => {
     const track = trackRef.current;
@@ -66,6 +81,50 @@ export default function EcoPortfolio() {
       (track.clientWidth - cardGap * (visibleCards - 1)) / visibleCards;
     setCardW(Math.max(0, Math.floor(w)));
   }, [layout]);
+
+  const jumpTo = useCallback((left: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    wrappingRef.current = true;
+    const prev = track.style.scrollBehavior;
+    track.style.scrollBehavior = "auto";
+    track.scrollLeft = left;
+    track.style.scrollBehavior = prev;
+    wrappingRef.current = false;
+  }, []);
+
+  const normalizeLoop = useCallback(() => {
+    const track = trackRef.current;
+    if (!track || wrappingRef.current || setWidth <= 0) return;
+    if (track.scrollLeft < setWidth * 0.5) {
+      jumpTo(track.scrollLeft + setWidth);
+    } else if (track.scrollLeft >= setWidth * 1.5) {
+      jumpTo(track.scrollLeft - setWidth);
+    }
+  }, [jumpTo, setWidth]);
+
+  const scheduleNormalize = useCallback(() => {
+    if (settleTimerRef.current != null) {
+      window.clearTimeout(settleTimerRef.current);
+    }
+    settleTimerRef.current = window.setTimeout(() => {
+      normalizeLoop();
+      settleTimerRef.current = null;
+    }, STEP_SETTLE_MS);
+  }, [normalizeLoop]);
+
+  const scrollByStep = useCallback(
+    (direction: "left" | "right") => {
+      const track = trackRef.current;
+      if (!track || !cardW || !isSlider) return;
+      track.scrollBy({
+        left: direction === "left" ? -step : step,
+        behavior: "smooth",
+      });
+      scheduleNormalize();
+    },
+    [cardW, isSlider, scheduleNormalize, step],
+  );
 
   useLayoutEffect(() => {
     measureCards();
@@ -77,43 +136,14 @@ export default function EcoPortfolio() {
     return () => ro.disconnect();
   }, [measureCards]);
 
-  const getScrollStep = useCallback(() => {
-    return (cardW || 300) + layout.cardGap;
-  }, [cardW, layout.cardGap]);
-
-  const scrollByStep = useCallback(
-    (direction: "left" | "right") => {
-      const track = trackRef.current;
-      if (!track || !isSlider) return;
-
-      const step = getScrollStep();
-      const maxScroll = track.scrollWidth - track.clientWidth;
-
-      if (direction === "right" && track.scrollLeft >= maxScroll - 4) {
-        track.scrollTo({ left: 0, behavior: "smooth" });
-        return;
-      }
-
-      if (direction === "left" && track.scrollLeft <= 4) {
-        track.scrollTo({ left: maxScroll, behavior: "smooth" });
-        return;
-      }
-
-      track.scrollBy({
-        left: direction === "left" ? -step : step,
-        behavior: "smooth",
-      });
-    },
-    [getScrollStep, isSlider],
-  );
-
   useLayoutEffect(() => {
-    trackRef.current?.scrollTo({ left: 0 });
-  }, [layout.visibleCards, layout.cardGap, layout.leftInset]);
+    if (!cardW || !setWidth) return;
+    jumpTo(setWidth);
+  }, [cardW, jumpTo, layout.cardGap, layout.leftInset, layout.visibleCards, setWidth]);
 
   useEffect(() => {
     const track = trackRef.current;
-    if (!track || !isSlider) return;
+    if (!track || !cardW || !isSlider) return;
 
     let paused = false;
     const pause = () => {
@@ -123,10 +153,18 @@ export default function EcoPortfolio() {
       paused = false;
     };
 
+    const onScroll = () => {
+      if (wrappingRef.current) return;
+      if (track.scrollLeft < setWidth * 0.25 || track.scrollLeft >= setWidth * 1.75) {
+        normalizeLoop();
+      }
+    };
+
     track.addEventListener("mouseenter", pause);
     track.addEventListener("mouseleave", resume);
     track.addEventListener("touchstart", pause, { passive: true });
     track.addEventListener("touchend", resume, { passive: true });
+    track.addEventListener("scroll", onScroll, { passive: true });
 
     const timer = window.setInterval(() => {
       if (paused) return;
@@ -135,12 +173,16 @@ export default function EcoPortfolio() {
 
     return () => {
       clearInterval(timer);
+      if (settleTimerRef.current != null) {
+        window.clearTimeout(settleTimerRef.current);
+      }
       track.removeEventListener("mouseenter", pause);
       track.removeEventListener("mouseleave", resume);
       track.removeEventListener("touchstart", pause);
       track.removeEventListener("touchend", resume);
+      track.removeEventListener("scroll", onScroll);
     };
-  }, [scrollByStep, isSlider]);
+  }, [cardW, isSlider, normalizeLoop, scrollByStep, setWidth]);
 
   const imageSizes =
     layout.visibleCards === 1
@@ -197,14 +239,14 @@ export default function EcoPortfolio() {
 
             <div
               ref={trackRef}
-              className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               style={{ height: layout.cardHeight, gap: layout.cardGap }}
             >
-              {cards.map((item) => (
+              {loopCards.map(({ item, copy }) => (
                 <article
-                  key={item.id}
+                  key={`${item.id}-${copy}`}
                   data-eco-portfolio-card
-                  className="relative shrink-0 snap-start overflow-hidden rounded-[16px] bg-white shadow-[0px_1px_30px_8px_rgba(140,140,140,0.14)] md:rounded-[20px] lg:rounded-[24px]"
+                  className="relative shrink-0 overflow-hidden rounded-[16px] bg-white shadow-[0px_1px_30px_8px_rgba(140,140,140,0.14)] md:rounded-[20px] lg:rounded-[24px]"
                   style={{
                     width: cardW || undefined,
                     height: layout.cardHeight,
@@ -218,7 +260,9 @@ export default function EcoPortfolio() {
                     alt={item.title}
                     fill
                     className="object-cover object-top"
-                    sizes={imageSizes} loading="lazy"/>
+                    sizes={imageSizes}
+                    loading="lazy"
+                  />
                 </article>
               ))}
             </div>

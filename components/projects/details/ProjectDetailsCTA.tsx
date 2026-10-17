@@ -8,7 +8,6 @@ import "@/components/home/FAQ.css";
 import "./ProjectDetailsRelated.css";
 import {
   PROJECT_DETAILS_UI,
-  getProjectDetail,
   type ProjectDetail,
 } from "@/lib/project-details-data";
 import { PD } from "@/lib/project-details-layout";
@@ -68,9 +67,7 @@ export function ProjectDetailsRelated({ project }: { project: ProjectDetail }) {
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:gap-5 md:mt-10 md:grid-cols-3 md:gap-5">
             {project.related.map((item, index) => {
-              const related = getProjectDetail(item.slug);
-              const flipText =
-                related?.about.body.split("\n\n")[0] ?? item.description;
+              const flipText = item.description;
 
               return (
               <article
