@@ -5,6 +5,8 @@ import "./FAQ.css";
 import { useMemo, useState } from "react";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
 import { useFaqHrmQuery } from "@/hooks/queries/useFaqHrmQuery";
+import { useHrmPageQuery } from "@/hooks/queries/useHrmPageQuery";
+import { hrmSectionItem, splitLeadingWord } from "@/lib/hrm-page";
 
 export default function FAQ({
   className = "bg-[#FFFDF6]",
@@ -12,8 +14,17 @@ export default function FAQ({
   className?: string;
   ctaHref?: string;
 }) {
+  const { data: pageData } = useHrmPageQuery();
   const { data } = useFaqHrmQuery();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const heading = hrmSectionItem(pageData?.data?.sections?.faq);
+  const { accent, title: headingTitle } = useMemo(
+    () => splitLeadingWord(heading?.title ?? ""),
+    [heading?.title],
+  );
+  const ctaText = heading?.subtitle?.trim() ?? "";
+  const ctaLabel = heading?.cta_contact?.trim() ?? "";
 
   const faqs = useMemo(
     () =>
@@ -32,7 +43,7 @@ export default function FAQ({
     setOpenIndex((current) => (current === index ? null : index));
   };
 
-  if (!faqs.length) return null;
+  if (!faqs.length || !heading || !accent || !ctaText || !ctaLabel) return null;
 
   return (
     <section
@@ -47,11 +58,11 @@ export default function FAQ({
 
           <h2 className="section-heading">
             <span className="section-heading-split-accent faq-gradient-text faq-accent-text">
-              HRMS
+              {accent}
             </span>
-            <span className="section-heading-split-title">
-              Talk to Web Karigor About Your HR Needs
-            </span>
+            {headingTitle ? (
+              <span className="section-heading-split-title">{headingTitle}</span>
+            ) : null}
           </h2>
         </div>
 
@@ -103,14 +114,14 @@ export default function FAQ({
 
         <div className="text-center">
           <p className="faq-cta-heading mx-auto mb-6 max-w-[669px] font-montserrat text-[clamp(22px,4.2vw,42px)] font-bold leading-[140%] tracking-[-0.05em] text-black">
-            Ready to Simplify Your HR and Payroll Management?
+            {ctaText}
           </p>
           <button
             type="button"
             onClick={openConsultationModal}
             className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
           >
-            Let&apos;s talk
+            {ctaLabel}
           </button>
         </div>
       </div>

@@ -4,7 +4,9 @@ import "./FAQ.css";
 
 import { useMemo, useState } from "react";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
+import { useErpPageQuery } from "@/hooks/queries/useErpPageQuery";
 import { useFaqErpQuery } from "@/hooks/queries/useFaqErpQuery";
+import { erpSectionItem } from "@/lib/erp-page";
 
 export default function FAQ({
   className = "bg-[#FFFDF6]",
@@ -12,8 +14,13 @@ export default function FAQ({
   className?: string;
   ctaHref?: string;
 }) {
+  const { data: pageData } = useErpPageQuery();
   const { data } = useFaqErpQuery();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const heading = erpSectionItem(pageData?.data?.sections?.faq);
+  const ctaText = heading?.title?.trim() ?? "";
+  const ctaLabel = heading?.cta_text?.trim() ?? "";
 
   const faqs = useMemo(
     () =>
@@ -32,7 +39,7 @@ export default function FAQ({
     setOpenIndex((current) => (current === index ? null : index));
   };
 
-  if (!faqs.length) return null;
+  if (!faqs.length || !heading || !ctaText || !ctaLabel) return null;
 
   return (
     <section
@@ -103,17 +110,14 @@ export default function FAQ({
 
         <div className="text-center">
           <p className="faq-cta-heading mx-auto mb-6 max-w-[669px] font-montserrat text-[clamp(22px,4.2vw,42px)] font-bold leading-[140%] tracking-[-0.05em] text-black">
-            Talk to Web Karigor About Your ERP Needs
-          </p>
-          <p className="home-pricing-desc">
-            Contact Web Karigor to discuss your ERP software development requirements and the type of ERP system your business needs.
+            {ctaText}
           </p>
           <button
             type="button"
             onClick={openConsultationModal}
             className="faq-cta cursor-pointer rounded-lg border border-[#000000] mt-5 px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
           >
-            Let&apos;s talk
+            {ctaLabel}
           </button>
         </div>
       </div>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import TeamSection from "@/components/team/TeamSection";
-import teamContent from "@/data/team-content.json";
 
 export const metadata: Metadata = {
-  title: teamContent.metadata.title,
-  description: teamContent.metadata.description,
+  title: "Team — Webkarigor",
+  description:
+    "Meet the handpicked team behind Webkarigor — designers, engineers, and product thinkers building digital products that perform.",
 };
 
 export default function TeamPage() {

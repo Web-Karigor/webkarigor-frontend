@@ -3,11 +3,19 @@
 import "./TeamSection.css";
 
 import Image from "next/image";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
-import teamContent from "@/data/team-content.json";
+import { useTeamsQuery } from "@/hooks/queries/useTeamsQuery";
 
-const { headline, intro, members } = teamContent;
+const HEADLINE = {
+  line1Left: "Our Team",
+  line1Right: "Is",
+  line2: "Our",
+  line3: "Strength",
+} as const;
+
+const INTRO =
+  "A expert, focused team building products with craft, clarity, and care — turning ideas into digital experiences that help businesses grow.";
 
 /** Row 2 is the only full row; the rest follow the 1-2 → 1-3 → 2-3 stagger. */
 const LEADING_ROWS = [[1, 2], [1, 2, 3]] as const;
@@ -21,10 +29,6 @@ function columnFor(index: number) {
   }
   const cycle = REPEATING_ROWS.flat();
   return cycle[remaining % cycle.length];
-}
-
-function firstName(fullName: string) {
-  return fullName.trim().split(/\s+/)[0] ?? fullName;
 }
 
 function PlusIcon() {
@@ -48,8 +52,24 @@ function PlusIcon() {
 
 export default function TeamSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { data } = useTeamsQuery();
   /** Multiple cards can stay open at once */
   const [openIds, setOpenIds] = useState<Set<string>>(() => new Set());
+
+  const members = useMemo(
+    () =>
+      [...(data?.data?.posts ?? [])]
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+        .map((post) => ({
+          id: post.fields?.id?.trim() || String(post.id),
+          name: post.fields?.name?.trim() ?? "",
+          role: post.fields?.role?.trim() ?? "",
+          image: post.fields?.image?.url ?? "",
+          bio: post.fields?.bio?.trim() ?? "",
+        }))
+        .filter((item) => item.name && item.role && item.image),
+    [data],
+  );
 
   const toggleMember = (id: string) => {
     setOpenIds((prev) => {
@@ -62,7 +82,7 @@ export default function TeamSection() {
 
   useLayoutEffect(() => {
     const root = sectionRef.current;
-    if (!root) return;
+    if (!root || !members.length) return;
 
     const ctx = gsap.context(() => {
       const items = root.querySelectorAll(".team_grid_item");
@@ -93,7 +113,7 @@ export default function TeamSection() {
     }, root);
 
     return () => ctx.revert();
-  }, []);
+  }, [members.length]);
 
   return (
     <section ref={sectionRef} className="team-section" aria-label="Our team">
@@ -102,75 +122,82 @@ export default function TeamSection() {
           <div className="team_section_title">
             <h2>
               <span className="team-line">
-                {headline.line1Left} {headline.line1Right}
+                {HEADLINE.line1Left} {HEADLINE.line1Right}
               </span>
               <span className="team-line">
-                {headline.line2} {headline.line3}
+                {HEADLINE.line2} {HEADLINE.line3}
               </span>
             </h2>
           </div>
 
           <div className="team_section_intro">
-            <p>{intro}</p>
+            <p>{INTRO}</p>
           </div>
         </div>
 
-        <div className="team_grid_wrapper">
-          <div role="list" className="team_grid">
-            {members.map((member, index) => {
-              const isOpen = openIds.has(member.id);
-              return (
-                <div
-                  key={member.id}
-                  role="listitem"
-                  className="team_grid_item"
-                  style={{ gridColumn: columnFor(index) }}
-                >
-                  <article className="teammate_card">
-                    <div
-                      className={`teammate_card_thumbnail${isOpen ? " is-open" : ""}`}
-                      data-member-id={member.id}
-                    >
-                      <div className="teammate_card_media">
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          fill
-                          sizes="(max-width: 720px) 50vw, (max-width: 1200px) 33vw, 360px"
-                          className="u-cover" loading="lazy"/>
-                      </div>
+        {members.length > 0 && (
+          <div className="team_grid_wrapper">
+            <div role="list" className="team_grid">
+              {members.map((member, index) => {
+                const isOpen = openIds.has(member.id);
+                return (
+                  <div
+                    key={member.id}
+                    role="listitem"
+                    className="team_grid_item"
+                    style={{ gridColumn: columnFor(index) }}
+                  >
+                    <article className="teammate_card">
+                      <div
+                        className={`teammate_card_thumbnail${isOpen ? " is-open" : ""}`}
+                        data-member-id={member.id}
+                      >
+                        <div className="teammate_card_media">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            fill
+                            sizes="(max-width: 720px) 50vw, (max-width: 1200px) 33vw, 360px"
+                            className="u-cover"
+                            loading="lazy"
+                          />
+                        </div>
 
-                      <div className="teammate_popup" aria-hidden={!isOpen}>
-                        <div className="teammate_popup_content">
-                          <div className="teammate_popup_heading">{member.name}</div>
-                          <p className="teammate_popup_bio">{member.bio}</p>
+                        <div className="teammate_popup" aria-hidden={!isOpen}>
+                          <div className="teammate_popup_content">
+                            <div className="teammate_popup_heading">{member.name}</div>
+                            <div
+                              className="teammate_popup_bio"
+                              dangerouslySetInnerHTML={{ __html: member.bio }}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="teammate_card_chrome">
+                          <button
+                            type="button"
+                            className="modal_trigger u-frost"
+                            aria-label={`About ${member.name}`}
+                            aria-expanded={isOpen}
+                            onClick={() => toggleMember(member.id)}
+                          >
+                            <span className="icon-svg">
+                              <PlusIcon />
+                            </span>
+                          </button>
+                        </div>
+
+                        <div className="teammate_card_chrome is-bottom">
+                          <div className="badge u-frost">{member.role}</div>
                         </div>
                       </div>
-
-                      <div className="teammate_card_chrome">
-                        <button
-                          type="button"
-                          className="modal_trigger u-frost"
-                          aria-label={`About ${member.name}`}
-                          aria-expanded={isOpen}
-                          onClick={() => toggleMember(member.id)}
-                        >
-                          <span className="icon-svg">
-                            <PlusIcon />
-                          </span>
-                        </button>
-                      </div>
-
-                      <div className="teammate_card_chrome is-bottom">
-                        <div className="badge u-frost">{member.role}</div>
-                      </div>
-                    </div>
-                  </article>
-                </div>
-              );
-            })}
+                    </article>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

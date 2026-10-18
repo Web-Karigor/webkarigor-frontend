@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { BarChart3, Briefcase, Handshake, UserRound } from "lucide-react";
 import { WHY } from "@/lib/software-development-data";
+import { useSoftwareDevelopmentPageQuery } from "@/hooks/queries/useSoftwareDevelopmentPageQuery";
+import { sdSectionItem } from "@/lib/software-development-page";
 
 const ICONS = {
   user: UserRound,
@@ -9,45 +13,66 @@ const ICONS = {
   chart: BarChart3,
 } as const;
 
-function WhyChooseImages() {
+function WhyChooseImages({
+  image,
+  overlayImage,
+  imageAlt,
+}: {
+  image: string;
+  overlayImage: string;
+  imageAlt: string;
+}) {
   return (
     <div className="relative mx-auto w-full max-w-[560px] shrink-0 lg:mx-0">
       <div className="relative mx-auto aspect-[362/393] w-full max-w-[500px]">
         <Image
-          src={WHY.image}
-          alt={WHY.imageAlt}
+          src={image}
+          alt={imageAlt}
           className="absolute right-0 top-0 h-[78%] w-[74%] rounded-[22px] object-cover shadow-[0_16px_35px_rgba(16,24,40,0.12)]"
           width={600}
           height={580}
-          sizes="(max-width: 1023px) 74vw, 370px" loading="lazy"/>
+          sizes="(max-width: 1023px) 74vw, 370px"
+          loading="lazy"
+        />
 
         <Image
-          src={WHY.overlayImage}
+          src={overlayImage}
           alt="Software analytics dashboard"
           className="absolute bottom-0 left-0 z-[1] h-[51%] w-[47%] rounded-[20px] object-cover shadow-[0_16px_35px_rgba(16,24,40,0.16)]"
           width={380}
           height={367}
-          sizes="(max-width: 1023px) 47vw, 235px" loading="lazy"/>
+          sizes="(max-width: 1023px) 47vw, 235px"
+          loading="lazy"
+        />
       </div>
     </div>
   );
 }
 
-function WhyChooseCopy() {
+function WhyChooseCopy({
+  eyebrow,
+  title,
+}: {
+  eyebrow: string;
+  title: string;
+}) {
   return (
     <div className="w-full min-w-0 max-w-[620px] max-md:mx-auto max-md:text-center lg:pt-2">
       <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
-        {WHY.eyebrow}
+        {eyebrow}
       </p>
       <h2 className="mt-3 m-0 font-montserrat text-[clamp(22px,3.2vw,28px)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-        {WHY.title}
+        {title}
       </h2>
 
       <ul className="mt-8 m-0 flex list-none flex-col gap-7 p-0 sm:mt-10 sm:gap-8">
         {WHY.items.map((feature) => {
           const Icon = ICONS[feature.icon as keyof typeof ICONS];
           return (
-            <li key={feature.title} className="flex items-start gap-4 max-md:flex-col max-md:items-center sm:gap-5">
+            <li
+              key={feature.title}
+              className="flex items-start gap-4 max-md:flex-col max-md:items-center sm:gap-5"
+            >
               <span
                 className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border sm:h-14 sm:w-14"
                 style={{
@@ -75,11 +100,24 @@ function WhyChooseCopy() {
 }
 
 export default function WhyChoose() {
+  const { data } = useSoftwareDevelopmentPageQuery();
+  const item = sdSectionItem(data?.data?.sections?.why_webkarigor);
+
+  const eyebrow = item?.title?.trim() ?? "";
+  const title = item?.subtitle?.trim() ?? "";
+  const image = item?.left_image_one?.url?.trim() ?? "";
+  const overlayImage = item?.left_image_two?.url?.trim() ?? "";
+  const imageAlt =
+    item?.left_image_one?.alt_text?.trim() ||
+    item?.left_image_one?.name?.trim() ||
+    title;
+
+  if (!eyebrow || !title || !image || !overlayImage) return null;
+
   return (
     <section
       className="w-full bg-[#F9FBFE]"
       style={{
-        /* Figma section: 1920 · pad 48 / 243 / 48 / 120 · radius TR/BR 8 */
         borderTopRightRadius: 8,
         borderBottomRightRadius: 8,
       }}
@@ -93,8 +131,12 @@ export default function WhyChoose() {
           paddingRight: "clamp(16px, 12.66vw, 243px)",
         }}
       >
-        <WhyChooseImages />
-        <WhyChooseCopy />
+        <WhyChooseImages
+          image={image}
+          overlayImage={overlayImage}
+          imageAlt={imageAlt}
+        />
+        <WhyChooseCopy eyebrow={eyebrow} title={title} />
       </div>
     </section>
   );

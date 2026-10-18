@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
 
-const BLOGS_API = "https://admin.webkarigor.com/api/blogs";
+function apiUrl() {
+  const base = (process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "");
+  if (!base) {
+    throw new Error("NEXT_PUBLIC_BASE_URL is not set");
+  }
+  return `${base}/api/v1/post-types/blog`;
+}
 
 export async function GET() {
-  const res = await fetch(BLOGS_API, {
+  const res = await fetch(apiUrl(), {
     headers: { Accept: "application/json" },
     cache: "no-store",
   });

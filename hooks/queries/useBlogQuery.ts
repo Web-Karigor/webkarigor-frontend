@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiFetch } from "@/lib/apiFetch";
-import type { BlogDetailResponse } from "@/types/blog";
+import { findBlogBySlug } from "@/lib/blog-data";
+import type { Blog, BlogPostsResponse } from "@/types/blog";
 
 export function useBlogQuery(slug: string) {
-  return useQuery<BlogDetailResponse, Error>({
-    queryKey: ["blog", slug],
+  return useQuery<BlogPostsResponse, Error, Blog | null>({
+    queryKey: ["blogs"],
     queryFn: () =>
-      apiFetch<BlogDetailResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/blogs/${encodeURIComponent(slug)}`,
+      apiFetch<BlogPostsResponse>(
+        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/blog`,
       ),
+    select: (res) => findBlogBySlug(res.data?.posts, slug) ?? null,
     enabled: Boolean(slug),
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,

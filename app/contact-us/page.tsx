@@ -9,7 +9,7 @@ const ContactCompanyDeck = dynamic(
   () => import("@/components/contact/ContactCompanyDeck"),
 );
 const ContactStories = dynamic(() => import("@/components/contact/ContactStories"));
-const FAQ = dynamic(() => import("@/components/home/FAQ"));
+const ContactFAQ = dynamic(() => import("@/components/contact/ContactFAQ"));
 const HomeConsultation = dynamic(
   () => import("@/components/home/HomeConsultation"),
 );
@@ -26,7 +26,7 @@ export default function ContactUsPage() {
       <ContactConnect />
       <ContactCompanyDeck />
       <ContactStories />
-      <FAQ className="bg-[#FFFEFB]" ctaHref="#contact" />
+      <ContactFAQ className="bg-[#FFFEFB]" />
       <HomeConsultation />
     </div>
   );

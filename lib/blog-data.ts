@@ -1,3 +1,5 @@
+import type { Blog, BlogPost } from "@/types/blog";
+
 export const BLOG_PAGE = {
   eyebrow: "Beyond the Interface",
   titleLead: "Perspectives on Design,",
@@ -26,6 +28,43 @@ export function stripHtml(html: string) {
   return html
     .replace(/<[^>]*>/g, " ")
     .replace(/&nbsp;/g, " ")
+    .replace(/&rsquo;/g, "'")
+    .replace(/&ldquo;/g, '"')
+    .replace(/&rdquo;/g, '"')
     .replace(/\s+/g, " ")
     .trim();
+}
+
+export function mapPostsToBlogs(posts: BlogPost[] | undefined | null): Blog[] {
+  if (!posts?.length) return [];
+
+  return [...posts]
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+    .map((post) => {
+      const fields = post.fields ?? ({} as BlogPost["fields"]);
+      const title = fields.title?.trim() ?? "";
+      const slug = fields.slug?.trim() ?? "";
+      const image = fields.thumb_image?.url?.trim() ?? "";
+
+      if (!title || !slug || !image) return null;
+
+      return {
+        id: post.id,
+        title,
+        slug,
+        author: fields.author?.trim() || "Web Karigor",
+        published_at: fields.published_date?.trim() || "",
+        subtitle: fields.subtitle?.trim() || "",
+        details: fields.details?.trim() || "",
+        image,
+      } satisfies Blog;
+    })
+    .filter((item): item is Blog => item !== null);
+}
+
+export function findBlogBySlug(
+  posts: BlogPost[] | undefined | null,
+  slug: string,
+): Blog | undefined {
+  return mapPostsToBlogs(posts).find((post) => post.slug === slug);
 }

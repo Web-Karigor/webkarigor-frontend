@@ -1,4 +1,8 @@
+"use client";
+
 import { TECH_ORBIT } from "@/lib/software-development-data";
+import { useSoftwareDevelopmentPageQuery } from "@/hooks/queries/useSoftwareDevelopmentPageQuery";
+import { sdSectionItem } from "@/lib/software-development-page";
 
 /** Figma 2409-12229 — 967 × 650 orbit geometry */
 const FRAME = { width: 967, height: 650 } as const;
@@ -33,7 +37,13 @@ const ICON_LAYOUT = [
  * Left 3 arcs + Right 3 arcs (separate) · tight middle · icons both sides
  */
 export default function FeaturesOrbit() {
-  const { title, description, icons } = TECH_ORBIT;
+  const { data } = useSoftwareDevelopmentPageQuery();
+  const item = sdSectionItem(data?.data?.sections?.technology);
+  const title = item?.title?.trim() ?? "";
+  const description = item?.subtitle?.trim() ?? "";
+  const icons = TECH_ORBIT.icons;
+
+  if (!title || !description) return null;
 
   return (
     <section className="w-full overflow-hidden py-8 md:py-12">

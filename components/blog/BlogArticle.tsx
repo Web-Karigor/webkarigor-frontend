@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { useMemo } from "react";
 import { useBlogQuery } from "@/hooks/queries/useBlogQuery";
 import { useBlogsQuery } from "@/hooks/queries/useBlogsQuery";
-import { formatBlogDate, stripHtml } from "@/lib/blog-data";
+import { formatBlogDate, mapPostsToBlogs, stripHtml } from "@/lib/blog-data";
 import type { Blog } from "@/types/blog";
 import BlogShare from "./BlogShare";
 import "./BlogRelated.css";
@@ -25,6 +26,8 @@ function BackLink() {
 }
 
 function RelatedBlogCard({ post }: { post: Blog }) {
+  const preview = post.subtitle || stripHtml(post.details);
+
   return (
     <article className="related-blog-flip relative aspect-[3/4]">
       <Link
@@ -47,7 +50,7 @@ function RelatedBlogCard({ post }: { post: Blog }) {
 
           <div className="related-blog-flip-face related-blog-flip-back">
             <p className="m-0 min-h-0 overflow-y-auto font-montserrat text-[14px] font-medium leading-[1.75] text-[#6d6d6d] sm:text-[15px]">
-              {stripHtml(post.description)}
+              {preview}
             </p>
             <span className="mt-6 inline-flex shrink-0 items-center gap-1.5 self-end font-montserrat text-[14px] font-semibold text-[#111] sm:text-[15px]">
               Read Blog
@@ -72,13 +75,16 @@ function ArticleSkeleton() {
 }
 
 export default function BlogArticle({ slug }: { slug: string }) {
-  const { data, isLoading, isError } = useBlogQuery(slug);
+  const { data: post, isLoading, isError } = useBlogQuery(slug);
   const { data: listData } = useBlogsQuery();
 
-  const post = data?.data?.[0];
-  const related = (listData?.data ?? [])
-    .filter((item) => item.slug !== slug)
-    .slice(0, RELATED_COUNT);
+  const related = useMemo(
+    () =>
+      mapPostsToBlogs(listData?.data?.posts)
+        .filter((item) => item.slug !== slug)
+        .slice(0, RELATED_COUNT),
+    [listData, slug],
+  );
 
   return (
     <article className="bg-[#FFFDF6] pb-16 pt-[112px] sm:pb-20 sm:pt-[132px] lg:pb-24 lg:pt-[156px]">
@@ -97,19 +103,24 @@ export default function BlogArticle({ slug }: { slug: string }) {
               <h1 className="m-0 mt-6 font-montserrat text-[clamp(30px,4.2vw,44px)] font-extrabold leading-[1.12] tracking-[-0.035em] text-[#111] sm:mt-7">
                 {post.title}
               </h1>
-              <div
-                className="mt-4 font-montserrat text-[16px] font-medium leading-[1.55] text-[#8d8d8d] sm:mt-5 sm:text-[18px] [&_a]:underline [&_p]:m-0 [&_p+p]:mt-3"
-                dangerouslySetInnerHTML={{ __html: post.description }}
-              />
+              {post.subtitle ? (
+                <p className="m-0 mt-4 font-montserrat text-[16px] font-medium leading-[1.55] text-[#8d8d8d] sm:mt-5 sm:text-[18px]">
+                  {post.subtitle}
+                </p>
+              ) : null}
               <div className="mt-6 flex items-center justify-between gap-4 border-t border-[#E4E0D6] pt-4 sm:mt-7">
                 <p className="m-0 font-montserrat text-[13px] font-medium text-[#8d8d8d] sm:text-[15px]">
                   {post.author}
-                  <span className="px-2 text-[#c4c4c4]" aria-hidden="true">
-                    |
-                  </span>
-                  <time dateTime={post.published_at}>
-                    {formatBlogDate(post.published_at)}
-                  </time>
+                  {post.published_at ? (
+                    <>
+                      <span className="px-2 text-[#c4c4c4]" aria-hidden="true">
+                        |
+                      </span>
+                      <time dateTime={post.published_at}>
+                        {formatBlogDate(post.published_at)}
+                      </time>
+                    </>
+                  ) : null}
                 </p>
                 <BlogShare title={post.title} />
               </div>
@@ -118,18 +129,27 @@ export default function BlogArticle({ slug }: { slug: string }) {
         </header>
 
         {post ? (
-          <figure className="m-0 mt-6 sm:mt-8">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[18px] bg-[#EFE9DC]">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                priority
-                sizes="(max-width: 760px) 100vw, 760px"
-                className="object-cover"
+          <>
+            <figure className="m-0 mt-6 sm:mt-8">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-[18px] bg-[#EFE9DC]">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  priority
+                  sizes="(max-width: 760px) 100vw, 760px"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
+
+            {post.details ? (
+              <div
+                className="blog-article-body mt-8 font-montserrat text-[16px] font-medium leading-[1.75] text-[#3F3C34] sm:mt-10 sm:text-[18px] [&_a]:underline [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:text-[clamp(22px,3vw,28px)] [&_h2]:font-bold [&_h2]:tracking-[-0.03em] [&_h2]:text-[#111] [&_h3]:mb-2 [&_h3]:mt-8 [&_h3]:text-[clamp(18px,2.4vw,22px)] [&_h3]:font-bold [&_h3]:text-[#111] [&_li]:mt-2 [&_p]:m-0 [&_p+p]:mt-4 [&_strong]:font-semibold [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-5"
+                dangerouslySetInnerHTML={{ __html: post.details }}
               />
-            </div>
-          </figure>
+            ) : null}
+          </>
         ) : null}
       </div>
 

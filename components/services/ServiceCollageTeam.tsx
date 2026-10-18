@@ -21,6 +21,14 @@ const DEFAULT_PHOTOS = {
   center: "/team/sajjad.jpg",
 } as const;
 
+export type ServiceCollagePhotos = {
+  left: string;
+  right: string;
+  bottom: string;
+  large: string;
+  center: string;
+};
+
 function box(x: number, y: number, w: number, h: number): CSSProperties {
   return {
     left: `${((x - GROUP.x) / GROUP.w) * 100}%`,
@@ -33,10 +41,10 @@ function box(x: number, y: number, w: number, h: number): CSSProperties {
 
 function Collage({
   fluid = false,
-  centerSrc,
+  photos,
 }: {
   fluid?: boolean;
-  centerSrc: string;
+  photos: ServiceCollagePhotos;
 }) {
   return (
     <div className="wdd-collage" aria-hidden>
@@ -76,14 +84,14 @@ function Collage({
         style={box(651.150390625, 616.92578125, 137.19338989257812, 137.19338989257812)}
       />
       <Portrait
-        src={DEFAULT_PHOTOS.left}
+        src={photos.left}
         alt="Team member"
         className="wdd-photo-beard wdd-radius-sm"
         style={box(651.150390625, 616.92578125, 137.19338989257812, 137.19338989257812)}
       />
 
       <Portrait
-        src={DEFAULT_PHOTOS.right}
+        src={photos.right}
         alt="Team member"
         className="wdd-photo-woman wdd-radius-sm wdd-photo-shadow"
         style={box(1094, 774, 137.19338989257812, 137.19338989257812)}
@@ -94,7 +102,7 @@ function Collage({
         style={box(765.48046875, 925.609375, 171.4917449951172, 171.4917449951172)}
       />
       <Portrait
-        src={DEFAULT_PHOTOS.bottom}
+        src={photos.bottom}
         alt="Team member"
         className="wdd-photo-hoodie wdd-radius-sm"
         style={box(765.48046875, 925.609375, 171.4917449951172, 171.4917449951172)}
@@ -105,7 +113,7 @@ function Collage({
         style={box(1039.86328125, 434, 228.6556396484375, 257.23760986328125)}
       />
       <Portrait
-        src={DEFAULT_PHOTOS.large}
+        src={photos.large}
         alt="Team member"
         className="wdd-photo-large wdd-radius-lg"
         style={box(1039.86328125, 434, 228.6556396484375, 257.23760986328125)}
@@ -116,7 +124,7 @@ function Collage({
         style={box(879.8046875, 754.1171875, 91.46226501464844, 91.46226501464844)}
       />
       <Portrait
-        src={centerSrc}
+        src={photos.center}
         alt="Team member"
         className="wdd-photo-cap wdd-radius-sm"
         style={box(864, 739, 123, 122)}
@@ -152,18 +160,28 @@ function Portrait({
 export default function ServiceCollageTeam({
   leftTitle,
   rightTitle,
-  centerSrc = DEFAULT_PHOTOS.center,
+  photos,
+  centerSrc,
   leftWidth = 632,
   rightWidth = 398,
   rightTop = 647,
 }: {
   leftTitle: string;
   rightTitle: string;
+  photos?: Partial<ServiceCollagePhotos>;
   centerSrc?: string;
   leftWidth?: number;
   rightWidth?: number;
   rightTop?: number;
 }) {
+  const resolvedPhotos: ServiceCollagePhotos = {
+    left: photos?.left ?? DEFAULT_PHOTOS.left,
+    right: photos?.right ?? DEFAULT_PHOTOS.right,
+    bottom: photos?.bottom ?? DEFAULT_PHOTOS.bottom,
+    large: photos?.large ?? DEFAULT_PHOTOS.large,
+    center: photos?.center ?? centerSrc ?? DEFAULT_PHOTOS.center,
+  };
+
   const label = `${leftTitle}, ${rightTitle}`;
 
   return (
@@ -187,7 +205,7 @@ export default function ServiceCollageTeam({
               <span className="wdd-figma-title wdd-figma-title-left">{leftTitle}</span>
               <span className="wdd-figma-title wdd-figma-title-right">{rightTitle}</span>
             </h2>
-            <Collage centerSrc={centerSrc} />
+            <Collage photos={resolvedPhotos} />
           </div>
         </div>
       </div>
@@ -197,7 +215,7 @@ export default function ServiceCollageTeam({
           <span className="wdd-compact-line wdd-compact-left">{leftTitle}</span>
           <span className="wdd-compact-line wdd-compact-right">{rightTitle}</span>
         </h2>
-        <Collage fluid centerSrc={centerSrc} />
+        <Collage fluid photos={resolvedPhotos} />
       </div>
     </section>
   );

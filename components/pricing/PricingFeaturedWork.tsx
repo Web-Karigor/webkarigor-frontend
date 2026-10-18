@@ -2,49 +2,65 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { FEATURED_WORK, FEATURED_WORK_SECTION } from "@/lib/pricing-data";
+import { FEATURED_WORK_SECTION } from "@/lib/pricing-data";
+import { useProjectsQuery } from "@/hooks/queries/useProjectsQuery";
+import { mapPostsToGridItems } from "@/lib/projects";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.15 } as const;
 
 /** Figma: 1521 × 1083 Hug — same width as Complete Package (1520) */
 const FEATURED_W = 1521;
+const FEATURED_COUNT = 5;
+
+/** Same listing ratio as /projects cards (mapPostsToGridItems → 1300×600). */
+const LISTING_ASPECT = "1300 / 600";
 
 function FeaturedImage({
   src,
   alt,
   href,
   sizes,
-  className,
 }: {
   src: string;
   alt: string;
   href: string;
   sizes: string;
-  className: string;
 }) {
   return (
     <Link
       href={href}
       data-project-cursor
-      className={`group relative block overflow-hidden rounded-[20px] bg-[#1a1a1a] outline-none ${className}`}
+      className="group relative block w-full overflow-hidden rounded-[20px] bg-[#1a1a1a] outline-none"
+      style={{ aspectRatio: LISTING_ASPECT }}
       aria-label={alt}
     >
       <Image
         src={src}
         alt={alt}
         fill
-        className="object-contain transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
-        sizes={sizes} loading="lazy"/>
+        className="object-cover object-center transition-transform duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+        sizes={sizes}
+        loading="lazy"
+      />
     </Link>
   );
 }
 
 export default function PricingFeaturedWork() {
   const { title, description, seeAll } = FEATURED_WORK_SECTION;
-  const [topLeft, topRight, bottomLeft, bottomMid, bottomRight] = FEATURED_WORK;
+  const { data } = useProjectsQuery();
+
+  const items = useMemo(() => {
+    return mapPostsToGridItems(data?.data?.posts).slice(0, FEATURED_COUNT);
+  }, [data]);
+
+  if (items.length < FEATURED_COUNT) return null;
+
+  const [topLeft, topRight, bottomLeft, bottomMid, bottomRight] = items;
 
   return (
     <section className="pricing-featured bg-black py-[clamp(64px,8vw,100px)]">
@@ -81,7 +97,7 @@ export default function PricingFeaturedWork() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
               {[topLeft, topRight].map((item, index) => (
                 <motion.div
-                  key={item.src}
+                  key={item.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
@@ -90,8 +106,7 @@ export default function PricingFeaturedWork() {
                   <FeaturedImage
                     src={item.src}
                     alt={item.alt}
-                    href={item.href ?? seeAll.href}
-                    className="aspect-[750/470] w-full"
+                    href={`/projects/${item.slug}`}
                     sizes="(max-width: 640px) 100vw, 760px"
                   />
                 </motion.div>
@@ -101,7 +116,7 @@ export default function PricingFeaturedWork() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
               {[bottomLeft, bottomMid, bottomRight].map((item, index) => (
                 <motion.div
-                  key={item.src}
+                  key={item.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
@@ -110,8 +125,7 @@ export default function PricingFeaturedWork() {
                   <FeaturedImage
                     src={item.src}
                     alt={item.alt}
-                    href={item.href ?? seeAll.href}
-                    className="aspect-[750/470] w-full"
+                    href={`/projects/${item.slug}`}
                     sizes="(max-width: 640px) 100vw, 500px"
                   />
                 </motion.div>

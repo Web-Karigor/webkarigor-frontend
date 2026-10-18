@@ -5,7 +5,7 @@ import PricingPackage from "@/components/pricing/PricingPackage";
 import PricingBuiltFor from "@/components/pricing/PricingBuiltFor";
 import PricingFeaturedWork from "@/components/pricing/PricingFeaturedWork";
 import ProjectHoverCursor from "@/components/projects/ProjectHoverCursor";
-import FAQ from "@/components/home/FAQ";
+import PricingFAQ from "@/components/pricing/PricingFAQ";
 import PricingSection from "@/components/home/PricingSection";
 import TrustedFounders from "@/components/home/TrustedFounders";
 import HomeConsultation from "@/components/home/HomeConsultation";
@@ -28,7 +28,7 @@ export default function PricingPage() {
       <TrustedFounders />
       <PricingBuiltFor />
       <PricingFeaturedWork />
-      <FAQ />
+      <PricingFAQ />
       <HomeConsultation />
     </div>
   );

@@ -1,20 +1,40 @@
+"use client";
+
+import { useSoftwareDevelopmentPageQuery } from "@/hooks/queries/useSoftwareDevelopmentPageQuery";
 import {
-  TRUST_TITLE,
-  TRUSTED_LOGOS,
-} from "@/lib/software-development-data";
+  sdSectionItem,
+  titleCaseName,
+} from "@/lib/software-development-page";
 
 export default function Trusted() {
+  const { data } = useSoftwareDevelopmentPageQuery();
+  const item = sdSectionItem(data?.data?.sections?.client_work_with);
+
+  const title = item?.title?.trim() ?? "";
+  const logos = (item?.images ?? [])
+    .map((img) => {
+      const src = img.url?.trim() ?? "";
+      const rawName = img.alt_text?.trim() || img.name?.trim() || "";
+      const name = /^image[-_]?\d+/i.test(rawName)
+        ? ""
+        : titleCaseName(rawName);
+      return { src, name, key: src || String(img.id) };
+    })
+    .filter((logo) => logo.src);
+
+  if (!title || !logos.length) return null;
+
   return (
     <section className="bg-[#FFFEFB] pb-14 pt-10 lg:pb-16">
       <div className="mx-auto flex w-full max-w-[1800px] flex-col items-center gap-7 px-[clamp(16px,3.5vw,50px)]">
         <p className="m-0 max-w-[640px] text-center font-montserrat text-[clamp(18px,1.6vw,24px)] font-bold leading-[1.35] text-[#18214D]">
-          {TRUST_TITLE}
+          {title}
         </p>
 
         <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:gap-3.5">
-          {TRUSTED_LOGOS.map((logo) => (
+          {logos.map((logo) => (
             <div
-              key={logo.name}
+              key={logo.key}
               className="inline-flex h-12 items-center justify-center gap-2 rounded-[10px] border border-[#E5E7EB] bg-white px-4 shadow-[0_2px_10px_rgba(24,33,77,0.04)] sm:h-[52px] sm:px-5"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -24,9 +44,11 @@ export default function Trusted() {
                 className="h-5 w-5 object-contain"
                 loading="lazy"
               />
-              <span className="font-montserrat text-[12px] font-semibold tracking-[-0.01em] text-[#344054] sm:text-[13px]">
-                {logo.name}
-              </span>
+              {logo.name ? (
+                <span className="font-montserrat text-[12px] font-semibold tracking-[-0.01em] text-[#344054] sm:text-[13px]">
+                  {logo.name}
+                </span>
+              ) : null}
             </div>
           ))}
         </div>

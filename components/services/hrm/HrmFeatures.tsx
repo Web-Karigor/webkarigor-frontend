@@ -11,7 +11,12 @@ import {
   Settings,
   type LucideIcon,
 } from "lucide-react";
+import { useHrmPageQuery } from "@/hooks/queries/useHrmPageQuery";
 import { useHrmServicesQuery } from "@/hooks/queries/useHrmServicesQuery";
+import {
+  extractHrmLeadText,
+  hrmSectionItem,
+} from "@/lib/hrm-page";
 
 const ICONS: Record<string, LucideIcon> = {
   users: Users,
@@ -24,7 +29,13 @@ const ICONS: Record<string, LucideIcon> = {
 };
 
 export default function HrmFeatures() {
+  const { data: pageData } = useHrmPageQuery();
   const { data } = useHrmServicesQuery();
+
+  const heading = hrmSectionItem(pageData?.data?.sections?.why_webkarigor);
+  const eyebrow = heading?.title?.trim() ?? "";
+  const title = heading?.subtitle?.trim() ?? "";
+  const lead = extractHrmLeadText(heading?.content ?? "");
 
   const features = useMemo(
     () =>
@@ -42,7 +53,7 @@ export default function HrmFeatures() {
     [data],
   );
 
-  if (!features.length) return null;
+  if (!features.length || !eyebrow || !title || !lead) return null;
 
   return (
     <section className="erp-features bg-white py-[clamp(48px,6vw,80px)]">
@@ -50,14 +61,14 @@ export default function HrmFeatures() {
         <div className="erp-features-head flex w-full flex-col gap-5 max-md:items-center max-md:text-center md:gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div className="erp-features-copy max-w-[640px] shrink-0 max-md:mx-auto">
             <p className="m-0 font-montserrat text-[16px] font-semibold leading-none text-[#15d286] sm:text-[18px]">
-              Why Webkarigor
+              {eyebrow}
             </p>
             <h2 className="mt-3 m-0 font-montserrat text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-black">
-              Simplify Your HR Operations
+              {title}
             </h2>
           </div>
           <p className="erp-features-lead m-0 w-full max-w-[650px] font-manrope text-[clamp(15px,1.5vw,18px)] font-semibold leading-[150%] tracking-[0] text-[#A7A7A7] max-md:mx-auto lg:shrink-0">
-            We develop HR management solutions that bring employee records, attendance, leave, payroll, and workforce information together in one centralized system, helping HR teams manage daily processes more efficiently.
+            {lead}
           </p>
         </div>
 

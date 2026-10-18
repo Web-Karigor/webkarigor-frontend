@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Search } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { useBlogsQuery } from "@/hooks/queries/useBlogsQuery";
-import { BLOG_PAGE } from "@/lib/blog-data";
+import { BLOG_PAGE, mapPostsToBlogs } from "@/lib/blog-data";
 import { useBlogUiStore } from "@/store/blog-ui-store";
 
 const PAGE_SIZE = 4;
@@ -18,7 +18,7 @@ export default function BlogList() {
   const setVisibleCount = useBlogUiStore((s) => s.setVisibleCount);
 
   const posts = useMemo(() => {
-    const all = data?.data ?? [];
+    const all = mapPostsToBlogs(data?.data?.posts);
     const needle = query.trim().toLowerCase();
     if (!needle) return all;
     return all.filter((post) => post.title.toLowerCase().includes(needle));
