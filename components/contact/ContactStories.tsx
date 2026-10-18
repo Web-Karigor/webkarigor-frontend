@@ -2,8 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import contactContent from "@/data/contact-content.json";
+import { useEffect, useMemo, useState } from "react";
+import { useContactPageQuery } from "@/hooks/queries/useContactPageQuery";
+import { useContactUsSuccessStoriesQuery } from "@/hooks/queries/useContactUsSuccessStoriesQuery";
+import {
+  contactSectionItem,
+  mapContactStoryPosts,
+  splitContactStoriesTitle,
+} from "@/lib/contact-page";
 
 function CtaArrow() {
   return (
@@ -25,32 +31,54 @@ function CtaArrow() {
   );
 }
 
-const {
-  badge,
-  headingLine1,
-  headingAccent1,
-  headingLine2,
-  headingAccent2,
-  ctaLabel,
-  ctaHref,
-  categories,
-} = contactContent.stories;
+/** Section chrome — not provided by CMS story posts. */
+const CHROME = {
+  badge: "Client Stories",
+  ctaLabel: "Book a call",
+  ctaHref: "#contact",
+} as const;
 
 export default function ContactStories() {
-  const [activeId, setActiveId] = useState(categories[0]?.id ?? "");
-  const active = categories.find((item) => item.id === activeId) ?? categories[0];
+  const { data: pageData } = useContactPageQuery();
+  const { data: storiesData } = useContactUsSuccessStoriesQuery();
 
-  if (!active) return null;
+  const sectionTitle =
+    contactSectionItem(pageData?.data?.sections?.success_stories)?.title?.trim() ??
+    "";
+  const heading = useMemo(
+    () => splitContactStoriesTitle(sectionTitle),
+    [sectionTitle],
+  );
+
+  const categories = useMemo(
+    () => mapContactStoryPosts(storiesData?.data?.posts),
+    [storiesData],
+  );
+
+  const [activeId, setActiveId] = useState("");
+
+  useEffect(() => {
+    if (!categories.length) return;
+    if (!activeId || !categories.some((item) => item.id === activeId)) {
+      setActiveId(categories[0]!.id);
+    }
+  }, [categories, activeId]);
+
+  const active =
+    categories.find((item) => item.id === activeId) ?? categories[0];
+
+  if (!sectionTitle || !active) return null;
 
   return (
     <section className="contact-stories" aria-labelledby="contact-stories-heading">
       <div className="contact-stories-inner">
         <header className="contact-stories-header">
-          <span className="contact-section-badge">{badge}</span>
+          <span className="contact-section-badge">{CHROME.badge}</span>
           <h2 id="contact-stories-heading" className="contact-stories-title">
-            {headingLine1}{" "}
-            <span className="contact-title-accent">{headingAccent1}</span> {headingLine2}{" "}
-            <span className="contact-title-accent">{headingAccent2}</span>
+            {heading.line1}{" "}
+            <span className="contact-title-accent">{heading.accent1}</span>{" "}
+            {heading.line2}{" "}
+            <span className="contact-title-accent">{heading.accent2}</span>
           </h2>
         </header>
 
@@ -76,19 +104,25 @@ export default function ContactStories() {
               alt={active.imageAlt}
               fill
               className="object-cover object-center"
-              sizes="(max-width: 900px) 100vw, 60vw" loading="lazy"/>
+              sizes="(max-width: 900px) 100vw, 60vw"
+              loading="lazy"
+            />
           </div>
 
           <div className="contact-story-quote">
             <div className="contact-story-author">
-              <div className="contact-story-avatar">
-                <Image
-                  src={active.avatar}
-                  alt={active.name}
-                  fill
-                  className="object-cover"
-                  sizes="48px" loading="lazy"/>
-              </div>
+              {active.avatar ? (
+                <div className="contact-story-avatar">
+                  <Image
+                    src={active.avatar}
+                    alt={active.name}
+                    fill
+                    className="object-cover"
+                    sizes="48px"
+                    loading="lazy"
+                  />
+                </div>
+              ) : null}
               <div>
                 <p className="contact-story-name">{active.name}</p>
                 <p className="contact-story-role">{active.role}</p>
@@ -97,8 +131,8 @@ export default function ContactStories() {
 
             <p className="contact-story-quote-text">{active.quote}</p>
 
-            <Link href={ctaHref} className="contact-story-cta">
-              {ctaLabel}
+            <Link href={CHROME.ctaHref} className="contact-story-cta">
+              {CHROME.ctaLabel}
               <CtaArrow />
             </Link>
           </div>

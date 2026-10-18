@@ -3,6 +3,7 @@
 import { useIsFetching } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { setSmoothScrollLocked } from "@/lib/smooth-scroll";
 
 /** Minimum time the overlay stays up (avoids blink). */
 const MIN_MS = 600;
@@ -12,7 +13,22 @@ const MAX_MS = 12000;
 const BOOTSTRAP_MS = 650;
 /** Fetches must stay at 0 this long before we treat the page as ready. */
 const IDLE_MS = 350;
+/**
+ * After network idle, wait so layout + GSAP measure can finish under the
+ * still-opaque overlay — prevents the visible “jolt” when we fade out.
+ */
+const PAINT_SETTLE_MS = 180;
 const EXIT_MS = 550;
+
+function lockScrollChrome() {
+  document.documentElement.classList.add("wk-preloader-active");
+  setSmoothScrollLocked(true);
+}
+
+function unlockScrollChrome() {
+  document.documentElement.classList.remove("wk-preloader-active");
+  setSmoothScrollLocked(false);
+}
 
 export default function Preloader() {
   const pathname = usePathname();
@@ -36,23 +52,23 @@ export default function Preloader() {
     setVisible(true);
     setExiting(false);
     setProgress(12);
-    document.documentElement.classList.add("wk-preloader-active");
+    lockScrollChrome();
   }, [pathname]);
 
   useEffect(() => {
     return () => {
-      document.documentElement.classList.remove("wk-preloader-active");
+      unlockScrollChrome();
     };
   }, []);
 
-  // Fade out, then unmount overlay.
+  // Fade out, then unmount overlay + unlock scroll (after opacity is gone).
   useEffect(() => {
     if (!exiting) return;
     const cycle = cycleRef.current;
     const timer = window.setTimeout(() => {
       if (cycle !== cycleRef.current) return;
       setVisible(false);
-      document.documentElement.classList.remove("wk-preloader-active");
+      unlockScrollChrome();
     }, EXIT_MS);
     return () => window.clearTimeout(timer);
   }, [exiting]);
@@ -69,7 +85,13 @@ export default function Preloader() {
       finishedRef.current = true;
       cancelAnimationFrame(frame);
       setProgress(100);
-      setExiting(true);
+      // Two frames: layout flush → paint, then start exit under stable UI.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (cycle !== cycleRef.current) return;
+          setExiting(true);
+        });
+      });
     };
 
     const tick = () => {
@@ -82,15 +104,17 @@ export default function Preloader() {
         idleSinceRef.current = null;
         setProgress(Math.min(90, 14 + (elapsed / 5000) * 76));
       } else if (!bootstrapped) {
-        // Still waiting for page components to mount / start their queries.
         idleSinceRef.current = null;
         setProgress(Math.min(72, 12 + (elapsed / BOOTSTRAP_MS) * 60));
       } else {
         if (idleSinceRef.current == null) idleSinceRef.current = Date.now();
         const idleFor = Date.now() - idleSinceRef.current;
-        setProgress(Math.min(97, 90 + (idleFor / IDLE_MS) * 7));
+        setProgress(Math.min(97, 90 + (idleFor / (IDLE_MS + PAINT_SETTLE_MS)) * 7));
 
-        if (elapsed >= MIN_MS && idleFor >= IDLE_MS) {
+        if (
+          elapsed >= MIN_MS &&
+          idleFor >= IDLE_MS + PAINT_SETTLE_MS
+        ) {
           complete();
           return;
         }

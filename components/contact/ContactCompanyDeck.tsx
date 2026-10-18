@@ -1,20 +1,37 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import contactContent from "@/data/contact-content.json";
+import { useContactPageQuery } from "@/hooks/queries/useContactPageQuery";
+import {
+  contactSectionItem,
+  splitContactDeckTitle,
+} from "@/lib/contact-page";
 
-const {
-  badge,
-  headingLine1,
-  headingAccent,
-  description,
-  ctaLabel,
-  ctaHref,
-  image,
-  imageAlt,
-} = contactContent.companyDeck;
+/** Section chrome — not provided by pages/contact-us. */
+const CHROME = {
+  badge: "Company Deck",
+  ctaLabel: "Check Company Deck",
+  ctaHref: "/about-us",
+} as const;
 
 export default function ContactCompanyDeck() {
+  const { data } = useContactPageQuery();
+  const item = contactSectionItem(data?.data?.sections?.company_desk);
+
+  const title = item?.title?.trim() ?? "";
+  const description = item?.subtitle?.trim() ?? "";
+  const image = item?.left_image?.url?.trim() ?? "";
+  const imageAlt =
+    item?.left_image?.alt_text?.trim() ||
+    item?.left_image?.name?.trim() ||
+    title;
+
+  if (!title || !description || !image) return null;
+
+  const { line1, accent } = splitContactDeckTitle(title);
+
   return (
     <section className="contact-deck" aria-labelledby="contact-deck-heading">
       <div className="contact-deck-panel">
@@ -24,20 +41,22 @@ export default function ContactCompanyDeck() {
             alt={imageAlt}
             fill
             className="object-cover"
-            sizes="(max-width: 900px) 100vw, 55vw" loading="lazy"/>
+            sizes="(max-width: 900px) 100vw, 55vw"
+            loading="lazy"
+          />
         </div>
 
         <div className="contact-deck-copy">
           <span className="contact-section-badge">
-            <span className="contact-section-badge-text">{badge}</span>
+            <span className="contact-section-badge-text">{CHROME.badge}</span>
           </span>
           <h2 id="contact-deck-heading" className="contact-deck-title">
-            {headingLine1}{" "}
-            <span className="contact-title-accent">{headingAccent}</span>
+            {line1}{" "}
+            <span className="contact-title-accent">{accent}</span>
           </h2>
           <p className="contact-deck-desc">{description}</p>
-          <Link href={ctaHref} className="contact-deck-cta">
-            {ctaLabel}
+          <Link href={CHROME.ctaHref} className="contact-deck-cta">
+            {CHROME.ctaLabel}
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>

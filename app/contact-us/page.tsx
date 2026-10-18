@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import "@/components/contact/ContactPage.css";
 import ContactHero from "@/components/contact/ContactHero";
-import contactContent from "@/data/contact-content.json";
 
 const ContactConnect = dynamic(() => import("@/components/contact/ContactConnect"));
 const ContactCompanyDeck = dynamic(
@@ -15,8 +14,9 @@ const HomeConsultation = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: contactContent.metadata.title,
-  description: contactContent.metadata.description,
+  title: "Contact Us | Webkarigor",
+  description:
+    "Have a question or just want to chat? Tell us about your project — we respond within 24 hours.",
 };
 
 export default function ContactUsPage() {

@@ -23,6 +23,8 @@
     overflow-x: clip;
     overflow-anchor: none;
     overscroll-behavior-y: none;
+    /* Reserve scrollbar space so lock/unlock does not shift layout width */
+    scrollbar-gutter: stable;
   }
 
   body {

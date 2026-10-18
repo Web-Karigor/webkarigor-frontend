@@ -1,9 +1,17 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import contactContent from "@/data/contact-content.json";
+import { useMemo } from "react";
+import { useContactPageQuery } from "@/hooks/queries/useContactPageQuery";
+import {
+  contactSectionItem,
+  parseContactOffice,
+  splitContactConnectTitle,
+} from "@/lib/contact-page";
 
-const { badge, headingLine1, headingAccent, logos, emails, offices } = contactContent.connect;
+/** Section chrome — not provided by pages/contact-us. */
+const BADGE = "Connect Now";
 
 function WhatsAppIcon() {
   return (
@@ -14,56 +22,82 @@ function WhatsAppIcon() {
 }
 
 export default function ContactConnect() {
+  const { data } = useContactPageQuery();
+  const item = contactSectionItem(data?.data?.sections?.connect);
+
+  const view = useMemo(() => {
+    if (!item) return null;
+    const title = item.title?.trim() ?? "";
+    if (!title) return null;
+
+    const { line1, accent } = splitContactConnectTitle(title);
+    const emails = [
+      {
+        title: item.email_info_title?.trim() ?? "",
+        email: item.email_info_email?.trim() ?? "",
+      },
+      {
+        title: item.career_email_title?.trim() ?? "",
+        email: item.career_email?.trim() ?? "",
+      },
+    ].filter((entry) => entry.title && entry.email);
+
+    const office = parseContactOffice(
+      item.address?.trim() ?? "",
+      item.whatsapp?.trim() ?? "",
+    );
+
+    if (!emails.length || !office.address || !office.phone || !office.whatsappHref) {
+      return null;
+    }
+
+    return { line1, accent, emails, office };
+  }, [item]);
+
+  if (!view) return null;
+
+  const { line1, accent, emails, office } = view;
+
   return (
     <section className="contact-connect" aria-labelledby="contact-connect-heading">
       <div className="contact-connect-inner">
-        {/* <div className="contact-logo-row" aria-label="Clients">
-          {logos.map((logo) => (
-            <span key={logo.name} className="contact-logo-item">
-              <Image
-                src={logo.src}
-                alt={logo.name}
-                width={56}
-                height={56}
-                unoptimized loading="lazy"/>
-            </span>
-          ))}
-        </div> */}
-
         <span className="contact-section-badge">
-          <span className="contact-section-badge-text">{badge}</span>
+          <span className="contact-section-badge-text">{BADGE}</span>
         </span>
         <h2 id="contact-connect-heading" className="contact-connect-title">
-          {headingLine1}{" "}
-          <span className="contact-title-accent">{headingAccent}</span>
+          {line1}{" "}
+          <span className="contact-title-accent">{accent}</span>
         </h2>
 
         <div className="contact-info-grid">
-          {emails.map((item) => (
-            <div key={item.email} className="contact-email-card">
-              <p className="contact-email-card-title">{item.title}</p>
-              <Link href={item.href}>
+          {emails.map((entry) => (
+            <div key={entry.email} className="contact-email-card">
+              <p className="contact-email-card-title">{entry.title}</p>
+              <Link href={`mailto:${entry.email}`}>
                 <Mail className="h-5 w-5 shrink-0 opacity-80" strokeWidth={1.75} aria-hidden />
-                {item.email}
+                {entry.email}
               </Link>
             </div>
           ))}
 
-          {offices.map((office) => (
-            <article key={office.country} className="contact-office-card">
+          <article
+            key={office.country || office.phone}
+            className="contact-office-card"
+          >
+            {office.country ? (
               <h3 className="contact-office-country">{office.country}</h3>
-              <p className="contact-office-address">{office.address}</p>
-              <a
-                href={office.whatsappHref}
-                className="contact-office-phone"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <WhatsAppIcon />
-                {office.phone}
-              </a>
-            </article>
-          ))}
+            ) : null}
+            <p className="contact-office-address">{office.address}</p>
+            <a
+              href={office.whatsappHref}
+              className="contact-office-phone"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon />
+              {office.phone}
+            </a>
+          </article>
         </div>
       </div>
     </section>
