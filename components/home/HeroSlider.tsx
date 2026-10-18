@@ -2,28 +2,22 @@
 
 import "./HeroSlider.css";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import Image from "next/image";
+import { useProjectsHomeQuery } from "@/hooks/queries/useProjectsHomeQuery";
 import { gsap } from "@/lib/gsap";
-import { SLIDER_IMAGES } from "@/lib/home-assets";
+import { mapPostsToHomeSliderImages } from "@/lib/projects-home";
 
-const images = SLIDER_IMAGES;
-const CYCLE_SIZE = images.length;
 const REPEAT_CYCLES = 4;
-const ANCHOR_INDEX = CYCLE_SIZE * (REPEAT_CYCLES / 2);
 const SLIDE_DURATION = 36;
 
 const SCALE_MAX = 1;
 const SCALE_MIN = 0.7;
 
-const cards = Array.from({ length: CYCLE_SIZE * REPEAT_CYCLES }, (_, i) => ({
-  src: images[i % images.length],
-}));
-
-function getSeamlessCycleWidth(track: HTMLElement) {
+function getSeamlessCycleWidth(track: HTMLElement, cycleSize: number) {
   const children = Array.from(track.children) as HTMLElement[];
-  if (children.length <= CYCLE_SIZE) return 0;
-  return children[CYCLE_SIZE].offsetLeft - children[0].offsetLeft;
+  if (children.length <= cycleSize) return 0;
+  return children[cycleSize].offsetLeft - children[0].offsetLeft;
 }
 
 function getCardCenter(track: HTMLElement, index: number) {
@@ -42,13 +36,34 @@ function computeScale(cardCenterX: number, viewportRect: DOMRect) {
 }
 
 export default function HeroSlider() {
+  const { data } = useProjectsHomeQuery();
+  const images = useMemo(
+    () => mapPostsToHomeSliderImages(data?.data?.posts),
+    [data],
+  );
+  const cycleSize = images.length;
+  const anchorIndex = cycleSize * (REPEAT_CYCLES / 2);
+  const imagesKey = useMemo(
+    () => images.map((image) => image.src).join("|"),
+    [images],
+  );
+
+  const cards = useMemo(
+    () =>
+      Array.from({ length: cycleSize * REPEAT_CYCLES }, (_, i) => ({
+        src: images[i % cycleSize]!.src,
+        key: `${images[i % cycleSize]!.id}-${i}`,
+      })),
+    [images, cycleSize],
+  );
+
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const viewport = viewportRef.current;
     const track = trackRef.current;
-    if (!viewport || !track) return;
+    if (!viewport || !track || cycleSize === 0) return;
 
     let cycleWidth = 0;
     let anchorCenter = 0;
@@ -114,8 +129,8 @@ export default function HeroSlider() {
       const ratio =
         prevCycleWidth > 0 && preservePosition ? scrollOffset / prevCycleWidth : 0;
 
-      cycleWidth = getSeamlessCycleWidth(track);
-      anchorCenter = getCardCenter(track, ANCHOR_INDEX);
+      cycleWidth = getSeamlessCycleWidth(track, cycleSize);
+      anchorCenter = getCardCenter(track, anchorIndex);
 
       const nextOffset =
         preservePosition && prevCycleWidth > 0 && cycleWidth > 0
@@ -158,14 +173,16 @@ export default function HeroSlider() {
       visibility.disconnect();
       cancelAnimationFrame(resizeRaf);
     };
-  }, []);
+  }, [imagesKey, cycleSize, anchorIndex]);
+
+  if (!cycleSize) return null;
 
   return (
     <section data-hero-slider className="slanted-wrapper relative z-[2] max-md:mt-2 sm:-mt-[36px] md:-mt-[44px] lg:-mt-[52px] xl:-mt-[60px] 2xl:-mt-[68px] mt-60">
       <div ref={viewportRef} className="slanted-viewport">
         <div ref={trackRef} className="slanted-track">
-          {cards.map((card, i) => (
-            <div key={i} className="slanted-card">
+          {cards.map((card) => (
+            <div key={card.key} className="slanted-card">
               <Image
                 src={card.src}
                 alt=""

@@ -11,6 +11,7 @@ import StickyNav from "@/components/home/StickuNav";
 import FloatingActions from "@/components/FloatingActions";
 import ScrollProgress from "@/components/ScrollProgress";
 import GlobalCursor from "@/components/GlobalCursor";
+import Preloader from "@/components/Preloader";
 import GsapProvider from "@/components/providers/GsapProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
 import SmoothScroll from "@/components/providers/SmoothScroll";
@@ -76,6 +77,7 @@ export default function RootLayout({
         <QueryProvider>
         <SmoothScroll>
         <GsapProvider>
+          <Preloader />
           <GlobalCursor />
           <div className="relative z-10 overflow-x-clip">
             <Navbar />

@@ -10,19 +10,15 @@ import {
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import servicesContent from "@/data/crm-content.json";
+import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
 import { CRM_TESTIMONIALS } from "@/lib/crm-data";
+import { crmSectionItem, extractCrmText } from "@/lib/crm-page";
 
 const AUTO_MS = 4200;
 const GAP_PX = 16;
 const DRAG_THRESHOLD_PX = 48;
 
-const {
-  eyebrow,
-  title,
-  description,
-  summary,
-  avatars: AVATARS,
-} = servicesContent.testimonials;
+const { summary, avatars: AVATARS } = servicesContent.testimonials;
 
 function Stars({ count, size = 18 }: { count: number; size?: number }) {
   return (
@@ -44,6 +40,12 @@ function Stars({ count, size = 18 }: { count: number; size?: number }) {
 }
 
 export default function Testimonials() {
+  const { data: pageData } = useCrmPageQuery();
+  const heading = crmSectionItem(pageData?.data?.sections?.clients_sucess);
+  const eyebrow = heading?.title?.trim() ?? "";
+  const title = heading?.subtitle?.trim() ?? "";
+  const description = extractCrmText(heading?.content ?? "");
+
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(1);
@@ -182,6 +184,10 @@ export default function Testimonials() {
     dragX !== 0
       ? `translateX(calc(${baseTranslate} + ${dragX}px))`
       : `translateX(${baseTranslate})`;
+
+  if (!eyebrow || !title || !description || !CRM_TESTIMONIALS.length) {
+    return null;
+  }
 
   return (
     <section className="bg-[#f2f2f2] py-8">

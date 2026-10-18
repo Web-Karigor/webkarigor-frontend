@@ -2,13 +2,13 @@
 
 import "./TrustedFounders.css";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import Image from "next/image";
+import { useProjectsHomeQuery } from "@/hooks/queries/useProjectsHomeQuery";
 import { gsap } from "@/lib/gsap";
-import { SLIDER_IMAGES } from "@/lib/home-assets";
+import { mapPostsToHomeSliderImages } from "@/lib/projects-home";
 import homeContent from "@/data/home-content.json";
 
-const images = SLIDER_IMAGES;
 const { badge, headingLines, headingAccent } = homeContent.testimonials;
 /** Duplicate sets for seamless infinite marquee */
 const LOOP_SETS = 3;
@@ -23,13 +23,6 @@ type MarqueeItem = {
   key: string;
 };
 
-const marqueeItems: MarqueeItem[] = Array.from({ length: LOOP_SETS }, (_, set) =>
-  images.map((src) => ({
-    src,
-    key: `${set}-${src}`,
-  })),
-).flat();
-
 function mapScaleFromX(centerX: number, viewLeft: number, viewRight: number) {
   const span = Math.max(viewRight - viewLeft, 1);
   const progress = gsap.utils.clamp(0, 1, (centerX - viewLeft) / span);
@@ -37,13 +30,34 @@ function mapScaleFromX(centerX: number, viewLeft: number, viewRight: number) {
 }
 
 export default function TrustedFounders() {
+  const { data } = useProjectsHomeQuery();
+  const images = useMemo(
+    () => mapPostsToHomeSliderImages(data?.data?.posts),
+    [data],
+  );
+  const imagesKey = useMemo(
+    () => images.map((image) => image.src).join("|"),
+    [images],
+  );
+
+  const marqueeItems = useMemo<MarqueeItem[]>(
+    () =>
+      Array.from({ length: LOOP_SETS }, (_, set) =>
+        images.map((image) => ({
+          src: image.src,
+          key: `${set}-${image.id}`,
+        })),
+      ).flat(),
+    [images],
+  );
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const container = containerRef.current;
-    if (!section || !container) return;
+    if (!section || !container || images.length === 0) return;
 
     const cards = gsap.utils.toArray<HTMLElement>(
       container.querySelectorAll(".trusted-image-card"),
@@ -177,7 +191,9 @@ export default function TrustedFounders() {
         clearProps: "x,transform,willChange,backfaceVisibility",
       });
     };
-  }, []);
+  }, [imagesKey, images.length]);
+
+  if (!images.length) return null;
 
   return (
     <section ref={sectionRef} className="trusted-wrapper">
@@ -212,7 +228,9 @@ export default function TrustedFounders() {
                 fill
                 sizes="(max-width: 1024px) 40vw, 495px"
                 className="object-cover"
-                draggable={false} loading="lazy"/>
+                draggable={false}
+                loading="lazy"
+              />
             </div>
           ))}
         </div>

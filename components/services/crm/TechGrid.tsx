@@ -1,15 +1,15 @@
 "use client";
 
 import servicesContent from "@/data/services-content.json";
+import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
+import { crmSectionItem, extractCrmText } from "@/lib/crm-page";
 
 type TechItem = {
   name: string;
   icon: string;
 };
 
-const { eyebrow, title, description, items: TECH_ITEMS } =
-  servicesContent.techGrid;
-
+const TECH_ITEMS = servicesContent.techGrid.items as TechItem[];
 const TOP_ROW = TECH_ITEMS.slice(0, 6);
 const BOTTOM_ROW = TECH_ITEMS.slice(6);
 
@@ -50,17 +50,22 @@ function TechMarqueeRow({
 }
 
 export default function TechGrid() {
+  const { data } = useCrmPageQuery();
+  const item = crmSectionItem(data?.data?.sections?.why_webkarigor);
+
+  const eyebrow = item?.title?.trim() ?? "";
+  const title = item?.subtitle?.trim() ?? "";
+  const description = extractCrmText(item?.content ?? "");
+
+  if (!eyebrow || !title || !description) return null;
+
   return (
     <section className="bg-[#e7eef6] py-16">
       <div className="mx-auto flex w-full max-w-[1680px] flex-col items-center px-[clamp(16px,4vw,40px)]">
         <div className="mb-9 text-center">
           <h2 className="m-0 font-montserrat text-[clamp(26px,4.2vw,56px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#111827]">
-            <span className="block text-[24px] text-[#15d286]">
-              {eyebrow}
-            </span>
-            <span className="mt-2 block text-[#000000] text-[32px]">
-              {title}
-            </span>
+            <span className="block text-[24px] text-[#15d286]">{eyebrow}</span>
+            <span className="mt-2 block text-[32px] text-[#000000]">{title}</span>
           </h2>
           <p className="mx-auto mt-3 max-w-[900px] font-montserrat text-[12px] font-semibold leading-[1.45] text-[#A7A7A7] sm:mt-4 sm:text-[18px]">
             {description}
@@ -68,20 +73,20 @@ export default function TechGrid() {
         </div>
 
         <div className="grid w-full grid-cols-3 gap-2.5 sm:hidden">
-          {TECH_ITEMS.map((item) => (
+          {TECH_ITEMS.map((tech) => (
             <div
-              key={item.name}
+              key={tech.name}
               className="flex h-9 min-w-0 w-full items-center gap-1.5 rounded-md bg-white px-2 shadow-[0_5px_14px_rgba(15,23,42,0.08)]"
-              title={item.name}
+              title={tech.name}
             >
               <img
-                src={item.icon}
+                src={tech.icon}
                 alt=""
                 className="h-4 w-4 shrink-0 object-contain"
                 loading="lazy"
               />
               <span className="min-w-0 truncate font-montserrat text-[11px] font-medium text-[#1f2937]">
-                {item.name}
+                {tech.name}
               </span>
             </div>
           ))}

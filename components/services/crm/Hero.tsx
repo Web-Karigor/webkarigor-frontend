@@ -3,11 +3,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent } from "react";
-// import { Sparkles, TrendingUp } from "lucide-react";
-import CRMContent from "@/data/crm-content.json";
+import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
+import {
+  crmSectionItem,
+  splitCrmHeroTitle,
+} from "@/lib/crm-page";
 import { SERVICE_PAGE_GUTTER } from "@/lib/service-layout";
 
-const { hero } = CRMContent;
+const WHATSAPP = {
+  href: "https://wa.me/8801624283328",
+  label: "Say hello: +880 1624-283328",
+} as const;
+
+const FORM = {
+  placeholders: {
+    name: "Your Name",
+    phone: "Mobile",
+    details: "Project Details",
+  },
+  submitLabel: "Start Your Project",
+} as const;
+
+const STATS = [
+  { value: "10+", label: "Years of Experience" },
+  { value: "300+", label: "Successful Projects" },
+  { value: "200+", label: "Happy Clients" },
+] as const;
 
 const FIELD_CLASS =
   "min-h-[52px] w-full resize-y rounded-xl border border-transparent bg-[#f3f3f1] px-4 py-[14px] font-montserrat text-[0.9375rem] text-[#1f1e1c] outline-none transition-[border-color,background-color] placeholder:text-[#9a9a9a] focus:border-[rgba(56,248,171,0.7)] focus:bg-white";
@@ -21,6 +42,18 @@ function WhatsAppIcon() {
 }
 
 export default function Hero() {
+  const { data } = useCrmPageQuery();
+  const item = crmSectionItem(data?.data?.sections?.hero);
+
+  if (!item) return null;
+
+  const title = item.title?.trim() ?? "";
+  const subtitle = item.subtitle?.trim() ?? "";
+  const imageUrl = item.image?.url?.trim() ?? "";
+  const { line1, line2 } = splitCrmHeroTitle(title);
+
+  if (!title || !subtitle || !imageUrl) return null;
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
@@ -31,22 +64,22 @@ export default function Hero() {
         <div className="grid grid-cols-1 items-start gap-[clamp(36px,5vw,56px)] lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-[clamp(28px,3vw,48px)]">
           <div className="max-w-[640px] max-md:mx-auto max-md:text-center">
             <Link
-              href={hero.whatsapp.href}
+              href={WHATSAPP.href}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 rounded-full border border-[rgba(31,30,28,0.14)] bg-white px-[18px] py-2.5 font-montserrat text-sm font-medium text-[#1f1e1c] no-underline transition-[border-color,box-shadow] hover:border-[rgba(56,248,171,0.65)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] max-md:mx-auto"
             >
               <WhatsAppIcon />
-              <span>{hero.whatsapp.label}</span>
+              <span>{WHATSAPP.label}</span>
             </Link>
 
             <h1 className="mt-[clamp(18px,2.5vw,28px)] font-montserrat text-[clamp(1.5rem,6.6vw,1.8rem)] font-bold leading-[1.2] tracking-[-0.04em] text-[#1f1e1c] md:text-[clamp(2.25rem,5vw,4.25rem)] md:leading-[1.08]">
-              {hero.titleLines[0]}
-              <span className="block">{hero.titleLines[1]}</span>
+              {line1}
+              {line2 ? <span className="block">{line2}</span> : null}
             </h1>
 
             <p className="mt-[clamp(16px,2.5vw,24px)] max-w-[560px] font-montserrat text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-[1.7] text-[#6b6b6b] max-md:mx-auto">
-              {hero.description}
+              {subtitle}
             </p>
 
             <form
@@ -57,14 +90,14 @@ export default function Hero() {
                 <input
                   type="text"
                   name="name"
-                  placeholder={hero.form.placeholders.name}
+                  placeholder={FORM.placeholders.name}
                   className={FIELD_CLASS}
                   required
                 />
                 <input
                   type="tel"
                   name="phone"
-                  placeholder={hero.form.placeholders.phone}
+                  placeholder={FORM.placeholders.phone}
                   className={FIELD_CLASS}
                   required
                 />
@@ -73,7 +106,7 @@ export default function Hero() {
               <textarea
                 name="details"
                 rows={4}
-                placeholder={hero.form.placeholders.details}
+                placeholder={FORM.placeholders.details}
                 className={`${FIELD_CLASS} min-h-[120px]`}
                 required
               />
@@ -82,12 +115,11 @@ export default function Hero() {
                 type="submit"
                 className="mt-1 min-h-[54px] w-full cursor-pointer rounded-full border-0 font-montserrat text-base font-bold text-white transition-[opacity,transform] hover:-translate-y-px hover:opacity-95"
                 style={{
-                  /* Light yellow only at start + end; green stays in the middle */
                   background:
                     "linear-gradient(90deg, #d8ef88 0%, #38f8ab 18%, #0ec47b 50%, #38f8ab 82%, #d8ef88 100%)",
                 }}
               >
-                {hero.form.submitLabel}
+                {FORM.submitLabel}
               </button>
             </form>
           </div>
@@ -95,36 +127,17 @@ export default function Hero() {
           <div className="mx-auto w-full max-w-[720px] pt-3 lg:ml-auto lg:justify-self-end lg:pt-0">
             <div className="svc-hero-visual relative aspect-[796/522] w-full">
               <Image
-                src={hero.image.src}
-                alt={hero.image.alt}
+                src={imageUrl}
+                alt={item.image?.alt_text || title}
                 fill
                 className="object-contain"
                 sizes="(max-width: 1024px) 100vw, 720px"
                 loading="lazy"
               />
-
-              {/* <div className="absolute top-4 left-[4%] z-[3] inline-flex max-w-[calc(100%-8%)] items-center gap-2.5 whitespace-nowrap rounded-full bg-white px-3.5 py-2 font-montserrat text-[13px] font-semibold text-[#15d286] shadow-[0_12px_32px_rgba(0,0,0,0.16)] sm:top-6 sm:left-[2%] sm:max-w-[calc(100%-4%)] sm:-translate-x-[8%] sm:px-4 sm:py-2.5 sm:text-sm lg:top-8 lg:left-0 lg:max-w-none lg:-translate-x-1/4 lg:px-5 lg:py-3 lg:text-[clamp(0.875rem,1.2vw,1rem)] xl:-translate-x-[36%]">
-                <Sparkles className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4 lg:h-[18px] lg:w-[18px]" aria-hidden />
-                <span>{hero.badges.ai}</span>
-              </div>
-
-              <div className="absolute right-[4%] bottom-[clamp(40px,12%,72px)] z-[3] flex max-w-[calc(100%-8%)] items-center gap-2.5 rounded-2xl bg-white p-2.5 shadow-[0_12px_32px_rgba(0,0,0,0.16)] sm:right-[2%] sm:bottom-[clamp(48px,13%,80px)] sm:max-w-[calc(100%-4%)] sm:translate-x-[8%] sm:rounded-[18px] sm:p-3 lg:right-0 lg:bottom-[clamp(56px,14%,92px)] lg:max-w-none lg:translate-x-1/4 lg:p-[14px_18px] xl:translate-x-[36%]">
-                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#38f8ab] to-[#15d286] text-white sm:h-10 sm:w-10 lg:h-11 lg:w-11" aria-hidden>
-                  <TrendingUp className="h-[18px] w-[18px] lg:h-5 lg:w-5" />
-                </span>
-                <span className="flex flex-col gap-0.5">
-                  <span className="font-montserrat text-[clamp(0.75rem,1vw,0.8125rem)] font-medium text-[#8a8a8a]">
-                    {hero.badges.conversionLabel}
-                  </span>
-                  <strong className="font-montserrat text-[clamp(1.125rem,1.6vw,1.375rem)] font-bold leading-none text-[#1f1e1c]">
-                    {hero.badges.conversionValue}
-                  </strong>
-                </span>
-              </div> */}
             </div>
 
             <div className="mt-[clamp(24px,3vw,32px)] grid grid-cols-3 gap-[clamp(12px,2vw,24px)] text-center">
-              {hero.stats.map((stat) => (
+              {STATS.map((stat) => (
                 <div key={stat.label} className="flex flex-col items-center">
                   <span className="block font-montserrat text-[clamp(1.75rem,3vw,2.75rem)] font-bold leading-[1.05] tracking-[-0.03em] text-[#1f1e1c]">
                     {stat.value}

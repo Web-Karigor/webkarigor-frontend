@@ -1,21 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import servicesContent from "@/data/crm-content.json";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
+import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
 import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
+import { crmSectionItem, extractCrmText } from "@/lib/crm-page";
 import {
   formatPackageOriginalPrice,
   formatPackagePrice,
 } from "@/lib/package-price";
 import type { HomepagePackage } from "@/types/homepage-package";
 
-const {
-  eyebrow,
-  title,
-  description,
-  ctaLabel,
-} = servicesContent.pricing;
+const CTA_LABEL = "Book Now";
 
 const POPULAR_LABEL = "Most popular";
 const FEATURES_HEADING = "What's Included:";
@@ -70,9 +66,17 @@ function groupByCategory(packages: HomepagePackage[]) {
 }
 
 export default function Pricing() {
+  const { data: pageData } = useCrmPageQuery();
+  const heading = crmSectionItem(pageData?.data?.sections?.pricing);
+  const eyebrow = heading?.title?.trim() ?? "";
+  const title = heading?.subtitle?.trim() ?? "";
+  const description = extractCrmText(heading?.content ?? "");
+
   const { data } = useServiceQuery("crm");
   const serviceId = data?.data.service.id ?? 6;
   const markets = groupByCategory(data?.data.packages ?? []);
+
+  if (!eyebrow || !title || !description) return null;
 
   return (
     <section id="pricing" className="scroll-mt-28 bg-white py-[clamp(48px,7vw,80px)]">
@@ -194,7 +198,7 @@ export default function Pricing() {
                             packageId={pkg.id}
                             serviceId={pkg.service?.id ?? serviceId}
                           >
-                            {ctaLabel}
+                            {CTA_LABEL}
                           </PricingCtaButton>
 
                           <div className="home-pricing-features">

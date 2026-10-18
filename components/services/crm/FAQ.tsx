@@ -2,32 +2,45 @@
 
 import "./FAQ.css";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
-import crm_faq from "@/data/crm-content.json";
+import crmContent from "@/data/crm-content.json";
+import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
+import { crmSectionItem, splitTrailingWords } from "@/lib/crm-page";
 
-const {
-  badge,
-  headingAccent,
-  headingTitle,
-  ctaText,
-  ctaLabel,
-  ctaHref,
-  items: faqs,
-} = crm_faq.faq;
+const FAQ_ITEMS = crmContent.faq.items;
 
 export default function FAQ({
   className = "bg-[#FFFDF6]",
-  ctaHref: ctaHrefProp,
 }: {
   className?: string;
   ctaHref?: string;
 }) {
+  const { data: pageData } = useCrmPageQuery();
+  const heading = crmSectionItem(pageData?.data?.sections?.faq);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const { head: headingAccent, tail: headingTitle } = useMemo(
+    () => splitTrailingWords(heading?.title ?? "", 2),
+    [heading?.title],
+  );
+  const ctaText = heading?.title_two?.trim() ?? "";
+  const ctaLabel = heading?.cta_contact?.trim() ?? "";
 
   const toggleFAQ = (index: number) => {
     setOpenIndex((current) => (current === index ? null : index));
   };
+
+  if (
+    !heading ||
+    !headingAccent ||
+    !headingTitle ||
+    !ctaText ||
+    !ctaLabel ||
+    !FAQ_ITEMS.length
+  ) {
+    return null;
+  }
 
   return (
     <section
@@ -37,7 +50,7 @@ export default function FAQ({
       <div className="mx-auto max-w-[1320px]">
         <div className="faq-section-header mb-12 text-center md:mb-16">
           <span className="faq-section-badge">
-            <span className="faq-badge-text">{badge}</span>
+            <span className="faq-badge-text">Frequently Asked Questions</span>
           </span>
 
           <h2 className="section-heading">
@@ -49,11 +62,11 @@ export default function FAQ({
         </div>
 
         <div className="mb-12 space-y-1 md:mb-16">
-          {faqs.map((faq, index) => {
+          {FAQ_ITEMS.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <div key={index} className="border-b border-[#e5e5e5]">
+              <div key={faq.question} className="border-b border-[#e5e5e5]">
                 <button
                   type="button"
                   onClick={() => toggleFAQ(index)}
@@ -69,9 +82,7 @@ export default function FAQ({
                     }`}
                     aria-hidden
                   >
-                    {/* Horizontal bar always visible */}
                     <span className="absolute h-[2px] w-[14px] rounded-full bg-current" />
-                    {/* Vertical bar rotates away for minus */}
                     <span
                       className={`absolute h-[14px] w-[2px] rounded-full bg-current transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isOpen ? "scale-y-0" : "scale-y-100"
@@ -80,7 +91,6 @@ export default function FAQ({
                   </span>
                 </button>
 
-                {/* Height-only animation — no opacity (avoids flicker/shake) */}
                 <div
                   className={`grid overflow-hidden transition-[grid-template-rows] duration-[450ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
                     isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"

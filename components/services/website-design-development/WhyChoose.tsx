@@ -1,16 +1,28 @@
+"use client";
+
 import {
   Briefcase,
   Handshake,
   TrendingUp,
   UserRound,
 } from "lucide-react";
-
 import { whyChooseUs } from "@/data/website-design-development-content.json";
+import { useWebDesignDevelopmentPageQuery } from "@/hooks/queries/useWebDesignDevelopmentPageQuery";
+import { wddSectionItem } from "@/lib/web-design-development-page";
 
-const { items: REASONS, title, eyebrow, description } = whyChooseUs;
+const { items: REASONS } = whyChooseUs;
 const ICONS = { Briefcase, Handshake, TrendingUp, UserRound };
 
 export default function WhyChoose() {
+  const { data } = useWebDesignDevelopmentPageQuery();
+  const item = wddSectionItem(data?.data?.sections?.why_webkarigor);
+
+  const eyebrow = item?.title?.trim() ?? "";
+  const title = item?.subtitle?.trim() ?? "";
+  const description = item?.subtitle_two?.trim() ?? "";
+
+  if (!eyebrow || !title || !description) return null;
+
   return (
     <section className="bg-[#f8fafb] px-5 py-[clamp(64px,8vw,96px)]">
       <div className="mx-auto w-full max-w-[1680px]">
