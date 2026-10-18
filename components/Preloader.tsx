@@ -1,72 +1,115 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useIsFetching } from "@tanstack/react-query";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-const MIN_MS = 2000;
-const MAX_MS = 5000;
+/** Minimum time the overlay stays up (avoids blink). */
+const MIN_MS = 600;
+/** Hard cap so a stuck request cannot trap the UI. */
+const MAX_MS = 12000;
+/** Give the new page time to mount (incl. dynamic chunks) and start queries. */
+const BOOTSTRAP_MS = 650;
+/** Fetches must stay at 0 this long before we treat the page as ready. */
+const IDLE_MS = 350;
+const EXIT_MS = 550;
 
 export default function Preloader() {
+  const pathname = usePathname();
+  const fetching = useIsFetching();
+
   const [visible, setVisible] = useState(true);
   const [exiting, setExiting] = useState(false);
   const [progress, setProgress] = useState(12);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.add("wk-preloader-active");
+  const cycleRef = useRef(0);
+  const startedAtRef = useRef(Date.now());
+  const idleSinceRef = useRef<number | null>(null);
+  const finishedRef = useRef(false);
 
-    const startedAt = Date.now();
+  // Every route change → show preloader until that page's API work settles.
+  useEffect(() => {
+    cycleRef.current += 1;
+    finishedRef.current = false;
+    idleSinceRef.current = null;
+    startedAtRef.current = Date.now();
+    setVisible(true);
+    setExiting(false);
+    setProgress(12);
+    document.documentElement.classList.add("wk-preloader-active");
+  }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      document.documentElement.classList.remove("wk-preloader-active");
+    };
+  }, []);
+
+  // Fade out, then unmount overlay.
+  useEffect(() => {
+    if (!exiting) return;
+    const cycle = cycleRef.current;
+    const timer = window.setTimeout(() => {
+      if (cycle !== cycleRef.current) return;
+      setVisible(false);
+      document.documentElement.classList.remove("wk-preloader-active");
+    }, EXIT_MS);
+    return () => window.clearTimeout(timer);
+  }, [exiting]);
+
+  // Stay visible while React Query has in-flight requests for this route.
+  useEffect(() => {
+    if (!visible || exiting) return;
+
+    const cycle = cycleRef.current;
     let frame = 0;
-    let finished = false;
-    let exitTimer = 0;
-    let hideTimer = 0;
+
+    const complete = () => {
+      if (finishedRef.current || cycle !== cycleRef.current) return;
+      finishedRef.current = true;
+      cancelAnimationFrame(frame);
+      setProgress(100);
+      setExiting(true);
+    };
 
     const tick = () => {
-      if (finished) return;
-      const elapsed = Date.now() - startedAt;
-      const ready = document.readyState === "complete";
-      const base = Math.min(90, 12 + (elapsed / MIN_MS) * 78);
-      setProgress(ready ? Math.max(base, 94) : base);
+      if (finishedRef.current || cycle !== cycleRef.current) return;
+
+      const elapsed = Date.now() - startedAtRef.current;
+      const bootstrapped = elapsed >= BOOTSTRAP_MS;
+
+      if (fetching > 0) {
+        idleSinceRef.current = null;
+        setProgress(Math.min(90, 14 + (elapsed / 5000) * 76));
+      } else if (!bootstrapped) {
+        // Still waiting for page components to mount / start their queries.
+        idleSinceRef.current = null;
+        setProgress(Math.min(72, 12 + (elapsed / BOOTSTRAP_MS) * 60));
+      } else {
+        if (idleSinceRef.current == null) idleSinceRef.current = Date.now();
+        const idleFor = Date.now() - idleSinceRef.current;
+        setProgress(Math.min(97, 90 + (idleFor / IDLE_MS) * 7));
+
+        if (elapsed >= MIN_MS && idleFor >= IDLE_MS) {
+          complete();
+          return;
+        }
+      }
+
+      if (elapsed >= MAX_MS) {
+        complete();
+        return;
+      }
+
       frame = requestAnimationFrame(tick);
     };
 
     frame = requestAnimationFrame(tick);
 
-    const hide = () => {
-      if (finished) return;
-      finished = true;
-      cancelAnimationFrame(frame);
-      setProgress(100);
-      setExiting(true);
-
-      exitTimer = window.setTimeout(() => {
-        setVisible(false);
-        root.classList.remove("wk-preloader-active");
-      }, 550);
-    };
-
-    const complete = () => {
-      const remaining = Math.max(0, MIN_MS - (Date.now() - startedAt));
-      hideTimer = window.setTimeout(hide, remaining);
-    };
-
-    if (document.readyState === "complete") {
-      complete();
-    } else {
-      window.addEventListener("load", complete, { once: true });
-    }
-
-    const safety = window.setTimeout(complete, MAX_MS);
-
     return () => {
-      finished = true;
       cancelAnimationFrame(frame);
-      window.clearTimeout(safety);
-      window.clearTimeout(hideTimer);
-      window.clearTimeout(exitTimer);
-      window.removeEventListener("load", complete);
-      root.classList.remove("wk-preloader-active");
     };
-  }, []);
+  }, [visible, exiting, fetching, pathname]);
 
   if (!visible) return null;
 
