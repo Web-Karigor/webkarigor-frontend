@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import contactContent from "@/data/contact-content.json";
-
-const { badge, headingLine1, headingAccent, description, ctaLabel, ctaHref } =
-  contactContent.bottomCta;
+const badge = "";
+const headingLine1 = "";
+const headingAccent = "";
+const description = "";
+const ctaLabel = "";
+const ctaHref = "/contact-us";
 
 export default function ContactBottomCta() {
   return (

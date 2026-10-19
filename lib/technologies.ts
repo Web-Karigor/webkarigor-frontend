@@ -8,6 +8,18 @@ import type {
 const COLUMN_SIZE = 5;
 const GROUP_TITLES = ["Back end", "Front end", "Design", "Tools & Cloud"];
 
+export function mapTechnologyPostsToMarquee(
+  posts: TechnologyPost[] | undefined,
+): { name: string; icon: string }[] {
+  return [...(posts ?? [])]
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+    .map((post) => ({
+      name: post.fields?.name?.trim() ?? "",
+      icon: post.fields?.icon?.trim() ?? "",
+    }))
+    .filter((item) => item.name && item.icon);
+}
+
 export function mapTechnologyPostsToGroups(
   posts: TechnologyPost[] | undefined,
 ): TechGroup[] {

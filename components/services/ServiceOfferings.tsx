@@ -1,17 +1,47 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft } from "lucide-react";
-import servicesContent from "@/data/services-content.json";
-import { SERVICE_OFFERINGS } from "@/lib/services-data";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ArrowLeft,
+  Cloud,
+  Home,
+  Hospital,
+  ShoppingCart,
+  type LucideIcon,
+} from "lucide-react";
+import content from "@/data/services-content.json";
+import { useSpecializedServicesQuery } from "@/hooks/queries/useSpecializedServicesQuery";
 
-const { eyebrow, title, description } = servicesContent.offerings;
+const eyebrow = content.offerings.eyebrow;
+const title = content.offerings.title;
+const description = content.offerings.description;
+
+const OFFERING_ICONS = {
+  shoppingCart: ShoppingCart,
+  cloud: Cloud,
+  hospital: Hospital,
+  home: Home,
+} as const satisfies Record<string, LucideIcon>;
 
 const CARD_GAP = 24;
 const AUTO_SCROLL_MS = 4500;
 const DRAG_THRESHOLD_PX = 48;
 
 export default function ServiceOfferings() {
+  const { data } = useSpecializedServicesQuery();
+  const offerings = useMemo(
+    () =>
+      [...(data?.data?.posts ?? [])]
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+        .map((post) => ({
+          title: post.fields?.title?.trim() ?? "",
+          description: post.fields?.description?.trim() ?? "",
+          icon: post.fields?.icon?.trim() ?? "",
+          variant: post.fields?.variant?.trim() === "green" ? "green" : "yellow",
+        }))
+        .filter((item) => item.title),
+    [data],
+  );
   const viewportRef = useRef<HTMLDivElement>(null);
   const pauseAutoRef = useRef(false);
   const resumeTimerRef = useRef<number | null>(null);
@@ -220,8 +250,10 @@ export default function ServiceOfferings() {
               {/* Spacer so cards clear the arrow on large screens */}
               <div className="hidden w-[210px] shrink-0 lg:block" aria-hidden />
 
-              {SERVICE_OFFERINGS.map((item, index) => {
-                const Icon = item.icon;
+              {offerings.map((item, index) => {
+                const Icon =
+                  OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS] ??
+                  ShoppingCart;
                 return (
                   <article
                     key={`${item.title}-${index}`}

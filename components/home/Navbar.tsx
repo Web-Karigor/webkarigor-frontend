@@ -14,17 +14,17 @@ import {
   useState,
 } from "react";
 import { ChevronRight, EllipsisVertical } from "lucide-react";
-import homeContent from "@/data/home-content.json";
 import {
-  SERVICE_NAV_DESC,
+  serviceNavDescription,
   STICKY_NAV_MORE_LINKS,
 } from "@/lib/sticky-nav-data";
+import { mapFooterLinks } from "@/lib/footer-menus";
 import { openConsultationModal } from "@/store/consultation-store";
 import { useNavbarStore, type NavMenu } from "@/store/navbar-store";
-import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
+import { useServicesMenuQuery } from "@/hooks/queries/useFooterMenusQuery";
 import { scrollAppTo, scrollAppToTop } from "@/lib/smooth-scroll";
 
-const { brand } = homeContent.navbar;
+const brand = "Webkarigor";
 
 type NavItem =
   | { id: string; label: string; href: string; kind: "link" }
@@ -102,8 +102,8 @@ export default function Navbar() {
   const pillLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hoverCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { data: servicesData } = useServicesQuery();
-  const services = [...(servicesData?.data ?? [])].sort((a, b) => a.id - b.id);
+  const { data: servicesMenu } = useServicesMenuQuery();
+  const services = mapFooterLinks(servicesMenu?.data?.posts);
 
   const measurePill = useCallback((id: string): PillBox | null => {
     const nav = navRef.current;
@@ -479,26 +479,29 @@ export default function Navbar() {
                       offset={dropdownOffset}
                     >
                       <div className="space-y-1">
-                        {services.map((item) => (
-                          <Link
-                            key={item.id}
-                            href={`/service/${item.slug}`}
-                            onClick={closeMenu}
-                            className="navbar-dropdown-link"
-                          >
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
-                                {item.title}
-                              </span>
-                              <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
-                            </div>
-                            {SERVICE_NAV_DESC[item.slug] ? (
-                              <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
-                                {SERVICE_NAV_DESC[item.slug]}
-                              </p>
-                            ) : null}
-                          </Link>
-                        ))}
+                        {services.map((item) => {
+                          const description = serviceNavDescription(item.href);
+                          return (
+                            <Link
+                              key={item.id}
+                              href={item.href}
+                              onClick={closeMenu}
+                              className="navbar-dropdown-link"
+                            >
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
+                                  {item.label}
+                                </span>
+                                <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
+                              </div>
+                              {description ? (
+                                <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
+                                  {description}
+                                </p>
+                              ) : null}
+                            </Link>
+                          );
+                        })}
                       </div>
                     </NavDropdown>
                   ) : null}

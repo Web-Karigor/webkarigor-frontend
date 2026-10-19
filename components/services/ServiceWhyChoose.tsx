@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { LayoutGrid, Target, TrendingUp, Users, type LucideIcon } from "lucide-react";
-import servicesContent from "@/data/services-content.json";
+import content from "@/data/services-content.json";
 
-const {
-  eyebrow,
-  title,
-  description,
-  images,
-  hireUsLabels,
-  features,
-} = servicesContent.whyChoose;
+const eyebrow = content.whyChoose.eyebrow;
+const title = content.whyChoose.title;
+const description = content.whyChoose.description;
+const images = content.whyChoose.images;
+const hireUsLabels = content.whyChoose.hireUsLabels;
+const features = content.whyChoose.features;
 
 const FEATURE_ICONS = {
   target: Target,
@@ -20,7 +18,7 @@ const FEATURE_ICONS = {
 
 const FEATURE_CARDS = features.map((feature) => ({
   ...feature,
-  icon: FEATURE_ICONS[feature.icon as keyof typeof FEATURE_ICONS],
+  icon: FEATURE_ICONS[feature.icon as keyof typeof FEATURE_ICONS] ?? Target,
 }));
 
 function HireUsBadge() {
@@ -118,6 +116,8 @@ function FeatureCard({
 }
 
 export default function ServiceWhyChoose() {
+  if (!title && !description && !features.length && !images.left.src) return null;
+
   return (
     <section className="bg-[#f5f7fa] py-[clamp(56px,8vw,96px)]">
       <div className="mx-auto w-full max-w-[1678px] px-[clamp(16px,3.5vw,40px)]">
@@ -142,22 +142,30 @@ export default function ServiceWhyChoose() {
           {/* LEFT — images + hire badge */}
           <div className="grid min-h-0 w-full min-w-0 grid-cols-[1fr_1.05fr] gap-3 sm:gap-4 lg:min-h-[clamp(440px,48vw,631px)] lg:gap-[clamp(12px,1.3vw,20px)]">
             <div className="relative min-h-[280px] overflow-hidden rounded-[clamp(14px,1.2vw,20px)] shadow-[0_12px_32px_rgba(0,0,0,0.08)] sm:min-h-[320px] lg:min-h-0 lg:h-full">
-              <Image
-                src={images.left.src}
-                alt={images.left.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1023px) 48vw, 28vw" loading="lazy"/>
+              {images.left.src ? (
+                <Image
+                  src={images.left.src}
+                  alt={images.left.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1023px) 48vw, 28vw"
+                  loading="lazy"
+                />
+              ) : null}
             </div>
 
             <div className="grid h-full min-h-0 grid-rows-[minmax(0,1.15fr)_auto] gap-3 sm:gap-4 lg:gap-[clamp(12px,1.3vw,20px)]">
               <div className="relative min-h-[160px] overflow-hidden rounded-[clamp(14px,1.2vw,20px)] shadow-[0_12px_32px_rgba(0,0,0,0.08)] sm:min-h-[200px] lg:min-h-0">
-                <Image
-                  src={images.right.src}
-                  alt={images.right.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1023px) 48vw, 26vw" loading="lazy"/>
+                {images.right.src ? (
+                  <Image
+                    src={images.right.src}
+                    alt={images.right.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1023px) 48vw, 26vw"
+                    loading="lazy"
+                  />
+                ) : null}
               </div>
 
               <div className="mx-auto aspect-square w-[clamp(120px,22vw,233px)] max-w-full shrink-0">

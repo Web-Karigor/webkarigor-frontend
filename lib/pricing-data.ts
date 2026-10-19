@@ -1,8 +1,6 @@
 /**
- * Pricing Page — Figma node 2546-10751 (1920 × 10024)
- * Design tokens stay in TS; editable copy lives in data/pricing-content.json
+ * Pricing page design tokens. Copy and plan rows come from the API.
  */
-import pricingContent from "@/data/pricing-content.json";
 
 export const PR = {
   frame: 1920,
@@ -68,11 +66,21 @@ export const PR = {
   ],
 } as const;
 
-export const PRICING_METADATA = pricingContent.metadata;
+export const PRICING_METADATA = {
+  title: "Pricing",
+  description: "",
+};
 
-export const PRICING_HERO = pricingContent.hero;
+export const PRICING_HERO = {
+  eyebrow: "",
+  titleLines: [] as string[],
+};
 
-export const PRICING_HERO_FEATURES = pricingContent.hero.features;
+export const PRICING_HERO_FEATURES: {
+  title: string;
+  description: string;
+  icon: string;
+}[] = [];
 
 export type PricingBilling = "monthly" | "yearly";
 
@@ -85,23 +93,50 @@ export type PricingPlan = {
   features: string[];
 };
 
-export const PRICING_PLANS_SECTION = pricingContent.plans;
+export const PRICING_PLANS_SECTION = {
+  title: "",
+};
 
-export const PRICING_PLANS: PricingPlan[] = pricingContent.plans.items;
+export const PRICING_PLANS: PricingPlan[] = [];
 
-export const PRICING_CUSTOM_BANNER = pricingContent.customBanner;
+export const PRICING_CUSTOM_BANNER = {
+  backgroundSrc: "/pricing/rectangle-79.png",
+  overlaySrc: "/rr.webp",
+  titleLines: [] as string[],
+  description: "",
+  cta: { href: "", label: "" },
+};
 
-export const PACKAGE_SECTION = pricingContent.package;
+export const PACKAGE_SECTION = {
+  title: "",
+  ellipseSrc: "/pricing/ellipse-1569.webp",
+  starSrc: "/pricing/star-17.png",
+};
 
-export const PACKAGE_COLUMNS = pricingContent.package.columns;
+export const PACKAGE_COLUMNS: string[][] = [];
 
-export const BUILT_FOR_SECTION = pricingContent.builtFor;
+export const BUILT_FOR_SECTION = {
+  title: "",
+  cta: { href: "", label: "" },
+  columns: { ours: "", others: "" },
+};
 
-export const COMPARISON_ITEMS = pricingContent.builtFor.items;
+export const COMPARISON_ITEMS: {
+  label: string;
+  otherHas: boolean;
+}[] = [];
 
-export const FEATURED_WORK_SECTION = pricingContent.featuredWork;
+export const FEATURED_WORK_SECTION = {
+  title: "",
+  description: "",
+  seeAll: { href: "/projects", label: "" },
+};
 
-export const FEATURED_WORK = pricingContent.featuredWork.items;
+export const FEATURED_WORK: {
+  title: string;
+  image: string;
+  href: string;
+}[] = [];
 
 /** Figma: Save 25% on yearly */
 export function planPrice(plan: PricingPlan, billing: PricingBilling): number {

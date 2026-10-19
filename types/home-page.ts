@@ -89,6 +89,19 @@ export type RequestQuoteItem = {
   button_text: string;
 };
 
+export type ContactUsItem = {
+  id: number;
+  sort_order?: number;
+  title_sm?: string;
+  title?: string;
+  subtitle?: string;
+  coo_name?: string;
+  coo_designation?: string;
+  prefer_talk_title?: string;
+  cta_whats_app?: string;
+  image?: HomeMedia | null;
+};
+
 export type HomePageSections = {
   hero?: HomeSection<HeroItem>;
   brands_work_with?: HomeSection<BrandsItem>;
@@ -98,8 +111,14 @@ export type HomePageSections = {
   video?: HomeSection<VideoItem>;
   team?: HomeSection<TeamItem>;
   request_quote?: HomeSection<RequestQuoteItem>;
+  contact_us?: HomeSection<ContactUsItem>;
   services?: HomeSection<ServicesHeadingItem>;
   specialized_services?: HomeSection<SpecializedServicesItem>;
+  packages?: HomeSection<{
+    title?: string | null;
+    subtitle?: string | null;
+    content?: string | null;
+  }>;
 };
 
 export type HomePageData = {

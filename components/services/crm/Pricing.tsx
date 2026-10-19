@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { useMemo } from "react";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
 import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
+import { usePricingPostsQuery } from "@/hooks/queries/usePricingPostsQuery";
 import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
 import { crmSectionItem, extractCrmText } from "@/lib/crm-page";
 import {
   formatPackageOriginalPrice,
   formatPackagePrice,
 } from "@/lib/package-price";
-import type { HomepagePackage } from "@/types/homepage-package";
+import crmContent from "@/data/crm-content.json";
+import { mapPricingPosts } from "@/lib/pricing-posts";
 
 const CTA_LABEL = "Book Now";
 
@@ -36,45 +39,21 @@ function CheckIcon() {
   );
 }
 
-function groupByCategory(packages: HomepagePackage[]) {
-  const groups = new Map<
-    number,
-    { id: number; name: string; slug: string; plans: HomepagePackage[] }
-  >();
-
-  for (const pkg of packages) {
-    const category = pkg.package_category;
-    if (!category) continue;
-    const current = groups.get(category.id) ?? {
-      id: category.id,
-      name: category.name,
-      slug: category.slug,
-      plans: [],
-    };
-    current.plans.push(pkg);
-    groups.set(category.id, current);
-  }
-
-  return [...groups.values()]
-    .sort((a, b) => a.id - b.id)
-    .map((group) => ({
-      ...group,
-      plans: [...group.plans].sort(
-        (a, b) => Number(a.is_popular) - Number(b.is_popular),
-      ),
-    }));
-}
-
 export default function Pricing() {
   const { data: pageData } = useCrmPageQuery();
   const heading = crmSectionItem(pageData?.data?.sections?.pricing);
-  const eyebrow = heading?.title?.trim() ?? "";
-  const title = heading?.subtitle?.trim() ?? "";
-  const description = extractCrmText(heading?.content ?? "");
+  const eyebrow = heading?.title?.trim() || crmContent.pricing.eyebrow;
+  const title = heading?.subtitle?.trim() || crmContent.pricing.title;
+  const description =
+    extractCrmText(heading?.content ?? "") || crmContent.pricing.description;
 
   const { data } = useServiceQuery("crm");
+  const plansQuery = usePricingPostsQuery("pricing-crm");
   const serviceId = data?.data.service.id ?? 6;
-  const markets = groupByCategory(data?.data.packages ?? []);
+  const plans = useMemo(
+    () => mapPricingPosts(plansQuery.data?.data?.posts),
+    [plansQuery.data],
+  );
 
   if (!eyebrow || !title || !description) return null;
 
@@ -93,31 +72,10 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="service-pricing-markets">
-          {markets.map((market) => {
-            const isYellow = market.slug === "ecommerce";
-
-            return (
-              <div
-                key={market.id}
-                className={`service-pricing-market rounded-[24px] ${
-                  isYellow
-                    ? "border border-[#e8d48a] bg-[#fff8d9]"
-                    : "border border-[#9fe8c8] bg-[#dffcf0]"
-                }`}
-              >
-                <div
-                  className={`service-pricing-market-label mx-4 mt-4 rounded-[16px] px-6 py-[14px] text-center font-montserrat text-[clamp(18px,1.4vw,22px)] font-bold text-[#111827] ${
-                    isYellow ? "bg-[#feed35]" : "bg-[#38f8ab]"
-                  }`}
-                >
-                  {market.name}
-                </div>
-
-                <div className="service-pricing-cards">
-                  {market.plans.map((pkg) => {
+        <div className="home-pricing-grid">
+                  {plans.map((pkg) => {
                     const isPopular = pkg.is_popular;
-                    const availText = pkg.availability || pkg.title;
+                    const availText = pkg.availability?.trim() || "";
                     const price = formatPackagePrice(pkg);
                     const originalPrice = formatPackageOriginalPrice(pkg);
 
@@ -145,35 +103,43 @@ export default function Pricing() {
                           className={`home-pricing-card${isPopular ? " is-popular" : ""}`}
                         >
                           <div
-                            className={`home-pricing-avail is-pill is-${
-                              isPopular ? "red" : "green"
-                            }${isPopular ? " is-marquee" : ""}`}
+                            className={`home-pricing-avail${
+                              availText
+                                ? ` is-pill is-${isPopular ? "red" : "green"}${
+                                    isPopular ? " is-marquee" : ""
+                                  }`
+                                : " is-empty"
+                            }`}
                           >
-                            <span
-                              className={`home-pricing-dot${
-                                isPopular ? " is-red" : ""
-                              }`}
-                              aria-hidden
-                            >
-                              <span className="home-pricing-dot-pulse" />
-                            </span>
+                            {availText ? (
+                              <>
+                                <span
+                                  className={`home-pricing-dot${
+                                    isPopular ? " is-red" : ""
+                                  }`}
+                                  aria-hidden
+                                >
+                                  <span className="home-pricing-dot-pulse" />
+                                </span>
 
-                            {isPopular ? (
-                              <div
-                                className="home-pricing-marquee"
-                                aria-label={availText}
-                              >
-                                <div className="home-pricing-marquee-track">
-                                  {Array.from({ length: 8 }).map((_, i) => (
-                                    <span key={i}>{availText}</span>
-                                  ))}
-                                </div>
-                              </div>
-                            ) : (
-                              <span className="home-pricing-avail-text">
-                                {availText}
-                              </span>
-                            )}
+                                {isPopular ? (
+                                  <div
+                                    className="home-pricing-marquee"
+                                    aria-label={availText}
+                                  >
+                                    <div className="home-pricing-marquee-track">
+                                      {Array.from({ length: 8 }).map((_, i) => (
+                                        <span key={i}>{availText}</span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <span className="home-pricing-avail-text">
+                                    {availText}
+                                  </span>
+                                )}
+                              </>
+                            ) : null}
                           </div>
 
                           <h3 className="home-pricing-title">
@@ -196,7 +162,9 @@ export default function Pricing() {
 
                           <PricingCtaButton
                             packageId={pkg.id}
+                            packageName={pkg.package_type?.name ?? pkg.slug}
                             serviceId={pkg.service?.id ?? serviceId}
+                            serviceName={data?.data.service.title ?? null}
                           >
                             {CTA_LABEL}
                           </PricingCtaButton>
@@ -218,10 +186,6 @@ export default function Pricing() {
                       </div>
                     );
                   })}
-                </div>
-              </div>
-            );
-          })}
         </div>
       </div>
     </section>

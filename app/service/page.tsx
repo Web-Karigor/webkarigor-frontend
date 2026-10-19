@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import ServiceHero from "@/components/services/ServiceHero";
 import ServiceMarquee from "@/components/services/ServiceMarquee";
 import ServiceClients from "@/components/services/ServiceClients";
-import servicesContent from "@/data/services-content.json";
 import "@/styles/service-pages-laptop.css";
 
 const ServiceOfferings = dynamic(
@@ -29,8 +28,8 @@ const HomeConsultation = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: servicesContent.metadata.title,
-  description: servicesContent.metadata.description,
+  title: "Services",
+  description: "",
 };
 
 export default function ServicePage() {

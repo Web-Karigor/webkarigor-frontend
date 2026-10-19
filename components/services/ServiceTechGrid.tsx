@@ -1,17 +1,18 @@
 "use client";
 
-import servicesContent from "@/data/services-content.json";
+import { useMemo } from "react";
+import content from "@/data/services-content.json";
+import { useTechnologiesQuery } from "@/hooks/queries/useTechnologiesQuery";
+import { mapTechnologyPostsToMarquee } from "@/lib/technologies";
 
 type TechItem = {
   name: string;
   icon: string;
 };
 
-const { eyebrow, title, description, items: TECH_ITEMS } =
-  servicesContent.techGrid;
-
-const TOP_ROW = TECH_ITEMS.slice(0, 6);
-const BOTTOM_ROW = TECH_ITEMS.slice(6);
+const eyebrow = content.techGrid.eyebrow;
+const title = content.techGrid.title;
+const description = content.techGrid.description;
 
 function TechMarqueeRow({
   items,
@@ -50,6 +51,14 @@ function TechMarqueeRow({
 }
 
 export default function ServiceTechGrid() {
+  const { data } = useTechnologiesQuery();
+  const techItems = useMemo(
+    () => mapTechnologyPostsToMarquee(data?.data?.posts),
+    [data],
+  );
+  const topRow = techItems.slice(0, 6);
+  const bottomRow = techItems.slice(6);
+
   return (
     <section className="bg-[#e7eef6] py-16">
       <div className="mx-auto flex w-full max-w-[1680px] flex-col items-center px-[clamp(16px,4vw,40px)]">
@@ -68,8 +77,8 @@ export default function ServiceTechGrid() {
         </div>
 
         <div className="relative grid w-full max-w-[1260px] gap-[10px] overflow-hidden">
-          <TechMarqueeRow items={TOP_ROW} reverse />
-          <TechMarqueeRow items={BOTTOM_ROW} />
+          <TechMarqueeRow items={topRow} reverse />
+          <TechMarqueeRow items={bottomRow} />
 
           <div className="pointer-events-none absolute inset-y-0 left-0 w-[56px] bg-gradient-to-r from-[#e7eef6] via-[#e7eef6]/80 to-transparent sm:w-[120px] lg:w-[250px]" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-[56px] bg-gradient-to-l from-[#e7eef6] via-[#e7eef6]/80 to-transparent sm:w-[120px] lg:w-[250px]" />

@@ -4,12 +4,14 @@ import "./TrustedFounders.css";
 
 import { useLayoutEffect, useMemo, useRef } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { usePricingPageQuery } from "@/hooks/queries/usePricingPageQuery";
 import { useProjectsHomeQuery } from "@/hooks/queries/useProjectsHomeQuery";
+import { mapPricingTestimonial } from "@/lib/pricing-page";
+import { pageSlugFromPath } from "@/lib/page-contact";
 import { gsap } from "@/lib/gsap";
+import { HOME_TESTIMONIALS } from "@/lib/home-static";
 import { mapPostsToHomeSliderImages } from "@/lib/projects-home";
-import homeContent from "@/data/home-content.json";
-
-const { badge, headingLines, headingAccent } = homeContent.testimonials;
 /** Duplicate sets for seamless infinite marquee */
 const LOOP_SETS = 3;
 const MARQUEE_SPEED_DESKTOP = 56;
@@ -30,6 +32,20 @@ function mapScaleFromX(centerX: number, viewLeft: number, viewRight: number) {
 }
 
 export default function TrustedFounders() {
+  const pathname = usePathname();
+  const onPricing = pageSlugFromPath(pathname) === "pricing";
+  const pricingPage = usePricingPageQuery(onPricing);
+  const testimonial = useMemo(
+    () => (onPricing ? mapPricingTestimonial(pricingPage.data) : null),
+    [onPricing, pricingPage.data],
+  );
+  const staticHeading = onPricing ? null : HOME_TESTIMONIALS;
+  const badgeText = testimonial?.badge || staticHeading?.badge || "";
+  const lines = testimonial?.headingLines?.some(Boolean)
+    ? testimonial.headingLines
+    : (staticHeading?.headingLines ?? ["", ""]);
+  const accentText = testimonial?.headingAccent || staticHeading?.headingAccent || "";
+
   const { data } = useProjectsHomeQuery();
   const images = useMemo(
     () => mapPostsToHomeSliderImages(data?.data?.posts),
@@ -200,13 +216,13 @@ export default function TrustedFounders() {
       <div className="trusted-layout">
         <div className="trusted-text">
           <span className="trusted-badge">
-            <span className="section-badge-text">{badge}</span>
+            <span className="section-badge-text">{badgeText}</span>
           </span>
           <h2 className="trusted-heading font-bold">
-            {headingLines[0]} <br />
-            {headingLines[1]}{" "}
+            {lines[0]} <br />
+            {lines[1]}{" "}
             <span className="text-[#BABABA] font-museoModerno font-bold">
-              {headingAccent}
+              {accentText}
             </span>
           </h2>
         </div>

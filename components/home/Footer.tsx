@@ -2,12 +2,31 @@
 
 import "./Footer.css";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { useMemo, type ReactNode } from "react";
 import FooterBrand from "@/components/home/FooterBrand";
-import homeContent from "@/data/home-content.json";
+import { useAboutPageQuery } from "@/hooks/queries/useAboutPageQuery";
+import {
+  useImportantLinksQuery,
+  useIndustriesMenuQuery,
+  useServicesMenuQuery,
+  useSocialLinksQuery,
+} from "@/hooks/queries/useFooterMenusQuery";
+import { aboutFooterHeading, mapAboutFooter } from "@/lib/about-page";
+import { mapFooterLinks, mapFooterSocialLinks } from "@/lib/footer-menus";
+import { pageSlugFromPath } from "@/lib/page-contact";
 
-const { headingLines, headingLinesMobile, taglineParts, linkColumns, socialLinks, copyright } =
-  homeContent.footer;
+const headingLines = [
+  "Let's build what your users will love",
+  "and your business will grow with",
+];
+const headingLinesMobile = [
+  "Let's build what your",
+  "users will love and your",
+  "business will grow with",
+];
+const taglineParts = ["Build Smarter", "Launch Stronger", "Scale Faster"];
+const copyright = "© 2026 Webkarigor. All rights reserved.";
 
 const socialIcons: Record<string, ReactNode> = {
   linkedin: <LinkedInIcon />,
@@ -95,6 +114,43 @@ function XIcon() {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
+  const aboutPage = useAboutPageQuery(pageSlugFromPath(pathname) === "abouts-us");
+  const pageFooter = mapAboutFooter(
+    aboutPage.data?.data?.sections?.footer?.items?.[0],
+  );
+  const heading = pageFooter.title
+    ? aboutFooterHeading(pageFooter.title)
+    : { desktop: headingLines, mobile: headingLinesMobile };
+  const tagline = pageFooter.tagline.length ? pageFooter.tagline : taglineParts;
+
+  const socialQuery = useSocialLinksQuery();
+  const servicesQuery = useServicesMenuQuery();
+  const industriesQuery = useIndustriesMenuQuery();
+  const importantQuery = useImportantLinksQuery();
+
+  const socialLinks = useMemo(
+    () => mapFooterSocialLinks(socialQuery.data?.data?.posts),
+    [socialQuery.data],
+  );
+  const linkColumns = useMemo(
+    () => [
+      {
+        title: "Services",
+        links: mapFooterLinks(servicesQuery.data?.data?.posts),
+      },
+      {
+        title: "Industries",
+        links: mapFooterLinks(industriesQuery.data?.data?.posts),
+      },
+      {
+        title: "Important Link",
+        links: mapFooterLinks(importantQuery.data?.data?.posts),
+      },
+    ],
+    [servicesQuery.data, industriesQuery.data, importantQuery.data],
+  );
+
   return (
     <footer className="footer-shell">
       <div className="footer-wrap">
@@ -104,26 +160,26 @@ export default function Footer() {
           <div className="footer-content">
             <div className="footer-intro">
               <h2 className="footer-heading font-extrabold">
-                {headingLines.map((line) => (
+                {heading.desktop.map((line) => (
                   <span key={line} className="footer-heading-line footer-heading-line--desktop">
                     {line}
                   </span>
                 ))}
-                {headingLinesMobile.map((line) => (
+                {heading.mobile.map((line) => (
                   <span key={line} className="footer-heading-line footer-heading-line--mobile">
                     {line}
                   </span>
                 ))}
               </h2>
               <p className="footer-tagline">
-                {taglineParts.map((part, index) => (
+                {tagline.map((part, index) => (
                   <span key={part} className="footer-tagline-item">
                     {index > 0 ? (
                       <span className="footer-tagline-sep" aria-hidden="true">
                         •
                       </span>
                     ) : null}
-                    <span>{part}</span>
+                    <span className="footer-tagline-text">{part}</span>
                   </span>
                 ))}
               </p>
@@ -134,7 +190,7 @@ export default function Footer() {
                 const isPlaceholder = item.href === "#";
                 return (
                   <a
-                    key={item.label}
+                    key={item.id}
                     href={item.href}
                     target={isPlaceholder ? undefined : "_blank"}
                     rel={isPlaceholder ? undefined : "noopener noreferrer"}
@@ -148,7 +204,17 @@ export default function Footer() {
                         : undefined
                     }
                   >
-                    {socialIcons[item.id]}
+                    {item.icon ? (
+                      <img
+                        src={item.icon}
+                        alt=""
+                        width={18}
+                        height={18}
+                        className="h-[18px] w-[18px]"
+                      />
+                    ) : (
+                      socialIcons[item.key]
+                    )}
                   </a>
                 );
               })}
@@ -160,10 +226,24 @@ export default function Footer() {
                   <h3 className="footer-links-title">{column.title}</h3>
                   <ul className="footer-links-list">
                     {column.links.map((link) => (
-                      <li key={link.label}>
-                        <Link href={link.href} className="footer-link">
-                          {link.label}
-                        </Link>
+                      <li key={link.id}>
+                        {link.href.startsWith("/") ? (
+                          <Link href={link.href} className="footer-link">
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <a
+                            href={link.href}
+                            className="footer-link"
+                            onClick={
+                              link.href === "#"
+                                ? (event) => event.preventDefault()
+                                : undefined
+                            }
+                          >
+                            {link.label}
+                          </a>
+                        )}
                       </li>
                     ))}
                   </ul>

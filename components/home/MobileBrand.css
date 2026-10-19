@@ -5,12 +5,15 @@
 }
 
 .mobile-brand-word {
-  opacity: 0.01;
-  animation: mobile-brand-rise 0.9s ease 2.4s forwards;
+  opacity: 0;
+}
+
+.mobile-brand-word.is-revealed {
+  animation: mobile-brand-rise 0.9s ease forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mobile-brand-word {
+  .mobile-brand-word.is-revealed {
     opacity: 1;
     animation: none;
   }

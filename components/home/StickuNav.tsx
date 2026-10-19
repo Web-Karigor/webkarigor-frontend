@@ -17,10 +17,11 @@ import {
 } from "lucide-react";
 import { scrollAppTo, scrollAppToTop } from "@/lib/smooth-scroll";
 import {
-  SERVICE_NAV_DESC,
+  serviceNavDescription,
   STICKY_NAV_MORE_LINKS,
 } from "@/lib/sticky-nav-data";
-import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
+import { mapFooterLinks } from "@/lib/footer-menus";
+import { useServicesMenuQuery } from "@/hooks/queries/useFooterMenusQuery";
 import { useStickyNavStore } from "@/store/sticky-nav-store";
 
 export default function StickyNav() {
@@ -29,8 +30,8 @@ export default function StickyNav() {
   const closeSheet = useStickyNavStore((s) => s.closeSheet);
   const toggleSheet = useStickyNavStore((s) => s.toggleSheet);
   const [mounted, setMounted] = useState(false);
-  const { data: servicesData } = useServicesQuery();
-  const services = [...(servicesData?.data ?? [])].sort((a, b) => a.id - b.id);
+  const { data: servicesMenu } = useServicesMenuQuery();
+  const services = mapFooterLinks(servicesMenu?.data?.posts);
 
   // Client-only mount avoids hydration mismatches (e.g. browser tooling
   // mutating the DOM, or env(safe-area) differences).
@@ -85,26 +86,29 @@ export default function StickyNav() {
                   Services
                 </p>
                 <div className="space-y-1">
-                  {services.map((item) => (
-                    <Link
-                      key={item.id}
-                      href={`/service/${item.slug}`}
-                      onClick={close}
-                      className="block rounded-xl p-3 transition active:bg-[#f3f4f6]"
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
-                          {item.title}
-                        </span>
-                        <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
-                      </div>
-                      {SERVICE_NAV_DESC[item.slug] ? (
-                        <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
-                          {SERVICE_NAV_DESC[item.slug]}
-                        </p>
-                      ) : null}
-                    </Link>
-                  ))}
+                  {services.map((item) => {
+                    const description = serviceNavDescription(item.href);
+                    return (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        onClick={close}
+                        className="block rounded-xl p-3 transition active:bg-[#f3f4f6]"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-montserrat text-[15px] font-semibold text-[#111827]">
+                            {item.label}
+                          </span>
+                          <ChevronRight className="h-4 w-4 text-[#9ca3af]" />
+                        </div>
+                        {description ? (
+                          <p className="mt-0.5 font-montserrat text-[12px] font-medium text-[#6b7280]">
+                            {description}
+                          </p>
+                        ) : null}
+                      </Link>
+                    );
+                  })}
                 </div>
               </MobileSheet>
             ) : null}

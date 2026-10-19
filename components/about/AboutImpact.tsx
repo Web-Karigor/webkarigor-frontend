@@ -1,19 +1,30 @@
+"use client";
+
 import Image from "next/image";
-import { ABOUT_IMPACT } from "@/lib/about-data";
+import { useMemo } from "react";
+import { useAboutPageQuery } from "@/hooks/queries/useAboutPageQuery";
+import { mapAboutImpact } from "@/lib/about-page";
 
 export default function AboutImpact() {
+  const { data } = useAboutPageQuery();
+  const impact = useMemo(() => mapAboutImpact(data), [data]);
+
+  if (!impact.intro && !impact.stats.length && !impact.mainImage) {
+    return null;
+  }
+
   return (
     <section className="about-impact bg-[#FFFAEA] xl:h-[756px] xl:min-h-[756px] xl:flex xl:items-center mt-10 mb-14">
       <div className="about-impact-inner mx-auto grid w-full pt-10 pb-10 max-w-[1920px] grid-cols-1 items-center gap-12 px-[clamp(16px,4.75vw,99px)] lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 xl:gap-16">
         <div className="min-w-0">
           <p className="mx-auto m-0 max-w-[523px] text-center font-montserrat text-[clamp(15px,1.2vw,18px)] font-medium leading-[1.7] text-[#0A0A0A] lg:mx-0 lg:text-left">
-            {ABOUT_IMPACT.intro}
+            {impact.intro}
           </p>
 
           <div className="mt-10 flex flex-col sm:mt-12">
-            {ABOUT_IMPACT.stats.map((stat, index) => (
+            {impact.stats.map((stat, index) => (
               <div
-                key={stat.value}
+                key={stat.label}
                 className={
                   index === 0
                     ? "border-b border-[#d1d5db]/70 pb-8 sm:pb-10"
@@ -41,26 +52,32 @@ export default function AboutImpact() {
         <div className="min-w-0">
           <div className="relative xl:pt-1">
             <div className="relative aspect-[16/11] w-full overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px] xl:max-w-[1100px]">
-              <Image
-                src={ABOUT_IMPACT.mainImage}
-                alt={ABOUT_IMPACT.mainImageAlt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 900px" loading="lazy"/>
+              {impact.mainImage ? (
+                <Image
+                  src={impact.mainImage}
+                  alt={impact.mainImageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 900px"
+                  loading="lazy"
+                />
+              ) : null}
             </div>
 
             <div className="relative z-10 -mt-10 grid grid-cols-4 gap-2 px-2 sm:-mt-14 sm:gap-3 sm:px-4 md:-mt-16 md:gap-4 md:px-5 xl:max-w-[1100px]">
-              {ABOUT_IMPACT.gallery.map((src) => (
+              {impact.gallery.map((image) => (
                 <div
-                  key={src}
+                  key={image.src}
                   className="relative aspect-[5/4] overflow-hidden rounded-[12px] shadow-[0_8px_24px_rgba(0,0,0,0.12)] sm:rounded-[16px] md:rounded-[20px]"
                 >
                   <Image
-                    src={src}
-                    alt=""
+                    src={image.src}
+                    alt={image.alt}
                     fill
                     className="object-cover"
-                    sizes="200px" loading="lazy"/>
+                    sizes="200px"
+                    loading="lazy"
+                  />
                 </div>
               ))}
             </div>

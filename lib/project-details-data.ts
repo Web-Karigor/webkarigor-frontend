@@ -1,5 +1,3 @@
-import content from "@/data/project-details-content.json";
-
 export type ProjectCredit = {
   role: string;
   name: string;
@@ -84,23 +82,38 @@ export type ProjectDetail = {
   nextSlug: string;
 };
 
-type ProjectContent = Omit<ProjectDetail, "credits" | "ctaBody">;
+/** Section labels for the project-detail layout. Body copy comes from the projects API. */
+export const PROJECT_DETAILS_METADATA = {
+  siteName: "Webkarigor",
+  fallbackTitle: "Project — Webkarigor",
+};
 
-const projectContent = content.projects as unknown as Record<string, ProjectContent>;
+export const PROJECT_DETAILS_UI = {
+  backToProjects: "Back to Projects",
+  projectDetails: "Project Details",
+  clientsVoice: "Clients Voice",
+  problem: "Problem",
+  solution: "Solution",
+  credits: "CREDITS",
+  testimonial: "Testimonial",
+  ctaTitle: "Have a project idea in mind?",
+  ctaButton: "Let’s get started",
+  nextProject: "View Next Project",
+  relatedProjects: "Other Related Projects",
+  viewProject: "View Project",
+  mockupAlt: "Project desktop mockup",
+  metaLabels: {
+    execution: "Execution",
+    clientName: "Client Name",
+    projectArea: "Project Area",
+    status: "Status",
+    technologies: "Technologies",
+  },
+};
 
-export const PROJECT_DETAILS_METADATA = content.metadata;
-export const PROJECT_DETAILS_UI = content.ui;
-export const DEFAULT_PROJECT_SLUG = content.defaultSlug;
-export const PROJECT_DETAILS: Record<string, ProjectDetail> = Object.fromEntries(
-  Object.entries(projectContent).map(([slug, project]) => [
-    slug,
-    {
-      ...project,
-      credits: content.sharedCredits,
-      ctaBody: content.sharedCtaBody
-    }
-  ])
-);
+export const DEFAULT_PROJECT_SLUG = "";
+
+export const PROJECT_DETAILS: Record<string, ProjectDetail> = {};
 
 export function getProjectDetail(slug: string): ProjectDetail | undefined {
   return PROJECT_DETAILS[slug];

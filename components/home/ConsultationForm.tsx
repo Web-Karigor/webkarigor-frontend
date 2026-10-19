@@ -19,7 +19,6 @@ import {
   ChevronRight,
   Globe,
 } from "lucide-react";
-import homeContent from "@/data/home-content.json";
 import {
   COUNTRY_OPTIONS,
   DEFAULT_COUNTRY,
@@ -32,16 +31,41 @@ import {
   type QuotationPayload,
 } from "@/hooks/mutations/useQuotationMutation";
 import { getQuotationContext } from "@/store/consultation-store";
+import { useHomepagePackagesQuery } from "@/hooks/queries/useHomepagePackagesQuery";
+import { usePageContactQuery } from "@/hooks/queries/usePageContactQuery";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
+import { pageSlugFromPath, whatsAppHref } from "@/lib/page-contact";
 
-const {
-  fields,
-  schedule,
-  submitLabel,
-  whatsapp,
-  timeSlots: TIME_SLOTS,
-  weekdays: WEEKDAYS,
-} = homeContent.consultation;
+const fields = {
+  fullName: { label: "Full Name", placeholder: "Esther Howard" },
+  email: { label: "Contact Email", placeholder: "your-mail@gmail.com" },
+  phone: { label: "Contact Number (WhatsApp)", placeholder: "123 4567 890" },
+  region: { label: "Your Current Region" },
+  details: {
+    label: "Project Details",
+    placeholder: "I need to build my ecommerce dashboard...",
+  },
+};
+const schedule = {
+  dateTitle: "Select a date",
+  prevMonthAria: "Previous month",
+  nextMonthAria: "Next month",
+  timeTitle: "Pick any time",
+  timeOptional: "(Optional)",
+};
+const submitLabel = "Let's Do It";
+const TIME_SLOTS = [
+  "9:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "1:00 PM",
+  "2:00 PM",
+  "3:00 PM",
+  "4:00 PM",
+  "5:00 PM",
+];
+const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
 
 type FlagComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -160,12 +184,6 @@ function buildPhone(dialCode: string, raw: string) {
   return `${dialCode}${digits.replace(/^0+/, "")}`;
 }
 
-function formatSelectedDate(year: number, month: number, day: number) {
-  const mm = String(month + 1).padStart(2, "0");
-  const dd = String(day).padStart(2, "0");
-  return `${year}-${mm}-${dd}`;
-}
-
 function useClickOutside(
   ref: React.RefObject<HTMLElement | null>,
   open: boolean,
@@ -198,6 +216,11 @@ export default function ConsultationForm({
   const pathname = usePathname();
   const quotation = useQuotationMutation();
   const { data: servicesData } = useServicesQuery();
+  const { data: packagesData } = useHomepagePackagesQuery();
+  const { contact } = usePageContactQuery();
+  const talkPrompt = contact?.prefer_talk_title?.trim() || "Prefer to talk first?";
+  const whatsAppLabel = contact?.cta_whats_app?.trim() ?? "";
+  const whatsAppLink = whatsAppHref(whatsAppLabel);
   const [dialCountry, setDialCountry] = useState<CountryOption>(DEFAULT_DIAL_COUNTRY);
   const [region, setRegion] = useState<CountryOption>(DEFAULT_COUNTRY);
   const [dialOpen, setDialOpen] = useState(false);
@@ -324,31 +347,27 @@ export default function ConsultationForm({
     }
 
     const ctx = getQuotationContext();
-    const slug = pathname?.startsWith("/service/")
+    const serviceSlug = pathname?.startsWith("/service/")
       ? pathname.split("/")[2] || null
       : null;
-    const pathServiceId =
-      slug && servicesData?.data
-        ? (servicesData.data.find((item) => item.slug === slug)?.id ?? null)
-        : null;
+    const matchedService =
+      servicesData?.data?.find((item) => item.id === ctx.serviceId) ??
+      servicesData?.data?.find((item) => item.slug === serviceSlug);
+    const matchedPackage = packagesData?.data?.find((item) => item.id === ctx.packageId);
 
     const payload: QuotationPayload = {
-      package_id: ctx.packageId,
-      service_id: ctx.serviceId ?? pathServiceId,
       name,
       email: email || null,
-      phone: buildPhone(dialCountry.dialCode, phoneRaw),
+      contact_number: buildPhone(dialCountry.dialCode, phoneRaw),
       region: region.name || null,
-      date: hideSchedule
-        ? null
-        : formatSelectedDate(
-          calendarDate.getFullYear(),
-          calendarDate.getMonth(),
-          selectedDay,
-        ),
       project_details: projectDetails || null,
-      page: pathname || null,
-      comment: selectedTime || null,
+      page: pageSlugFromPath(pathname),
+      service: ctx.serviceName || matchedService?.title || null,
+      package:
+        ctx.packageName ||
+        matchedPackage?.package_type?.name ||
+        matchedPackage?.title ||
+        null,
     };
 
     quotation.mutate(payload, {
@@ -395,6 +414,7 @@ export default function ConsultationForm({
             name="email"
             placeholder={fields.email.placeholder}
             className="home-consultation-input"
+            required
           />
         </label>
       </div>
@@ -659,17 +679,19 @@ export default function ConsultationForm({
 
           <div className="flex w-full flex-row flex-nowrap items-center gap-3">
             <p className="home-consultation-talk !m-0 !w-auto shrink-0 whitespace-nowrap !text-[14px]">
-              Prefer to talk first?
+              {talkPrompt}
             </p>
-            <Link
-              href={whatsapp.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home-consultation-whatsapp home-consultation-whatsapp--compact"
-            >
-              <WhatsAppIcon />
-              <span className="text-[14px]">{whatsapp.label}</span>
-            </Link>
+            {whatsAppLink ? (
+              <Link
+                href={whatsAppLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="home-consultation-whatsapp home-consultation-whatsapp--compact"
+              >
+                <WhatsAppIcon />
+                <span className="text-[14px]">{whatsAppLabel}</span>
+              </Link>
+            ) : null}
           </div>
         ) : null}
       </div>

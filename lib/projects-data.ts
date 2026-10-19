@@ -1,4 +1,4 @@
-import content from "@/data/projects-content.json";
+import projectsContent from "@/data/projects-content.json";
 import {
   getProjectDetail,
   type ProjectDetail,
@@ -31,15 +31,57 @@ export type ProjectWatermark = {
   }>;
 };
 
-export const PROJECTS_METADATA = content.metadata;
-export const PROJECTS_INTRO = content.intro;
-export const PROJECTS_CONTENT_W = content.layout.contentWidth;
-export const PROJECTS_GAP = content.layout.gap;
-export const PROJECTS_RADIUS = content.layout.radius;
-export const PROJECTS_WATERMARK = content.watermark as ProjectWatermark;
-export const PROJECT_CARD_OVERLAY_LABELS = content.cardOverlayLabels;
-export const PROJECT_CARD_SLUGS: Record<string, string> = content.cardSlugs;
-export const PROJECT_ITEMS = content.items as ProjectItem[];
+export const PROJECTS_METADATA = {
+  title: "Projects",
+  description: "",
+};
+
+export const PROJECTS_INTRO = {
+  title: projectsContent.intro.title,
+  body: projectsContent.intro.body,
+};
+
+/** Bento frame — layout only. Cards come from the projects API. */
+export const PROJECTS_CONTENT_W = 1300;
+export const PROJECTS_GAP = 20;
+export const PROJECTS_RADIUS = 32;
+
+export const PROJECTS_WATERMARK: ProjectWatermark = {
+  fontSize: 248,
+  color: "#E8E4DC",
+  opacity: 0.18,
+  width: 281,
+  items: [
+    { id: "tl-projects", text: "PROJECTS", side: "left", top: "0%", h: 1424 },
+    {
+      id: "bl-webkarigor",
+      text: "WEBKARIGOR",
+      side: "left",
+      bottom: "6%",
+      h: 1943,
+    },
+    {
+      id: "tr-webkarigor",
+      text: "WEBKARIGOR",
+      side: "right",
+      top: "6%",
+      h: 1943,
+    },
+    {
+      id: "br-projects",
+      text: "PROJECTS",
+      side: "right",
+      bottom: "0%",
+      h: 1424,
+    },
+  ],
+};
+
+export const PROJECT_CARD_OVERLAY_LABELS = projectsContent.cardOverlayLabels;
+
+export const PROJECT_CARD_SLUGS: Record<string, string> = {};
+
+export const PROJECT_ITEMS: ProjectItem[] = [];
 
 export type ProjectCardOverview = {
   title: string;

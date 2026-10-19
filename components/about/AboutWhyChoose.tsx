@@ -1,4 +1,8 @@
+"use client";
+
+import { useMemo } from "react";
 import { Code2, Handshake, Layers3, Zap } from "lucide-react";
+import { useWhyChooseAboutUsQuery } from "@/hooks/queries/useWhyChooseAboutUsQuery";
 import { ABOUT_WHY_CHOOSE } from "@/lib/about-data";
 
 const ICONS = {
@@ -7,9 +11,6 @@ const ICONS = {
   plans: Layers3,
   performance: Zap,
 } as const;
-
-const TOP_CARDS = ABOUT_WHY_CHOOSE.items.slice(0, 2);
-const BOTTOM_CARDS = ABOUT_WHY_CHOOSE.items.slice(2, 4);
 
 function WhyChooseCard({
   title,
@@ -20,7 +21,7 @@ function WhyChooseCard({
   description: string;
   icon: string;
 }) {
-  const Icon = ICONS[icon as keyof typeof ICONS];
+  const Icon = ICONS[icon as keyof typeof ICONS] ?? Handshake;
 
   return (
     <article
@@ -48,23 +49,43 @@ function WhyChooseCard({
 }
 
 export default function AboutWhyChoose() {
+  const { data } = useWhyChooseAboutUsQuery();
+  const items = useMemo(
+    () =>
+      [...(data?.data?.posts ?? [])]
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+        .map((post) => ({
+          id: post.id,
+          title: post.fields?.title?.trim() ?? "",
+          description: post.fields?.description?.trim() ?? "",
+          icon: post.fields?.icon?.trim().toLowerCase() ?? "",
+        }))
+        .filter((item) => item.title),
+    [data],
+  );
+  const topCards = items.slice(0, 2);
+  const bottomCards = items.slice(2, 4);
+  if (!ABOUT_WHY_CHOOSE.title && !items.length) return null;
+
   return (
     <section className="about-why bg-[#FFFEFB] py-16 sm:py-20 md:py-28">
       <div className="mx-auto w-full max-w-[1478px] px-[clamp(16px,4vw,40px)]">
-        <div className="mb-10 text-center sm:mb-14">
-          <h2 className="about-why-title m-0 mx-auto max-w-[533px] font-museoModerno text-[clamp(26px,6vw,48px)] font-medium italic leading-[140%] tracking-[-0.05em] text-[#15D286]">
-            {ABOUT_WHY_CHOOSE.title}
-          </h2>
-          <p className="mt-3 m-0 px-1 font-montserrat text-[clamp(14px,1.15vw,16px)] font-medium text-[#6b7280]">
-            {ABOUT_WHY_CHOOSE.subtitle}
-          </p>
-        </div>
+        {ABOUT_WHY_CHOOSE.title || ABOUT_WHY_CHOOSE.subtitle ? (
+          <div className="mb-10 text-center sm:mb-14">
+            <h2 className="about-why-title m-0 mx-auto max-w-[533px] font-museoModerno text-[clamp(26px,6vw,48px)] font-medium italic leading-[140%] tracking-[-0.05em] text-[#15D286]">
+              {ABOUT_WHY_CHOOSE.title}
+            </h2>
+            <p className="mt-3 m-0 px-1 font-montserrat text-[clamp(14px,1.15vw,16px)] font-medium text-[#6b7280]">
+              {ABOUT_WHY_CHOOSE.subtitle}
+            </p>
+          </div>
+        ) : null}
 
         <div className="about-why-stack mx-auto flex w-full max-w-[1478px] flex-col gap-5 sm:gap-8 xl:min-h-[739px] xl:justify-between xl:gap-0">
           <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6 xl:justify-start xl:gap-8">
-            {TOP_CARDS.map((item) => (
+            {topCards.map((item) => (
               <WhyChooseCard
-                key={item.title}
+                key={item.id}
                 title={item.title}
                 description={item.description}
                 icon={item.icon}
@@ -73,9 +94,9 @@ export default function AboutWhyChoose() {
           </div>
 
           <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6 xl:justify-end xl:gap-8">
-            {BOTTOM_CARDS.map((item) => (
+            {bottomCards.map((item) => (
               <WhyChooseCard
-                key={item.title}
+                key={item.id}
                 title={item.title}
                 description={item.description}
                 icon={item.icon}

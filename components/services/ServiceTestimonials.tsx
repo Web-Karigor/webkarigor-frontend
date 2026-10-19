@@ -9,20 +9,24 @@ import {
 } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import servicesContent from "@/data/services-content.json";
-import { TESTIMONIALS } from "@/lib/services-data";
+import content from "@/data/services-content.json";
 
 const AUTO_MS = 4200;
 const GAP_PX = 16;
 const DRAG_THRESHOLD_PX = 48;
 
-const {
-  eyebrow,
-  title,
-  description,
-  summary,
-  avatars: AVATARS,
-} = servicesContent.testimonials;
+const eyebrow = content.testimonials.eyebrow;
+const title = content.testimonials.title;
+const description = content.testimonials.description;
+const summary = content.testimonials.summary;
+const AVATARS = content.testimonials.avatars;
+const STATIC_TESTIMONIALS = content.testimonials.items.map((item) => ({
+  quote: item.quote,
+  name: item.name,
+  role: item.role,
+  avatar: "",
+  rating: item.rating,
+}));
 
 function Stars({ count, size = 18 }: { count: number; size?: number }) {
   return (
@@ -60,7 +64,7 @@ export default function ServiceTestimonials() {
     moved: false,
   });
 
-  const total = TESTIMONIALS.length;
+  const total = STATIC_TESTIMONIALS.length;
   const maxIndex = Math.max(0, total - visible);
 
   const goTo = useCallback(
@@ -183,6 +187,8 @@ export default function ServiceTestimonials() {
       ? `translateX(calc(${baseTranslate} + ${dragX}px))`
       : `translateX(${baseTranslate})`;
 
+  if (!STATIC_TESTIMONIALS.length) return null;
+
   return (
     <section className="bg-[#f2f2f2] py-8">
       <div className="mx-auto w-full max-w-[1920px] px-[clamp(16px,6.25vw,120px)]">
@@ -281,7 +287,7 @@ export default function ServiceTestimonials() {
                   }`}
                   style={{ transform: trackTransform }}
                 >
-                  {TESTIMONIALS.map((item) => (
+                  {STATIC_TESTIMONIALS.map((item) => (
                     <article
                       key={`${item.name}-${item.role}`}
                       className="w-full min-w-0 shrink-0 basis-full sm:basis-[calc((100%-1rem)/2)]"

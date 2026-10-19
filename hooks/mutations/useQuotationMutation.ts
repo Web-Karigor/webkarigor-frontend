@@ -2,16 +2,14 @@ import { useMutation } from "@tanstack/react-query";
 import { apiFetch, HttpError } from "@/lib/apiFetch";
 
 export type QuotationPayload = {
-  package_id: number | null;
-  service_id: number | null;
   name: string;
   email: string | null;
-  phone: string;
+  contact_number: string;
   region: string | null;
-  date: string | null;
   project_details: string | null;
   page: string | null;
-  comment: string | null;
+  service: string | null;
+  package: string | null;
 };
 
 export type QuotationResponse = {
@@ -47,7 +45,7 @@ export function useQuotationMutation() {
   return useMutation<QuotationResponse, Error, QuotationPayload>({
     mutationFn: (payload) => {
       const origin = typeof window !== "undefined" ? window.location.origin : "";
-      return apiFetch<QuotationResponse>(`${origin}/api/quotation`, {
+      return apiFetch<QuotationResponse>(`${origin}/api/contact-us`, {
         method: "POST",
         body: JSON.stringify(payload),
       });

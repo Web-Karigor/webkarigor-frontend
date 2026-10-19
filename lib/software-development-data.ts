@@ -1,25 +1,44 @@
 import content from "@/data/software-development-content.json";
 
-export const METADATA = content.metadata;
+export const METADATA = {
+  title: "Software Development",
+  description: "",
+};
 
-export const HERO = content.hero;
+export const HERO = {
+  title: "",
+  description: "",
+};
 
-export const TRUST_TITLE = content.trustTitle;
+export const TRUST_TITLE = "";
 
-export const TRUSTED_LOGOS = content.trustedLogos;
+export const TRUSTED_LOGOS: { name: string; src: string }[] = [];
 
-export const TECH_ORBIT = content.techOrbit;
+export const TECH_ORBIT = {
+  icons: content.techOrbit.icons,
+};
 
-export const WHY = content.whyChoose;
+export const WHY = {
+  items: content.whyChoose.items,
+};
 
-export const PORTFOLIO_SECTION = content.portfolio;
+export const PORTFOLIO_SECTION = { title: "" };
 
-export const PORTFOLIO_ITEMS = content.portfolio.items;
+export const PORTFOLIO_ITEMS: {
+  id: string;
+  title: string;
+  image: string;
+}[] = [];
 
-export const REVIEWS_SECTION = content.reviews;
+export const REVIEWS_SECTION = { title: "" };
 
-export const TESTIMONIALS = content.reviews.items;
+export const TESTIMONIALS: {
+  quote: string;
+  name: string;
+  role: string;
+  rating: number;
+}[] = [];
 
-export const PRICING_SECTION = content.pricing;
+export const PRICING_SECTION = { title: "" };
 
-export const PRICING_PLANS = content.pricing.plans;
+export const PRICING_PLANS: unknown[] = [];

@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent } from "react";
 import { Sparkles, TrendingUp } from "lucide-react";
-import servicesContent from "@/data/services-content.json";
+import content from "@/data/services-content.json";
 import { SERVICE_PAGE_GUTTER } from "@/lib/service-layout";
 
-const { hero } = servicesContent;
+const hero = content.hero;
 
 const FIELD_CLASS =
   "min-h-[52px] w-full resize-y rounded-xl border border-transparent bg-[#f3f3f1] px-4 py-[14px] font-montserrat text-[0.9375rem] text-[#1f1e1c] outline-none transition-[border-color,background-color] placeholder:text-[#9a9a9a] focus:border-[rgba(56,248,171,0.7)] focus:bg-white";
@@ -95,12 +95,16 @@ export default function ServiceHero() {
           <div className="mx-auto w-full max-w-[620px] overflow-visible pt-3 lg:ml-auto lg:justify-self-end lg:pt-0">
             <div className="svc-hero-visual relative aspect-[1/1.05] w-full max-h-[620px] overflow-visible">
               <div className="absolute inset-0 overflow-hidden rounded-[clamp(96px,15vw,160px)_clamp(8px,1vw,14px)_clamp(96px,15vw,160px)_clamp(36px,5vw,52px)] shadow-[0_24px_64px_rgba(0,0,0,0.12)]">
-                <Image
-                  src={hero.image.src}
-                  alt={hero.image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 620px" loading="lazy"/>
+                {hero.image.src ? (
+                  <Image
+                    src={hero.image.src}
+                    alt={hero.image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 620px"
+                    loading="lazy"
+                  />
+                ) : null}
               </div>
 
               <div className="absolute top-4 left-[4%] z-[3] inline-flex max-w-[calc(100%-8%)] items-center gap-2.5 whitespace-nowrap rounded-full bg-white px-3.5 py-2 font-montserrat text-[13px] font-semibold text-[#15d286] shadow-[0_12px_32px_rgba(0,0,0,0.16)] sm:top-6 sm:left-[2%] sm:max-w-[calc(100%-4%)] sm:-translate-x-[8%] sm:px-4 sm:py-2.5 sm:text-sm lg:top-8 lg:left-0 lg:max-w-none lg:-translate-x-1/4 lg:px-5 lg:py-3 lg:text-[clamp(0.875rem,1.2vw,1rem)] xl:-translate-x-[36%]">

@@ -1,9 +1,13 @@
 import Image from "next/image";
-import servicesContent from "@/data/services-content.json";
+import content from "@/data/services-content.json";
 
-const { title, description, logos } = servicesContent.clients;
+const title = content.clients.title;
+const description = content.clients.description;
+const logos = content.clients.logos;
 
 export default function ServiceClients() {
+  if (!title && !logos.length) return null;
+
   return (
     <section className="svc-clients bg-[#f8fafc] px-4 py-16 sm:px-8 lg:px-10 lg:py-[100px]">
       <div className="mx-auto flex w-full max-w-[1208px] flex-col items-center gap-8 lg:gap-[60px]">

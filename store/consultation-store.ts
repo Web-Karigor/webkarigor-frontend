@@ -3,6 +3,8 @@ import { create } from "zustand";
 export type QuotationContext = {
   packageId: number | null;
   serviceId: number | null;
+  packageName: string | null;
+  serviceName: string | null;
 };
 
 type ConsultationState = {
@@ -17,6 +19,8 @@ export const useConsultationStore = create<ConsultationState>((set) => ({
   quotation: {
     packageId: null,
     serviceId: null,
+    packageName: null,
+    serviceName: null,
   },
   openModal: (context) =>
     set({
@@ -24,6 +28,8 @@ export const useConsultationStore = create<ConsultationState>((set) => ({
       quotation: {
         packageId: context?.packageId ?? null,
         serviceId: context?.serviceId ?? null,
+        packageName: context?.packageName ?? null,
+        serviceName: context?.serviceName ?? null,
       },
     }),
   closeModal: () => set({ open: false }),

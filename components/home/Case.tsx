@@ -6,16 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useLayoutEffect, useMemo, useRef } from "react";
 import { gsap, refreshScrollTriggers, scrollStepsPx } from "@/lib/gsap";
-import homeContent from "@/data/home-content.json";
 import { useProjectsQuery } from "@/hooks/queries/useProjectsQuery";
+import { HOME_CASE_HEADER } from "@/lib/home-static";
 import { mapPostsToCaseItems, type CaseProjectItem } from "@/lib/projects";
 
-const {
-  badge: caseBadge,
-  headingAccent: caseHeadingAccent,
-  headingTitle: caseHeadingTitle,
-  description: caseDescription,
-} = homeContent.case;
+const caseBadge = HOME_CASE_HEADER.badge;
+const caseHeadingAccent = HOME_CASE_HEADER.headingAccent;
+const caseHeadingTitle = HOME_CASE_HEADER.headingTitle;
+const caseDescription = HOME_CASE_HEADER.description;
 
 export default function Case() {
   const { data } = useProjectsQuery();

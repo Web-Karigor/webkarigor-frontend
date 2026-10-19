@@ -5,7 +5,7 @@ import {
   ShoppingCart,
   type LucideIcon,
 } from "lucide-react";
-import servicesContent from "@/data/services-content.json";
+import content from "@/data/services-content.json";
 
 const OFFERING_ICONS = {
   shoppingCart: ShoppingCart,
@@ -21,15 +21,15 @@ export type ServiceOffering = {
   variant: "yellow" | "green";
 };
 
-export const SERVICE_OFFERINGS: ServiceOffering[] =
-  servicesContent.offerings.items.map((item) => ({
-    title: item.title,
-    description: item.description,
-    icon: OFFERING_ICONS[item.icon as keyof typeof OFFERING_ICONS],
-    variant: item.variant as "yellow" | "green",
-  }));
+export const SERVICE_OFFERINGS: ServiceOffering[] = [];
 
-export const TESTIMONIALS = servicesContent.testimonials.items;
+export const TESTIMONIALS: {
+  quote: string;
+  name: string;
+  role: string;
+  avatar: string;
+  rating: number;
+}[] = [];
 
 export type PricingPlan = {
   title: string;
@@ -44,12 +44,17 @@ export type PricingMarket = {
   plans: PricingPlan[];
 };
 
-export const PRICING_MARKETS: PricingMarket[] =
-  servicesContent.pricing.markets.map((market) => ({
+export const PRICING_MARKETS: PricingMarket[] = content.pricing.markets.map(
+  (market) => ({
     label: market.label,
-    theme: market.theme as "yellow" | "green",
+    theme: market.theme === "green" ? "green" : "yellow",
     plans: market.plans.map((plan) => ({
-      ...plan,
-      features: [...servicesContent.pricing.sharedFeatures],
+      title: plan.title,
+      price: plan.price,
+      subtitle: plan.subtitle,
+      features: content.pricing.sharedFeatures,
     })),
-  }));
+  }),
+);
+
+export { OFFERING_ICONS };

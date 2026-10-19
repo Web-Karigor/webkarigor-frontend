@@ -6,12 +6,12 @@ import {
   TrendingUp,
   UserRound,
 } from "lucide-react";
-import { whyChooseUs } from "@/data/website-design-development-content.json";
+import content from "@/data/website-design-development-content.json";
 import { useWebDesignDevelopmentPageQuery } from "@/hooks/queries/useWebDesignDevelopmentPageQuery";
 import { wddSectionItem } from "@/lib/web-design-development-page";
 
-const { items: REASONS } = whyChooseUs;
 const ICONS = { Briefcase, Handshake, TrendingUp, UserRound };
+const REASONS = content.whyChooseUs.items;
 
 export default function WhyChoose() {
   const { data } = useWebDesignDevelopmentPageQuery();

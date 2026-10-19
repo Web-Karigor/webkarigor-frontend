@@ -1,11 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import homeContent from "@/data/home-content.json";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
-import { useHomepagePackagesQuery } from "@/hooks/queries/useHomepagePackagesQuery";
-import { usePackagesQuery } from "@/hooks/queries/usePackagesQuery";
+import { useMemo } from "react";
+import { usePricingHomeQuery } from "@/hooks/queries/usePricingHomeQuery";
+import { usePricingPageQuery } from "@/hooks/queries/usePricingPageQuery";
+import { usePricingPostsQuery } from "@/hooks/queries/usePricingPostsQuery";
 import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
+import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
+import { homeSectionItem } from "@/lib/home-page";
+import { HOME_PRICING_LABELS } from "@/lib/home-static";
+import { mapPricingPosts } from "@/lib/pricing-posts";
+import { mapPackagesHeadingItem, mapPricingPlansHeader } from "@/lib/pricing-page";
+import { SERVICE_PRICING_HEADINGS } from "@/lib/service-pricing-headings";
 import {
   formatPackageOriginalPrice,
   formatPackagePrice,
@@ -13,17 +20,19 @@ import {
 } from "@/lib/package-price";
 import type { HomepagePackage } from "@/types/homepage-package";
 
-const {
-  badge,
-  headingAccent,
-  headingTitle,
-  description,
-  popularLabel,
-  featuresHeading,
-  cancelLabel,
-  noExtraFee,
-  // billing,
-} = homeContent.pricing;
+const EMPTY_PRICING_LABELS = {
+  popularLabel: "",
+  featuresHeading: "",
+  cancelLabel: "",
+  noExtraFee: "",
+};
+
+const SERVICE_PRICING_POST: Record<string, string> = {
+  erp: "pricing-erp",
+  hrm: "pricing-hrm",
+  "software-development": "pricing-software-development",
+  "website-design-development": "pricing-web-design-development",
+};
 
 function CheckIcon() {
   return (
@@ -81,30 +90,72 @@ function InfoIcon() {
 export default function PricingSection({
   backgroundColor,
   serviceSlug,
+  headingSlug,
   fromPackages = false,
 }: {
   backgroundColor?: string;
   serviceSlug?: string;
+  headingSlug?: string;
   fromPackages?: boolean;
 } = {}) {
-  const home = useHomepagePackagesQuery(!serviceSlug && !fromPackages);
-  const service = useServiceQuery(serviceSlug ?? "");
-  const all = usePackagesQuery(fromPackages || (!serviceSlug && !fromPackages));
+  const isHome = !serviceSlug && !fromPackages;
+  const pricingPostSlug = serviceSlug ? SERVICE_PRICING_POST[serviceSlug] ?? "" : "";
+  const pricingPage = usePricingPageQuery(fromPackages);
+  const homePage = useHomePageQuery(isHome);
+  const plansHeader = useMemo(() => {
+    const staticKey = headingSlug || (serviceSlug && !isHome ? serviceSlug : "");
+    const staticHeading = staticKey ? SERVICE_PRICING_HEADINGS[staticKey] ?? null : null;
+    if (fromPackages) return mapPricingPlansHeader(pricingPage.data);
+    if (isHome && !headingSlug) {
+      return mapPackagesHeadingItem(
+        homeSectionItem(homePage.data?.data?.sections?.packages),
+      );
+    }
+    return staticHeading;
+  }, [fromPackages, isHome, serviceSlug, headingSlug, pricingPage.data, homePage.data]);
+  const labels = isHome
+    ? HOME_PRICING_LABELS
+    : pricingPostSlug
+      ? {
+          ...EMPTY_PRICING_LABELS,
+          popularLabel: HOME_PRICING_LABELS.popularLabel,
+          featuresHeading: HOME_PRICING_LABELS.featuresHeading,
+          cancelLabel: HOME_PRICING_LABELS.cancelLabel,
+        }
+      : EMPTY_PRICING_LABELS;
+  const badgeText = plansHeader?.badge || "";
+  const accentText = plansHeader?.headingAccent || "";
+  const titleText = plansHeader?.headingTitle || "";
+  const descriptionText = plansHeader?.description || "";
+  const popularLabel = labels.popularLabel;
+  const featuresHeading = labels.featuresHeading;
+  const cancelLabel = labels.cancelLabel;
+  const noExtraFee = labels.noExtraFee;
 
-  const servicePackages = service.data?.data.packages ?? [];
-  const homePackages = (home.data?.data ?? []).filter((pkg) => pkg.show_homepage);
-  const allPackages = all.data?.data ?? [];
-  const packages: HomepagePackage[] = [
-    ...(servicePackages.length
-      ? servicePackages
-      : fromPackages
-        ? allPackages
-        : homePackages.length
-          ? homePackages
-          : allPackages),
-  ].sort(
-    (a, b) => (a.package_type?.id ?? a.id) - (b.package_type?.id ?? b.id),
-  );
+  const homePlans = usePricingHomeQuery(isHome);
+  const pagePlans = usePricingPostsQuery("pricing", fromPackages);
+  const servicePlans = usePricingPostsQuery(pricingPostSlug, Boolean(pricingPostSlug));
+  const service = useServiceQuery(serviceSlug ?? "");
+
+  const packages: HomepagePackage[] = useMemo(() => {
+    if (pricingPostSlug) return mapPricingPosts(servicePlans.data?.data?.posts);
+    if (serviceSlug) {
+      return [...(service.data?.data.packages ?? [])].sort(
+        (a, b) => (a.package_type?.id ?? a.id) - (b.package_type?.id ?? b.id),
+      );
+    }
+    return mapPricingPosts(
+      fromPackages ? pagePlans.data?.data?.posts : homePlans.data?.data?.posts,
+    );
+  }, [
+    pricingPostSlug,
+    servicePlans.data,
+    serviceSlug,
+    service.data,
+    fromPackages,
+    pagePlans.data,
+    homePlans.data,
+  ]);
 
   const serviceId = service.data?.data.service.id ?? null;
 
@@ -117,17 +168,17 @@ export default function PricingSection({
       <div className="home-pricing-shell">
         <div className="home-pricing-header">
           <span className="home-pricing-badge">
-            <span className="section-badge-text">{badge}</span>
+            <span className="section-badge-text">{badgeText}</span>
           </span>
 
           <h2 className="section-heading">
             <span className="section-heading-split-accent section-accent-text">
-              {headingAccent}
+              {accentText}
             </span>
-            <span className="section-heading-split-title">{headingTitle}</span>
+            <span className="section-heading-split-title">{titleText}</span>
           </h2>
 
-          <p className="home-pricing-desc">{description}</p>
+          <p className="home-pricing-desc">{descriptionText}</p>
         </div>
 
         <div className="home-pricing-billing">
@@ -252,7 +303,9 @@ export default function PricingSection({
 
                   <PricingCtaButton
                     packageId={pkg.id}
+                    packageName={name}
                     serviceId={serviceId ?? pkg.service?.id ?? null}
+                    serviceName={service.data?.data.service.title ?? null}
                   >
                     {customPrice ? "Contact Us" : "Book Now"}
                   </PricingCtaButton>

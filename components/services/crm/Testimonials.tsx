@@ -9,16 +9,20 @@ import {
 } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import servicesContent from "@/data/crm-content.json";
 import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
-import { CRM_TESTIMONIALS } from "@/lib/crm-data";
+import {
+  CRM_TESTIMONIAL_AVATARS,
+  CRM_TESTIMONIALS,
+  CRM_TESTIMONIALS_SUMMARY,
+} from "@/lib/crm-data";
 import { crmSectionItem, extractCrmText } from "@/lib/crm-page";
 
 const AUTO_MS = 4200;
 const GAP_PX = 16;
 const DRAG_THRESHOLD_PX = 48;
 
-const { summary, avatars: AVATARS } = servicesContent.testimonials;
+const summary = CRM_TESTIMONIALS_SUMMARY;
+const AVATARS = CRM_TESTIMONIAL_AVATARS;
 
 function Stars({ count, size = 18 }: { count: number; size?: number }) {
   return (

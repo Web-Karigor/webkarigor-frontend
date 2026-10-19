@@ -1,17 +1,15 @@
 "use client";
 
-import servicesContent from "@/data/services-content.json";
+import { useMemo } from "react";
 import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
+import { useTechnologiesQuery } from "@/hooks/queries/useTechnologiesQuery";
 import { crmSectionItem, extractCrmText } from "@/lib/crm-page";
+import { mapTechnologyPostsToMarquee } from "@/lib/technologies";
 
 type TechItem = {
   name: string;
   icon: string;
 };
-
-const TECH_ITEMS = servicesContent.techGrid.items as TechItem[];
-const TOP_ROW = TECH_ITEMS.slice(0, 6);
-const BOTTOM_ROW = TECH_ITEMS.slice(6);
 
 function TechMarqueeRow({
   items,
@@ -51,6 +49,13 @@ function TechMarqueeRow({
 
 export default function TechGrid() {
   const { data } = useCrmPageQuery();
+  const { data: technologies } = useTechnologiesQuery();
+  const techItems = useMemo(
+    () => mapTechnologyPostsToMarquee(technologies?.data?.posts),
+    [technologies],
+  );
+  const topRow = techItems.slice(0, 6);
+  const bottomRow = techItems.slice(6);
   const item = crmSectionItem(data?.data?.sections?.why_webkarigor);
 
   const eyebrow = item?.title?.trim() ?? "";
@@ -73,7 +78,7 @@ export default function TechGrid() {
         </div>
 
         <div className="grid w-full grid-cols-3 gap-2.5 sm:hidden">
-          {TECH_ITEMS.map((tech) => (
+          {techItems.map((tech) => (
             <div
               key={tech.name}
               className="flex h-9 min-w-0 w-full items-center gap-1.5 rounded-md bg-white px-2 shadow-[0_5px_14px_rgba(15,23,42,0.08)]"
@@ -93,8 +98,8 @@ export default function TechGrid() {
         </div>
 
         <div className="relative hidden w-full max-w-[1260px] gap-[10px] overflow-hidden sm:grid">
-          <TechMarqueeRow items={TOP_ROW} reverse />
-          <TechMarqueeRow items={BOTTOM_ROW} />
+          <TechMarqueeRow items={topRow} reverse />
+          <TechMarqueeRow items={bottomRow} />
 
           <div className="pointer-events-none absolute inset-y-0 left-0 w-[56px] bg-gradient-to-r from-[#e7eef6] via-[#e7eef6]/80 to-transparent sm:w-[120px] lg:w-[250px]" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-[56px] bg-gradient-to-l from-[#e7eef6] via-[#e7eef6]/80 to-transparent sm:w-[120px] lg:w-[250px]" />

@@ -15,7 +15,7 @@ import Preloader from "@/components/Preloader";
 import GsapProvider from "@/components/providers/GsapProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
 import SmoothScroll from "@/components/providers/SmoothScroll";
-import homeContent from "@/data/home-content.json";
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -46,11 +46,9 @@ const museoModerno = MuseoModerno({
   display: "swap",
 });
 
-const { title, description } = homeContent.metadata;
-
 export const metadata: Metadata = {
-  title,
-  description,
+  title: "Webkarigor",
+  description: "",
   icons: {
     icon: "/favicon.png",
   },

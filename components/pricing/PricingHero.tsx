@@ -8,7 +8,11 @@ import {
   Compass,
   type LucideIcon,
 } from "lucide-react";
-import { PRICING_HERO, PRICING_HERO_FEATURES, PR } from "@/lib/pricing-data";
+import { useMemo } from "react";
+import { useFeaturePricingQuery } from "@/hooks/queries/useFeaturePricingQuery";
+import { usePricingPageQuery } from "@/hooks/queries/usePricingPageQuery";
+import { mapPricingHero } from "@/lib/pricing-page";
+import { PR } from "@/lib/pricing-data";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.2 } as const;
@@ -27,6 +31,26 @@ const ICONS: Record<string, LucideIcon> = {
 const GAP_GLOWS = ["25%", "50%", "75%"] as const;
 
 export default function PricingHero() {
+  const { data } = usePricingPageQuery();
+  const featuresQuery = useFeaturePricingQuery();
+  const hero = useMemo(() => mapPricingHero(data), [data]);
+  const features = useMemo(
+    () =>
+      [...(featuresQuery.data?.data?.posts ?? [])]
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+        .map((post) => ({
+          id: post.id,
+          title: post.fields?.title?.trim() ?? "",
+          description: post.fields?.description?.trim() ?? "",
+          icon: post.fields?.icon?.trim().toLowerCase() ?? "",
+        }))
+        .filter((item) => item.title),
+    [featuresQuery.data],
+  );
+  if (!hero.eyebrow && !hero.titleLines.length && !features.length) {
+    return null;
+  }
+
   return (
     <section className="pricing-hero relative bg-[#F8F6EF] pt-[120px] pb-8 sm:pt-[140px] sm:pb-10 lg:pb-12">
       {/* Soft green glow — top center */}
@@ -65,7 +89,7 @@ export default function PricingHero() {
               backgroundClip: "text",
             }}
           >
-            {PRICING_HERO.eyebrow}
+            {hero.eyebrow}
           </p>
 
           <h1
@@ -77,7 +101,7 @@ export default function PricingHero() {
               letterSpacing: PR.heroTitle.titleTracking,
             }}
           >
-            {PRICING_HERO.titleLines.map((line) => (
+            {hero.titleLines.map((line) => (
               <span key={line} className="block">
                 {line}
               </span>
@@ -85,6 +109,7 @@ export default function PricingHero() {
           </h1>
         </motion.div>
 
+        {features.length ? (
         <div
           className="pricing-hero-grid relative mt-12 sm:mt-14"
         >
@@ -153,11 +178,11 @@ export default function PricingHero() {
           <div
             className="pricing-hero-cards relative z-[1] grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-5"
           >
-            {PRICING_HERO_FEATURES.map((item, index) => {
-              const Icon = ICONS[item.icon];
+            {features.map((item, index) => {
+              const Icon = ICONS[item.icon] ?? MousePointer2;
               return (
                 <motion.article
-                  key={item.title}
+                  key={item.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
@@ -183,6 +208,7 @@ export default function PricingHero() {
             })}
           </div>
         </div>
+        ) : null}
       </div>
     </section>
   );

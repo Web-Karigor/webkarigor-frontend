@@ -69,6 +69,15 @@ const nextConfig = {
       "country-flag-icons",
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/services/website-design-development",
+        destination: "/service/website-design-development",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {

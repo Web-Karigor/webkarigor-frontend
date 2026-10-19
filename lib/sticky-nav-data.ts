@@ -1,10 +1,16 @@
 export const SERVICE_NAV_DESC: Record<string, string> = {
   "website-design-development": "Custom websites for your business.",
+  "website-design": "Custom websites for your business.",
   erp: "Custom systems for operations.",
   hrm: "Specialist talent for your team.",
   "software-development": "Specialist talent for your team.",
   crm: "Specialist talent for your team.",
 };
+
+export function serviceNavDescription(href: string) {
+  const slug = href.split("?")[0]?.split("/").filter(Boolean).pop() ?? "";
+  return SERVICE_NAV_DESC[slug] ?? "";
+}
 
 export const STICKY_NAV_MORE_LINKS = [
   { href: "/about-us", title: "About us", desc: "Who we are and how we work" },

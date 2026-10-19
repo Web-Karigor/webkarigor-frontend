@@ -1,4 +1,4 @@
-import type { HomeMedia, HomeSection } from "@/types/home-page";
+import type { ContactUsItem, HomeMedia, HomeSection } from "@/types/home-page";
 
 export type ContactHeroItem = {
   id: number;
@@ -46,6 +46,7 @@ export type ContactPageSections = {
   company_desk?: HomeSection<ContactCompanyDeskItem>;
   success_stories?: HomeSection<ContactSuccessStoriesItem>;
   faq?: HomeSection<ContactFaqItem>;
+  contact_us?: HomeSection<ContactUsItem>;
 };
 
 export type ContactPageData = {

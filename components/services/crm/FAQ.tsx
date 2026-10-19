@@ -4,11 +4,10 @@ import "./FAQ.css";
 
 import { useMemo, useState } from "react";
 import { openConsultationModal } from "@/components/home/ConsultationModal";
-import crmContent from "@/data/crm-content.json";
 import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
 import { crmSectionItem, splitTrailingWords } from "@/lib/crm-page";
 
-const FAQ_ITEMS = crmContent.faq.items;
+const FAQ_ITEMS: { question: string; answer: string }[] = [];
 
 export default function FAQ({
   className = "bg-[#FFFDF6]",

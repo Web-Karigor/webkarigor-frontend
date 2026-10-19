@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { ABOUT_CAPABILITIES } from "@/lib/about-data";
+import { useCapabilitiesQuery } from "@/hooks/queries/useCapabilitiesQuery";
 
 /** Soft circle curve — larger step/radius = more gap between lines */
 const STEP_DEG = 30;
@@ -12,8 +12,17 @@ const SCROLL_VH_PER_STEP = 0.9;
 export default function AboutCapabilities() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { data } = useCapabilitiesQuery();
+  const capabilities = useMemo(
+    () =>
+      [...(data?.data?.posts ?? [])]
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+        .map((post) => post.fields?.title?.trim() ?? "")
+        .filter(Boolean),
+    [data],
+  );
 
-  const total = ABOUT_CAPABILITIES.length;
+  const total = capabilities.length;
   const sectionHeight = useMemo(
     () => `${total * SCROLL_VH_PER_STEP * 100}vh`,
     [total],
@@ -41,6 +50,8 @@ export default function AboutCapabilities() {
     };
   }, [total]);
 
+  if (!total) return null;
+
   return (
     <section
       ref={sectionRef}
@@ -60,7 +71,7 @@ export default function AboutCapabilities() {
             className="relative h-full w-full"
             style={{ transformStyle: "preserve-3d" }}
           >
-            {ABOUT_CAPABILITIES.map((label, index) => {
+            {capabilities.map((label, index) => {
               const offset = index - activeIndex;
               const abs = Math.abs(offset);
               const isActive = offset === 0;

@@ -1,14 +1,12 @@
 import Image from "next/image";
-import servicesContent from "@/data/services-content.json";
+import content from "@/data/services-content.json";
 import { PRICING_MARKETS } from "@/lib/services-data";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
 
-const {
-  eyebrow,
-  title,
-  description,
-  ctaLabel,
-} = servicesContent.pricing;
+const eyebrow = content.pricing.eyebrow;
+const title = content.pricing.title;
+const description = content.pricing.description;
+const ctaLabel = content.pricing.ctaLabel;
 
 const POPULAR_LABEL = "Most popular";
 const FEATURES_HEADING = "What's Included:";
@@ -48,6 +46,8 @@ function CheckIcon() {
 }
 
 export default function ServicePricing() {
+  if (!PRICING_MARKETS.length) return null;
+
   return (
     <section id="pricing" className="scroll-mt-28 bg-white py-[clamp(48px,7vw,80px)]">
       <div className="mx-auto w-full max-w-[1800px] px-[clamp(16px,4vw,40px)]">

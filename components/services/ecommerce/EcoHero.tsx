@@ -40,12 +40,16 @@ export default function EcoHero() {
             maxWidth: "min(808px, 42.1%)",
           }}
         >
-          <Image
-            src={ECO_HERO.heroImage}
-            alt={ECO_HERO.heroImageAlt}
-            fill
-            className="object-contain object-right-bottom"
-            sizes="808px" loading="lazy"/>
+          {ECO_HERO.heroImage ? (
+            <Image
+              src={ECO_HERO.heroImage}
+              alt={ECO_HERO.heroImageAlt}
+              fill
+              className="object-contain object-right-bottom"
+              sizes="808px"
+              loading="lazy"
+            />
+          ) : null}
         </div>
 
         {/* Left column — left 60, below header; clients sit above glow */}
@@ -150,12 +154,16 @@ export default function EcoHero() {
           </div>
 
           <div className="relative mx-auto mt-10 aspect-[808/712] w-full max-w-[480px]">
-            <Image
-              src={ECO_HERO.heroImage}
-              alt={ECO_HERO.heroImageAlt}
-              fill
-              className="object-contain object-bottom"
-              sizes="(max-width: 768px) 90vw, 480px" loading="lazy"/>
+            {ECO_HERO.heroImage ? (
+              <Image
+                src={ECO_HERO.heroImage}
+                alt={ECO_HERO.heroImageAlt}
+                fill
+                className="object-contain object-bottom"
+                sizes="(max-width: 768px) 90vw, 480px"
+                loading="lazy"
+              />
+            ) : null}
           </div>
 
           <div className="mt-8">

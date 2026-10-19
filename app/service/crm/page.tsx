@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/services/crm/Hero";
 import Marquee from "@/components/services/crm/Marquee";
 import Clients from "@/components/services/crm/Clients";
-import servicesContent from "@/data/crm-content.json";
 import "@/styles/service-pages-laptop.css";
 import Services from "@/components/home/Services";
 import Features from "@/components/services/crm/Features";
@@ -31,8 +30,8 @@ const HomeConsultation = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: servicesContent.metadata.title,
-  description: servicesContent.metadata.description,
+  title: "CRM",
+  description: "",
 };
 
 export default function CrmPage() {

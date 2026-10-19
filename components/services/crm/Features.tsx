@@ -51,7 +51,7 @@ export default function Features() {
   const title = item?.subtitle?.trim() ?? "";
   const lead = extractCrmText(item?.content ?? "");
 
-  if (!eyebrow || !title || !lead || !CRM_FEATURES.length) return null;
+  if (!eyebrow || !title || !lead) return null;
 
   return (
     <section className="erp-features bg-white py-[clamp(48px,6vw,80px)]">

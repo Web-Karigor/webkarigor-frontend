@@ -253,6 +253,21 @@
   line-height: 1;
 }
 
+@media (min-width: 768px) {
+  .footer-tagline-item {
+    display: contents;
+  }
+
+  .footer-tagline-text {
+    white-space: nowrap;
+  }
+
+  .footer-tagline-sep {
+    flex: 1 1 0;
+    min-width: 2rem;
+  }
+}
+
 .footer-social-row {
   display: flex;
   flex-wrap: wrap;

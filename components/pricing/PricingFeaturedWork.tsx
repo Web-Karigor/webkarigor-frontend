@@ -5,9 +5,8 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { FEATURED_WORK_SECTION } from "@/lib/pricing-data";
-import { useProjectsQuery } from "@/hooks/queries/useProjectsQuery";
-import { mapPostsToGridItems } from "@/lib/projects";
+import { usePricingPageQuery } from "@/hooks/queries/usePricingPageQuery";
+import { mapFeaturedWork } from "@/lib/pricing-page";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.15 } as const;
@@ -50,13 +49,12 @@ function FeaturedImage({
   );
 }
 
-export default function PricingFeaturedWork() {
-  const { title, description, seeAll } = FEATURED_WORK_SECTION;
-  const { data } = useProjectsQuery();
+const seeAll = { href: "/projects", label: "See All" };
 
-  const items = useMemo(() => {
-    return mapPostsToGridItems(data?.data?.posts).slice(0, FEATURED_COUNT);
-  }, [data]);
+export default function PricingFeaturedWork() {
+  const { data } = usePricingPageQuery();
+  const featured = useMemo(() => mapFeaturedWork(data), [data]);
+  const items = featured.images.slice(0, FEATURED_COUNT);
 
   if (items.length < FEATURED_COUNT) return null;
 
@@ -77,12 +75,12 @@ export default function PricingFeaturedWork() {
           style={{ maxWidth: FEATURED_W }}
         >
           <h2 className="m-0 mx-auto max-w-[900px] text-center font-montserrat text-[clamp(28px,3.6vw,48px)] font-bold leading-[1.2] tracking-[-0.03em] text-white">
-            {title}
+            {featured.title}
           </h2>
 
           <div className="mt-6 flex flex-col items-start justify-between gap-4 sm:mt-8 sm:flex-row sm:items-end">
             <p className="m-0 max-w-[520px] font-montserrat text-[15px] font-medium leading-[1.6] text-white/70 sm:text-[16px]">
-              {description}
+              {featured.description}
             </p>
             <Link
               href={seeAll.href}
@@ -106,7 +104,7 @@ export default function PricingFeaturedWork() {
                   <FeaturedImage
                     src={item.src}
                     alt={item.alt}
-                    href={`/projects/${item.slug}`}
+                    href={seeAll.href}
                     sizes="(max-width: 640px) 100vw, 760px"
                   />
                 </motion.div>
@@ -125,7 +123,7 @@ export default function PricingFeaturedWork() {
                   <FeaturedImage
                     src={item.src}
                     alt={item.alt}
-                    href={`/projects/${item.slug}`}
+                    href={seeAll.href}
                     sizes="(max-width: 640px) 100vw, 500px"
                   />
                 </motion.div>

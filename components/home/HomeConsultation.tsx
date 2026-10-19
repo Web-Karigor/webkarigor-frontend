@@ -4,13 +4,9 @@ import "./HomeConsultation.css";
 
 import Image from "next/image";
 import Link from "next/link";
-import homeContent from "@/data/home-content.json";
 import ConsultationForm from "@/components/home/ConsultationForm";
-
-const { badge, title, description, founder, talkPrompt, whatsapp } =
-  homeContent.consultation;
-
-const PROFILE_IMAGE = founder.image;
+import { usePageContactQuery } from "@/hooks/queries/usePageContactQuery";
+import { whatsAppHref } from "@/lib/page-contact";
 
 function WhatsAppIcon() {
   return (
@@ -29,6 +25,20 @@ export default function HomeConsultation({
   /** Hide calendar + time picker (service subpages) */
   hideSchedule?: boolean;
 } = {}) {
+  const { contact } = usePageContactQuery();
+  const badge = contact?.title_sm?.trim() ?? "";
+  const title = contact?.title?.trim() ?? "";
+  const description = contact?.subtitle?.trim() ?? "";
+  const founder = {
+    image: contact?.image?.url?.trim() ?? "",
+    name: contact?.coo_name?.trim() ?? "",
+    role: contact?.coo_designation?.trim() ?? "",
+  };
+  const talkPrompt = contact?.prefer_talk_title?.trim() ?? "";
+  const whatsAppLabel = contact?.cta_whats_app?.trim() ?? "";
+  const whatsapp = { href: whatsAppHref(whatsAppLabel), label: whatsAppLabel };
+  const PROFILE_IMAGE = founder.image;
+
   return (
     <section
       id="contact"
@@ -49,12 +59,16 @@ export default function HomeConsultation({
 
                 <div className="home-consultation-founder">
                   <div className="home-consultation-founder-photo">
-                    <Image
-                      src={PROFILE_IMAGE}
-                      alt={founder.name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 160px" loading="lazy"/>
+                    {PROFILE_IMAGE ? (
+                      <Image
+                        src={PROFILE_IMAGE}
+                        alt={founder.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 160px"
+                        loading="lazy"
+                      />
+                    ) : null}
                   </div>
                   <p className="home-consultation-founder-name">{founder.name}</p>
                   <p className="home-consultation-founder-role">{founder.role}</p>
@@ -63,15 +77,17 @@ export default function HomeConsultation({
 
               <div className="home-consultation-copy-bottom">
                 <p className="home-consultation-talk">{talkPrompt}</p>
-                <Link
-                  href={whatsapp.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="home-consultation-whatsapp"
-                >
-                  <WhatsAppIcon />
-                  <span>{whatsapp.label}</span>
-                </Link>
+                {whatsapp.href ? (
+                  <Link
+                    href={whatsapp.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="home-consultation-whatsapp"
+                  >
+                    <WhatsAppIcon />
+                    <span>{whatsapp.label}</span>
+                  </Link>
+                ) : null}
               </div>
             </aside>
 

@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 import ConsultationForm from "@/components/home/ConsultationForm";
-import homeContent from "@/data/home-content.json";
 import "@/components/home/HomeConsultation.css";
 import { setSmoothScrollLocked } from "@/lib/smooth-scroll";
 import {
@@ -13,8 +12,6 @@ import {
   getQuotationContext,
   type QuotationContext,
 } from "@/store/consultation-store";
-
-const MODAL_IMAGE = homeContent.consultation.contact.image;
 
 export type { QuotationContext };
 export { openConsultationModal, getQuotationContext };
@@ -59,12 +56,11 @@ export default function ConsultationModal() {
       >
         <div className="consultation-modal-media" aria-hidden>
           <Image
-            src={MODAL_IMAGE}
+            src="/contact-us/contact-form-image.png"
             alt=""
             fill
-            sizes="(min-width: 768px) 46vw, 0px"
             className="consultation-modal-media-img"
-            loading="lazy"
+            sizes="(min-width: 768px) 560px, 0px"
           />
         </div>
 

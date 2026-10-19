@@ -2,13 +2,14 @@
 
 import "./TechServices.css";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { useTechServicesHomeQuery } from "@/hooks/queries/useTechServicesHomeQuery";
 import { gsap } from "@/lib/gsap";
-import homeContent from "@/data/home-content.json";
-
-const categories = homeContent.techServices.categories;
-const portfolioItems = homeContent.techServices.portfolioImages;
+import {
+  mapTechServicesPosts,
+  type TechServicesVariant,
+} from "@/lib/tech-services-home";
 
 /**
  * Max card sizes (user uploads images at these dimensions):
@@ -20,11 +21,14 @@ const DESKTOP_SIZE = { width: 515, height: 448 } as const;
 const MOBILE_SIZE = { width: 202, height: 376 } as const;
 const LARGE_SIZE = { width: 515, height: 584 } as const;
 
-const VARIANT_SIZES = {
+const SIZE_BY_VARIANT: Record<
+  TechServicesVariant,
+  { width: number; height: number }
+> = {
   web: DESKTOP_SIZE,
   mobile: MOBILE_SIZE,
   tab: LARGE_SIZE,
-} as const;
+};
 
 /** Desktop viewport shows ~5 cards; edge tab cards clip slightly (overflow hidden). */
 const VISIBLE_MOTIF = [
@@ -42,17 +46,7 @@ const DESKTOP_SCALE_MOTIF = [
   MOBILE_SIZE,
 ] as const;
 
-const portfolioImages = portfolioItems.map((item) => ({
-  src: item.src,
-  size: VARIANT_SIZES[item.variant as keyof typeof VARIANT_SIZES],
-}));
-
-/** Per-image size in one seamless cycle (length === portfolioImages.length). */
-const CYCLE_SIZES = portfolioImages.map((item) => item.size);
-
-const CYCLE_SIZE = portfolioImages.length;
 const REPEAT_CYCLES = 4;
-const ANCHOR_INDEX = CYCLE_SIZE * (REPEAT_CYCLES / 2);
 /** Shared linear speed so text marquee + image strip stay in sync. */
 const SCROLL_SPEED_PX_PER_SEC = 72;
 /** Slower on mobile so the strip is easier to follow. */
@@ -81,18 +75,10 @@ const MOBILE_THREE_CARD_WIDTH =
   ) +
   (MOBILE_VISIBLE_CARDS - 1) * BASE_GAP;
 
-const cards = Array.from({ length: CYCLE_SIZE * REPEAT_CYCLES }, (_, i) => {
-  const cycleIndex = i % CYCLE_SIZE;
-  return {
-    src: portfolioImages[cycleIndex].src,
-    size: CYCLE_SIZES[cycleIndex],
-  };
-});
-
-function getSeamlessCycleWidth(track: HTMLElement) {
+function getSeamlessCycleWidth(track: HTMLElement, cycleSize: number) {
   const children = Array.from(track.children) as HTMLElement[];
-  if (children.length <= CYCLE_SIZE) return 0;
-  return children[CYCLE_SIZE].offsetLeft - children[0].offsetLeft;
+  if (!cycleSize || children.length <= cycleSize) return 0;
+  return children[cycleSize].offsetLeft - children[0].offsetLeft;
 }
 
 function getCardCenter(track: HTMLElement, index: number) {
@@ -133,7 +119,8 @@ function useTrackScale(viewportRef: React.RefObject<HTMLDivElement | null>) {
   return scale;
 }
 
-function CategoryMarquee() {
+function CategoryMarquee({ categories }: { categories: string[] }) {
+  const categoriesKey = categories.join("|");
   const trackRef = useRef<HTMLDivElement>(null);
   const setRef = useRef<HTMLUListElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
@@ -180,7 +167,7 @@ function CategoryMarquee() {
       observer.disconnect();
       visibility.disconnect();
     };
-  }, []);
+  }, [categoriesKey]);
 
   return (
     <div className="tech-services-nav">
@@ -192,8 +179,8 @@ function CategoryMarquee() {
             className="tech-services-nav-list"
             aria-hidden={copyIndex > 0 ? true : undefined}
           >
-            {categories.map((category) => (
-              <li key={`${copyIndex}-${category}`} className="tech-services-nav-item">
+            {categories.map((category, index) => (
+              <li key={`${copyIndex}-${index}-${category}`} className="tech-services-nav-item">
                 <span className="tech-services-nav-text">{category}</span>
                 <span className="tech-services-nav-dot" aria-hidden>
                   ·
@@ -232,7 +219,7 @@ function PortfolioCard({
             fill
             sizes="(max-width: 640px) 202px, 515px"
             quality={100}
-            className="object-contain"
+            className="object-cover"
             draggable={false} loading="lazy"/>
         </div>
       </div>
@@ -240,7 +227,25 @@ function PortfolioCard({
   );
 }
 
-function PortfolioSlider() {
+function PortfolioSlider({
+  images,
+}: {
+  images: ReturnType<typeof mapTechServicesPosts>;
+}) {
+  const cycleSize = images.length;
+  const cards = useMemo(() => {
+    if (!cycleSize) return [];
+    return Array.from({ length: cycleSize * REPEAT_CYCLES }, (_, i) => {
+      const image = images[i % cycleSize];
+      return {
+        src: image?.src ?? "",
+        size: SIZE_BY_VARIANT[image?.variant ?? "web"],
+      };
+    });
+  }, [cycleSize, images]);
+  const anchorIndex = cycleSize * (REPEAT_CYCLES / 2);
+  const imagesKey = images.map((image) => image.src).join("|");
+
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
@@ -249,6 +254,7 @@ function PortfolioSlider() {
   const viewportHeight = MAX_CARD_HEIGHT * scale;
 
   useLayoutEffect(() => {
+    if (!cycleSize) return;
     const viewport = viewportRef.current;
     const track = trackRef.current;
     if (!viewport || !track) return;
@@ -301,8 +307,8 @@ function PortfolioSlider() {
       const ratio =
         prevCycleWidth > 0 && preservePosition ? scrollOffset / prevCycleWidth : 0;
 
-      cycleWidth = getSeamlessCycleWidth(track);
-      anchorCenter = getCardCenter(track, ANCHOR_INDEX);
+      cycleWidth = getSeamlessCycleWidth(track, cycleSize);
+      anchorCenter = getCardCenter(track, anchorIndex);
 
       const nextOffset =
         preservePosition && prevCycleWidth > 0 && cycleWidth > 0
@@ -347,7 +353,7 @@ function PortfolioSlider() {
       cancelAnimationFrame(kickoff);
       cancelAnimationFrame(resizeRaf);
     };
-  }, [scale]);
+  }, [scale, cycleSize, anchorIndex, imagesKey]);
 
   return (
     <div className="tech-services-slider">
@@ -376,10 +382,20 @@ function PortfolioSlider() {
 }
 
 export default function TechServices() {
+  const { data } = useTechServicesHomeQuery();
+  const cards = useMemo(
+    () => mapTechServicesPosts(data?.data?.posts),
+    [data],
+  );
+  const categories = useMemo(
+    () => cards.map((card) => card.category).filter(Boolean),
+    [cards],
+  );
+
   return (
     <section className="tech-services relative z-[2]">
-      <CategoryMarquee />
-      <PortfolioSlider />
+      <CategoryMarquee categories={categories} />
+      <PortfolioSlider images={cards} />
     </section>
   );
 }

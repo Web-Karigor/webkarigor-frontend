@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
-import { BUILT_FOR_SECTION, COMPARISON_ITEMS } from "@/lib/pricing-data";
+import { usePricingPageQuery } from "@/hooks/queries/usePricingPageQuery";
+import { mapBuiltFor } from "@/lib/pricing-page";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.2 } as const;
@@ -28,8 +30,12 @@ function CompareCheck({ active }: { active: boolean }) {
   );
 }
 
+const cta = { href: "#contact", label: "Book a Call" };
+
 export default function PricingBuiltFor() {
-  const { title, cta, columns } = BUILT_FOR_SECTION;
+  const { data } = usePricingPageQuery();
+  const built = useMemo(() => mapBuiltFor(data), [data]);
+  if (!built.title && !built.oursItems.length && !built.othersItems.length) return null;
 
   return (
     <section className="pricing-built bg-[#F8F6EF] py-[clamp(64px,8vw,100px)]">
@@ -47,7 +53,7 @@ export default function PricingBuiltFor() {
         >
           <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
             <h2 className="m-0 max-w-[520px] font-montserrat text-[clamp(28px,3.4vw,44px)] font-bold leading-[1.15] tracking-[-0.03em] text-[#0A0A0A]">
-              {title}
+              {built.title}
             </h2>
             <Link
               href={cta.href}
@@ -71,16 +77,16 @@ export default function PricingBuiltFor() {
                 {/* Webkarigor — all active */}
                 <div>
                   <h3 className="m-0 mb-6 font-montserrat text-[20px] font-bold text-[#0A0A0A] md:mb-8 md:text-[22px]">
-                    {columns.ours}
+                    {built.ours}
                   </h3>
                   <ul className="m-0 flex list-none flex-col gap-4 p-0 md:gap-5">
-                    {COMPARISON_ITEMS.map((item) => (
+                    {built.oursItems.map((label) => (
                       <li
-                        key={`wk-${item.label}`}
+                        key={`wk-${label}`}
                         className="flex items-start gap-3 font-montserrat text-[clamp(14px,3.5vw,18px)] font-medium leading-[1.45] text-[#0A0A0A]"
                       >
                         <CompareCheck active />
-                        <span>{item.label}</span>
+                        <span>{label}</span>
                       </li>
                     ))}
                   </ul>
@@ -89,18 +95,16 @@ export default function PricingBuiltFor() {
                 {/* Other Agencies — mixed active / faded */}
                 <div>
                   <h3 className="m-0 mb-6 font-montserrat text-[20px] font-bold text-[#0A0A0A] md:mb-8 md:text-[22px]">
-                    {columns.others}
+                    {built.others}
                   </h3>
                   <ul className="m-0 flex list-none flex-col gap-4 p-0 md:gap-5">
-                    {COMPARISON_ITEMS.map((item) => (
+                    {built.othersItems.map((label) => (
                       <li
-                        key={`oa-${item.label}`}
-                        className={`flex items-start gap-3 font-montserrat text-[clamp(14px,3.5vw,18px)] font-medium leading-[1.45] ${
-                          item.otherHas ? "text-[#0A0A0A]" : "text-[#D1D5DB]"
-                        }`}
+                        key={`oa-${label}`}
+                        className="flex items-start gap-3 font-montserrat text-[clamp(14px,3.5vw,18px)] font-medium leading-[1.45] text-[#0A0A0A]"
                       >
-                        <CompareCheck active={item.otherHas} />
-                        <span>{item.label}</span>
+                        <CompareCheck active />
+                        <span>{label}</span>
                       </li>
                     ))}
                   </ul>
