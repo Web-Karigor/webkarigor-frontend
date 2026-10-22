@@ -13,6 +13,8 @@ import HrmTeam from "@/components/services/hrm/HrmTeam";
 import HrmPricing from "@/components/services/hrm/HrmPricing";
 import { HRM_METADATA } from "@/lib/hrm-data";
 
+export const revalidate = 900;
+
 export const metadata: Metadata = HRM_METADATA;
 
 export default function HrmServicePage() {

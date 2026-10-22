@@ -13,6 +13,8 @@ import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { METADATA } from "@/lib/software-development-data";
 import "@/styles/service-pages-laptop.css";
 
+export const revalidate = 900;
+
 export const metadata: Metadata = METADATA;
 
 export default function SoftwareDevelopmentServicePage() {

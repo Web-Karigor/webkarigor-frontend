@@ -35,7 +35,7 @@ export default function MobileBrand() {
         onClick={() => {
           if (pathname === "/") scrollAppToTop({ immediate: true });
         }}
-        className={`mobile-brand-word flex h-[1.5em] items-center text-[56px] md:text-[72px]${revealed ? " is-revealed" : ""}`}
+        className={`mobile-brand-word pointer-events-auto flex h-[1.5em] items-center text-[56px] md:text-[72px]${revealed ? " is-revealed" : ""}`}
       >
         <Image
           src="/logo.svg"

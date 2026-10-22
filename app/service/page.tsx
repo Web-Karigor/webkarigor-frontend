@@ -5,6 +5,8 @@ import ServiceMarquee from "@/components/services/ServiceMarquee";
 import ServiceClients from "@/components/services/ServiceClients";
 import "@/styles/service-pages-laptop.css";
 
+export const revalidate = 900;
+
 const ServiceOfferings = dynamic(
   () => import("@/components/services/ServiceOfferings"),
 );

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { findBlogBySlug } from "@/lib/blog-data";
 import type { BlogPostsResponse } from "@/types/blog";
 
+export const revalidate = 900;
+
 function apiUrl() {
   const base = (process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "");
   if (!base) {
@@ -18,7 +20,7 @@ export async function GET(
   const { slug } = await params;
   const res = await fetch(apiUrl(), {
     headers: { Accept: "application/json" },
-    cache: "no-store",
+    next: { revalidate: 900 },
   });
 
   if (!res.ok) {

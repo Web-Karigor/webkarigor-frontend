@@ -8,7 +8,7 @@ export async function proxyPostType(slug: string) {
 
   const res = await fetch(`${base}/api/v1/post-types/${slug}`, {
     headers: { Accept: "application/json" },
-    cache: "no-store",
+    next: { revalidate: 900 },
   });
 
   const text = await res.text();

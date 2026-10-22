@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const revalidate = 900;
+
 type RouteContext = {
   params: Promise<{ slug: string }>;
 };
@@ -23,7 +25,7 @@ export async function GET(_request: Request, context: RouteContext) {
 
   const res = await fetch(`${base}/api/v1/pages/${slug}`, {
     headers: { Accept: "application/json" },
-    cache: "no-store",
+    next: { revalidate: 900 },
   });
 
   const text = await res.text();

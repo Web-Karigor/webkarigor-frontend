@@ -396,7 +396,7 @@ export async function fetchProjectsResponse(): Promise<ProjectsResponse | null> 
   try {
     const res = await fetch(`${base}/api/v1/post-types/projects`, {
       headers: { Accept: "application/json" },
-      next: { revalidate: 300 },
+      next: { revalidate: 900 },
     });
     if (!res.ok) return null;
     return (await res.json()) as ProjectsResponse;

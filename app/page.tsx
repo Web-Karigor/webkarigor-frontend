@@ -6,6 +6,8 @@ import ProjectHoverCursor from "@/components/projects/ProjectHoverCursor";
 import Clients from "@/components/home/Clients";
 import Offerings from "@/components/home/Offerings";
 
+export const revalidate = 900;
+
 /** Below-the-fold: code-split so first paint stays light. SSR kept so layout/SEO unchanged. */
 const AIFeature = dynamic(() => import("@/components/home/AIFeature"));
 const VideoSection = dynamic(() => import("@/components/home/VideoSection"));

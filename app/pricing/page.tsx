@@ -12,6 +12,8 @@ import HomeConsultation from "@/components/home/HomeConsultation";
 import { PRICING_METADATA } from "@/lib/pricing-data";
 import "@/styles/site-pages-laptop.css";
 
+export const revalidate = 900;
+
 export const metadata: Metadata = {
   title: PRICING_METADATA.title,
   description: PRICING_METADATA.description,

@@ -3,6 +3,8 @@ import BlogArticle from "@/components/blog/BlogArticle";
 import { findBlogBySlug, stripHtml } from "@/lib/blog-data";
 import type { BlogPostsResponse } from "@/types/blog";
 
+export const revalidate = 900;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -22,7 +24,7 @@ export async function generateMetadata({
   try {
     const res = await fetch(blogApiUrl(), {
       headers: { Accept: "application/json" },
-      next: { revalidate: 300 },
+      next: { revalidate: 900 },
     });
     if (!res.ok) return { title: "Article — Webkarigor" };
     const json = (await res.json()) as BlogPostsResponse;

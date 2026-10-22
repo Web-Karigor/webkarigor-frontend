@@ -50,11 +50,13 @@ export default function ServiceOfferings() {
   const dragRef = useRef<{
     pointerId: number;
     startX: number;
+    startY: number;
     startScroll: number;
     lastX: number;
     lastT: number;
     velocity: number;
     moved: boolean;
+    captured: boolean;
   } | null>(null);
 
   const clearResumeTimer = () => {
@@ -137,17 +139,20 @@ export default function ServiceOfferings() {
     if (!viewport || maxScroll() <= 0) return;
 
     pauseAuto();
+    const touch = event.pointerType === "touch";
     dragRef.current = {
       pointerId: event.pointerId,
       startX: event.clientX,
+      startY: event.clientY,
       startScroll: viewport.scrollLeft,
       lastX: event.clientX,
       lastT: performance.now(),
       velocity: 0,
       moved: false,
+      captured: !touch,
     };
     setDragging(true);
-    viewport.setPointerCapture(event.pointerId);
+    if (!touch) viewport.setPointerCapture(event.pointerId);
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -163,6 +168,20 @@ export default function ServiceOfferings() {
     drag.lastT = now;
 
     const deltaX = event.clientX - drag.startX;
+    const deltaY = event.clientY - drag.startY;
+
+    if (!drag.captured) {
+      if (Math.abs(deltaY) > 10 && Math.abs(deltaY) > Math.abs(deltaX)) {
+        dragRef.current = null;
+        setDragging(false);
+        pauseAuto(AUTO_SCROLL_MS);
+        return;
+      }
+      if (Math.abs(deltaX) < 8) return;
+      drag.captured = true;
+      viewport.setPointerCapture(event.pointerId);
+    }
+
     if (Math.abs(deltaX) > 6) {
       drag.moved = true;
     }

@@ -3,6 +3,7 @@
 import { useIsFetching } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { refreshScrollTriggers } from "@/lib/gsap";
 import { setSmoothScrollLocked } from "@/lib/smooth-scroll";
 
 /** Minimum time the overlay stays up (avoids blink). */
@@ -28,6 +29,16 @@ function lockScrollChrome() {
 function unlockScrollChrome() {
   document.documentElement.classList.remove("wk-preloader-active");
   setSmoothScrollLocked(false);
+  /*
+    ScrollTrigger and in-view animations measure while the page is locked.
+    iOS does not fire resize when only overflow changes, so sections stay
+    at their hidden start state until something forces a refresh.
+  */
+  requestAnimationFrame(() => {
+    refreshScrollTriggers();
+    window.dispatchEvent(new Event("scroll"));
+  });
+  window.setTimeout(() => refreshScrollTriggers(), 480);
 }
 
 export default function Preloader() {

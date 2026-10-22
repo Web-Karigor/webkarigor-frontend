@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const revalidate = 900;
+
 function softwareDevelopmentPageApiUrl() {
   const base = (process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "");
   if (!base) {
@@ -11,7 +13,7 @@ function softwareDevelopmentPageApiUrl() {
 export async function GET() {
   const res = await fetch(softwareDevelopmentPageApiUrl(), {
     headers: { Accept: "application/json" },
-    cache: "no-store",
+    next: { revalidate: 900 },
   });
 
   const text = await res.text();

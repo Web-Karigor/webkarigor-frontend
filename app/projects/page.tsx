@@ -5,6 +5,8 @@ import ProjectsHero from "@/components/projects/ProjectsHero";
 import { PROJECTS_METADATA } from "@/lib/projects-data";
 import "@/styles/site-pages-laptop.css";
 
+export const revalidate = 900;
+
 export const metadata: Metadata = PROJECTS_METADATA;
 
 export default function ProjectsPage() {

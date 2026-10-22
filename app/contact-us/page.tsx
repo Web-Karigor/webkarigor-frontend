@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import "@/components/contact/ContactPage.css";
 import ContactHero from "@/components/contact/ContactHero";
 
+export const revalidate = 900;
+
 const ContactConnect = dynamic(() => import("@/components/contact/ContactConnect"));
 const ContactCompanyDeck = dynamic(
   () => import("@/components/contact/ContactCompanyDeck"),

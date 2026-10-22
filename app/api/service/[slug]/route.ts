@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const revalidate = 900;
+
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ slug: string }> },
@@ -7,7 +9,7 @@ export async function GET(
   const { slug } = await params;
   const res = await fetch(`http://admin.webkarigor.com/api/service/${slug}`, {
     headers: { Accept: "application/json" },
-    cache: "no-store",
+    next: { revalidate: 900 },
   });
 
   const text = await res.text();

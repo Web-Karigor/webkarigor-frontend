@@ -36,7 +36,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;
+  /* Behind the bar. If Safari drops mask-composite, the gradient cannot cover the buttons. */
+  z-index: 0;
   border-radius: inherit;
   padding: 1.5px;
   box-sizing: border-box;
@@ -72,8 +73,6 @@
   background-color: #fffdf6;
   padding: 0 0.5rem;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
 }
 
 .sticky-nav-cta {

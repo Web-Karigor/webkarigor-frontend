@@ -7,6 +7,8 @@ import "@/styles/service-pages-laptop.css";
 import Services from "@/components/home/Services";
 import Features from "@/components/services/crm/Features";
 
+export const revalidate = 900;
+
 const Offerings = dynamic(
   () => import("@/components/services/crm/Offerings"),
 );

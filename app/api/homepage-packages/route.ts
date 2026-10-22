@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 
+export const revalidate = 900;
+
 const HOMEPAGE_PACKAGES_API = "http://admin.webkarigor.com/api/homepage-packages";
 
 export async function GET() {
   const res = await fetch(HOMEPAGE_PACKAGES_API, {
     headers: { Accept: "application/json" },
-    cache: "no-store",
+    next: { revalidate: 900 },
   });
 
   const text = await res.text();

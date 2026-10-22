@@ -3,12 +3,12 @@
 .team2 {
   position: relative;
   overflow: hidden;
+  /* WebKit lets preserve-3d cards escape overflow:hidden and widen the page. */
+  contain: paint;
   background: #fefcf6;
   padding: 28px 0 8px;
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
+  max-width: 100%;
 }
 
 .team2-container {
@@ -109,15 +109,15 @@
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .team2-tornado-wrapper {
   position: absolute;
   top: 48%;
   left: 50%;
-  width: 100vw;
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
   height: min(52vh, 520px);
   transform: translate(-50%, -50%);
   display: flex;
@@ -232,7 +232,7 @@
   }
 
   .team2-tornado-wrapper {
-    width: 100vw;
+    width: 100%;
     height: min(42vh, 360px);
     top: 50%;
     perspective: 900px;

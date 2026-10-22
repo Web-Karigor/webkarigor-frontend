@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import type { TeamsPost, TeamsResponse } from "@/types/teams";
 
+export const revalidate = 900;
+
 function apiUrl(page = 1) {
   const base = (process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "");
   if (!base) {
@@ -12,7 +14,7 @@ function apiUrl(page = 1) {
 export async function GET() {
   const firstRes = await fetch(apiUrl(1), {
     headers: { Accept: "application/json" },
-    cache: "no-store",
+    next: { revalidate: 900 },
   });
 
   const contentType = firstRes.headers.get("content-type") || "application/json";
@@ -31,7 +33,7 @@ export async function GET() {
   for (let page = 2; page <= lastPage; page += 1) {
     const res = await fetch(apiUrl(page), {
       headers: { Accept: "application/json" },
-      cache: "no-store",
+      next: { revalidate: 900 },
     });
     if (!res.ok) continue;
     const json = (await res.json()) as TeamsResponse;

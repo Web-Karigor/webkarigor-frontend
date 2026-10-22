@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Manrope, Montserrat, MuseoModerno } from "next/font/google";
 import "./globals.css";
 import "@/styles/section-shared.css";
@@ -16,6 +16,7 @@ import GsapProvider from "@/components/providers/GsapProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 
+export const revalidate = 900;
 
 const inter = Inter({
   subsets: ["latin"],
@@ -52,6 +53,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.png",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

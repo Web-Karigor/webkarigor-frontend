@@ -19,6 +19,8 @@ import {
 } from "@/lib/projects";
 import "@/styles/site-pages-laptop.css";
 
+export const revalidate = 900;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };

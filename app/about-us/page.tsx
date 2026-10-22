@@ -5,6 +5,8 @@ import AboutImpact from "@/components/about/AboutImpact";
 import { ABOUT_METADATA } from "@/lib/about-data";
 import "@/styles/site-pages-laptop.css";
 
+export const revalidate = 900;
+
 const AboutVision = dynamic(() => import("@/components/about/AboutVision"));
 const AboutCapabilities = dynamic(
   () => import("@/components/about/AboutCapabilities"),

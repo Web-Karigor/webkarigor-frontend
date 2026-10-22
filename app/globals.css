@@ -20,11 +20,22 @@
     @apply border-border;
   }
   html {
-    overflow-x: clip;
     overflow-anchor: none;
-    overscroll-behavior-y: none;
-    /* Reserve scrollbar space so lock/unlock does not shift layout width */
-    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /*
+      Do not clip or gutter the root on touch browsers. iOS Safari treats
+      overflow on html as a containing block, which detaches position:fixed
+      (the phone navbar) and can stop the rest of the page from painting.
+    */
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html {
+      overflow-x: clip;
+      overscroll-behavior-y: none;
+      scrollbar-gutter: stable;
+    }
   }
 
   body {
@@ -36,6 +47,14 @@
   html.wk-preloader-active,
   html.wk-preloader-active body {
     overflow: hidden !important;
+  }
+
+  /* overflow:hidden on the root detaches position:fixed on iOS and leaves sections unpainted. */
+  @media (hover: none) and (pointer: coarse) {
+    html.wk-preloader-active,
+    html.wk-preloader-active body {
+      overflow: visible !important;
+    }
   }
 
   .wk-preloader {

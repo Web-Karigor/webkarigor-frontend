@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import TeamSection from "@/components/team/TeamSection";
 
+export const revalidate = 900;
+
 export const metadata: Metadata = {
   title: "Team — Webkarigor",
   description:

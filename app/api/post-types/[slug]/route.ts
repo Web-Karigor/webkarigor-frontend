@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { proxyPostType } from "@/lib/proxy-post-type";
 
+export const revalidate = 900;
+
 type RouteContext = {
   params: Promise<{ slug: string }>;
 };

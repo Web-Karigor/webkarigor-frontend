@@ -91,7 +91,6 @@ export default function Case() {
           end: () => `+=${scrollStepsPx(Math.max(cards.length - 1, 1))}`,
           pin: pinRef.current,
           pinSpacing: true,
-          pinType: "fixed",
           scrub: true,
           anticipatePin: 0,
           fastScrollEnd: false,

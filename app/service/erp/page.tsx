@@ -12,6 +12,8 @@ import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { ERP_METADATA } from "@/lib/erp-data";
 import "@/styles/service-pages-laptop.css";
 
+export const revalidate = 900;
+
 export const metadata: Metadata = ERP_METADATA;
 
 export default function ErpServicePage() {

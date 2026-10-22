@@ -12,6 +12,8 @@ import ServiceMarquee from "@/components/services/ServiceMarquee";
 import { ECO_METADATA } from "@/lib/ecommerce-data";
 import "@/styles/service-pages-laptop.css";
 
+export const revalidate = 900;
+
 export const metadata: Metadata = ECO_METADATA;
 
 export default function EcommerceServicePage() {
