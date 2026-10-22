@@ -746,7 +746,9 @@
 
   .service_card_title {
     max-width: none;
-    font-size: clamp(1.35rem, 6vw, 1.75rem);
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
     margin-bottom: 8px;
     white-space: normal;
   }
@@ -783,7 +785,7 @@
   }
 
   .service-card-platforms-label {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .service-card-platforms-list {
@@ -857,10 +859,27 @@
   .service-card-media {
     width: 100%;
     max-width: 326px;
-    height: 268px;
-    min-height: 268px;
+    height: 200px;
+    min-height: 200px;
+    aspect-ratio: auto;
     margin: 0 auto;
     border-radius: 24px;
+  }
+
+  .service-card-tags {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .service_card_title {
+    font-size: 18px;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    margin-bottom: 6px;
+  }
+
+  .service-card-platforms-label {
+    font-size: 15px;
   }
 
   .service-card-title {
@@ -886,11 +905,11 @@
     position: relative;
     flex-shrink: 0;
     width: 100%;
-    max-width: 326px;
-    margin-top: auto;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 16px;
+    max-width: none;
+    margin-top: 4px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 12px;
   }
 
   .service-card-author::before {

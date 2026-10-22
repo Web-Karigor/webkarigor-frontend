@@ -3,6 +3,22 @@
    PRICING SECTION
 ========================= */
 
+/*
+  iOS Safari drops later sections when a large filter is on screen, and it
+  often never fires the in-view callback that fades these blocks in. Keep the
+  fade on desktop; on a phone the sections stay painted.
+*/
+@media (hover: none) and (pointer: coarse) {
+  .pricing-hero-filter-glow {
+    display: none !important;
+  }
+
+  .pricing-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 .pricing-section {
   padding: clamp(48px, 8vw, 96px) 0;
 }

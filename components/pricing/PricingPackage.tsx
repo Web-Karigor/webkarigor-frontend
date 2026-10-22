@@ -47,7 +47,7 @@ export default function PricingPackage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={vp}
           transition={{ duration: 0.9, ease }}
-          className="relative mx-auto overflow-hidden rounded-[24px] bg-black sm:rounded-[36px] lg:rounded-[48px]"
+          className="pricing-reveal relative mx-auto overflow-hidden rounded-[24px] bg-black sm:rounded-[36px] lg:rounded-[48px]"
           style={{
             maxWidth: PACKAGE_W,
           }}

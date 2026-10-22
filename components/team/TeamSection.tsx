@@ -166,6 +166,7 @@ export default function TeamSection() {
                         <div className="teammate_popup" aria-hidden={!isOpen}>
                           <div className="teammate_popup_content">
                             <div className="teammate_popup_heading">{member.name}</div>
+                            <div className="teammate_popup_role">{member.role}</div>
                             <div
                               className="teammate_popup_bio"
                               dangerouslySetInnerHTML={{ __html: member.bio }}

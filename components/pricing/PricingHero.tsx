@@ -115,7 +115,7 @@ export default function PricingHero() {
         >
           {/* ——— Gradients between cards (the red-circle spots) ——— */}
           <div
-            className="pointer-events-none absolute inset-0 z-0 hidden lg:block"
+            className="pricing-hero-filter-glow pointer-events-none absolute inset-0 z-0 hidden lg:block"
             aria-hidden
           >
             {GAP_GLOWS.map((left) => (
@@ -154,23 +154,23 @@ export default function PricingHero() {
             ))}
           </div>
 
-          {/* Mobile / tablet: softer gap glows still visible */}
+          {/* Mobile / tablet: gradient only. A CSS blur here blanks later sections on iOS. */}
           <div
             className="pointer-events-none absolute inset-0 z-0 lg:hidden"
             aria-hidden
           >
             <div
-              className="absolute left-1/2 top-1/4 h-[199px] w-[199px] -translate-x-1/2 rounded-full"
+              className="absolute left-1/2 top-[18%] h-[220px] w-[220px] -translate-x-1/2 rounded-full"
               style={{
-                background: "linear-gradient(180deg, #AEFFDF 0%, #FFF68F 100%)",
-                filter: "blur(120px)",
+                background:
+                  "radial-gradient(circle, rgba(174,255,223,0.9) 0%, rgba(255,246,143,0.35) 46%, rgba(248,246,239,0) 72%)",
               }}
             />
             <div
-              className="absolute left-1/2 top-3/4 h-[199px] w-[199px] -translate-x-1/2 rounded-full"
+              className="absolute left-1/2 top-[68%] h-[220px] w-[220px] -translate-x-1/2 rounded-full"
               style={{
-                background: "linear-gradient(180deg, #AEFFDF 0%, #FFF68F 100%)",
-                filter: "blur(120px)",
+                background:
+                  "radial-gradient(circle, rgba(174,255,223,0.9) 0%, rgba(255,246,143,0.35) 46%, rgba(248,246,239,0) 72%)",
               }}
             />
           </div>
@@ -187,7 +187,7 @@ export default function PricingHero() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
                   transition={{ duration: 0.8, delay: index * 0.06, ease }}
-                  className="pricing-hero-card relative flex w-full max-w-[370px] flex-col gap-4 rounded-[20px] p-5 sm:gap-5 sm:p-6 lg:min-h-[329px] lg:p-8"
+                  className="pricing-reveal pricing-hero-card relative flex w-full max-w-[370px] flex-col gap-4 rounded-[20px] p-5 sm:gap-5 sm:p-6 lg:min-h-[329px] lg:p-8"
                   style={{
                     backgroundColor: PR.heroCard.bg,
                     boxShadow: PR.heroCard.shadow,

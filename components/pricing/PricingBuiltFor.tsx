@@ -48,7 +48,7 @@ export default function PricingBuiltFor() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={vp}
           transition={{ duration: 0.85, ease }}
-          className="mx-auto flex flex-col gap-12"
+          className="pricing-reveal mx-auto flex flex-col gap-12"
           style={{ maxWidth: BUILT_FOR_W }}
         >
           <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">

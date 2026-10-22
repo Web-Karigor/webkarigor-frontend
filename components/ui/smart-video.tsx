@@ -134,6 +134,8 @@ export function SmartVideo({
       muted={muted}
       loop
       playsInline
+      controls={false}
+      disablePictureInPicture
       preload="metadata"
     />
   );

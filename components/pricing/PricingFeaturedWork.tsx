@@ -71,7 +71,7 @@ export default function PricingFeaturedWork() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={vp}
           transition={{ duration: 0.85, ease }}
-          className="mx-auto"
+          className="pricing-reveal mx-auto"
           style={{ maxWidth: FEATURED_W }}
         >
           <h2 className="m-0 mx-auto max-w-[900px] text-center font-montserrat text-[clamp(28px,3.6vw,48px)] font-bold leading-[1.2] tracking-[-0.03em] text-white">
@@ -96,6 +96,7 @@ export default function PricingFeaturedWork() {
               {[topLeft, topRight].map((item, index) => (
                 <motion.div
                   key={item.id}
+                  className="pricing-reveal"
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
@@ -115,6 +116,7 @@ export default function PricingFeaturedWork() {
               {[bottomLeft, bottomMid, bottomRight].map((item, index) => (
                 <motion.div
                   key={item.id}
+                  className="pricing-reveal"
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
