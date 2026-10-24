@@ -54,40 +54,75 @@ function ArrowIcon() {
 
 export default function ThankYouPage() {
   return (
-    <section className="thank-you" aria-labelledby="thank-you-heading">
-      <div className="thank-you-orb" aria-hidden />
-      <div className="thank-you-card">
-        <div className="thank-you-mark">
+    <section
+      className="relative isolate flex min-h-screen min-h-[100dvh] items-center justify-center overflow-hidden px-4 py-8 sm:px-6 sm:py-12 mt-5"
+      aria-labelledby="thank-you-heading"
+    >
+      <div
+        className="pointer-events-none absolute -right-16 top-10 -z-10 h-48 w-48 rounded-full bg-indigo-500/15 blur-3xl sm:right-10 sm:h-80 sm:w-80"
+        aria-hidden="true"
+      />
+
+      <div className="w-full max-w-3xl rounded-2xl border border-gray-200/20 p-5 shadow-xl sm:p-8 md:p-12">
+        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full sm:mb-6 sm:h-16 sm:w-16">
           <CheckIcon />
         </div>
-        <p className="thank-you-badge">
-          <span className="thank-you-badge-text">Message received</span>
+
+        <p className="mb-4 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold sm:mb-5 sm:text-sm">
+          <span className="thank-you-badge-text">
+            Message received
+          </span>
         </p>
-        <h1 id="thank-you-heading" className="thank-you-title">
+
+        <h1
+          id="thank-you-heading"
+          className="mb-4 text-3xl font-bold leading-tight tracking-tight sm:mb-5 sm:text-4xl md:text-5xl"
+        >
           Thank you
-          <span className="thank-you-title-accent">we’ll take it from here</span>
+          <span className="mt-2 block text-2xl leading-snug sm:text-3xl md:text-4xl">
+            we’ll take it from here
+          </span>
         </h1>
-        <p className="thank-you-desc">
+
+        <p className="mb-7 max-w-xl text-sm leading-7 sm:mb-8 sm:text-base">
           Your request is in. We’ll get back to you shortly with a clear next
           step for the project.
         </p>
 
-        <ol className="thank-you-steps">
+        <ol className="mb-7 grid grid-cols-1 gap-6 border-y border-gray-200/20 py-6 sm:mb-9 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
           {steps.map((step, index) => (
-            <li key={step.title} className="thank-you-step">
-              <span className="thank-you-step-index">0{index + 1}</span>
-              <h2 className="thank-you-step-title">{step.title}</h2>
-              <p className="thank-you-step-text">{step.text}</p>
+            <li
+              key={step.title}
+              className="grid min-w-0 grid-cols-[2rem_minmax(0,1fr)] gap-x-3 sm:block"
+            >
+              <span className="row-span-2 mb-3 text-sm font-semibold opacity-60">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <h2 className="mb-2 text-base font-semibold leading-snug sm:text-lg">
+                {step.title}
+              </h2>
+
+              <p className="text-sm leading-6 opacity-80 sm:leading-7">
+                {step.text}
+              </p>
             </li>
           ))}
         </ol>
 
-        <div className="thank-you-actions">
-          <Link href="/" className="thank-you-btn">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Link
+            href="/"
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-center text-sm font-semibold transition-transform hover:-translate-y-0.5 sm:w-auto sm:text-base"
+          >
             <span>Back to home</span>
             <ArrowIcon />
           </Link>
-          <Link href="/projects" className="thank-you-btn thank-you-btn--ghost">
+
+          <Link
+            href="/projects"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-xl px-5 py-3 text-center text-sm font-semibold transition-transform hover:-translate-y-0.5 sm:w-auto sm:text-base"
+          >
             <span>See our work</span>
           </Link>
         </div>
