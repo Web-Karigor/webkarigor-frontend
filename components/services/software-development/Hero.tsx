@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Phone } from "lucide-react";
+import { openConsultationModal } from "@/components/home/ConsultationModal";
 import { useSoftwareDevelopmentPageQuery } from "@/hooks/queries/useSoftwareDevelopmentPageQuery";
 import {
   parseSdContact,
@@ -10,7 +10,6 @@ import {
 } from "@/lib/software-development-page";
 
 const DOODLE_SRC = "/manpower/vector-16.png";
-const PRIMARY_CTA_HREF = "#contact";
 
 /** Doodle positions — layout only */
 const DOODLE_LAYOUT = [
@@ -85,12 +84,13 @@ export default function Hero() {
             </p>
 
             <div className="mt-6 flex w-full max-w-[520px] flex-col gap-3 md:mt-8 md:flex-row md:flex-wrap md:items-center md:gap-4">
-              <Link
-                href={PRIMARY_CTA_HREF}
-                className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"
+              <button
+                type="button"
+                onClick={() => openConsultationModal()}
+                className="inline-flex cursor-pointer items-center justify-center rounded-full border-0 bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"
               >
                 {buttonText}
-              </Link>
+              </button>
               <a
                 href={telHref}
                 className="mt-3 inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-4 py-2.5 font-montserrat text-[13px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] sm:mt-4 sm:w-fit sm:justify-start sm:text-[14px]"

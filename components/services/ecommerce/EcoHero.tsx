@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Phone } from "lucide-react";
+import { openConsultationModal } from "@/components/home/ConsultationModal";
 import { SERVICE_PAGE_GUTTER } from "@/lib/service-layout";
 import { ECO_HERO } from "@/lib/ecommerce-data";
 
@@ -74,12 +74,13 @@ export default function EcoHero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link
-              href={ECO_HERO.primaryCta.href}
-              className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"
+            <button
+              type="button"
+              onClick={() => openConsultationModal()}
+              className="inline-flex cursor-pointer items-center justify-center rounded-full border-0 bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90"
             >
               {ECO_HERO.primaryCta.label}
-            </Link>
+            </button>
             <a
               href={`tel:${ECO_HERO.hotline.replace(/-/g, "")}`}
               className="inline-flex items-center gap-2.5 rounded-full border border-[#1f1e1c] bg-transparent px-5 py-3.5 font-montserrat text-[14px] font-semibold text-black transition-colors hover:bg-black/[0.03]"
@@ -138,12 +139,13 @@ export default function EcoHero() {
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <Link
-              href={ECO_HERO.primaryCta.href}
-              className="inline-flex items-center justify-center rounded-full bg-[#0EC47B] px-7 py-3.5 font-montserrat text-[14px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)]"
+            <button
+              type="button"
+              onClick={() => openConsultationModal()}
+              className="inline-flex cursor-pointer items-center justify-center rounded-full border-0 bg-[#0EC47B] px-7 py-3.5 font-montserrat text-[14px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)]"
             >
               {ECO_HERO.primaryCta.label}
-            </Link>
+            </button>
             <a
               href={`tel:${ECO_HERO.hotline.replace(/-/g, "")}`}
               className="inline-flex items-center gap-2 rounded-full border border-[#1f1e1c] bg-transparent px-4 py-3 font-montserrat text-[13px] font-semibold text-black"

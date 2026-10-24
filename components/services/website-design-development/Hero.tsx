@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Phone } from "lucide-react";
+import { openConsultationModal } from "@/components/home/ConsultationModal";
 import { useWebDesignDevelopmentPageQuery } from "@/hooks/queries/useWebDesignDevelopmentPageQuery";
 import {
   parseWddContact,
@@ -11,7 +11,6 @@ import {
 } from "@/lib/web-design-development-page";
 
 const TITLE_UNDERLINE = "/services/service-hero-underline.png";
-const PRIMARY_CTA_HREF = "#contact";
 
 export default function Hero() {
   const { data } = useWebDesignDevelopmentPageQuery();
@@ -71,12 +70,13 @@ export default function Hero() {
             </p>
 
             <div className="mt-8 flex w-full flex-col items-stretch gap-3 md:flex-row md:flex-wrap md:items-center md:gap-4">
-              <Link
-                href={PRIMARY_CTA_HREF}
-                className="inline-flex w-full items-center justify-center rounded-full bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90 md:w-auto"
+              <button
+                type="button"
+                onClick={() => openConsultationModal()}
+                className="inline-flex w-full cursor-pointer items-center justify-center rounded-full border-0 bg-[#0EC47B] px-8 py-3.5 font-montserrat text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(14,196,123,0.35)] transition-opacity hover:opacity-90 md:w-auto"
               >
                 {buttonText}
-              </Link>
+              </button>
               <a
                 href={telHref}
                 className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-5 py-3.5 font-montserrat text-[14px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] md:w-auto"

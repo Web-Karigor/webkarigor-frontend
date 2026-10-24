@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import ConsultationForm from "@/components/home/ConsultationForm";
 import "@/components/home/HomeConsultation.css";
@@ -17,6 +18,7 @@ export type { QuotationContext };
 export { openConsultationModal, getQuotationContext };
 
 export default function ConsultationModal() {
+  const router = useRouter();
   const open = useConsultationStore((s) => s.open);
   const closeModal = useConsultationStore((s) => s.closeModal);
 
@@ -77,7 +79,8 @@ export default function ConsultationModal() {
           <ConsultationForm
             showWhatsApp
             onSuccess={() => {
-              window.setTimeout(() => closeModal(), 1600);
+              closeModal();
+              router.push("/thank-you");
             }}
           />
         </div>
