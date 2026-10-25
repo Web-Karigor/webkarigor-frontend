@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiFetch } from "@/lib/apiFetch";
+import { retryTransientQueryError } from "@/lib/query-retry";
 import type { ServicesResponse } from "@/types/service";
 
 export function useServicesQuery() {
@@ -7,6 +8,7 @@ export function useServicesQuery() {
     queryKey: ["services"],
     queryFn: () => apiFetch<ServicesResponse>(`/services`),
     staleTime: 1000 * 60 * 60,
+    retry: retryTransientQueryError,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,

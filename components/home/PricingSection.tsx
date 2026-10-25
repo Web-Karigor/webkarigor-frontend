@@ -131,7 +131,7 @@ export default function PricingSection({
     ? (SERVICE_PRICING_POST[serviceSlug] ?? "")
     : "";
   const pricingPage = usePricingPageQuery(fromPackages);
-  const homePage = useHomePageQuery();
+  const homePage = useHomePageQuery(isHome && !headingSlug);
   const plansHeader = useMemo(() => {
     const staticKey =
       headingSlug || (serviceSlug && !isHome ? serviceSlug : "");

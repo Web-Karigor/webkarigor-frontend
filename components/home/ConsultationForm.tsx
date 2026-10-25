@@ -242,7 +242,10 @@ export default function ConsultationForm({
   const pathname = usePathname();
   const quotation = useQuotationMutation();
   const { data: servicesData } = useServicesQuery();
-  const { data: packagesData } = useHomepagePackagesQuery();
+  const quotationContext = getQuotationContext();
+  const needsPackageLookup =
+    quotationContext.packageId !== null && !quotationContext.packageName;
+  const { data: packagesData } = useHomepagePackagesQuery(needsPackageLookup);
   const { contact } = usePageContactQuery();
   const talkPrompt =
     contact?.prefer_talk_title?.trim() || "Prefer to talk first?";
