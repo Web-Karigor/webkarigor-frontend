@@ -6,7 +6,7 @@ import type { ServicesResponse } from "@/types/service";
 export function useServicesQuery() {
   return useQuery<ServicesResponse, Error>({
     queryKey: ["services"],
-    queryFn: () => apiFetch<ServicesResponse>(`/services`),
+    queryFn: () => apiFetch<ServicesResponse>(`/post-types/services-menu`),
     staleTime: 1000 * 60 * 60,
     retry: retryTransientQueryError,
     refetchOnWindowFocus: false,
