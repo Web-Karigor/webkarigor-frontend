@@ -11,7 +11,10 @@ import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
 import { homeSectionItem } from "@/lib/home-page";
 import { HOME_PRICING_LABELS } from "@/lib/home-static";
 import { mapPricingPosts } from "@/lib/pricing-posts";
-import { mapPackagesHeadingItem, mapPricingPlansHeader } from "@/lib/pricing-page";
+import {
+  mapPackagesHeadingItem,
+  mapPricingPlansHeader,
+} from "@/lib/pricing-page";
 import { SERVICE_PRICING_HEADINGS } from "@/lib/service-pricing-headings";
 import {
   formatPackageOriginalPrice,
@@ -64,10 +67,34 @@ function CustomPriceIcon() {
       aria-hidden
       className="home-pricing-custom-icon"
     >
-      <rect x="2" y="14" width="12" height="24" rx="6" stroke="#111" strokeWidth="2" />
-      <rect x="22" y="2" width="12" height="36" rx="6" stroke="#111" strokeWidth="2" />
+      <rect
+        x="2"
+        y="14"
+        width="12"
+        height="24"
+        rx="6"
+        stroke="#111"
+        strokeWidth="2"
+      />
+      <rect
+        x="22"
+        y="2"
+        width="12"
+        height="36"
+        rx="6"
+        stroke="#111"
+        strokeWidth="2"
+      />
       <circle cx="28" cy="10" r="3.5" fill="#16c784" />
-      <rect x="42" y="10" width="12" height="28" rx="6" stroke="#111" strokeWidth="2" />
+      <rect
+        x="42"
+        y="10"
+        width="12"
+        height="28"
+        rx="6"
+        stroke="#111"
+        strokeWidth="2"
+      />
     </svg>
   );
 }
@@ -99,12 +126,17 @@ export default function PricingSection({
   fromPackages?: boolean;
 } = {}) {
   const isHome = !serviceSlug && !fromPackages;
-  const pricingPostSlug = serviceSlug ? SERVICE_PRICING_POST[serviceSlug] ?? "" : "";
+  const pricingPostSlug = serviceSlug
+    ? (SERVICE_PRICING_POST[serviceSlug] ?? "")
+    : "";
   const pricingPage = usePricingPageQuery(fromPackages);
   const homePage = useHomePageQuery(isHome);
   const plansHeader = useMemo(() => {
-    const staticKey = headingSlug || (serviceSlug && !isHome ? serviceSlug : "");
-    const staticHeading = staticKey ? SERVICE_PRICING_HEADINGS[staticKey] ?? null : null;
+    const staticKey =
+      headingSlug || (serviceSlug && !isHome ? serviceSlug : "");
+    const staticHeading = staticKey
+      ? (SERVICE_PRICING_HEADINGS[staticKey] ?? null)
+      : null;
     if (fromPackages) return mapPricingPlansHeader(pricingPage.data);
     if (isHome && !headingSlug) {
       return mapPackagesHeadingItem(
@@ -112,7 +144,14 @@ export default function PricingSection({
       );
     }
     return staticHeading;
-  }, [fromPackages, isHome, serviceSlug, headingSlug, pricingPage.data, homePage.data]);
+  }, [
+    fromPackages,
+    isHome,
+    serviceSlug,
+    headingSlug,
+    pricingPage.data,
+    homePage.data,
+  ]);
   const labels = isHome
     ? HOME_PRICING_LABELS
     : pricingPostSlug
@@ -134,7 +173,10 @@ export default function PricingSection({
 
   const homePlans = usePricingHomeQuery(isHome);
   const pagePlans = usePricingPostsQuery("pricing", fromPackages);
-  const servicePlans = usePricingPostsQuery(pricingPostSlug, Boolean(pricingPostSlug));
+  const servicePlans = usePricingPostsQuery(
+    pricingPostSlug,
+    Boolean(pricingPostSlug),
+  );
   const service = useServiceQuery(serviceSlug ?? "");
 
   const packages: HomepagePackage[] = useMemo(() => {
@@ -244,8 +286,12 @@ export default function PricingSection({
                       width={174}
                       height={34}
                       className="home-pricing-popular-badge-img"
-                      unoptimized loading="lazy"/>
-                    <span className="home-pricing-popular-badge-text">{popularLabel}</span>
+                      unoptimized
+                      loading="lazy"
+                    />
+                    <span className="home-pricing-popular-badge-text">
+                      {popularLabel}
+                    </span>
                   </div>
                 ) : null}
 
@@ -266,7 +312,10 @@ export default function PricingSection({
                       </span>
 
                       {isPopular ? (
-                        <div className="home-pricing-marquee" aria-label={availText}>
+                        <div
+                          className="home-pricing-marquee"
+                          aria-label={availText}
+                        >
                           <div className="home-pricing-marquee-track">
                             {Array.from({ length: 8 }).map((_, i) => (
                               <span key={i}>{availText}</span>
@@ -274,7 +323,9 @@ export default function PricingSection({
                           </div>
                         </div>
                       ) : (
-                        <span className="home-pricing-avail-text">{availText}</span>
+                        <span className="home-pricing-avail-text">
+                          {availText}
+                        </span>
                       )}
                     </div>
                   ) : (
@@ -307,11 +358,13 @@ export default function PricingSection({
                     serviceId={serviceId ?? pkg.service?.id ?? null}
                     serviceName={service.data?.data.service.title ?? null}
                   >
-                    {customPrice ? "Contact Us" : "Book Now"}
+                    {customPrice ? "Contact Us" : "Get A Quote"}
                   </PricingCtaButton>
 
                   <div className="home-pricing-features">
-                    <p className="home-pricing-features-title">{featuresHeading}</p>
+                    <p className="home-pricing-features-title">
+                      {featuresHeading}
+                    </p>
                     <ul className="home-pricing-features-list">
                       {(pkg.features ?? []).map((feature, index) => (
                         <li key={`${pkg.id}-${index}`}>

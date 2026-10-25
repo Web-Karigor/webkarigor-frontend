@@ -32,7 +32,7 @@ export default function BlogList() {
   const hasMore = visibleCount < posts.length;
 
   return (
-    <section className="relative overflow-hidden bg-[#FFFDF6] pb-16 pt-[112px] sm:pb-20 sm:pt-[132px] lg:pb-28 lg:pt-[156px]">
+    <section className="relative overflow-hidden bg-[#FFFDF6] pb-16 pt-6 sm:pb-20 sm:pt-6 md:pt-[132px] lg:pb-28 lg:pt-[156px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-[320px]"

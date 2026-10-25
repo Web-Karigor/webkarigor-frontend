@@ -61,6 +61,9 @@ export default function HomeBanner() {
             <button
               type="button"
               onClick={openConsultationModal}
+              data-gtm-cta="true"
+              data-cta-id="home-banner-consultation"
+              data-cta-location="home_banner"
               className="w-full sm:w-auto rounded-xl bg-black px-6 sm:px-7 py-3 font-montserrat text-base sm:text-lg md:text-[18px] font-medium capitalize text-white transition hover:bg-[#1a1a1a]"
               style={{ minWidth: "min(100%, 170px)" }}
             >

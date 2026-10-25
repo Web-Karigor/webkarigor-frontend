@@ -77,7 +77,9 @@ export default function ConsultationModal() {
 
         <div className="consultation-modal-body">
           <ConsultationForm
+            hideSchedule
             showWhatsApp
+            formLocation="consultation_modal"
             onSuccess={() => {
               closeModal();
               router.push("/thank-you");

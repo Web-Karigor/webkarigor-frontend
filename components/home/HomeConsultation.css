@@ -245,7 +245,7 @@
 }
 
 .home-consultation-form-grid--two {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr) !important;
 }
 
 .home-consultation-field {
@@ -861,7 +861,7 @@
 
 @media (min-width: 1024px) {
   .home-consultation-layout {
-    grid-template-columns: 500px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 72px;
     align-items: start;
   }
@@ -896,7 +896,7 @@
   }
 
   .home-consultation-form-grid--two {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr) !important;
   }
 
   .home-consultation-schedule {
@@ -917,7 +917,7 @@
   }
 
   .home-consultation-layout {
-    grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(28px, 3vw, 48px);
   }
 
@@ -1091,7 +1091,7 @@
 
 @media (min-width: 768px) {
   .consultation-modal-panel .home-consultation-form-grid--two {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .consultation-modal-panel .home-consultation-schedule {
@@ -1133,6 +1133,43 @@
 
   .consultation-modal-body {
     padding: 24px 28px 22px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .consultation-modal-panel .home-consultation-form {
+    flex: 1;
+    min-height: 100%;
+  }
+
+  .consultation-modal-panel .home-consultation-actions.has-whatsapp {
+    margin-top: auto;
+  }
+
+  .consultation-modal-panel .home-consultation-actions.has-whatsapp > div {
+    position: absolute;
+    left: 20px;
+    right: calc(50% + 20px);
+    bottom: 20px;
+    z-index: 1;
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 12px;
+    width: auto;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.56);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(8px);
+  }
+
+  .consultation-modal-panel .home-consultation-actions.has-whatsapp > div p {
+    color: #fff;
+  }
+
+  .consultation-modal-panel .home-consultation-actions.has-whatsapp .home-consultation-submit {
+    margin-top: auto;
   }
 }
 

@@ -14,10 +14,7 @@
       "href": "https://wa.me/8801624283328",
       "label": "Say hello: +880 1624-283328"
     },
-    "titleLines": [
-      "Bespoke Custom CRM Software",
-      "Develop Services"
-    ],
+    "titleLines": ["Bespoke Custom CRM Software", "Develop Services"],
     "description": "Web Karigor is a CRM software development company that brings together business thinking, design, modern technology and scalable architecture to provide CRM software solutions based on real business needs. It's not just about writing code; it's about crafting a CRM system that can be used and adapted to meet changing needs.",
     "form": {
       "placeholders": {
@@ -295,12 +292,7 @@
         "alt": "Design review session"
       }
     },
-    "hireUsLabels": [
-      "HIRE US",
-      "HIRE US",
-      "HIRE US",
-      "HIRE US"
-    ],
+    "hireUsLabels": ["HIRE US", "HIRE US", "HIRE US", "HIRE US"],
     "features": [
       {
         "title": "Business-Focused CRM Solutions",
@@ -333,12 +325,7 @@
       "reviewsLabel": "(100+ Reviews)",
       "headline": "Customer experience that speak for them selves"
     },
-    "avatars": [
-      "/sm1.webp",
-      "/sm2.webp",
-      "/sm3.webp",
-      "/sm4.webp"
-    ],
+    "avatars": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"],
     "items": [
       {
         "quote": "We were getting a lot of property enquiries, but keeping track of every follow-up was becoming difficult. The CRM lead pipeline gives our sales team a much clearer picture of where each prospect stands. The property enquiry workflow has been particularly useful.",
@@ -496,14 +483,8 @@
   "team": {
     "mobileTitle": "Smart Team",
     "mobileSubtitle": "Big Result",
-    "desktopExpertLines": [
-      "Expert",
-      "Team"
-    ],
-    "desktopResultLines": [
-      "Smarter",
-      "Solutions"
-    ],
+    "desktopExpertLines": ["Expert", "Team"],
+    "desktopResultLines": ["Smarter", "Solutions"],
     "cardAriaLabel": "Team member",
     "members": [
       {
@@ -550,7 +531,7 @@
     "title": "Fair Pricing for Your Product",
     "description": "Our packages are designed to fit your product's stage and ambition. Flexible, transparent, and customizable based on what your business truly needs.",
     "whatYouGetLabel": "What you get:",
-    "ctaLabel": "Book Now",
+    "ctaLabel": "Get A Quote",
     "sharedFeatures": [
       "User research and product discovery sessions",
       "End-to-end UX/UI design for the full product",

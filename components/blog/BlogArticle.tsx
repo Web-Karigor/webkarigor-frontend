@@ -87,7 +87,7 @@ export default function BlogArticle({ slug }: { slug: string }) {
   );
 
   return (
-    <article className="bg-[#FFFDF6] pb-16 pt-[112px] sm:pb-20 sm:pt-[132px] lg:pb-24 lg:pt-[156px]">
+    <article className="bg-[#FFFDF6] pb-16 pt-6 sm:pb-20 sm:pt-6 md:pt-[132px] lg:pb-24 lg:pt-[156px]">
       <div className="mx-auto w-full max-w-[820px] px-[clamp(16px,4vw,40px)]">
         <header>
           <BackLink />

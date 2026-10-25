@@ -12,7 +12,7 @@ export default function AboutHero() {
   if (!hero.images.length && !hero.title) return null;
 
   return (
-    <section className="about-hero relative overflow-x-clip bg-[#FFFEFB] pt-[110px] sm:pt-[130px] lg:pt-[150px]">
+    <section className="about-hero relative overflow-x-clip bg-[#FFFEFB] pt-6 sm:pt-6 md:pt-[130px] lg:pt-[150px]">
       <div className="w-full">
         {hero.images.length ? <Carousel images={hero.images} /> : null}
       </div>

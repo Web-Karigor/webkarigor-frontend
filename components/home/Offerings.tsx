@@ -401,14 +401,14 @@ export default function Offerings({
                       }`}
                     >
                       <div className="flex items-center gap-[14px]">
-                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
+                        <span className="inline-flex lg:h-9 lg:w-9 h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white">
                           <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
                         </span>
-                        <h3 className="m-0 font-montserrat text-xl font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
+                        <h3 className="m-0 font-montserrat lg:text-xl text-base font-bold leading-[1.2] tracking-[-0.02em] text-[#111827]">
                           {item.title}
                         </h3>
                       </div>
-                      <p className="m-0 font-montserrat text-[0.9375rem] leading-[1.65] text-[#111827]">
+                      <p className="m-0 font-montserrat lg:text-[0.9375rem] text-sm leading-[1.65] text-[#111827]">
                         {item.description}
                       </p>
                     </article>

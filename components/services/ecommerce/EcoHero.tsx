@@ -118,7 +118,7 @@ export default function EcoHero() {
       </div>
 
       {/* Mobile */}
-      <div className="relative mx-auto flex w-full max-w-[1920px] flex-col px-[clamp(16px,4vw,40px)] pb-16 pt-[128px] lg:hidden">
+      <div className="relative mx-auto flex w-full max-w-[1920px] flex-col px-[clamp(16px,4vw,40px)] pb-16 pt-6 lg:hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[100px]"
