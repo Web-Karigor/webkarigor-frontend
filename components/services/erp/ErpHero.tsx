@@ -15,8 +15,10 @@ const TITLE_UNDERLINE = "/services/service-hero-underline.png";
 
 export default function ErpHero() {
   const { data } = useErpPageQuery();
+  console.log(data);
   const item = erpSectionItem(data?.data?.sections?.hero);
 
+  console.log(item);
   if (!item) return null;
 
   const title = item.title?.trim() ?? "";
