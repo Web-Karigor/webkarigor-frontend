@@ -4,7 +4,7 @@ import type { WebDesignDevelopmentPageResponse } from "@/types/web-design-develo
 
 export function useWebDesignDevelopmentPageQuery() {
   return useQuery<WebDesignDevelopmentPageResponse, Error>({
-    queryKey: ["web-design-development-page"],
+    queryKey: ["page", "web-design-development"],
     queryFn: () =>
       apiFetch<WebDesignDevelopmentPageResponse>(
         `/pages/web-design-development`,

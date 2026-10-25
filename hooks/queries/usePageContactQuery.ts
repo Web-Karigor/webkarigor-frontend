@@ -28,7 +28,7 @@ export function usePageContactQuery() {
   const isHome = slug === "home";
 
   const page = useQuery<PageContactResponse, Error>({
-    queryKey: ["page-contact", slug],
+    queryKey: ["page", slug],
     queryFn: () => fetchPage(slug),
     enabled: !isHome,
     staleTime: 1000 * 60 * 30,
@@ -37,9 +37,12 @@ export function usePageContactQuery() {
   });
 
   const home = useQuery<PageContactResponse, Error>({
-    queryKey: ["page-contact", "home"],
+    queryKey: ["page", "home"],
     queryFn: () => fetchPage("home"),
-    enabled: isHome || page.isFetched,
+    enabled:
+      isHome ||
+      (page.isFetched &&
+        !homeSectionItem(page.data?.data?.sections?.contact_us)),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     retry: false,
