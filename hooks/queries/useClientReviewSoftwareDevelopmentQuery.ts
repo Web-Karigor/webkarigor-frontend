@@ -7,7 +7,7 @@ export function useClientReviewSoftwareDevelopmentQuery() {
     queryKey: ["client-review-software-development"],
     queryFn: () =>
       apiFetch<ClientReviewSoftwareDevelopmentResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/client-review-software-development`,
+        `/post-types/client-review-software-development`,
       ),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,

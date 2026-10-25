@@ -5,10 +5,7 @@ import type { FaqErpResponse } from "@/types/faq-erp";
 export function useFaqErpQuery() {
   return useQuery<FaqErpResponse, Error>({
     queryKey: ["faq-erp"],
-    queryFn: () =>
-      apiFetch<FaqErpResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/faq-erp`,
-      ),
+    queryFn: () => apiFetch<FaqErpResponse>(`/post-types/faq-erp`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

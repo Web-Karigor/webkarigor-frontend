@@ -7,7 +7,7 @@ export function useClientReviewWebdesignQuery() {
     queryKey: ["client-review-webdesign"],
     queryFn: () =>
       apiFetch<ClientReviewWebdesignResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/client-review-webdesign`,
+        `/post-types/client-review-webdesign`,
       ),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,

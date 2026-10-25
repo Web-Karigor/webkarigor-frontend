@@ -81,7 +81,10 @@ export default function Hero() {
                 href={telHref}
                 className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#D0D5DD] bg-white px-5 py-3.5 font-montserrat text-[14px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.03] md:w-auto"
               >
-                <Phone className="h-4 w-4 shrink-0 text-[#111827]" aria-hidden />
+                <Phone
+                  className="h-4 w-4 shrink-0 text-[#111827]"
+                  aria-hidden
+                />
                 {hotlineLabel}: {hotline}
               </a>
             </div>

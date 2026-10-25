@@ -18,8 +18,7 @@ type PageContactResponse = {
 };
 
 function fetchPage(slug: string) {
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
-  return apiFetch<PageContactResponse>(`${origin}/api/pages/${slug}`);
+  return apiFetch<PageContactResponse>(`/pages/${slug}`);
 }
 
 /** Contact block for the current page, with the home page block as fallback. */
@@ -47,8 +46,11 @@ export function usePageContactQuery() {
   });
 
   const contact =
-    homeSectionItem(isHome ? home.data?.data?.sections?.contact_us : page.data?.data?.sections?.contact_us) ??
-    homeSectionItem(home.data?.data?.sections?.contact_us);
+    homeSectionItem(
+      isHome
+        ? home.data?.data?.sections?.contact_us
+        : page.data?.data?.sections?.contact_us,
+    ) ?? homeSectionItem(home.data?.data?.sections?.contact_us);
 
   return { contact, slug };
 }

@@ -7,7 +7,7 @@ export function useFaqSoftwareDevelopementQuery() {
     queryKey: ["faq-software-developement"],
     queryFn: () =>
       apiFetch<FaqSoftwareDevelopementResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/faq-software-developement`,
+        `/post-types/faq-software-developement`,
       ),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,

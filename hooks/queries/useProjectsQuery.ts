@@ -5,10 +5,7 @@ import type { ProjectsResponse } from "@/types/projects";
 export function useProjectsQuery() {
   return useQuery<ProjectsResponse, Error>({
     queryKey: ["projects"],
-    queryFn: () =>
-      apiFetch<ProjectsResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/projects`,
-      ),
+    queryFn: () => apiFetch<ProjectsResponse>(`/post-types/projects`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

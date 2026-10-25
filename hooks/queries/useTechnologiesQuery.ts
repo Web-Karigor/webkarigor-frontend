@@ -5,10 +5,7 @@ import type { TechnologiesResponse } from "@/types/technologies";
 export function useTechnologiesQuery() {
   return useQuery<TechnologiesResponse, Error>({
     queryKey: ["technologies"],
-    queryFn: () =>
-      apiFetch<TechnologiesResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/technologies`,
-      ),
+    queryFn: () => apiFetch<TechnologiesResponse>(`/post-types/technologies`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

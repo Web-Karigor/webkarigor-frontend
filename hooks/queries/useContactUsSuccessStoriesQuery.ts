@@ -7,7 +7,7 @@ export function useContactUsSuccessStoriesQuery() {
     queryKey: ["contact-us-success-stories"],
     queryFn: () =>
       apiFetch<ContactUsSuccessStoriesResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/contact-us-success-stories`,
+        `/post-types/contact-us-success-stories`,
       ),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,

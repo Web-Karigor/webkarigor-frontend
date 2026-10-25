@@ -6,9 +6,7 @@ export function useSoftwareDevelopmentPageQuery() {
   return useQuery<SoftwareDevelopmentPageResponse, Error>({
     queryKey: ["software-development-page"],
     queryFn: () =>
-      apiFetch<SoftwareDevelopmentPageResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/pages/software-development`,
-      ),
+      apiFetch<SoftwareDevelopmentPageResponse>(`/pages/software-development`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

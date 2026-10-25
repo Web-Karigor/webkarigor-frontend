@@ -7,7 +7,7 @@ export function useProjectSoftwareDevelopementQuery() {
     queryKey: ["project-software-developement"],
     queryFn: () =>
       apiFetch<ProjectSoftwareDevelopementResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/project-software-developement`,
+        `/post-types/project-software-developement`,
       ),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,

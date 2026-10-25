@@ -12,15 +12,16 @@ export async function POST(request: Request) {
     );
   }
 
-  const base = (process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "");
-  if (!base) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
+  if (!baseUrl) {
     return NextResponse.json(
       { success: false, message: "NEXT_PUBLIC_BASE_URL is not set" },
       { status: 500 },
     );
   }
 
-  const res = await fetch(`${base}/api/v1/contact-us`, {
+  const contactApiUrl = new URL("/api/v1/contact-us", baseUrl).toString();
+  const res = await fetch(contactApiUrl, {
     method: "POST",
     headers: {
       Accept: "application/json",

@@ -6,9 +6,7 @@ export function useTechServicesHomeQuery() {
   return useQuery<TechServicesHomeResponse, Error>({
     queryKey: ["tech-services-home"],
     queryFn: () =>
-      apiFetch<TechServicesHomeResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/tech-services-home`,
-      ),
+      apiFetch<TechServicesHomeResponse>(`/post-types/tech-services-home`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

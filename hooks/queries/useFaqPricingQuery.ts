@@ -5,10 +5,7 @@ import type { FaqPostsResponse } from "@/types/faq-posts";
 export function useFaqPricingQuery() {
   return useQuery<FaqPostsResponse, Error>({
     queryKey: ["faq-pricing"],
-    queryFn: () =>
-      apiFetch<FaqPostsResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/faq-pricing`,
-      ),
+    queryFn: () => apiFetch<FaqPostsResponse>(`/post-types/faq-pricing`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
