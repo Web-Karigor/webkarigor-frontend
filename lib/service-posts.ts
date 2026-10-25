@@ -1,16 +1,60 @@
 import { stripHtml } from "@/lib/home-page";
-import type { Service } from "@/types/service";
+import type { Service, ServicesMenuData } from "@/types/service";
 import type { ServicePost, StoryService } from "@/types/service-posts";
+
+export type ServiceMenuEntry = {
+  id: number | null;
+  title: string;
+  slug: string;
+};
+
+export function serviceSlugFromHref(href: string | null | undefined) {
+  const path = href?.split(/[?#]/, 1)[0].replace(/\/+$/, "") ?? "";
+  return path.split("/").filter(Boolean).pop() ?? "";
+}
+
+export function serviceMenuEntries(
+  data: Service[] | ServicesMenuData | undefined,
+): ServiceMenuEntry[] {
+  if (!data) return [];
+  if (Array.isArray(data)) {
+    return data.map((service) => ({
+      id: service.id,
+      title: service.title,
+      slug: service.slug,
+    }));
+  }
+
+  return data.posts.map((post) => ({
+    // Menu post IDs are not canonical service IDs.
+    id: null,
+    title: post.fields.label?.trim() ?? "",
+    slug: serviceSlugFromHref(post.fields.href),
+  }));
+}
+
+export function findServiceMenuEntry(
+  data: Service[] | ServicesMenuData | undefined,
+  slug: string | null | undefined,
+  serviceId?: number | null,
+) {
+  const entries = serviceMenuEntries(data);
+  return (
+    entries.find((entry) => serviceId != null && entry.id === serviceId) ??
+    entries.find((entry) => entry.slug === slug)
+  );
+}
 
 function resolveServiceLink(
   title: string,
-  navServices: Service[],
+  navServices: Service[] | ServicesMenuData,
 ): string {
-  if (!navServices.length) return "";
+  const entries = serviceMenuEntries(navServices);
+  if (!entries.length) return "";
 
   const t = title.toLowerCase();
-  const find = (test: (s: Service) => boolean) =>
-    navServices.find(test)?.slug;
+  const find = (test: (s: ServiceMenuEntry) => boolean) =>
+    entries.find(test)?.slug;
 
   let slug: string | undefined;
   if (/\bcrm\b/.test(t)) {
@@ -34,7 +78,7 @@ function resolveServiceLink(
 
 export function mapServicePostsToStory(
   posts: ServicePost[] | undefined,
-  navServices: Service[] | undefined,
+  navServices: Service[] | ServicesMenuData | undefined,
 ): StoryService[] {
   const nav = navServices ?? [];
 

@@ -3,10 +3,11 @@ import { apiFetch } from "@/lib/apiFetch";
 import { retryTransientQueryError } from "@/lib/query-retry";
 import type { ServicesResponse } from "@/types/service";
 
-export function useServicesQuery() {
+export function useServicesQuery(enabled = true) {
   return useQuery<ServicesResponse, Error>({
     queryKey: ["services"],
     queryFn: () => apiFetch<ServicesResponse>(`/post-types/services-menu`),
+    enabled,
     staleTime: 1000 * 60 * 60,
     retry: retryTransientQueryError,
     refetchOnWindowFocus: false,

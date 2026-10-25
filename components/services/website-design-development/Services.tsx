@@ -57,7 +57,10 @@ export default function Services() {
             </h2>
           </div>
           <p className="m-0 w-full max-w-[650px] font-manrope text-[16px] font-medium leading-[1.55] text-[#a4a8ad] max-md:mx-auto md:pb-0.5 lg:text-[18px]">
-            Different businesses need different types of websites. Our web design and development services can be tailored to your project&apos;s goals, audience, features, speed, and future direction.
+            Different businesses need different types of websites. Our web
+            design and development services can be tailored to your
+            project&apos;s goals, audience, features, speed, and future
+            direction.
           </p>
         </div>
 
@@ -75,7 +78,10 @@ export default function Services() {
                   </span>
                   <span
                     className="inline-flex h-7 w-7 items-center justify-center rounded-[6px]"
-                    style={{ backgroundColor: service.bg, color: service.color }}
+                    style={{
+                      backgroundColor: service.bg,
+                      color: service.color,
+                    }}
                   >
                     <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
                   </span>

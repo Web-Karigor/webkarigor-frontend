@@ -7,9 +7,27 @@ export type Service = {
 };
 
 export type ServicesResponse = {
-  data: Service[];
+  data: Service[] | ServicesMenuData;
   success: boolean;
-  status: number;
+  status?: number;
+  meta?: Record<string, unknown>;
+};
+
+export type ServiceMenuPost = {
+  id: number;
+  fields: {
+    label?: string | null;
+    href?: string | null;
+  };
+};
+
+export type ServicesMenuData = {
+  id: number;
+  name: string;
+  slug: string;
+  description: string | null;
+  updated_at?: string;
+  posts: ServiceMenuPost[];
 };
 
 export type ServiceDetailData = {

@@ -35,6 +35,7 @@ import { useHomepagePackagesQuery } from "@/hooks/queries/useHomepagePackagesQue
 import { usePageContactQuery } from "@/hooks/queries/usePageContactQuery";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 import { pageSlugFromPath, whatsAppHref } from "@/lib/page-contact";
+import { findServiceMenuEntry } from "@/lib/service-posts";
 import {
   claimLeadEvent,
   pageTypeFromPath,
@@ -414,9 +415,11 @@ export default function ConsultationForm({
     const serviceSlug = pathname?.startsWith("/service/")
       ? pathname.split("/")[2] || null
       : null;
-    const matchedService =
-      servicesData?.data?.find((item) => item.id === ctx.serviceId) ??
-      servicesData?.data?.find((item) => item.slug === serviceSlug);
+    const matchedService = findServiceMenuEntry(
+      servicesData?.data,
+      serviceSlug,
+      ctx.serviceId,
+    );
     const matchedPackage = packagesData?.data?.find(
       (item) => item.id === ctx.packageId,
     );

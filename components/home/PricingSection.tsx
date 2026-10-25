@@ -7,6 +7,7 @@ import { usePricingHomeQuery } from "@/hooks/queries/usePricingHomeQuery";
 import { usePricingPageQuery } from "@/hooks/queries/usePricingPageQuery";
 import { usePricingPostsQuery } from "@/hooks/queries/usePricingPostsQuery";
 import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
+import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 import { useHomePageQuery } from "@/hooks/queries/useHomePageQuery";
 import { homeSectionItem } from "@/lib/home-page";
 import { HOME_PRICING_LABELS } from "@/lib/home-static";
@@ -16,6 +17,7 @@ import {
   mapPricingPlansHeader,
 } from "@/lib/pricing-page";
 import { SERVICE_PRICING_HEADINGS } from "@/lib/service-pricing-headings";
+import { findServiceMenuEntry } from "@/lib/service-posts";
 import {
   formatPackageOriginalPrice,
   formatPackagePrice,
@@ -178,7 +180,9 @@ export default function PricingSection({
     pricingPostSlug,
     Boolean(pricingPostSlug),
   );
-  const service = useServiceQuery(serviceSlug ?? "");
+  const isWddService = serviceSlug === "website-design-development";
+  const servicesMenu = useServicesQuery(isWddService);
+  const service = useServiceQuery(isWddService ? "" : serviceSlug ?? "");
 
   const packages: HomepagePackage[] = useMemo(() => {
     if (pricingPostSlug) return mapPricingPosts(servicePlans.data?.data?.posts);
@@ -201,6 +205,14 @@ export default function PricingSection({
   ]);
 
   const serviceId = service.data?.data.service.id ?? null;
+  const serviceName =
+    service.data?.data.service.title ??
+    (isWddService
+      ? findServiceMenuEntry(
+          servicesMenu.data?.data,
+          "website-design-development",
+        )?.title ?? null
+      : null);
 
   return (
     <section
@@ -357,7 +369,7 @@ export default function PricingSection({
                     packageId={pkg.id}
                     packageName={name}
                     serviceId={serviceId ?? pkg.service?.id ?? null}
-                    serviceName={service.data?.data.service.title ?? null}
+                    serviceName={serviceName}
                   >
                     {customPrice ? "Contact Us" : "Get A Quote"}
                   </PricingCtaButton>
