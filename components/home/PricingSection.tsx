@@ -33,6 +33,7 @@ const EMPTY_PRICING_LABELS = {
 const SERVICE_PRICING_POST: Record<string, string> = {
   erp: "pricing-erp",
   hrm: "pricing-hrm",
+  crm: "pricing-crm",
   "software-development": "pricing-software-development",
   "website-design-development": "pricing-web-design-development",
 };
@@ -130,7 +131,7 @@ export default function PricingSection({
     ? (SERVICE_PRICING_POST[serviceSlug] ?? "")
     : "";
   const pricingPage = usePricingPageQuery(fromPackages);
-  const homePage = useHomePageQuery(isHome);
+  const homePage = useHomePageQuery();
   const plansHeader = useMemo(() => {
     const staticKey =
       headingSlug || (serviceSlug && !isHome ? serviceSlug : "");
