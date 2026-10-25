@@ -12,7 +12,7 @@ export default function ProjectDetailsHero({ project }: { project: ProjectDetail
   const galleryW = hero.cardW * 3 + hero.gap * 2;
 
   return (
-    <section className="pd-hero relative bg-[#FFFDF6] pt-[88px] sm:pt-[110px] lg:pt-[132px]">
+    <section className="pd-hero relative bg-[#FFFDF6] pt-6 sm:pt-6 md:pt-[110px] lg:pt-[132px]">
       <div
         className="mx-auto w-full px-[clamp(16px,4vw,40px)]"
         style={{ maxWidth: PD.content + 80 }}

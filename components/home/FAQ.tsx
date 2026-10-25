@@ -138,6 +138,9 @@ export default function FAQ({
               <button
                 type="button"
                 onClick={openConsultationModal}
+                data-gtm-cta="true"
+                data-cta-id="home-faq-consultation"
+                data-cta-location="home_faq"
                 className="faq-cta cursor-pointer rounded-lg border border-[#000000] px-5 py-2 font-montserrat text-base font-semibold capitalize text-[#000000] md:px-6 md:py-3 md:text-lg"
               >
                 {ctaLabel}

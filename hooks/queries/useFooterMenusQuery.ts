@@ -5,10 +5,7 @@ import type { FooterMenuResponse } from "@/types/footer-menus";
 function useFooterMenuQuery(slug: string) {
   return useQuery<FooterMenuResponse, Error>({
     queryKey: ["post-type", slug],
-    queryFn: () =>
-      apiFetch<FooterMenuResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/${slug}`,
-      ),
+    queryFn: () => apiFetch<FooterMenuResponse>(`/post-types/${slug}`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

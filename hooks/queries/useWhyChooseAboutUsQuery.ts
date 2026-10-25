@@ -6,9 +6,7 @@ export function useWhyChooseAboutUsQuery() {
   return useQuery<WhyChooseAboutUsResponse, Error>({
     queryKey: ["post-type", "why-choose-about-us"],
     queryFn: () =>
-      apiFetch<WhyChooseAboutUsResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/why-choose-about-us`,
-      ),
+      apiFetch<WhyChooseAboutUsResponse>(`/post-types/why-choose-about-us`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

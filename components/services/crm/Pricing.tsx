@@ -14,7 +14,7 @@ import {
 import crmContent from "@/data/crm-content.json";
 import { mapPricingPosts } from "@/lib/pricing-posts";
 
-const CTA_LABEL = "Book Now";
+const CTA_LABEL = "Get A Quote";
 
 const POPULAR_LABEL = "Most popular";
 const FEATURES_HEADING = "What's Included:";
@@ -58,7 +58,10 @@ export default function Pricing() {
   if (!eyebrow || !title || !description) return null;
 
   return (
-    <section id="pricing" className="scroll-mt-28 bg-white py-[clamp(48px,7vw,80px)]">
+    <section
+      id="pricing"
+      className="scroll-mt-28 bg-white py-[clamp(48px,7vw,80px)]"
+    >
       <div className="mx-auto w-full max-w-[1800px] px-[clamp(16px,4vw,40px)]">
         <div className="mx-auto mb-[clamp(32px,5vw,48px)] max-w-[760px] text-center">
           <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
@@ -73,119 +76,121 @@ export default function Pricing() {
         </div>
 
         <div className="home-pricing-grid">
-                  {plans.map((pkg) => {
-                    const isPopular = pkg.is_popular;
-                    const availText = pkg.availability?.trim() || "";
-                    const price = formatPackagePrice(pkg);
-                    const originalPrice = formatPackageOriginalPrice(pkg);
+          {plans.map((pkg) => {
+            const isPopular = pkg.is_popular;
+            const availText = pkg.availability?.trim() || "";
+            const price = formatPackagePrice(pkg);
+            const originalPrice = formatPackageOriginalPrice(pkg);
 
-                    return (
-                      <div
-                        key={pkg.id}
-                        className={`home-pricing-plan${isPopular ? " is-popular" : ""}`}
-                      >
-                        {isPopular ? (
-                          <div className="home-pricing-popular-badge">
-                            <Image
-                              src="/pricing/popular-tab.png"
-                              alt=""
-                              width={174}
-                              height={34}
-                              className="home-pricing-popular-badge-img"
-                              unoptimized loading="lazy"/>
-                            <span className="home-pricing-popular-badge-text">
-                              {POPULAR_LABEL}
-                            </span>
-                          </div>
-                        ) : null}
+            return (
+              <div
+                key={pkg.id}
+                className={`home-pricing-plan${isPopular ? " is-popular" : ""}`}
+              >
+                {isPopular ? (
+                  <div className="home-pricing-popular-badge">
+                    <Image
+                      src="/pricing/popular-tab.png"
+                      alt=""
+                      width={174}
+                      height={34}
+                      className="home-pricing-popular-badge-img"
+                      unoptimized
+                      loading="lazy"
+                    />
+                    <span className="home-pricing-popular-badge-text">
+                      {POPULAR_LABEL}
+                    </span>
+                  </div>
+                ) : null}
 
-                        <article
-                          className={`home-pricing-card${isPopular ? " is-popular" : ""}`}
+                <article
+                  className={`home-pricing-card${isPopular ? " is-popular" : ""}`}
+                >
+                  <div
+                    className={`home-pricing-avail${
+                      availText
+                        ? ` is-pill is-${isPopular ? "red" : "green"}${
+                            isPopular ? " is-marquee" : ""
+                          }`
+                        : " is-empty"
+                    }`}
+                  >
+                    {availText ? (
+                      <>
+                        <span
+                          className={`home-pricing-dot${
+                            isPopular ? " is-red" : ""
+                          }`}
+                          aria-hidden
                         >
+                          <span className="home-pricing-dot-pulse" />
+                        </span>
+
+                        {isPopular ? (
                           <div
-                            className={`home-pricing-avail${
-                              availText
-                                ? ` is-pill is-${isPopular ? "red" : "green"}${
-                                    isPopular ? " is-marquee" : ""
-                                  }`
-                                : " is-empty"
-                            }`}
+                            className="home-pricing-marquee"
+                            aria-label={availText}
                           >
-                            {availText ? (
-                              <>
-                                <span
-                                  className={`home-pricing-dot${
-                                    isPopular ? " is-red" : ""
-                                  }`}
-                                  aria-hidden
-                                >
-                                  <span className="home-pricing-dot-pulse" />
-                                </span>
-
-                                {isPopular ? (
-                                  <div
-                                    className="home-pricing-marquee"
-                                    aria-label={availText}
-                                  >
-                                    <div className="home-pricing-marquee-track">
-                                      {Array.from({ length: 8 }).map((_, i) => (
-                                        <span key={i}>{availText}</span>
-                                      ))}
-                                    </div>
-                                  </div>
-                                ) : (
-                                  <span className="home-pricing-avail-text">
-                                    {availText}
-                                  </span>
-                                )}
-                              </>
-                            ) : null}
-                          </div>
-
-                          <h3 className="home-pricing-title">
-                            {pkg.package_type?.name ?? pkg.slug}
-                          </h3>
-                          <p className="home-pricing-card-desc">{pkg.title}</p>
-
-                          <div className="home-pricing-amount">
-                            <div className="home-pricing-price-stack">
-                              <span className="home-pricing-price">{price}</span>
-                              {originalPrice ? (
-                                <span className="home-pricing-price-original">
-                                  {originalPrice}
-                                </span>
-                              ) : null}
+                            <div className="home-pricing-marquee-track">
+                              {Array.from({ length: 8 }).map((_, i) => (
+                                <span key={i}>{availText}</span>
+                              ))}
                             </div>
                           </div>
+                        ) : (
+                          <span className="home-pricing-avail-text">
+                            {availText}
+                          </span>
+                        )}
+                      </>
+                    ) : null}
+                  </div>
 
-                          <p className="home-pricing-cancel">{CANCEL_LABEL}</p>
+                  <h3 className="home-pricing-title">
+                    {pkg.package_type?.name ?? pkg.slug}
+                  </h3>
+                  <p className="home-pricing-card-desc">{pkg.title}</p>
 
-                          <PricingCtaButton
-                            packageId={pkg.id}
-                            packageName={pkg.package_type?.name ?? pkg.slug}
-                            serviceId={pkg.service?.id ?? serviceId}
-                            serviceName={data?.data.service.title ?? null}
-                          >
-                            {CTA_LABEL}
-                          </PricingCtaButton>
+                  <div className="home-pricing-amount">
+                    <div className="home-pricing-price-stack">
+                      <span className="home-pricing-price">{price}</span>
+                      {originalPrice ? (
+                        <span className="home-pricing-price-original">
+                          {originalPrice}
+                        </span>
+                      ) : null}
+                    </div>
+                  </div>
 
-                          <div className="home-pricing-features">
-                            <p className="home-pricing-features-title">
-                              {FEATURES_HEADING}
-                            </p>
-                            <ul className="home-pricing-features-list">
-                              {pkg.features.map((feature) => (
-                                <li key={feature}>
-                                  <CheckIcon />
-                                  <span>{feature}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </article>
-                      </div>
-                    );
-                  })}
+                  <p className="home-pricing-cancel">{CANCEL_LABEL}</p>
+
+                  <PricingCtaButton
+                    packageId={pkg.id}
+                    packageName={pkg.package_type?.name ?? pkg.slug}
+                    serviceId={pkg.service?.id ?? serviceId}
+                    serviceName={data?.data.service.title ?? null}
+                  >
+                    {CTA_LABEL}
+                  </PricingCtaButton>
+
+                  <div className="home-pricing-features">
+                    <p className="home-pricing-features-title">
+                      {FEATURES_HEADING}
+                    </p>
+                    <ul className="home-pricing-features-list">
+                      {pkg.features.map((feature) => (
+                        <li key={feature}>
+                          <CheckIcon />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

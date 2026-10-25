@@ -19,6 +19,9 @@ export default function PricingCtaButton({
     <button
       type="button"
       className="home-pricing-cta capitalize"
+      data-gtm-cta="true"
+      data-cta-id="pricing-inquiry"
+      data-cta-location="pricing"
       onClick={() =>
         openConsultationModal({
           packageId: packageId ?? null,

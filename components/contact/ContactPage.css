@@ -677,6 +677,10 @@
 
 @media (max-width: 639px) {
   .contact-hero {
+    padding-top: 24px;
+  }
+
+  .contact-hero {
     padding-bottom: clamp(40px, 8vw, 56px);
   }
 
@@ -822,4 +826,10 @@
 
 .contact-page .home-consultation-section {
   --home-consultation-section-w: 1520px;
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+  .contact-hero {
+    padding-top: 24px;
+  }
 }

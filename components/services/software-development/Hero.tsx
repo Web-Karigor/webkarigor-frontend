@@ -72,7 +72,7 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="relative z-[1] mx-auto flex h-full w-full max-w-[1800px] items-center px-[clamp(16px,3.5vw,50px)] pt-[80px] pb-6 sm:pt-[96px] sm:pb-8 lg:pt-[108px] lg:pb-0">
+      <div className="relative z-[1] mx-auto flex h-full w-full max-w-[1800px] items-center px-[clamp(16px,3.5vw,50px)] pt-6 pb-6 md:pt-[96px] md:pb-8 lg:pt-[108px] lg:pb-0">
         <div className="flex w-full flex-col items-stretch gap-6 md:gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <div className="mp-hero-copy flex w-full max-w-none shrink-0 flex-col max-md:items-center max-md:text-center lg:max-w-[620px]">
             <h1 className="m-0 font-montserrat text-[clamp(1.5rem,6.6vw,1.8rem)] font-bold leading-[1.2] tracking-[-0.03em] text-[#111827] md:text-[clamp(1.75rem,5.5vw,3.75rem)] md:leading-[1.12]">

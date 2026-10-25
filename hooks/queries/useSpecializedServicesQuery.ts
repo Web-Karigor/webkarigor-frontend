@@ -6,9 +6,7 @@ export function useSpecializedServicesQuery() {
   return useQuery<SpecializedServicesResponse, Error>({
     queryKey: ["specialized-services"],
     queryFn: () =>
-      apiFetch<SpecializedServicesResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/specialized-services`,
-      ),
+      apiFetch<SpecializedServicesResponse>(`/post-types/specialized-services`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

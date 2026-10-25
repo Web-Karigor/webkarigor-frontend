@@ -26,7 +26,7 @@ export default function ServiceHero() {
   };
 
   return (
-    <section className="svc-hero relative overflow-visible bg-[#f5f5f5] pb-[clamp(48px,6vw,72px)] pt-[120px]">
+    <section className="svc-hero relative overflow-visible bg-[#f5f5f5] pb-[clamp(48px,6vw,72px)] pt-6 md:pt-[120px]">
       <div className={`${SERVICE_PAGE_GUTTER} relative z-[1] overflow-visible pt-4`}>
         <div className="grid grid-cols-1 items-start gap-[clamp(36px,5vw,56px)] lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-[clamp(28px,3vw,48px)]">
           <div className="max-w-[640px]">

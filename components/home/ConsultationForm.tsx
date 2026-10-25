@@ -35,6 +35,11 @@ import { useHomepagePackagesQuery } from "@/hooks/queries/useHomepagePackagesQue
 import { usePageContactQuery } from "@/hooks/queries/usePageContactQuery";
 import { useServicesQuery } from "@/hooks/queries/useServicesQuery";
 import { pageSlugFromPath, whatsAppHref } from "@/lib/page-contact";
+import {
+  claimLeadEvent,
+  pageTypeFromPath,
+  pushDataLayerEvent,
+} from "@/lib/gtm";
 
 const fields = {
   fullName: { label: "Full Name", placeholder: "Esther Howard" },
@@ -53,7 +58,7 @@ const schedule = {
   timeTitle: "Pick any time",
   timeOptional: "(Optional)",
 };
-const submitLabel = "Let's Do It";
+const submitLabel = "Submit";
 const TIME_SLOTS = [
   "9:00 AM",
   "10:00 AM",
@@ -71,7 +76,12 @@ type FlagComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 function WhatsAppIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="currentColor" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className="h-4 w-4 shrink-0"
+      fill="currentColor"
+      aria-hidden
+    >
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
     </svg>
   );
@@ -129,12 +139,26 @@ function dayKey(year: number, monthIndex: number, day: number) {
   return year * 10000 + (monthIndex + 1) * 100 + day;
 }
 
-function isPastDhakaDate(year: number, monthIndex: number, day: number, now: DhakaNow) {
-  return dayKey(year, monthIndex, day) < dayKey(now.year, now.month - 1, now.day);
+function isPastDhakaDate(
+  year: number,
+  monthIndex: number,
+  day: number,
+  now: DhakaNow,
+) {
+  return (
+    dayKey(year, monthIndex, day) < dayKey(now.year, now.month - 1, now.day)
+  );
 }
 
-function isDhakaToday(year: number, monthIndex: number, day: number, now: DhakaNow) {
-  return dayKey(year, monthIndex, day) === dayKey(now.year, now.month - 1, now.day);
+function isDhakaToday(
+  year: number,
+  monthIndex: number,
+  day: number,
+  now: DhakaNow,
+) {
+  return (
+    dayKey(year, monthIndex, day) === dayKey(now.year, now.month - 1, now.day)
+  );
 }
 
 function parseSlotMinutes(slot: string) {
@@ -207,10 +231,12 @@ function useClickOutside(
 export default function ConsultationForm({
   hideSchedule = false,
   showWhatsApp = false,
+  formLocation = "consultation_section",
   onSuccess,
 }: {
   hideSchedule?: boolean;
   showWhatsApp?: boolean;
+  formLocation?: string;
   onSuccess?: () => void;
 } = {}) {
   const pathname = usePathname();
@@ -218,10 +244,12 @@ export default function ConsultationForm({
   const { data: servicesData } = useServicesQuery();
   const { data: packagesData } = useHomepagePackagesQuery();
   const { contact } = usePageContactQuery();
-  const talkPrompt = contact?.prefer_talk_title?.trim() || "Prefer to talk first?";
+  const talkPrompt =
+    contact?.prefer_talk_title?.trim() || "Prefer to talk first?";
   const whatsAppLabel = contact?.cta_whats_app?.trim() ?? "";
   const whatsAppLink = whatsAppHref(whatsAppLabel);
-  const [dialCountry, setDialCountry] = useState<CountryOption>(DEFAULT_DIAL_COUNTRY);
+  const [dialCountry, setDialCountry] =
+    useState<CountryOption>(DEFAULT_DIAL_COUNTRY);
   const [region, setRegion] = useState<CountryOption>(DEFAULT_COUNTRY);
   const [dialOpen, setDialOpen] = useState(false);
   const [regionOpen, setRegionOpen] = useState(false);
@@ -233,12 +261,14 @@ export default function ConsultationForm({
   });
   const [selectedDay, setSelectedDay] = useState(() => getDhakaNow().day);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(
-    null,
-  );
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   const dialRef = useRef<HTMLDivElement>(null);
   const regionRef = useRef<HTMLDivElement>(null);
+  const formStarted = useRef(false);
 
   useClickOutside(dialRef, dialOpen, () => setDialOpen(false));
   useClickOutside(regionRef, regionOpen, () => setRegionOpen(false));
@@ -292,7 +322,11 @@ export default function ConsultationForm({
     if (delta < 0 && !canGoPrevMonth) return;
 
     setCalendarDate((current) => {
-      const next = new Date(current.getFullYear(), current.getMonth() + delta, 1);
+      const next = new Date(
+        current.getFullYear(),
+        current.getMonth() + delta,
+        1,
+      );
       const nextKey = next.getFullYear() * 12 + next.getMonth();
       const minKey = dhakaNow.year * 12 + (dhakaNow.month - 1);
       return nextKey < minKey ? current : next;
@@ -300,7 +334,10 @@ export default function ConsultationForm({
 
     setSelectedDay((currentDay) => {
       const next = new Date(viewYear, viewMonth + delta, 1);
-      if (next.getFullYear() === dhakaNow.year && next.getMonth() === dhakaNow.month - 1) {
+      if (
+        next.getFullYear() === dhakaNow.year &&
+        next.getMonth() === dhakaNow.month - 1
+      ) {
         return Math.max(currentDay, dhakaNow.day);
       }
       return 1;
@@ -323,11 +360,32 @@ export default function ConsultationForm({
       return;
     }
 
+    if (/\d/.test(name)) {
+      setStatus({ type: "error", text: "Name cannot contain numbers." });
+      return;
+    }
+
+    if (region.iso2 === "BD" && !/^\d{11}$/.test(phoneRaw)) {
+      setStatus({
+        type: "error",
+        text: "Bangladesh contact numbers must be 11 digits.",
+      });
+      return;
+    }
+
     if (
       !hideSchedule &&
-      isPastDhakaDate(calendarDate.getFullYear(), calendarDate.getMonth(), selectedDay, dhakaNow)
+      isPastDhakaDate(
+        calendarDate.getFullYear(),
+        calendarDate.getMonth(),
+        selectedDay,
+        dhakaNow,
+      )
     ) {
-      setStatus({ type: "error", text: "Please select today or a future date." });
+      setStatus({
+        type: "error",
+        text: "Please select today or a future date.",
+      });
       return;
     }
 
@@ -342,7 +400,10 @@ export default function ConsultationForm({
         dhakaNow,
       )
     ) {
-      setStatus({ type: "error", text: "Please select a present or future time." });
+      setStatus({
+        type: "error",
+        text: "Please select a present or future time.",
+      });
       return;
     }
 
@@ -353,7 +414,9 @@ export default function ConsultationForm({
     const matchedService =
       servicesData?.data?.find((item) => item.id === ctx.serviceId) ??
       servicesData?.data?.find((item) => item.slug === serviceSlug);
-    const matchedPackage = packagesData?.data?.find((item) => item.id === ctx.packageId);
+    const matchedPackage = packagesData?.data?.find(
+      (item) => item.id === ctx.packageId,
+    );
 
     const payload: QuotationPayload = {
       name,
@@ -372,6 +435,24 @@ export default function ConsultationForm({
 
     quotation.mutate(payload, {
       onSuccess: (response) => {
+        if (response?.success === true) {
+          const responseLeadId = response.data?.id;
+          const leadId =
+            typeof responseLeadId === "number" &&
+            Number.isSafeInteger(responseLeadId) &&
+            responseLeadId > 0
+              ? responseLeadId
+              : undefined;
+          if (leadId === undefined || claimLeadEvent(leadId)) {
+            pushDataLayerEvent({
+              event: "generate_lead",
+              form_type: "quotation",
+              form_location: formLocation,
+              page_type: pageTypeFromPath(pathname),
+              ...(leadId !== undefined ? { lead_id: leadId } : {}),
+            });
+          }
+        }
         form.reset();
         setDialCountry(DEFAULT_DIAL_COUNTRY);
         setRegion(DEFAULT_COUNTRY);
@@ -394,15 +475,36 @@ export default function ConsultationForm({
   const phoneLabelHint = fields.phone.label.match(/\(([^)]+)\)/)?.[1];
 
   return (
-    <form className="home-consultation-form" onSubmit={handleSubmit}>
+    <form
+      className="home-consultation-form"
+      onSubmit={handleSubmit}
+      onFocusCapture={() => {
+        if (formStarted.current) return;
+        formStarted.current = true;
+        pushDataLayerEvent({
+          event: "lead_form_start",
+          form_type: "quotation",
+          form_location: formLocation,
+          page_type: pageTypeFromPath(pathname),
+        });
+      }}
+    >
       <div className="home-consultation-form-grid home-consultation-form-grid--two">
         <label className="home-consultation-field">
-          <span className="home-consultation-label">{fields.fullName.label}</span>
+          <span className="home-consultation-label">
+            {fields.fullName.label}
+          </span>
           <input
             type="text"
             name="name"
             placeholder={fields.fullName.placeholder}
             className="home-consultation-input"
+            onChange={(event) => {
+              event.currentTarget.value = event.currentTarget.value.replace(
+                /\d/g,
+                "",
+              );
+            }}
             required
           />
         </label>
@@ -424,7 +526,10 @@ export default function ConsultationForm({
           <span className="home-consultation-label">
             {phoneLabelMain}
             {phoneLabelHint ? (
-              <span className="home-consultation-label-hint"> ({phoneLabelHint})</span>
+              <span className="home-consultation-label-hint">
+                {" "}
+                ({phoneLabelHint})
+              </span>
             ) : null}
           </span>
 
@@ -444,8 +549,13 @@ export default function ConsultationForm({
                 aria-label={`Country code ${dialCountry.dialCode}`}
               >
                 <Globe className="home-consultation-code-globe" aria-hidden />
-                <span className="home-consultation-code-value">{dialCountry.dialCode}</span>
-                <ChevronDown className="home-consultation-code-chevron" aria-hidden />
+                <span className="home-consultation-code-value">
+                  {dialCountry.dialCode}
+                </span>
+                <ChevronDown
+                  className="home-consultation-code-chevron"
+                  aria-hidden
+                />
               </button>
 
               {dialOpen ? (
@@ -471,8 +581,12 @@ export default function ConsultationForm({
                           className="home-consultation-flag"
                           title={option.name}
                         />
-                        <span className="home-consultation-option-name">{option.name}</span>
-                        <span className="home-consultation-option-code">{option.dialCode}</span>
+                        <span className="home-consultation-option-name">
+                          {option.name}
+                        </span>
+                        <span className="home-consultation-option-code">
+                          {option.dialCode}
+                        </span>
                       </button>
                     </li>
                   ))}
@@ -485,6 +599,19 @@ export default function ConsultationForm({
               name="phone"
               placeholder={fields.phone.placeholder}
               className="home-consultation-input home-consultation-input--phone"
+              inputMode="numeric"
+              maxLength={region.iso2 === "BD" ? 11 : undefined}
+              pattern={region.iso2 === "BD" ? "[0-9]{11}" : undefined}
+              title={
+                region.iso2 === "BD"
+                  ? "Enter an 11-digit Bangladesh number"
+                  : undefined
+              }
+              onChange={(event) => {
+                const digits = event.currentTarget.value.replace(/\D/g, "");
+                event.currentTarget.value =
+                  region.iso2 === "BD" ? digits.slice(0, 11) : digits;
+              }}
               required
             />
             <input type="hidden" name="dialCode" value={dialCountry.dialCode} />
@@ -510,7 +637,10 @@ export default function ConsultationForm({
                   className="home-consultation-flag"
                   title={region.name}
                 />
-                <ChevronDown className="home-consultation-inline-chevron" aria-hidden />
+                <ChevronDown
+                  className="home-consultation-inline-chevron"
+                  aria-hidden
+                />
                 <span>{region.name}</span>
               </span>
             </button>
@@ -534,7 +664,9 @@ export default function ConsultationForm({
                         className="home-consultation-flag"
                         title={option.name}
                       />
-                      <span className="home-consultation-option-name">{option.name}</span>
+                      <span className="home-consultation-option-name">
+                        {option.name}
+                      </span>
                     </button>
                   </li>
                 ))}
@@ -558,7 +690,9 @@ export default function ConsultationForm({
       {!hideSchedule ? (
         <div className="home-consultation-schedule">
           <div className="home-consultation-schedule-panel">
-            <p className="home-consultation-schedule-title">{schedule.dateTitle}</p>
+            <p className="home-consultation-schedule-title">
+              {schedule.dateTitle}
+            </p>
 
             <div className="home-consultation-calendar">
               <div className="home-consultation-calendar-head">
@@ -599,7 +733,12 @@ export default function ConsultationForm({
                     );
                   }
 
-                  const past = isPastDhakaDate(viewYear, viewMonth, day, dhakaNow);
+                  const past = isPastDhakaDate(
+                    viewYear,
+                    viewMonth,
+                    day,
+                    dhakaNow,
+                  );
                   return (
                     <button
                       key={`${day}-${index}`}
@@ -644,7 +783,9 @@ export default function ConsultationForm({
                     }${past ? " is-disabled" : ""}`}
                     onClick={() => {
                       if (past) return;
-                      setSelectedTime((current) => (current === slot ? null : slot));
+                      setSelectedTime((current) =>
+                        current === slot ? null : slot,
+                      );
                     }}
                   >
                     {slot}
@@ -665,7 +806,9 @@ export default function ConsultationForm({
         </p>
       ) : null}
 
-      <div className={`home-consultation-actions${showWhatsApp ? " has-whatsapp" : ""}`}>
+      <div
+        className={`home-consultation-actions${showWhatsApp ? " has-whatsapp" : ""}`}
+      >
         <button
           type="submit"
           className="home-consultation-submit"
@@ -676,7 +819,6 @@ export default function ConsultationForm({
         </button>
 
         {showWhatsApp ? (
-
           <div className="flex w-full flex-row flex-nowrap items-center gap-3">
             <p className="home-consultation-talk !m-0 !w-auto shrink-0 whitespace-nowrap !text-[14px]">
               {talkPrompt}

@@ -5,10 +5,7 @@ import type { FaqWebdesignResponse } from "@/types/faq-webdesign";
 export function useFaqWebdesignQuery() {
   return useQuery<FaqWebdesignResponse, Error>({
     queryKey: ["faq-webdesign"],
-    queryFn: () =>
-      apiFetch<FaqWebdesignResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/faq-webdesign`,
-      ),
+    queryFn: () => apiFetch<FaqWebdesignResponse>(`/post-types/faq-webdesign`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

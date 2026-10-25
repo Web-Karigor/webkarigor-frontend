@@ -52,7 +52,7 @@ export default function PricingHero() {
   }
 
   return (
-    <section className="pricing-hero relative bg-[#F8F6EF] pt-[120px] pb-8 sm:pt-[140px] sm:pb-10 lg:pb-12">
+    <section className="pricing-hero relative bg-[#F8F6EF] pt-6 pb-8 sm:pt-6 sm:pb-10 md:pt-[140px] lg:pb-12">
       {/* Soft green glow — top center */}
       <div
         aria-hidden

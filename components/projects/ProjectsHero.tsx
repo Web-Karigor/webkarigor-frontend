@@ -16,7 +16,7 @@ export default function ProjectsHero() {
   }, [data]);
 
   return (
-    <section className="projects-hero relative bg-[#FFFDF6] pt-[100px] sm:pt-[120px] lg:pt-[160px]">
+    <section className="projects-hero relative bg-[#FFFDF6] pt-6 sm:pt-6 md:pt-[120px] lg:pt-[160px]">
       <div className="mx-auto w-full max-w-[1200px] px-[clamp(16px,4vw,40px)] text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

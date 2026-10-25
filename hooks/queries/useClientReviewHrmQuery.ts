@@ -6,9 +6,7 @@ export function useClientReviewHrmQuery() {
   return useQuery<ClientReviewHrmResponse, Error>({
     queryKey: ["client-review-hrm"],
     queryFn: () =>
-      apiFetch<ClientReviewHrmResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/post-types/client-review-hrm`,
-      ),
+      apiFetch<ClientReviewHrmResponse>(`/post-types/client-review-hrm`),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

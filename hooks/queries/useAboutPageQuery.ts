@@ -5,10 +5,7 @@ import type { AboutPageResponse } from "@/types/about-page";
 export function useAboutPageQuery(enabled = true) {
   return useQuery<AboutPageResponse, Error>({
     queryKey: ["cms-page", "abouts-us"],
-    queryFn: () =>
-      apiFetch<AboutPageResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/pages/abouts-us`,
-      ),
+    queryFn: () => apiFetch<AboutPageResponse>(`/pages/abouts-us`),
     enabled,
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,

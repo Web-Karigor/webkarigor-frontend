@@ -38,7 +38,7 @@ export default function ErpHero() {
 
   return (
     <section className="erp-hero relative overflow-hidden bg-white">
-      <div className="mx-auto w-full max-w-[1850px] px-[clamp(16px,3.5vw,50px)] pb-14 pt-[80px] sm:pt-[100px] lg:pb-20 lg:pt-[128px]">
+      <div className="mx-auto w-full max-w-[1850px] px-[clamp(16px,3.5vw,50px)] pb-14 pt-6 md:pt-[100px] lg:pb-20 lg:pt-[128px]">
         <div className="erp-hero-split flex w-full flex-col items-stretch gap-12 py-4 max-md:gap-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-12">
           <div className="erp-hero-copy flex shrink-0 flex-col justify-center max-md:items-center max-md:text-center lg:min-h-[388px]">
             <h1 className="m-0 font-montserrat text-[clamp(1.5rem,6.6vw,1.8rem)] font-bold leading-[1.2] tracking-[-0.03em] text-[#111827] md:text-[clamp(2.5rem,4.5vw,3.75rem)] md:leading-[1.12]">

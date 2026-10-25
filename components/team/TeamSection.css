@@ -334,6 +334,10 @@
 
 /* —— Responsive —— */
 @media (max-width: 720px) {
+  .team-section {
+    padding-top: 24px;
+  }
+
   .team-container {
     width: calc(100% - 32px);
   }
@@ -359,10 +363,6 @@
 }
 
 @media (max-width: 480px) {
-  .team-section {
-    padding-top: 96px;
-  }
-
   .team_grid {
     column-gap: 10px;
     row-gap: 28px;

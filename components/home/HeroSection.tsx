@@ -46,6 +46,9 @@ function HeroCta({ label }: { label: string }) {
       href={CTA.href}
       className="hero-hello mt-4 no-underline md:mt-[60px] lg:mt-[var(--hero-hello-mt,60px)]"
       aria-label={label}
+      data-gtm-cta="true"
+      data-cta-id="hero-contact"
+      data-cta-location="home_hero"
     >
       <Image
         src={CTA.arrowSrc}
@@ -129,7 +132,7 @@ export default function HeroSection() {
       <span className="absolute right-[478px] top-0 hidden h-[720px] w-[1px] bg-[#DACFA7] 2xl:inline-block" />
       <span className="absolute left-1/2 top-[580px] hidden h-[1px] w-[942px] -translate-x-1/2 bg-[#DACFA7] 2xl:inline-block" />
 
-      <div className="relative z-[2] mx-auto flex w-full max-w-[1899px] flex-col px-4 pb-10 pt-20 sm:px-6 sm:pb-12 sm:pt-24 lg:hidden">
+      <div className="relative z-[2] mx-auto flex w-full max-w-[1899px] flex-col px-4 pb-10 pt-6 sm:px-6 sm:pb-12 sm:pt-6 md:pt-24 lg:hidden">
         <HeroTitle {...lines} />
 
         <div className="hero-mobile-mid mt-8 flex w-full items-center gap-3 sm:mt-10">

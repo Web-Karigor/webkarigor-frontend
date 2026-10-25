@@ -4,6 +4,7 @@ import "./HomeConsultation.css";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import ConsultationForm from "@/components/home/ConsultationForm";
 import { usePageContactQuery } from "@/hooks/queries/usePageContactQuery";
 import { whatsAppHref } from "@/lib/page-contact";
@@ -18,13 +19,14 @@ function WhatsAppIcon() {
 
 export default function HomeConsultation({
   backgroundColor,
-  hideSchedule = false,
+  hideSchedule = true,
 }: {
   /** Override outer section background (service pages keep #FFFEFB) */
   backgroundColor?: string;
   /** Hide calendar + time picker (service subpages) */
   hideSchedule?: boolean;
 } = {}) {
+  const router = useRouter();
   const { contact } = usePageContactQuery();
   const badge = contact?.title_sm?.trim() ?? "";
   const title = contact?.title?.trim() ?? "";
@@ -91,7 +93,10 @@ export default function HomeConsultation({
               </div>
             </aside>
 
-            <ConsultationForm hideSchedule={hideSchedule} />
+            <ConsultationForm
+              hideSchedule={hideSchedule}
+              onSuccess={() => router.push("/thank-you")}
+            />
           </div>
         </div>
       </div>

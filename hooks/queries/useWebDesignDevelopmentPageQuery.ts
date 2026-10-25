@@ -7,7 +7,7 @@ export function useWebDesignDevelopmentPageQuery() {
     queryKey: ["web-design-development-page"],
     queryFn: () =>
       apiFetch<WebDesignDevelopmentPageResponse>(
-        `${typeof window !== "undefined" ? window.location.origin : ""}/api/pages/web-design-development`,
+        `/pages/web-design-development`,
       ),
     staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,

@@ -544,6 +544,9 @@ export default function Navbar() {
                   <button
                     type="button"
                     className="navbar-cta-start"
+                    data-gtm-cta="true"
+                    data-cta-id="navbar-consultation"
+                    data-cta-location="home_navbar"
                     onClick={() => {
                       closeMenu();
                       openConsultationModal();

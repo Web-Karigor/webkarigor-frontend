@@ -32,7 +32,7 @@ export default function BlogList() {
   const hasMore = visibleCount < posts.length;
 
   return (
-    <section className="relative overflow-hidden bg-[#FFFDF6] pb-16 pt-[112px] sm:pb-20 sm:pt-[132px] lg:pb-28 lg:pt-[156px]">
+    <section className="relative overflow-hidden bg-[#FFFDF6] pb-16 pt-6 sm:pb-20 sm:pt-6 md:pt-[132px] lg:pb-28 lg:pt-[156px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-[320px]"
@@ -58,9 +58,9 @@ export default function BlogList() {
             className="mx-auto mt-7 w-full max-w-[420px] sm:mt-9"
             onSubmit={(event) => event.preventDefault()}
           >
-            <label className="flex h-12 items-center gap-2.5 rounded-full bg-[#FFFAE9] px-5 sm:h-[52px]">
+            <label className="flex h-12 items-center gap-2.5 rounded-full bg-[#e2d9b9] px-5 sm:h-[52px]">
               <Search
-                className="h-[18px] w-[18px] shrink-0 text-[#A3A2A0]"
+                className="h-[18px] w-[18px] shrink-0 text-[#222221]"
                 strokeWidth={2}
                 aria-hidden
               />
@@ -70,7 +70,7 @@ export default function BlogList() {
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search"
                 aria-label="Search articles"
-                className="h-full w-full bg-transparent font-montserrat text-[15px] font-medium text-[#1F1E1C] outline-none placeholder:text-[#A3A2A0] [&::-webkit-search-cancel-button]:cursor-pointer"
+                className="h-full w-full bg-transparent font-montserrat text-[15px] font-medium text-[#1F1E1C] outline-none placeholder:text-[#1f1e1d] [&::-webkit-search-cancel-button]:cursor-pointer"
               />
             </label>
           </form>
@@ -116,7 +116,9 @@ export default function BlogList() {
           </ul>
         ) : (
           <p className="mx-auto mt-16 max-w-md text-center font-montserrat text-[15px] font-medium text-[#6b7280]">
-            {query.trim() ? "No articles match that search." : "No articles yet."}
+            {query.trim()
+              ? "No articles match that search."
+              : "No articles yet."}
           </p>
         )}
 
