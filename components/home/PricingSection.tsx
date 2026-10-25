@@ -28,8 +28,9 @@ const EMPTY_PRICING_LABELS = {
 };
 
 const SERVICE_PRICING_POST: Record<string, string> = {
-  erp: "pricing-erp",
-  hrm: "pricing-hrm",
+  "erp": "pricing-erp",
+  "hrm": "pricing-hrm",
+  "crm": "pricing-crm",
   "software-development": "pricing-software-development",
   "website-design-development": "pricing-web-design-development",
 };
@@ -101,7 +102,7 @@ export default function PricingSection({
   const isHome = !serviceSlug && !fromPackages;
   const pricingPostSlug = serviceSlug ? SERVICE_PRICING_POST[serviceSlug] ?? "" : "";
   const pricingPage = usePricingPageQuery(fromPackages);
-  const homePage = useHomePageQuery(isHome);
+  const homePage = useHomePageQuery();
   const plansHeader = useMemo(() => {
     const staticKey = headingSlug || (serviceSlug && !isHome ? serviceSlug : "");
     const staticHeading = staticKey ? SERVICE_PRICING_HEADINGS[staticKey] ?? null : null;
@@ -117,11 +118,11 @@ export default function PricingSection({
     ? HOME_PRICING_LABELS
     : pricingPostSlug
       ? {
-          ...EMPTY_PRICING_LABELS,
-          popularLabel: HOME_PRICING_LABELS.popularLabel,
-          featuresHeading: HOME_PRICING_LABELS.featuresHeading,
-          cancelLabel: HOME_PRICING_LABELS.cancelLabel,
-        }
+        ...EMPTY_PRICING_LABELS,
+        popularLabel: HOME_PRICING_LABELS.popularLabel,
+        featuresHeading: HOME_PRICING_LABELS.featuresHeading,
+        cancelLabel: HOME_PRICING_LABELS.cancelLabel,
+      }
       : EMPTY_PRICING_LABELS;
   const badgeText = plansHeader?.badge || "";
   const accentText = plansHeader?.headingAccent || "";
@@ -244,7 +245,7 @@ export default function PricingSection({
                       width={174}
                       height={34}
                       className="home-pricing-popular-badge-img"
-                      unoptimized loading="lazy"/>
+                      unoptimized loading="lazy" />
                     <span className="home-pricing-popular-badge-text">{popularLabel}</span>
                   </div>
                 ) : null}
@@ -254,9 +255,8 @@ export default function PricingSection({
                 >
                   {availText ? (
                     <div
-                      className={`home-pricing-avail is-pill is-${tone}${
-                        isPopular ? " is-marquee" : ""
-                      }`}
+                      className={`home-pricing-avail is-pill is-${tone}${isPopular ? " is-marquee" : ""
+                        }`}
                     >
                       <span
                         className={`home-pricing-dot${tone === "red" ? " is-red" : ""}`}
