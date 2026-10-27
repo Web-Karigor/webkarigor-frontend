@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
+import PricingCarousel from "@/components/home/PricingCarousel";
 import { useMemo } from "react";
 import { usePricingHomeQuery } from "@/hooks/queries/usePricingHomeQuery";
 import { usePricingPageQuery } from "@/hooks/queries/usePricingPageQuery";
@@ -274,7 +275,7 @@ export default function PricingSection({
           </p>
         </div>
 
-        <div className="home-pricing-grid">
+        <PricingCarousel count={packages.length} className="home-pricing-grid">
           {packages.map((pkg) => {
             const price = formatPackagePrice(pkg);
             const originalPrice = formatPackageOriginalPrice(pkg);
@@ -391,7 +392,7 @@ export default function PricingSection({
               </div>
             );
           })}
-        </div>
+        </PricingCarousel>
       </div>
     </section>
   );

@@ -67,6 +67,7 @@ export default function ProjectsGrid() {
               title={item.title}
               src={item.src}
               alt={item.alt}
+              slug={item.slug}
               width={featured?.w ?? item.w}
               height={featured?.h ?? item.h}
               href={`/projects/${item.slug}`}

@@ -2,6 +2,7 @@ import Image from "next/image";
 import content from "@/data/services-content.json";
 import { PRICING_MARKETS } from "@/lib/services-data";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
+import PricingCarousel from "@/components/home/PricingCarousel";
 
 const eyebrow = content.pricing.eyebrow;
 const title = content.pricing.title;
@@ -10,7 +11,7 @@ const ctaLabel = content.pricing.ctaLabel;
 
 const POPULAR_LABEL = "Most popular";
 const FEATURES_HEADING = "What's Included:";
-const CANCEL_LABEL = "Cancel any time";
+// const CANCEL_LABEL = "Cancel any time";
 
 /** Match home pricing card availability chrome (1st = green, 2nd popular = red marquee) */
 const CARD_AVAIL = [
@@ -49,7 +50,10 @@ export default function ServicePricing() {
   if (!PRICING_MARKETS.length) return null;
 
   return (
-    <section id="pricing" className="scroll-mt-28 bg-white py-[clamp(48px,7vw,80px)]">
+    <section
+      id="pricing"
+      className="scroll-mt-28 bg-white py-[clamp(48px,7vw,80px)]"
+    >
       <div className="mx-auto w-full max-w-[1800px] px-[clamp(16px,4vw,40px)]">
         <div className="mx-auto mb-[clamp(32px,5vw,48px)] max-w-[760px] text-center">
           <p className="m-0 font-montserrat text-[clamp(14px,1.2vw,18px)] font-semibold leading-none text-[#15d286]">
@@ -84,7 +88,7 @@ export default function ServicePricing() {
                   {market.label}
                 </div>
 
-                <div className="service-pricing-cards">
+                <PricingCarousel count={market.plans.length} className="service-pricing-cards">
                   {market.plans.map((plan, index) => {
                     const isPopular = index === 1;
                     const avail = CARD_AVAIL[index] ?? CARD_AVAIL[0];
@@ -102,7 +106,9 @@ export default function ServicePricing() {
                               width={174}
                               height={34}
                               className="home-pricing-popular-badge-img"
-                              unoptimized loading="lazy"/>
+                              unoptimized
+                              loading="lazy"
+                            />
                             <span className="home-pricing-popular-badge-text">
                               {POPULAR_LABEL}
                             </span>
@@ -145,13 +151,17 @@ export default function ServicePricing() {
                           </div>
 
                           <h3 className="home-pricing-title">{plan.title}</h3>
-                          <p className="home-pricing-card-desc">{plan.subtitle}</p>
+                          <p className="home-pricing-card-desc">
+                            {plan.subtitle}
+                          </p>
 
                           <div className="home-pricing-amount">
-                            <span className="home-pricing-price">{plan.price}</span>
+                            <span className="home-pricing-price">
+                              {plan.price}
+                            </span>
                           </div>
 
-                          <p className="home-pricing-cancel">{CANCEL_LABEL}</p>
+                          {/* <p className="home-pricing-cancel">{CANCEL_LABEL}</p> */}
 
                           <PricingCtaButton>{ctaLabel}</PricingCtaButton>
 
@@ -172,7 +182,7 @@ export default function ServicePricing() {
                       </div>
                     );
                   })}
-                </div>
+                </PricingCarousel>
               </div>
             );
           })}

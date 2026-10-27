@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useMemo } from "react";
 import PricingCtaButton from "@/components/home/PricingCtaButton";
+import PricingCarousel from "@/components/home/PricingCarousel";
 import { useCrmPageQuery } from "@/hooks/queries/useCrmPageQuery";
 import { usePricingPostsQuery } from "@/hooks/queries/usePricingPostsQuery";
 import { useServiceQuery } from "@/hooks/queries/useServiceQuery";
@@ -18,7 +19,7 @@ const CTA_LABEL = "Get A Quote";
 
 const POPULAR_LABEL = "Most popular";
 const FEATURES_HEADING = "What's Included:";
-const CANCEL_LABEL = "Cancel any time";
+// const CANCEL_LABEL = "Cancel any time";
 
 function CheckIcon() {
   return (
@@ -75,7 +76,7 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="home-pricing-grid">
+        <PricingCarousel count={plans.length} className="home-pricing-grid">
           {plans.map((pkg) => {
             const isPopular = pkg.is_popular;
             const availText = pkg.availability?.trim() || "";
@@ -163,7 +164,7 @@ export default function Pricing() {
                     </div>
                   </div>
 
-                  <p className="home-pricing-cancel">{CANCEL_LABEL}</p>
+                  {/* <p className="home-pricing-cancel">{CANCEL_LABEL}</p> */}
 
                   <PricingCtaButton
                     packageId={pkg.id}
@@ -191,7 +192,7 @@ export default function Pricing() {
               </div>
             );
           })}
-        </div>
+        </PricingCarousel>
       </div>
     </section>
   );

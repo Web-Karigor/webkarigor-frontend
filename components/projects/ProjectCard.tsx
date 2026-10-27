@@ -14,6 +14,7 @@ type ProjectCardProps = {
   title: string;
   width: number;
   height: number;
+  slug: string;
   href?: string;
   variant?: "image" | "brand-v" | "ventures";
   description?: string;
@@ -26,6 +27,7 @@ export default function ProjectCard({
   title,
   width,
   height,
+  slug,
   href,
   variant = "image",
   description,
@@ -94,7 +96,9 @@ export default function ProjectCard({
             alt={alt}
             fill
             className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-            sizes="(max-width: 768px) 100vw, min(100vw, 1300px)" loading="lazy"/>
+            sizes="(max-width: 768px) 100vw, min(100vw, 1300px)"
+            loading="lazy"
+          />
           <div className="project-card-default-labels">
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 sm:bottom-5 sm:left-5 sm:right-5">
@@ -113,7 +117,9 @@ export default function ProjectCard({
           alt={alt}
           fill
           className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-          sizes="(max-width: 768px) 100vw, min(100vw, 1300px)" loading="lazy"/>
+          sizes="(max-width: 768px) 100vw, min(100vw, 1300px)"
+          loading="lazy"
+        />
       )}
 
       {overlay}
@@ -128,7 +134,7 @@ export default function ProjectCard({
       href={href}
       data-project-cursor
       className="group block w-full max-w-full outline-none"
-      aria-label={title}
+      aria-label={slug}
     >
       {card}
     </Link>

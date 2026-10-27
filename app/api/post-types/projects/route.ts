@@ -7,7 +7,7 @@ function projectsApiUrl() {
   if (!base) {
     throw new Error("NEXT_PUBLIC_BASE_URL is not set");
   }
-  return `${base}/api/v1/post-types/projects`;
+  return `${base}/post-types/projects`;
 }
 
 export async function GET() {

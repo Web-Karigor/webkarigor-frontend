@@ -55,12 +55,7 @@
       "/hero/slider/mouripharma-app.jpg",
       "/hero/slider/kapital-properties.jpg"
     ],
-    "teamImages": [
-      "/sm1.webp",
-      "/sm2.webp",
-      "/sm3.webp",
-      "/sm4.webp"
-    ]
+    "teamImages": ["/sm1.webp", "/sm2.webp", "/sm3.webp", "/sm4.webp"]
   },
   "services": {
     "badge": "Services",
@@ -84,10 +79,7 @@
         "subtitle": "CRM Software Development Services",
         "desc": "We create custom CRM software solutions that enable businesses to leverage intelligent technology to manage customer relationships, automate sales processes, enhance communication, and create better customer experiences.",
         "link": "/service/crm",
-        "images": [
-          "/services/crm-1.jpg",
-          "/services/crm-2.jpg"
-        ]
+        "images": ["/services/crm-1.jpg", "/services/crm-2.jpg"]
       },
       {
         "title": "HRM Software",
@@ -95,10 +87,7 @@
         "subtitle": "HR Software in Bangladesh",
         "desc": "HR Software Development in Bangladesh is the process of creating software solutions for human resource management to streamline HR processes, attendance systems, payroll management, leave tracking, and employee management.",
         "link": "/service/hrm",
-        "images": [
-          "/services/hrm-1.jpg",
-          "/services/hrm-2.jpg"
-        ]
+        "images": ["/services/hrm-1.jpg", "/services/hrm-2.jpg"]
       },
       {
         "title": "ERP Software",
@@ -106,10 +95,7 @@
         "subtitle": "ERP Software in Bangladesh",
         "desc": "With scalable business management systems, our ERP software in Bangladesh enables businesses to streamline operations, gain visibility into workflows, manage resources, and make informed decisions",
         "link": "/service/erp",
-        "images": [
-          "/services/erp-1.jpg",
-          "/services/erp-2.jpg"
-        ]
+        "images": ["/services/erp-1.jpg", "/services/erp-2.jpg"]
       },
       {
         "title": "Custom Software",
@@ -245,15 +231,10 @@
     "items": [
       {
         "number": "(01)",
-        "tags": [
-          "Travel Agency"
-        ],
+        "tags": ["Travel Agency"],
         "title": "Suma International — Travel Services Website",
         "description": "A travel services website designed to simplify how people explore packages, understand services and send inquiries. The experience organizes eight service areas into a clear structure and builds trust through transparent, well-described content.",
-        "platforms": [
-          "Web",
-          "Mobile"
-        ],
+        "platforms": ["Web", "Mobile"],
         "color": "#007b7a",
         "href": "/projects/suma-international",
         "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
@@ -262,23 +243,15 @@
           "role": "Director • Suma International",
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df55bfbee02637c53da16_1664138677695.avif"
         },
-        "images": [
-          "/suma/suma-home-slider.jpg"
-        ]
+        "images": ["/suma/suma-home-slider.jpg"]
       },
       {
         "number": "(02)",
-        "tags": [
-          "E-commerce & Retail"
-        ],
+        "tags": ["E-commerce & Retail"],
         "title": "Shishu Poribohon — Kids E-commerce",
         "titleOneLine": true,
         "description": "A trust-focused e-commerce experience for parents to discover and purchase quality kids’ products across Bangladesh, with clear product information, secure checkout, rewards, order tracking, and a scalable foundation for international delivery.",
-        "platforms": [
-          "Web",
-          "Android",
-          "iOS"
-        ],
+        "platforms": ["Web", "Android", "iOS"],
         "color": "#f0841a",
         "href": "/projects/kids-ecommerce",
         "quote": "Working with Brand Appart has been an absolute pleasure. Beyond their creativity and professionalism, there's a real sense of kindness and care in everything they do.",
@@ -287,21 +260,14 @@
           "role": "Founder • Shishu Poribohon",
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/68403ea61d62eda6b245af20_1738708560978.avif"
         },
-        "images": [
-          "/shishu/Shishu Poribohon - Thumnail - Home Page Slider.jpg"
-        ]
+        "images": ["/shishu/Shishu Poribohon - Thumnail - Home Page Slider.jpg"]
       },
       {
         "number": "(03)",
-        "tags": [
-          "Real Estate"
-        ],
+        "tags": ["Real Estate"],
         "title": "Probashi Resort: Property Investment Platform",
         "description": "A property investment platform designed to simplify share-based property ownership. The experience helps users explore projects, understand investment options, complete registration and payments, and track their investment through a clear, trustworthy digital experience.",
-        "platforms": [
-          "Web",
-          "Mobile"
-        ],
+        "platforms": ["Web", "Mobile"],
         "color": "#268e6f",
         "href": "/projects/probashi-resorts",
         "quote": "A huge thank you to the entire Brand Appart team for your outstanding work on our rebranding! We're thrilled to have you as an integral part of the Incard team, and we can't wait to reveal what's coming next.",
@@ -316,15 +282,10 @@
       },
       {
         "number": "(04)",
-        "tags": [
-          "Real Estate"
-        ],
+        "tags": ["Real Estate"],
         "title": "Kapital Properties: A Modern Digital Property Ecosystem",
         "description": "A technology-driven property platform designed to simplify property discovery, buying, selling, renting, financing, and management through a trusted, transparent, and connected digital experience.",
-        "platforms": [
-          "Web",
-          "Mobile"
-        ],
+        "platforms": ["Web", "Mobile"],
         "color": "#8e8834",
         "href": "/projects/kapital-properties",
         "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
@@ -339,14 +300,10 @@
       },
       {
         "number": "(05)",
-        "tags": [
-          "News & Media"
-        ],
+        "tags": ["News & Media"],
         "title": "Times Today — Modern Digital News Platform",
         "description": "A modern responsive news platform designed and developed for Times Today BD, focused on clearer content hierarchy, easier news discovery, improved article readability, mobile responsiveness, and a more structured digital news experience.",
-        "platforms": [
-          "Web"
-        ],
+        "platforms": ["Web"],
         "color": "#d63a2e",
         "href": "/projects/times-today",
         "quote": "I've worked with Brand Appart on multiple projects website development, landing pages for branding, and PowerPoint presentations. I love how flexible, fast, and professional the team is.",
@@ -355,9 +312,7 @@
           "role": "Managing Director • Times Today BD",
           "image": "https://cdn.prod.website-files.com/67f7891166d9b83b9231109e/683df55bfbee02637c53da16_1664138677695.avif"
         },
-        "images": [
-          "/timestoday/Times Today - Thumnail - Home Page Slider.jpg"
-        ]
+        "images": ["/timestoday/Times Today - Thumnail - Home Page Slider.jpg"]
       }
     ]
   },
@@ -472,10 +427,7 @@
   },
   "testimonials": {
     "badge": "Testimonials",
-    "headingLines": [
-      "Trusted",
-      "by"
-    ],
+    "headingLines": ["Trusted", "by"],
     "headingAccent": "Founders"
   },
   "pricing": {
@@ -485,7 +437,7 @@
     "description": "We offer flexible pricing for websites, software solutions, and digital platforms, depending on your business needs, project scope, and long-term goals.",
     "popularLabel": "Most popular",
     "featuresHeading": "What's Included:",
-    "cancelLabel": "Cancel any time",
+
     "noExtraFee": "Everything Included",
     "billing": {
       "monthly": "Monthly",
@@ -615,15 +567,7 @@
       "4:00 PM",
       "5:00 PM"
     ],
-    "weekdays": [
-      "S",
-      "M",
-      "T",
-      "W",
-      "T",
-      "F",
-      "S"
-    ]
+    "weekdays": ["S", "M", "T", "W", "T", "F", "S"]
   },
   "footer": {
     "headingLines": [
@@ -635,11 +579,7 @@
       "users will love and your",
       "business will grow with"
     ],
-    "taglineParts": [
-      "Build Smarter",
-      "Launch Stronger",
-      "Scale Faster"
-    ],
+    "taglineParts": ["Build Smarter", "Launch Stronger", "Scale Faster"],
     "copyright": "© 2026 Webkarigor. All rights reserved.",
     "linkColumns": [
       {
