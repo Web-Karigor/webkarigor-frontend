@@ -80,9 +80,10 @@
     top: auto;
     left: auto;
     flex: none;
-    width: 100%;
+    width: auto;
     height: 100%;
-    max-width: none;
+    aspect-ratio: 9 / 16;
+    max-width: 100%;
     max-height: none;
     margin: 0;
     transform: none;

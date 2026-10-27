@@ -18,6 +18,7 @@ import "./VideoSection.css";
 
 const SHOWREEL_FALLBACK =
   "https://designmonks.b-cdn.net/DM%20Others/DM%20Showreel%202026.mp4";
+const MOBILE_SHOWREEL = "https://player.vimeo.com/video/1239738826?background=1";
 
 const CLIP_SMALL = "inset(18% 20% 18% 20% round 28px)";
 const CLIP_FULL = "inset(0% 0% 0% 0% round 0px)";
@@ -39,6 +40,7 @@ function useMinLg() {
 function ScrollExpandVideo({ src, reduceMotion }: { src: string; reduceMotion: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const desktop = useMinLg();
+  const activeSrc = desktop ? src : MOBILE_SHOWREEL;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const progress = useSpring(scrollYProgress, { stiffness: 80, damping: 22, mass: 0.4, restDelta: 0.0005 });
   // clip-path + transform only: the video box never changes size, so there is no relayout per frame.
@@ -53,11 +55,11 @@ function ScrollExpandVideo({ src, reduceMotion }: { src: string; reduceMotion: b
 
   const media = (
     <>
-      {desktop && src ? (
+      {desktop && activeSrc ? (
         <>
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[72vw] min-h-[128%] w-[228vh] min-w-[128%] -translate-x-1/2 -translate-y-1/2 blur-[56px] saturate-150">
             <SmartVideo
-              src={src}
+              src={activeSrc}
               title=""
               playing={inView}
               muted
@@ -69,9 +71,9 @@ function ScrollExpandVideo({ src, reduceMotion }: { src: string; reduceMotion: b
       ) : null}
       <div className="video-frame">
         <div className="video-player-slot">
-          {src ? (
+          {activeSrc ? (
             <SmartVideo
-              src={src}
+              src={activeSrc}
               title="SalesMama showreel"
               playing={inView}
               muted={!audible}

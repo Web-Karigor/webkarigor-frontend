@@ -340,6 +340,7 @@
   display: flex;
   overflow-x: auto;
   gap: 16px;
+  align-items: stretch;
   padding: 8px 2px 14px;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -349,7 +350,17 @@
 .pricing-carousel.is-active .is-carousel-track::-webkit-scrollbar { display: none; }
 .pricing-carousel.is-active .is-carousel-track > .home-pricing-plan,
 .pricing-carousel.is-active .is-carousel-track > .service-pricing-market { flex: 0 0 calc((100% - 48px) / 4); scroll-snap-align: start; }
-.pricing-carousel.is-active .is-carousel-track > .home-pricing-plan { min-width: 250px; }
+.pricing-carousel.is-active .is-carousel-track > .home-pricing-plan {
+  min-width: 250px;
+  height: auto;
+  min-height: 0;
+  align-self: stretch;
+}
+.pricing-carousel.is-active .is-carousel-track > .home-pricing-plan > .home-pricing-card {
+  height: auto;
+  min-height: 720px;
+  flex: 1 0 auto;
+}
 .pricing-carousel.is-active .service-pricing-cards > .home-pricing-plan { flex: 0 0 calc((100% - 16px) / 2); scroll-snap-align: start; }
 
 @media (max-width: 1099px) {
