@@ -164,8 +164,8 @@ export default function HeroSection() {
                   alt=""
                   width={392}
                   height={392}
-                  className="hero-photo-img h-auto w-full max-w-[280px] 2xl:max-w-[392px]"
-                  sizes="(max-width: 1535px) 280px, 392px"
+                  className="hero-photo-img object-cover"
+                  sizes="(max-width: 1535px) 32vw, 392px"
                   loading="lazy"
                   unoptimized
                 />
@@ -192,8 +192,8 @@ export default function HeroSection() {
                   alt=""
                   width={392}
                   height={392}
-                  className="hero-photo-img h-auto w-full max-w-[280px] 2xl:max-w-[392px]"
-                  sizes="(max-width: 1535px) 280px, 392px"
+                  className="hero-photo-img object-cover"
+                  sizes="(max-width: 1535px) 32vw, 392px"
                   loading="lazy"
                   unoptimized
                 />

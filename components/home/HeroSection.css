@@ -297,6 +297,16 @@
   }
 }
 
+/* Side photos stay square. 392px is the desktop cap; laptops scale to the side column. */
+.hero-photo-img {
+  --hero-photo-size: min(392px, calc((min(100vw, 1899px) - 5rem) / 4 - 0.75rem));
+  width: var(--hero-photo-size);
+  height: var(--hero-photo-size);
+  max-width: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 /* =========================================================
    lg only — 1024px–1279px
    Fit viewport via spacing math (no overflow-y:auto/hidden).
@@ -339,10 +349,6 @@
 
   .hero-hello {
     font-size: clamp(0.8rem, 1.05vw, 1rem);
-  }
-
-  .hero-photo-img {
-    max-width: 200px !important;
   }
 
   .hero-projects-wrap {
@@ -395,10 +401,6 @@
     font-size: clamp(0.9rem, 1.15vw, 1.15rem);
   }
 
-  .hero-photo-img {
-    max-width: 260px !important;
-  }
-
   .hero-projects-wrap {
     bottom: 0;
   }
@@ -437,10 +439,6 @@
     line-height: 150%;
   }
 
-  .hero-photo-img {
-    max-width: 230px !important;
-  }
-
   .hero-projects-text {
     font-size: clamp(140px, 13vw, 190px);
   }
@@ -459,26 +457,15 @@
     --hero-hello-mt: 1.5vh;
   }
 
-  .hero-photo-img {
-    max-width: min(248px, 23vw) !important;
-  }
-}
-
-@media (min-width: 1280px) {
-  .hero-photo-img {
-    max-width: min(320px, 23vw) !important;
-  }
 }
 
 @media (min-width: 1536px) {
   .hero-section {
+    height: auto !important;
+    min-height: 100vh;
     --hero-center-mt: 280px;
     --hero-title-pull: 0px;
     --hero-photo-left-mt: 5.5rem;
-  }
-
-  .hero-photo-img {
-    max-width: 430px !important;
   }
 }
 

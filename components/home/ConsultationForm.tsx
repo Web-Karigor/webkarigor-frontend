@@ -45,7 +45,7 @@ import {
 const fields = {
   fullName: { label: "Full Name", placeholder: "Esther Howard" },
   email: { label: "Contact Email", placeholder: "your-mail@gmail.com" },
-  phone: { label: "Contact Number (WhatsApp)", placeholder: "123 4567 890" },
+  phone: { label: "Contact Number(WhatsApp Preferred)", placeholder: "123 4567 890" },
   region: { label: "Your Current Region" },
   details: {
     label: "Project Details",
