@@ -307,6 +307,17 @@
   flex-shrink: 0;
 }
 
+/* Pull side photos toward the center copy. Outer alignment left a wide inner gap on desktop. */
+.hero-photo-left {
+  margin-left: auto;
+  margin-right: 1.75rem;
+}
+
+.hero-photo-right {
+  margin-right: auto;
+  margin-left: 1.75rem;
+}
+
 /* =========================================================
    lg only — 1024px–1279px
    Fit viewport via spacing math (no overflow-y:auto/hidden).
